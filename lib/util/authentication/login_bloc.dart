@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
-import 'package:fsek_mobile/models/api_login_result.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
 import 'authentication_bloc.dart';
@@ -29,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginButtonPressed) {
       yield LoginLoading();
 
-      var token;
+      DeviseToken token;
       try {
         token = await userService.sendLogin(
           email: event.username,
@@ -42,10 +42,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         return;   
       }
       
-      if(token is APILoginResult) {
-        yield LoginFailure(error: describeResult(token));
+      if(token.error != null && token.error.isNotEmpty) {
+        yield LoginFailure(error: token.error);
         return;
-      }
+      } 
 
       try {
         authenticationBloc.add(LoggedIn(token: token));
@@ -53,19 +53,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch (ex) {
         yield LoginFailure(error: token.toString());
       }
-    }
-  }
-
-  static String describeResult(APILoginResult result) {
-    switch(result) {
-      case APILoginResult.AuthenticationError:
-        return "Username or password not correct.";
-      case APILoginResult.Disabled:
-        return "Your account is disabled. Please contact an administrator.";
-      case APILoginResult.LockedOut:
-        return "Your account has been locked for failed login attempts. Please contact an administrator.";
-      default:
-        return "Unknown login error. Please try again.";
     }
   }
 }

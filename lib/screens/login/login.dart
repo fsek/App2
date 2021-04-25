@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _versionText = Text("Purplepoint Mobile Version: " + buildName, style: 
+    var _versionText = Text("App Version: " + buildName, style: 
       Theme.of(context).textTheme.bodyText1);
     return Scaffold(
       backgroundColor: Colors.transparent,

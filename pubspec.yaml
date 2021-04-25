@@ -29,12 +29,6 @@ dependencies:
   json_annotation: ^3.0.1 # For json serializing
   flutter_secure_storage: ^3.3.1+1 # For storing encryption keys for Boxes
   shared_preferences: '>=0.5.7+3 <2.0.0' # For web storage as well as small things, such as app theme
-  google_maps_flutter: ^1.1.0 # For maps screen
-  fluster: ^1.1.2 # For clustering markers on map
-  barcode_scan: ^2.0.1 # For QR-scan
-  dynamic_treeview: 1.0.0+2 # For selecting department
-  font_awesome_flutter: ^8.11.0 # Font Awesome icons (not pro, we can install pro though)
-  dots_indicator: ^1.0.0 # For navigation in device configuration
   firebase_messaging: ^7.0.3 # For Push notifications
   geolocator: ^5.3.2+2 # For saving coordinates
   equatable: ^1.1.1 # For State
@@ -44,7 +38,6 @@ dependencies:
   package_info: '>=0.4.1 <2.0.0' # For getting version number
   get_it: ^4.0.2 # For singleton service instances
   location_permissions: ^3.0.0+1 # For requesting location permissions
-  nfc_in_flutter: ^2.0.5 # For NFC-tag reading
 
 dev_dependencies:
   json_serializable: ^3.2.5 # For Data serialization

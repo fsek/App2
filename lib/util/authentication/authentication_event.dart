@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fsek_mobile/models/mobileAPIToken.dart';
+import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 
 abstract class AuthenticationEvent extends Equatable {
@@ -16,7 +16,7 @@ class AppStarted extends AuthenticationEvent {
 }
 
 class LoggedIn extends AuthenticationEvent {
-  final MobileAPIToken token;
+  final DeviseToken token;
 
   LoggedIn({@required this.token}) : super(props: [token]);
 

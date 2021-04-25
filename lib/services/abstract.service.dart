@@ -9,24 +9,22 @@ import 'dart:convert';
 import '../environments/environment.dart';
 
 class AbstractService {
-  static const String API_URL = "${Environment.API_URL}/v${Environment.API_VERSION}";
-  static String token = "";
+  static const String API_URL = Environment.API_URL;
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
   };
 
-  static Future<Map> get(String endpoint, {String authHeader}) async {
+  static Future<Map> get(String endpoint) async {
     var responseJson;
-    headers["Authorization"] =
-        authHeader == null ? "Bearer " + token : authHeader;
 
-    try {
+    try { 
       var response = await http.get(
         API_URL + endpoint,
         headers: headers,
       );
       responseJson = _returnResponse(response);
+      updateHeaders(response);
     } on SocketException {
       // Probably no internet on device
       throw FetchDataException(HttpErrorMessage.Message[399]);
@@ -35,18 +33,16 @@ class AbstractService {
   }
 
   static Future<Map> post(String endpoint,
-      {String authHeader,
-      String body = "",
+      {String body = "",
       Map<String, dynamic> mapBody}) async {
     var responseJson;
-    headers["Authorization"] =
-        authHeader == null ? "Bearer " + token : authHeader;
 
     try {
       var response = await http.post(API_URL + endpoint,
         headers: headers,
         body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
+      updateHeaders(response);
     } on SocketException {
       // Probably no internet on device
       throw FetchDataException(HttpErrorMessage.Message[399]);
@@ -75,5 +71,16 @@ class AbstractService {
         throw FetchDataException(
             '${HttpErrorMessage.Message[499]} Statuscode: ${response.statusCode}');
     }
+  }
+
+  static updateHeaders(http.Response response) {
+    if(response.headers["access-token"].isNotEmpty)
+      headers["access-token"] = response.headers["access-token"];
+    if(response.headers["expiry"].isNotEmpty)
+      headers["expiry"] = response.headers["expiry"];
+  }
+
+  static setToken(String accessToken) {
+    headers["access-token"] = accessToken;
   }
 }

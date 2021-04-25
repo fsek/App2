@@ -43,9 +43,9 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   @override
   void initState() {
     setupLocator();
-    checkApiVersion();
     _storage = locator<TokenStorageWrapper>();
     _userService = locator<UserService>();
+    _userService.clearToken();
     _authenticationBloc = AuthenticationBloc(userService: _userService);
     _authenticationBloc.add(AppStarted());
     _authenticationBloc.listen((AuthenticationState state) async {
@@ -61,7 +61,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           .then((value) => setState(() => _departments = value))
           .catchError(onDataError);
 */
-        setupPushNotifications();
+        //setupPushNotifications();
       }
     });
 
@@ -91,37 +91,6 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
         print(ex);
       }
     }
-  }
-
-  void checkApiVersion() {
-    locator<HomeService>().isGoodApiVersion().then((value) {
-      if(!value) {
-        showDialog<void>(
-          context: locator<NavigationService>().navigatorKey.currentState.overlay.context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Old app version'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text('This version of the app uses an old API version.'),
-                    Text('It is recommended that you update your app.'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Ok!'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    });
   }
 
   @override
