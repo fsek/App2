@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
 class ForgottenPassword {
-  static void openDialog(BuildContext context, TextEditingController resetController, UserService userService) {
+  static void openDialog(BuildContext context, TextEditingController resetController, UserService? userService) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -89,7 +89,7 @@ class ForgottenPassword {
                                     setState(() {
                                       loading = true;
                                     });
-                                    userService
+                                    userService!
                                         .resetPasswordRequest(
                                             resetController.text)
                                         .then((success) {});

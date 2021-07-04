@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/login_bloc.dart';
@@ -10,15 +12,15 @@ import 'package:fsek_mobile/util/authentication/login_state.dart';
 import 'package:fsek_mobile/widgets/forgotten_password.dart';
 
 class LoginUI extends StatefulWidget {
-  final LoginBloc loginBloc;
-  final AuthenticationBloc authenticationBloc;
-  final UserService userService;
+  final LoginBloc? loginBloc;
+  final AuthenticationBloc? authenticationBloc;
+  final UserService? userService;
 
   LoginUI({
-    Key key,
-    @required this.loginBloc,
-    @required this.authenticationBloc,
-    @required this.userService,
+    Key? key,
+    required this.loginBloc,
+    required this.authenticationBloc,
+    required this.userService,
   }) : super(key: key);
 
   @override
@@ -31,18 +33,39 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
   final _passwordController = TextEditingController();
   final _resetController = TextEditingController();
 
-  AnimationController _animationController;
-  Animation loginBtnAnimation;
-  Animation loadingAnimation;
+  late AnimationController _animationController;
+  late Animation loginBtnAnimation;
+  late Animation loadingAnimation;
 
   final _emailFocusNode = FocusNode();
   final _passFocusNode = FocusNode();
 
-  LoginBloc get _loginBloc => widget.loginBloc;
+  Color? _emailLabelColor;
+  Color? _passLabelColor;
+
+  LoginBloc? get _loginBloc => widget.loginBloc;
 
   @override
   void initState() {
     super.initState();
+
+    // workaround for this bug: https://github.com/flutter/flutter/issues/21385
+    _emailLabelColor = locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
+    _emailFocusNode.addListener(() {
+      setState(() {
+       _emailLabelColor = _emailFocusNode.hasFocus ? 
+        Theme.of(context).inputDecorationTheme.labelStyle!.color : 
+        Theme.of(context).inputDecorationTheme.hintStyle!.color;
+      });
+    });
+    _passLabelColor = locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
+    _passFocusNode.addListener(() {
+      setState(() {
+       _passLabelColor = _passFocusNode.hasFocus ? 
+        Theme.of(context).inputDecorationTheme.labelStyle!.color : 
+        Theme.of(context).inputDecorationTheme.hintStyle!.color;
+      });
+    });
 
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
@@ -85,12 +108,12 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
   }
 
   void _onLoginButtonPressed() {
-    final FormState validForm = _formKey.currentState;
+    final FormState validForm = _formKey.currentState!;
     if (validForm.validate()) {
       _animationController.forward();
       _emailFocusNode.unfocus();
       _passFocusNode.unfocus();
-      _loginBloc.add(LoginButtonPressed(
+      _loginBloc!.add(LoginButtonPressed(
         username: _emailController.text.trim(),
         password: _passwordController.text,
       ));
@@ -109,12 +132,15 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: 'Email',
-            prefixIcon: Icon(Icons.account_circle),
+            prefixIcon: Icon(Icons.account_circle, color: _emailLabelColor),
+            labelStyle: TextStyle(
+              color: _emailLabelColor
+            )
           ),
           focusNode: _emailFocusNode,
           controller: _emailController,
-          validator: (String value) {
-            return value.trim().isEmpty ? 'Required field' : null;
+          validator: (String? value) {
+            return value!.trim().isEmpty ? 'Required field' : null;
           },
         ));
     final _passwordField = Focus(
@@ -123,12 +149,15 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'Password',
-            prefixIcon: Icon(Icons.lock),
+            prefixIcon: Icon(Icons.lock, color: _passLabelColor,),
+            labelStyle: TextStyle(
+              color: _passLabelColor
+            )
           ),
           focusNode: _passFocusNode,
           controller: _passwordController,
-          validator: (String value) {
-            return value.isEmpty ? 'Required field' : null;
+          validator: (String? value) {
+            return value!.isEmpty ? 'Required field' : null;
           },
         ));
     final _forgotPasswordButton = TextButton(
@@ -137,7 +166,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         child: Text(
           "Forgot my password",
           style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.grey),
+              Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey),
         ));
 
     final form = Form(
@@ -159,17 +188,17 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         LoginState state,
       ) {
         final _loginButton = ScaleTransition(
-          scale: loginBtnAnimation,
+          scale: loginBtnAnimation as Animation<double>,
           child: ElevatedButton(
             key: Key("login_btn"),
             onPressed:
-                state is! LoginLoading ? _onLoginButtonPressed : null,
+              state is! LoginLoading ? _onLoginButtonPressed : null,
             child: Text(
               "Log in",
               style: TextStyle(color: Colors.white, fontSize: 16),
             )));
         final _loadingIcon = ScaleTransition(
-          scale: loadingAnimation, child: CircularProgressIndicator());
+            scale: loadingAnimation as Animation<double>, child: CircularProgressIndicator());
 
         return Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -180,36 +209,24 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
                 ),
                 elevation: 5,
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                  padding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                radius: 36.0,
-                                backgroundImage:
-                                    AssetImage("assets/img/f_logo.png"),
-                                backgroundColor: Colors.transparent,
-                              ),
-                              SizedBox(width: 16),
-                              Text(
-                                "F-sektionen",
-                                style: Theme.of(context).textTheme.headline4.apply(fontFamily: 'Brandon Grotesque'),
-                              )
-                            ],
-                          ),
-                          form,
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [_forgotPasswordButton]),
-                          Stack(children: [
-                            Center(child: _loginButton),
-                            Center(child: _loadingIcon)
-                          ])
-                        ]))));
+                        children: locator<ThemeService>().loginIcon
+                      ),
+                      form,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [_forgotPasswordButton]),
+                      Stack(children: [
+                        Center(child: _loginButton),
+                        Center(child: _loadingIcon)
+                      ])
+                    ]))));
       },
       listener: (context, state) {
         // Show Errors in snackbar
@@ -217,7 +234,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           _animationController.reverse();
         }
         if (state is LoginFailure) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${state.error}'),

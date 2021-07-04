@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:fsek_mobile/models/devise_token.dart';
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
@@ -15,12 +13,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserService userService;
 
   LoginBloc({
-    @required this.authenticationBloc,
-    @required this.userService,
-  }) : assert(authenticationBloc != null), assert(userService != null);
-
-  @override
-  LoginState get initialState => LoginInitial();
+    required this.authenticationBloc,
+    required this.userService,
+  }) : super(LoginInitial());
 
   @override
   Stream<LoginState> mapEventToState(
@@ -29,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginButtonPressed) {
       yield LoginLoading();
 
-      DeviseToken token;
+      var token;
       try {
         token = await userService.sendLogin(
           email: event.username,
@@ -45,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if(token.error != null && token.error.isNotEmpty) {
         yield LoginFailure(error: token.error);
         return;
-      } 
+      }
 
       try {
         authenticationBloc.add(LoggedIn(token: token));

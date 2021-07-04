@@ -9,14 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 */ 
 class TokenStorageWrapper {
-  static FlutterSecureStorage secureStorage;
-  static SharedPreferences prefs;
+  static late FlutterSecureStorage secureStorage;
+  static SharedPreferences? prefs;
 
   TokenStorageWrapper() {
     secureStorage = FlutterSecureStorage();
   }
 
-  void write({String key, dynamic value}) {
+  void write({String? key, dynamic value}) {
     if(key == null || value == null) {
       print("Cannot store null tokens");
       return;
@@ -29,7 +29,7 @@ class TokenStorageWrapper {
     }
   }
   
-  Future<Map<String, String>> readAll() async {
+  Future<Map<String, String?>> readAll() async {
     if(!kIsWeb) {
       return secureStorage.readAll();
     }
@@ -38,15 +38,15 @@ class TokenStorageWrapper {
         prefs = await SharedPreferences.getInstance();
 
       var map = {
-        "access_token": prefs.getString("access_token"),
-        "refresh_token": prefs.getString("refresh_token"),
-        "expires": prefs.getString("expires"),
+        "access_token": prefs!.getString("access_token"),
+        "refresh_token": prefs!.getString("refresh_token"),
+        "expires": prefs!.getString("expires"),
       };
       return map;
     }
   }
 
-  Future<String> read({String key}) async {
+  Future<String?> read(String key) async {
     if(!kIsWeb) {
       return secureStorage.read(key: key);
     }
@@ -54,11 +54,11 @@ class TokenStorageWrapper {
       if(prefs == null)
         prefs = await SharedPreferences.getInstance();
 
-      return prefs.getString(key);
+      return prefs!.getString(key);
     }
   }
 
-  Future<void> delete({String key}) async {
+  Future<void> delete({String key = ""}) async {
     if(!kIsWeb) {
       secureStorage.delete(key: key);
     }
@@ -66,7 +66,7 @@ class TokenStorageWrapper {
       if(prefs == null)
         prefs = await SharedPreferences.getInstance();
 
-      prefs.setString(key, null);
+      prefs!.remove(key);
     }
   }
 

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/services/navigation.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 
 class ErrorPage extends StatefulWidget {
-  ErrorPage({Key key, this.text, this.authenticationBloc}) : super(key: key);
+  ErrorPage({Key? key, this.text, this.authenticationBloc}) : super(key: key);
 
-  final String text;
-  final AuthenticationBloc authenticationBloc;
+  final String? text;
+  final AuthenticationBloc? authenticationBloc;
 
   @override
   _ErrorPageState createState() => _ErrorPageState();
@@ -23,9 +24,9 @@ class _ErrorPageState extends State<ErrorPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Stack(
-      children: [
-        Padding(
+      child: Stack(
+        children: [
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +36,7 @@ class _ErrorPageState extends State<ErrorPage> {
                 SizedBox(
                   height: 6,
                 ),
-                Text(widget.text),
+                Text(widget.text!),
                 SizedBox(
                   height: 20,
                 ),
@@ -45,7 +46,7 @@ class _ErrorPageState extends State<ErrorPage> {
                   color: Colors.purple,
                   onPressed: () {
                     locator<NavigationService>().pop();
-                    widget.authenticationBloc.add(AppStarted());
+                    widget.authenticationBloc!.add(AppStarted());
                   },
                 )
               ],

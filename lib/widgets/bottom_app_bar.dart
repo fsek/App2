@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
-  IconData iconData;
-  String text;
+  IconData? iconData;
+  String? text;
 }
 
 class FsekAppBar extends StatefulWidget {
@@ -18,27 +18,27 @@ class FsekAppBar extends StatefulWidget {
     this.notchedShape,
     this.onTabSelected,
   }) {
-    assert(this.items.length == 2 || this.items.length == 4);
+    assert(this.items!.length == 2 || this.items!.length == 4);
   }
-  final List<FsekAppBarItem> items;
-  final String centerItemText;
+  final List<FsekAppBarItem>? items;
+  final String? centerItemText;
   final double height;
   final double iconSize;
-  final Color backgroundColor;
-  final Color color;
-  final Color selectedColor;
-  final NotchedShape notchedShape;
-  final ValueChanged<int> onTabSelected;
+  final Color? backgroundColor;
+  final Color? color;
+  final Color? selectedColor;
+  final NotchedShape? notchedShape;
+  final ValueChanged<int?>? onTabSelected;
 
   @override
   State<StatefulWidget> createState() => FsekAppBarState();
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
-  int _selectedIndex = 0;
+  int? _selectedIndex = 0;
 
-  _updateIndex(int index) {
-    widget.onTabSelected(index);
+  _updateIndex(int? index) {
+    widget.onTabSelected!(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -46,9 +46,9 @@ class FsekAppBarState extends State<FsekAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = List.generate(widget.items.length, (int index) {
+    List<Widget> items = List.generate(widget.items!.length, (int index) {
       return _buildTabItem(
-        item: widget.items[index],
+        item: widget.items![index],
         index: index,
         onPressed: _updateIndex,
       );
@@ -77,7 +77,7 @@ class FsekAppBarState extends State<FsekAppBar> {
             SizedBox(height: widget.iconSize),
             Text(
               widget.centerItemText ?? '',
-              style: Theme.of(context).textTheme.bodyText2.apply(color: Colors.grey, fontFamily: 'Brandon Grotesque'),
+              style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontFamily: 'Brandon Grotesque'),
             ),
           ],
         ),
@@ -86,26 +86,26 @@ class FsekAppBarState extends State<FsekAppBar> {
   }
 
   Widget _buildTabItem({
-    FsekAppBarItem item,
-    int index,
-    ValueChanged<int> onPressed,
+    required FsekAppBarItem item,
+    int? index,
+    ValueChanged<int?>? onPressed,
   }) {
-    Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    Color? color = _selectedIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
-      key: Key(item.text.toLowerCase() + "_btn"),
+      key: Key(item.text!.toLowerCase() + "_btn"),
       child: SizedBox(
         height: widget.height,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: () => onPressed(index),
+            onTap: () => onPressed!(index),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(item.iconData, color: color, size: widget.iconSize),
                 Text(
-                  item.text,
+                  item.text!,
                   style: TextStyle(color: color),
                 )
               ],

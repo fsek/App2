@@ -9,18 +9,18 @@ import 'package:fsek_mobile/util/authentication/login_bloc.dart';
 import 'login_ui.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, @required this.userService}) : super(key: key);
+  LoginPage({Key? key, required this.userService}) : super(key: key);
 
-  final UserService userService;
+  final UserService? userService;
 
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginBloc _loginBloc;
-  UserService _userService;
+  LoginBloc? _loginBloc;
+  UserService? _userService;
   //ignore: close_sinks
-  AuthenticationBloc _authenticationBloc;
+  AuthenticationBloc? _authenticationBloc;
   
   String buildName = "x.x.x";
 
@@ -29,8 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     _userService = widget.userService;
     _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     _loginBloc = LoginBloc(
-      authenticationBloc: _authenticationBloc,
-      userService: _userService
+      authenticationBloc: _authenticationBloc!,
+      userService: _userService!
     );
     
     if(!kIsWeb) {
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _versionText = Text("App Version: " + buildName, style: 
+    var _versionText = Text("F-appen Version: " + buildName, style: 
       Theme.of(context).textTheme.bodyText1);
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _loginBloc.close();
+    _loginBloc!.close();
     super.dispose();
   }
 }

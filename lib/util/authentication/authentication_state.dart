@@ -15,7 +15,7 @@ class AuthenticationAuthenticated extends AuthenticationState {}
 class AuthenticationUserFetched extends AuthenticationState {
   final List<String> messages;
 
-  const AuthenticationUserFetched({@required this.messages});
+  const AuthenticationUserFetched({required this.messages});
 
   @override
   List<Object> get props => [messages];
@@ -35,7 +35,7 @@ class AuthenticationDisconnected extends AuthenticationState {}
 class AuthenticationError extends AuthenticationState {
   final String error;
 
-  const AuthenticationError({@required this.error});
+  const AuthenticationError({required this.error});
 
   @override
   List<Object> get props => [error];

@@ -1,5 +1,7 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -8,19 +10,24 @@ import 'package:fsek_mobile/util/storage_wrapper.dart';
 import 'abstract.service.dart';
 
 class UserService extends AbstractService {
-  UserService({@required this.storage}) : assert(storage != null);
+  UserService({required this.storage});
   final TokenStorageWrapper storage;
   
-  static User user; //put in authbloc
+  static User? user; //put in authbloc
   /*
    * HTTP Requests
    */
-  Future<dynamic> sendLogin({String email, String pass}) async {
+  Future<dynamic> sendLogin({required String email, required String pass}) async {
     try {
-      Map json = await AbstractService.post("/auth/sign_in", mapBody: {"email": email, "password": pass});
-      if(json["data"] != null)
-        //user = User.fromJson(json["data"]);
-        return DeviseToken(accessToken: AbstractService.headers["access-token"], expires: timeConvert(AbstractService.headers["expiry"]));
+      var response = await http.post(
+        Uri.parse(Environment.API_URL + "/auth/sign_in"),
+        headers: AbstractService.headers,
+        body: jsonEncode({"email": email, "password": pass}));
+      var json = jsonDecode(response.body);
+      if(json["data"] != null) {
+        user = User.fromJson(json["data"]);
+        return DeviseToken(accessToken: response.headers["access-token"], expires: timeConvert(response.headers["expiry"]));
+      }
       else
         return DeviseToken(error: json["errors"][0]);
     } on UnauthorisedException catch(e) {
@@ -30,7 +37,7 @@ class UserService extends AbstractService {
 
   Future<User> getUserRequest() async {
     Map json = await AbstractService.get("/account/user");
-    return User.fromJson(json);
+    return User.fromJson(json as Map<String, dynamic>);
   }
 
   Future<bool> resetPasswordRequest(String email) async {
@@ -58,7 +65,7 @@ class UserService extends AbstractService {
   // These two functions are seperated so we can see if a token
   // has expired or just dosent exist
   Future<bool> isAuthenticated() async {
-    var value = await storage.read(key: 'access-token');
+    var value = await storage.read('access-token');
     if (value != null) {
       AbstractService.headers["Authorization"] = "Bearer " + value;
       return true;
@@ -67,14 +74,21 @@ class UserService extends AbstractService {
   }
 
   Future<bool> isValid() async {
-    var value = await storage.read(key: 'expires');
+    var value = await storage.read('expires');
     if (value != null &&
         timeConvert(value).compareTo(DateTime.now().toUtc()) > 0)
       return true;
     return false;
   }
 
-  DateTime timeConvert(String rubytimestring) {
+  DateTime timeConvert(String? rubytimestring) {
+    if(rubytimestring == null)
+      return DateTime.now();
+
+    int? time = int.tryParse(rubytimestring);
+    if(time == null)
+      return DateTime.now();
+
     int rubytime = int.parse(rubytimestring);
     return DateTime.fromMillisecondsSinceEpoch(rubytime*1000);
   }

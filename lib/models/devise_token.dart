@@ -5,9 +5,9 @@ part 'devise_token.g.dart'; //generated JSON file
 @JsonSerializable()
 
 class DeviseToken {
-  String accessToken;
-  DateTime expires;
-  String error;
+  String? accessToken;
+  DateTime? expires;
+  String? error;
 
   DeviseToken({
     this.accessToken, 

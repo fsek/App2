@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class LoadingWidget extends StatefulWidget {
-  const LoadingWidget({
-    Key key,
-  }) : super(key: key);
-
   @override
   _LoadingWidgetState createState() => _LoadingWidgetState();
 }
