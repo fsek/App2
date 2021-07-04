@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fsek_mobile/widgets/bottom_app_bar.dart';
 
 import 'models/destination.dart';
 import 'models/user/user.dart';
+import 'services/service_locator.dart';
+import 'services/theme.service.dart';
+import 'widgets/bottom_app_bar.dart';
 
 class ContentWrapper extends StatefulWidget {
   ContentWrapper(
@@ -13,8 +15,8 @@ class ContentWrapper extends StatefulWidget {
   ) : super();
 
   final List<Destination> navbarDestinations;
-  final User user;
-  final StreamController onNavigation;
+  final User? user;
+  final StreamController? onNavigation;
   final List<String> messages;
 
   @override
@@ -23,8 +25,8 @@ class ContentWrapper extends StatefulWidget {
 
 class _ContentWrapperState extends State<ContentWrapper>
     with TickerProviderStateMixin<ContentWrapper> {
-  List<Key> _destinationKeys;
-  List<AnimationController> _faders;
+  late List<Key> _destinationKeys;
+  late List<AnimationController> _faders;
   int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -74,24 +76,14 @@ class _ContentWrapperState extends State<ContentWrapper>
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(widget.user == null ? "Loading..." : widget.user.name,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .apply(color: Colors.white)),
+            Text(widget.user == null ? "Loading..." : "${widget.user!.firstname!} ${widget.user!.lastname!}",
+              style: Theme.of(context)
+                .textTheme
+                .headline5!
+                .apply(color: Colors.white)),
             SizedBox(
               height: 4,
             ),
-            Text(
-                widget.user == null
-                    ? "Loading..."
-                    : widget.user.mainLicense +
-                        " - " +
-                        (widget.user == null ? "Loading..." : widget.user.role),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .apply(color: Colors.white70)),
           ],
         ),
       ],
@@ -114,6 +106,7 @@ class _ContentWrapperState extends State<ContentWrapper>
             SizedBox(
               height: 24,
             ),
+            //_bottomInfo,
             SizedBox(
               height: 12,
             ),
@@ -148,14 +141,11 @@ class _ContentWrapperState extends State<ContentWrapper>
                   //ignore pointer so the destinations aren't interactable when animating
                   return IgnorePointer(child: view);
                 }
-                return Offstage(
-                    child:
-                        view); //move offstag e to ensure they aren't painted when not visible
+                return Offstage(child: view); //move offstag e to ensure they aren't painted when not visible
               }
             }).toList())),
           ])),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             tooltip: 'F-sektionen',
@@ -171,12 +161,12 @@ class _ContentWrapperState extends State<ContentWrapper>
             child: FsekAppBar(
               backgroundColor: Colors.orange[700],
               centerItemText: "F-sektionen",
-              onTabSelected: (int index) {
+              onTabSelected: (int? index) {
                 setState(() {
-                  _currentIndex = index;
+                  _currentIndex = index ?? 0;
                 });
-                widget.onNavigation
-                    .add(widget.navbarDestinations[index].widget.runtimeType);
+                widget.onNavigation!
+                    .add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
                 ...widget.navbarDestinations.map((Destination destination) {

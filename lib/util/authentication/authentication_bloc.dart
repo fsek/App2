@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/user.service.dart';
@@ -20,10 +19,7 @@ class TokenCallback {
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserService userService;
   final List<TokenCallback> onTokenRefreshCallbacks = [];
-  AuthenticationBloc({@required this.userService}) : assert(userService != null);
-
-  @override
-  AuthenticationState get initialState => AuthenticationUninitialized();
+  AuthenticationBloc({required this.userService}) : super(AuthenticationUninitialized());
 
   void addTokenRefreshCallback(TokenCallback callback) {
     onTokenRefreshCallbacks.add(callback);
@@ -64,7 +60,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         return; 
       }
 
-      userService.storeToken(event.token);
+      userService.storeToken(event.token!);
       yield AuthenticationAuthenticated();
       this.add(Authenticated());
       yield AuthenticationLoading();
@@ -74,7 +70,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     if (event is Authenticated) {
       try {
         //User user = await userService.getUserRequest();
-        this.add(UserFetched(user: null));
+        this.add(UserFetched(user: UserService.user!));
       }
       catch(ex) {
         if(ex is UnauthorisedException)

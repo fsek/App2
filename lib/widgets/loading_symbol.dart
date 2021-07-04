@@ -5,12 +5,12 @@ import 'dart:math' as math show sin, pi;
 import 'package:flutter/animation.dart';
 
 class DelayTween extends Tween<double> {
-  DelayTween({double begin, double end, this.delay}) : super(begin: begin, end: end);
+  DelayTween({double? begin, double? end, this.delay}) : super(begin: begin, end: end);
 
-  final double delay;
+  final double? delay;
 
   @override
-  double lerp(double t) => super.lerp((math.sin((t - delay) * 2 * math.pi) + 1) / 2);
+  double lerp(double t) => super.lerp((math.sin((t - delay!) * 2 * math.pi) + 1) / 2);
 
   @override
   double evaluate(Animation<double> animation) => lerp(animation.value);
@@ -19,7 +19,7 @@ class DelayTween extends Tween<double> {
 // From Flutter spinkit
 class LoadingSymbol extends StatefulWidget {
   const LoadingSymbol({
-    Key key,
+    Key? key,
     this.color,
     this.size = 50.0,
     this.itemBuilder,
@@ -30,18 +30,18 @@ class LoadingSymbol extends StatefulWidget {
         assert(size != null),
         super(key: key);
 
-  final Color color;
+  final Color? color;
   final double size;
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
   final Duration duration;
-  final AnimationController controller;
+  final AnimationController? controller;
 
   @override
   _LoadingSymbolState createState() => _LoadingSymbolState();
 }
 
 class _LoadingSymbolState extends State<LoadingSymbol> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -75,6 +75,6 @@ class _LoadingSymbolState extends State<LoadingSymbol> with SingleTickerProvider
   }
 
   Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder(context, index)
+      ? widget.itemBuilder!(context, index)
       : DecoratedBox(decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle));
 }

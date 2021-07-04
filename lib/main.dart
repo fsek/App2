@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app.dart';
+import 'models/destination.dart';
+import 'services/navigation.service.dart';
+import 'services/service_locator.dart';
+import 'services/theme.service.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
-class SimpleBlocDelegate extends BlocDelegate {
+class SimpleBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     print(transition.toString());
@@ -17,6 +21,54 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() {
+  setupLocator();
+  var route = locator<NavigationService>();
+  final List<Destination> navbarDestinations = <Destination>[
+    Destination(0, 'Home', Icons.home, Container()),
+    Destination(1, 'Calendar', Icons.calendar_today, Container()),
+    Destination(2, 'Notifications', Icons.notifications, Container()),
+    Destination(3, 'Other', Icons.list, Container()),
+  ];
+  route.navbarDestinations = navbarDestinations;
+  route.routes = {
+  };
+
+  locator<ThemeService>().theme = ThemeData(
+    brightness: Brightness.light,
+    primaryColor: Colors.orange,
+    accentColor: Colors.orangeAccent,
+    buttonColor: Colors.orange,
+    inputDecorationTheme: InputDecorationTheme(
+      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+      labelStyle: TextStyle(
+        color: Colors.orange
+      ),
+      hintStyle: TextStyle(
+        color: Colors.grey[600]
+      ),
+    ),
+  );
+  locator<ThemeService>().backgroundColors = [
+    Color(0xFFf77e14),
+    Color(0xFFe6660b),
+  ];
+  locator<ThemeService>().loginIcon = [
+    CircleAvatar(
+      radius: 40.0,
+      backgroundImage:
+          AssetImage("assets/img/f_logo.png"),
+      backgroundColor: Colors.transparent,
+    ),
+    SizedBox(width: 16),
+    Text(
+      "F-sektionen",
+      style: TextStyle(
+        fontFamily: 'Helvetica Neue',
+        fontSize: 28.0,
+        color: Colors.grey[700]
+      )
+    )
+  ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
@@ -25,11 +77,11 @@ void main() {
     } else {
       // In production mode, send it to the FlutterError.onError function
       // which we have overwritten
-      Zone.current.handleUncaughtError(details.exception, details.stack);
+      Zone.current.handleUncaughtError(details.exception, details.stack!);
     }
   };
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  Bloc.observer = SimpleBlocObserver();
 
   runZonedGuarded<Future<void>>(() async {
     runApp(FsekMobileApp());
