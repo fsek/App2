@@ -4,6 +4,7 @@ import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/home/home.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
@@ -24,7 +25,7 @@ void main() {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
-    Destination(0, 'Home', Icons.home, Container()),
+    Destination(0, 'Home', Icons.home, HomePage()),
     Destination(1, 'Calendar', Icons.calendar_today, Container()),
     Destination(2, 'Notifications', Icons.notifications, Container()),
     Destination(3, 'Other', Icons.list, Container()),

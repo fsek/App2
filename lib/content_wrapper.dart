@@ -84,6 +84,11 @@ class _ContentWrapperState extends State<ContentWrapper>
             SizedBox(
               height: 4,
             ),
+            Text(widget.user == null ? "Loading..." : "${widget.user!.program} ${widget.user!.start_year}",
+              style: Theme.of(context)
+                .textTheme
+                .subtitle2!
+                .apply(color: Colors.grey[200])),
           ],
         ),
       ],
@@ -106,12 +111,8 @@ class _ContentWrapperState extends State<ContentWrapper>
             SizedBox(
               height: 24,
             ),
-            //_bottomInfo,
-            SizedBox(
-              height: 12,
-            ),
             Container(
-                color: Colors.grey[300],
+                color: Colors.grey[400],
                 height: 1,
                 width: MediaQuery.of(context).size.width * 2 / 3),
             SizedBox(
