@@ -10,9 +10,7 @@ import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
 
 class ContentWrapper extends StatefulWidget {
-  ContentWrapper(
-      this.navbarDestinations, this.user, this.onNavigation, this.messages
-  ) : super();
+  ContentWrapper(this.navbarDestinations, this.user, this.onNavigation, this.messages) : super();
 
   final List<Destination> navbarDestinations;
   final User? user;
@@ -23,8 +21,7 @@ class ContentWrapper extends StatefulWidget {
   _ContentWrapperState createState() => _ContentWrapperState();
 }
 
-class _ContentWrapperState extends State<ContentWrapper>
-    with TickerProviderStateMixin<ContentWrapper> {
+class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStateMixin<ContentWrapper> {
   late List<Key> _destinationKeys;
   late List<AnimationController> _faders;
   int _currentIndex = 0;
@@ -33,17 +30,14 @@ class _ContentWrapperState extends State<ContentWrapper>
   @override
   void initState() {
     //generate animation controllers for all destinations so we can fade them in and out
-    _faders = widget.navbarDestinations
-        .map<AnimationController>((Destination destination) {
-      return AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200));
+    _faders = widget.navbarDestinations.map<AnimationController>((Destination destination) {
+      return AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     }).toList();
     //set the fader of the starting page to 1 so it's visible
     _faders[_currentIndex].value = 1.0;
     //generate a list of globalkeys which we shall assign to our destinations
     //Each destination shall have its own key
-    _destinationKeys = List<Key>.generate(
-        widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
+    _destinationKeys = List<Key>.generate(widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
 
     super.initState();
   }
@@ -57,11 +51,14 @@ class _ContentWrapperState extends State<ContentWrapper>
   @override
   Widget build(BuildContext context) {
     // Shows state messages
-    for(String message in widget.messages) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.green,));
+    for (String message in widget.messages) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.green,
+      ));
     }
     widget.messages.clear(); // clears all showed messages
-    
+
     var _user = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -76,19 +73,11 @@ class _ContentWrapperState extends State<ContentWrapper>
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(widget.user == null ? "Loading..." : "${widget.user!.firstname!} ${widget.user!.lastname!}",
-              style: Theme.of(context)
-                .textTheme
-                .headline5!
-                .apply(color: Colors.white)),
+            Text(widget.user == null ? "Loading..." : "${widget.user!.firstname!} ${widget.user!.lastname!}", style: Theme.of(context).textTheme.headline5!.apply(color: Colors.white)),
             SizedBox(
               height: 4,
             ),
-            Text(widget.user == null ? "Loading..." : "${widget.user!.program} ${widget.user!.start_year}",
-              style: Theme.of(context)
-                .textTheme
-                .subtitle2!
-                .apply(color: Colors.grey[200])),
+            Text(widget.user == null ? "Loading..." : "${widget.user!.program} ${widget.user!.start_year}", style: Theme.of(context).textTheme.subtitle2!.apply(color: Colors.grey[200])),
           ],
         ),
       ],
@@ -105,26 +94,23 @@ class _ContentWrapperState extends State<ContentWrapper>
           key: _scaffoldKey,
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child: Column(children: [
-            SizedBox(height: 16,),
+              child: Column(children: [
+            SizedBox(
+              height: 16,
+            ),
             _user,
             SizedBox(
               height: 24,
             ),
-            Container(
-                color: Colors.grey[400],
-                height: 1,
-                width: MediaQuery.of(context).size.width * 2 / 3),
+            Container(color: Colors.grey[400], height: 1, width: MediaQuery.of(context).size.width * 2 / 3),
             SizedBox(
               height: 12,
             ),
             Expanded(
-              child: Stack(
-                children: widget.navbarDestinations.map((Destination destination) {
+                child: Stack(
+                    children: widget.navbarDestinations.map((Destination destination) {
               final Widget view = FadeTransition(
-                opacity: _faders[destination.index].drive(CurveTween(
-                    curve: Curves
-                        .fastOutSlowIn)), //set opacity according to animation
+                opacity: _faders[destination.index].drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
                 child: KeyedSubtree(
                   //set a global key to a widget so we preserve its state and subtree on a tree rebuild
                   key: _destinationKeys[destination.index],
@@ -148,7 +134,9 @@ class _ContentWrapperState extends State<ContentWrapper>
           ])),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/nollningpage');
+            },
             tooltip: 'F-sektionen',
             child: CircleAvatar(
               radius: 36.0,
@@ -166,13 +154,11 @@ class _ContentWrapperState extends State<ContentWrapper>
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
-                widget.onNavigation!
-                    .add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
+                widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
                 ...widget.navbarDestinations.map((Destination destination) {
-                  return FsekAppBarItem(
-                      iconData: destination.icon, text: destination.title);
+                  return FsekAppBarItem(iconData: destination.icon, text: destination.title);
                 }).toList()
               ],
               selectedColor: Colors.white,
