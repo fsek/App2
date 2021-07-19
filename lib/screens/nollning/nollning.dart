@@ -24,7 +24,11 @@ class _NollningPageState extends State<NollningPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
-                  onPressed: () => null,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/adventure_missions');
+                  },
+                  child: Icon(Icons
+                      .emoji_events_rounded), // Change to better mission icon
                 ),
                 FloatingActionButton(
                   onPressed: () => null,
