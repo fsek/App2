@@ -28,9 +28,10 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
                 icon: Icon(Icons.group_rounded),
               ),
               Tab(
-                text: 'HIGHSCORE',
-                icon: Icon(Icons.emoji_events_rounded),
-              ),
+                  text: 'HIGHSCORE',
+                  icon: Hero(
+                      child: Icon(Icons.emoji_events_rounded),
+                      tag: "adventure_missions_tag")),
             ],
           ),
           title: Text('Äventyrsuppdrag'),
