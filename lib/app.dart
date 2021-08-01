@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
 import 'package:fsek_mobile/screens/nollning/nollning.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/util/PushNotificationsManager.dart';
@@ -135,6 +136,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
             // put named routes here plz
             '/nollningpage': (context) => NollningPage(),
             '/adventure_missions': (context) => AdventureMissionsPage(),
+            '/emergency_contacts': (context) => EmergencyContactsPage(),
           }..addAll(locator<NavigationService>().routes),
         ));
   }
