@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<News> news = [];
   void initState() {
-    locator<HomeService>().getAlbums();
     locator<HomeService>().getNews().then((value) => setState(() {this.news = value;}));
     super.initState();
   }

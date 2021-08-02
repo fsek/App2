@@ -8,9 +8,4 @@ class HomeService extends AbstractService {
     List<News> result = (json['news'] as List).map((data) => News.fromJson(data)).toList();
     return result;
   }
-  Future<List<News>> getAlbums() async {
-    Map json = await AbstractService.get("/albums/1");
-    List<News> result = (json['news'] as List).map((data) => News.fromJson(data)).toList();
-    return result;
-  }
 }
