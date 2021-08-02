@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
+import 'package:fsek_mobile/screens/other/other.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
@@ -28,11 +29,10 @@ void main() {
     Destination(0, 'Home', Icons.home, HomePage()),
     Destination(1, 'Calendar', Icons.calendar_today, Container()),
     Destination(2, 'Notifications', Icons.notifications, Container()),
-    Destination(3, 'Other', Icons.list, Container()),
+    Destination(3, 'Other', Icons.list, OtherContent()),
   ];
   route.navbarDestinations = navbarDestinations;
-  route.routes = {
-  };
+  route.routes = {};
 
   locator<ThemeService>().theme = ThemeData(
     brightness: Brightness.light,
@@ -40,13 +40,10 @@ void main() {
     accentColor: Colors.orangeAccent,
     buttonColor: Colors.orange,
     inputDecorationTheme: InputDecorationTheme(
-      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-      labelStyle: TextStyle(
-        color: Colors.orange
-      ),
-      hintStyle: TextStyle(
-        color: Colors.grey[600]
-      ),
+      focusedBorder:
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+      labelStyle: TextStyle(color: Colors.orange),
+      hintStyle: TextStyle(color: Colors.grey[600]),
     ),
   );
   locator<ThemeService>().backgroundColors = [
@@ -56,19 +53,15 @@ void main() {
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,
-      backgroundImage:
-          AssetImage("assets/img/f_logo.png"),
+      backgroundImage: AssetImage("assets/img/f_logo.png"),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text(
-      "F-sektionen",
-      style: TextStyle(
-        fontFamily: 'Helvetica Neue',
-        fontSize: 28.0,
-        color: Colors.grey[700]
-      )
-    )
+    Text("F-sektionen",
+        style: TextStyle(
+            fontFamily: 'Helvetica Neue',
+            fontSize: 28.0,
+            color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
