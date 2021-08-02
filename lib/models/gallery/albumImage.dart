@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'imageFile.dart';
+
 part 'albumImage.g.dart';
 
 @JsonSerializable()
