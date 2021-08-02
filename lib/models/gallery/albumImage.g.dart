@@ -16,10 +16,12 @@ AlbumImage _$AlbumImageFromJson(Map<String, dynamic> json) {
     ..updated_at = json['updated_at'] == null
         ? null
         : DateTime.parse(json['updated_at'] as String)
-    ..file = json['file']
+    ..file = json['file'] == null
+        ? null
+        : ImageFile.fromJson(json['file'] as Map<String, dynamic>)
     ..filename = json['filename'] as String?
     ..photographer_id = json['photographer_id'] as int?
-    ..Photographer_name = json['Photographer_name'] as String?
+    ..photographer_name = json['photographer_name'] as String?
     ..width = json['width'] as int?
     ..height = json['height'] as int?
     ..file_tmp = json['file_tmp'] as String?;
@@ -34,7 +36,7 @@ Map<String, dynamic> _$AlbumImageToJson(AlbumImage instance) =>
       'file': instance.file,
       'filename': instance.filename,
       'photographer_id': instance.photographer_id,
-      'Photographer_name': instance.Photographer_name,
+      'photographer_name': instance.photographer_name,
       'width': instance.width,
       'height': instance.height,
       'file_tmp': instance.file_tmp,

@@ -11,7 +11,7 @@ class ImageFile {
   ImageFile();
 
   factory ImageFile.fromJson(Map<String, dynamic> json) =>
-      _$ImageFileFromJson(json);
+      _ImageFileFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ImageFileToJson(this);
+  Map<String, dynamic> toJson() => _ImageFileToJson(this);
 }

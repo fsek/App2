@@ -13,7 +13,7 @@ class AlbumImage {
   ImageFile? file;
   String? filename;
   int? photographer_id;
-  String? Photographer_name;
+  String? photographer_name;
   int? width;
   int? height;
   String? file_tmp;

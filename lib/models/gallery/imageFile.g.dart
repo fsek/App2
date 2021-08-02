@@ -7,14 +7,14 @@ part of 'imageFile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ImageFile _$ImageFileFromJson(Map<String, dynamic> json) {
+ImageFile _ImageFileFromJson(Map<String, dynamic> json) {
   return ImageFile()
     ..url = json['url'] as String?
     ..large = json['large']['url'] as String?
     ..thumb = json['thumb']['url'] as String?;
 }
 
-Map<String, dynamic> _$ImageFileToJson(ImageFile instance) => <String, dynamic>{
+Map<String, dynamic> _ImageFileToJson(ImageFile instance) => <String, dynamic>{
       'url': instance.url,
       'large': instance.large,
       'thumb': instance.thumb,
