@@ -13,31 +13,28 @@ class UserService extends AbstractService {
   UserService({required this.storage});
   final TokenStorageWrapper storage;
   
-  static User? user; //put in authbloc
+  static User? _user; //put in authbloc
   /*
    * HTTP Requests
    */
-  Future<dynamic> sendLogin({required String email, required String pass}) async {
+  Future<DeviseToken> sendLogin({required String email, required String pass}) async {
     try {
       var response = await http.post(
         Uri.parse(Environment.API_URL + "/auth/sign_in"),
         headers: AbstractService.headers,
         body: jsonEncode({"email": email, "password": pass}));
+
       var json = jsonDecode(response.body);
       if(json["data"] != null) {
-        user = User.fromJson(json["data"]);
-        return DeviseToken(accessToken: response.headers["access-token"], expires: timeConvert(response.headers["expiry"]));
+        setCurrentUser(User.fromJson(json["data"]));
+        return DeviseToken.getFromHeaders(response.headers);
       }
-      else
+      else {
         return DeviseToken(error: json["errors"][0]);
+      }
     } on UnauthorisedException catch(e) {
       return DeviseToken(error: e.toString());
     }
-  }
-
-  Future<User> getUserRequest() async {
-    Map json = await AbstractService.get("/account/user");
-    return User.fromJson(json as Map<String, dynamic>);
   }
 
   Future<bool> resetPasswordRequest(String email) async {
@@ -50,46 +47,55 @@ class UserService extends AbstractService {
     return json["result"];
   }
 
+  Future<User> getUser() async {
+    if(_user == null) {
+      String? json = await storage.read('user-data');
+      if(json != null)
+        return User.fromJson(jsonDecode(json));
+    }
+    return User();
+  }
+
   //Token Functions
   void storeToken(DeviseToken token) {
-    storage.write(key: "access-token", value: token.accessToken);
-    storage.write(key: "expires", value: token.expires.toString());
+    DeviseToken.storeToken(storage, token);
   }
 
   void clearToken() {
-    storage.delete(key: "access-token");
-    storage.delete(key: "expires");
-    AbstractService.headers["Authorization"] = "";
+    DeviseToken.clearToken(storage);
+    AbstractService.token = DeviseToken();
+    AbstractService.mapAuthHeaders();
+  }
+
+  void setCurrentUser(User user) {
+    _user = user;
+    storage.write(key: "user-data", value: jsonEncode(user.toJson()));
   }
 
   // These two functions are seperated so we can see if a token
   // has expired or just dosent exist
   Future<bool> isAuthenticated() async {
-    var value = await storage.read('access-token');
-    if (value != null) {
-      AbstractService.headers["Authorization"] = "Bearer " + value;
-      return true;
+    var value = AbstractService.token;
+    if (value == null) {
+      DeviseToken token = await DeviseToken.getFromStorage(storage);
+      if(token.accessToken == null) {
+        return false;
+      }
+      else {
+        AbstractService.token = token;
+        return true;
+      }
     }
     return false;
   }
 
   Future<bool> isValid() async {
-    var value = await storage.read('expires');
-    if (value != null &&
-        timeConvert(value).compareTo(DateTime.now().toUtc()) > 0)
+    if(AbstractService.token == null)
+      return false;
+      
+    DateTime? value = AbstractService.token!.expires;
+    if (value != null && value.compareTo(DateTime.now().toUtc()) > 0)
       return true;
     return false;
-  }
-
-  DateTime timeConvert(String? rubytimestring) {
-    if(rubytimestring == null)
-      return DateTime.now();
-
-    int? time = int.tryParse(rubytimestring);
-    if(time == null)
-      return DateTime.now();
-
-    int rubytime = int.parse(rubytimestring);
-    return DateTime.fromMillisecondsSinceEpoch(rubytime*1000);
   }
 }
