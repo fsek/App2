@@ -20,9 +20,7 @@ Widget build(BuildContext context) {
   Album? album; 
   locator<AlbumService>().getAlbum(id).then((value) => album = value ); 
   //Something acting kinda sus here. Maybe auth errors(?)
-  while(album == null){ //FIX THIS! 
-    sleep(Duration(milliseconds: 500));  
-  }
+
 
   return Scaffold(
     appBar: AppBar(title: Text("TEXT"),),
