@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/news.dart';
 
-class NewsScreen extends StatelessWidget {
-  const NewsScreen({Key? key, required this.news}) : super(key: key);
+class NewsPage extends StatelessWidget {
+  const NewsPage({Key? key, required this.news}) : super(key: key);
 
   final News news;
 

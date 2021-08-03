@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/news.dart';
-import 'package:fsek_mobile/screens/news/news_page.dart';
+import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/services/home.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 
@@ -48,6 +48,6 @@ class _HomePageState extends State<HomePage> {
   void openNews(News news) {
     //redirect to other page and shit
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => NewsScreen(news: news)));
+        MaterialPageRoute(builder: (context) => NewsPage(news: news)));
   }
 }
