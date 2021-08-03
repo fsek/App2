@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/gallery/gallery.dart';
 
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
   final about = ["F-sektionen", "F-appen"];
   final settings = ["Konto"];
   final support = ["Kontakt", "Anonym kontaktsida"];
+  final Map<String, Widget> routeMap = {
+    "Sångbok": Container(),
+    "Bildgalleri": GalleryPage(),
+    "Hilbert Café": Container(),
+    "F-sektionen": Container(),
+    "F-appen": Container(),
+    "Konto": Container(),
+    "Kontakt": Container(),
+    "Anonym Kontaksida": Container()
+  };
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-        children: _generateListTiles(catagories) +
+        children: _generateListTiles(catagories, context) +
             [
               ListTile(
                   title: Text(
@@ -17,7 +28,7 @@ class OtherContent extends StatelessWidget {
                 style: _style(),
               ))
             ] +
-            _generateListTiles(about) +
+            _generateListTiles(about, context) +
             [
               ListTile(
                   title: Text(
@@ -25,31 +36,33 @@ class OtherContent extends StatelessWidget {
                 style: _style(),
               ))
             ] +
-            _generateListTiles(settings) +
+            _generateListTiles(settings, context) +
             [ListTile(title: Text("Support", style: _style()))] +
-            _generateListTiles(support));
+            _generateListTiles(support, context));
   }
-}
 
-List<Widget> _generateListTiles(List<String> tileTexts) {
-  List<Widget> tiles = [];
-  for (String tileText in tileTexts) {
-    tiles.add(Card(
-      margin: EdgeInsets.all(2),
-      child: InkWell(
-          child: ListTile(
-        title: Text(tileText),
-        onTap: () => _goToTilePage(tileText),
-      )),
-    ));
+  List<Widget> _generateListTiles(
+      List<String> tileTexts, BuildContext context) {
+    List<Widget> tiles = [];
+    for (String tileText in tileTexts) {
+      tiles.add(Card(
+        margin: EdgeInsets.all(2),
+        child: InkWell(
+            child: ListTile(
+          title: Text(tileText),
+          onTap: () => goToTilePage(tileText, context),
+        )),
+      ));
+    }
+    return tiles;
   }
-  return tiles;
-}
 
-void _goToTilePage(String title) {
-  //todo
-}
+  void goToTilePage(String title, BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+  }
 
-TextStyle _style() {
-  return TextStyle(fontWeight: FontWeight.bold);
+  TextStyle _style() {
+    return TextStyle(fontWeight: FontWeight.bold);
+  }
 }

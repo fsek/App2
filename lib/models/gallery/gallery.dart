@@ -10,7 +10,7 @@ class Gallery {
   int? image_count;
   String? thumb;
   List<int>? years;
-  String? Title;
+  String? title;
 
   Gallery();
 

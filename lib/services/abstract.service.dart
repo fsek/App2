@@ -9,8 +9,8 @@ import 'package:fsek_mobile/util/errors/http_error_messages.dart';
 import 'dart:convert';
 
 class AbstractService {
-  static final String API_URL = "${Environment.API_URL}";
   static DeviseToken? token;
+  static final String API_URL = "${Environment.API_URL}/api";
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -41,10 +41,9 @@ class AbstractService {
     mapAuthHeaders();
 
     try {
-      var response = await http.post(
-        Uri.parse(API_URL + endpoint),
-        headers: headers,
-        body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      var response = await http.post(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
       updateToken(response.headers);
     } on SocketException {

@@ -16,7 +16,7 @@ Gallery _$GalleryFromJson(Map<String, dynamic> json) {
     ..image_count = json['image_count'] as int?
     ..thumb = json['thumb'] as String?
     ..years = (json['years'] as List<dynamic>?)?.map((e) => e as int).toList()
-    ..Title = json['Title'] as String?;
+    ..title = json['title'] as String?;
 }
 
 Map<String, dynamic> _$GalleryToJson(Gallery instance) => <String, dynamic>{
@@ -26,5 +26,5 @@ Map<String, dynamic> _$GalleryToJson(Gallery instance) => <String, dynamic>{
       'image_count': instance.image_count,
       'thumb': instance.thumb,
       'years': instance.years,
-      'Title': instance.Title,
+      'title': instance.title,
     };
