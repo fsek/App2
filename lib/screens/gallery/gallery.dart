@@ -3,6 +3,7 @@ import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/models/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/gallery/album.dart';
+import 'package:fsek_mobile/services/album.service.dart';
 import 'package:fsek_mobile/services/gallery.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 
@@ -67,31 +68,38 @@ class _GalleryPageState extends State<GalleryPage> {
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
                 crossAxisCount: 2,
-                children: generateAlbumThumbnails(galleries),
+                children: generateAlbumThumbnails(),
               ))
             ])
         //Text(selectedYear.toString())
         );
   }
 
-  List<Widget> generateAlbumThumbnails(List<Gallery>? galleries) {
+  List<Widget> generateAlbumThumbnails() {
     if (galleries == null) {
       return [];
     }
     List<Widget> result = [];
-    for (Gallery elem in galleries) {
-      result.add(InkWell(
-        child: Container(
-          child: Image.network("${Environment.API_URL}${elem.thumb.toString()}"),
-        ),
-        onTap: () => goToAlbum(elem.id!),
-      ));
+    for (Gallery elem in galleries!) {
+      result.add(
+        Ink.image(
+          image: NetworkImage("${Environment.API_URL}${elem.thumb.toString()}"), 
+          fit: BoxFit.cover, 
+          child: InkWell(
+            onTap: () => goToAlbum(elem.id!),
+          )
+        )
+      );
     }
     return result;
   }
 
   void goToAlbum(int id) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AlbumPage(id: id))); 
+    locator<AlbumService>().getAlbum(id).then((album){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AlbumPage(album: album))); 
+    });
+
+    
     //Send to correct page and then fetch complete album on other page :^)
   }
 }
