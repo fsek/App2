@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
+import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
@@ -10,7 +11,7 @@ class OtherContent extends StatelessWidget {
     "Sångbok": Container(),
     "Bildgalleri": GalleryPage(),
     "Hilbert Café": Container(),
-    "F-sektionen": Container(),
+    "F-sektionen": AboutGuildPage(),
     "F-appen": Container(),
     "Konto": Container(),
     "Kontakt": Container(),
