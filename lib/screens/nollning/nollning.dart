@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 
 class NollningPage extends StatefulWidget {
+  static const routeName = '/nollningpage';
+
   @override
   _NollningPageState createState() => _NollningPageState();
 }
