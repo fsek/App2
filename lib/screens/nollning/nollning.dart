@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 
 class NollningPage extends StatefulWidget {
+  static const routeName = '/nollningpage';
+
   @override
   _NollningPageState createState() => _NollningPageState();
 }
@@ -14,12 +17,16 @@ class _NollningPageState extends State<NollningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Nollning 2021"),
+      ),
       backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => null,
         icon: Icon(Icons.phone_rounded),
         label: Text("Nolleakuten"),
+        backgroundColor: Colors.redAccent,
         heroTag: "emergency_tag",
       ),
       body: Center(
@@ -27,14 +34,14 @@ class _NollningPageState extends State<NollningPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(
-              flex: 4,
+              flex: 3,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton.extended(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/adventure_missions');
+                    Navigator.pushNamed(context, AdventureMissionsPage.routeName);
                   },
                   // Change to better mission icon
                   icon: Icon(Icons.emoji_events_rounded),

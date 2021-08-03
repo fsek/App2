@@ -9,7 +9,7 @@ import 'dart:convert';
 
 
 class AbstractService {
-  static final String API_URL = "${Environment.API_URL}";
+  static const String API_URL = "${Environment.API_URL}";
   static String? token = "";
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',

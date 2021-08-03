@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:fsek_mobile/services/home.service.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
@@ -16,4 +17,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => ThemeService());
+  locator.registerLazySingleton(() => NollningService());
 }
