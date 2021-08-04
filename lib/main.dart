@@ -10,6 +10,8 @@ import 'package:fsek_mobile/themes.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
+import 'screens/nollning/adventure_missions.dart';
+import 'screens/nollning/emergency_contacts.dart';
 import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
@@ -35,7 +37,10 @@ void main() {
     Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];
   route.navbarDestinations = navbarDestinations;
-  route.routes = {};
+  route.routes = {
+    '/adventure_missions': (context) => AdventureMissionsPage(),
+    '/emergency_contacts': (context) => EmergencyContactsPage(),
+  };
 
   locator<ThemeService>().theme = fsekTheme;
   locator<ThemeService>().backgroundColors = fsekBackground;
@@ -46,11 +51,7 @@ void main() {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
