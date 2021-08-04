@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/home/calendar.dart';
+import 'package:fsek_mobile/screens/other/other.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
@@ -35,6 +36,10 @@ void main() {
     ),
     Destination(2, 'Notifications', Icons.notifications, Container()),
     Destination(3, 'Other', Icons.list, Container()),
+    Destination(0, 'Hem', Icons.home, HomePage()),
+    Destination(1, 'Kalender', Icons.calendar_today, Container()),
+    Destination(2, 'Notiser', Icons.notifications, Container()),
+    Destination(3, 'Övrigt', Icons.list, OtherContent()),
   ];
   route.navbarDestinations = navbarDestinations;
   route.routes = {};

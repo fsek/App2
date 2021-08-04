@@ -69,8 +69,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     // We need the User-info from the API on authentication so we fetch that
     if (event is Authenticated) {
       try {
-        //User user = await userService.getUserRequest();
-        this.add(UserFetched(user: UserService.user!));
+        yield AuthenticationUserFetched(messages: onTokenRefreshCallbacks.map((e) => e.message).toList());
+        executeCallbacks();
       }
       catch(ex) {
         if(ex is UnauthorisedException)
@@ -83,13 +83,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           yield AuthenticationError(error: ex.toString());
         }
       }
-    }
-
-    // Store it on UserService (this is stupid but works)
-    if (event is UserFetched) {
-      UserService.user = event.user;
-      yield AuthenticationUserFetched(messages: onTokenRefreshCallbacks.map((e) => e.message).toList());
-      executeCallbacks();
     }
 
     if (event is LoggedOut) {
