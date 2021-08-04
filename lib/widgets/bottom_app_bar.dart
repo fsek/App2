@@ -12,11 +12,11 @@ class FsekAppBar extends StatefulWidget {
     this.centerItemText,
     this.height: 60.0,
     this.iconSize: 24.0,
-    this.backgroundColor,
     this.color,
     this.selectedColor,
     this.notchedShape,
-    this.onTabSelected,
+    required this.onTabSelected,
+    required this.currentIndex
   }) {
     assert(this.items!.length == 2 || this.items!.length == 4);
   }
@@ -24,33 +24,24 @@ class FsekAppBar extends StatefulWidget {
   final String? centerItemText;
   final double height;
   final double iconSize;
-  final Color? backgroundColor;
   final Color? color;
   final Color? selectedColor;
   final NotchedShape? notchedShape;
-  final ValueChanged<int?>? onTabSelected;
+  final ValueChanged<int?> onTabSelected;
+  final int currentIndex;
 
   @override
   State<StatefulWidget> createState() => FsekAppBarState();
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
-  int? _selectedIndex = 0;
-
-  _updateIndex(int? index) {
-    widget.onTabSelected!(index);
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Widget> items = List.generate(widget.items!.length, (int index) {
       return _buildTabItem(
         item: widget.items![index],
         index: index,
-        onPressed: _updateIndex,
+        onPressed: (i) => widget.onTabSelected(i),
       );
     });
     items.insert(items.length >> 1, _buildMiddleTabItem());
@@ -62,7 +53,6 @@ class FsekAppBarState extends State<FsekAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: items,
       ),
-      color: widget.backgroundColor,
     );
   }
 
@@ -86,7 +76,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     int? index,
     ValueChanged<int?>? onPressed,
   }) {
-    Color? color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    Color? color = widget.currentIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       key: Key(item.text!.toLowerCase() + "_btn"),
       child: SizedBox(

@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
+import 'package:fsek_mobile/themes.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
+import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
@@ -30,26 +32,13 @@ void main() {
     Destination(1, 'Kalender', Icons.calendar_today, Container()),
     Destination(2, 'Notiser', Icons.notifications, Container()),
     Destination(3, 'Övrigt', Icons.list, OtherContent()),
+    Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];
   route.navbarDestinations = navbarDestinations;
   route.routes = {};
 
-  locator<ThemeService>().theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.orange,
-    accentColor: Colors.orangeAccent,
-    buttonColor: Colors.orange,
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-      labelStyle: TextStyle(color: Colors.orange),
-      hintStyle: TextStyle(color: Colors.grey[600]),
-    ),
-  );
-  locator<ThemeService>().backgroundColors = [
-    Color(0xFFf77e14),
-    Color(0xFFe6660b),
-  ];
+  locator<ThemeService>().theme = fsekTheme;
+  locator<ThemeService>().backgroundColors = fsekBackground;
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,

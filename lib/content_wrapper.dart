@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
 import 'models/user/user.dart';
+import 'screens/nollning/nollning.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
@@ -83,8 +85,23 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
       ],
     );
 
+    List<Widget> _userContainer = [
+      SizedBox(
+        height: 16,
+      ),
+      _user,
+      SizedBox(
+        height: 24,
+      ),
+      Container(color: Colors.grey[400], height: 1, width: MediaQuery.of(context).size.width * 2 / 3),
+      SizedBox(
+        height: 12,
+      ),
+    ];
+
+    if (_faders[widget.navbarDestinations.length-1].value > 0.2) _userContainer.clear();
+
     return Stack(children: [
-      //PPBackground(),
       Container(
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height,
@@ -95,17 +112,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           backgroundColor: Colors.transparent,
           body: SafeArea(
               child: Column(children: [
-            SizedBox(
-              height: 16,
-            ),
-            _user,
-            SizedBox(
-              height: 24,
-            ),
-            Container(color: Colors.grey[400], height: 1, width: MediaQuery.of(context).size.width * 2 / 3),
-            SizedBox(
-              height: 12,
-            ),
+            ..._userContainer,
             Expanded(
                 child: Stack(
                     children: widget.navbarDestinations.map((Destination destination) {
@@ -138,7 +145,12 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             width: 100,
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/nollningpage');
+                setState(() {
+                  _currentIndex = widget.navbarDestinations.length - 1;
+                });
+                locator<ThemeService>().theme = nollning2021theme;
+                locator<ThemeService>().backgroundColors = nollning2021Background;
+                widget.onNavigation!.add(NollningPage);
               },
               child: Image(
                 image: AssetImage("assets/img/nollning_moose_icon.png"),
@@ -151,16 +163,18 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
-              backgroundColor: Colors.orange[700],
+              currentIndex: _currentIndex,
               centerItemText: "F-sektionen",
               onTabSelected: (int? index) {
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
+                locator<ThemeService>().theme = fsekTheme;
+                locator<ThemeService>().backgroundColors = fsekBackground;
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.map((Destination destination) {
+                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
                   return FsekAppBarItem(iconData: destination.icon, text: destination.title);
                 }).toList()
               ],
