@@ -75,10 +75,6 @@ class FsekAppBarState extends State<FsekAppBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: widget.iconSize),
-            Text(
-              widget.centerItemText ?? '',
-              style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontFamily: 'Brandon Grotesque'),
-            ),
           ],
         ),
       ),
