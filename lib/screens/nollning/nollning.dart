@@ -16,11 +16,18 @@ class _NollningPageState extends State<NollningPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => null,
-        icon: Icon(Icons.phone_rounded),
-        label: Text("Nolleakuten"),
-        heroTag: "emergency_tag",
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.pushNamed(context, '/emergency_contacts');
+            },
+            icon: Icon(Icons.phone_rounded),
+            label: Text("Nolleakuten"),
+            heroTag: "emergency_tag",
+          ),
+        ],
       ),
       body: Center(
         child: Column(
