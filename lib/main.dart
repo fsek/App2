@@ -36,15 +36,14 @@ void main() {
 
   locator<ThemeService>().theme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.orange,
+    primaryColor: Colors.orange[800],
     accentColor: Colors.orangeAccent,
     buttonColor: Colors.orange,
     inputDecorationTheme: InputDecorationTheme(
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
       labelStyle: TextStyle(color: Colors.orange),
       hintStyle: TextStyle(color: Colors.grey[600]),
-    ),
+    )
   );
   locator<ThemeService>().backgroundColors = [
     Color(0xFFf77e14),
@@ -58,10 +57,10 @@ void main() {
     ),
     SizedBox(width: 16),
     Text("F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+      style: TextStyle(
+        fontFamily: 'Helvetica Neue',
+        fontSize: 28.0,
+        color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
