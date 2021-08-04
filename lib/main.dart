@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
-
+import 'package:fsek_mobile/screens/home/calendar.dart';
 import 'app.dart';
 import 'models/destination.dart';
 import 'screens/nollning/adventure_missions.dart';
@@ -31,7 +31,7 @@ void main() {
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, 'Hem', Icons.home, HomePage()),
-    Destination(1, 'Kalender', Icons.calendar_today, Container()),
+    Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
     Destination(2, 'Notiser', Icons.notifications, Container()),
     Destination(3, 'Övrigt', Icons.list, OtherContent()),
     Destination(4, 'Nollning', Icons.home, NollningPage()),
@@ -48,7 +48,8 @@ void main() {
       accentColor: Colors.orangeAccent,
       buttonColor: Colors.orange,
       inputDecorationTheme: InputDecorationTheme(
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
         labelStyle: TextStyle(color: Colors.orange),
         hintStyle: TextStyle(color: Colors.grey[600]),
       ));
@@ -65,7 +66,11 @@ void main() {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
+    Text("F-sektionen",
+        style: TextStyle(
+            fontFamily: 'Helvetica Neue',
+            fontSize: 28.0,
+            color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
