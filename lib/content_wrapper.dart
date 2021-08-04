@@ -133,17 +133,20 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             }).toList())),
           ])),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/nollningpage');
-            },
-            tooltip: 'F-sektionen',
-            child: CircleAvatar(
-              radius: 36.0,
-              backgroundImage: AssetImage("assets/img/nollning_moose_icon.png"),
-              backgroundColor: Colors.orange,
+          floatingActionButton: Container(
+            height: 100,
+            width: 100,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/nollningpage');
+              },
+              child: Image(
+                image: AssetImage("assets/img/nollning_moose_icon.png"),
+              ),
+              tooltip: 'F-sektionen',
+              elevation: 2.0,
+              backgroundColor: Colors.transparent,
             ),
-            elevation: 2.0,
           ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
