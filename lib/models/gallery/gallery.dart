@@ -5,8 +5,10 @@ part 'gallery.g.dart';
 @JsonSerializable()
 class Gallery {
   int? id;
+  // ignore: non_constant_identifier_names
   DateTime? start_date;
   String? location;
+  // ignore: non_constant_identifier_names
   int? image_count;
   String? thumb;
   List<int>? years;

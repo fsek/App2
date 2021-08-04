@@ -10,6 +10,8 @@ import 'package:fsek_mobile/themes.dart';
 
 import 'app.dart';
 import 'models/destination.dart';
+import 'screens/nollning/adventure_missions.dart';
+import 'screens/nollning/emergency_contacts.dart';
 import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
@@ -35,7 +37,10 @@ void main() {
     Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];
   route.navbarDestinations = navbarDestinations;
-  route.routes = {};
+  route.routes = {
+    '/adventure_missions': (context) => AdventureMissionsPage(),
+    '/emergency_contacts': (context) => EmergencyContactsPage(),
+  };
 
   locator<ThemeService>().theme = ThemeData(
       brightness: Brightness.light,

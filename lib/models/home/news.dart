@@ -10,6 +10,7 @@ class News {
   int? id;
   String? title;
   String? content;
+  // ignore: non_constant_identifier_names
   DateTime? created_at;
   String? image;
   List<String>? categories;
