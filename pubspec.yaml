@@ -65,8 +65,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/img/f_logo.png
-   - assets/img/nollning_moose_icon.png
+   - assets/img/
+  
+
 
   fonts:
    - family: Brandon Grotesque
