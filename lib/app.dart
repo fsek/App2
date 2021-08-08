@@ -2,9 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
-import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
-import 'package:fsek_mobile/screens/nollning/nollning.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -52,22 +49,18 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
     _authenticationBloc!.stream.listen((AuthenticationState state) async {
       if (state is AuthenticationUserFetched) {
         setState(() {
-          _userService!.getUser().then((value) => setState(() {this._user = value;}));
+          _userService!.getUser().then((value) => setState(() {
+                this._user = value;
+              }));
         });
 
         setupPushNotifications();
       }
     });
-    // Change background listener
+    // Change background-listener
     locator<NavigationService>().onNavigation.stream.listen((event) {
-      for (int i = 0;
-          i < locator<NavigationService>().navbarDestinations.length;
-          i++) {
-        if (locator<NavigationService>()
-                .navbarDestinations[i]
-                .widget
-                .runtimeType ==
-            event) {
+      for (int i = 0; i < locator<NavigationService>().navbarDestinations.length; i++) {
+        if (locator<NavigationService>().navbarDestinations[i].widget.runtimeType == event) {
           setState(() {
             backgroundIndex = i + 1;
           });
@@ -86,39 +79,25 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           navigatorKey: locator<NavigationService>().navigatorKey,
           theme: locator<ThemeService>().theme,
           home: Stack(children: [
-            AppBackground(
-                backgroundColors: locator<ThemeService>().backgroundColors),
+            AppBackground(backgroundColors: locator<ThemeService>().backgroundColors),
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               bloc: _authenticationBloc,
               builder: (BuildContext context, AuthenticationState state) {
                 return AnimatedSwitcher(
                   duration: Duration(milliseconds: 250),
-                  child: _buildPage(context, state,
-                      locator<NavigationService>().navbarDestinations),
+                  child: _buildPage(context, state, locator<NavigationService>().navbarDestinations),
                 );
               },
               listener: (context, state) {
                 if (state is AuthenticationDisconnected) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ErrorPage(
-                              authenticationBloc: _authenticationBloc,
-                              text:
-                                  "We could not connect to Purplepoint. Please check your connection or try again later.")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: "We could not connect to Fsektionen.se. Please check your connection or try again later.")));
                 }
                 if (state is AuthenticationError) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ErrorPage(
-                              authenticationBloc: _authenticationBloc,
-                              text: state.error)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: state.error)));
                 }
 
                 // Background-animation stuff
-                if (state is! AuthenticationUserFetched &&
-                    state is! AuthenticationAuthenticated) {
+                if (state is! AuthenticationUserFetched && state is! AuthenticationAuthenticated) {
                   setState(() {
                     backgroundIndex = 0;
                   });
@@ -133,30 +112,23 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            // put named routes here plz
-            '/nollningpage': (context) => NollningPage(),
-            '/adventure_missions': (context) => AdventureMissionsPage(),
-            '/emergency_contacts': (context) => EmergencyContactsPage(),
+            // put named routes in main.dart please (add hot restart app if running)
           }..addAll(locator<NavigationService>().routes),
         ));
   }
 
-  Widget? _buildPage(BuildContext context, AuthenticationState state,
-      List<Destination> navbarDestinations) {
+  Widget? _buildPage(BuildContext context, AuthenticationState state, List<Destination> navbarDestinations) {
     if (state is AuthenticationUninitialized) {
       return LoadingWidget();
     }
     if (state is AuthenticationAuthenticated) {
-      return ContentWrapper(navbarDestinations, null,
-          locator<NavigationService>().onNavigation, []);
+      return ContentWrapper(navbarDestinations, null, locator<NavigationService>().onNavigation, []);
     }
     if (state is AuthenticationTokenRefreshed) {
-      return ContentWrapper(navbarDestinations, _user,
-          locator<NavigationService>().onNavigation, []);
+      return ContentWrapper(navbarDestinations, _user, locator<NavigationService>().onNavigation, []);
     }
     if (state is AuthenticationUserFetched) {
-      return ContentWrapper(navbarDestinations, _user,
-          locator<NavigationService>().onNavigation, state.messages);
+      return ContentWrapper(navbarDestinations, _user, locator<NavigationService>().onNavigation, state.messages);
     }
     if (state is AuthenticationUnauthenticated) {
       return LoginPage(userService: _userService);
@@ -183,8 +155,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       _storage!.write(key: "first_time", value: false);
       try {
         String token = await pushManager!.getToken();
-        locator<NotificationsService>().acceptNotifications(token).then(
-            (success) => print("Notifications accept: " + success.toString()));
+        locator<NotificationsService>().acceptNotifications(token).then((success) => print("Notifications accept: " + success.toString()));
       } catch (ex) {
         print(ex);
       }

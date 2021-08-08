@@ -10,6 +10,7 @@ import 'dart:convert';
 
 class AbstractService {
   static DeviseToken? token;
+  // ignore: non_constant_identifier_names
   static final String API_URL = "${Environment.API_URL}/api";
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',

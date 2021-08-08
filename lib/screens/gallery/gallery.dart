@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/environments/environment.dart';
-import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/models/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/gallery/album.dart';
 import 'package:fsek_mobile/services/album.service.dart';
