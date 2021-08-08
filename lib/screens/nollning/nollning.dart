@@ -15,7 +15,7 @@ class _NollningPageState extends State<NollningPage> {
   Widget build(BuildContext context) {
     return Stack(children: [
       Image.asset(
-        "assets/img/background.png",
+        "assets/img/nollningbakgrundtest.png", //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
@@ -23,7 +23,7 @@ class _NollningPageState extends State<NollningPage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/2.69420 /* lemao */, 0, 0),
+          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

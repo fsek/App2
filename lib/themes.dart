@@ -27,7 +27,7 @@ final ThemeData nollning2021theme = ThemeData(
   accentColor: Colors.orangeAccent,
   buttonColor: Colors.orange,
   bottomAppBarTheme: BottomAppBarTheme(
-    color: Color(0xFFe3b900)
+    color: Color(0xFFc0a836)
   ),
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder:
