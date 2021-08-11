@@ -13,6 +13,8 @@ class _SettingsPageState extends State<SettingsPage>{
   User? user; 
   static const programs = ["Teknisk Fysik", "Teknisk Matematik", "Teknisk Nanovetenska", "Oklart"];
   static const foodPrefs = ["vegetarian", "vegan", "pescetarian", "milk", "gluten"];
+  static const foodPrefsDisplay = {"vegetarian": "Vegetarian", "vegan": "Vegan", 
+    "pescetarian": "Pescetarian", "milk": "Mjölkallergi", "gluten": "Gluten"}; 
   static List<int> years = List.generate(DateTime.now().year-1960, (i) => DateTime.now().year-i); 
   bool extraPref = false; 
 
@@ -46,14 +48,24 @@ class _SettingsPageState extends State<SettingsPage>{
               controller: TextEditingController(text: user!.firstname),
               decoration: InputDecoration(
                 border: OutlineInputBorder()
-              )
+              ),
+              onChanged: (input) {
+                setState(() {
+                  user!.firstname = input; 
+                });
+              },
             ),
             Text("Efternamn*"),
             TextField(
               controller: TextEditingController(text: user!.lastname),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),     
-              )
+              ),
+              onChanged: (input) {
+                setState(() {
+                  user!.lastname = input; 
+                });
+              },
             ),
             Text("Program"),
             DropdownButton(
@@ -94,14 +106,24 @@ class _SettingsPageState extends State<SettingsPage>{
               controller: TextEditingController(text: user!.student_id != null ? user!.student_id : ""),
               decoration: InputDecoration(
                 border: OutlineInputBorder()
-              )
+              ),
+              onChanged: (input) {
+                setState(() {
+                  user!.student_id = input; 
+                });
+              },
             ),
             Text("Telefon"), 
             TextField(
               controller: TextEditingController(text: user!.phone != null ? user!.phone : ""),
               decoration: InputDecoration(
                 border: OutlineInputBorder()
-              ), 
+              ),
+             onChanged: (input) {
+               setState(() {
+                 user!.phone = input; 
+               });
+             }, 
             ),
             Row(
               children: [
@@ -126,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage>{
                 DropdownMenuItem(
                   child: Row(
                     children: [ 
-                      Text(foodPref),
+                      Text(foodPrefsDisplay[foodPref]!),
                       StatefulBuilder(
                         builder: (BuildContext context, StateSetter setChildState){ 
                           return Checkbox(
@@ -248,7 +270,6 @@ class _SettingsPageState extends State<SettingsPage>{
   }
 
   Widget extraPrefTextField(){
-    print(extraPref);
     if(extraPref){
       return TextField(   
         controller: TextEditingController(text: user!.food_custom),
