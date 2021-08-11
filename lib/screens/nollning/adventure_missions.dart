@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/models/nollning/nollning_group.dart';
+import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
+import 'package:fsek_mobile/services/nollning.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
 
 class AdventureMissionsPage extends StatefulWidget {
   static const routeName = '/adventure_missions';
@@ -9,7 +13,12 @@ class AdventureMissionsPage extends StatefulWidget {
 }
 
 class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
+  List<NollningGroup>? groups;
   void initState() {
+    // locator<NollningService>().testGetThings();
+    locator<NollningService>().getNollningGroups().then((value) => setState(() {
+          this.groups = value;
+        }));
     super.initState();
   }
 
@@ -42,7 +51,7 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
         body: TabBarView(children: [
           _adventureMissions(context),
           _myGroup(context),
-          _highscore(context),
+          HighscoreTab(groups: groups),
         ]),
       ),
     );
@@ -50,8 +59,23 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
 
   // Filler widget for adventureMissions tab
   Widget _adventureMissions(BuildContext context) {
-    return Scaffold(
-      body: Text("Inga äventyrsuppdrag är tillgängliga :("),
+    if (groups == null) {
+      return Text("ohno");
+    }
+    List<Widget> nollningGroups = groups!.map((e) => _groupToWidget(e)).toList();
+    return Column(
+      children: nollningGroups,
+      //Text("Inga äventyrsuppdrag är tillgängliga :("),
+    );
+  }
+
+  Widget _groupToWidget(NollningGroup nollningGroup) {
+    return Row(
+      children: [
+        Text(nollningGroup.name!),
+        Text(nollningGroup.total_points!.toString()),
+        Text(nollningGroup.finished_missions.toString()),
+      ],
     );
   }
 
