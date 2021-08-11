@@ -20,7 +20,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => ThemeService());
+  locator.registerLazySingleton(() => EventService());
   locator.registerLazySingleton(() => GalleryService());
   locator.registerLazySingleton(() => AlbumService());
-  locator.registerLazySingleton(() => EventService());
 }
