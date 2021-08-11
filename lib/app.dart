@@ -52,7 +52,9 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
     _authenticationBloc!.stream.listen((AuthenticationState state) async {
       if (state is AuthenticationUserFetched) {
         setState(() {
-          _userService!.getUser().then((value) => setState(() {this._user = value;}));
+          _userService!.getUser().then((value) => setState(() {
+                this._user = value;
+              }));
         });
 
         setupPushNotifications();

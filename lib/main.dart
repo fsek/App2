@@ -27,19 +27,15 @@ void main() {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
-    Destination(0, 'Home', Icons.home, HomePage()),
+    Destination(0, 'Hem', Icons.home, HomePage()),
     Destination(
       1,
-      'Calendar',
+      'Kalender',
       Icons.calendar_today,
       Calendar(),
     ),
-    Destination(2, 'Notifications', Icons.notifications, Container()),
-    Destination(3, 'Other', Icons.list, Container()),
-    Destination(0, 'Hem', Icons.home, HomePage()),
-    Destination(1, 'Kalender', Icons.calendar_today, Container()),
     Destination(2, 'Notiser', Icons.notifications, Container()),
-    Destination(3, 'Övrigt', Icons.list, OtherContent()),
+    Destination(3, 'Övrigt', Icons.list, Container()),
   ];
   route.navbarDestinations = navbarDestinations;
   route.routes = {};
