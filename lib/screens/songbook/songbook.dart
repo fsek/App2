@@ -71,13 +71,9 @@ class _SongbookPageState extends State<SongbookPage> {
     return Card(
       child: InkWell(
         onTap: () => openSong(song.id!),
-        child: 
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(song.title == null ? "": song.title!),
-            Text(song.author == null ? "Bortglömd" : song.author!),
-          ],),
+        child: ListTile(
+          title: 
+            Text(song.title == null ? "": song.title!),),
       )
     );
   }
