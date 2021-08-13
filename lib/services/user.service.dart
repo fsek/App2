@@ -58,6 +58,13 @@ class UserService extends AbstractService {
     return _user!;
   }
 
+  Future<Map> updateUser(User updatedUser) async {
+    var response = await AbstractService.put("/users/" +updatedUser.id!.toString(),
+    mapBody: updatedUser.toJson()); 
+    getUser();
+    return response;
+  }
+
   //Token Functions
   void storeToken(DeviseToken token) {
     DeviseToken.storeToken(storage, token);

@@ -37,7 +37,27 @@ class _SettingsPageState extends State<SettingsPage>{
       ); 
     }
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Inställningar"),
+        actions: [
+          Padding(
+            padding: 
+              EdgeInsets.only(right: 16),
+              child: 
+                GestureDetector(
+                  onTap: () {
+                    showDialog(context: context,
+                    builder: savingPopup()); 
+                    locator<UserService>().updateUser(user!).then((value) { 
+                      Navigator.pop(context);
+                    });
+
+                  },
+                  child: Text("Spara"),
+                ),
+            ),
+          ],
+        ),
       body:SingleChildScrollView(
         child:
         Column(
@@ -280,5 +300,14 @@ class _SettingsPageState extends State<SettingsPage>{
       );
     }
     return Container(); 
+  }
+
+  Widget Function(BuildContext) savingPopup(){
+    return (BuildContext context) => AlertDialog(
+      title: Text("Sparar"),
+      content: 
+        CircularProgressIndicator(
+          color: Colors.orange[600]),
+     );
   }
 }
