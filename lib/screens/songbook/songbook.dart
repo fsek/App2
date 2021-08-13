@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
-import 'package:fsek_mobile/screens/songbook/song,.dart';
+import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
@@ -71,13 +71,9 @@ class _SongbookPageState extends State<SongbookPage> {
     return Card(
       child: InkWell(
         onTap: () => openSong(song.id!),
-        child: 
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(song.title == null ? "": song.title!),
-            Text(song.author == null ? "Bortglömd" : song.author!),
-          ],),
+        child: ListTile(
+          title: 
+            Text(song.title == null ? "": song.title!),),
       )
     );
   }
