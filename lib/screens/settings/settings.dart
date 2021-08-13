@@ -22,6 +22,8 @@ class _SettingsPageState extends State<SettingsPage>{
     locator<UserService>().getUser().then((value) {
       setState((){
         user = value;
+        extraPref = user!.food_custom != ""; 
+        print(user!.food_custom);
       }); 
     }); 
     super.initState();
@@ -49,6 +51,9 @@ class _SettingsPageState extends State<SettingsPage>{
                     showDialog(context: context,
                     builder: savingPopup()); 
                     locator<UserService>().updateUser(user!).then((value) { 
+                      setState(() {
+                        extraPref = user!.food_custom != "";  
+                      });
                       Navigator.pop(context);
                     });
 
@@ -57,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage>{
                 ),
             ),
           ],
-        ),
+        ), //Alot of the code here is duplicate. could be made much more compact
       body:SingleChildScrollView(
         child:
         Column(
@@ -70,9 +75,8 @@ class _SettingsPageState extends State<SettingsPage>{
                 border: OutlineInputBorder()
               ),
               onChanged: (input) {
-                setState(() {
-                  user!.firstname = input; 
-                });
+                  user!.firstname = input;
+                  print(user!.food_custom);
               },
             ),
             Text("Efternamn*"),
@@ -82,9 +86,7 @@ class _SettingsPageState extends State<SettingsPage>{
                 border: OutlineInputBorder(),     
               ),
               onChanged: (input) {
-                setState(() {
-                  user!.lastname = input; 
-                });
+                  user!.lastname = input;
               },
             ),
             Text("Program"),
@@ -128,9 +130,7 @@ class _SettingsPageState extends State<SettingsPage>{
                 border: OutlineInputBorder()
               ),
               onChanged: (input) {
-                setState(() {
-                  user!.student_id = input; 
-                });
+                user!.student_id = input;
               },
             ),
             Text("Telefon"), 
@@ -139,10 +139,9 @@ class _SettingsPageState extends State<SettingsPage>{
               decoration: InputDecoration(
                 border: OutlineInputBorder()
               ),
-             onChanged: (input) {
-               setState(() {
-                 user!.phone = input; 
-               });
+              keyboardType: TextInputType.number,
+              onChanged: (input) {
+                user!.phone = input; 
              }, 
             ),
             Row(
@@ -154,9 +153,7 @@ class _SettingsPageState extends State<SettingsPage>{
                 value: user!.display_phone, 
                 onChanged: (bool? value){
                   setState(() {
-                    if(value != user!.display_phone){
                       user!.display_phone = value; 
-                    }
                   });
                 },)
               ]
@@ -296,7 +293,10 @@ class _SettingsPageState extends State<SettingsPage>{
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Andra matpreferenser/allergier'
-        )
+        ),
+        onChanged: (input) {
+          user!.food_custom = input; 
+        },
       );
     }
     return Container(); 
@@ -310,4 +310,5 @@ class _SettingsPageState extends State<SettingsPage>{
           color: Colors.orange[600]),
      );
   }
+
 }

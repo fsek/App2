@@ -61,7 +61,7 @@ class UserService extends AbstractService {
   Future<Map> updateUser(User updatedUser) async {
     var response = await AbstractService.put("/users/" +updatedUser.id!.toString(),
     mapBody: updatedUser.toJson()); 
-    getUser();
+    setCurrentUser(updatedUser);
     return response;
   }
 
