@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
+import 'package:fsek_mobile/screens/songbook/songbook.dart';
 
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
@@ -7,7 +8,7 @@ class OtherContent extends StatelessWidget {
   final settings = ["Konto"];
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
-    "Sångbok": Container(),
+    "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
     "Hilbert Café": Container(),
     "F-sektionen": Container(),
