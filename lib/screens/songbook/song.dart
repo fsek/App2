@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+//import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/songbook/song.dart';
 
 
@@ -27,9 +27,10 @@ class SongPage extends StatelessWidget{
                ],) 
             ),
             Container(
-              child: Html(
-                data: song.content,
-              ),
+              child: Text(song.content!),
+             /* child: Html(
+                data: song.content, Using flutter_html broke something. 
+              ),*/
             )
          ],
        ),
