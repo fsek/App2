@@ -43,15 +43,15 @@ class OtherContent extends StatelessWidget {
   }
 
   List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
+    List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     for (String tileText in tileTexts) {
       tiles.add(Card(
         margin: EdgeInsets.all(2),
         child: InkWell(
-            child: ListTile(
-          title: Text(tileText),
-          onTap: () => goToTilePage(tileText, context),
+          child: ListTile(
+            title: Text(tileText),
+            onTap: () => goToTilePage(tileText, context),
         )),
       ));
     }
