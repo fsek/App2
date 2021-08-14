@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:fsek_mobile/models/home/event.dart';
+import 'package:fsek_mobile/models/home/calendarevent.dart';
 import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
@@ -15,8 +15,8 @@ class _CalendarState extends State<Calendar> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  List<Event> _selectedEvents = [];
-  Map<DateTime, List<Event>> _events = {};
+  List<CalendarEvent> _selectedEvents = [];
+  Map<DateTime, List<CalendarEvent>> _events = {};
 
   void initState() {
     locator<EventService>().getEvents().then((value) => setState(() {
@@ -25,16 +25,18 @@ class _CalendarState extends State<Calendar> {
     super.initState();
   }
 
-  void openEventPage(Event event) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => EventPage(event: event)));
+  void openEventPage(CalendarEvent event) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EventPage(event_id: event.id ?? -1)));
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<CalendarEvent> _getEventsForDay(DateTime day) {
     return _events[day] ?? [];
   }
 
-  Widget createEventCard(Event event) {
+  Widget createEventCard(CalendarEvent event) {
     return Container(
       child: Card(
         child: InkWell(
@@ -127,7 +129,7 @@ class _CalendarState extends State<Calendar> {
               child: ListView(
                 children: <Widget>[
                   ..._selectedEvents.map(
-                    (Event e) => createEventCard(e),
+                    (CalendarEvent e) => createEventCard(e),
                   ),
                 ],
               ),

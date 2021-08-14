@@ -4,9 +4,14 @@ part 'eventuser.g.dart';
 
 @JsonSerializable()
 class EventUser {
-  String? name;
+  int? id;
+  String? answer;
+  String? user_type;
+  int? group_id;
+  String? group_custom;
+  bool? reserve;
 
-  EventUser();
+  EventUser(this.answer, this.group_id, this.group_custom, this.user_type);
 
   factory EventUser.fromJson(Map<String, dynamic> json) =>
       _$EventUserFromJson(json);
