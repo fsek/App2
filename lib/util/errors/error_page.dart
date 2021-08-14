@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/services/navigation.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
