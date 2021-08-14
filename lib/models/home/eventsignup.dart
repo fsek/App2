@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'event.dart';
 part 'eventsignup.g.dart';
 
 @JsonSerializable()
@@ -13,6 +12,8 @@ class EventSignup {
   int? novice;
   int? mentor;
   int? custom;
+  bool? open;
+  bool? closed;
   String? custom_name;
   DateTime? deleted_at;
   DateTime? created_at;
@@ -24,7 +25,6 @@ class EventSignup {
   DateTime? sent_open;
   String? question;
   String? notification_message;
-
   EventSignup();
 
   factory EventSignup.fromJson(Map<String, dynamic> json) =>
