@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
 

@@ -5,10 +5,14 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
+import 'package:fsek_mobile/screens/home/calendar.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
-
+import 'package:fsek_mobile/themes.dart';
 import 'app.dart';
 import 'models/destination.dart';
+import 'screens/nollning/adventure_missions.dart';
+import 'screens/nollning/emergency_contacts.dart';
+import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
@@ -27,29 +31,34 @@ void main() {
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, 'Hem', Icons.home, HomePage()),
-    Destination(1, 'Kalender', Icons.calendar_today, Container()),
+    Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
     Destination(2, 'Notiser', Icons.notifications, Container()),
     Destination(3, 'Övrigt', Icons.list, OtherContent()),
+    Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];
   route.navbarDestinations = navbarDestinations;
-  route.routes = {};
+  route.routes = {
+    '/adventure_missions': (context) => AdventureMissionsPage(),
+    '/emergency_contacts': (context) => EmergencyContactsPage(),
+  };
 
   locator<ThemeService>().theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.orange,
-    accentColor: Colors.orangeAccent,
-    buttonColor: Colors.orange,
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-      labelStyle: TextStyle(color: Colors.orange),
-      hintStyle: TextStyle(color: Colors.grey[600]),
-    ),
-  );
+      brightness: Brightness.light,
+      primaryColor: Colors.orange[800],
+      accentColor: Colors.orangeAccent,
+      buttonColor: Colors.orange,
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+        labelStyle: TextStyle(color: Colors.orange),
+        hintStyle: TextStyle(color: Colors.grey[600]),
+      ));
   locator<ThemeService>().backgroundColors = [
     Color(0xFFf77e14),
     Color(0xFFe6660b),
   ];
+  locator<ThemeService>().theme = fsekTheme;
+  locator<ThemeService>().backgroundColors = fsekBackground;
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,

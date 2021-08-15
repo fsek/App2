@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
+import 'package:fsek_mobile/screens/settings/settings.dart';
+import 'package:fsek_mobile/screens/songbook/songbook.dart';
+
 
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
@@ -8,12 +11,12 @@ class OtherContent extends StatelessWidget {
   final settings = ["Konto"];
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
-    "Sångbok": Container(),
+    "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
     "Hilbert Café": Container(),
     "F-sektionen": AboutGuildPage(),
     "F-appen": Container(),
-    "Konto": Container(),
+    "Konto": SettingsPage(),
     "Kontakt": Container(),
     "Anonym Kontaksida": Container()
   };
@@ -43,15 +46,15 @@ class OtherContent extends StatelessWidget {
   }
 
   List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
+    List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     for (String tileText in tileTexts) {
       tiles.add(Card(
         margin: EdgeInsets.all(2),
         child: InkWell(
-            child: ListTile(
-          title: Text(tileText),
-          onTap: () => goToTilePage(tileText, context),
+          child: ListTile(
+            title: Text(tileText),
+            onTap: () => goToTilePage(tileText, context),
         )),
       ));
     }

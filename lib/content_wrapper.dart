@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
 import 'models/user/user.dart';
+import 'screens/nollning/nollning.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
@@ -59,32 +61,12 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
     }
     widget.messages.clear(); // clears all showed messages
 
-    var _user = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CircleAvatar(
-          child: Icon(Icons.person, size: 44, color: Colors.grey[700]),
-          backgroundColor: Colors.grey[300],
-          radius: 32,
-        ),
-        SizedBox(
-          width: 24,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(widget.user == null ? "Loading..." : "${widget.user!.firstname!} ${widget.user!.lastname!}", style: Theme.of(context).textTheme.headline5!.apply(color: Colors.white)),
-            SizedBox(
-              height: 4,
-            ),
-            Text(widget.user == null ? "Loading..." : "${widget.user!.program} ${widget.user!.start_year}", style: Theme.of(context).textTheme.subtitle2!.apply(color: Colors.grey[200])),
-          ],
-        ),
-      ],
-    );
+   
+
+  
+
 
     return Stack(children: [
-      //PPBackground(),
       Container(
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height,
@@ -95,17 +77,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           backgroundColor: Colors.transparent,
           body: SafeArea(
               child: Column(children: [
-            SizedBox(
-              height: 16,
-            ),
-            _user,
-            SizedBox(
-              height: 24,
-            ),
-            Container(color: Colors.grey[400], height: 1, width: MediaQuery.of(context).size.width * 2 / 3),
-            SizedBox(
-              height: 12,
-            ),
+
             Expanded(
                 child: Stack(
                     children: widget.navbarDestinations.map((Destination destination) {
@@ -133,31 +105,41 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             }).toList())),
           ])),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/nollningpage');
-            },
-            tooltip: 'F-sektionen',
-            child: CircleAvatar(
-              radius: 36.0,
-              backgroundImage: AssetImage("assets/img/nollning_moose_icon.png"),
-              backgroundColor: Colors.orange,
+          floatingActionButton: Container(
+            height: 100,
+            width: 100,
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = widget.navbarDestinations.length - 1;
+                });
+                locator<ThemeService>().theme = nollning2021theme;
+                locator<ThemeService>().backgroundColors = nollning2021Background;
+                widget.onNavigation!.add(NollningPage);
+              },
+              child: Image(
+                image: AssetImage("assets/img/nollning_moose_icon.png"),
+              ),
+              tooltip: 'F-sektionen',
+              elevation: 2.0,
+              backgroundColor: Colors.transparent,
             ),
-            elevation: 2.0,
           ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
-              backgroundColor: Colors.orange[700],
+              currentIndex: _currentIndex,
               centerItemText: "F-sektionen",
               onTabSelected: (int? index) {
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
+                locator<ThemeService>().theme = fsekTheme;
+                locator<ThemeService>().backgroundColors = fsekBackground;
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.map((Destination destination) {
+                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
                   return FsekAppBarItem(iconData: destination.icon, text: destination.title);
                 }).toList()
               ],

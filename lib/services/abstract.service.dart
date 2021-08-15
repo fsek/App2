@@ -10,6 +10,7 @@ import 'dart:convert';
 
 class AbstractService {
   static DeviseToken? token;
+  // ignore: non_constant_identifier_names
   static final String API_URL = "${Environment.API_URL}/api";
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -53,7 +54,26 @@ class AbstractService {
     return responseJson;
   }
 
+  static Future<Map> put(String endpoint,
+      {String body = "",
+      Map<String, dynamic>? mapBody}) async {
+    var responseJson;
+    mapAuthHeaders(); 
+    try{
+      var response = await http.put(Uri.parse(API_URL+endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body)); 
+      responseJson = _returnResponse(response); 
+      updateToken(response.headers); 
+    } on SocketException {
+      // Probably no internet on device
+      throw FetchDataException(HttpErrorMessage.Message[399]);
+    }
+    return responseJson;
+  }
+
   static Map _returnResponse(http.Response response) {
+
     print(response.body);
     switch (response.statusCode) {
       case 200:
