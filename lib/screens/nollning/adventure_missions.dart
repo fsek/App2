@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -15,10 +16,6 @@ class AdventureMissionsPage extends StatefulWidget {
 class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
   List<NollningGroup>? groups;
   void initState() {
-    // locator<NollningService>().testGetThings();
-    locator<NollningService>().getNollningGroups().then((value) => setState(() {
-          this.groups = value;
-        }));
     super.initState();
   }
 
@@ -49,9 +46,9 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
               tag: "adventure_missions_tag",
             )),
         body: TabBarView(children: [
-          _adventureMissions(context),
+          AdventureMissionsTab(),
           _myGroup(context),
-          HighscoreTab(groups: groups),
+          HighscoreTab(),
         ]),
       ),
     );
