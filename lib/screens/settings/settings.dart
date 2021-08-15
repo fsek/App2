@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
+import 'package:intl/intl.dart';
 
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState(); 
@@ -16,6 +17,8 @@ class _SettingsPageState extends State<SettingsPage>{
   static const foodPrefsDisplay = {"vegetarian": "Vegetarian", "vegan": "Vegan", 
     "pescetarian": "Pescetarian", "milk": "Mjölkallergi", "gluten": "Gluten"}; 
   static List<int> years = List.generate(DateTime.now().year-1960, (i) => DateTime.now().year-i); 
+
+
   bool extraPref = false; 
 
   void initState(){
@@ -46,269 +49,314 @@ class _SettingsPageState extends State<SettingsPage>{
             padding: 
               EdgeInsets.only(right: 16),
               child: 
-                GestureDetector(
-                  onTap: () {
-                    showDialog(context: context,
-                    builder: savingPopup()); 
-                    locator<UserService>().updateUser(user!).then((value) { 
-                      setState(() {
-                        extraPref = user!.food_custom != "";  
+                Center(child:
+                  GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).unfocus(); 
+                      showDialog(context: context,
+                      builder: savingPopup()); 
+                      locator<UserService>().updateUser(user!).then((value) { 
+                        setState(() {
+                          extraPref = user!.food_custom != "";  
+                        });
+                        Navigator.pop(context);
                       });
-                      Navigator.pop(context);
-                    });
 
-                  },
-                  child: Text("Spara"),
-                ),
+                    },
+                    child: Text("Spara", style: TextStyle(fontSize: 16),),
+                  ),
+              ),
             ),
           ],
         ), //Alot of the code here is duplicate. could be made much more compact
-      body:SingleChildScrollView(
-        child:
-        Column(
+      body:
+        SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Förnamn*"),
-            TextField(
-              controller: TextEditingController(text: user!.firstname),
-              decoration: InputDecoration(
-                border: OutlineInputBorder()
-              ),
-              onChanged: (input) {
-                  user!.firstname = input;
-                  print(user!.food_custom);
-              },
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _makeTextField("Förnamn*", () => user!.firstname!, (input) => user!.firstname = input),
+                  _makeTextField("Efternamn*", () => user!.lastname!, (input) => user!.lastname = input),
+                  _makeDropDown<String>("Program", programs, () => user!.program, (program) { 
+                    setState(() {
+                      if(program != user!.program){
+                        user!.program = program; 
+                      }
+                    });
+                  }),
+                  _makeDropDown<int>("Startår", years, ()=>user!.start_year, (year) {
+                    setState((){
+                      if(year != user!.start_year){
+                        user!.start_year = year; 
+                      }
+                    });
+                  }),
+                ]
+              )
             ),
-            Text("Efternamn*"),
-            TextField(
-              controller: TextEditingController(text: user!.lastname),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),     
-              ),
-              onChanged: (input) {
-                  user!.lastname = input;
-              },
-            ),
-            Text("Program"),
-            DropdownButton(
-              isExpanded: true,
-              value: user!.program,  
-              items: programs.map((program) => 
-                DropdownMenuItem(
-                  child: Text(program),
-                  value: program)
-                ).toList(),
-              onChanged: (String? program){
-                setState((){
-                  if(program != user!.program){
-                    user!.program = program; 
-                  }
-                }); 
-              },
-            ),
-            Text("Startår"),
-            DropdownButton(
-              isExpanded: true,
-              value:user!.start_year,
-              items: years.map((year) => 
-                DropdownMenuItem(
-                  child: Text(year.toString()),
-                  value: year)).toList(),
-              onChanged: (int? year){
-                setState((){
-                  if(year != user!.start_year){
-                    user!.start_year = year; 
-                  }
-                });
-              }
-            ), 
-            Text("Nedstående fält används endast för sektionsval, bilbokning samt arbete i Hilbert Café. Kan ses av styrelsen, administratörer samt ansvariga för val, bokning eller caféet"),
-            Text("LUCAT-id"), 
-            TextField(
-              controller: TextEditingController(text: user!.student_id != null ? user!.student_id : ""),
-              decoration: InputDecoration(
-                border: OutlineInputBorder()
-              ),
-              onChanged: (input) {
-                user!.student_id = input;
-              },
-            ),
-            Text("Telefon"), 
-            TextField(
-              controller: TextEditingController(text: user!.phone != null ? user!.phone : ""),
-              decoration: InputDecoration(
-                border: OutlineInputBorder()
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (input) {
-                user!.phone = input; 
-             }, 
-            ),
-            Row(
-              children: [
-                Text("Visa tel. för gruppmedlemmar"),
-                Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                value: user!.display_phone, 
-                onChanged: (bool? value){
-                  setState(() {
-                      user!.display_phone = value; 
-                  });
-                },)
-              ]
-            ),
-            DropdownButton(
-              isExpanded: true,
-              hint: Text("Matpreferenser"),
-              items: foodPrefs.map((foodPref) => 
-                DropdownMenuItem(
-                  child: Row(
-                    children: [ 
-                      Text(foodPrefsDisplay[foodPref]!),
-                      StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setChildState){ 
-                          return Checkbox(
-                            checkColor: Colors.white,
-                            fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                            value: user!.food_preferences!.contains(foodPref), 
-                            onChanged: (bool? add){
-                              setChildState(() {
-                                if(add!)
-                                  user!.food_preferences!.add(foodPref);
-                                else 
-                                  user!.food_preferences!.remove(foodPref);
-                              });
-                            },
-                          );
-                        } 
-                      )
-                    ]
-                  ),
-                  value: foodPref)
-                ).toList()
-                ..add(
-                  DropdownMenuItem(
-                    child: Row(children: [Text("Annat"),
-                        StatefulBuilder(
-                          builder: (BuildContext context, StateSetter setChildState){
-                            return Checkbox(
-                              checkColor: Colors.white,
-                              fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                              value: extraPref,
-                              onChanged: (bool? add){
-                                setChildState(() => extraPref = add!);
-                                setState(() {});
-                              }
-                            );
-                          }
-                        )
-                      ]
-                    ),
-                    value: "Annat",
-                  )
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: 
+                Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                  child: Text("Nedstående fält används endast för "
+                    "sektionsval, bilbokning samt arbete i Hilbert Café. "
+                    "Kan ses av styrelse, administratörer samt ansvariga för"
+                    "  val, bokning eller caféet"),
                 ),
-                onChanged: (_) {setState(() {
-                  
-                });},
+              ),
+            ), 
+            Padding(padding: EdgeInsets.all(8),
+              child: Column( 
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _makeTextField("LUCAT-id", () => user!.student_id != null ? 
+                      user!.student_id! : "", (input) =>user!.student_id = input),
+                  _makeTextField("Telefon", () => user!.phone != null ?
+                      user!.phone! : "", (input) => user!.phone = input, num: true),  
+                  _makeCheckBox("Visa tel. för gruppmedlemmar", 
+                      () => user!.display_phone, 
+                      (bool? change) => setState(() {
+                        user!.display_phone = change;
+                        }
+                      )
+                  ),
+                  DropdownButton(
+                    isExpanded: true,
+                    hint: Text("Matpreferenser"),
+                    items: foodPrefs.map((foodPref) => 
+                      DropdownMenuItem(
+                        child: Row(
+                          children: [ 
+                            Text(foodPrefsDisplay[foodPref]!),
+                            Spacer(),
+                            StatefulBuilder(
+                              builder: (BuildContext context, StateSetter setChildState){ 
+                                return Checkbox(
+                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+                                  value: user!.food_preferences!.contains(foodPref), 
+                                  onChanged: (bool? add){
+                                    setChildState(() {
+                                      if(add!)
+                                        user!.food_preferences!.add(foodPref);
+                                      else 
+                                        user!.food_preferences!.remove(foodPref);
+                                    });
+                                  },
+                                );
+                              } 
+                            )
+                          ]
+                        ),
+                        value: foodPref)
+                      ).toList()
+                      ..add(
+                        DropdownMenuItem(
+                          child: Row(children: [Text("Annat"),
+                            Spacer(),
+                            StatefulBuilder(
+                              builder: (BuildContext context, StateSetter setChildState){
+                                return Checkbox(
+                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+                                  value: extraPref,
+                                  onChanged: (bool? add){
+                                    setChildState(() => extraPref = add!);
+                                    setState(() {});
+                                  }
+                                );
+                              }
+                            )
+                          ]
+                        ),
+                          value: "Annat",
+                      )
+                    ),
+                    onChanged: (_) {setState(() {});}, 
+                  ),
+                  _extraPrefTextField(),
+                  Text("Matprefersener kan endast ses av de som arrangerar"
+                    " evenmang som du anmält dig till.", 
+                    style: TextStyle(color: Colors.grey[600]),)
+                ]
+              ),
             ),
-            extraPrefTextField(), 
-            Text("Matprefersener kan endast ses av de som arrangerar evenmang som du anmält dig till."),
-            Text("Följande fält avgör vilka push-notisersom skickas till dina mobila enheter. Notificationer går alltid att se på webbsidan och i appen."),
-            Row(
-              children: [
-                Text("Notiser för eventanmälan"),
-                Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                value: user!.notify_event_users, 
-                onChanged: (bool? value){
-                  setState(() {
-                    if(value != user!.notify_event_users){
-                      user!.notify_event_users = value; 
-                    }
-                  });
-                },)
-              ]
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: 
+                Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                  child: Text("Nedstående fält används endast för "
+                    "sektionsval, bilbokning samt arbete i Hilbert Café. "
+                    "Kan ses av styrelse, administratörer samt ansvariga för"
+                    "  val, bokning eller caféet"),
+                ),
+              ),
             ),
-            Row(
-              children: [
-                Text("Notiser för meddelande"),
-                Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                value: user!.notify_messages, 
-                onChanged: (bool? value){
-                  setState(() {
-                    if(value != user!.notify_messages){
-                      user!.notify_messages = value; 
-                    }
-                  });
-                },)
-              ]
+            Padding(padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+              child: 
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _makeCheckBox("Notiser för eventanmälan", 
+                      () => user!.notify_event_users,
+                      (bool? change) {
+                        setState(() {
+                          user!.notify_event_users = change; 
+                        });
+                      }), 
+                    _makeCheckBox("Notiser för meddelande",
+                      () => user!.notify_messages, 
+                      (bool? change) {
+                        setState(() {
+                          user!.notify_messages = change; 
+                        });
+                      }),
+                    _makeCheckBox("Notiser för eventanmälan stänger",
+                      () => user!.notify_event_closing,
+                      (bool? change) {
+                        setState(() {
+                          user!.notify_event_closing = change; 
+                        });
+                      }),
+                    _makeCheckBox("Notiser för eventanmälan stänger",
+                     () => user!.notify_event_open,
+                     (bool? change) {
+                       setState(() {
+                         user!.notify_event_open = change; 
+                       });
+                     })
+                  ],
+                ), 
+              ),
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: 
+                Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28), 
+                  child: Text("Medlemskap sedan ${_makeTimestamp()}"
+                 )
+                ),
+              ),
             ),
-            Row(
-              children: [
-                Text("Visa tel. för gruppmedlemmar"),
-                Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                value: user!.notify_event_closing, 
-                onChanged: (bool? value){
-                  setState(() {
-                    if(value != user!.notify_event_closing){
-                      user!.notify_event_closing = value; 
-                    }
-                  });
-                },)
-              ]
-            ),
-            Row(
-              children: [
-                Text("Visa tel. för gruppmedlemmar"),
-                Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                value: user!.notify_event_open, 
-                onChanged: (bool? value){
-                  setState(() {
-                    if(value != user!.notify_event_open){
-                      user!.notify_event_open = value; 
-                    }
-                  });
-                },)
-              ]
-            ),
-            Text("Medlemskap sedan ${user!.member_at}")
           ]
-        ), 
+        )
       )
     ); 
   }
 
-  Widget extraPrefTextField(){
+  Widget _extraPrefTextField(){
     if(extraPref){
-      return TextField(   
-        controller: TextEditingController(text: user!.food_custom),
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'Andra matpreferenser/allergier'
-        ),
-        onChanged: (input) {
-          user!.food_custom = input; 
-        },
+      return Padding(padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Andra matpreferenser/allergier"),
+            TextField(   
+              controller: TextEditingController(text: user!.food_custom),
+              decoration: InputDecoration(
+                border: UnderlineInputBorder(),
+              ),
+              onChanged: (input) {
+                user!.food_custom = input; 
+              },
+            )
+          ],
+        )
       );
     }
-    return Container(); 
+    return SizedBox.shrink(); 
   }
 
+  Widget _makeTextField(String displayText,String Function() attrGetter,
+      void Function(String?) modUser, {bool num = false}){
+    return Padding(padding: EdgeInsets.fromLTRB(0, 6, 0, 6), 
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(displayText, style: TextStyle(fontSize: 16) ),
+          TextField(
+            controller: TextEditingController(text: attrGetter()),
+            decoration: InputDecoration(
+              border: UnderlineInputBorder()
+            ),
+            keyboardType: num ? TextInputType.number : null,
+            onChanged: (change) => modUser(change)
+          )
+        ],
+      )
+    );
+  }
+
+  Widget _makeDropDown<T>(String displayText, List<T> dropDownItems,
+      T? Function() attrGetter, void Function(T?) modUser) {
+    return Padding(padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+    child:
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(displayText, style: TextStyle(fontSize: 16),),
+          DropdownButton<T>(
+            isExpanded: true,
+            value: attrGetter(), 
+            items: dropDownItems.map((item) => 
+              DropdownMenuItem(
+                child: Text(item.toString()),
+                value: item)
+              ).toList(),
+            onChanged: (T? change) => modUser(change)
+          )
+        ],
+      ),
+    );   
+  }
+
+  Widget _makeCheckBox(String displayText, bool? Function() attrGetter, 
+      void Function(bool?) modUser) {
+    return Row(
+      children: [
+        Text(displayText),
+        Spacer(),
+        Checkbox(
+        checkColor: Colors.white,
+        fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+        value: attrGetter(), 
+        onChanged: (bool? change) => modUser(change)
+        ,)
+      ]
+    );
+  }
+
+  String _makeTimestamp(){
+    DateTime memberSince = DateTime.parse(user!.member_at!);
+   
+    return "${DateFormat.Hm().format(memberSince)}, ${DateFormat.d().format(memberSince)} "
+      /*"${DateFormat.MMMM('sv_SE').format(memberSince)} */"${DateFormat.y().format(memberSince)}"; //Doesnt work now
+  }
+
+
+  //Sometimes causes render overflow. Seems to be when saving while keyboard is active. Feels weird ):
   Widget Function(BuildContext) savingPopup(){
-    return (BuildContext context) => AlertDialog(
-      title: Text("Sparar"),
-      content: 
-        CircularProgressIndicator(
-          color: Colors.orange[600]),
-     );
+    return (BuildContext context) =>
+        SimpleDialog(
+          title: Text("Sparar"),
+          children:[
+            Column(
+             children: [
+              CircularProgressIndicator(
+              color: Colors.orange[600],),
+             ],  
+            )
+          ]
+      );
   }
 
 }
