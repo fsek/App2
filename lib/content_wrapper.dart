@@ -61,45 +61,10 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
     }
     widget.messages.clear(); // clears all showed messages
 
-    var _user = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CircleAvatar(
-          child: Icon(Icons.person, size: 44, color: Colors.grey[700]),
-          backgroundColor: Colors.grey[300],
-          radius: 32,
-        ),
-        SizedBox(
-          width: 24,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(widget.user == null ? "Loading..." : "${widget.user!.firstname!} ${widget.user!.lastname!}", style: Theme.of(context).textTheme.headline5!.apply(color: Colors.white)),
-            SizedBox(
-              height: 4,
-            ),
-            Text(widget.user == null ? "Loading..." : "${widget.user!.program} ${widget.user!.start_year}", style: Theme.of(context).textTheme.subtitle2!.apply(color: Colors.grey[200])),
-          ],
-        ),
-      ],
-    );
+   
 
-    List<Widget> _userContainer = [
-      SizedBox(
-        height: 16,
-      ),
-      _user,
-      SizedBox(
-        height: 24,
-      ),
-      Container(color: Colors.grey[400], height: 1, width: MediaQuery.of(context).size.width * 2 / 3),
-      SizedBox(
-        height: 12,
-      ),
-    ];
+  
 
-    if (_faders[widget.navbarDestinations.length-1].value > 0.2) _userContainer.clear();
 
     return Stack(children: [
       Container(
@@ -112,7 +77,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           backgroundColor: Colors.transparent,
           body: SafeArea(
               child: Column(children: [
-            ..._userContainer,
+
             Expanded(
                 child: Stack(
                     children: widget.navbarDestinations.map((Destination destination) {
