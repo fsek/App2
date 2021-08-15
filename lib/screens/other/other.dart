@@ -3,6 +3,8 @@ import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 
+import 'fap.dart';
+
 
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
@@ -14,7 +16,7 @@ class OtherContent extends StatelessWidget {
     "Bildgalleri": GalleryPage(),
     "Hilbert Café": Container(),
     "F-sektionen": Container(),
-    "F-appen": Container(),
+    "F-appen": FapPage(),
     "Konto": SettingsPage(),
     "Kontakt": Container(),
     "Anonym Kontaksida": Container()
