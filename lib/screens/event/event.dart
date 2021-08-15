@@ -6,6 +6,7 @@ import 'package:fsek_mobile/models/home/group.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:intl/intl.dart';
 import 'package:fsek_mobile/services/event.service.dart';
+import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
 
@@ -22,27 +23,30 @@ class _EventPageState extends State<EventPage> {
   Group? group;
   String? answer;
   String? custom_group;
+  List<String>? food_preferences;
+  String? food_custom;
   bool displayGroupInput = true;
   void initState() {
-    String? user_type = null;
-    Group? group = null;
-    String? answer = null;
     locator<EventService>()
         .getEvent(widget.event_id)
         .then((value) => setState(() {
               this.event = value;
             }));
+    locator<UserService>().getUser().then((value) => setState(() {
+          this.food_preferences = value.food_preferences;
+          this.food_custom = value.food_custom;
+        }));
     super.initState();
   }
 
   void update() {
-    String? user_type = null;
-    Group? group = null;
-    String? answer = null;
     locator<EventService>()
         .getEvent(widget.event_id)
         .then((value) => setState(() {
               this.event = value;
+              this.user_type = null;
+              this.group = null;
+              this.answer = null;
             }));
   }
 
@@ -372,6 +376,14 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
+              Row(
+                children: [
+                  Text("  Matpreffar: "),
+                  ...?food_preferences
+                      ?.map((food_preferences) => Text(food_preferences + " ")),
+                  Text(food_custom ?? ""),
+                ],
+              ),
               SizedBox(
                 height: 50,
                 width: 200,
@@ -412,6 +424,14 @@ class _EventPageState extends State<EventPage> {
           Text((event!.event_signup!.question ?? "") +
               " " +
               (event!.event_user!.answer ?? "")),
+          Row(
+            children: [
+              Text("Matpreffar: "),
+              ...?food_preferences
+                  ?.map((food_preferences) => Text(food_preferences + " ")),
+              Text(food_custom ?? ""),
+            ],
+          ),
           const Divider(),
           Align(
             alignment: Alignment.centerLeft,
