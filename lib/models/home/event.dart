@@ -21,7 +21,10 @@ class Event {
   bool? food;
   bool? cash;
   bool? closed;
+<<<<<<< HEAD
   bool? can_signup;
+=======
+>>>>>>> e0b99a5b0c4dda9bb88a06e5f91c018af696e538
   int? price;
   List<String>? dress_code;
   int? event_user_count;

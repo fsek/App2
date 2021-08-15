@@ -27,7 +27,10 @@ Event _$EventFromJson(Map<String, dynamic> json) {
     ..food = json['food'] as bool?
     ..cash = json['cash'] as bool?
     ..closed = json['closed'] as bool?
+<<<<<<< HEAD
     ..can_signup = json['can_signup'] as bool?
+=======
+>>>>>>> e0b99a5b0c4dda9bb88a06e5f91c018af696e538
     ..price = json['price'] as int?
     ..dress_code =
         (json['dress_code'] as List<dynamic>?)?.map((e) => e as String).toList()
@@ -72,7 +75,10 @@ Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'food': instance.food,
       'cash': instance.cash,
       'closed': instance.closed,
+<<<<<<< HEAD
       'can_signup': instance.can_signup,
+=======
+>>>>>>> e0b99a5b0c4dda9bb88a06e5f91c018af696e538
       'price': instance.price,
       'dress_code': instance.dress_code,
       'event_user_count': instance.event_user_count,

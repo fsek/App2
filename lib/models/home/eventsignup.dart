@@ -12,8 +12,11 @@ class EventSignup {
   int? novice;
   int? mentor;
   int? custom;
+<<<<<<< HEAD
   bool? open;
   bool? closed;
+=======
+>>>>>>> e0b99a5b0c4dda9bb88a06e5f91c018af696e538
   String? custom_name;
   DateTime? deleted_at;
   DateTime? created_at;
