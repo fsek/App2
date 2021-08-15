@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
-import 'package:fsek_mobile/screens/nollning/nollning.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -51,13 +49,15 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
     _authenticationBloc!.stream.listen((AuthenticationState state) async {
       if (state is AuthenticationUserFetched) {
         setState(() {
-          _userService!.getUser().then((value) => setState(() {this._user = value;}));
+          _userService!.getUser().then((value) => setState(() {
+                this._user = value;
+              }));
         });
 
         setupPushNotifications();
       }
     });
-    // Change background listener
+    // Change background-listener
     locator<NavigationService>().onNavigation.stream.listen((event) {
       for (int i = 0; i < locator<NavigationService>().navbarDestinations.length; i++) {
         if (locator<NavigationService>().navbarDestinations[i].widget.runtimeType == event) {
@@ -90,7 +90,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
               },
               listener: (context, state) {
                 if (state is AuthenticationDisconnected) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: "We could not connect to Purplepoint. Please check your connection or try again later.")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: "We could not connect to Fsektionen.se. Please check your connection or try again later.")));
                 }
                 if (state is AuthenticationError) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: state.error)));
@@ -112,9 +112,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            // put named routes here plz
-            NollningPage.routeName: (context) => NollningPage(),
-            AdventureMissionsPage.routeName: (context) => AdventureMissionsPage(),
+            // put named routes in main.dart please (add hot restart app if running)
           }..addAll(locator<NavigationService>().routes),
         ));
   }

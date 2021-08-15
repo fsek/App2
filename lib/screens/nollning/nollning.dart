@@ -16,70 +16,76 @@ class _NollningPageState extends State<NollningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Nollning 2021"),
+    return Stack(children: [
+      Image.asset(
+        "assets/img/nollningbakgrundtest.png", //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        fit: BoxFit.cover,
       ),
-      backgroundColor: Colors.white,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => null,
-        icon: Icon(Icons.phone_rounded),
-        label: Text("Nolleakuten"),
-        backgroundColor: Colors.redAccent,
-        heroTag: "emergency_tag",
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(
-              flex: 3,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    Navigator.pushNamed(context, AdventureMissionsPage.routeName);
-                  },
-                  // Change to better mission icon
-                  icon: Icon(Icons.emoji_events_rounded),
-                  label: Text("Uppdrag"),
-                  heroTag: "adventure_missions_tag",
+                Spacer(
+                  flex: 4,
                 ),
-                FloatingActionButton.extended(
-                  onPressed: () => null,
-                  icon: Icon(Icons.message_rounded),
-                  label: Text("Meddelanden"),
-                  heroTag: "messages_tag",
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/adventure_missions');
+                      },
+                      child: Image.asset(
+                        "assets/img/Uppdrag.png",
+                        height: 100,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => {},
+                      child: Image.asset(
+                        "assets/img/Meddelande.png",
+                        height: 100,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/emergency_contacts');
+                      },
+                      child: Image.asset(
+                        "assets/img/information.png",
+                        height: 100,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => null,
+                      child: Image.asset(
+                        "assets/img/skrikbok.png",
+                        height: 100,
+                        // scale: 2,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(
+                  flex: 4,
                 ),
               ],
             ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                FloatingActionButton.extended(
-                  onPressed: () => null,
-                  icon: Icon(Icons.calendar_today_rounded),
-                  label: Text("Tidslinje"),
-                  heroTag: "timeline_tag",
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () => null,
-                  icon: Icon(Icons.queue_music_rounded),
-                  label: Text("Sångbok"),
-                  heroTag: "songbook_tag",
-                ),
-              ],
-            ),
-            Spacer(
-              flex: 4,
-            ),
-          ],
+          ),
         ),
       ),
-    );
+    ]);
   }
 }

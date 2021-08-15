@@ -20,7 +20,7 @@ class UserService extends AbstractService {
   Future<DeviseToken> sendLogin({required String email, required String pass}) async {
     try {
       var response = await http.post(
-        Uri.parse(Environment.API_URL + "/auth/sign_in"),
+        Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
         headers: AbstractService.headers,
         body: jsonEncode({"email": email, "password": pass}));
 
@@ -52,8 +52,10 @@ class UserService extends AbstractService {
       String? json = await storage.read('user-data');
       if(json != null)
         return User.fromJson(jsonDecode(json));
+      else 
+        return User(); 
     }
-    return User();
+    return _user!;
   }
 
   //Token Functions

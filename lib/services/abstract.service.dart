@@ -9,8 +9,9 @@ import 'package:fsek_mobile/util/errors/http_error_messages.dart';
 import 'dart:convert';
 
 class AbstractService {
-  static final String API_URL = "${Environment.API_URL}";
   static DeviseToken? token;
+  // ignore: non_constant_identifier_names
+  static final String API_URL = "${Environment.API_URL}/api";
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
