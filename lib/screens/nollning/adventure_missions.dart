@@ -14,7 +14,8 @@ class AdventureMissionsPage extends StatefulWidget {
 }
 
 class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
-  List<NollningGroup>? groups;
+  // List<NollningGroup>? groups;
+
   void initState() {
     super.initState();
   }
@@ -55,26 +56,26 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
   }
 
   // Filler widget for adventureMissions tab
-  Widget _adventureMissions(BuildContext context) {
-    if (groups == null) {
-      return Text("ohno");
-    }
-    List<Widget> nollningGroups = groups!.map((e) => _groupToWidget(e)).toList();
-    return Column(
-      children: nollningGroups,
-      //Text("Inga äventyrsuppdrag är tillgängliga :("),
-    );
-  }
+  // Widget _adventureMissions(BuildContext context) {
+  //   if (groups == null) {
+  //     return Text("ohno");
+  //   }
+  //   List<Widget> nollningGroups = groups!.map((e) => _groupToWidget(e)).toList();
+  //   return Column(
+  //     children: nollningGroups,
+  //     //Text("Inga äventyrsuppdrag är tillgängliga :("),
+  //   );
+  // }
 
-  Widget _groupToWidget(NollningGroup nollningGroup) {
-    return Row(
-      children: [
-        Text(nollningGroup.name!),
-        Text(nollningGroup.total_points!.toString()),
-        Text(nollningGroup.finished_missions.toString()),
-      ],
-    );
-  }
+  // Widget _groupToWidget(NollningGroup nollningGroup) {
+  //   return Row(
+  //     children: [
+  //       Text(nollningGroup.name!),
+  //       Text(nollningGroup.total_points!.toString()),
+  //       Text(nollningGroup.finished_missions.toString()),
+  //     ],
+  //   );
+  // }
 
   // Filler widget for myGroup tab
   Widget _myGroup(BuildContext context) {
@@ -83,17 +84,17 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
     );
   }
 
-  Widget _highscore(BuildContext context) {
-    // Filler data for adventure mission groups
-    final groups = List<String>.generate(16, (i) => 'Group_${i + 1}');
+  // Widget _highscore(BuildContext context) {
+  //   // Filler data for adventure mission groups
+  //   final groups = List<String>.generate(16, (i) => 'Group_${i + 1}');
 
-    return ListView.builder(
-      itemCount: groups.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('${index + 1}. ${groups[index]}'),
-        );
-      },
-    );
-  }
+  //   return ListView.builder(
+  //     itemCount: groups.length,
+  //     itemBuilder: (context, index) {
+  //       return ListTile(
+  //         title: Text('${index + 1}. ${groups[index]}'),
+  //       );
+  //     },
+  //   );
+  // }
 }
