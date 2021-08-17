@@ -36,8 +36,7 @@ class AbstractService {
   }
 
   static Future<Map> post(String endpoint,
-      {String body = "",
-      Map<String, dynamic>? mapBody}) async {
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
     mapAuthHeaders();
 
@@ -55,16 +54,33 @@ class AbstractService {
   }
 
   static Future<Map> put(String endpoint,
-      {String body = "",
-      Map<String, dynamic>? mapBody}) async {
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
-    mapAuthHeaders(); 
-    try{
-      var response = await http.put(Uri.parse(API_URL+endpoint),
+    mapAuthHeaders();
+    try {
+      var response = await http.put(Uri.parse(API_URL + endpoint),
           headers: headers,
-          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body)); 
-      responseJson = _returnResponse(response); 
-      updateToken(response.headers); 
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      responseJson = _returnResponse(response);
+      updateToken(response.headers);
+    } on SocketException {
+      // Probably no internet on device
+      throw FetchDataException(HttpErrorMessage.Message[399]);
+    }
+    return responseJson;
+  }
+
+  static Future<Map> delete(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
+    var responseJson;
+    mapAuthHeaders();
+
+    try {
+      var response = await http.delete(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      responseJson = _returnResponse(response);
+      updateToken(response.headers);
     } on SocketException {
       // Probably no internet on device
       throw FetchDataException(HttpErrorMessage.Message[399]);
@@ -73,7 +89,6 @@ class AbstractService {
   }
 
   static Map _returnResponse(http.Response response) {
-
     print(response.body);
     switch (response.statusCode) {
       case 200:
@@ -98,17 +113,17 @@ class AbstractService {
   }
 
   static void mapAuthHeaders() {
-    if(token == null)
-      return;
+    if (token == null) return;
     headers["access-token"] = token!.accessToken ?? "";
     headers["uid"] = token!.uid ?? "";
     headers["client"] = token!.client ?? "";
-    if(token!.expires != null)
-      headers["expires"] = (token!.expires!.millisecondsSinceEpoch*1000).toString();
+    if (token!.expires != null)
+      headers["expires"] =
+          (token!.expires!.millisecondsSinceEpoch * 1000).toString();
   }
 
   static void updateToken(Map<String, String> headers) {
-    if(headers['access-token']?.isNotEmpty ?? false) {
+    if (headers['access-token']?.isNotEmpty ?? false) {
       DeviseToken token = DeviseToken.getFromHeaders(headers);
       AbstractService.token = token;
     }
