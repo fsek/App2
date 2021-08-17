@@ -29,7 +29,7 @@ class _CalendarState extends State<Calendar> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => EventPage(event_id: event.id ?? -1)));
+            builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -46,30 +46,55 @@ class _CalendarState extends State<Calendar> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  event.title ?? "ingen titel",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.orange[600],
+                Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Text(
+                    event.title ?? "ingen titel",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.orange[600],
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-                Text(
-                  /* better error checking */
-                  DateFormat("kk:mm").format(event.start ?? DateTime.now()) +
-                      " - " +
-                      DateFormat("kk:mm").format(event.end ?? DateTime.now()),
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                  textAlign: TextAlign.left,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time_rounded,
+                      size: 20,
+                    ),
+                    Text(
+                      /* better error checking */
+                      "  " +
+                          DateFormat("kk:mm")
+                              .format(event.start ?? DateTime.now()) +
+                          " - " +
+                          DateFormat("kk:mm")
+                              .format(event.end ?? DateTime.now()) +
+                          ", " +
+                          DateFormat("MMMMd", "sv_SE")
+                              .format(event.start ?? DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
                 ),
-                Text(
-                  event.location ?? "intigheten",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                  textAlign: TextAlign.left,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room,
+                      size: 20,
+                    ),
+                    Text(
+                      "  " + (event.location ?? "intigheten"),
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -90,7 +115,7 @@ class _CalendarState extends State<Calendar> {
             startingDayOfWeek: StartingDayOfWeek.monday,
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: DateTime.now(),
+            focusedDay: _focusedDay,
             availableCalendarFormats: const {
               CalendarFormat.month: 'Month',
             },
@@ -119,7 +144,7 @@ class _CalendarState extends State<Calendar> {
             child: Text(
               /* It's too late to write pretty code, take this formatting space*/
               "  " +
-                  DateFormat("MMMMEEEEd").format(
+                  DateFormat("MMMMEEEEd", "sv_SE").format(
                     _selectedDay ?? DateTime.now(),
                   ),
               style: TextStyle(

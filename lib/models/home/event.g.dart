@@ -10,7 +10,6 @@ Event _$EventFromJson(Map<String, dynamic> json) {
   return Event()
     ..id = json['id'] as int?
     ..title = json['title'] as String?
-    ..content = json['content'] as String?
     ..starts_at = json['starts_at'] == null
         ? null
         : DateTime.parse(json['starts_at'] as String)
@@ -19,8 +18,7 @@ Event _$EventFromJson(Map<String, dynamic> json) {
         : DateTime.parse(json['ends_at'] as String)
     ..description = json['description'] as String?
     ..location = json['location'] as String?
-    ..allday = json['allday'] as bool?
-    ..has_signup = json['has_signup'] as bool?
+    ..all_day = json['all_day'] as bool?
     ..signup_not_opened_yet = json['signup_not_opened_yet'] as bool?
     ..recurring = json['recurring'] as bool?
     ..drink = json['drink'] as bool?
@@ -36,7 +34,9 @@ Event _$EventFromJson(Map<String, dynamic> json) {
     ..user_types = (json['user_types'] as List<dynamic>?)
         ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
         .toList()
-    ..contacts = json['contacts'] as Map<String, dynamic>?
+    ..contact = json['contact'] == null
+        ? null
+        : Contact.fromJson(json['contact'] as Map<String, dynamic>)
     ..slots = json['slots'] as int?
     ..question = json['question'] as String?
     ..url = json['url'] as String?
@@ -59,13 +59,11 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'content': instance.content,
       'starts_at': instance.starts_at?.toIso8601String(),
       'ends_at': instance.ends_at?.toIso8601String(),
       'description': instance.description,
       'location': instance.location,
-      'allday': instance.allday,
-      'has_signup': instance.has_signup,
+      'all_day': instance.all_day,
       'signup_not_opened_yet': instance.signup_not_opened_yet,
       'recurring': instance.recurring,
       'drink': instance.drink,
@@ -78,7 +76,7 @@ Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'event_user_count': instance.event_user_count,
       'short': instance.short,
       'user_types': instance.user_types,
-      'contacts': instance.contacts,
+      'contact': instance.contact,
       'slots': instance.slots,
       'question': instance.question,
       'url': instance.url,
