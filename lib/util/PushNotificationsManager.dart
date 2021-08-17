@@ -8,7 +8,7 @@ class PushNotificationsManager {
   static PushNotificationsManager? _instance;
 
   static PushNotificationsManager? getInstance() {
-    if(_instance == null) {
+    if (_instance == null) {
       _instance = PushNotificationsManager._();
     }
 
@@ -30,7 +30,7 @@ class PushNotificationsManager {
         provisional: false,
         sound: true,
       );
-      
+
       _initialized = true;
     }
   }
@@ -39,13 +39,11 @@ class PushNotificationsManager {
     if (_initialized) {
       // For testing purposes print the Firebase Messaging token
       String? token = await _firebaseMessaging.getToken();
-      if(token == null)
-        throw new Exception("Could not get token");
+      if (token == null) throw new Exception("Could not get token");
 
       print("FirebaseMessaging token: $token"); //send to server
       return token;
-    }
-    else {
+    } else {
       throw new Exception("PushNotificationsManager not initialized.");
     }
   }
