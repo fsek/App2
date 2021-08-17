@@ -33,7 +33,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             title: Text("Gruppnamn"),
             trailing: Text("Poäng"),
           ),
-          color: Colors.orange[600],
+          color: Theme.of(context).bottomAppBarTheme.color,
         ),
         Expanded(
           child: ListView.builder(
