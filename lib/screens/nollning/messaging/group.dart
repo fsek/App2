@@ -46,7 +46,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meddelanden'),
+        title: Text(widget.group.name!),
       ),
       body: Stack(
         children: [
@@ -146,7 +146,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
       // NOTE: ActionCable dosent work on stage, why? i dunno, ask förberg or smth
       // Connects to websocket with the token and sets origin because ActionCable respects CORS
-      cable = ActionCable.Connect("wss://stage.fsektionen.se/cable?token=$token", headers: {"Origin": "https://stage.fsektionen.se"}, onConnected: () {
+      cable = ActionCable.Connect("wss://fsektionen.se/cable?token=$token", headers: {"Origin": "https://fsektionen.se"}, onConnected: () {
         print("connected");
 
         // Connects to the channel with the group id
