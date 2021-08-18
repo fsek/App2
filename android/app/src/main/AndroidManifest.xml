@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.app2">
+    package="se.fsektionen.fapp">
    <application
-        android:label="app2"
-        android:icon="@mipmap/launcher_icon">
+        android:label="F-sektionen"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

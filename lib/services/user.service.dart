@@ -37,6 +37,27 @@ class UserService extends AbstractService {
     }
   }
 
+  Future<DeviseToken> validateToken() async {
+    try {
+      AbstractService.mapAuthHeaders();
+
+      var response = await http.get(
+        Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+        headers: AbstractService.headers);
+
+      var json = jsonDecode(response.body);
+      if(json["data"] != null) {
+        setCurrentUser(User.fromJson(json["data"]));
+        return DeviseToken.getFromHeaders(response.headers);
+      }
+      else {
+        return DeviseToken(error: json["errors"][0]);
+      }
+    } on UnauthorisedException catch(e) {
+      return DeviseToken(error: e.toString());
+    }
+  }
+
   Future<bool> resetPasswordRequest(String email) async {
     await AbstractService.post("/account/resetpassword", body: email);
     return true;
@@ -68,6 +89,7 @@ class UserService extends AbstractService {
   //Token Functions
   void storeToken(DeviseToken token) {
     DeviseToken.storeToken(storage, token);
+    AbstractService.token = token;
   }
 
   void clearToken() {

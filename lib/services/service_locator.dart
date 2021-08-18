@@ -1,4 +1,5 @@
 
+import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:fsek_mobile/services/event.service.dart';
@@ -28,4 +29,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => AlbumService());
   locator.registerLazySingleton(() => SongbookService());
   locator.registerLazySingleton(() => SongService());
+  locator.registerLazySingleton(() => MessagesService());
 }

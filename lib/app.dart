@@ -50,11 +50,11 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       if (state is AuthenticationUserFetched) {
         setState(() {
           _userService!.getUser().then((value) => setState(() {
-                this._user = value;
-              }));
-        });
+            this._user = value;
 
-        setupPushNotifications();
+            setupPushNotifications();
+          }));
+        });
       }
     });
     // Change background-listener
@@ -147,51 +147,25 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   }
 
   void setupPushNotifications() async {
-    var firstTime = await _storage!.read("first_time");
     pushManager = PushNotificationsManager();
     if (!kIsWeb) await pushManager!.init();
 
-    if (firstTime == null || firstTime == "true") {
-      _storage!.write(key: "first_time", value: false);
-      try {
-        String token = await pushManager!.getToken();
-        locator<NotificationsService>().acceptNotifications(token).then((success) => print("Notifications accept: " + success.toString()));
-      } catch (ex) {
-        print(ex);
+    try {
+      String token = await pushManager!.getToken();
+      locator<NotificationsService>().createPushDevice(token);
+      
+      String? oldId = await locator<TokenStorageWrapper>().read("notificationId");
+      if(oldId == null || oldId != token) {
+        locator<TokenStorageWrapper>().write(key: "notificationId", value: token);
+
+        User user = await locator<UserService>().getUser();
+        if(user.id == null)
+          locator<NotificationsService>().deletePushDevice(oldId!);
       }
+    } catch (ex) {
+      print(ex);
     }
   }
-
-  /*void checkApiVersion() {
-    _userService!.isGoodApiVersion().then((value) {
-      if(!value) {
-        showDialog<void>(
-          context: locator<NavigationService>().navigatorKey.currentState!.overlay!.context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Old app version'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text('This version of the app uses an old API version.'),
-                    Text('It is recommended that you update your app.'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Ok!'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    });
-  }*/
 
   @override
   void dispose() {
