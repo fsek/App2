@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +94,9 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
+  
   runZonedGuarded<Future<void>>(() async {
     initializeDateFormatting().then((_) => runApp(FsekMobileApp()));
   }, (Object error, StackTrace stackTrace) {
@@ -120,4 +125,12 @@ Future<void> _reportError(dynamic error, dynamic stackTrace) async {
       stackTrace: stackTrace,
     );*/
   }
+}
+
+Future<void> _backgroundMessagingHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+  print(message.data);
+  print(message.notification);
+  print(message.messageType);
+  print(message.category);
 }

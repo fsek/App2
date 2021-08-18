@@ -1,6 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/util/storage_wrapper.dart';
 
 class PushNotificationsManager {
   PushNotificationsManager._();

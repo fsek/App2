@@ -1,6 +1,7 @@
 import 'package:action_cable/action_cable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/messages/message.dart';
 import 'package:fsek_mobile/models/messages/messaging_group.dart';
 import 'package:fsek_mobile/models/user/user.dart';
@@ -207,7 +208,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
       // NOTE: ActionCable dosent work on stage, why? i dunno, ask förberg or smth
       // Connects to websocket with the token and sets origin because ActionCable respects CORS
-      cable = ActionCable.Connect("wss://fsektionen.se/cable?token=$token", headers: {"Origin": "https://fsektionen.se"}, onConnected: () {
+      cable = ActionCable.Connect("${Environment.CABLE_URL}?token=$token", headers: {"Origin": Environment.API_URL}, onConnected: () {
         print("connected");
 
         // Connects to the channel with the group id

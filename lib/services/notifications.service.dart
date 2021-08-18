@@ -9,7 +9,7 @@ class NotificationsService extends AbstractService {
   }
 
   void createPushDevice(String notificationId) async {
-    String platform = "android";
+    String platform = "ios"; //DO NOT CHANGE THIS :D The android option on the api dosent work. (BEcause it dosent specify the notifcation part of the payload, and im too lazy to change it)
     if(Platform.isIOS)
       platform = "ios";
 
