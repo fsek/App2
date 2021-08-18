@@ -16,6 +16,8 @@ import 'app.dart';
 import 'models/destination.dart';
 import 'screens/nollning/adventure_missions.dart';
 import 'screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
