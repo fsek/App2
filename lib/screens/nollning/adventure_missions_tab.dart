@@ -108,8 +108,18 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
       // if the mission has variable points, let them fill in the amount,
       // else just post instantly
       if (mission.variable_points!) {
-        _variablePointsDialog(context, mission.max_points!);
+        _variablePointsDialog(context, mission.max_points!).then((value) {
+          if (value != null) {
+            _finishAdventureMission(mission, value);
+          }
+        });
+      } else {
+        _finishAdventureMission(mission, mission.max_points!);
       }
+    } else {
+      _resetMissionDialog(context).then((remove) {
+        if (remove == true) _resetAdventureMission(mission.id!);
+      });
     }
 
     if (mission.is_accepted!) {
@@ -127,9 +137,12 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
 
   Future<void> _finishAdventureMission(AdventureMission mission, int points) async {}
 
-  Future<void> _variablePointsDialog(BuildContext context, int max_points) async {
+  Future<void> _resetAdventureMission(int id) async {}
+
+  Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
     final _formKey = GlobalKey<FormState>();
     TextEditingController _textFieldController = TextEditingController();
+    int? points;
 
     return showDialog(
       context: context,
@@ -153,17 +166,41 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
             TextButton(
               child: Text('OK'),
               onPressed: () {
-                if (!_isValidInput(_textFieldController.text, max_points)) {
-                  _errorMessageDialog(context, max_points);
+                if (_isValidInput(_textFieldController.text, max_points)) {
+                  points = int.parse(_textFieldController.text);
+                  Navigator.pop(context, points);
                 }
                 print(_textFieldController.text);
-                Navigator.pop(context);
               },
             ),
           ],
         );
       },
     );
+  }
+
+  Future<bool?> _resetMissionDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Säker på att du vill förinta uppdraget?"),
+            actions: [
+              TextButton(
+                child: Text('AVBRYT'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: Text('FÖRINTA'),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        });
   }
 
   bool _isValidInput(String value, int max_points) {
@@ -176,17 +213,6 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
         return false;
       }
     }
-    // we don't show error message on empty string
-    return true;
-  }
-
-  Future<void> _errorMessageDialog(BuildContext context, int max_points) async {
-    return showDialog(
-        context: context,
-        builder: (builder) {
-          return AlertDialog(
-            content: Text("Bara tal mellan 1 och $max_points tack!"),
-          );
-        });
+    return false;
   }
 }
