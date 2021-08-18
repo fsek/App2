@@ -34,7 +34,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "se.fsektionen.fappprod"
+        applicationId "se.fsektionen.fapp"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
