@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:http/http.dart' as http;
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
@@ -35,6 +36,11 @@ class UserService extends AbstractService {
     } on UnauthorisedException catch(e) {
       return DeviseToken(error: e.toString());
     }
+  }
+
+  Future<void> signOut() async {
+    AbstractService.delete("/auth/sign_out");
+    clearToken();
   }
 
   Future<DeviseToken> validateToken() async {

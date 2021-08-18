@@ -156,11 +156,11 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       
       String? oldId = await locator<TokenStorageWrapper>().read("notificationId");
       if(oldId == null || oldId != token) {
-        locator<TokenStorageWrapper>().write(key: "notificationId", value: token);
-
         User user = await locator<UserService>().getUser();
         if(user.id == null)
           locator<NotificationsService>().deletePushDevice(oldId!);
+
+        locator<TokenStorageWrapper>().write(key: "notificationId", value: token);
       }
     } catch (ex) {
       print(ex);

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
-import 'package:fsek_mobile/models/home/eventsignup.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
 import 'package:fsek_mobile/models/home/group.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 import 'package:intl/intl.dart';
 import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
@@ -14,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class EventPage extends StatefulWidget {
-  int eventId;
+  final int eventId;
   EventPage({Key? key, required this.eventId}) : super(key: key);
   @override
   _EventPageState createState() => _EventPageState();

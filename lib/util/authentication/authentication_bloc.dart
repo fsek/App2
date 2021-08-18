@@ -92,7 +92,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
     if (event is LoggedOut) {
       yield AuthenticationLoading();
-      userService.clearToken();
+      userService.signOut();
       yield AuthenticationUnauthenticated();
     }
 
