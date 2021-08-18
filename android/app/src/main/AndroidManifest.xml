@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="se.fsektionen.fappprod">
+    package="se.fsektionen.fapp">
    <application
         android:label="F-sektionen"
         android:icon="@mipmap/ic_launcher">
