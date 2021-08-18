@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/home/calendar.dart';
+import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
 import 'app.dart';
@@ -26,7 +28,7 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
-void main() {
+void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
@@ -40,6 +42,7 @@ void main() {
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
+    '/messages': (context) => MessagesPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
@@ -86,6 +89,8 @@ void main() {
 
   Bloc.observer = SimpleBlocObserver();
 
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runZonedGuarded<Future<void>>(() async {
     runApp(FsekMobileApp());
   }, (Object error, StackTrace stackTrace) {
