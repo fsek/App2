@@ -2,19 +2,18 @@ import 'package:json_annotation/json_annotation.dart';
 import 'eventuser.dart';
 import 'group.dart';
 import 'eventsignup.dart';
+import 'contact.dart';
 part 'event.g.dart';
 
 @JsonSerializable()
 class Event {
   int? id;
   String? title;
-  String? content;
   DateTime? starts_at;
   DateTime? ends_at;
   String? description;
   String? location;
-  bool? allday;
-  bool? has_signup;
+  bool? all_day;
   bool? signup_not_opened_yet;
   bool? recurring;
   bool? drink;
@@ -27,7 +26,7 @@ class Event {
   int? event_user_count;
   String? short;
   List<List<String>>? user_types;
-  Map<String, dynamic>? contacts;
+  Contact? contact;
   int? slots;
   String? question;
   String? url;
