@@ -1,4 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/util/storage_wrapper.dart';
 
 class PushNotificationsManager {
   PushNotificationsManager._();
@@ -20,6 +22,7 @@ class PushNotificationsManager {
 
   Future<void> init() async {
     if (!_initialized) {
+      
       // For iOS request permission first.
       await _firebaseMessaging.requestPermission(
         alert: true,

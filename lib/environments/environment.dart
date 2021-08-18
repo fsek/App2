@@ -1,3 +1,3 @@
 class Environment {
-  static const String API_URL = "https://stage.fsektionen.se";
+  static const String API_URL = "https://fsektionen.se";
 }

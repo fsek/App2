@@ -1,14 +1,17 @@
 import 'package:action_cable/action_cable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/messages/message.dart';
 import 'package:fsek_mobile/models/messages/messaging_group.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
+import 'package:html/parser.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// This file is chaos, but it workss
+// This file is chaos, but it workss... it should probably be made into smaller files
 class GroupPage extends StatefulWidget {
   const GroupPage({Key? key, required this.group}) : super(key: key);
 
@@ -24,10 +27,11 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
   ActionCable? cable;
 
   final PagingController<int, Message> _pagingController = PagingController(firstPageKey: 1);
-
+  
   String _channelName = "GroupsChannel";
   Map _channelParams = {};
   TextEditingController _controller = TextEditingController();
+  TextEditingController _updateMessageController = TextEditingController();
 
   @override
   void initState() {
@@ -69,23 +73,37 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                     children: [
                       _date,
                       Row(mainAxisAlignment: isThisUser(message.name!) ? MainAxisAlignment.end : MainAxisAlignment.start, children: [
+                        message.avatar != null && message.avatar!.isNotEmpty && !isThisUser(message.name!) ? Image.network(message.avatar!, width: 50,) : Container(),
                         Container(
                           width: MediaQuery.of(context).size.width * 2 / 3,
-                          child: Card(
-                            child: InkWell(
-                              onTap: () => null,
-                              child: ListTile(
-                                tileColor: isThisUser(message.name!) ? Colors.green[100] : Colors.blue[100],
-                                contentPadding: EdgeInsets.fromLTRB(10, 1, 10, 1),
-                                title: Text(message.name!),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(padding: EdgeInsets.fromLTRB(0, 3, 0, 0), child: RichText(text: TextSpan(text: message.text!.trim(), style: Theme.of(context).textTheme.bodyText1!.apply(color: Colors.grey)))),
-                                    Row(children: [Text(message.time!)],mainAxisAlignment: MainAxisAlignment.end,)
-                                  ],
-                                ),
-                              ))))]),
+                          child: GestureDetector(
+                            onLongPress: isThisUser(message.name!) ? () => showDialog(context: context, builder: (context) => holdPopup(context, message),) : null,
+                            child: Card(
+                              child: InkWell(
+                                onTap: () => null,
+                                child: ListTile(
+                                  tileColor: isThisUser(message.name!) ? Colors.green[100] : Colors.blue[100],
+                                  contentPadding: EdgeInsets.fromLTRB(10, 1, 10, 1),
+                                  title: Text(message.name!),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 3, 0, 0), 
+                                        child: Html(
+                                          data: message.text, 
+                                          style: {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero)},
+                                          onLinkTap: (String? url, RenderContext context, 
+                                            Map<String,String> attributes, element) {
+                                              launch(url!);
+                                            }
+                                        )),
+                                      Row(children: [Text(message.time!)],mainAxisAlignment: MainAxisAlignment.end,)
+                                    ],
+                                  ),
+                                ))),
+                          )),
+                        ]),
                     ],
                   );
                   }
@@ -111,17 +129,28 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  String getTextWithoutHtml(String text) {
+    return parse(text).documentElement?.text ?? "[APP ERROR]";
+  }
+
   Widget _getTextField() {
     return Container(
       color: Colors.grey[200],
       child: Stack(children: [
-        TextFormField(
-          enabled: widget.group.group_type != "info",
-          controller: _controller,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(),
-          )),
+        LayoutBuilder(builder: (context, constraint) {
+          return Container(
+            width: constraint.maxWidth - 60,
+            child: TextFormField(
+              enabled: widget.group.group_type != "info",
+              controller: _controller,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(),
+              )),
+          );
+        }),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -133,6 +162,38 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
             )
           ],)
       ]));
+  }
+
+  // i wrote this in 5 minutes, shut up
+  Widget holdPopup(BuildContext context, Message message) {
+    _updateMessageController = TextEditingController(text: getTextWithoutHtml(message.text!.trim()));
+    bool _update = false;
+    return StatefulBuilder(builder: (context, setState) {
+      return  AlertDialog(title: Text("Vad vill du göra med meddelandet?"), actions: [
+        _update ? TextFormField(
+          controller: _updateMessageController,
+        ) : Container(),
+        !_update ? TextButton(
+          onPressed: () => setState(() { _update = true; }),
+          child: const Text('Redigera'),
+        ) : TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            sendUpdateMessage(message.id!, _updateMessageController.text);
+          },
+          style: ButtonStyle(foregroundColor: MaterialStateProperty.all<Color>(Colors.green[600]!)),
+          child: const Text('Spara'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            sendDestroyMessage(message.id!);
+          },
+          style: ButtonStyle(foregroundColor: MaterialStateProperty.all<Color>(Colors.red)),
+          child: const Text('Ta bort'),
+        ),
+      ],);
+    });
   }
 
   bool isThisUser(String messageUser) {
@@ -169,7 +230,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
         destroyMessage(data["message_id"]);
       }
       else if(data["action"] == "update") {
-        updateMessage(data["message"]["message"] as Message);
+        updateMessage(Message.fromJson(data["message"]["message"]));
       }
     });
   }
@@ -215,17 +276,16 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
   void updateMessage(Message message) {
     setState(() {
       messages[messages.indexWhere((element) => element.id == message.id)] = message;
+      _pagingController.itemList = messages;
+      _pagingController.refresh();
     });
   }
 
-  void destroyMessage(dynamic messageId) {
-    int? id = int.tryParse(messageId);
-    if(id == null) {
-      print("could not destroy message (not found): " + messageId);
-      return;
-    }
+  void destroyMessage(int messageId) {
     setState(() {
-      messages.removeAt(messages.indexWhere((element) => element.id == id));
+      messages.removeAt(messages.indexWhere((element) => element.id == messageId));
+      _pagingController.itemList = messages;
+      _pagingController.refresh();
     });
   }
 

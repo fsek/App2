@@ -19,13 +19,13 @@ class NewsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                child: Text(news.title!,
-                  style: Theme.of(context).textTheme.headline6
-                ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+              child: Text(news.title!,
+                style: Theme.of(context).textTheme.headline6
               ),
             ),
+          ),
           Divider(
             thickness: 1,
           ),
@@ -38,9 +38,9 @@ class NewsPage extends StatelessWidget {
                    "p": Style(lineHeight: LineHeight(1.2))
                   },
                   onLinkTap: (String? url, RenderContext context, 
-                      Map<String,String> attributes, element){
-                        launch(url!);
-                      }
+                    Map<String,String> attributes, element){
+                      launch(url!);
+                    }
                   ), 
                 ),
               ),
