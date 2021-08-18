@@ -42,6 +42,7 @@ dependencies:
   url_launcher: ^6.0.9 # For memes
   linkable: ^3.0.1 # For making numbers, emails and links clickable
   flutter_html: ^2.1.1 # For rendering HTML
+  pull_to_refresh: ^2.0.0
 
 
 dev_dependencies:

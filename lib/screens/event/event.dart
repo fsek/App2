@@ -9,6 +9,7 @@ import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -504,6 +505,26 @@ class _EventPageState extends State<EventPage> {
     }
   }
 
+  void _onRefresh() async {
+    locator<EventService>()
+        .getEvent(widget.eventId)
+        .then(
+          (value) => setState(
+            () {
+              this.event = value;
+              _refreshController.refreshCompleted();
+            },
+          ),
+        )
+        .catchError(
+      (e) {
+        _refreshController.refreshFailed();
+      },
+    );
+  }
+
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     if (event == null) {
@@ -513,180 +534,187 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Evenemang'),
-      ),
-      body: Container(
-        width: double.infinity,
-        child: Card(
-          child: ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Text(
-                  event?.title ?? "ingen titel",
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.orange[600],
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              const Divider(),
-              Row(
-                children: [
-                  Icon(
-                    Icons.access_time_rounded,
-                  ),
-                  Text(
-                    /* better error checking */
-                    "  " +
-                        DateFormat("kk:mm")
-                            .format(event?.starts_at ?? DateTime.now()) +
-                        getDots() +
-                        " - " +
-                        DateFormat("kk:mm")
-                            .format(event?.ends_at ?? DateTime.now()) +
-                        ", " +
-                        DateFormat("MMMMd", "sv_SE")
-                            .format(event?.starts_at ?? DateTime.now()),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.room,
-                  ),
-                  Text(
-                    "  " + (event?.location ?? "intigheten"),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-              const Divider(),
-              Container(
-                margin: EdgeInsets.all(10),
-                /* should be parsed html */
-                child: Html(
-                    data: event?.description ?? "ingen beskrivning",
-                    style: {"p": Style(lineHeight: LineHeight(1.2))},
-                    onLinkTap: (String? url, RenderContext context,
-                        Map<String, String> attributes, element) {
-                      launch(url!);
-                    }),
-              ),
-              const Divider(),
-              Row(children: [
-                Text("  Klädkod: "),
-                ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
-              ]),
-              Visibility(
-                  visible: event!.cash ?? false,
+
+    return SmartRefresher(
+      controller: _refreshController,
+      enablePullDown: true,
+      onRefresh: _onRefresh,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Evenemang'),
+        ),
+        body: Container(
+          width: double.infinity,
+          child: Card(
+            child: ListView(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
                   child: Text(
-                      "  Pris: " + (event?.price?.toString() ?? "") + " kr")),
-              const Divider(),
-              Visibility(
-                visible: event!.cash ?? false,
-                child: Row(
-                  children: [
-                    Icon(Icons.attach_money_rounded),
-                    Text("  Kostar pengar")
-                  ],
+                    event?.title ?? "ingen titel",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.orange[600],
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-              ),
-              Visibility(
-                visible: event!.food ?? false,
-                child: Row(
+                const Divider(),
+                Row(
                   children: [
                     Icon(
-                      Icons.restaurant_rounded,
+                      Icons.access_time_rounded,
                     ),
-                    Text("  Mat serveras")
+                    Text(
+                      /* better error checking */
+                      "  " +
+                          DateFormat("kk:mm")
+                              .format(event?.starts_at ?? DateTime.now()) +
+                          getDots() +
+                          " - " +
+                          DateFormat("kk:mm")
+                              .format(event?.ends_at ?? DateTime.now()) +
+                          ", " +
+                          DateFormat("MMMMd", "sv_SE")
+                              .format(event?.starts_at ?? DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
                   ],
                 ),
-              ),
-              Visibility(
-                visible: event!.drink ?? false,
-                child: Row(
+                Row(
                   children: [
                     Icon(
-                      Icons.wine_bar_rounded,
+                      Icons.room,
                     ),
-                    Text("  Alkohol serveras")
+                    Text(
+                      "  " + (event?.location ?? "intigheten"),
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
                   ],
                 ),
-              ),
-              Visibility(
-                visible: event!.can_signup ?? false,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.event_rounded,
-                    ),
-                    Text("  Kräver anmälan")
-                  ],
+                const Divider(),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  /* should be parsed html */
+                  child: Html(
+                      data: event?.description ?? "ingen beskrivning",
+                      style: {"p": Style(lineHeight: LineHeight(1.2))},
+                      onLinkTap: (String? url, RenderContext context,
+                          Map<String, String> attributes, element) {
+                        launch(url!);
+                      }),
                 ),
-              ),
-              const Divider(),
-              Visibility(
-                visible: (!(event!.contact == null)),
-                child: Container(
+                const Divider(),
+                Row(children: [
+                  Text("  Klädkod: "),
+                  ...?event?.dress_code
+                      ?.map((dressCode) => Text(dressCode + " "))
+                ]),
+                Visibility(
+                    visible: event!.cash ?? false,
+                    child: Text(
+                        "  Pris: " + (event?.price?.toString() ?? "") + " kr")),
+                const Divider(),
+                Visibility(
+                  visible: event!.cash ?? false,
+                  child: Row(
+                    children: [
+                      Icon(Icons.attach_money_rounded),
+                      Text("  Kostar pengar")
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: event!.food ?? false,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.restaurant_rounded,
+                      ),
+                      Text("  Mat serveras")
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: event!.drink ?? false,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.wine_bar_rounded,
+                      ),
+                      Text("  Alkohol serveras")
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: event!.can_signup ?? false,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.event_rounded,
+                      ),
+                      Text("  Kräver anmälan")
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Visibility(
+                  visible: (!(event!.contact == null)),
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Vid frågor om eventet, kontakta eventansvarig:",
+                        ),
+                        InkWell(
+                          child: new Text(
+                            event!.contact?.name ?? "",
+                            style: TextStyle(
+                              color: Colors.blue[300],
+                            ),
+                          ),
+                          onTap: () => launch(
+                            "https://www.fsektionen.se/kontakter/" +
+                                (event!.contact?.id ?? 0).toString(),
+                          ),
+                        ),
+                        const Divider(),
+                      ],
+                    ),
+                  ),
+                ),
+                signupInfoWidget(),
+                const Divider(),
+                Container(
                   margin: EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Vid frågor om eventet, kontakta eventansvarig:",
-                      ),
+                      Text("Vid tekniska problem vid anmälan, kontakta "),
                       InkWell(
                         child: new Text(
-                          event!.contact?.name ?? "",
+                          "spindelmännen",
                           style: TextStyle(
                             color: Colors.blue[300],
                           ),
                         ),
-                        onTap: () => launch(
-                          "https://www.fsektionen.se/kontakter/" +
-                              (event!.contact?.id ?? 0).toString(),
-                        ),
+                        onTap: () =>
+                            launch("https://www.fsektionen.se/kontakter/1"),
                       ),
                       const Divider(),
                     ],
                   ),
                 ),
-              ),
-              signupInfoWidget(),
-              const Divider(),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Vid tekniska problem vid anmälan, kontakta "),
-                    InkWell(
-                      child: new Text(
-                        "spindelmännen",
-                        style: TextStyle(
-                          color: Colors.blue[300],
-                        ),
-                      ),
-                      onTap: () =>
-                          launch("https://www.fsektionen.se/kontakter/1"),
-                    ),
-                    const Divider(),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
