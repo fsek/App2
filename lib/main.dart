@@ -46,6 +46,8 @@ void main() async {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
     '/messages': (context) => MessagesPage(),
+    '/chant_book': (context) => ChantBookPage(),
+    '/song_book': (context) => SongbookPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
