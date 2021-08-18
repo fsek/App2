@@ -38,13 +38,13 @@ class _ChantBookPageState extends State<ChantBookPage> {
   Widget build(BuildContext context){
 
     return allChants == [] ? Scaffold(
-        appBar: AppBar(title: Text("Sångbok")),
+        appBar: AppBar(title: Text("Sektionsramsor")),
         body:
         Center(
             child: CircularProgressIndicator(color: Colors.orange[600]))) :
     Scaffold(
       appBar:
-      AppBar(title: Text("Sångbok")),
+      AppBar(title: Text("Sektionsramsor")),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
