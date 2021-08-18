@@ -8,11 +8,5 @@ class SongService extends AbstractService {
     Song result = Song.fromJson(json['song']); 
     return result;
   }
-  
-  Future<Song> getChant(int id) async {
-  Map json = await AbstractService.get('/songs/chants/${id}');
-  Song result = Song.fromJson(json['song']);
-  return result;
-  }
 
 }
