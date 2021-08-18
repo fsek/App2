@@ -207,6 +207,8 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
   void receivedMessage(Message message) {
     setState(() {
       messages.add(message);
+      _pagingController.itemList = messages;
+      _pagingController.refresh();
     });
   }
 

@@ -73,7 +73,6 @@ class AbstractService {
   }
 
   static Map _returnResponse(http.Response response) {
-
     print(response.body);
     switch (response.statusCode) {
       case 200:

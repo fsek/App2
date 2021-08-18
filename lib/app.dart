@@ -50,11 +50,11 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       if (state is AuthenticationUserFetched) {
         setState(() {
           _userService!.getUser().then((value) => setState(() {
-                this._user = value;
-              }));
+            this._user = value;
+          }));
         });
 
-        setupPushNotifications();
+        //setupPushNotifications();
       }
     });
     // Change background-listener
