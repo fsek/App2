@@ -50,17 +50,28 @@ class AbstractService {
     return responseJson;
   }
 
-  static Future<Map> put(String endpoint,
-      {String body = "",
-      Map<String, dynamic>? mapBody}) async {
+  static Future<Map> put(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
-    mapAuthHeaders(); 
-    try{
-      var response = await http.put(Uri.parse(API_URL+endpoint),
-          headers: headers,
-          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body)); 
-      responseJson = _returnResponse(response); 
-      updateToken(response.headers); 
+    mapAuthHeaders();
+    try {
+      var response = await http.put(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      responseJson = _returnResponse(response);
+      updateToken(response.headers);
+    } on SocketException {
+      // Probably no internet on device
+      throw FetchDataException(HttpErrorMessage.Message[399]);
+    }
+    return responseJson;
+  }
+
+  static Future<Map> delete(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
+    var responseJson;
+    mapAuthHeaders();
+
+    try {
+      var response = await http.delete(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      responseJson = _returnResponse(response);
+      updateToken(response.headers);
     } on SocketException {
       // Probably no internet on device
       throw FetchDataException(HttpErrorMessage.Message[399]);
@@ -69,7 +80,6 @@ class AbstractService {
   }
 
   static Map _returnResponse(http.Response response) {
-
     print(response.body);
     switch (response.statusCode) {
       case 200:

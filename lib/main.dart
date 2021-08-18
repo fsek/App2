@@ -16,6 +16,7 @@ import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
 class SimpleBlocObserver extends BlocObserver {
@@ -87,7 +88,7 @@ void main() {
   Bloc.observer = SimpleBlocObserver();
 
   runZonedGuarded<Future<void>>(() async {
-    runApp(FsekMobileApp());
+    initializeDateFormatting().then((_) => runApp(FsekMobileApp()));
   }, (Object error, StackTrace stackTrace) {
     // Whenever an error occurs, call the `_reportError` function. This sends
     // Dart errors to the dev console or Sentry depending on the environment.

@@ -1,24 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/home/news.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, required this.news}) : super(key: key);
 
   final News news;
-
-  String _handleContent(String content) {
-    //This might not be needed here. Maybe fix in the serializer(?) DEees
-    int fwdIndex = 0;
-    int backIndex = content.length - 1;
-    while (content[fwdIndex] != ">") {
-      fwdIndex++;
-    }
-    while (content[backIndex] != "<") {
-      backIndex--;
-    }
-    return content.substring(fwdIndex + 1, backIndex);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,41 +16,45 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
               child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  news.title!,
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+                child: Text(news.title!,
+                  style: Theme.of(context).textTheme.headline6
                 ),
               ),
-              alignment: Alignment.center),
+            ),
           Divider(
-            thickness: 4,
+            thickness: 1,
           ),
           Container(
             child: Padding(
               padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-              child: Text(_handleContent(news.content!)),
-            ),
-            alignment: Alignment.topLeft, //Alignment acting kinda sus )^:
-          ), //clean up weird divs from content, helper or actually fix xd
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    news.user!.name!,
-                    textAlign: TextAlign.left,
-                  ),
+              child: 
+                Html(data: news.content!,
+                  style: {
+                   "p": Style(lineHeight: LineHeight(1.2))
+                  },
+                  onLinkTap: (String? url, RenderContext context, 
+                      Map<String,String> attributes, element){
+                        launch(url!);
+                      }
+                  ), 
                 ),
               ),
-              Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                      news.created_at!.toString())) //fix disgusting timestamps
-            ],
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+            child: Row(
+              children: [
+                Text(
+                  news.user!.name!,
+                ),
+                Spacer(),
+                Text(_generateTimestamp())
+              ]
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(8),
@@ -71,5 +65,11 @@ class NewsPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _generateTimestamp(){
+    return "${DateFormat.y().format(news.created_at!)}-"
+    "${DateFormat.M().format(news.created_at!)}-" 
+    "${DateFormat.d().format(news.created_at!)}";
   }
 }
