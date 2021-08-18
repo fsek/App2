@@ -9,4 +9,10 @@ class SongbookService extends AbstractService {
         (json['songs'] as List).map((data) => SongbookEntry.fromJson(data)).toList();
     return result; 
   }
+  Future<List<SongbookEntry>> getChantbook() async {
+    Map json = await AbstractService.get("/songs/chants");
+    List<SongbookEntry> result =
+    (json['songs'] as List).map((data) => SongbookEntry.fromJson(data)).toList();
+    return result;
+  }
 }
