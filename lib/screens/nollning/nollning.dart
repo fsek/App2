@@ -66,7 +66,9 @@ class _NollningPageState extends State<NollningPage> {
                       ),
                     ),
                     InkWell(
-                      onTap: () => null,
+                      onTap: () {
+                      Navigator.pushNamed(context, '/chant_book');
+                    },
                       child: Image.asset(
                         "assets/img/skrikbok.png",
                         height: 100,
