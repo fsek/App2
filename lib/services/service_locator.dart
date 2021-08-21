@@ -12,6 +12,7 @@ import 'package:fsek_mobile/util/storage_wrapper.dart';
 import 'package:fsek_mobile/services/gallery.service.dart';
 
 import 'album.service.dart';
+import 'contact.service.dart';
 import 'navigation.service.dart';
 
 GetIt locator = GetIt.instance;
@@ -29,5 +30,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => AlbumService());
   locator.registerLazySingleton(() => SongbookService());
   locator.registerLazySingleton(() => SongService());
+  locator.registerLazySingleton(() => ContactService());
   locator.registerLazySingleton(() => MessagesService());
 }

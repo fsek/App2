@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
@@ -25,7 +26,7 @@ class OtherContent extends StatelessWidget {
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
-    "Kontakt": Container(),
+    "Kontakt": ContactPage(),
     "Anonym Kontaksida": Container()
   };
 
