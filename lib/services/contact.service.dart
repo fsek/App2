@@ -11,10 +11,13 @@ class ContactService extends AbstractService {
     return result;  
   }
   Future<Map> sendMessage(Map<String, dynamic> message, int recipientID) async {
-    String postUri = uri + "/" + recipientID.toString() + "/mail"; 
-    Map response = await AbstractService.post(postUri, mapBody: message);
-    print(response);
-    return response; 
+    try{
+      String postUri = uri + "/" + recipientID.toString() + "/mail"; 
+      Map response = await AbstractService.post(postUri, mapBody: message);
+      return response; 
+    } catch (error){
+        throw error; 
+    }
 }
 
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/contact/contact.dart';
 import 'package:fsek_mobile/services/contact.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -112,8 +113,8 @@ class _ContactPageState extends State<ContactPage> {
                   )),
               Padding(
                   padding: EdgeInsets.fromLTRB(8, 6, 8, 0),
-                  child: Text(currentContact!
-                      .text!) //Make into html when that dependency is merged
+                  child: Html(
+                    data: currentContact!.text!) //Make into html when that dependency is merged
                   ),
               Container(
                   width: double.infinity,
@@ -209,30 +210,63 @@ class _ContactPageState extends State<ContactPage> {
 
   void _sendMessage(String messageBody) {
     if (messageBody == "") {
-      //Popup att meddelande är tomt
+      _emptyPopup(); 
       return;
     }
-    try {
-      locator<UserService>().getUser().then((user) {
+    locator<UserService>().getUser().then((user) async {
+      try{
         Map<String, dynamic> message = Map();
         message["name"] = user.firstname! + " " + user.lastname!;
         message["email"] = user.email!;
         message["message"] = messageBody;
         //Message has to be wrapped to be accepted by api
-        locator<ContactService>().sendMessage(
-            {"contact_message": message}, currentContact!.id!).then((reponse) {
-          controller.clear();
-          _successPopup();
+        await locator<ContactService>().sendMessage(
+            {"contact_message": message}, currentContact!.id!); 
+        controller.clear();
+        _successPopup();
+        setState(() {
+          localMessage = "";
         });
-      });
-    } catch (error) {
-      _failPopup();
-    }
+      } catch(error){
+        _failPopup();
+      }
+    });
   }
   void _successPopup(){
-
+    FocusScope.of(context).unfocus();
+    showDialog(context: context, builder: _popUp("Yay!!", "Ditt meddelande har "
+    "skickas! :D"));
   }
   void _failPopup(){
+    FocusScope.of(context).unfocus(); 
+    showDialog(context: context, builder: _popUp("Åh nej!", "Ditt meddelande kunde"
+    "inte skickas ): Kolla om du har täckning och försök igen.")); 
+  }
+  void _emptyPopup(){
+    FocusScope.of(context).unfocus(); 
+    showDialog(context: context, builder: _popUp("Hmmm", "Ditt meddelande är "
+    "tomt. Inget har skickats.")); 
+  }
 
+  Widget Function(BuildContext) _popUp(String title, String text) {
+    return (BuildContext contact) => 
+      SimpleDialog(
+        title: Text(title, style: Theme.of(context).textTheme.headline5),
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(text, 
+                style: Theme.of(context).textTheme.subtitle1),
+            ),
+          ),
+          Align(alignment: Alignment.bottomRight,
+            child: IconButton(
+              icon: Icon(Icons.check, color: Colors.grey[800]),
+              onPressed: () => Navigator.pop(context)
+            ),
+          ) 
+        ],
+      );
   }
 }
