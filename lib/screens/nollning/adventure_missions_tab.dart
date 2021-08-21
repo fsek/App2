@@ -74,12 +74,9 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
         ),
         physics: const AlwaysScrollableScrollPhysics(),
       ),
-      onRefresh: () {
-        return Future.delayed(Duration(seconds: 1), () {
-          locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
-                this._adventureWeeks = value;
-              }));
-        });
+      onRefresh: () async {
+        this._adventureWeeks = await locator<NollningService>().getAdventureWeeks();
+        setState(() {});
       },
     );
   }
