@@ -62,15 +62,19 @@ class _SettingsPageState extends State<SettingsPage> {
               padding: EdgeInsets.only(right: 16),
               child: Center(
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     FocusScope.of(context).unfocus();
-                    showDialog(context: context, builder: savingPopup());
+                    showDialog(context: context, builder: _savingPopup());
                     locator<UserService>().updateUser(user!).then((value) {
                       setState(() {
                         extraPref = user!.food_custom != "";
                       });
                       Navigator.pop(context);
-                    });
+                      }).catchError((error) {
+                        print("in error");
+                        Navigator.pop(context);
+                        showDialog(context: context, builder: _failedPopup());
+                      });
                   },
                   child: Text(
                     "Spara",
@@ -349,9 +353,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   //Sometimes causes render overflow. Seems to be when saving while keyboard is active. Feels weird ):
-  Widget Function(BuildContext) savingPopup() {
+  Widget Function(BuildContext) _savingPopup() {
     return (BuildContext context) =>
-        SimpleDialog(title: Text("Sparar"), children: [
+        SimpleDialog(title: Text("Sparar",
+          style: Theme.of(context).textTheme.headline5),
+        children: [
           Column(
             children: [
               CircularProgressIndicator(
@@ -360,5 +366,26 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           )
         ]);
+  }
+  Widget Function(BuildContext) _failedPopup() {
+    return (BuildContext context) => 
+      SimpleDialog(title: Text("Varning", 
+        style: Theme.of(context).textTheme.headline5),
+        children: [
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text("Ändringarna kunde inte sparas ): "
+              "Kolla din täckning och de obligatiska fälten."),
+              ),
+          ),
+          Align(alignment: Alignment.bottomRight,
+            child: IconButton(
+              icon: Icon(Icons.check, color: Colors.grey[800]),
+              onPressed: () => Navigator.pop(context),
+            )
+          )
+        ]
+      );
   }
 }

@@ -3,6 +3,7 @@ import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
+import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
@@ -21,7 +22,8 @@ class OtherContent extends StatelessWidget {
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
-    "Hilbert Café": Container(),
+    "Hilbert Café": PlaceholderPage(title: "Hilbert Café", disc: "Här kommer du kunna "
+    "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
