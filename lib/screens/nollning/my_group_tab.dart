@@ -18,10 +18,16 @@ class MyGroupTab extends StatefulWidget {
 
 class _MyGroupTabState extends State<MyGroupTab> {
   List<AdventureMissionWeek>? _adventureWeeks;
+  List<int>? totalMissionsList;
+  List<int>? acceptedMissionsList;
+  List<double>? progressList;
 
   void initState() {
     locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
           this._adventureWeeks = value;
+          this.totalMissionsList = totalMissions(_adventureWeeks!);
+          this.acceptedMissionsList = acceptedMissions(_adventureWeeks!);
+          this.progressList = List.empty(growable: true);
         }));
     super.initState();
   }
@@ -36,6 +42,14 @@ class _MyGroupTabState extends State<MyGroupTab> {
           ),
         ),
       );
+    }
+    //fuck it! For loop time
+    for (var i = 0; i < 5; i++) {
+      if (totalMissionsList!.elementAt(i) == 0) {
+        progressList!.add(0);
+      } else {
+        progressList!.add(acceptedMissionsList!.elementAt(i) / totalMissionsList!.elementAt(i));
+      }
     }
 
     return Stack(
@@ -70,12 +84,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
                   children: [
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_0.png",
-                      progress: 0.7,
+                      progress: progressList!.elementAt(0),
                       borderColor: Colors.purple[900]!,
                     ),
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_1.png",
-                      progress: 1.0,
+                      progress: progressList!.elementAt(1),
                       borderColor: Colors.blue[900]!,
                     ),
                   ],
@@ -85,7 +99,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                   children: [
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_4.png",
-                      progress: 0.4,
+                      progress: progressList!.elementAt(4),
                       borderColor: Colors.orange,
                     ),
                   ],
@@ -95,12 +109,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
                   children: [
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_2.png",
-                      progress: 0.8,
+                      progress: progressList!.elementAt(2),
                       borderColor: Colors.red[900]!,
                     ),
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_3.png",
-                      progress: 0.1,
+                      progress: progressList!.elementAt(3),
                       borderColor: Colors.green[900]!,
                     ),
                   ],
@@ -157,5 +171,29 @@ class _MyGroupTabState extends State<MyGroupTab> {
         ),
       ),
     ]);
+  }
+
+  List<int> totalMissions(List<AdventureMissionWeek> adventureMissionWeeks) {
+    List<int> missionsPerWeek = List.empty(growable: true);
+    adventureMissionWeeks.forEach((week) {
+      missionsPerWeek.add(week.adventure_missions!.length);
+    });
+    //fuck it! While loop
+    while (missionsPerWeek.length != 5) {
+      missionsPerWeek.add(0);
+    }
+    return missionsPerWeek;
+  }
+
+  List<int> acceptedMissions(List<AdventureMissionWeek> adventureMissionWeeks) {
+    List<int> acceptedPerWeek = List.empty(growable: true);
+    adventureMissionWeeks.forEach((week) {
+      acceptedPerWeek.add(week.missions_accepted ?? 0);
+    });
+    //fuck it! While loop
+    while (acceptedPerWeek.length != 5) {
+      acceptedPerWeek.add(0);
+    }
+    return acceptedPerWeek;
   }
 }
