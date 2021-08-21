@@ -22,7 +22,13 @@ class _HighscoreTabState extends State<HighscoreTab> {
   @override
   Widget build(BuildContext context) {
     if (_groups == null) {
-      return Text("Handle null plz");
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.orange[600],
+          ),
+        ),
+      );
     }
     _groups!.sort((g1, g2) => compareGroups(g1, g2));
     return Column(

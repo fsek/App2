@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
+import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 
@@ -48,7 +49,7 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
             )),
         body: TabBarView(children: [
           AdventureMissionsTab(),
-          _myGroup(context),
+          MyGroupTab(),
           HighscoreTab(),
         ]),
       ),
@@ -78,11 +79,11 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
   // }
 
   // Filler widget for myGroup tab
-  Widget _myGroup(BuildContext context) {
-    return Scaffold(
-      body: Text("Ingen faddergrupp är tillgänglig :("),
-    );
-  }
+  // Widget _myGroup(BuildContext context) {
+  //   return Scaffold(
+  //     body: Text("Ingen faddergrupp är tillgänglig :("),
+  //   );
+  // }
 
   // Widget _highscore(BuildContext context) {
   //   // Filler data for adventure mission groups
