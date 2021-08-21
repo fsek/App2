@@ -19,12 +19,21 @@ class NollningService extends AbstractService {
     return result;
   }
 
-  void finishAdventureMission(int id, int points) {
-    AbstractService.post(
+  Future<Map> finishAdventureMission(int id, int points) async {
+    return AbstractService.post(
       '/adventure_missions/finish_adventure_mission',
       mapBody: {
         "adventure_mission_id": id,
         "points": points,
+      },
+    );
+  }
+
+  Future<Map> resetAdventureMission(int id) {
+    return AbstractService.delete(
+      "/adventure_missions/reset_adventure_mission",
+      mapBody: {
+        "adventure_mission_id": id,
       },
     );
   }

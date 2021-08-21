@@ -5,8 +5,10 @@ import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/screens/nollning/mission.dart';
+import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/util/app_exception.dart';
 
 class AdventureMissionsTab extends StatefulWidget {
   @override
@@ -17,7 +19,6 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   List<AdventureMissionWeek>? _adventureWeeks;
 
   void initState() {
-    // locator<NollningService>().testGetThings();
     locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
           this._adventureWeeks = value;
         }));
@@ -27,7 +28,13 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   @override
   Widget build(BuildContext context) {
     if (_adventureWeeks == null) {
-      return Text("NULL NULL NULL PLZ HANDLE");
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.orange[600],
+          ),
+        ),
+      );
     }
     int weekCount = _adventureWeeks!.length;
     return DefaultTabController(
@@ -102,42 +109,72 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
     }
   }
 
-  void _setCompletedState(AdventureMission mission) {
-    // if the mission isn't already handed in yet (either completed or pending)
-    if (!(mission.is_accepted! || mission.is_pending!)) {
-      // if the mission has variable points, let them fill in the amount,
-      // else just post instantly
-      if (mission.variable_points!) {
-        _variablePointsDialog(context, mission.max_points!).then((value) {
-          if (value != null) {
-            _finishAdventureMission(mission, value);
+  void _setCompletedState(AdventureMission mission) async {
+    try {
+      // if the mission isn't already handed in yet (either completed or pending)
+      if (!(mission.is_accepted! || mission.is_pending!)) {
+        // if the mission has variable points, let them fill in the amount,
+        // else just post instantly
+        if (mission.variable_points!) {
+          int? points = await _variablePointsDialog(context, mission.max_points!);
+          if (points != null) {
+            Map json = await locator<NollningService>().finishAdventureMission(mission.id!, points);
+            _changeLookOnMissionOrThrowError(mission, json);
           }
-        });
+        } else {
+          Map json = await locator<NollningService>().finishAdventureMission(mission.id!, mission.max_points!);
+          _changeLookOnMissionOrThrowError(mission, json);
+        }
       } else {
-        _finishAdventureMission(mission, mission.max_points!);
+        bool? remove = await _resetMissionDialog(context);
+        if (remove == true) {
+          Map json = await locator<NollningService>().resetAdventureMission(mission.id!);
+          _changeLookOnMissionOrThrowError(mission, json);
+        }
       }
-    } else {
-      _resetMissionDialog(context).then((remove) {
-        if (remove == true) _resetAdventureMission(mission.id!);
-      });
+    } on Exception {
+      _failedToUpdateDialog(context, "Oj, nåt gick fel. Försök igen senare.");
     }
+  }
 
-    if (mission.is_accepted!) {
-      mission.is_accepted = false;
-    } else if (mission.is_pending!) {
-      mission.is_pending = false;
+  void _changeLookOnMissionOrThrowError(AdventureMission mission, Map json) {
+    // TODO: fix with error handling!
+    // At this point only throws error in AbstractService, want to catch it here
+    // When trying with try{}catch{} it did not seem to fix the problem...
+    if (json.containsKey('error')) {
+      _failedToUpdateDialog(context, json['error']);
     } else {
-      if (mission.require_acceptance!) {
-        mission.is_pending = true;
+      if (mission.is_accepted!) {
+        mission.is_accepted = false;
+      } else if (mission.is_pending!) {
+        mission.is_pending = false;
       } else {
-        mission.is_accepted = true;
+        if (mission.require_acceptance!) {
+          mission.is_pending = true;
+        } else {
+          mission.is_accepted = true;
+        }
       }
     }
   }
 
-  Future<void> _finishAdventureMission(AdventureMission mission, int points) async {}
-
-  Future<void> _resetAdventureMission(int id) async {}
+  Future<void> _failedToUpdateDialog(BuildContext context, String errorMessage) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(errorMessage),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
 
   Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
     final _formKey = GlobalKey<FormState>();
