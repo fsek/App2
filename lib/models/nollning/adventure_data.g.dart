@@ -11,9 +11,14 @@ AdventureData _$AdventureDataFromJson(Map<String, dynamic> json) {
     ..group_name = json['group_name'] as String?
     ..is_mentor = json['is_mentor'] as bool?
     ..total_group_points = json['total_group_points'] as int?
-    ..adventures = (json['adventures'] as List<dynamic>?)
-        ?.map((e) => AdventureMissionWeek.fromJson(e as Map<String, dynamic>))
-        .toList();
+    ..adventures = (json['adventures'] as Map<String, dynamic>?)?.map(
+      (k, e) => MapEntry(
+          k,
+          (e as List<dynamic>)
+              .map((e) =>
+                  AdventureMissionWeek.fromJson(e as Map<String, dynamic>))
+              .toList()),
+    );
 }
 
 Map<String, dynamic> _$AdventureDataToJson(AdventureData instance) =>

@@ -1,6 +1,8 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
@@ -21,6 +23,9 @@ class _MyGroupTabState extends State<MyGroupTab> {
   List<int>? totalMissionsList;
   List<int>? acceptedMissionsList;
   List<double>? progressList;
+  int? totalPoints;
+  int? maxTotalPoints;
+  AdventureData? adventureData;
 
   void initState() {
     locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
@@ -28,6 +33,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
           this.totalMissionsList = totalMissions(_adventureWeeks!);
           this.acceptedMissionsList = acceptedMissions(_adventureWeeks!);
           this.progressList = List.empty(growable: true);
+        }));
+
+    locator<NollningService>().getAdventures().then((value) => setState(() {
+          this.adventureData = value;
+          totalPoints = value.total_group_points ?? 0;
+          maxTotalPoints = _getMaxTotal();
         }));
     super.initState();
   }
@@ -70,11 +81,11 @@ class _MyGroupTabState extends State<MyGroupTab> {
                 Column(
                   children: [
                     LinearProgressIndicator(
-                      value: 0.55,
+                      value: (totalPoints ?? 0) / (maxTotalPoints ?? 1),
                       minHeight: 10,
                     ),
                     Text(
-                      "55/100 poäng",
+                      "$totalPoints poäng",
                       style: TextStyle(),
                     ),
                   ],
@@ -195,5 +206,20 @@ class _MyGroupTabState extends State<MyGroupTab> {
       acceptedPerWeek.add(0);
     }
     return acceptedPerWeek;
+  }
+
+  int _getMaxTotal() {
+    Map<String, List<AdventureMissionWeek>> map = adventureData!.adventures!;
+    int points = 0;
+    map.entries.forEach((entry) {
+      if (entry.key == "adventures") {
+        entry.value.forEach((week) {
+          week.adventure_missions!.forEach((mission) {
+            points+= mission.max_points ?? 0;
+          });
+        });
+      }
+    });
+    return points;
   }
 }
