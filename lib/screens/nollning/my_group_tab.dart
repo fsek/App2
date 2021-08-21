@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,9 +83,26 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       value: (totalPoints ?? 0) / (maxTotalPoints ?? 1),
                       minHeight: 10,
                     ),
-                    Text(
-                      "$totalPoints poäng",
-                      style: TextStyle(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: Text(
+                        adventureData!.group_name ?? "",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        "$totalPoints poäng",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 35,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -215,7 +231,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
       if (entry.key == "adventures") {
         entry.value.forEach((week) {
           week.adventure_missions!.forEach((mission) {
-            points+= mission.max_points ?? 0;
+            points += mission.max_points ?? 0;
           });
         });
       }
