@@ -15,8 +15,9 @@ News _$NewsFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['created_at'] as String)
     ..image = json['image'] as String?
-    ..categories =
-        (json['categories'] as List<dynamic>?)?.map((e) => e as String).toList()
+    ..categories = (json['categories'] as List<dynamic>?)
+        ?.map((e) => e as Map<String, dynamic>?)
+        .toList()
     ..user = json['user'] == null
         ? null
         : NewsUser.fromJson(json['user'] as Map<String, dynamic>);

@@ -44,7 +44,8 @@ dependencies:
   infinite_scroll_pagination: ^3.1.0 # For messaging
   linkable: ^3.0.1 # For making numbers, emails and links clickable
   flutter_html: ^2.1.1 # For rendering HTML
-  pull_to_refresh: ^2.0.0
+  pull_to_refresh: ^2.0.0 # this already exists in flutter
+  flutter_local_notifications: ^8.1.1 # For handling local notifications
 
 
 dev_dependencies:

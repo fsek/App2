@@ -6,7 +6,6 @@ import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 
