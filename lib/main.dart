@@ -50,6 +50,7 @@ void main() async {
     '/messages': (context) => MessagesPage(),
     '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
+    '/nollningpage' : (context) => NollningPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
