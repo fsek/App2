@@ -60,6 +60,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
           children: List.generate(weekCount, (index) => _showAdventureWeek(_adventureWeeks![index])),
         ),
       ),
+      initialIndex: weekCount - 1, // make sure the current week is chosen as default
     );
   }
 

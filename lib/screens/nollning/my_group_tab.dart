@@ -48,50 +48,65 @@ class _MyGroupTabState extends State<MyGroupTab> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _weekProgressCircle(
-                    imgPath: "assets/img/vecka_0.png",
-                    progress: 0.7,
-                    borderColor: Colors.purple[900]!,
-                  ),
-                  _weekProgressCircle(
-                    imgPath: "assets/img/vecka_1.png",
-                    progress: 1.0,
-                    borderColor: Colors.blue[900]!,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _weekProgressCircle(
-                    imgPath: "assets/img/vecka_4.png",
-                    progress: 0.4,
-                    borderColor: Colors.orange,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _weekProgressCircle(
-                    imgPath: "assets/img/vecka_2.png",
-                    progress: 0.8,
-                    borderColor: Colors.red[900]!,
-                  ),
-                  _weekProgressCircle(
-                    imgPath: "assets/img/vecka_3.png",
-                    progress: 0.1,
-                    borderColor: Colors.green[900]!,
-                  ),
-                ],
-              )
-            ],
+          body: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    LinearProgressIndicator(
+                      value: 0.55,
+                      minHeight: 10,
+                    ),
+                    Text(
+                      "55/100 poäng",
+                      style: TextStyle(),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _weekProgressCircle(
+                      imgPath: "assets/img/vecka_0.png",
+                      progress: 0.7,
+                      borderColor: Colors.purple[900]!,
+                    ),
+                    _weekProgressCircle(
+                      imgPath: "assets/img/vecka_1.png",
+                      progress: 1.0,
+                      borderColor: Colors.blue[900]!,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _weekProgressCircle(
+                      imgPath: "assets/img/vecka_4.png",
+                      progress: 0.4,
+                      borderColor: Colors.orange,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _weekProgressCircle(
+                      imgPath: "assets/img/vecka_2.png",
+                      progress: 0.8,
+                      borderColor: Colors.red[900]!,
+                    ),
+                    _weekProgressCircle(
+                      imgPath: "assets/img/vecka_3.png",
+                      progress: 0.1,
+                      borderColor: Colors.green[900]!,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         )
       ],
