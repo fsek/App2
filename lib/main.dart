@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fsek_mobile/app.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/home/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
+import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
 import 'app.dart';
@@ -39,7 +39,7 @@ void main() async {
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, 'Hem', Icons.home, HomePage()),
     Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
-    Destination(2, 'Notiser', Icons.notifications, Container()),
+    Destination(2, 'Notiser', Icons.notifications, NotiserPage()),
     Destination(3, 'Övrigt', Icons.list, OtherContent()),
     Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];

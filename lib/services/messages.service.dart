@@ -1,4 +1,3 @@
-import 'package:fsek_mobile/models/messages/groupmessage.dart';
 import 'package:fsek_mobile/models/messages/message.dart';
 import 'package:fsek_mobile/models/messages/messaging_group.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';

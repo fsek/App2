@@ -70,6 +70,23 @@ class AbstractService {
     return responseJson;
   }
 
+  static Future<Map> patch(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
+    var responseJson;
+    mapAuthHeaders();
+    try {
+      var response = await http.patch(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      responseJson = _returnResponse(response);
+      updateToken(response.headers);
+    } on SocketException {
+      // Probably no internet on device
+      throw FetchDataException(HttpErrorMessage.Message[399]);
+    }
+    return responseJson;
+  }
+
   static Future<Map> delete(String endpoint,
       {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;

@@ -39,8 +39,7 @@ class _SongbookPageState extends State<SongbookPage> {
     super.dispose();
   }
 
-  Widget build(BuildContext context){
-    
+  Widget build(BuildContext context) {
     return allSongs == [] ? Scaffold(
       appBar: AppBar(title: Text("Sångbok")),
       body: 
