@@ -40,6 +40,12 @@ dependencies:
   location_permissions: ^4.0.0 # For requesting location permissions
   table_calendar: ^3.0.1 # For calender
   url_launcher: ^6.0.9 # For memes
+  action_cable: ^1.2.0 # For messaging
+  infinite_scroll_pagination: ^3.1.0 # For messaging
+  linkable: ^3.0.1 # For making numbers, emails and links clickable
+  flutter_html: ^2.1.1 # For rendering HTML
+  pull_to_refresh: ^2.0.0
+
 
 dev_dependencies:
   json_serializable: ^4.1.3 # For Data serialization
@@ -52,7 +58,7 @@ dependency_overrides:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/img/icon-512x512.png"
+  image_path: "assets/img/f_logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

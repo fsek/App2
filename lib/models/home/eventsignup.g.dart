@@ -19,6 +19,8 @@ EventSignup _$EventSignupFromJson(Map<String, dynamic> json) {
     ..novice = json['novice'] as int?
     ..mentor = json['mentor'] as int?
     ..custom = json['custom'] as int?
+    ..open = json['open'] as bool?
+    ..closed = json['closed'] as bool?
     ..custom_name = json['custom_name'] as String?
     ..deleted_at = json['deleted_at'] == null
         ? null
@@ -59,6 +61,8 @@ Map<String, dynamic> _$EventSignupToJson(EventSignup instance) =>
       'novice': instance.novice,
       'mentor': instance.mentor,
       'custom': instance.custom,
+      'open': instance.open,
+      'closed': instance.closed,
       'custom_name': instance.custom_name,
       'deleted_at': instance.deleted_at?.toIso8601String(),
       'created_at': instance.created_at?.toIso8601String(),

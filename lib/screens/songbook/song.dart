@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/songbook/song.dart';
 
 
@@ -65,8 +66,17 @@ class SongPage extends StatelessWidget{
                     ),
                 ),
               Padding(
-                padding: EdgeInsets.all(14),
-                child: Text(song.content!),
+                padding: EdgeInsets.fromLTRB(14, 6, 14, 14),
+                child:
+                  Html(
+                    data: song.content!,
+                    style: {
+                      "p": Style(
+                        fontSize: FontSize(16, units: "pt"),
+                        lineHeight: LineHeight(1.5)
+                       )
+                    }, 
+                   ),
               )
             ]
           )

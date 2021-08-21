@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/home/news.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, required this.news}) : super(key: key);
@@ -17,13 +19,13 @@ class NewsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                child: Text(news.title!,
-                  style: Theme.of(context).textTheme.headline6
-                ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+              child: Text(news.title!,
+                style: Theme.of(context).textTheme.headline6
               ),
             ),
+          ),
           Divider(
             thickness: 1,
           ),
@@ -31,11 +33,17 @@ class NewsPage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
               child: 
-                Text(news.content!,
-                textAlign: TextAlign.left,
+                Html(data: news.content!,
+                  style: {
+                   "p": Style(lineHeight: LineHeight(1.2))
+                  },
+                  onLinkTap: (String? url, RenderContext context, 
+                    Map<String,String> attributes, element){
+                      launch(url!);
+                    }
+                  ), 
                 ),
-            ),
-          ), //clean up weird divs from content, helper or actually fix xd
+              ),
           Padding(
             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: Row(

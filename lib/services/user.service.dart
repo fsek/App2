@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:http/http.dart' as http;
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
@@ -23,6 +24,32 @@ class UserService extends AbstractService {
         Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
         headers: AbstractService.headers,
         body: jsonEncode({"email": email, "password": pass}));
+
+      var json = jsonDecode(response.body);
+      if(json["data"] != null) {
+        setCurrentUser(User.fromJson(json["data"]));
+        return DeviseToken.getFromHeaders(response.headers);
+      }
+      else {
+        return DeviseToken(error: json["errors"][0]);
+      }
+    } on UnauthorisedException catch(e) {
+      return DeviseToken(error: e.toString());
+    }
+  }
+
+  Future<void> signOut() async {
+    AbstractService.delete("/auth/sign_out");
+    clearToken();
+  }
+
+  Future<DeviseToken> validateToken() async {
+    try {
+      AbstractService.mapAuthHeaders();
+
+      var response = await http.get(
+        Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+        headers: AbstractService.headers);
 
       var json = jsonDecode(response.body);
       if(json["data"] != null) {
@@ -68,6 +95,7 @@ class UserService extends AbstractService {
   //Token Functions
   void storeToken(DeviseToken token) {
     DeviseToken.storeToken(storage, token);
+    AbstractService.token = token;
   }
 
   void clearToken() {
