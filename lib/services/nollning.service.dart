@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
@@ -17,6 +18,11 @@ class NollningService extends AbstractService {
     is_mentor = json['is_mentor'] ?? false; // ugly hack don't judge
     List<AdventureMissionWeek> result = (json['adventures']['adventures'] as List).map((data) => AdventureMissionWeek.fromJson(data)).toList();
     return result;
+  }
+
+  Future<AdventureData> getAdventures() async {
+    Map json = await AbstractService.get("/adventures");
+    return AdventureData.fromJson(json as Map<String, dynamic>);
   }
 
   Future<Map> finishAdventureMission(int id, int points) async {
