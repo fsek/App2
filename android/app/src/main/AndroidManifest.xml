@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="se.fsektionen.fapp">
    <application
-        android:label="F-sektionen"
+        android:label="F-sek-stage"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

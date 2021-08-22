@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:178540363026:android:a28c8958559448a97d07cb",
+        "android_client_info": {
+          "package_name": "se.fsektionen.fapp2prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178540363026-aitaberi4qd7fpmhe0v5q0i0csiuh92u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq-3ZYblOZ6GCjeQuIeUc-qRZuwsnINyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178540363026-aitaberi4qd7fpmhe0v5q0i0csiuh92u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "178540363026-1r8s72lauv6dj69n62qrsfmbev24t02g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.fsektionen.fappprod"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:178540363026:android:4b99208032fb7724",
         "android_client_info": {
           "package_name": "se.fsektionen.fappprod"
@@ -25,15 +61,20 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178540363026-aitaberi4qd7fpmhe0v5q0i0csiuh92u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "178540363026-1r8s72lauv6dj69n62qrsfmbev24t02g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.fsektionen.fappprod"
+              }
+            }
+          ]
         }
       }
     }
