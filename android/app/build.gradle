@@ -79,7 +79,7 @@ android {
                     // so sign locally 
                     // otherwise build an unsigned apk for later signing by the CI/CD provider  
                     signingConfig signingConfigs.release 
-                }  
+                }
             }
         }
     }
