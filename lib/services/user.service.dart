@@ -37,6 +37,32 @@ class UserService extends AbstractService {
     }
   }
 
+  Future<void> signOut() async {
+    AbstractService.delete("/auth/sign_out");
+    clearToken();
+  }
+
+  Future<DeviseToken> validateToken() async {
+    try {
+      AbstractService.mapAuthHeaders();
+
+      var response = await http.get(
+        Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+        headers: AbstractService.headers);
+
+      var json = jsonDecode(response.body);
+      if(json["data"] != null) {
+        setCurrentUser(User.fromJson(json["data"]));
+        return DeviseToken.getFromHeaders(response.headers);
+      }
+      else {
+        return DeviseToken(error: json["errors"][0]);
+      }
+    } on UnauthorisedException catch(e) {
+      return DeviseToken(error: e.toString());
+    }
+  }
+
   Future<bool> resetPasswordRequest(String email) async {
     await AbstractService.post("/account/resetpassword", body: email);
     return true;
@@ -59,15 +85,20 @@ class UserService extends AbstractService {
   }
 
   Future<Map> updateUser(User updatedUser) async {
-    var response = await AbstractService.put("/users/" +updatedUser.id!.toString(),
-    mapBody: updatedUser.toJson()); 
-    setCurrentUser(updatedUser);
-    return response;
+    try {
+      var response = await AbstractService.put("/users/" +updatedUser.id!.toString(),
+      mapBody: updatedUser.toJson()); 
+      setCurrentUser(updatedUser);
+      return response;
+    } catch(error) {
+      throw error;
+    }
   }
 
   //Token Functions
   void storeToken(DeviseToken token) {
     DeviseToken.storeToken(storage, token);
+    AbstractService.token = token;
   }
 
   void clearToken() {

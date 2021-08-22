@@ -61,6 +61,25 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
     }
     widget.messages.clear(); // clears all showed messages
 
+    Widget _header = Padding(
+        padding: EdgeInsets.all(6),
+        child: Row(
+          children: [
+            Image(
+              image: AssetImage("assets/img/f_logo_black.png"),
+              width: 64,
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              "F-sektionen inom TLTH",
+              style: Theme.of(context).textTheme.headline5,
+            )
+          ],
+        ));
+    if (_faders[widget.navbarDestinations.length-1].value > 0.2) _header = Container();
+
     return Stack(children: [
       Container(
         constraints: BoxConstraints(
@@ -72,21 +91,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           backgroundColor: Colors.transparent,
           body: SafeArea(
               child: Column(children: [
-                Padding(
-                  padding: EdgeInsets.all(6),
-                  child: Row(children: [
-                    Image(
-                      image: AssetImage("assets/img/f_logo_black.png"),
-                      width: 64,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "F-sektionen inom TLTH",
-                      style: Theme.of(context).textTheme.headline5,
-                    )
-                ],)),
+                _header,
             Expanded(
                 child: Stack(
                     children: widget.navbarDestinations.map((Destination destination) {

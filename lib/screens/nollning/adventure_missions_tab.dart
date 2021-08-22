@@ -66,36 +66,39 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
 
   Widget _showAdventureWeek(AdventureMissionWeek missionWeek) {
     List<AdventureMission> missions = missionWeek.adventure_missions!;
-    return ListView(
-      children: List.generate(
-        missions.length,
-        (index) => _adventureMissionTile(missions[index]),
+    return RefreshIndicator(
+      child: ListView(
+        children: List.generate(
+          missions.length,
+          (index) => _adventureMissionTile(missions[index]),
+        ),
+        physics: const AlwaysScrollableScrollPhysics(),
       ),
+      onRefresh: () async {
+        this._adventureWeeks = await locator<NollningService>().getAdventureWeeks();
+        setState(() {});
+      },
     );
   }
 
   Widget _adventureMissionTile(AdventureMission mission) {
     return InkWell(
       // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MissionPage(mission: mission))),
-      child: ListTile(
-        title: Text(mission.title!),
-        // subtitle has to change wether or not we have variable amount of points
-        subtitle: mission.variable_points! ? Text("1-${mission.max_points} poäng") : Text("${mission.max_points} poäng"),
-        trailing: locator<NollningService>().is_mentor
-            ? IconButton(
-                onPressed: () => setState(() => _setCompletedState(mission)),
-                icon: mission.is_accepted! || mission.is_pending!
-                    ? Icon(
-                        Icons.cancel_rounded,
-                        color: Colors.red,
-                      )
-                    : Icon(
-                        Icons.check_box_rounded,
-                        color: Colors.green,
-                      ),
-              )
-            : null,
-        tileColor: _getTileColor(mission),
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          return ListTile(
+            title: Text(mission.title!),
+            // subtitle has to change wether or not we have variable amount of points
+            subtitle: mission.variable_points! ? Text("1-${mission.max_points} poäng") : Text("${mission.max_points} poäng"),
+            trailing: locator<NollningService>().is_mentor
+                ? IconButton(
+                    onPressed: mission.locked ?? false ? null : () => {_setCompletedState(mission).then((value) => setState(() {}))},
+                    icon: _getIcon(mission),
+                  )
+                : null,
+            tileColor: _getTileColor(mission),
+          );
+        },
       ),
     );
   }
@@ -105,12 +108,33 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
       return Colors.greenAccent.shade100;
     } else if (mission.is_pending!) {
       return Colors.yellowAccent.shade100;
+    } else if (mission.locked ?? false) {
+      return Colors.grey.shade300;
     } else {
       return Colors.transparent;
     }
   }
 
-  void _setCompletedState(AdventureMission mission) async {
+  Icon _getIcon(AdventureMission mission) {
+    if (mission.locked ?? false) {
+      return Icon(
+        Icons.lock,
+        color: Colors.grey,
+      );
+    } else if (mission.is_accepted! || mission.is_pending!) {
+      return Icon(
+        Icons.cancel_rounded,
+        color: Colors.red,
+      );
+    } else {
+      return Icon(
+        Icons.check_box_rounded,
+        color: Colors.green,
+      );
+    }
+  }
+
+  Future<void> _setCompletedState(AdventureMission mission) async {
     try {
       // if the mission isn't already handed in yet (either completed or pending)
       if (!(mission.is_accepted! || mission.is_pending!)) {

@@ -4,7 +4,7 @@ import 'abstract.service.dart';
 
 class SongService extends AbstractService {
   Future<Song> getSong(int id) async {
-    Map json = await AbstractService.get('/songs/${id}'); 
+    Map json = await AbstractService.get('/songs/$id'); 
     Song result = Song.fromJson(json['song']); 
     return result;
   }

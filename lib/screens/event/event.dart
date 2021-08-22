@@ -1,60 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
-import 'package:fsek_mobile/models/home/eventsignup.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
 import 'package:fsek_mobile/models/home/group.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 import 'package:intl/intl.dart';
 import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class EventPage extends StatefulWidget {
-  int event_id;
-  EventPage({Key? key, required this.event_id}) : super(key: key);
+  final int eventId;
+  EventPage({Key? key, required this.eventId}) : super(key: key);
   @override
   _EventPageState createState() => _EventPageState();
 }
 
 class _EventPageState extends State<EventPage> {
   Event? event;
-  String? user_type;
+  String? userType;
   Group? group;
   String? answer;
-  String? custom_group;
-  List<String>? food_preferences;
-  String? food_custom;
+  String? customGroup;
+  List<String>? foodPreferences;
+  String? foodCustom;
   bool displayGroupInput = true;
+  final Map<String, Style> _htmlStyle = {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, lineHeight: LineHeight(1.2))};
+
+  static const foodPrefsDisplay = {
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Mjölkallergi",
+    "gluten": "Gluten"
+  };
   void initState() {
     locator<EventService>()
-        .getEvent(widget.event_id)
+        .getEvent(widget.eventId)
         .then((value) => setState(() {
               this.event = value;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.food_preferences = value.food_preferences;
-          this.food_custom = value.food_custom;
+          this.foodPreferences = value.food_preferences;
+          this.foodCustom = value.food_custom;
+          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
+            this.foodPreferences![i] =
+                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          }
         }));
+
     super.initState();
   }
 
   void update() {
     locator<EventService>()
-        .getEvent(widget.event_id)
+        .getEvent(widget.eventId)
         .then((value) => setState(() {
               this.event = value;
-              this.user_type = null;
+              this.userType = null;
               this.group = null;
               this.answer = null;
             }));
   }
 
   void sendSignup() async {
-    EventUser eventUser = EventUser(answer, group?.id, custom_group, user_type);
+    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType);
     /* just to be sure */
     if (group?.id != null) {
-      custom_group = null;
+      customGroup = null;
     }
     int eventId = event?.id ?? -1;
     Map json = await AbstractService.post(
@@ -86,13 +101,13 @@ class _EventPageState extends State<EventPage> {
           Text("Prioritering:"),
           DropdownButton<String?>(
             isExpanded: true,
-            value: user_type,
+            value: userType,
             icon: const Icon(Icons.arrow_downward),
             iconSize: 24,
             elevation: 16,
             onChanged: (String? newValue) {
               setState(() {
-                user_type = newValue;
+                userType = newValue;
               });
             },
             items: [
@@ -154,7 +169,7 @@ class _EventPageState extends State<EventPage> {
             child: TextField(
                 onChanged: (String? newValue) {
                   setState(() {
-                    custom_group = newValue;
+                    customGroup = newValue;
                   });
                 },
                 decoration: InputDecoration(
@@ -240,11 +255,6 @@ class _EventPageState extends State<EventPage> {
               signup = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Grupp: " + groupName),
-                  Text("Prioritet: " + userType),
-                  Text((event!.event_signup!.question ?? "") +
-                      " " +
-                      (event!.event_user!.answer ?? "")),
                   Row(
                     children: [
                       Icon(
@@ -252,24 +262,21 @@ class _EventPageState extends State<EventPage> {
                         color: Colors.red[300],
                       ),
                       Text(
-                        "Du har inte fått plats!",
+                        "Du fick tyvärr inte plats till eventet.",
                         style: TextStyle(
                           color: Colors.red[300],
                         ),
                       ),
                     ],
                   ),
+                  const Divider(),
+                  ..._signupDetails(groupName, userType),
                 ],
               );
             } else {
               signup = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Grupp: " + groupName),
-                  Text("Prioritet: " + userType),
-                  Text((event!.event_signup!.question ?? "") +
-                      " " +
-                      (event!.event_user!.answer ?? "")),
                   Row(
                     children: [
                       Icon(
@@ -284,6 +291,8 @@ class _EventPageState extends State<EventPage> {
                       ),
                     ],
                   ),
+                  const Divider(),
+                  ..._signupDetails(groupName, userType),
                 ],
               );
             }
@@ -298,66 +307,63 @@ class _EventPageState extends State<EventPage> {
 
     return Container(
       width: double.infinity,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Anmälan",
-              style: TextStyle(fontSize: 25, color: Colors.orange[600]),
-            ),
-            const Divider(),
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Anmälan",
+            style: TextStyle(fontSize: 25, color: Colors.orange[600]),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            child: Column(
               children: [
-                Icon(
-                  Icons.person,
+                Row(
+                  children: [
+                    Icon(Icons.person,),
+                    Text("  Antal anmälda: " + event!.event_user_count!.toString(),),
+                  ],
                 ),
-                Text(
-                  "  Antal anmälda: " + event!.event_user_count!.toString(),
+                Row(
+                  children: [
+                    Icon(Icons.people,),
+                    Text("  Antal platser: " + event!.event_signup!.slots!.toString(),),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.event_available_rounded,
+                    ),
+                    Text(
+                      "  Anmälan öppnar: " +
+                          DateFormat("Md").format(event!.event_signup!.opens!) +
+                          " " +
+                          DateFormat("jm", "sv_SE")
+                              .format(event!.event_signup!.opens!),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_busy_rounded,
+                    ),
+                    Text(
+                      "  Anmälan stänger: " +
+                          DateFormat("Md").format(event!.event_signup!.closes!) +
+                          " " +
+                          DateFormat("jm", "sv_SE")
+                              .format(event!.event_signup!.opens!),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.people,
-                ),
-                Text(
-                  "  Antal platser: " + event!.event_signup!.slots!.toString(),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.event_available_rounded,
-                ),
-                Text(
-                  "  Anmälan öppnar: " +
-                      DateFormat("Md").format(event!.event_signup!.opens!) +
-                      " " +
-                      DateFormat("jm").format(event!.event_signup!.opens!),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.event_busy_rounded,
-                ),
-                Text(
-                  "  Anmälan stänger: " +
-                      DateFormat("Md").format(event!.event_signup!.closes!) +
-                      " " +
-                      DateFormat("jm").format(event!.event_signup!.opens!),
-                ),
-              ],
-            ),
-            const Divider(),
-            signup,
-          ],
-        ),
+          ),
+          const Divider(),
+          signup,
+        ],
       ),
     );
   }
@@ -369,6 +375,7 @@ class _EventPageState extends State<EventPage> {
 
     if (event?.event_user == null) {
       return Container(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -378,12 +385,13 @@ class _EventPageState extends State<EventPage> {
               questionInput(),
               Row(
                 children: [
-                  Text("  Matpreffar: "),
-                  ...?food_preferences
-                      ?.map((food_preferences) => Text(food_preferences + " ")),
-                  Text(food_custom ?? ""),
+                  Text("  Matpreferenser: "),
+                  ...?foodPreferences?.where((element) => element.isNotEmpty)
+                      .map((foodPreference) => Text(foodPreference + " ")),
+                  Text(foodCustom ?? ""),
                 ],
               ),
+              SizedBox(height: 8,),
               SizedBox(
                 height: 50,
                 width: 200,
@@ -419,20 +427,8 @@ class _EventPageState extends State<EventPage> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Grupp: " + groupName),
-          Text("Prioritet: " + userType),
-          Text((event!.event_signup!.question ?? "") +
-              " " +
-              (event!.event_user!.answer ?? "")),
-          Row(
-            children: [
-              Text("Matpreffar: "),
-              ...?food_preferences
-                  ?.map((food_preferences) => Text(food_preferences + " ")),
-              Text(food_custom ?? ""),
-            ],
-          ),
-          const Divider(),
+          ..._signupDetails(groupName, userType),
+          SizedBox(height: 8,),
           Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(
@@ -458,6 +454,66 @@ class _EventPageState extends State<EventPage> {
     }
   }
 
+  List<Widget> _signupDetails(String? groupName, String? userType) {
+    return [
+      RichText(
+        text: TextSpan(
+          text: "Grupp: ", 
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), 
+          children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
+      RichText(
+        text: TextSpan(
+          text: "Prioritet: ", 
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), 
+          children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
+      event!.event_signup!.question != null ?
+        RichText(
+          text: TextSpan(
+            text: event!.event_signup!.question!,
+            children: [
+              TextSpan(text: " "),
+              TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+            ],
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))) : 
+        Container(),
+      Row(
+        children: [
+          RichText(text: TextSpan(text: "Matpreferenser: ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+          ...?foodPreferences?.where((element) => element.isNotEmpty)
+              .map((foodPreferences) => Text(foodPreferences + " ")),
+          Text(foodCustom ?? ""),
+        ],
+      ),
+    ];
+  }
+
+  String getDots() {
+    switch (event!.dot) {
+      case "single":
+        return " (.)";
+      case "double":
+        return " (..)";
+      default:
+        return "";
+    }
+  }
+
+  void _onRefresh() async {
+    locator<EventService>().getEvent(widget.eventId)
+      .then((value) => 
+        setState(() {
+          this.event = value;
+          _refreshController.refreshCompleted();
+        }),
+      )
+      .catchError((e) {
+        _refreshController.refreshFailed();
+      },
+    );
+  }
+
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     if (event == null) {
@@ -467,125 +523,190 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Evenemang'),
-      ),
-      body: Container(
-        width: double.infinity,
-        child: Card(
-          child: ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Text(
+
+    return SmartRefresher(
+      controller: _refreshController,
+      enablePullDown: true,
+      onRefresh: _onRefresh,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Evenemang'),
+        ),
+        body: Container(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: [
+                Text(
                   event?.title ?? "ingen titel",
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.orange[600],
                   ),
-                  textAlign: TextAlign.left,
                 ),
-              ),
-              const Divider(),
-              Row(
-                children: [
-                  Icon(
-                    Icons.access_time_rounded,
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time_rounded,
+                          ),
+                          Text(
+                            /* better error checking */
+                            "  " +
+                                DateFormat("kk:mm")
+                                    .format(event?.starts_at ?? DateTime.now()) +
+                                getDots() +
+                                " - " +
+                                DateFormat("kk:mm")
+                                    .format(event?.ends_at ?? DateTime.now()) +
+                                ", " +
+                                DateFormat("MMMMd", "sv_SE")
+                                    .format(event?.starts_at ?? DateTime.now()),
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.room,
+                          ),
+                          Text("  " + (event?.location ?? "intigheten"),
+                            style: TextStyle(fontSize: 14,),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  Text(
-                    /* better error checking */
-                    "  " +
-                        DateFormat("kk:mm")
-                            .format(event?.starts_at ?? DateTime.now()) +
-                        " - " +
-                        DateFormat("kk:mm")
-                            .format(event?.ends_at ?? DateTime.now()) +
-                        ", " +
-                        DateFormat("MMMMd")
-                            .format(event?.starts_at ?? DateTime.now()),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.left,
+                ),
+                const Divider(),
+                Container(
+                  margin: EdgeInsets.fromLTRB(3,15,0,15),
+                  /* should be parsed html */
+                  child: Html(
+                    data: event?.description ?? "ingen beskrivning",
+                    style: _htmlStyle,
+                    onLinkTap: (String? url, RenderContext context,  Map<String, String> attributes, element) {
+                      launch(url!);
+                    }),
+                ),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(children: [
+                        Text("Klädkod: "),
+                        ...?event?.dress_code
+                            ?.map((dressCode) => Text(dressCode + " "))
+                      ]),
+                      Visibility(
+                          visible: event!.cash ?? false,
+                          child: Text(
+                              "Pris: " + (event?.price?.toString() ?? "") + " kr")),
+                    ],
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.room,
+                ),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: event!.cash ?? false,
+                        child: Row(
+                          children: [
+                            Icon(Icons.attach_money_rounded),
+                            Text("  Kostar pengar")
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: event!.food ?? false,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.restaurant_rounded,
+                            ),
+                            Text("  Mat serveras")
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: event!.drink ?? false,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.wine_bar_rounded,
+                            ),
+                            Text("  Alkohol serveras")
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: event!.can_signup ?? false,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.event_rounded,
+                            ),
+                            Text("  Kräver anmälan")
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "  " + (event?.location ?? "intigheten"),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.left,
+                ),
+                const Divider(),
+                Visibility(
+                  visible: (!(event!.contact == null)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Vid frågor om eventet, kontakta eventansvarig:",
+                      ),
+                      InkWell(
+                        child: new Text(
+                          event!.contact?.name ?? "",
+                          style: TextStyle(
+                            color: Colors.blue[300],
+                          ),
+                        ),
+                        onTap: () => launch(
+                          "https://www.fsektionen.se/kontakter/" +
+                              (event!.contact?.id ?? 0).toString(),
+                        ),
+                      ),
+                      const Divider(),
+                    ],
                   ),
-                ],
-              ),
-              const Divider(),
-              Container(
-                margin: EdgeInsets.all(10),
-                /* should be parsed html */
-                child: Text(event?.description ?? "ingen beskrivning"),
-              ),
-              const Divider(),
-              Row(children: [
-                Text("  Klädkod: "),
-                ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
-              ]),
-              Visibility(
-                  visible: event!.cash ?? false,
-                  child: Text(
-                      "  Pris: " + (event?.price?.toString() ?? "") + " kr")),
-              const Divider(),
-              Visibility(
-                visible: event!.cash ?? false,
-                child: Row(
+                ),
+                signupInfoWidget(),
+                const Divider(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.attach_money_rounded),
-                    Text("  Kostar pengar")
+                    Text("Vid tekniska problem vid anmälan, kontakta "),
+                    InkWell(
+                      child: new Text(
+                        "spindelmännen",
+                        style: TextStyle(color: Colors.blue[300],),
+                      ),
+                      onTap: () => launch("https://www.fsektionen.se/kontakter/1"),
+                    ),
                   ],
                 ),
-              ),
-              Visibility(
-                visible: event!.food ?? false,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.restaurant_rounded,
-                    ),
-                    Text("  Mat serveras")
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: event!.drink ?? false,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.wine_bar_rounded,
-                    ),
-                    Text("  Alkohol serveras")
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: event!.can_signup ?? false,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.event_rounded,
-                    ),
-                    Text("  Kräver anmälan")
-                  ],
-                ),
-              ),
-              const Divider(),
-              signupInfoWidget(),
-            ],
+              ],
+            ),
           ),
         ),
       ),
