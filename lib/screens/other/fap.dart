@@ -11,7 +11,7 @@ class FapPage extends StatelessWidget {
       "Teodor Åberg, su-perman 2021",
       "Emil Manelius, Spindelförman 21/22",
       "Nils Thorin, Spindelman 2021",
-      "Hannes Ryberg, su-perman 2021",
+      "Simon Löwgren, Spindelman 2021",
     ];
     List<String> inspiration = [
       "https://www.youtube.com/watch?v=k238XpMMn38"
@@ -30,7 +30,7 @@ class FapPage extends StatelessWidget {
             SizedBox(height: 10,),
             Text("Version: ja"),
             SizedBox(height: 10,),
-            Text("Powered by Kaffe, su-perman tårar, och Flutter"),
+            Text("Powered by Kaffe, su-permannatårar, och Flutter"),
             SizedBox(height: 10,),
             Text("Knackad av F-sektionens su-per- och spindelmän:", style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.orange[700]),),
             ...(knackare.map((e) => Text(e)).toList()),

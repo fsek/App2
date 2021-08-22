@@ -41,8 +41,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       final bool tokenValid = await userService.isValid();
 
       if (hasToken && tokenValid) {
-        yield AuthenticationAuthenticated();
-        this.add(Authenticated());
+        final DeviseToken token = await userService.validateToken();
+        if(token.error != null && token.error!.isNotEmpty) {
+          yield AuthenticationUnauthenticated();
+        }
+        else {
+          yield AuthenticationAuthenticated();
+          this.add(Authenticated());
+        }
       } else if(hasToken && !tokenValid) {
         this.add(TokenRevoked());
       }
@@ -86,7 +92,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
     if (event is LoggedOut) {
       yield AuthenticationLoading();
-      userService.clearToken();
+      userService.signOut();
       yield AuthenticationUnauthenticated();
     }
 

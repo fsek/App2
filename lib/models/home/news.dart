@@ -13,7 +13,7 @@ class News {
   // ignore: non_constant_identifier_names
   DateTime? created_at;
   String? image;
-  List<String>? categories;
+  List<Map<String, dynamic>?>? categories;
   NewsUser? user;
 
   News();

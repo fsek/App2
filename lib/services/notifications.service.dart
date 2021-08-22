@@ -1,29 +1,33 @@
+import 'dart:io';
+
+import 'package:fsek_mobile/util/storage_wrapper.dart';
+
 import 'abstract.service.dart';
+import 'service_locator.dart';
 
 class NotificationsService extends AbstractService {
-  /*
-   * HTTP Requests
-   */
-  Future<bool?> acceptNotifications(String token) async {
-    Map json = await AbstractService.post("/settings/notifications/accept", body: token);
-    return (json['result'] as bool?);
+  void updatePushNotificationId(String notificationId, String? oldId) {
+    createPushDevice(notificationId);
+    if(oldId != null) deletePushDevice(oldId);
   }
-  Future<bool?> declineNotifications(String token) async {
-    Map json = await AbstractService.post("/settings/notifications/decline", body: token);
-    return (json['result'] as bool?);
+
+  Future<void> createPushDevice(String notificationId) async {
+    String platform = "ios"; //DO NOT CHANGE THIS :D The android option on the api dosent work. (BEcause it dosent specify the notifcation part of the payload, and im too lazy to change it)
+    if(Platform.isIOS)
+      platform = "ios";
+
+    await AbstractService.post("/push_devices", mapBody: {"push_device": {"token": notificationId, "system": platform}});
   }
-  Future<bool?> updateEmailPreferences(bool? email) async {
-    Map json = await AbstractService.post("/settings/email", body: email.toString());
-    return (json['result'] as bool?);
+
+  Future<void> deletePushDevice(String notificationId) async {
+    await AbstractService.delete("/push_devices", mapBody: {"token": notificationId,});
+    locator<TokenStorageWrapper>().delete(key: "notificationId");
   }
-  
-  Future<Map<String, bool?>> getNotificationPreferences() async {
-    Map<String, bool?> result = new Map();
-    Map json = await AbstractService.get("/settings/notifications/current");
-    
-    result["email"] = json['email'] as bool?;
-    result["web"] = json['web'] as bool?;
-    result["push"] = json['pushNotification'] as bool?;
-    return result;
+
+  Future<void> logOutDevice() async {
+    String? id = await locator<TokenStorageWrapper>().read("notificationId");
+
+    if(id != null)
+      deletePushDevice(id);
   }
 }

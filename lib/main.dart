@@ -1,17 +1,23 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/home/calendar.dart';
+import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
+import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
 import 'app.dart';
 import 'models/destination.dart';
 import 'screens/nollning/adventure_missions.dart';
 import 'screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'screens/nollning/nollning.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
@@ -27,13 +33,13 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
-void main() {
+void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, 'Hem', Icons.home, HomePage()),
     Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
-    Destination(2, 'Notiser', Icons.notifications, Container()),
+    Destination(2, 'Notiser', Icons.notifications, NotiserPage()),
     Destination(3, 'Övrigt', Icons.list, OtherContent()),
     Destination(4, 'Nollning', Icons.home, NollningPage()),
   ];
@@ -41,6 +47,10 @@ void main() {
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
+    '/messages': (context) => MessagesPage(),
+    '/chant_book': (context) => ChantBookPage(),
+    '/song_book': (context) => SongbookPage(),
+    '/nollningpage' : (context) => NollningPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
@@ -87,6 +97,11 @@ void main() {
 
   Bloc.observer = SimpleBlocObserver();
 
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
+  
   runZonedGuarded<Future<void>>(() async {
     initializeDateFormatting().then((_) => runApp(FsekMobileApp()));
   }, (Object error, StackTrace stackTrace) {
@@ -115,4 +130,12 @@ Future<void> _reportError(dynamic error, dynamic stackTrace) async {
       stackTrace: stackTrace,
     );*/
   }
+}
+
+Future<void> _backgroundMessagingHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+  print(message.data);
+  print(message.notification);
+  print(message.messageType);
+  print(message.category);
 }

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/contact/contact.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
+import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/services/notifications.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
+import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 
 import 'fap.dart';
 
@@ -15,36 +22,53 @@ class OtherContent extends StatelessWidget {
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
-    "Hilbert Café": Container(),
+    "Hilbert Café": PlaceholderPage(title: "Hilbert Café", disc: "Här kommer du kunna "
+    "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
-    "Kontakt": Container(),
+    "Kontakt": ContactPage(),
     "Anonym Kontaksida": Container()
   };
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-        children: _generateListTiles(catagories, context) +
-            [
-              ListTile(
-                  title: Text(
-                "Om",
-                style: _style(),
-              ))
-            ] +
-            _generateListTiles(about, context) +
-            [
-              ListTile(
-                  title: Text(
-                "Inställningar",
-                style: _style(),
-              ))
-            ] +
-            _generateListTiles(settings, context) +
-            [ListTile(title: Text("Support", style: _style()))] +
-            _generateListTiles(support, context));
+      children: _generateListTiles(catagories, context) +
+        [
+          ListTile(
+              title: Text(
+            "Om",
+            style: _style(),
+          ))
+        ] +
+        _generateListTiles(about, context) +
+        [
+          ListTile(
+              title: Text(
+            "Inställningar",
+            style: _style(),
+          ))
+        ] +
+        _generateListTiles(settings, context) +
+        [
+          ListTile(title: Text("Support", style: _style()))
+        ] +
+        _generateListTiles(support, context) + 
+        [
+          Card(
+            margin: EdgeInsets.all(2),
+            child: InkWell(
+              child: ListTile(
+                title: Text("Logga ut"),
+                onTap: () {
+                  locator<NotificationsService>().logOutDevice().then((value) {
+                    BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+                  });
+                },
+            )),
+          )
+        ]);
   }
 
   List<Widget> _generateListTiles(
