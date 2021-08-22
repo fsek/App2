@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import 'package:fsek_mobile/services/nollning.service.dart';
-=======
-
 import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/notiser.service.dart';
->>>>>>> master
 import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:fsek_mobile/services/event.service.dart';
@@ -30,7 +25,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => ThemeService());
-  locator.registerLazySingleton(() => NollningService());
   locator.registerLazySingleton(() => EventService());
   locator.registerLazySingleton(() => GalleryService());
   locator.registerLazySingleton(() => AlbumService());
