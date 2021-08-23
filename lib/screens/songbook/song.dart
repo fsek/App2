@@ -34,7 +34,7 @@ class SongPage extends StatelessWidget{
                                 TextStyle(color: Colors.orange[600], fontSize: 24),
                             ),
                           ),
-                          song.melody != null 
+                          song.melody != null && song.melody != "" 
                             ? Padding(padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
                                 child: 
                                   RichText(
@@ -48,7 +48,7 @@ class SongPage extends StatelessWidget{
                                   ),
                               )
                             : SizedBox.shrink(), 
-                          song.author != null
+                          song.author != null && song.author != ""
                             ? Padding(padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
                                 child: 
                                   RichText(
