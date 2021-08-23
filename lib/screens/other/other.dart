@@ -10,6 +10,7 @@ import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
 
@@ -21,14 +22,16 @@ class OtherContent extends StatelessWidget {
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
-    "Bildgalleri": GalleryPage(),
+    "Bildgalleri": PlaceholderPage(title: "Bildgalleri", disc: "Här kommer du "
+    "snart kunna kolla på bilder från nutida och dåtida evenemang som "
+    "F-sektionen har hållt i!"),
     "Hilbert Café": PlaceholderPage(title: "Hilbert Café", disc: "Här kommer du kunna "
     "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
     "Kontakt": ContactPage(),
-    "Anonym Kontaksida": Container()
+    "Anonym kontaktsida": Container()
   };
 
   @override
@@ -60,7 +63,8 @@ class OtherContent extends StatelessWidget {
             margin: EdgeInsets.all(2),
             child: InkWell(
               child: ListTile(
-                title: Text("Logga ut"),
+                tileColor: Colors.red[600],
+                title: Text("Logga ut", style: TextStyle(color: Colors.white),),
                 onTap: () {
                   locator<NotificationsService>().logOutDevice().then((value) {
                     BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
@@ -81,6 +85,7 @@ class OtherContent extends StatelessWidget {
           child: ListTile(
             title: Text(tileText),
             onTap: () => goToTilePage(tileText, context),
+            trailing: tileText != "Anonym kontaktsida" ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -88,6 +93,10 @@ class OtherContent extends StatelessWidget {
   }
 
   void goToTilePage(String title, BuildContext context) {
+    if(title == "Anonym kontaktsida"){
+      launch("http://contact.fsektionen.se");
+      return; 
+    }
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
