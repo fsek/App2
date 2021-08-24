@@ -32,7 +32,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
           this.totalMissionsList = totalMissions(_adventureWeeks!);
           this.acceptedMissionsList = acceptedMissions(_adventureWeeks!);
           this.progressList = List.empty(growable: true);
-        }));
+        })).catchError((error) => showDialog(context: context, builder: _cantDisplayPopup()));
 
     locator<NollningService>().getAdventures().then((value) => setState(() {
           this.adventureData = value;
@@ -243,5 +243,28 @@ class _MyGroupTabState extends State<MyGroupTab> {
       }
     });
     return points;
+  }
+  Widget Function(BuildContext) _cantDisplayPopup() {
+    print("in error"); 
+    return (BuildContext context) => 
+      SimpleDialog(title: Text("Varning", 
+        style: Theme.of(context).textTheme.headline5),
+        children: [
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text("Detta kan endast visas för faddrar "
+              "och nollor i årets nollning!\n"
+              "Kolla ifall du har täckning annars"),
+              ),
+          ),
+          Align(alignment: Alignment.bottomRight,
+            child: IconButton(
+              icon: Icon(Icons.check, color: Colors.grey[800]),
+              onPressed: () => Navigator.pop(context),
+            )
+          )
+        ]
+      );
   }
 }

@@ -9,7 +9,7 @@ import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
-
+ 
 class AdventureMissionsTab extends StatefulWidget {
   @override
   _AdventureMissionsTabState createState() => _AdventureMissionsTabState();
@@ -19,9 +19,10 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   List<AdventureMissionWeek>? _adventureWeeks;
 
   void initState() {
-    locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
+    locator<NollningService>().getAdventureWeeks().then((value) async => setState(() {
           this._adventureWeeks = value;
-        }));
+        })).catchError((error) => 
+          showDialog(context: context, builder:_cantDisplayPopup())); 
     super.initState();
   }
 
@@ -276,5 +277,29 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
       }
     }
     return false;
+  }
+  
+  Widget Function(BuildContext) _cantDisplayPopup() {
+    print("in error"); 
+    return (BuildContext context) => 
+      SimpleDialog(title: Text("Varning", 
+        style: Theme.of(context).textTheme.headline5),
+        children: [
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text("Detta kan endast visas för faddrar "
+              "och nollor i årets nollning!\n"
+              "Kolla ifall du har täckning annars"),
+              ),
+          ),
+          Align(alignment: Alignment.bottomRight,
+            child: IconButton(
+              icon: Icon(Icons.check, color: Colors.grey[800]),
+              onPressed: () => Navigator.pop(context),
+            )
+          )
+        ]
+      );
   }
 }
