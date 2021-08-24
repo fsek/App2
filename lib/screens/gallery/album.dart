@@ -13,40 +13,61 @@ class AlbumPage extends StatelessWidget {
   build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  album.title!,
-                  style: Theme.of(context).textTheme.headline4?.apply(color: Colors.orange[800]),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(color: Colors.grey[50]),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      album.title!,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          ?.apply(color: Colors.orange[800]),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(album.description ?? "-"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                        text: TextSpan(
+                            text: "Fotografter: ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.apply(color: Colors.orange[800]),
+                            children: [
+                          TextSpan(
+                              text: album.photographers?.join(", ") ??
+                                  "No photographers",
+                              style: Theme.of(context).textTheme.bodyText2)
+                        ])),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(album.description ?? "-"),
-                SizedBox(
-                  height: 10,
-                ),
-                RichText(
-                    text: TextSpan(
-                        text: "Fotografter: ",
-                        style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.orange[800]),
-                        children: [TextSpan(text: album.photographers?.join(", ") ?? "No photographers", style: Theme.of(context).textTheme.bodyText2)])),
-                SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: generateImages(context),
-                  ),
-                )
-              ],
-            )));
+              ),
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                children: generateImages(context),
+              ),
+            )
+          ],
+        ));
   }
 
   Widget generateDiscripton() {
@@ -57,7 +78,8 @@ class AlbumPage extends StatelessWidget {
     List<Widget> result = [];
     for (int i = 0; i < album.images!.length; i++) {
       result.add(Ink.image(
-        image: NetworkImage("${Environment.API_URL}${album.images![i].file!.thumb!}"),
+        image: NetworkImage(
+            "${Environment.API_URL}${album.images![i].file!.thumb!}"),
         fit: BoxFit.cover,
         child: InkWell(
           onTap: () => openImageBrowser(context, i),
