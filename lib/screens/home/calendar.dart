@@ -172,7 +172,7 @@ class _CalendarState extends State<Calendar> {
               Expanded(
                 child: SizedBox(
                   height: 200,
-                  child: ListView(
+                  child: Column(
                     children: <Widget>[
                       ..._selectedEvents.map(
                         (CalendarEvent e) => createEventCard(e),
