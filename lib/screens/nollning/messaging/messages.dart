@@ -12,7 +12,7 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage> {
   List<MessagingGroup> groups = [];
-  
+
   void initState() {
     locator<MessagesService>().getGroups().then((value) {
       setState(() {
@@ -26,52 +26,45 @@ class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meddelanden'),
-      ),
-      body: Column(children: _buildList(groups),));
+        appBar: AppBar(
+          title: const Text('Meddelanden'),
+        ),
+        body: ListView(
+          children: _buildList(groups),
+        ));
   }
 
   List<Widget> _buildList(List<MessagingGroup> groups) {
     return groups.map((group) {
       return Card(
-        child: InkWell(
-            onTap: () => openGroup(group),
-            child: ListTile(
-              title: Text(group.name!),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...group.messages!.map((e) =>  
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                      child: RichText(
-                        text: TextSpan(
-                          text: e!.user!["name"], 
-                          style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontStyle: FontStyle.italic), 
-                          children: [
-                            TextSpan(
-                              text: ": "+ truncateWithEllipsis(30, e.content!.trim()),
-                              style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontStyle: FontStyle.normal),
-                            ),
-                          ]))
-                    ), 
+          child: InkWell(
+              onTap: () => openGroup(group),
+              child: ListTile(
+                title: Text(group.name!),
+                subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  ...group.messages!.map(
+                    (e) => Padding(
+                        padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                        child: RichText(
+                            text: TextSpan(text: e!.user!["name"], style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontStyle: FontStyle.italic), children: [
+                          TextSpan(
+                            text: ": " + truncateWithEllipsis(30, e.content!.trim()),
+                            style: Theme.of(context).textTheme.bodyText2!.apply(color: Colors.grey, fontStyle: FontStyle.normal),
+                          ),
+                        ]))),
                   )
                 ]),
-              isThreeLine: true,
-            )));
+                isThreeLine: true,
+              )));
     }).toList();
   }
 
   String truncateWithEllipsis(int cutoff, String myString) {
-    return (myString.length <= cutoff)
-      ? myString
-      : '${myString.substring(0, cutoff)}...';
+    return (myString.length <= cutoff) ? myString : '${myString.substring(0, cutoff)}...';
   }
 
   void openGroup(MessagingGroup group) {
     //redirect to other page and shit
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => GroupPage(group: group)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => GroupPage(group: group)));
   }
 }
