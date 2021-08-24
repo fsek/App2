@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>178540363026-7hfsgimjdm0gtgk4c4j8bikpa98pb9v9.apps.googleusercontent.com</string>
+	<string>178540363026-0jtekle8haichnvs4nm08t7tdl4h43v9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.178540363026-7hfsgimjdm0gtgk4c4j8bikpa98pb9v9</string>
+	<string>com.googleusercontent.apps.178540363026-0jtekle8haichnvs4nm08t7tdl4h43v9</string>
 	<key>API_KEY</key>
 	<string>AIzaSyARP3cYux5o3QB3qY07lOmpk4NOQzGAl0A</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>se.fsektionen.app2prod</string>
+	<string>se.fsektionen.fapp2prod</string>
 	<key>PROJECT_ID</key>
 	<string>f-sek-production</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:178540363026:ios:6e810562172733217d07cb</string>
+	<string>1:178540363026:ios:02463f5700e04c367d07cb</string>
 	<key>DATABASE_URL</key>
 	<string>https://f-sek-production.firebaseio.com</string>
 </dict>
