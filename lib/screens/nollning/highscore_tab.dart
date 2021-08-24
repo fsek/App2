@@ -35,17 +35,21 @@ class _HighscoreTabState extends State<HighscoreTab> {
     return Column(
       children: [
         Container(
-          child: ListTile(
-            leading: Text("Placering"),
-            title: Text("Gruppnamn"),
-            trailing: Text("Poäng"),
-          ),
+          child: IgnorePointer( // This is incredibly bad code but it just won't scale correctly across devices otherwise
+              child: TabBar(
+                  indicatorColor: Theme.of(context).bottomAppBarTheme.color,
+                  tabs: [
+                Tab(text: "Placering"),
+                Tab(text: "Gruppnamn"),
+                Tab(text: "Poäng")
+              ])),
           color: Theme.of(context).bottomAppBarTheme.color,
         ),
         Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              this._groups = await locator<NollningService>().getNollningGroups();
+              this._groups =
+                  await locator<NollningService>().getNollningGroups();
               setState(() {});
             },
             child: ListView.builder(
@@ -155,12 +159,12 @@ class _HighscoreTabState extends State<HighscoreTab> {
 
   // First sort on points, then on completed missions, and then it up to chance
   // could add so that it also handles with alphabetic order, men palla
-  int compareGroups(NollningGroup group1, NollningGroup group2) {
-    var compResult = group2.total_points!.compareTo(group1.total_points!);
+  int compareGroups(group1, group2) {
+    var compResult = group2.total_points.compareTo(group1.total_points);
     // don't have same points
     if (compResult != 0) {
       return compResult;
     }
-    return group2.finished_missions!.compareTo(group1.finished_missions!);
+    return group2.finished_missions.compareTo(group1.finshed_missions);
   }
 }
