@@ -24,8 +24,8 @@ final List<Color> fsekBackground = [
 final ThemeData nollning2021theme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xFFe3b900),
-  accentColor: Colors.orangeAccent,
-  buttonColor: Colors.orange,
+  accentColor: Color(0xFFf3dd6d),
+  buttonColor: Color(0xFFd2b941),
   bottomAppBarTheme: BottomAppBarTheme(
     color: Color(0xFFc0a836)
   ),
