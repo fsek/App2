@@ -16,8 +16,11 @@ class _MessagesPageState extends State<MessagesPage> {
   void initState() {
     locator<MessagesService>().getGroups().then((value) {
       setState(() {
-        groups = value;
-      });
+        groups = value..sort((a,b) {
+        return a.group_user!.unread_count!.compareTo(b.group_user!.unread_count!);
+        }
+      ); 
+    });
     });
 
     super.initState();
@@ -29,7 +32,7 @@ class _MessagesPageState extends State<MessagesPage> {
       appBar: AppBar(
         title: const Text('Meddelanden'),
       ),
-      body: Column(children: _buildList(groups),));
+      body: ListView(children: _buildList(groups),));
   }
 
   List<Widget> _buildList(List<MessagingGroup> groups) {
