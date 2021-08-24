@@ -16,7 +16,9 @@ class _MessagesPageState extends State<MessagesPage> {
   void initState() {
     locator<MessagesService>().getGroups().then((value) {
       setState(() {
-        groups = value;
+        groups = value..sort((a,b) => -a.group_user!.unread_count!.compareTo(
+          b.group_user!.unread_count!
+        ));
       });
     });
 
