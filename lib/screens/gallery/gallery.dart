@@ -36,6 +36,9 @@ class _GalleryPageState extends State<GalleryPage> {
           //Make dropdown prettier mayb :
           children: [
             Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[50]
+              ),
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: DropdownButton(
                 elevation: 2,
@@ -55,17 +58,17 @@ class _GalleryPageState extends State<GalleryPage> {
                   });
                 },
               )),
-              Expanded( //SOMEONE PELASE FIX THIS UGLY ASS SCROLLING !!!!!!. Same goes for the i
-              //dividual imagealbums ):::
+              Expanded(
                 child: GridView.count(
                   padding: EdgeInsets.all(12),
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
                   crossAxisCount: 2,
                   children: generateAlbumThumbnails(),
-                ),
+                  shrinkWrap: true,
+                  ),
               ),
-          ])
+            ])
       //Text(selectedYear.toString())
       );
   }
@@ -79,33 +82,37 @@ class _GalleryPageState extends State<GalleryPage> {
       result.add(Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(top:8), 
+            padding: EdgeInsets.only(top:16), 
             child: Column(
               children: [
                 Text(elem.title.toString(), style: Theme.of(context).textTheme.headline6?.apply(color: Colors.white, fontSizeDelta: -4,),
                   softWrap: true,
                   textAlign: TextAlign.center,),
                 SizedBox(height: 16,),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(Icons.date_range, color: Theme.of(context).primaryColor),
-                  SizedBox(width: 2,),
-                  Text(DateFormat('d MMM yyyy').format(elem.start_date!), style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.white),)
-                ]),
-                SizedBox(height: 3,),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(Icons.location_pin, color: Theme.of(context).primaryColor), 
-                  SizedBox(width: 2,),
-                  Flexible(
-                    child: Text(elem.location.toString(), style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),
-                    overflow: TextOverflow.ellipsis,),
-                  ),
-                ]),
-                SizedBox(height: 3,),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(Icons.image, color: Theme.of(context).primaryColor), 
-                  SizedBox(width: 2,),
-                  Text(elem.image_count.toString(), style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),),
-                ]),
+                Center(
+                  child: Column(children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Icon(Icons.date_range, color: Theme.of(context).primaryColor),
+                      SizedBox(width: 2,),
+                      Text(DateFormat('d MMM yyyy').format(elem.start_date!), style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.white),)
+                    ]),
+                    SizedBox(height: 3,),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Icon(Icons.location_pin, color: Theme.of(context).primaryColor), 
+                      SizedBox(width: 2,),
+                    Flexible(
+                      child: Text(elem.location.toString(), style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,),
+                    ),
+                  ]),
+                  SizedBox(height: 3,),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Icon(Icons.image, color: Theme.of(context).primaryColor), 
+                    SizedBox(width: 2,),
+                    Text(elem.image_count.toString(), style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),),
+                  ]),
+                  ],),
+                )
               ]),
           ),
           Ink.image(

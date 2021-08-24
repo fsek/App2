@@ -15,12 +15,17 @@ class _ChantBookPageState extends State<ChantBookPage> {
   List<SongbookEntry> allChants = [];
   TextEditingController _controller = TextEditingController();
   bool searchFocus = false;
-  String initChar = "";
+  String chantAuthor = "";
 
   void initState() {
     locator<SongbookService>().getChantbook().then((value) => setState(() {
           this.chants = value;
-          chants.sort((a, b) => a.author!.compareTo(b.author!)); // handle null?
+          chants.sort((a, b) {
+            if(a.author!.compareTo(b.author!) != 0) 
+              return a.author!.compareTo(b.author!);
+            else 
+              return a.title!.compareTo(b.title!);
+          }); // handle null?
           allChants = List.from(chants);
         }));
     super.initState();
@@ -77,7 +82,7 @@ class _ChantBookPageState extends State<ChantBookPage> {
                     onChanged: (search) {
                       List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                       setState(() {
-                        initChar = "";
+                        chantAuthor = "";
                         chants = allChants.where((song) {
                           return searchTerms.every((term) => song.title!.toLowerCase().contains(term));
                         }).toList();
@@ -111,13 +116,13 @@ class _ChantBookPageState extends State<ChantBookPage> {
   Widget _generateSongTile(SongbookEntry song) {
     //This way of doing it is probably really stupid. but so be it
     List<Widget> index = [];
-    if (song.author != initChar) {
-      initChar = song.author!;
+    if (song.author != chantAuthor) {
+      chantAuthor = song.author!;
       index.add(Container(
         decoration: BoxDecoration(color: Colors.grey[300]),
         child: ListTile(
           title: Text(
-            initChar,
+            chantAuthor,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
