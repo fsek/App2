@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       Text(news.user!.name!),
                       SizedBox(height: 6),
                       Text(
-                        news.created_at.toString(),
+                        news.created_at.toString().substring(0,16),
                         style: TextStyle(fontSize: 12),
                       )
                     ]),
