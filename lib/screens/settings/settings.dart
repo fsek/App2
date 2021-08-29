@@ -256,14 +256,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       user!.notify_messages = change;
                     });
                   }),
-                  _makeCheckBox("Notiser för eventanmälan stänger",
+                  _makeCheckBox("Notiser före eventanmälan stänger",
                       () => user!.notify_event_closing, (bool? change) {
                     setState(() {
                       changedSetting  = true; 
                       user!.notify_event_closing = change;
                     });
                   }),
-                  _makeCheckBox("Notiser för eventanmälan stänger",
+                  _makeCheckBox("Notiser när eventanmälan öppnar",
                       () => user!.notify_event_open, (bool? change) {
                     setState(() {
                       changedSetting = true; 
