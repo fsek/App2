@@ -19,6 +19,49 @@ class AlbumPage extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.grey[50]),
+              child: ExpansionTile(
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                childrenPadding: EdgeInsets.fromLTRB(8, 0 ,8 ,8),
+                title: 
+                  Text(
+                    album.title!,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        ?.apply(color: Colors.orange[800]),
+                  ),
+                children: [
+                  SizedBox(
+                    height: 16,
+                    width: double.infinity,
+                  ),
+                  Text(album.description ?? "-", 
+                    textAlign: TextAlign.start,),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RichText(
+                      text: TextSpan(
+                          text: "Fotografter: ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.apply(color: Colors.orange[800]),
+                          children: [
+                        TextSpan(
+                            text: album.photographers?.join(", ") ??
+                                "No photographers",
+                            style: Theme.of(context).textTheme.bodyText2)
+                      ])),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+/*            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(color: Colors.grey[50]),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -57,13 +100,16 @@ class AlbumPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            ),*/
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 4,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                children: generateImages(context),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  children: generateImages(context),
+                ),
               ),
             )
           ],
