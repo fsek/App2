@@ -391,6 +391,27 @@ class _EventPageState extends State<EventPage> {
             ),
             const Divider(),
             signup,
+            const Divider(),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Vid tekniska problem med anmälan, kontakta "),
+                  InkWell(
+                    child: new Text(
+                      "spindelmännen",
+                      style: TextStyle(
+                        color: Colors.blue[300],
+                      ),
+                    ),
+                    onTap: () =>
+                        launch("https://www.fsektionen.se/kontakter/1"),
+                  ),
+                  const Divider(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -568,15 +589,15 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("kk:mm")
-                              .format(event?.starts_at ?? DateTime.now()) +
+                          DateFormat("kk:mm").format(
+                              event?.starts_at?.toLocal() ?? DateTime.now()) +
                           getDots() +
                           " - " +
-                          DateFormat("kk:mm")
-                              .format(event?.ends_at ?? DateTime.now()) +
+                          DateFormat("kk:mm").format(
+                              event?.ends_at?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", "sv_SE")
-                              .format(event?.starts_at ?? DateTime.now()),
+                          DateFormat("MMMMd", "sv_SE").format(
+                              event?.starts_at?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -663,7 +684,10 @@ class _EventPageState extends State<EventPage> {
                     ],
                   ),
                 ),
-                const Divider(),
+                Visibility(
+                  visible: event!.can_signup ?? false,
+                  child: const Divider(),
+                ),
                 Visibility(
                   visible: (!(event!.contact == null)),
                   child: Container(
@@ -692,27 +716,6 @@ class _EventPageState extends State<EventPage> {
                   ),
                 ),
                 signupInfoWidget(),
-                const Divider(),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Vid tekniska problem vid anmälan, kontakta "),
-                      InkWell(
-                        child: new Text(
-                          "spindelmännen",
-                          style: TextStyle(
-                            color: Colors.blue[300],
-                          ),
-                        ),
-                        onTap: () =>
-                            launch("https://www.fsektionen.se/kontakter/1"),
-                      ),
-                      const Divider(),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
