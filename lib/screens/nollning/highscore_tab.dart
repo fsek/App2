@@ -155,12 +155,12 @@ class _HighscoreTabState extends State<HighscoreTab> {
 
   // First sort on points, then on completed missions, and then it up to chance
   // could add so that it also handles with alphabetic order, men palla
-  int compareGroups(group1, group2) {
-    var compResult = group2.total_points.compareTo(group1.total_points);
+  int compareGroups(NollningGroup group1, NollningGroup group2) {
+    var compResult = group2.total_points!.compareTo(group1.total_points!);
     // don't have same points
     if (compResult != 0) {
       return compResult;
     }
-    return group2.finished_missions.compareTo(group1.finshed_missions);
+    return group2.finished_missions!.compareTo(group1.finished_missions!);
   }
 }
