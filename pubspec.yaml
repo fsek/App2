@@ -12,7 +12,7 @@ description: Mobile application for the F-guild
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
-version: 1.0.0+1 #buildnumber incremented automatically in codemagic
+version: 0.5.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -30,7 +30,6 @@ dependencies:
   flutter_secure_storage: ^4.2.0 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
   firebase_messaging: ^10.0.3 # For Push notifications
-  geolocator: ^7.2.0+1 # For saving coordinates
   equatable: ^2.0.3 # For State
   bloc: ^7.0.0 # For State
   flutter_bloc: ^7.0.1 # For State
@@ -59,7 +58,7 @@ dependency_overrides:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/img/f_logo.png"
+  image_path: "assets/img/icon-512.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

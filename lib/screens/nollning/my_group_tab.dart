@@ -61,7 +61,8 @@ class _MyGroupTabState extends State<MyGroupTab> {
         progressList!.add(acceptedMissionsList!.elementAt(i) / totalMissionsList!.elementAt(i));
       }
     }
-
+    double circleSize = MediaQuery.of(context).size.height / 5.5
+;
     return Stack(
       children: [
         Image.asset(
@@ -73,7 +74,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 35),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -113,11 +114,13 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       imgPath: "assets/img/vecka_0.png",
                       progress: progressList!.elementAt(0),
                       borderColor: Colors.purple[900]!,
+                      size: circleSize
                     ),
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_1.png",
                       progress: progressList!.elementAt(1),
                       borderColor: Colors.blue[900]!,
+                      size:circleSize
                     ),
                   ],
                 ),
@@ -128,6 +131,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       imgPath: "assets/img/vecka_4.png",
                       progress: progressList!.elementAt(4),
                       borderColor: Colors.orange,
+                      size: circleSize
                     ),
                   ],
                 ),
@@ -138,11 +142,13 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       imgPath: "assets/img/vecka_2.png",
                       progress: progressList!.elementAt(2),
                       borderColor: Colors.red[900]!,
+                      size: circleSize
                     ),
                     _weekProgressCircle(
                       imgPath: "assets/img/vecka_3.png",
                       progress: progressList!.elementAt(3),
                       borderColor: Colors.green[900]!,
+                      size: circleSize
                     ),
                   ],
                 ),
@@ -206,7 +212,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
       missionsPerWeek.add(week.adventure_missions!.length);
     });
     //fuck it! While loop
-    while (missionsPerWeek.length != 5) {
+    while (missionsPerWeek.length <= 5) {
       missionsPerWeek.add(0);
     }
     return missionsPerWeek;
@@ -218,7 +224,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
       acceptedPerWeek.add(week.missions_accepted ?? 0);
     });
     //fuck it! While loop
-    while (acceptedPerWeek.length != 5) {
+    while (acceptedPerWeek.length <= 5) {
       acceptedPerWeek.add(0);
     }
     return acceptedPerWeek;

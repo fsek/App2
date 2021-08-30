@@ -183,7 +183,7 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget questionInput() {
-    if (event?.question == "") {
+    if (event?.question == null) {
       return Container();
     }
     return Container(
@@ -466,7 +466,7 @@ class _EventPageState extends State<EventPage> {
           text: "Prioritet: ", 
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), 
           children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
-      event!.event_signup!.question != null ?
+      event!.event_signup!.question != "" ?
         RichText(
           text: TextSpan(
             text: event!.event_signup!.question!,
