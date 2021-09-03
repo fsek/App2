@@ -115,21 +115,36 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
     }
   }
 
-  Icon _getIcon(AdventureMission mission) {
+  Widget _getIcon(AdventureMission mission) {
     if (mission.locked ?? false) {
-      return Icon(
-        Icons.lock,
-        color: Colors.grey,
+      return Column(
+        children: [
+          Icon(
+            Icons.lock,
+            color: Colors.grey,
+          ),
+          SizedBox(child: Text("Låst")),
+        ],
       );
     } else if (mission.is_accepted! || mission.is_pending!) {
-      return Icon(
-        Icons.cancel_rounded,
-        color: Colors.red,
+      return Column(
+        children: [
+          Icon(
+            Icons.cancel_rounded,
+            color: Colors.red,
+          ),
+          SizedBox(child: Text("Avbryt/Ta bort")),
+        ],
       );
     } else {
-      return Icon(
-        Icons.check_box_rounded,
-        color: Colors.green,
+      return Column(
+        children: [
+          Icon(
+            Icons.check_box_rounded,
+            color: Colors.green,
+          ),
+          SizedBox(child: Text("Godkänn")),
+        ],
       );
     }
   }
