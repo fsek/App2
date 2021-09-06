@@ -7,7 +7,6 @@ import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -74,7 +73,6 @@ class _EventPageState extends State<EventPage> {
           this.foodPreferences = value.food_preferences;
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            print(this.foodPreferences?[i]);
             this.foodPreferences![i] =
                 foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
@@ -561,24 +559,10 @@ class _EventPageState extends State<EventPage> {
     }
   }
 
-  void _onRefresh() async {
-    locator<EventService>()
-        .getEvent(widget.eventId)
-        .then(
-          (value) => setState(() {
-            this.event = value;
-            _refreshController.refreshCompleted();
-          }),
-        )
-        .catchError(
-      (e) {
-        _refreshController.refreshFailed();
-      },
-    );
+  Future<void> _onRefresh() async {
+    update();
   }
 
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     if (event == null) {
@@ -589,18 +573,16 @@ class _EventPageState extends State<EventPage> {
       );
     }
 
-    return SmartRefresher(
-      controller: _refreshController,
-      enablePullDown: true,
-      onRefresh: _onRefresh,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Evenemang'),
-        ),
-        body: Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Evenemang'),
+      ),
+      body: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: RefreshIndicator(
+            onRefresh: () => _onRefresh(),
             child: ListView(
               children: [
                 Text(

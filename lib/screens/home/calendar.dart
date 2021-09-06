@@ -152,7 +152,6 @@ class _CalendarState extends State<Calendar> {
                     return _getEventsForDay(day);
                   },
                 ),
-<<<<<<< HEAD
                 Container(
                   alignment: Alignment.centerLeft,
                   width: double.infinity,
@@ -166,22 +165,6 @@ class _CalendarState extends State<Calendar> {
                       fontSize: 12,
                       color: Colors.white,
                     ),
-=======
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  /* Tried changing the Listview here to a column to prevent scrolling, but it overflows even though the screen is wrapped in scrollview
-                 Then I tried locking the scrolling of the listview with physics attribute, but this for completely illogical reasons
-                 makes the last event stay behind the bottom app bar and completely IGNORES the sizedbox placed at the end. Very frustrating.
-                 Eventlist will stay scrollable for now. Try to fix if you dare/are a better programmer than me -SL */
-                  child: ListView(
-                    children: <Widget>[
-                      ..._selectedEvents.map(
-                        (CalendarEvent e) => createEventCard(e),
-                      ), SizedBox(height: 150)
-                    ],
->>>>>>> dd5cbcc79531a9a1dbba8c11a00f59862fcdfe7b
                   ),
                 ),
               ],
