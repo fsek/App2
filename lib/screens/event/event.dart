@@ -350,7 +350,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       "  Anmälan öppnar: " +
-                          DateFormat("Md")
+                          DateFormat("d/M")
                               .format(event!.event_signup!.opens!.toLocal()) +
                           " " +
                           DateFormat("jm", "sv_SE")
@@ -365,7 +365,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       "  Anmälan stänger: " +
-                          DateFormat("Md")
+                          DateFormat("d/M")
                               .format(event!.event_signup!.closes!.toLocal()) +
                           " " +
                           DateFormat("jm", "sv_SE")
