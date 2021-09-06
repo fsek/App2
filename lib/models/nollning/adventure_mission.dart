@@ -10,7 +10,7 @@ class AdventureMission {
   int? index;
   bool? variable_points;
   bool? locked;
-  bool? require_acceptance; 
+  bool? require_acceptance;
   bool? is_accepted;
   bool? is_pending;
 

@@ -35,17 +35,21 @@ class _HighscoreTabState extends State<HighscoreTab> {
     return Column(
       children: [
         Container(
-          child: ListTile(
-            leading: Text("Placering"),
-            title: Text("Gruppnamn"),
-            trailing: Text("Poäng"),
-          ),
+          child: IgnorePointer( // This is incredibly bad code but it just won't scale correctly across devices otherwise
+              child: TabBar(
+                  indicatorColor: Theme.of(context).bottomAppBarTheme.color,
+                  tabs: [
+                Tab(text: "Placering"),
+                Tab(text: "Gruppnamn"),
+                Tab(text: "Poäng")
+              ])),
           color: Theme.of(context).bottomAppBarTheme.color,
         ),
         Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              this._groups = await locator<NollningService>().getNollningGroups();
+              this._groups =
+                  await locator<NollningService>().getNollningGroups();
               setState(() {});
             },
             child: ListView.builder(
