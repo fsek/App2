@@ -52,6 +52,7 @@ class _EventPageState extends State<EventPage> {
           this.foodPreferences = value.food_preferences;
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
+            print(this.foodPreferences?[i]);
             this.foodPreferences![i] =
                 foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
@@ -69,6 +70,15 @@ class _EventPageState extends State<EventPage> {
               this.group = null;
               this.answer = null;
             }));
+    locator<UserService>().getUser().then((value) => setState(() {
+          this.foodPreferences = value.food_preferences;
+          this.foodCustom = value.food_custom;
+          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
+            print(this.foodPreferences?[i]);
+            this.foodPreferences![i] =
+                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          }
+        }));
   }
 
   void sendSignup() async {
@@ -335,14 +345,6 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ],
                 ),
-                Text(
-                  "  Anmälan öppnar: " +
-                      DateFormat("Md")
-                          .format(event!.event_signup!.opens!.toLocal()) +
-                      " " +
-                      DateFormat("jm", "sv_SE")
-                          .format(event!.event_signup!.opens!.toLocal()),
-                ),
                 Row(
                   children: [
                     Icon(
@@ -350,20 +352,28 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       "  Anmälan öppnar: " +
-                          DateFormat("Md").format(event!.event_signup!.opens!) +
+                          DateFormat("Md")
+                              .format(event!.event_signup!.opens!.toLocal()) +
                           " " +
                           DateFormat("jm", "sv_SE")
-                              .format(event!.event_signup!.opens!),
+                              .format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
-                Text(
-                  "  Anmälan stänger: " +
-                      DateFormat("Md")
-                          .format(event!.event_signup!.closes!.toLocal()) +
-                      " " +
-                      DateFormat("jm", "sv_SE")
-                          .format(event!.event_signup!.opens!.toLocal()),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_busy_rounded,
+                    ),
+                    Text(
+                      "  Anmälan stänger: " +
+                          DateFormat("Md")
+                              .format(event!.event_signup!.closes!.toLocal()) +
+                          " " +
+                          DateFormat("jm", "sv_SE")
+                              .format(event!.event_signup!.closes!.toLocal()),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -622,18 +632,18 @@ class _EventPageState extends State<EventPage> {
                         fontSize: 14,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.room,
-                        ),
-                        Text(
-                          "  " + (event?.location ?? "intigheten"),
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room,
+                    ),
+                    Text(
+                      "  " + (event?.location ?? "intigheten"),
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
