@@ -32,55 +32,50 @@ class _HomePageState extends State<HomePage> {
 
   Widget createNewsCard() {
     return RefreshIndicator(
-      onRefresh: () => _onRefresh(),
-      child: Container(
-      child: PagedListView<int, News>(
-        pagingController: _pagingController,
-        shrinkWrap: true,
-        builderDelegate: PagedChildBuilderDelegate<News>(
-          itemBuilder: (context, news, index) {
-            if (news.title == null) return Container();
-            
-            return Card(
-              child: InkWell(
-                onTap: () => openNews(news),
-                child: ListTile(
-                  title: Text(news.title!),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(news.user!.name!),
-                      SizedBox(height: 6),
-                      Text(
-                        news.created_at.toString().substring(0,16),
-                        style: TextStyle(fontSize: 12),
-                      )
-                    ]),
-                  isThreeLine: true,
-                )));
-          }, 
-          noItemsFoundIndicatorBuilder: (context) {
-            return Container(
-              height: 400,
-              child: Center(
-                child: Text("Inga nyheter tillgängliga", style: Theme.of(context).textTheme.headline6)));
-          }),
-      ),
-    ));
+        onRefresh: () => _onRefresh(),
+        child: Container(
+          child: PagedListView<int, News>(
+            pagingController: _pagingController,
+            shrinkWrap: true,
+            builderDelegate: PagedChildBuilderDelegate<News>(itemBuilder: (context, news, index) {
+              if (news.title == null) return Container();
+
+              return Card(
+                  child: InkWell(
+                      onTap: () => openNews(news),
+                      child: ListTile(
+                        title: Text(news.title!),
+                        subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(news.user!.name!),
+                          SizedBox(height: 6),
+                          Text(
+                            news.created_at.toString().substring(0, 16),
+                            style: TextStyle(fontSize: 12),
+                          )
+                        ]),
+                        isThreeLine: true,
+                      )));
+            }, noItemsFoundIndicatorBuilder: (context) {
+              return Container(height: 400, child: Center(child: Text("Inga nyheter tillgängliga", style: Theme.of(context).textTheme.headline6)));
+            }),
+          ),
+        ));
   }
 
   void openNews(News news) {
     //redirect to other page and shit
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => NewsPage(news: news)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsPage(news: news)));
   }
 
   void loadMoreNews(int page) {
     locator<HomeService>().getMoreNews(page).then((value) {
-      if(value.meta?.next_page == null) {
+      if (value.meta?.next_page == null) {
         _pagingController.appendLastPage(value.news ?? []);
-      }
-      else {
+      } else if (page == 1) {
+        locator<HomeService>().getPinnedNews().then((pinned) {
+          _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
+        });
+      } else {
         _pagingController.appendPage(value.news ?? [], page + 1);
       }
     });
