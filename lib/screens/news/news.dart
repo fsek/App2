@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/home/news.dart';
+import 'package:fsek_mobile/util/time.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -48,7 +49,7 @@ class NewsPage extends StatelessWidget {
                     news.user!.name!,
                   ),
                   Spacer(),
-                  Text(_generateTimestamp())
+                  Text(Time.format(news.created_at!, "%d %M %Y %h:%m"))
                 ]),
               ),
               Padding(
@@ -62,9 +63,4 @@ class NewsPage extends StatelessWidget {
         ));
   }
 
-  String _generateTimestamp() {
-    return "${DateFormat.y().format(news.created_at!)}-"
-        "${DateFormat.M().format(news.created_at!)}-"
-        "${DateFormat.d().format(news.created_at!)}";
-  }
 }
