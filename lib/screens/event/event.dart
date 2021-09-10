@@ -7,7 +7,6 @@ import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -27,7 +26,13 @@ class _EventPageState extends State<EventPage> {
   List<String>? foodPreferences;
   String? foodCustom;
   bool displayGroupInput = true;
-  final Map<String, Style> _htmlStyle = {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, lineHeight: LineHeight(1.2))};
+  final Map<String, Style> _htmlStyle = {
+    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
+    "p": Style(
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        lineHeight: LineHeight(1.2))
+  };
 
   static const foodPrefsDisplay = {
     "vegetarian": "Vegetarian",
@@ -46,6 +51,7 @@ class _EventPageState extends State<EventPage> {
           this.foodPreferences = value.food_preferences;
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
+            print(this.foodPreferences?[i]);
             this.foodPreferences![i] =
                 foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
@@ -63,6 +69,14 @@ class _EventPageState extends State<EventPage> {
               this.group = null;
               this.answer = null;
             }));
+    locator<UserService>().getUser().then((value) => setState(() {
+          this.foodPreferences = value.food_preferences;
+          this.foodCustom = value.food_custom;
+          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
+            this.foodPreferences![i] =
+                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          }
+        }));
   }
 
   void sendSignup() async {
@@ -321,26 +335,26 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.person,),
-                    Text("  Antal anmälda: " + event!.event_user_count!.toString(),),
+                    Icon(
+                      Icons.person,
+                    ),
+                    Text(
+                      "  Antal anmälda: " + event!.event_user_count!.toString(),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.people,),
-                    Text("  Antal platser: " + event!.event_signup!.slots!.toString(),),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.event_available_rounded,
+                    Icon(
+                      Icons.event_available_rounded,
                     ),
                     Text(
                       "  Anmälan öppnar: " +
-                          DateFormat("Md").format(event!.event_signup!.opens!) +
+                          DateFormat("d/M")
+                              .format(event!.event_signup!.opens!.toLocal()) +
                           " " +
                           DateFormat("jm", "sv_SE")
-                              .format(event!.event_signup!.opens!),
+                              .format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
@@ -351,10 +365,11 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       "  Anmälan stänger: " +
-                          DateFormat("Md").format(event!.event_signup!.closes!) +
+                          DateFormat("d/M")
+                              .format(event!.event_signup!.closes!.toLocal()) +
                           " " +
                           DateFormat("jm", "sv_SE")
-                              .format(event!.event_signup!.opens!),
+                              .format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
                 ),
@@ -363,6 +378,26 @@ class _EventPageState extends State<EventPage> {
           ),
           const Divider(),
           signup,
+          const Divider(),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Vid tekniska problem med anmälan, kontakta "),
+                InkWell(
+                  child: new Text(
+                    "spindelmännen",
+                    style: TextStyle(
+                      color: Colors.blue[300],
+                    ),
+                  ),
+                  onTap: () => launch("https://www.fsektionen.se/kontakter/1"),
+                ),
+                const Divider(),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -386,12 +421,15 @@ class _EventPageState extends State<EventPage> {
               Row(
                 children: [
                   Text("  Matpreferenser: "),
-                  ...?foodPreferences?.where((element) => element.isNotEmpty)
+                  ...?foodPreferences
+                      ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text(foodPreference + " ")),
                   Text(foodCustom ?? ""),
                 ],
               ),
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               SizedBox(
                 height: 50,
                 width: 200,
@@ -428,7 +466,9 @@ class _EventPageState extends State<EventPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ..._signupDetails(groupName, userType),
-          SizedBox(height: 8,),
+          SizedBox(
+            height: 8,
+          ),
           Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(
@@ -457,29 +497,50 @@ class _EventPageState extends State<EventPage> {
   List<Widget> _signupDetails(String? groupName, String? userType) {
     return [
       RichText(
-        text: TextSpan(
-          text: "Grupp: ", 
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), 
-          children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
-      RichText(
-        text: TextSpan(
-          text: "Prioritet: ", 
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), 
-          children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
-      event!.event_signup!.question != "" ?
-        RichText(
           text: TextSpan(
-            text: event!.event_signup!.question!,
-            children: [
-              TextSpan(text: " "),
-              TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-            ],
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))) : 
-        Container(),
+              text: "Grupp: ",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+            TextSpan(
+                text: groupName,
+                style: TextStyle(
+                    fontWeight: FontWeight.normal, color: Colors.black))
+          ])),
+      RichText(
+          text: TextSpan(
+              text: "Prioritet: ",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+            TextSpan(
+                text: userType,
+                style: TextStyle(
+                    fontWeight: FontWeight.normal, color: Colors.black))
+          ])),
+      event!.event_signup!.question != ""
+          ? RichText(
+              text: TextSpan(
+                  text: event!.event_signup!.question!,
+                  children: [
+                    TextSpan(text: " "),
+                    TextSpan(
+                        text: event!.event_user!.answer,
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal, color: Colors.black))
+                  ],
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black)))
+          : Container(),
       Row(
         children: [
-          RichText(text: TextSpan(text: "Matpreferenser: ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences?.where((element) => element.isNotEmpty)
+          RichText(
+              text: TextSpan(
+                  text: "Matpreferenser: ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black))),
+          ...?foodPreferences
+              ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
         ],
@@ -498,22 +559,10 @@ class _EventPageState extends State<EventPage> {
     }
   }
 
-  void _onRefresh() async {
-    locator<EventService>().getEvent(widget.eventId)
-      .then((value) => 
-        setState(() {
-          this.event = value;
-          _refreshController.refreshCompleted();
-        }),
-      )
-      .catchError((e) {
-        _refreshController.refreshFailed();
-      },
-    );
+  Future<void> _onRefresh() async {
+    update();
   }
 
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     if (event == null) {
@@ -524,18 +573,16 @@ class _EventPageState extends State<EventPage> {
       );
     }
 
-    return SmartRefresher(
-      controller: _refreshController,
-      enablePullDown: true,
-      onRefresh: _onRefresh,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Evenemang'),
-        ),
-        body: Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Evenemang'),
+      ),
+      body: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: RefreshIndicator(
+            onRefresh: () => _onRefresh(),
             child: ListView(
               children: [
                 Text(
@@ -546,60 +593,57 @@ class _EventPageState extends State<EventPage> {
                   ),
                 ),
                 const Divider(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.access_time_rounded,
-                          ),
-                          Text(
-                            /* better error checking */
-                            "  " +
-                                DateFormat("kk:mm")
-                                    .format(event?.starts_at ?? DateTime.now()) +
-                                getDots() +
-                                " - " +
-                                DateFormat("kk:mm")
-                                    .format(event?.ends_at ?? DateTime.now()) +
-                                ", " +
-                                DateFormat("MMMMd", "sv_SE")
-                                    .format(event?.starts_at ?? DateTime.now()),
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time_rounded,
+                    ),
+                    Text(
+                      /* better error checking */
+                      "  " +
+                          DateFormat("kk:mm").format(
+                              event?.starts_at?.toLocal() ?? DateTime.now()) +
+                          getDots() +
+                          " - " +
+                          DateFormat("kk:mm").format(
+                              event?.ends_at?.toLocal() ?? DateTime.now()) +
+                          ", " +
+                          DateFormat("MMMMd", "sv_SE").format(
+                              event?.starts_at?.toLocal() ?? DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 14,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.room,
-                          ),
-                          Text("  " + (event?.location ?? "intigheten"),
-                            style: TextStyle(fontSize: 14,),
-                          ),
-                        ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room,
+                    ),
+                    Text(
+                      "  " + (event?.location ?? "intigheten"),
+                      style: TextStyle(
+                        fontSize: 14,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const Divider(),
                 Container(
-                  margin: EdgeInsets.fromLTRB(3,15,0,15),
+                  margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                    data: event?.description ?? "ingen beskrivning",
-                    style: _htmlStyle,
-                    onLinkTap: (String? url, RenderContext context,  Map<String, String> attributes, element) {
-                      launch(url!);
-                    }),
+                      data: event?.description ?? "ingen beskrivning",
+                      style: _htmlStyle,
+                      onLinkTap: (String? url, RenderContext context,
+                          Map<String, String> attributes, element) {
+                        launch(url!);
+                      }),
                 ),
                 const Divider(),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -610,8 +654,9 @@ class _EventPageState extends State<EventPage> {
                       ]),
                       Visibility(
                           visible: event!.cash ?? false,
-                          child: Text(
-                              "Pris: " + (event?.price?.toString() ?? "") + " kr")),
+                          child: Text("Pris: " +
+                              (event?.price?.toString() ?? "") +
+                              " kr")),
                     ],
                   ),
                 ),
@@ -665,46 +710,38 @@ class _EventPageState extends State<EventPage> {
                     ],
                   ),
                 ),
-                const Divider(),
+                Visibility(
+                  visible: event!.can_signup ?? false,
+                  child: const Divider(),
+                ),
                 Visibility(
                   visible: (!(event!.contact == null)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Vid frågor om eventet, kontakta eventansvarig:",
-                      ),
-                      InkWell(
-                        child: new Text(
-                          event!.contact?.name ?? "",
-                          style: TextStyle(
-                            color: Colors.blue[300],
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Vid frågor om eventet, kontakta eventansvarig:",
+                        ),
+                        InkWell(
+                          child: new Text(
+                            event!.contact?.name ?? "",
+                            style: TextStyle(
+                              color: Colors.blue[300],
+                            ),
+                          ),
+                          onTap: () => launch(
+                            "https://www.fsektionen.se/kontakter/" +
+                                (event!.contact?.id ?? 0).toString(),
                           ),
                         ),
-                        onTap: () => launch(
-                          "https://www.fsektionen.se/kontakter/" +
-                              (event!.contact?.id ?? 0).toString(),
-                        ),
-                      ),
-                      const Divider(),
-                    ],
+                        const Divider(),
+                      ],
+                    ),
                   ),
                 ),
                 signupInfoWidget(),
-                const Divider(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Vid tekniska problem vid anmälan, kontakta "),
-                    InkWell(
-                      child: new Text(
-                        "spindelmännen",
-                        style: TextStyle(color: Colors.blue[300],),
-                      ),
-                      onTap: () => launch("https://www.fsektionen.se/kontakter/1"),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

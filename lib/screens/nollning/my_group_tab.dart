@@ -85,9 +85,11 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       minHeight: 10,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 6),
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 10, left: 10),
                       child: Text(
                         adventureData?.group_name ?? "",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 30,
                           fontWeight: FontWeight.bold,

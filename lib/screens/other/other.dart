@@ -26,6 +26,7 @@ class OtherContent extends StatelessWidget {
         disc: "Här kommer du "
             "snart kunna kolla på bilder från nutida och dåtida evenemang som "
             "F-sektionen har hållt i!"),
+    /* GalleryPage(),*/
     "Hilbert Café": PlaceholderPage(
         title: "Hilbert Café",
         disc: "Här kommer du kunna "
