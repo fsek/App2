@@ -35,7 +35,9 @@ class _SettingsPageState extends State<SettingsPage> {
       List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
 
   bool extraPref = false;
+  bool changedSetting = false; 
 
+  @override
   void initState() {
     locator<UserService>().getUser().then((value) {
       setState(() {
@@ -46,6 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
     });
     super.initState();
   }
+  
 
   Widget build(BuildContext context) {
     if (user == null) {
@@ -54,214 +57,233 @@ class _SettingsPageState extends State<SettingsPage> {
           body: Center(
               child: CircularProgressIndicator(color: Colors.orange[600])));
     }
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Inställningar"),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: Center(
-                child: GestureDetector(
-                  onTap: () async {
-                    FocusScope.of(context).unfocus();
-                    showDialog(context: context, builder: _savingPopup());
-                    locator<UserService>().updateUser(user!).then((value) {
-                      setState(() {
-                        extraPref = user!.food_custom != "";
-                      });
-                      Navigator.pop(context);
-                      }).catchError((error) {
-                        print("in error");
-                        Navigator.pop(context);
-                        showDialog(context: context, builder: _failedPopup());
-                      });
-                  },
-                  child: Text(
-                    "Spara",
-                    style: TextStyle(fontSize: 16),
+    return WillPopScope(
+      onWillPop: () async {
+        if(changedSetting)
+          await showDialog(context: context, builder: _saveOnClosePopup()); 
+        return true; 
+      } ,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("Inställningar"),
+            actions: [
+              Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () => _save(),
+                    child: Text(
+                      "Spara",
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ), //Alot of the code here is duplicate. could be made much more compact
-        body: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: EdgeInsets.all(8),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _makeTextField("Förnamn*", () => user!.firstname!,
-                        (input) => user!.firstname = input),
-                    _makeTextField("Efternamn*", () => user!.lastname!,
-                        (input) => user!.lastname = input),
-                    _makeDropDown<String>(
-                        "Program", programs, () => user!.program, (program) {
-                      setState(() {
-                        if (program != user!.program) {
-                          user!.program = program;
-                        }
-                      });
-                    }),
-                    _makeDropDown<int>("Startår", years, () => user!.start_year,
-                        (year) {
-                      setState(() {
-                        if (year != user!.start_year) {
-                          user!.start_year = year;
-                        }
-                      });
-                    }),
-                  ])),
-          SizedBox(
-            width: double.infinity,
-            child: Container(
-              color: Colors.grey[200],
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                child: Text("Nedstående fält används endast för "
-                    "sektionsval, bilbokning samt arbete i Hilbert Café. "
-                    "Kan ses av styrelse, administratörer samt ansvariga för"
-                    "  val, bokning eller caféet"),
+            ],
+          ), //Alot of the code here is duplicate. could be made much more compact
+          body: SingleChildScrollView(
+              child:
+                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+                padding: EdgeInsets.all(8),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _makeTextField("Förnamn*", () => user!.firstname!,
+                          (input) {
+                            changedSetting = true; 
+                           user!.firstname = input;
+                          }
+                      ),
+                      _makeTextField("Efternamn*", () => user!.lastname!,
+                          (input) {
+                            changedSetting = true; 
+                            user!.lastname = input;
+                            }
+                      ),
+                      _makeDropDown<String>(
+                          "Program", programs, () => user!.program, (program) {
+                        setState(() {
+                          if (program != user!.program) {
+                            changedSetting = true; 
+                            user!.program = program;
+                          }
+                        });
+                      }),
+                      _makeDropDown<int>("Startår", years, () => user!.start_year,
+                          (year) {
+                        setState(() {
+                          if (year != user!.start_year) {
+                            changedSetting = true; 
+                            user!.start_year = year;
+                          }
+                        });
+                      }),
+                    ])),
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                  child: Text("Nedstående fält används endast för "
+                      "sektionsval, bilbokning samt arbete i Hilbert Café. "
+                      "Kan ses av styrelse, administratörer samt ansvariga för"
+                      "  val, bokning eller caféet"),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              _makeTextField(
-                  "LUCAT-id",
-                  () => user!.student_id != null ? user!.student_id! : "",
-                  (input) => user!.student_id = input),
-              _makeTextField(
-                  "Telefon",
-                  () => user!.phone != null ? user!.phone! : "",
-                  (input) => user!.phone = input,
-                  num: true),
-              _makeCheckBox(
-                  "Visa tel. för gruppmedlemmar",
-                  () => user!.display_phone,
-                  (bool? change) => setState(() {
-                        user!.display_phone = change;
-                      })),
-              DropdownButton(
-                isExpanded: true,
-                hint: Text("Matpreferenser"),
-                items: foodPrefs
-                    .map((foodPref) => DropdownMenuItem(
-                        child: Row(children: [
-                          Text(foodPrefsDisplay[foodPref]!),
-                          Spacer(),
-                          StatefulBuilder(builder: (BuildContext context,
-                              StateSetter setChildState) {
-                            return Checkbox(
-                              checkColor: Colors.white,
-                              fillColor: MaterialStateProperty.resolveWith(
-                                  (states) => Colors.orange[600]),
-                              value: user!.food_preferences!.contains(foodPref),
-                              onChanged: (bool? add) {
-                                setChildState(() {
-                                  if (add!)
-                                    user!.food_preferences!.add(foodPref);
-                                  else
-                                    user!.food_preferences!.remove(foodPref);
-                                });
-                              },
-                            );
-                          })
-                        ]),
-                        value: foodPref))
-                    .toList()
-                      ..add(DropdownMenuItem(
-                        child: Row(children: [
-                          Text("Annat"),
-                          Spacer(),
-                          StatefulBuilder(builder: (BuildContext context,
-                              StateSetter setChildState) {
-                            return Checkbox(
+            Padding(
+              padding: EdgeInsets.all(8),
+              child:
+                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                _makeTextField(
+                    "LUCAT-id",
+                    () => user!.student_id != null ? user!.student_id! : "",
+                    (input) {
+                      changedSetting = true; 
+                      user!.student_id = input;
+                    }),
+                _makeTextField(
+                    "Telefon",
+                    () => user!.phone != null ? user!.phone! : "",
+                    (input) {
+                      changedSetting = true; 
+                      user!.phone = input; 
+                    },
+                    num: true),
+                _makeCheckBox(
+                    "Visa tel. för gruppmedlemmar",
+                    () => user!.display_phone,
+                    (bool? change) { setState(() {
+                          changedSetting = true; 
+                          user!.display_phone = change;
+                        });
+                    }),
+                DropdownButton(
+                  isExpanded: true,
+                  hint: Text("Matpreferenser"),
+                  items: foodPrefs
+                      .map((foodPref) => DropdownMenuItem(
+                          child: Row(children: [
+                            Text(foodPrefsDisplay[foodPref]!),
+                            Spacer(),
+                            StatefulBuilder(builder: (BuildContext context,
+                                StateSetter setChildState) {
+                              return Checkbox(
                                 checkColor: Colors.white,
                                 fillColor: MaterialStateProperty.resolveWith(
                                     (states) => Colors.orange[600]),
-                                value: extraPref,
+                                value: user!.food_preferences!.contains(foodPref),
                                 onChanged: (bool? add) {
-                                  setChildState(() => extraPref = add!);
-                                  setState(() {});
-                                });
-                          })
-                        ]),
-                        value: "Annat",
-                      )),
-                onChanged: (_) {
-                  setState(() {});
-                },
-              ),
-              _extraPrefTextField(),
-              Text(
-                "Matprefersener kan endast ses av de som arrangerar"
-                " evenmang som du anmält dig till.",
-                style: TextStyle(color: Colors.grey[600]),
-              )
-            ]),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: Container(
-              color: Colors.grey[200],
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                child: Text("Nedstående fält används endast för "
-                    "sektionsval, bilbokning samt arbete i Hilbert Café. "
-                    "Kan ses av styrelse, administratörer samt ansvariga för"
-                    "  val, bokning eller caféet"),
-              ),
+                                  setChildState(() {
+                                    changedSetting = true; 
+                                    if (add!)
+                                      user!.food_preferences!.add(foodPref);
+                                    else
+                                      user!.food_preferences!.remove(foodPref);
+                                  });
+                                },
+                              );
+                            })
+                          ]),
+                          value: foodPref))
+                      .toList()
+                        ..add(DropdownMenuItem(
+                          child: Row(children: [
+                            Text("Annat"),
+                            Spacer(),
+                            StatefulBuilder(builder: (BuildContext context,
+                                StateSetter setChildState) {
+                              return Checkbox(
+                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      (states) => Colors.orange[600]),
+                                  value: extraPref,
+                                  onChanged: (bool? add) {
+                                    setChildState(() {
+                                      extraPref = add!; 
+                                    });
+                                    setState(() {});
+                                  });
+                            })
+                          ]),
+                          value: "Annat",
+                        )),
+                  onChanged: (_) {
+                    setState(() {});
+                  },
+                ),
+                _extraPrefTextField(),
+                Text(
+                  "Matprefersener kan endast ses av de som arrangerar"
+                  " evenmang som du anmält dig till.",
+                  style: TextStyle(color: Colors.grey[600]),
+                )
+              ]),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _makeCheckBox(
-                    "Notiser för eventanmälan", () => user!.notify_event_users,
-                    (bool? change) {
-                  setState(() {
-                    user!.notify_event_users = change;
-                  });
-                }),
-                _makeCheckBox(
-                    "Notiser för meddelande", () => user!.notify_messages,
-                    (bool? change) {
-                  setState(() {
-                    user!.notify_messages = change;
-                  });
-                }),
-                _makeCheckBox("Notiser för eventanmälan stänger",
-                    () => user!.notify_event_closing, (bool? change) {
-                  setState(() {
-                    user!.notify_event_closing = change;
-                  });
-                }),
-                _makeCheckBox("Notiser för eventanmälan stänger",
-                    () => user!.notify_event_open, (bool? change) {
-                  setState(() {
-                    user!.notify_event_open = change;
-                  });
-                })
-              ],
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: Container(
-              color: Colors.grey[200],
-              child: Padding(
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: Padding(
                   padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                  child: Text("Medlemskap sedan ${_makeTimestamp()}")),
+                  child: Text("Nedstående fält används endast för "
+                      "sektionsval, bilbokning samt arbete i Hilbert Café. "
+                      "Kan ses av styrelse, administratörer samt ansvariga för"
+                      "  val, bokning eller caféet"),
+                ),
+              ),
             ),
-          ),
-        ])));
+            Padding(
+              padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _makeCheckBox(
+                      "Notiser för eventanmälan", () => user!.notify_event_users,
+                      (bool? change) {
+                    setState(() {
+                      changedSetting = true; 
+                      user!.notify_event_users = change;
+                    });
+                  }),
+                  _makeCheckBox(
+                      "Notiser för meddelande", () => user!.notify_messages,
+                      (bool? change) {
+                    setState(() {
+                      changedSetting = true; 
+                      user!.notify_messages = change;
+                    });
+                  }),
+                  _makeCheckBox("Notiser före eventanmälan stänger",
+                      () => user!.notify_event_closing, (bool? change) {
+                    setState(() {
+                      changedSetting  = true; 
+                      user!.notify_event_closing = change;
+                    });
+                  }),
+                  _makeCheckBox("Notiser när eventanmälan öppnar",
+                      () => user!.notify_event_open, (bool? change) {
+                    setState(() {
+                      changedSetting = true; 
+                      user!.notify_event_open = change;
+                    });
+                  })
+                ],
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                color: Colors.grey[200],
+                child: Padding(
+                    padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                    child: Text("Medlemskap sedan ${_makeTimestamp()}")),
+              ),
+            ),
+          ]))),
+    );
   }
 
   Widget _extraPrefTextField() {
@@ -281,8 +303,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   user!.food_custom = input;
                 },
               )
-            ],
-          ));
+            ]
+          )
+        );
     }
     return SizedBox.shrink();
   }
@@ -387,5 +410,53 @@ class _SettingsPageState extends State<SettingsPage> {
           )
         ]
       );
+  }
+
+  Widget Function(BuildContext) _saveOnClosePopup(){
+    return (BuildContext context) => 
+      SimpleDialog(title: Text("Osparade Ändringar",
+        style: Theme.of(context).textTheme.headline5),
+        children: [
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text("Du har orsparade ändringar. "
+              "Vill du spara eller slänga dessa?")),
+          ),
+
+          Align(
+            alignment: Alignment.bottomCenter, 
+            child: Row(
+              children: [
+                TextButton(onPressed: () {
+                  Navigator.pop(context);
+                },
+                  child: Text("Stäng")),
+                Spacer(),
+                TextButton(onPressed: () async {
+                  _save();
+                  Navigator.pop(context);
+                },
+                child: Text("Spara"))
+              ],
+            ),
+          )
+
+        ],
+      ); 
+  } 
+
+  void _save() async {
+    FocusScope.of(context).unfocus();
+    showDialog(context: context, builder: _savingPopup());
+    locator<UserService>().updateUser(user!).then((value) {
+      setState(() {
+        extraPref = user!.food_custom != "";
+      });
+    Navigator.pop(context);
+    }).catchError((error) {
+      Navigator.pop(context);
+      showDialog(context: context, builder: _failedPopup());
+    });
   }
 }

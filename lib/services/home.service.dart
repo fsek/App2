@@ -8,4 +8,10 @@ class HomeService extends AbstractService {
     NewsWrapper result = NewsWrapper.fromJson(json as Map<String, dynamic>);
     return result;
   }
+
+  Future<NewsWrapper> getPinnedNews() async {
+    Map json = await AbstractService.get("/start");
+    NewsWrapper result = NewsWrapper.fromJson(json["pinned"] as Map<String, dynamic>);
+    return result;
+  }
 }

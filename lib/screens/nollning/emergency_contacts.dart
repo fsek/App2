@@ -25,6 +25,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
   TextStyle linkStyle = TextStyle(
     color: Colors.blue,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +74,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
                 "+46-462220854\n"
                 "Drop-in tisdag kl 12:00-13:00\n"
                 "Drop-in fredag kl 09:30-11:00 i Hilbert Café\n"
-
                 "\nTeknisk Matematik\n"
                 "Karin Cherfils-Karlsson\n"
                 "E-post: "
@@ -84,73 +84,65 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
           ),
           _EmergencyText(
             headerText: "Avdelningen för pedagogiskt stöd",
-            bodyText:
-              "Här finns tre samordnare tillgängliga för att diskutera "
-              "dina eventuella behov av pedagogiska stödåtgärder. Som funktionshindrad "
-              "har man samma rätt som andra studenter att få undervisning av hög kvalitet "
-              "och en bra studiemiljö. För att du ska få ta del av stödinsatser så "
-              "som anteckningshjälp, stöd av mentor och individuell handledning, "
-              "måste ditt funktionshinder vara varaktigt.\n"
-              "\nChristina Rowa"
-              "\nPedagogiskt stöd samordnare för LTH"
-              "\nE-post: christina.rowa@stu.lu.se"
-              "\nTel: +46-462227050"
-              "\nGenetikhuset, Sölvegatan 29 B, Lund\n"
-              "\nLäs mer om pedagogiskt stöd:"
-              "\nhttps://www.lu.se/studera/livet-som-student/service-och-stod/pedagogiskt-stod"
-            ,
+            bodyText: "Här finns tre samordnare tillgängliga för att diskutera "
+                "dina eventuella behov av pedagogiska stödåtgärder. Som funktionshindrad "
+                "har man samma rätt som andra studenter att få undervisning av hög kvalitet "
+                "och en bra studiemiljö. För att du ska få ta del av stödinsatser så "
+                "som anteckningshjälp, stöd av mentor och individuell handledning, "
+                "måste ditt funktionshinder vara varaktigt.\n"
+                "\nChristina Rowa"
+                "\nPedagogiskt stöd samordnare för LTH"
+                "\nE-post: christina.rowa@stu.lu.se"
+                "\nTel: +46-462227050"
+                "\nGenetikhuset, Sölvegatan 29 B, Lund\n"
+                "\nLäs mer om pedagogiskt stöd:"
+                "\nhttps://www.lu.se/studera/livet-som-student/service-och-stod/pedagogiskt-stod",
           ),
           _EmergencyText(
             headerText: "Kurator",
             bodyText:
-              "Om man har personliga bekymmer, har hamnat i någon form av "
-              "kris eller bara vill prata med någon kan man vända sig till "
-              "studiekuratorn för F, n och π. Du hittar henne mitt i E-huset högst "
-              "upp på våning 5. Hon är utbildad socionom, och har naturligtvis tystnadsplikt.\n"
-              "\nEmma Hammarlund"
-              "\nStudiekurator F, n och π"
-              "\nE-post: emma.hammarlund@lth.lu.se"
-              "\nTel: +46-462227247"
-            ,
+                "Om man har personliga bekymmer, har hamnat i någon form av "
+                "kris eller bara vill prata med någon kan man vända sig till "
+                "studiekuratorn för F, n och π. Du hittar henne mitt i E-huset högst "
+                "upp på våning 5. Hon är utbildad socionom, och har naturligtvis tystnadsplikt.\n"
+                "\nEmma Hammarlund"
+                "\nStudiekurator F, n och π"
+                "\nE-post: emma.hammarlund@lth.lu.se"
+                "\nTel: +46-462227247",
           ),
           _EmergencyText(
             headerText: "Studenthälsan",
             bodyText:
-              "Här finns kuratorer, sjuksköterskor, psykologer, psykiater, "
-              "allmänläkare, sjukgymnaster och vårdadministratörer. Hit kan alla "
-              "studenter vid Lunds Universitet vända sig. Här finns gruppkurser som "
-              "“Tentaångest” och “Våga tala”. Alla besök ska tidsbokas, och besöken "
-              "kostar 60 SEK. Studenthälsan fungerar som ett komplement till vårdcentralen "
-              "och personalen har naturligtvis tystnadsplikt.\n"
-
-              "\nTel: +46-462224377"
-              "\nParadisgatan 5B, Lund\n"
-              "\nLäs mer om Studenthälsan:"
-              "\nhttps://www.lu.se/studera/livet-som-student/service-och-stod/pedagogiskt-stod"
-            ,
+                "Här finns kuratorer, sjuksköterskor, psykologer, psykiater, "
+                "allmänläkare, sjukgymnaster och vårdadministratörer. Hit kan alla "
+                "studenter vid Lunds Universitet vända sig. Här finns gruppkurser som "
+                "“Tentaångest” och “Våga tala”. Alla besök ska tidsbokas, och besöken "
+                "kostar 60 SEK. Studenthälsan fungerar som ett komplement till vårdcentralen "
+                "och personalen har naturligtvis tystnadsplikt.\n"
+                "\nTel: +46-462224377"
+                "\nParadisgatan 5B, Lund\n"
+                "\nLäs mer om Studenthälsan:"
+                "\nhttps://www.lu.se/studera/livet-som-student/service-och-stod/pedagogiskt-stod",
           ),
           _EmergencyText(
             headerText: "Likabehandlingsordförande",
             bodyText:
-              "Mig når ni bäst via mail men om ni vill vara anonyma kan ni även använda "
-              "det anonyma kontaktformuläret på F-sektionens hemsida. Tveka inte att höra "
-              "av om ni känner er osäkra, obekväma eller orättvist behandlade.\n"
-              "\nJakob Wiren"
-              "\nE-post: libo@fsektionen.se"
-              "\nAnonymt kontaktformulär:"
-              "\nhttps://contact.fsektionen.se"
-            ,
+                "Mig når ni bäst via mail men om ni vill vara anonyma kan ni även använda "
+                "det anonyma kontaktformuläret på F-sektionens hemsida. Tveka inte att höra "
+                "av om ni känner er osäkra, obekväma eller orättvist behandlade.\n"
+                "\nJakob Wiren"
+                "\nE-post: libo@fsektionen.se"
+                "\nAnonymt kontaktformulär:"
+                "\nhttps://contact.fsektionen.se",
           ),
           _EmergencyText(
             headerText: "Utbildningsminister",
-            bodyText:
-              "Ni får gärna kontakta mig om ni har några frågor eller "
-              "funderingar angående utbildningen eller något studierelaterat event "
-              "eller projekt som ni vill driva. Jag nås bäst via email, men ni kan "
-              "även komma fram till mig i MH och snacka om ni vill.\n"
-              "\nDaniel Nesic"
-              "\nE-post: um@fsektionen.se"
-            ,
+            bodyText: "Ni får gärna kontakta mig om ni har några frågor eller "
+                "funderingar angående utbildningen eller något studierelaterat event "
+                "eller projekt som ni vill driva. Jag nås bäst via email, men ni kan "
+                "även komma fram till mig i MH och snacka om ni vill.\n"
+                "\nDaniel Nesic"
+                "\nE-post: um@fsektionen.se",
           ),
         ],
       ),
@@ -161,7 +153,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
 class _EmergencyText extends StatelessWidget {
   final String headerText;
   final String bodyText;
-
 
   _EmergencyText({required this.headerText, required this.bodyText});
 
@@ -192,10 +183,11 @@ class _HeaderText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        margin: const EdgeInsets.all(10),
-        alignment: Alignment.centerLeft,
-        child: Flexible(child:Linkable(text: text, style: headerStyle))
-      ),
+          margin: const EdgeInsets.all(10),
+          alignment: Alignment.centerLeft,
+          child: Row(children: <Widget>[
+            Flexible(child: Linkable(text: text, style: headerStyle))
+          ])),
       color: color,
       width: double.infinity,
     );
@@ -216,8 +208,8 @@ class _BodyText extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Container(
-        alignment: Alignment.centerLeft,
-        child: Linkable(text: text, style: bodyStyle)),
-      );
+          alignment: Alignment.centerLeft,
+          child: Linkable(text: text, style: bodyStyle)),
+    );
   }
 }
