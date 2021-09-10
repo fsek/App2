@@ -80,8 +80,9 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 25),
           ),
+          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
           trailing: Text(
-            "${_groups![index].total_points}",
+            "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
           ),
           tileColor: Colors.yellow.shade100,
@@ -102,8 +103,9 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
+          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
           trailing: Text(
-            "${_groups![index].total_points}",
+            "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
           ),
           tileColor: Colors.grey.shade200,
@@ -124,8 +126,9 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
+          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
           trailing: Text(
-            "${_groups![index].total_points}",
+            "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
           ),
           tileColor: Colors.brown.shade100,
@@ -145,8 +148,9 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 18),
           ),
+          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
           trailing: Text(
-            "${_groups![index].total_points}",
+            "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
           ),
         );
