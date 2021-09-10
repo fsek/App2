@@ -53,8 +53,7 @@ class NewsPage extends StatelessWidget {
                   news.user!.name!,
                 ),
                 Spacer(),
-                Text(Time.ddmm(news.created_at!))
-//                Text(_generateTimestamp())
+                Text(Time.format(news.created_at!, "%d %M %Y %h:%m"))
               ]
             ),
           ),
