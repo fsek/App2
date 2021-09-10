@@ -9,7 +9,7 @@ class AdventureData {
   String? group_name;
   bool? is_mentor;
   int? total_group_points;
-  Map<String,List<AdventureMissionWeek>>? adventures;
+  Map<String, List<AdventureMissionWeek>>? adventures;
 
   AdventureData();
 

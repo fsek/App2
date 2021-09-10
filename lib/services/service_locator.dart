@@ -1,4 +1,3 @@
-
 import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/notiser.service.dart';
 import 'package:fsek_mobile/services/song.service.dart';
@@ -21,8 +20,7 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(() => TokenStorageWrapper());
-  locator.registerLazySingleton(
-      () => UserService(storage: locator<TokenStorageWrapper>()));
+  locator.registerLazySingleton(() => UserService(storage: locator<TokenStorageWrapper>()));
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());

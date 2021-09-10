@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
@@ -15,9 +16,12 @@ class AdventureMissionsPage extends StatefulWidget {
 }
 
 class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
-  // List<NollningGroup>? groups;
+  AdventureData? _adventureData;
 
   void initState() {
+    locator<NollningService>().getAdventures().then((value) => setState(() {
+          this._adventureData = value;
+        }));
     super.initState();
   }
 
@@ -55,47 +59,4 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       ),
     );
   }
-
-  // Filler widget for adventureMissions tab
-  // Widget _adventureMissions(BuildContext context) {
-  //   if (groups == null) {
-  //     return Text("ohno");
-  //   }
-  //   List<Widget> nollningGroups = groups!.map((e) => _groupToWidget(e)).toList();
-  //   return Column(
-  //     children: nollningGroups,
-  //     //Text("Inga äventyrsuppdrag är tillgängliga :("),
-  //   );
-  // }
-
-  // Widget _groupToWidget(NollningGroup nollningGroup) {
-  //   return Row(
-  //     children: [
-  //       Text(nollningGroup.name!),
-  //       Text(nollningGroup.total_points!.toString()),
-  //       Text(nollningGroup.finished_missions.toString()),
-  //     ],
-  //   );
-  // }
-
-  // Filler widget for myGroup tab
-  // Widget _myGroup(BuildContext context) {
-  //   return Scaffold(
-  //     body: Text("Ingen faddergrupp är tillgänglig :("),
-  //   );
-  // }
-
-  // Widget _highscore(BuildContext context) {
-  //   // Filler data for adventure mission groups
-  //   final groups = List<String>.generate(16, (i) => 'Group_${i + 1}');
-
-  //   return ListView.builder(
-  //     itemCount: groups.length,
-  //     itemBuilder: (context, index) {
-  //       return ListTile(
-  //         title: Text('${index + 1}. ${groups[index]}'),
-  //       );
-  //     },
-  //   );
-  // }
 }

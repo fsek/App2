@@ -91,9 +91,15 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
             // subtitle has to change wether or not we have variable amount of points
             subtitle: mission.variable_points! ? Text("1-${mission.max_points} poäng") : Text("${mission.max_points} poäng"),
             trailing: locator<NollningService>().is_mentor
-                ? IconButton(
-                    onPressed: mission.locked ?? false ? null : () => {_setCompletedState(mission).then((value) => setState(() {}))},
-                    icon: _getIcon(mission),
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _getIconDescription(mission),
+                      IconButton(
+                        onPressed: mission.locked ?? false ? null : () => {_setCompletedState(mission).then((value) => setState(() {}))},
+                        icon: _getIcon(mission),
+                      ),
+                    ],
                   )
                 : null,
             tileColor: _getTileColor(mission),
@@ -115,7 +121,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
     }
   }
 
-  Icon _getIcon(AdventureMission mission) {
+  Widget _getIcon(AdventureMission mission) {
     if (mission.locked ?? false) {
       return Icon(
         Icons.lock,
@@ -130,6 +136,22 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
       return Icon(
         Icons.check_box_rounded,
         color: Colors.green,
+      );
+    }
+  }
+
+  Widget _getIconDescription(AdventureMission mission) {
+    if (mission.locked ?? false) {
+      return Text(
+        "Låst",
+      );
+    } else if (mission.is_accepted! || mission.is_pending!) {
+      return Text(
+        "Avbryt/\nTa bort",
+      );
+    } else {
+      return Text(
+        "Godkänn",
       );
     }
   }

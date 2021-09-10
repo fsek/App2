@@ -12,27 +12,27 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  DateTime _focusedDay = DateTime.now();
-  DateTime _now = DateTime.now();
-  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now().toLocal();
+  DateTime _now = DateTime.now().toLocal();
+  DateTime _selectedDay = DateTime.now().toLocal();
   List<CalendarEvent> _selectedEvents = [];
   Map<DateTime, List<CalendarEvent>> _events = {};
 
   void initState() {
-    _selectedDay = DateTime.utc(_now.year,_now.month, _now.day);
+    _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
 
     locator<EventService>().getEvents().then((value) => setState(() {
-      this._events = value;
-      _selectedEvents = _getEventsForDay(_selectedDay);
-    }));
+          this._events = value;
+          _selectedEvents = _getEventsForDay(_selectedDay);
+        }));
     super.initState();
   }
 
   void openEventPage(CalendarEvent event) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => EventPage(eventId: event.id ?? -1)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -69,14 +69,14 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("kk:mm")
-                              .format(event.start ?? DateTime.now()) +
+                          DateFormat("kk:mm").format(
+                              event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
                           DateFormat("kk:mm")
-                              .format(event.end ?? DateTime.now()) +
+                              .format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
                           DateFormat("MMMMd", "sv_SE")
-                              .format(event.start ?? DateTime.now()),
+                              .format(event.start?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -108,81 +108,69 @@ class _CalendarState extends State<Calendar> {
   }
 
   Future<void> _onRefresh() async {
-    locator<EventService>()
-      .getEvents()
-      .then((value) => setState(() {
-        this._events = value;
-      })
-    );
+    locator<EventService>().getEvents().then((value) => setState(() {
+          this._events = value;
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => _onRefresh(),
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          color: Colors.white,
-          child: Column(
-            children: [
-              TableCalendar(
-                availableGestures: AvailableGestures.horizontalSwipe,
-                locale: "sv_SE",
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: _focusedDay,
-                availableCalendarFormats: const {
-                  CalendarFormat.month: 'Month',
-                },
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay; // update `_focusedDay` here as well
-                    _selectedEvents = _getEventsForDay(selectedDay);
-                  });
-                },
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
-                },
-                eventLoader: (day) {
-                  return _getEventsForDay(day);
-                },
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                height: 20,
-                color: Colors.orange[600],
-                child: Text(
-                  /* It's too late to write pretty code, take this formatting space*/
-                  "  " +
-                      DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: RefreshIndicator(
+        onRefresh: () => _onRefresh(),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                TableCalendar(
+                  availableGestures: AvailableGestures.horizontalSwipe,
+                  locale: "sv_SE",
+                  startingDayOfWeek: StartingDayOfWeek.monday,
+                  firstDay: DateTime.now().subtract(Duration(days: 365 * 5)),
+                  lastDay: DateTime.now().add(Duration(days: 365 * 5)),
+                  focusedDay: _focusedDay,
+                  availableCalendarFormats: const {
+                    CalendarFormat.month: 'Month',
+                  },
+                  selectedDayPredicate: (day) {
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay =
+                          focusedDay; // update `_focusedDay` here as well
+                      _selectedEvents = _getEventsForDay(selectedDay);
+                    });
+                  },
+                  onPageChanged: (focusedDay) {
+                    _focusedDay = focusedDay;
+                  },
+                  eventLoader: (day) {
+                    return _getEventsForDay(day);
+                  },
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  width: double.infinity,
+                  height: 20,
+                  color: Colors.orange[600],
+                  child: Text(
+                    /* It's too late to write pretty code, take this formatting space*/
+                    "  " +
+                        DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  child: ListView(
-                    children: <Widget>[
-                      ..._selectedEvents.map(
-                        (CalendarEvent e) => createEventCard(e),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+            ..._selectedEvents.map((CalendarEvent e) => createEventCard(e)),
+          ],
         ),
       ),
     );
