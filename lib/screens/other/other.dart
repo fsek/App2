@@ -21,12 +21,7 @@ class OtherContent extends StatelessWidget {
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
-    "Bildgalleri": PlaceholderPage(
-        title: "Bildgalleri",
-        disc: "Här kommer du "
-            "snart kunna kolla på bilder från nutida och dåtida evenemang som "
-            "F-sektionen har hållt i!"),
-    /* GalleryPage(),*/
+    "Bildgalleri": GalleryPage(),
     "Hilbert Café": PlaceholderPage(
         title: "Hilbert Café",
         disc: "Här kommer du kunna "
@@ -73,8 +68,11 @@ class OtherContent extends StatelessWidget {
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
                     if (logout ?? false) {
-                      locator<NotificationsService>().logOutDevice().then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+                      locator<NotificationsService>()
+                          .logOutDevice()
+                          .then((value) {
+                        BlocProvider.of<AuthenticationBloc>(context)
+                            .add(LoggedOut());
                       });
                     }
                   },
@@ -107,7 +105,8 @@ class OtherContent extends StatelessWidget {
         });
   }
 
-  List<Widget> _generateListTiles(List<String> tileTexts, BuildContext context) {
+  List<Widget> _generateListTiles(
+      List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     for (String tileText in tileTexts) {
       tiles.add(Card(
@@ -116,7 +115,9 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != "Anonym kontaktsida" ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
+          trailing: tileText != "Anonym kontaktsida"
+              ? SizedBox.shrink()
+              : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -128,7 +129,8 @@ class OtherContent extends StatelessWidget {
       launch("http://contact.fsektionen.se");
       return;
     }
-    Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {
