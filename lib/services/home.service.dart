@@ -12,6 +12,9 @@ class HomeService extends AbstractService {
   Future<NewsWrapper> getPinnedNews() async {
     Map json = await AbstractService.get("/start");
     NewsWrapper result = NewsWrapper.fromJson(json["pinned"] as Map<String, dynamic>);
+    for(int i = 0; i < result.news!.length; i++){
+      result.news![i].is_pinned = true; 
+    }
     return result;
   }
 }
