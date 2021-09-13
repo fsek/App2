@@ -15,6 +15,10 @@ class News {
   String? image;
   List<Map<String, dynamic>?>? categories;
   NewsUser? user;
+  //This does not come from api but is used locally. Might (aka will) die if
+  //someone tries to push a newsentity to the server. HANDLE IN SERVICE OR
+  // SOMETHING BEFORE DOING (::
+  bool? is_pinned;
 
   News();
 
