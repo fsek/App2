@@ -728,7 +728,6 @@ class _EventPageState extends State<EventPage> {
                 Visibility(
                   visible: (!(event!.contact == null)),
                   child: Container(
-                    margin: EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
