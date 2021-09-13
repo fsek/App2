@@ -346,6 +346,17 @@ class _EventPageState extends State<EventPage> {
                 Row(
                   children: [
                     Icon(
+                      Icons.people,
+                    ),
+                    Text(
+                      "  Antal platser: " +
+                          event!.event_signup!.slots!.toString(),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
                       Icons.event_available_rounded,
                     ),
                     Text(
