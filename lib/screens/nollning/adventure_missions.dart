@@ -31,26 +31,24 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: 'UPPDRAG',
-                  icon: Icon(Icons.flag_rounded),
-                ),
-                Tab(
-                  text: 'MIN GRUPP',
-                  icon: Icon(Icons.group_rounded),
-                ),
-                Tab(
-                  text: 'HIGHSCORE',
-                  icon: Icon(Icons.emoji_events_rounded),
-                )
-              ],
-            ),
-            title: Hero(
-              child: Text('Äventyrsuppdrag'),
-              tag: "adventure_missions_tag",
-            )),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: 'UPPDRAG',
+                icon: Icon(Icons.flag_rounded),
+              ),
+              Tab(
+                text: 'MIN GRUPP',
+                icon: Icon(Icons.group_rounded),
+              ),
+              Tab(
+                text: 'HIGHSCORE',
+                icon: Icon(Icons.emoji_events_rounded),
+              )
+            ],
+          ),
+          title: Text('Äventyrsuppdrag'),
+        ),
         body: TabBarView(children: [
           AdventureMissionsTab(),
           MyGroupTab(),
