@@ -183,13 +183,13 @@ class _HeaderText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.centerLeft,
-          child: Row(children: <Widget>[
+        margin: const EdgeInsets.all(10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: [
             Flexible(child: Linkable(text: text, style: headerStyle))
           ])),
       color: color,
-      width: double.infinity,
     );
   }
 }
@@ -208,8 +208,8 @@ class _BodyText extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Container(
-          alignment: Alignment.centerLeft,
-          child: Linkable(text: text, style: bodyStyle)),
+        alignment: Alignment.centerLeft,
+        child: Linkable(text: text, style: bodyStyle)),
     );
   }
 }

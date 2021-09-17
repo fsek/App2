@@ -21,12 +21,7 @@ class OtherContent extends StatelessWidget {
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
-    "Bildgalleri": PlaceholderPage(
-        title: "Bildgalleri",
-        disc: "Här kommer du "
-            "snart kunna kolla på bilder från nutida och dåtida evenemang som "
-            "F-sektionen har hållt i!"),
-    /* GalleryPage(),*/
+    "Bildgalleri": GalleryPage(),
     "Hilbert Café": PlaceholderPage(
         title: "Hilbert Café",
         disc: "Här kommer du kunna "
