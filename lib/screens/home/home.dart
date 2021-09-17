@@ -54,6 +54,9 @@ class _HomePageState extends State<HomePage> {
                           )
                         ]),
                         isThreeLine: true,
+                        trailing: (news.is_pinned?? false) ? 
+                            Icon(Icons.push_pin_outlined, color: Colors.orange[600]) : 
+                            SizedBox.shrink()
                       )));
             }, noItemsFoundIndicatorBuilder: (context) {
               return Container(height: 400, child: Center(child: Text("Inga nyheter tillgängliga", style: Theme.of(context).textTheme.headline6)));
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         _pagingController.appendLastPage(value.news ?? []);
       } else if (page == 1) {
         locator<HomeService>().getPinnedNews().then((pinned) {
-          _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
+           _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
         });
       } else {
         _pagingController.appendPage(value.news ?? [], page + 1);

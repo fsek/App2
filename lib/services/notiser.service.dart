@@ -6,10 +6,11 @@ class NotiserService extends AbstractService {
   Future<NotisWrapper> getMoreMessages(int page) async {
     Map json = await AbstractService.get("/notifications?page=$page");
     NotisWrapper wrapper = NotisWrapper.fromJson(json as Map<String, dynamic>);
-    return wrapper; 
+    return wrapper;
   }
-  Future<void> vistNotis(int notisId) async {
+
+  Future<void> visitNotis(int notisId) async {
     await AbstractService.patch("/notifications/$notisId/visit");
-    return; 
+    return;
   }
 }

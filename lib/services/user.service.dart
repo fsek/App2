@@ -12,27 +12,27 @@ import 'abstract.service.dart';
 class UserService extends AbstractService {
   UserService({required this.storage});
   final TokenStorageWrapper storage;
-  
+
   static User? _user; //put in authbloc
   /*
    * HTTP Requests
    */
-  Future<DeviseToken> sendLogin({required String email, required String pass}) async {
+  Future<DeviseToken> sendLogin(
+      {required String email, required String pass}) async {
     try {
       var response = await http.post(
-        Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
-        headers: AbstractService.headers,
-        body: jsonEncode({"email": email, "password": pass}));
+          Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
+          headers: AbstractService.headers,
+          body: jsonEncode({"email": email, "password": pass}));
 
       var json = jsonDecode(response.body);
-      if(json["data"] != null) {
+      if (json["data"] != null) {
         setCurrentUser(User.fromJson(json["data"]));
         return DeviseToken.getFromHeaders(response.headers);
-      }
-      else {
+      } else {
         return DeviseToken(error: json["errors"][0]);
       }
-    } on UnauthorisedException catch(e) {
+    } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
     }
   }
@@ -47,24 +47,28 @@ class UserService extends AbstractService {
       AbstractService.mapAuthHeaders();
 
       var response = await http.get(
-        Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
-        headers: AbstractService.headers);
+          Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+          headers: AbstractService.headers);
 
       var json = jsonDecode(response.body);
-      if(json["data"] != null) {
+      if (json["data"] != null) {
         setCurrentUser(User.fromJson(json["data"]));
         return DeviseToken.getFromHeaders(response.headers);
-      }
-      else {
+      } else {
         return DeviseToken(error: json["errors"][0]);
       }
-    } on UnauthorisedException catch(e) {
+    } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
     }
   }
 
   Future<bool> resetPasswordRequest(String email) async {
-    await AbstractService.post("/account/resetpassword", body: email);
+    dynamic ret = await http.post(
+        Uri.parse(
+          Environment.API_URL + "/api/auth/password",
+        ),
+        body: '{"email": "' + email + '", "redirect_url": "/home"}',
+        headers: AbstractService.headers);
     return true;
   }
 
@@ -74,23 +78,24 @@ class UserService extends AbstractService {
   }
 
   Future<User> getUser() async {
-    if(_user == null) {
+    if (_user == null) {
       String? json = await storage.read('user-data');
-      if(json != null)
+      if (json != null)
         return User.fromJson(jsonDecode(json));
-      else 
-        return User(); 
+      else
+        return User();
     }
     return _user!;
   }
 
   Future<Map> updateUser(User updatedUser) async {
     try {
-      var response = await AbstractService.put("/users/" +updatedUser.id!.toString(),
-      mapBody: updatedUser.toJson()); 
+      var response = await AbstractService.put(
+          "/users/" + updatedUser.id!.toString(),
+          mapBody: updatedUser.toJson());
       setCurrentUser(updatedUser);
       return response;
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -118,10 +123,9 @@ class UserService extends AbstractService {
     var value = AbstractService.token;
     if (value == null) {
       DeviseToken token = await DeviseToken.getFromStorage(storage);
-      if(token.accessToken == null) {
+      if (token.accessToken == null) {
         return false;
-      }
-      else {
+      } else {
         AbstractService.token = token;
         return true;
       }
@@ -130,9 +134,8 @@ class UserService extends AbstractService {
   }
 
   Future<bool> isValid() async {
-    if(AbstractService.token == null)
-      return false;
-      
+    if (AbstractService.token == null) return false;
+
     DateTime? value = AbstractService.token!.expires;
     if (value != null && value.compareTo(DateTime.now().toUtc()) > 0)
       return true;
