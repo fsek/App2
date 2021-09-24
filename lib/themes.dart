@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 final ThemeData fsekTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Colors.orange,
-  accentColor: Colors.orangeAccent,
-  buttonColor: Colors.orange,
+  colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.orange[800], secondary: Colors.orangeAccent),
+  textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange), foregroundColor: MaterialStateProperty.all<Color>(Colors.white))),
   bottomAppBarTheme: BottomAppBarTheme(
     color: Colors.orange[700]
   ),
@@ -24,14 +24,13 @@ final List<Color> fsekBackground = [
 final ThemeData nollning2021theme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xFFe3b900),
-  accentColor: Color(0xFFf3dd6d),
-  buttonColor: Color(0xFFd2b941),
+  colorScheme: ThemeData().colorScheme.copyWith(primary: Color(0xFFe3b900), secondary:Color(0xFFf3dd6d)),
+  textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFd2b941)), foregroundColor: MaterialStateProperty.all<Color>(Colors.white))),
   bottomAppBarTheme: BottomAppBarTheme(
     color: Color(0xFFc0a836)
   ),
   inputDecorationTheme: InputDecorationTheme(
-    focusedBorder:
-        UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+    focusedBorder:  UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
     labelStyle: TextStyle(color: Colors.orange),
     hintStyle: TextStyle(color: Colors.grey[600]),
   ),
