@@ -53,8 +53,8 @@ class NollningService extends AbstractService {
   }
 
   void testGetThings() async {
-    print("TEST /adventures:");
-    Map json = await AbstractService.get("/adventure_mission_groups");
+    print("TEST /cafe:");
+    Map json = await AbstractService.get("/cafe?start=2021-09-28&end=2021-10-04");
     print(json);
   }
 }

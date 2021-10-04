@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
@@ -22,10 +23,11 @@ class OtherContent extends StatelessWidget {
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
-    "Hilbert Café": PlaceholderPage(
-        title: "Hilbert Café",
-        disc: "Här kommer du kunna "
-            "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
+    "Hilbert Café": CafePage(),
+    // PlaceholderPage(
+    //     title: "Hilbert Café",
+    //     disc: "Här kommer du kunna "
+    //         "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),

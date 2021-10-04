@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/models/home/calendarevent.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
 
 class CafePage extends StatefulWidget {
-  static const routeName = '/cafe';
-
   @override
   _CafePageState createState() => _CafePageState();
 }
@@ -18,6 +18,7 @@ class _CafePageState extends State<CafePage> {
   Map<DateTime, List<CalendarEvent>> _events = {};
 
   void initState() {
+    locator<NollningService>().testGetThings();
     super.initState();
   }
 
