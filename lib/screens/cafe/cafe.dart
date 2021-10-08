@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/services/nollning.service.dart';
+import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
+import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/models/home/calendarevent.dart';
@@ -16,9 +17,13 @@ class _CafePageState extends State<CafePage> {
   DateTime _selectedDay = DateTime.now().toLocal();
   List<CalendarEvent> _selectedEvents = [];
   Map<DateTime, List<CalendarEvent>> _events = {};
+  Map<DateTime, List<CafeShift>>? _shifts;
 
   void initState() {
-    locator<NollningService>().testGetThings();
+    locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
+          this._shifts = value;
+          print(_shifts);
+        }));
     super.initState();
   }
 
