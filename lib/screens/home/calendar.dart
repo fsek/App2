@@ -69,10 +69,10 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("kk:mm").format(
+                          DateFormat("HH:mm").format(
                               event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("kk:mm")
+                          DateFormat("HH:mm")
                               .format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
                           DateFormat("MMMMd", "sv_SE")

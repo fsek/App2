@@ -612,11 +612,11 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("kk:mm").format(
+                          DateFormat("HH:mm").format(
                               event?.starts_at?.toLocal() ?? DateTime.now()) +
                           getDots() +
                           " - " +
-                          DateFormat("kk:mm").format(
+                          DateFormat("HH:mm").format(
                               event?.ends_at?.toLocal() ?? DateTime.now()) +
                           ", " +
                           DateFormat("MMMMd", "sv_SE").format(
