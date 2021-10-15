@@ -48,7 +48,7 @@ class _EventPageState extends State<EventPage> {
               this.event = value;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = value.food_preferences;
+          this.foodPreferences = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
             print(this.foodPreferences?[i]);
@@ -70,7 +70,7 @@ class _EventPageState extends State<EventPage> {
               this.answer = null;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = value.food_preferences;
+          this.foodPreferences = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
             this.foodPreferences![i] =

@@ -170,6 +170,9 @@ class _CalendarState extends State<Calendar> {
               ],
             ),
             ..._selectedEvents.map((CalendarEvent e) => createEventCard(e)),
+            Container(
+              height: 50,
+            ),
           ],
         ),
       ),
