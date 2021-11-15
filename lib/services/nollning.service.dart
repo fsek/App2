@@ -1,5 +1,4 @@
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
-import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';

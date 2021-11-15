@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/models/cafe/cafe_user.dart';
 import 'package:fsek_mobile/models/cafe/councils.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -11,6 +12,7 @@ class CafeShift {
   bool? isme;
   Councils? councils;
   String? group;
+  CafeUser? user;
 
   CafeShift();
 

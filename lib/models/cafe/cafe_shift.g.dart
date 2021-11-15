@@ -16,7 +16,10 @@ CafeShift _$CafeShiftFromJson(Map<String, dynamic> json) {
     ..councils = json['councils'] == null
         ? null
         : Councils.fromJson(json['councils'] as Map<String, dynamic>)
-    ..group = json['group'] as String?;
+    ..group = json['group'] as String?
+    ..user = json['user'] == null
+        ? null
+        : CafeUser.fromJson(json['user'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$CafeShiftToJson(CafeShift instance) => <String, dynamic>{
@@ -26,4 +29,5 @@ Map<String, dynamic> _$CafeShiftToJson(CafeShift instance) => <String, dynamic>{
       'isme': instance.isme,
       'councils': instance.councils,
       'group': instance.group,
+      'user': instance.user,
     };

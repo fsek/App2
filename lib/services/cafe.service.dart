@@ -34,7 +34,7 @@ class CafeService extends AbstractService {
       (year['months'] as Map).forEach((keyMonth, month) {
         (month['days'] as Map).forEach((keyDay, day) {
           String date = (keyDay as String).split(" - ")[1];
-          shiftMap[_parseDate(year, date)] = (day as List).map((data) => CafeShift.fromJson(data)).toList();
+          shiftMap[_parseDate(keyYear, date)] = (day as List).map((data) => CafeShift.fromJson(data)).toList();
         });
       });
     });
@@ -45,11 +45,26 @@ class CafeService extends AbstractService {
     List<String> split = date.split("/");
     int month = int.parse(split[1]);
     int day = int.parse(split[0]);
-    return DateTime(int.parse(year), month, day);
+    return DateTime.utc(int.parse(year), month, day);
   }
 
   Future<Map<DateTime, List<CafeShift>>> getShiftsForCalendar() async {
     DateTime now = DateTime.now();
     return getCafeShiftBetweenDates(now.subtract(Duration(days: 7)), now.add(Duration(days: 49)));
+  }
+
+  Future<CafeShift> getShift(int id) async {
+    Map json = await AbstractService.get("/cafe/$id");
+    return CafeShift.fromJson(json['cafe_shift']);
+  }
+
+  Future<Map> cafeShiftSignup(CafeShift shift) {
+    return AbstractService.post('/cafe', mapBody: {
+      "user_id": shift.id,
+      "council_ids": shift.councils,
+      "group": shift.group,
+      // Add cafe competition?
+      // "competition": shift.competition
+    });
   }
 }
