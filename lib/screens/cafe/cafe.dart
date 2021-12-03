@@ -34,8 +34,7 @@ class _CafePageState extends State<CafePage> {
 
   Widget createCafeShiftCard(CafeShift shift) {
     return Card(
-      child: Card(
-          child: InkWell(
+      child: InkWell(
         onTap: () => openCafeShiftPage(shift),
         child: Container(
           margin: EdgeInsets.all(10),
@@ -66,12 +65,39 @@ class _CafePageState extends State<CafePage> {
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 
   void openCafeShiftPage(CafeShift shift) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => CafeShiftPage(shiftId: shift.id ?? -1)));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CafeShiftPage(shiftId: shift.id ?? -1),
+      ),
+    ).then(
+      // after returning from cafe_shift page, update the calendar
+      (value) => locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
+            this._events = value;
+            _selectedEvents = _getEventsForDay(_selectedDay);
+          })),
+    );
+  }
+
+  List<Widget> createPairShifts(List<CafeShift> dayShifts) {
+    // create pairs of shifts (which we will assume to have the same time)
+    List<Widget> pairList = [];
+    Row pair;
+    for (var i = 0; i < dayShifts.length / 2; i++) {
+      pair = Row(
+        children: [
+          Expanded(child: createCafeShiftCard(dayShifts[i])),
+          Expanded(child: createCafeShiftCard(dayShifts[i + 1])),
+        ],
+      );
+      pairList.add(pair);
+    }
+    return pairList;
   }
 
   @override
@@ -124,7 +150,7 @@ class _CafePageState extends State<CafePage> {
                 ),
               ),
             ),
-            ..._selectedEvents.map((CafeShift e) => createCafeShiftCard(e)),
+            ...createPairShifts(_selectedEvents),
           ],
         ),
       ),

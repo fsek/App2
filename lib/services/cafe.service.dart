@@ -1,5 +1,7 @@
 import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/user.service.dart';
 
 class CafeService extends AbstractService {
   /// {cafe_shift:
@@ -58,13 +60,19 @@ class CafeService extends AbstractService {
     return CafeShift.fromJson(json['cafe_shift']);
   }
 
-  Future<Map> cafeShiftSignup(CafeShift shift) {
+  Future<Map> cafeShiftSignup(CafeShift shift) async {
     return AbstractService.post('/cafe', mapBody: {
-      "user_id": shift.id,
-      "council_ids": shift.councils,
-      "group": shift.group,
-      // Add cafe competition?
-      // "competition": shift.competition
+      "cafe_shift_id": shift.id,
+      "cafe_worker": {
+        "user_id": await locator<UserService>().getUser().then((user) => user.id),
+        "councils_ids": [], //empty list for now, fix later!!
+        "group": shift.group,
+        "competition": true, //always true for now, fix later!!
+      }
     });
+  }
+
+  Future<Map> cafeShiftUnsign(CafeShift shift) {
+    return AbstractService.delete('/cafe/${shift.id}');
   }
 }
