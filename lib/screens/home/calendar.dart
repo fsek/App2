@@ -66,9 +66,9 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("kk:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("kk:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
                           DateFormat("MMMMd", "sv_SE").format(event.start?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
@@ -163,6 +163,9 @@ class _CalendarState extends State<Calendar> {
               ],
             ),
             ..._selectedEvents.map((CalendarEvent e) => createEventCard(e)),
+            Container(
+              height: 50,
+            ),
           ],
         ),
       ),
