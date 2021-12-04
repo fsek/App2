@@ -98,18 +98,6 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
       );
     }
     headerText += "till pass kl ${shift!.duration}";
-/*
-          (shift!.isme != null) ?
-          (shift!.isme!)
-              ? TextButton(
-                  onPressed: () => unsign(shift!),
-                  child: Text("Avanmäl mig :(("),
-                )
-              : TextButton(
-                  onPressed: () => signup(shift!),
-                  child: Text("Anmäl mig :))"),
-                ) : 
-                */
     return Scaffold(
       appBar: AppBar(
         title: Text('Cafépass'),
