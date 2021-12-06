@@ -1,0 +1,7 @@
+{
+    "helloWorld": "Hej, Värld!",
+    "@helloWorld": {
+      "description": "Hej värld!"
+    },
+    "fGuildName": "F-Sektionen inom TLTH"
+}
