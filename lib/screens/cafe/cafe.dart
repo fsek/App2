@@ -34,6 +34,7 @@ class _CafePageState extends State<CafePage> {
 
   Widget createCafeShiftCard(CafeShift shift) {
     return Card(
+      color: (shift.user != null) ? Colors.orange[100] : null,
       child: InkWell(
         onTap: () => openCafeShiftPage(shift),
         child: Container(
@@ -73,7 +74,10 @@ class _CafePageState extends State<CafePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CafeShiftPage(shiftId: shift.id ?? -1),
+        builder: (context) => CafeShiftPage(
+          shiftId: shift.id ?? -1,
+          user: shift.user,
+        ),
       ),
     ).then(
       // after returning from cafe_shift page, update the calendar
