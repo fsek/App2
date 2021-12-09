@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
-import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
 import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
@@ -31,26 +30,24 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: 'UPPDRAG',
-                  icon: Icon(Icons.flag_rounded),
-                ),
-                Tab(
-                  text: 'MIN GRUPP',
-                  icon: Icon(Icons.group_rounded),
-                ),
-                Tab(
-                  text: 'HIGHSCORE',
-                  icon: Icon(Icons.emoji_events_rounded),
-                )
-              ],
-            ),
-            title: Hero(
-              child: Text('Äventyrsuppdrag'),
-              tag: "adventure_missions_tag",
-            )),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: 'UPPDRAG',
+                icon: Icon(Icons.flag_rounded),
+              ),
+              Tab(
+                text: 'MIN GRUPP',
+                icon: Icon(Icons.group_rounded),
+              ),
+              Tab(
+                text: 'HIGHSCORE',
+                icon: Icon(Icons.emoji_events_rounded),
+              )
+            ],
+          ),
+          title: Text('Äventyrsuppdrag'),
+        ),
         body: TabBarView(children: [
           AdventureMissionsTab(),
           MyGroupTab(),

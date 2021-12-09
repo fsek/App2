@@ -1,16 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
-import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
-import 'package:fsek_mobile/models/nollning/nollning_group.dart';
-import 'package:fsek_mobile/screens/nollning/mission.dart';
-import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/theme.service.dart';
-import 'package:fsek_mobile/util/app_exception.dart';
 
 class MyGroupTab extends StatefulWidget {
   @override
@@ -61,8 +54,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
         progressList!.add(acceptedMissionsList!.elementAt(i) / totalMissionsList!.elementAt(i));
       }
     }
-    double circleSize = MediaQuery.of(context).size.height / 5.5
-;
+    double circleSize = MediaQuery.of(context).size.height / 5.5;
     return Stack(
       children: [
         Image.asset(
@@ -85,8 +77,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       minHeight: 10,
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, right: 10, left: 10),
+                      padding: const EdgeInsets.only(top: 8, right: 10, left: 10),
                       child: Text(
                         adventureData?.group_name ?? "",
                         textAlign: TextAlign.center,
@@ -112,46 +103,21 @@ class _MyGroupTabState extends State<MyGroupTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(
-                      imgPath: "assets/img/vecka_0.png",
-                      progress: progressList!.elementAt(0),
-                      borderColor: Colors.purple[900]!,
-                      size: circleSize
-                    ),
-                    _weekProgressCircle(
-                      imgPath: "assets/img/vecka_1.png",
-                      progress: progressList!.elementAt(1),
-                      borderColor: Colors.blue[900]!,
-                      size:circleSize
-                    ),
+                    _weekProgressCircle(imgPath: "assets/img/vecka_0.png", progress: progressList!.elementAt(0), borderColor: Colors.purple[900]!, size: circleSize),
+                    _weekProgressCircle(imgPath: "assets/img/vecka_1.png", progress: progressList!.elementAt(1), borderColor: Colors.blue[900]!, size: circleSize),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(
-                      imgPath: "assets/img/vecka_4.png",
-                      progress: progressList!.elementAt(4),
-                      borderColor: Colors.orange,
-                      size: circleSize
-                    ),
+                    _weekProgressCircle(imgPath: "assets/img/vecka_4.png", progress: progressList!.elementAt(4), borderColor: Colors.orange, size: circleSize),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(
-                      imgPath: "assets/img/vecka_2.png",
-                      progress: progressList!.elementAt(2),
-                      borderColor: Colors.red[900]!,
-                      size: circleSize
-                    ),
-                    _weekProgressCircle(
-                      imgPath: "assets/img/vecka_3.png",
-                      progress: progressList!.elementAt(3),
-                      borderColor: Colors.green[900]!,
-                      size: circleSize
-                    ),
+                    _weekProgressCircle(imgPath: "assets/img/vecka_2.png", progress: progressList!.elementAt(2), borderColor: Colors.red[900]!, size: circleSize),
+                    _weekProgressCircle(imgPath: "assets/img/vecka_3.png", progress: progressList!.elementAt(3), borderColor: Colors.green[900]!, size: circleSize),
                   ],
                 ),
               ],
