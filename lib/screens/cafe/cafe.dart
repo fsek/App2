@@ -81,10 +81,12 @@ class _CafePageState extends State<CafePage> {
       ),
     ).then(
       // after returning from cafe_shift page, update the calendar
-      (value) => locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
-            this._events = value;
-            _selectedEvents = _getEventsForDay(_selectedDay);
-          })),
+      (value) => locator<CafeService>()
+          .getShiftsForCalendar()
+          .then((value) => setState(() {
+                this._events = value;
+                _selectedEvents = _getEventsForDay(_selectedDay);
+              })),
     );
   }
 
@@ -95,8 +97,8 @@ class _CafePageState extends State<CafePage> {
     for (var i = 0; i < dayShifts.length / 2; i++) {
       pair = Row(
         children: [
-          Expanded(child: createCafeShiftCard(dayShifts[i])),
-          Expanded(child: createCafeShiftCard(dayShifts[i + 1])),
+          Expanded(child: createCafeShiftCard(dayShifts[2 * i])),
+          Expanded(child: createCafeShiftCard(dayShifts[2 * i + 1])),
         ],
       );
       pairList.add(pair);
