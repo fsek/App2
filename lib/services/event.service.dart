@@ -11,14 +11,14 @@ class EventService extends AbstractService {
     Map json = await AbstractService.get("/events?start=" +
         DateFormat("y", "sv_SE")
             .format(DateTime.now().subtract(Duration(days: 365))) +
-        DateFormat("M", "sv_SE")
+        DateFormat("MM", "sv_SE")
             .format(DateTime.now().subtract(Duration(days: 365))) +
         DateFormat("dd", "sv_SE")
             .format(DateTime.now().subtract(Duration(days: 365))) +
         "&end=" +
         DateFormat("y", "sv_SE")
             .format(DateTime.now().add(Duration(days: 365))) +
-        DateFormat("M", "sv_SE")
+        DateFormat("MM", "sv_SE")
             .format(DateTime.now().add(Duration(days: 365))) +
         DateFormat("dd", "sv_SE")
             .format(DateTime.now().add(Duration(days: 365))));
