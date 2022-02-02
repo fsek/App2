@@ -9,27 +9,16 @@ class EventService extends AbstractService {
     Map<DateTime, List<CalendarEvent>> result = {};
 
     Map json = await AbstractService.get("/events?start=" +
-        DateFormat("y", "sv_SE")
-            .format(DateTime.now().subtract(Duration(days: 365))) +
-        DateFormat("M", "sv_SE")
-            .format(DateTime.now().subtract(Duration(days: 365))) +
-        DateFormat("dd", "sv_SE")
-            .format(DateTime.now().subtract(Duration(days: 365))) +
+        DateFormat("y", "sv_SE").format(DateTime.now().subtract(Duration(days: 365))) +
+        DateFormat("MM", "sv_SE").format(DateTime.now().subtract(Duration(days: 365))) +
+        DateFormat("dd", "sv_SE").format(DateTime.now().subtract(Duration(days: 365))) +
         "&end=" +
-        DateFormat("y", "sv_SE")
-            .format(DateTime.now().add(Duration(days: 365))) +
-        DateFormat("M", "sv_SE")
-            .format(DateTime.now().add(Duration(days: 365))) +
-        DateFormat("dd", "sv_SE")
-            .format(DateTime.now().add(Duration(days: 365))));
-    List<CalendarEvent> eventlist = (json['events'] as List)
-        .map((data) => CalendarEvent.fromJson(data))
-        .toList();
+        DateFormat("y", "sv_SE").format(DateTime.now().add(Duration(days: 365))) +
+        DateFormat("MM", "sv_SE").format(DateTime.now().add(Duration(days: 365))) +
+        DateFormat("dd", "sv_SE").format(DateTime.now().add(Duration(days: 365))));
+    List<CalendarEvent> eventlist = (json['events'] as List).map((data) => CalendarEvent.fromJson(data)).toList();
     eventlist.forEach((event) {
-      DateTime? eventDay = DateTime.utc(
-          (event.start?.toLocal().year ?? 2010),
-          (event.start?.toLocal().month ?? 01),
-          (event.start?.toLocal().day ?? 01));
+      DateTime? eventDay = DateTime.utc((event.start?.toLocal().year ?? 2010), (event.start?.toLocal().month ?? 01), (event.start?.toLocal().day ?? 01));
       if (result.containsKey(eventDay)) {
         result[eventDay]?.add(event);
       } else {
