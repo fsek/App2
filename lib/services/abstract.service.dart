@@ -35,12 +35,15 @@ class AbstractService {
     return responseJson;
   }
 
-  static Future<Map> post(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
+  static Future<Map> post(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
     mapAuthHeaders();
 
     try {
-      var response = await http.post(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      var response = await http.post(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
       updateToken(response.headers);
     } on SocketException {
@@ -50,11 +53,14 @@ class AbstractService {
     return responseJson;
   }
 
-  static Future<Map> put(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
+  static Future<Map> put(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
     mapAuthHeaders();
     try {
-      var response = await http.put(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      var response = await http.put(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
       updateToken(response.headers);
     } on SocketException {
@@ -64,11 +70,14 @@ class AbstractService {
     return responseJson;
   }
 
-  static Future<Map> patch(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
+  static Future<Map> patch(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
     mapAuthHeaders();
     try {
-      var response = await http.patch(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      var response = await http.patch(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
       updateToken(response.headers);
     } on SocketException {
@@ -78,12 +87,15 @@ class AbstractService {
     return responseJson;
   }
 
-  static Future<Map> delete(String endpoint, {String body = "", Map<String, dynamic>? mapBody}) async {
+  static Future<Map> delete(String endpoint,
+      {String body = "", Map<String, dynamic>? mapBody}) async {
     var responseJson;
     mapAuthHeaders();
 
     try {
-      var response = await http.delete(Uri.parse(API_URL + endpoint), headers: headers, body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
+      var response = await http.delete(Uri.parse(API_URL + endpoint),
+          headers: headers,
+          body: body == "" ? jsonEncode(mapBody) : jsonEncode(body));
       responseJson = _returnResponse(response);
       updateToken(response.headers);
     } on SocketException {
@@ -112,7 +124,8 @@ class AbstractService {
         throw ServiceUnavailableException(HttpErrorMessage.Message[503]);
       case 500:
       default:
-        throw FetchDataException('${HttpErrorMessage.Message[499]} Statuscode: ${response.statusCode}');
+        throw FetchDataException(
+            '${HttpErrorMessage.Message[499]} Statuscode: ${response.statusCode}');
     }
   }
 
@@ -121,7 +134,9 @@ class AbstractService {
     headers["access-token"] = token!.accessToken ?? "";
     headers["uid"] = token!.uid ?? "";
     headers["client"] = token!.client ?? "";
-    if (token!.expires != null) headers["expires"] = (token!.expires!.millisecondsSinceEpoch * 1000).toString();
+    if (token!.expires != null)
+      headers["expires"] =
+          (token!.expires!.millisecondsSinceEpoch * 1000).toString();
   }
 
   static void updateToken(Map<String, String> headers) {

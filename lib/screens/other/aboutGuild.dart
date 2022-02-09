@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutGuildPage extends StatelessWidget {
-  final String text = "F-sektionen inom TLTH är en ideell förening för studenter som läser "
+  final String text =
+      "F-sektionen inom TLTH är en ideell förening för studenter som läser "
       "något av civilingenjörsprogrammen Teknisk Fysik, Teknisk Matematik "
       "eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap "
       "bland medlemmarna och tillvarata medlemmarnas gemensamma intressen."
@@ -30,7 +31,8 @@ class AboutGuildPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("F-sektionen", style: Theme.of(context).textTheme.headline6),
+                  Text("F-sektionen",
+                      style: Theme.of(context).textTheme.headline6),
                   SizedBox(
                     height: 8,
                   ),

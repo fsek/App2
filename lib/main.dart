@@ -11,6 +11,7 @@ import 'package:fsek_mobile/screens/home/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
+import 'package:fsek_mobile/screens/fruits/fruits.dart';
 import 'package:fsek_mobile/themes.dart';
 import 'app.dart';
 import 'models/destination.dart';
@@ -50,21 +51,29 @@ void main() async {
     '/messages': (context) => MessagesPage(),
     '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
-    '/nollningpage' : (context) => NollningPage(),
+    '/nollningpage': (context) => NollningPage(),
+    '/fruitpage': (context) => FruitPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.orange[800],
-    colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.orange[800], secondary: Colors.orangeAccent),
-    textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange))),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange))),
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-      labelStyle: TextStyle(color: Colors.orange),
-      hintStyle: TextStyle(color: Colors.grey[600]),
-    ));
+      brightness: Brightness.light,
+      primaryColor: Colors.orange[800],
+      colorScheme: ThemeData().colorScheme.copyWith(
+          primary: Colors.orange[800], secondary: Colors.orangeAccent),
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.orange))),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.orange))),
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+        labelStyle: TextStyle(color: Colors.orange),
+        hintStyle: TextStyle(color: Colors.grey[600]),
+      ));
   locator<ThemeService>().backgroundColors = [
     Color(0xFFf77e14),
     Color(0xFFe6660b),
@@ -102,7 +111,7 @@ void main() async {
   await Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
-  
+
   runZonedGuarded<Future<void>>(() async {
     initializeDateFormatting().then((_) => runApp(FsekMobileApp()));
   }, (Object error, StackTrace stackTrace) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/fruits/fruits.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
@@ -16,7 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'fap.dart';
 
 class OtherContent extends StatelessWidget {
-  final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
+  final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café", "Frukter"];
   final about = ["F-sektionen", "F-appen"];
   final settings = ["Konto"];
   final support = ["Kontakt", "Anonym kontaktsida"];
@@ -24,15 +25,12 @@ class OtherContent extends StatelessWidget {
     "Sångbok": SongbookPage(),
     "Bildgalleri": GalleryPage(),
     "Hilbert Café": CafePage(),
-    // PlaceholderPage(
-    //     title: "Hilbert Café",
-    //     disc: "Här kommer du kunna "
-    //         "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
+    "Frukter": FruitPage(),
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
     "Kontakt": ContactPage(),
-    "Anonym kontaktsida": Container()
+    "Anonym kontaktsida": Container(),
   };
 
   @override
