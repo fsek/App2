@@ -50,10 +50,4 @@ class NollningService extends AbstractService {
       return {};
     }
   }
-
-  void testGetThings() async {
-    print("TEST /cafe:");
-    Map json = await AbstractService.get("/cafe?start=2021-09-28&end=2021-10-04");
-    print(json);
-  }
 }

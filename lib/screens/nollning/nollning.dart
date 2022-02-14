@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/services/nollning.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -70,8 +71,8 @@ class _NollningPageState extends State<NollningPage> {
                     ),
                     InkWell(
                       onTap: () {
-                      Navigator.pushNamed(context, '/chant_book');
-                    },
+                        Navigator.pushNamed(context, '/chant_book');
+                      },
                       child: Image.asset(
                         "assets/img/skrikbok.png",
                         height: 100,
