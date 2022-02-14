@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/models/home/fruit.dart';
+import 'package:fsek_mobile/models/home/fruituser.dart';
+import 'package:fsek_mobile/services/fruit.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
 
 class FruitPage extends StatefulWidget {
   const FruitPage({Key? key}) : super(key: key);
@@ -8,6 +12,14 @@ class FruitPage extends StatefulWidget {
 }
 
 class _FruitPageState extends State<FruitPage> {
+  List<Fruit>? fruits;
+  void initState() {
+    locator<FruitService>().getFruits().then((value) => setState(() {
+          this.fruits = value;
+        }));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
