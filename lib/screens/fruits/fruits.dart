@@ -22,10 +22,20 @@ class _FruitPageState extends State<FruitPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Frukter'),
-      ),
-    );
+    if (fruits == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Frukter'),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Frukter'),
+        ),
+        body: ListView(
+            children: [...fruits!.map((fruit) => Text(fruit.name ?? ""))]),
+      );
+    }
   }
 }
