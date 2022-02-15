@@ -33,9 +33,36 @@ class _FruitPageState extends State<FruitPage> {
         appBar: AppBar(
           title: const Text('Frukter'),
         ),
-        body: ListView(
-            children: [...fruits!.map((fruit) => Text(fruit.name ?? ""))]),
+        body:
+            ListView(children: [...fruits!.map((fruit) => _FruitCard(fruit))]),
       );
     }
+  }
+}
+
+/* 
+ * note that this widget is stateless. We only want to set the fruit
+ * for the widget once and never change it, so we use final. It will
+ * never change state after construction, so it is stateless and not stateful
+ */
+class _FruitCard extends StatelessWidget {
+  final Fruit fruit;
+
+  @override
+  _FruitCard(this.fruit);
+
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: Card(
+        child: InkWell(
+          onTap: () {},
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(fruit.name!, style: TextStyle(fontSize: 20)),
+          ),
+        ),
+      ),
+    );
   }
 }
