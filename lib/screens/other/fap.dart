@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/services/fredmasky.service.dart';
+import 'package:fsek_mobile/models/fredmansky/fredmansky.dart';
+import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -95,7 +96,12 @@ class _FapPageState extends State<FapPage> {
       duration: Duration(seconds: 1),
       child: InkWell(
         onTap: () {
-          locator<FredmanskyService>().toggleFredmansky();
+          locator<FredmanskyService>().toggleFredmansky().then((value) {
+            if (value.enabled!) {
+              _joinPopup(context);
+            } else
+              _leavePopup(context);
+          });
         },
         child: Image.asset(
           "assets/img/FredmanskyBeer.png",
@@ -103,5 +109,43 @@ class _FapPageState extends State<FapPage> {
         ),
       ),
     );
+  }
+
+  void _leavePopup(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Your Beer Life has Ended"),
+            content: Text("You are a disgrace to spoders everywhere across the world, no more beer for you"),
+            actions: [
+              TextButton(
+                child: Text("Unlit fam"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void _joinPopup(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("A New Life with Beer"),
+            content: Text("Congratulations fren, a new life will start on friday 15.00"),
+            actions: [
+              TextButton(
+                child: Text("Lit fam"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }

@@ -1,5 +1,5 @@
 import 'package:fsek_mobile/services/cafe.service.dart';
-import 'package:fsek_mobile/services/fredmasky.service.dart';
+import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/notiser.service.dart';
 import 'package:fsek_mobile/services/song.service.dart';

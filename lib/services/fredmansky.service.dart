@@ -7,9 +7,9 @@ class FredmanskyService extends AbstractService {
     return Fredmansky.fromJson(json as Map<String, dynamic>);
   }
 
-  void testGetThings() async {
-    print("TEST /fredmansky:");
-    Map json = await AbstractService.patch("/fredmansky/toggle");
+  void testGetThings(String path) async {
+    print("TEST $path:");
+    Map json = await AbstractService.patch(path);
     print(json);
   }
 }
