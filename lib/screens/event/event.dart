@@ -398,7 +398,7 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
-              Row(
+              Wrap(
                 children: [
                   Text("  Matpreferenser: "),
                   ...?foodPreferences?.where((element) => element.isNotEmpty).map((foodPreference) => Text(foodPreference + " ")),
