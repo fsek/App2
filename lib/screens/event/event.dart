@@ -510,7 +510,7 @@ class _EventPageState extends State<EventPage> {
                   children: [TextSpan(text: " "), TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
-      Row(
+      Wrap(
         children: [
           RichText(text: TextSpan(text: "Matpreferenser: ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
           ...?foodPreferences?.where((element) => element.isNotEmpty).map((foodPreferences) => Text(foodPreferences + " ")),
