@@ -28,7 +28,6 @@ class Event {
   List<List<String>>? user_types;
   Contact? contact;
   int? slots;
-  String? question;
   String? url;
   String? textColor;
   String? dot;
