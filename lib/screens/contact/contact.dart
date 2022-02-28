@@ -84,7 +84,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 8),
-                    child: Text("Kontktperson",
+                    child: Text("Kontaktperson",
                         style: Theme.of(context).textTheme.subtitle2),
                   )),
               Padding(
