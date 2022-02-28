@@ -197,7 +197,7 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget questionInput() {
-    if (event?.question == null) {
+    if (event?.event_signup?.question == null) {
       return Container();
     }
     return Container(
