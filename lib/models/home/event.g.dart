@@ -38,7 +38,6 @@ Event _$EventFromJson(Map<String, dynamic> json) {
         ? null
         : Contact.fromJson(json['contact'] as Map<String, dynamic>)
     ..slots = json['slots'] as int?
-    ..question = json['question'] as String?
     ..url = json['url'] as String?
     ..textColor = json['textColor'] as String?
     ..dot = json['dot'] as String?
@@ -78,7 +77,6 @@ Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'user_types': instance.user_types,
       'contact': instance.contact,
       'slots': instance.slots,
-      'question': instance.question,
       'url': instance.url,
       'textColor': instance.textColor,
       'dot': instance.dot,
