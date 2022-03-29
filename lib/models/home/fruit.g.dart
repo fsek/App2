@@ -10,7 +10,7 @@ Fruit _$FruitFromJson(Map<String, dynamic> json) {
   return Fruit()
     ..id = json['id'] as int?
     ..name = json['name'] as String?
-    ..isMoldy = json['isMoldy'] as bool?
+    ..is_moldy = json['is_moldy'] as bool?
     ..user = json['user'] == null
         ? null
         : FruitUser.fromJson(json['user'] as Map<String, dynamic>);
@@ -19,6 +19,6 @@ Fruit _$FruitFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$FruitToJson(Fruit instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'isMoldy': instance.isMoldy,
+      'is_moldy': instance.is_moldy,
       'user': instance.user,
     };

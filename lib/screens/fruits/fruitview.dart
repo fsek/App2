@@ -35,8 +35,35 @@ class _FruitViewState extends State<FruitView> {
         appBar: AppBar(
           title: const Text('Frukt'),
         ),
-        body: Text(fruit!.name ?? ""),
+        body: _FruitWidget(this.fruit!),
       );
     }
+  }
+}
+
+class _FruitWidget extends StatelessWidget {
+  final Fruit fruit;
+  String moldStatus = "";
+  @override
+  _FruitWidget(this.fruit) {
+    /* We are optimistic. If isMoldy is null we assume the fruit is fresh */
+    if (this.fruit.is_moldy ?? false) {
+      this.moldStatus = "möglig";
+    } else {
+      this.moldStatus = "ej möglig";
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: Card(
+        child: Align(
+          alignment: Alignment.center,
+          child: Text("${fruit.name!}: ${moldStatus} ",
+              style: TextStyle(fontSize: 20)),
+        ),
+      ),
+    );
   }
 }

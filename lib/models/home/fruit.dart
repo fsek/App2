@@ -7,7 +7,7 @@ part 'fruit.g.dart';
 class Fruit {
   int? id;
   String? name;
-  bool? isMoldy;
+  bool? is_moldy;
   FruitUser? user;
 
   Fruit();
