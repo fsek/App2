@@ -9,4 +9,9 @@ class FruitService extends AbstractService {
     print(fruitlist);
     return fruitlist;
   }
+
+  Future<Fruit> getFruit(int id) async {
+    Map json = await AbstractService.get("/frukter/$id");
+    return Fruit.fromJson(json['fruit']);
+  }
 }

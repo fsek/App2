@@ -3,6 +3,7 @@ import 'package:fsek_mobile/models/home/fruit.dart';
 import 'package:fsek_mobile/models/home/fruituser.dart';
 import 'package:fsek_mobile/services/fruit.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/screens/fruits/fruitview.dart';
 
 class FruitPage extends StatefulWidget {
   const FruitPage({Key? key}) : super(key: key);
@@ -56,7 +57,12 @@ class _FruitCard extends StatelessWidget {
       height: 50,
       child: Card(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => FruitView(id: fruit.id ?? -1)));
+          },
           child: Align(
             alignment: Alignment.center,
             child: Text(fruit.name!, style: TextStyle(fontSize: 20)),
