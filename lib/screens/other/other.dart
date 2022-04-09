@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
+import 'package:fsek_mobile/screens/cafe/coffee_card.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
@@ -12,11 +13,12 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/screens/cafe/coffee_card.dart';
 
 import 'fap.dart';
 
 class OtherContent extends StatelessWidget {
-  final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
+  final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café", "Kaffekort"];
   final about = ["F-sektionen", "F-appen"];
   final settings = ["Konto"];
   final support = ["Kontakt", "Anonym kontaktsida"];
@@ -32,7 +34,8 @@ class OtherContent extends StatelessWidget {
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
     "Kontakt": ContactPage(),
-    "Anonym kontaktsida": Container()
+    "Anonym kontaktsida": Container(),
+    "Kaffekort": CoffeCardPage(),
   };
 
   @override
