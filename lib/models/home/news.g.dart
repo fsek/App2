@@ -20,7 +20,8 @@ News _$NewsFromJson(Map<String, dynamic> json) {
         .toList()
     ..user = json['user'] == null
         ? null
-        : NewsUser.fromJson(json['user'] as Map<String, dynamic>);
+        : NewsUser.fromJson(json['user'] as Map<String, dynamic>)
+    ..is_pinned = json['is_pinned'] as bool?;
 }
 
 Map<String, dynamic> _$NewsToJson(News instance) => <String, dynamic>{
@@ -31,4 +32,5 @@ Map<String, dynamic> _$NewsToJson(News instance) => <String, dynamic>{
       'image': instance.image,
       'categories': instance.categories,
       'user': instance.user,
+      'is_pinned': instance.is_pinned,
     };

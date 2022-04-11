@@ -1,4 +1,3 @@
-import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:json_annotation/json_annotation.dart';
 

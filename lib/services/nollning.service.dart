@@ -1,5 +1,4 @@
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
-import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
@@ -50,11 +49,5 @@ class NollningService extends AbstractService {
     } on TypeError {
       return {};
     }
-  }
-
-  void testGetThings() async {
-    print("TEST /adventures:");
-    Map json = await AbstractService.get("/adventure_mission_groups");
-    print(json);
   }
 }

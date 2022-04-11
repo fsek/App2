@@ -197,7 +197,7 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget questionInput() {
-    if (event?.question == null) {
+    if (event?.event_signup?.question == null) {
       return Container();
     }
     return Container(
@@ -429,13 +429,13 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
-              Row(
+              Wrap(
                 children: [
-                  Text("  Matpreferenser: "),
+                  Text("  Matpreferenser:"),
                   ...?foodPreferences
                       ?.where((element) => element.isNotEmpty)
-                      .map((foodPreference) => Text(foodPreference + " ")),
-                  Text(foodCustom ?? ""),
+                      .map((foodPreference) => Text("  " + foodPreference)),
+                  Text("  " + (foodCustom ?? "")),
                 ],
               ),
               SizedBox(
@@ -486,7 +486,10 @@ class _EventPageState extends State<EventPage> {
               height: 50,
               width: 200,
               child: InkWell(
-                onTap: () => removeSignup(),
+                onTap: () async {
+                  bool? unenroll = await _confirmUnenroll(context);
+                  if (unenroll ?? false) removeSignup();
+                },
                 child: Card(
                   color: Colors.red[400],
                   child: Align(
@@ -503,6 +506,30 @@ class _EventPageState extends State<EventPage> {
         ],
       );
     }
+  }
+
+  Future<bool?> _confirmUnenroll(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Är du säker på att du vill avanmäla dig?"),
+            actions: [
+              TextButton(
+                child: Text("AVBRYT"),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              TextButton(
+                child: Text("AVANMÄL MIG"),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        });
   }
 
   List<Widget> _signupDetails(String? groupName, String? userType) {
@@ -543,7 +570,7 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
-      Row(
+      Wrap(
         children: [
           RichText(
               text: TextSpan(
