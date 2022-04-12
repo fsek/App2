@@ -1,7 +1,6 @@
 {
-    "helloWorld": "Hej, Värld!",
-    "@helloWorld": {
-      "description": "Hej värld!"
-    },
-    "fGuildName": "F-Sektionen inom TLTH"
+    "fGuildName": "F-sektionen inom TLTH",
+    "language": "Språk",
+    "swedish": "Svenska",
+    "english": "Englska"
 }

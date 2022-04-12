@@ -50,21 +50,28 @@ void main() async {
     '/messages': (context) => MessagesPage(),
     '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
-    '/nollningpage' : (context) => NollningPage(),
+    '/nollningpage': (context) => NollningPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.orange[800],
-    colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.orange[800], secondary: Colors.orangeAccent),
-    textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange))),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange))),
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-      labelStyle: TextStyle(color: Colors.orange),
-      hintStyle: TextStyle(color: Colors.grey[600]),
-    ));
+      brightness: Brightness.light,
+      primaryColor: Colors.orange[800],
+      colorScheme: ThemeData().colorScheme.copyWith(
+          primary: Colors.orange[800], secondary: Colors.orangeAccent),
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.orange))),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.orange))),
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+        labelStyle: TextStyle(color: Colors.orange),
+        hintStyle: TextStyle(color: Colors.grey[600]),
+      ));
   locator<ThemeService>().backgroundColors = [
     Color(0xFFf77e14),
     Color(0xFFe6660b),
@@ -102,9 +109,9 @@ void main() async {
   await Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
-  
-  runZonedGuarded<Future<void>>(() async {
-    initializeDateFormatting().then((_) => runApp(FsekMobileApp()));
+
+  runZonedGuarded<void>(() {
+    runApp(FsekMobileApp());
   }, (Object error, StackTrace stackTrace) {
     // Whenever an error occurs, call the `_reportError` function. This sends
     // Dart errors to the dev console or Sentry depending on the environment.

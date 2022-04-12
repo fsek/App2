@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
+import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
@@ -18,7 +19,7 @@ import 'fap.dart';
 class OtherContent extends StatelessWidget {
   final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
   final about = ["F-sektionen", "F-appen"];
-  final settings = ["Konto"];
+  final settings = ["Konto", "Språk"];
   final support = ["Kontakt", "Anonym kontaktsida"];
   final Map<String, Widget> routeMap = {
     "Sångbok": SongbookPage(),
@@ -31,6 +32,7 @@ class OtherContent extends StatelessWidget {
     "F-sektionen": AboutGuildPage(),
     "F-appen": FapPage(),
     "Konto": SettingsPage(),
+    "Språk": LanguageSettingsPage(),
     "Kontakt": ContactPage(),
     "Anonym kontaktsida": Container()
   };

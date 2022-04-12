@@ -1,7 +1,6 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    },
-    "fGuildName": "F-Guild at TLTH"
+    "fGuildName": "F-Guild at TLTH",
+    "language": "Language",
+    "swedish": "Swedish",
+    "english": "English"
 }

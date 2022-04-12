@@ -23,11 +23,15 @@ import 'util/authentication/authentication_event.dart';
 import 'util/authentication/authentication_state.dart';
 import 'util/errors/error_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FsekMobileApp extends StatefulWidget {
   @override
   _FsekMobileAppState createState() => _FsekMobileAppState();
+  static _FsekMobileAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_FsekMobileAppState>();
 }
 
 class _FsekMobileAppState extends State<FsekMobileApp> {
@@ -35,14 +39,24 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   AuthenticationBloc? _authenticationBloc;
   UserService? _userService;
   TokenStorageWrapper? _storage;
+  Locale? _locale;
+  String? localeName;
   int backgroundIndex = 1;
 
   User? _user;
 
   List<Destination> navbarDestinations = [];
 
+  void setLocale(String locale) {
+    setState(() {
+      this._locale = Locale(locale);
+      localeName = locale;
+    });
+  }
+
   @override
   void initState() {
+    _locale = Locale('sv', '');
     _userService = locator<UserService>();
     //checkApiVersion();
     _storage = locator<TokenStorageWrapper>();
@@ -85,12 +99,16 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
         create: (context) => _authenticationBloc!,
         child: MaterialApp(
           localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
             AppLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: [
             Locale('en', ''),
             Locale('sv', ''),
           ],
+          locale: _locale,
           navigatorKey: locator<NavigationService>().navigatorKey,
           theme: locator<ThemeService>().theme,
           home: Stack(children: [
