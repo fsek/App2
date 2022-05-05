@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/themes.dart';
 
 class ThemeService {
-  ThemeData theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.orange[600],
-  );
-  List<Color> backgroundColors = [
-    Color(0xFFf77e14),
-    Color(0xFFe6660b),
-  ];
+  ThemeData theme = fsekTheme;
+  List<Color> backgroundColors = fsekBackground;
   List<Widget> loginIcon = [
     CircleAvatar(
       radius: 36.0,

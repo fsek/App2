@@ -68,10 +68,12 @@ class ForgottenPassword {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Stack(children: <Widget>[
-                            RaisedButton(
+                            ElevatedButton(
                                 key: Key('submit_btn'),
-                                elevation: 0,
-                                color: Colors.purple,
+                                style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all<double>(0),
+                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.purple)
+                                ),
                                 child: Text(
                                   "SUBMIT",
                                   style: TextStyle(

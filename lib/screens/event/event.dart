@@ -403,7 +403,7 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  onTap: () => launch("https://www.fsektionen.se/kontakter/1"),
+                  onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")), // lmao
                 ),
                 const Divider(),
               ],
@@ -676,7 +676,7 @@ class _EventPageState extends State<EventPage> {
                       style: _htmlStyle,
                       onLinkTap: (String? url, RenderContext context,
                           Map<String, String> attributes, element) {
-                        launch(url!);
+                        launchUrl(Uri.parse(url!));
                       }),
                 ),
                 const Divider(),
@@ -768,9 +768,9 @@ class _EventPageState extends State<EventPage> {
                               color: Colors.blue[300],
                             ),
                           ),
-                          onTap: () => launch(
+                          onTap: () => launchUrl(Uri.parse(
                             "https://www.fsektionen.se/kontakter/" +
-                                (event!.contact?.id ?? 0).toString(),
+                                (event!.contact?.id ?? 0).toString())
                           ),
                         ),
                         const Divider(),

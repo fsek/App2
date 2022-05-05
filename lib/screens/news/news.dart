@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/home/news.dart';
 import 'package:fsek_mobile/util/time.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatelessWidget {
@@ -38,7 +36,7 @@ class NewsPage extends StatelessWidget {
                       style: {"p": Style(lineHeight: LineHeight(1.2))},
                       onLinkTap: (String? url, RenderContext context,
                           Map<String, String> attributes, element) {
-                        launch(url!);
+                        launchUrl(Uri.parse(url!));
                       }),
                 ),
               ),

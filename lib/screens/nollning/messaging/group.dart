@@ -96,7 +96,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                                           style: {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero)},
                                           onLinkTap: (String? url, RenderContext context, 
                                             Map<String,String> attributes, element) {
-                                              launch(url!);
+                                              launchUrl(Uri.parse(url!));
                                             }
                                         )),
                                       Row(children: [Text(message.time!)],mainAxisAlignment: MainAxisAlignment.end,)

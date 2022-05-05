@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
@@ -15,14 +13,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required this.authenticationBloc,
     required this.userService,
-  }) : super(LoginInitial());
+  }) : super(LoginInitial()) {
+    on<LoginButtonPressed>(_onLoginButtonPressed);
+  }
 
-  @override
-  Stream<LoginState> mapEventToState(
-    LoginEvent event,
-  ) async* {
+  void _onLoginButtonPressed(LoginEvent event, Emitter<LoginState> emit) async {
     if (event is LoginButtonPressed) {
-      yield LoginLoading();
+      emit(LoginLoading());
 
       var token;
       try {
@@ -33,20 +30,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
       catch(ex) {
         authenticationBloc.add(AppError(error: ex.toString())); // Make sure we show an error that we cant connect
-        yield LoginInitial();
+        emit(LoginInitial());
         return;   
       }
       
       if(token.error != null && token.error.isNotEmpty) {
-        yield LoginFailure(error: token.error);
+        emit(LoginFailure(error: token.error));
         return;
       }
 
       try {
         authenticationBloc.add(LoggedIn(token: token));
-        yield LoginInitial();
+        emit(LoginInitial());
       } catch (ex) {
-        yield LoginFailure(error: token.toString());
+        emit(LoginFailure(error: token.toString()));
       }
     }
   }

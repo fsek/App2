@@ -63,7 +63,7 @@ class UserService extends AbstractService {
   }
 
   Future<bool> resetPasswordRequest(String email) async {
-    dynamic ret = await http.post(
+    await http.post(
         Uri.parse(
           Environment.API_URL + "/api/auth/password",
         ),

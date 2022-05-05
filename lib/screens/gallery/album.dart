@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/gallery/album.dart';
-import 'package:fsek_mobile/models/gallery/albumImage.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
 
 class AlbumPage extends StatelessWidget {

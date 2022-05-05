@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:fsek_mobile/screens/home/calendar.dart';
+import 'package:fsek_mobile/screens/home/home.dart';
+import 'package:fsek_mobile/screens/notiser/notiser.dart';
+import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
@@ -12,9 +15,8 @@ import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
 
 class ContentWrapper extends StatefulWidget {
-  ContentWrapper(this.navbarDestinations, this.user, this.onNavigation, this.messages) : super();
+  ContentWrapper(this.user, this.onNavigation, this.messages) : super();
 
-  final List<Destination> navbarDestinations;
   final User? user;
   final StreamController? onNavigation;
   final List<String> messages;
@@ -28,18 +30,25 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
   late List<AnimationController> _faders;
   int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final List<Destination> navbarDestinations = [
+    Destination(0, 'Hem', Icons.home, HomePage()),
+    Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
+    Destination(2, 'Notiser', Icons.notifications, NotiserPage()),
+    Destination(3, 'Övrigt', Icons.list, OtherContent()),
+    Destination(4, 'Nollning', Icons.home, NollningPage()),
+  ];
 
   @override
   void initState() {
     //generate animation controllers for all destinations so we can fade them in and out
-    _faders = widget.navbarDestinations.map<AnimationController>((Destination destination) {
+    _faders = this.navbarDestinations.map<AnimationController>((Destination destination) {
       return AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     }).toList();
     //set the fader of the starting page to 1 so it's visible
     _faders[_currentIndex].value = 1.0;
     //generate a list of globalkeys which we shall assign to our destinations
     //Each destination shall have its own key
-    _destinationKeys = List<Key>.generate(widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
+    _destinationKeys = List<Key>.generate(this.navbarDestinations.length, (int index) => GlobalKey()).toList();
 
     super.initState();
   }
@@ -78,7 +87,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             )
           ],
         ));
-    if (_faders[widget.navbarDestinations.length-1].value > 0.2) _header = Container();
+    if (_faders[this.navbarDestinations.length-1].value > 0.2) _header = Container();
 
     return Stack(children: [
       Container(
@@ -94,7 +103,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 _header,
             Expanded(
                 child: Stack(
-                    children: widget.navbarDestinations.map((Destination destination) {
+                    children: this.navbarDestinations.map((Destination destination) {
               final Widget view = FadeTransition(
                 opacity: _faders[destination.index].drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
                 child: KeyedSubtree(
@@ -125,7 +134,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             child: FloatingActionButton(
               onPressed: () {
                 setState(() {
-                  _currentIndex = widget.navbarDestinations.length - 1;
+                  _currentIndex = this.navbarDestinations.length - 1;
                 });
                 locator<ThemeService>().theme = nollning2021theme;
                 locator<ThemeService>().backgroundColors = nollning2021Background;
@@ -150,10 +159,10 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 });
                 locator<ThemeService>().theme = fsekTheme;
                 locator<ThemeService>().backgroundColors = fsekBackground;
-                widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
+                widget.onNavigation!.add(this.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
+                ...this.navbarDestinations.sublist(0, 4).map((Destination destination) {
                   return FsekAppBarItem(iconData: destination.icon, text: destination.title);
                 }).toList()
               ],

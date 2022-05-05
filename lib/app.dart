@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
+import 'package:fsek_mobile/screens/nollning/nollning.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -13,6 +14,12 @@ import 'screens/login/login.dart';
 
 import 'models/destination.dart';
 import 'models/user/user.dart';
+
+import 'screens/nollning/adventure_missions.dart';
+import 'screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/screens/nollning/chant_book.dart';
+import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 
 import 'services/navigation.service.dart';
 import 'services/notifications.service.dart';
@@ -32,7 +39,6 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   PushNotificationsManager? pushManager;
   AuthenticationBloc? _authenticationBloc;
   UserService? _userService;
-  TokenStorageWrapper? _storage;
   int backgroundIndex = 1;
 
   User? _user;
@@ -43,7 +49,6 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   void initState() {
     _userService = locator<UserService>();
     //checkApiVersion();
-    _storage = locator<TokenStorageWrapper>();
     _authenticationBloc = AuthenticationBloc(userService: _userService!);
     _authenticationBloc!.add(AppStarted());
     _authenticationBloc!.stream.listen((AuthenticationState state) async {
@@ -55,17 +60,6 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
             setupPushNotifications();
           }));
         });
-      }
-    });
-    // Change background-listener
-    locator<NavigationService>().onNavigation.stream.listen((event) {
-      for (int i = 0; i < locator<NavigationService>().navbarDestinations.length; i++) {
-        if (locator<NavigationService>().navbarDestinations[i].widget.runtimeType == event) {
-          setState(() {
-            backgroundIndex = i + 1;
-          });
-          break;
-        }
       }
     });
     super.initState();
@@ -95,25 +89,19 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
                 if (state is AuthenticationError) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ErrorPage(authenticationBloc: _authenticationBloc, text: state.error)));
                 }
-
-                // Background-animation stuff
-                if (state is! AuthenticationUserFetched && state is! AuthenticationAuthenticated) {
-                  setState(() {
-                    backgroundIndex = 0;
-                  });
-                } else {
-                  setState(() {
-                    backgroundIndex = 1;
-                  });
-                }
               },
             )
           ]),
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            // put named routes in main.dart please (add hot restart app if running)
-          }..addAll(locator<NavigationService>().routes),
+            '/adventure_missions': (context) => AdventureMissionsPage(),
+            '/emergency_contacts': (context) => EmergencyContactsPage(),
+            '/messages': (context) => MessagesPage(),
+            '/chant_book': (context) => ChantBookPage(),
+            '/song_book': (context) => SongbookPage(),
+            '/nollningpage' : (context) => NollningPage(),
+          },
         ));
   }
 
@@ -122,13 +110,13 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       return LoadingWidget();
     }
     if (state is AuthenticationAuthenticated) {
-      return ContentWrapper(navbarDestinations, null, locator<NavigationService>().onNavigation, []);
+      return ContentWrapper(null, locator<NavigationService>().onNavigation, []);
     }
     if (state is AuthenticationTokenRefreshed) {
-      return ContentWrapper(navbarDestinations, _user, locator<NavigationService>().onNavigation, []);
+      return ContentWrapper(_user, locator<NavigationService>().onNavigation, []);
     }
     if (state is AuthenticationUserFetched) {
-      return ContentWrapper(navbarDestinations, _user, locator<NavigationService>().onNavigation, state.messages);
+      return ContentWrapper(_user, locator<NavigationService>().onNavigation, state.messages);
     }
     if (state is AuthenticationUnauthenticated) {
       return LoginPage(userService: _userService);

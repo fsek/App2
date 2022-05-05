@@ -39,10 +39,12 @@ class _ErrorPageState extends State<ErrorPage> {
                 SizedBox(
                   height: 20,
                 ),
-                FlatButton(
+                TextButton(
                   child:
                       Text("Try again", style: TextStyle(color: Colors.white)),
-                  color: Colors.purple,
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.purple)
+                  ),
                   onPressed: () {
                     locator<NavigationService>().pop();
                     widget.authenticationBloc!.add(AppStarted());

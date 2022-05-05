@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
@@ -220,7 +218,6 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   }
 
   Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
-    final _formKey = GlobalKey<FormState>();
     TextEditingController _textFieldController = TextEditingController();
     int? points;
 

@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/services/nollning.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
