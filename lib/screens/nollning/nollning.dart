@@ -27,7 +27,8 @@ class _NollningPageState extends State<NollningPage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
+          padding: EdgeInsets.fromLTRB(0,
+              MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,6 +45,15 @@ class _NollningPageState extends State<NollningPage> {
                       },
                       child: Image.asset(
                         "assets/img/Uppdrag.png",
+                        height: 100,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/nolleguide');
+                      },
+                      child: Image.asset(
+                        "assets/img/information.png",
                         height: 100,
                       ),
                     ),

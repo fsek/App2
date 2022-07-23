@@ -9,6 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/screens/home/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
@@ -16,6 +19,7 @@ import 'app.dart';
 import 'models/destination.dart';
 import 'screens/nollning/adventure_missions.dart';
 import 'screens/nollning/emergency_contacts.dart';
+import 'screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'screens/nollning/nollning.dart';
@@ -51,6 +55,10 @@ void main() async {
     '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
     '/nollningpage': (context) => NollningPage(),
+    '/nolleguide': (context) => GuidePage(),
+    '/manners': (context) => MannersPage(),
+    '/people': (context) => PeoplePage(),
+    '/wordlist': (context) => WordListPage()
   };
 
   locator<ThemeService>().theme = ThemeData(
