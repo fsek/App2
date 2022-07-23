@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fsek_mobile/app.dart';
@@ -15,7 +16,6 @@ class LanguageSettingsState<LanguageSettingsPage> extends State {
 
   void initState() {
     super.initState();
-    _locale = FsekMobileApp.of(context)?.localeName;
   }
 
   void _setLocale(BuildContext context, String? locale) {
@@ -29,6 +29,7 @@ class LanguageSettingsState<LanguageSettingsPage> extends State {
 
   @override
   Widget build(BuildContext context) {
+    _locale = Localizations.localeOf(context).toString();
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.language),
@@ -36,13 +37,13 @@ class LanguageSettingsState<LanguageSettingsPage> extends State {
       body: Column(
         children: [
           RadioListTile<String>(
-            title: Text(AppLocalizations.of(context)!.swedish),
+            title: Text("Svenska"),
             value: 'sv',
             groupValue: _locale,
             onChanged: (value) => _setLocale(context, value),
           ),
           RadioListTile<String>(
-            title: Text(AppLocalizations.of(context)!.english),
+            title: Text("English"),
             value: 'en',
             groupValue: _locale,
             onChanged: (value) => _setLocale(context, value),
