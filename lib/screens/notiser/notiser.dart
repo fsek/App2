@@ -8,6 +8,7 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NotiserPage extends StatefulWidget {
   _NotiserPageState createState() => _NotiserPageState();
 }
@@ -27,6 +28,7 @@ class _NotiserPageState extends State<NotiserPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return Container(
       child: PagedListView<int, Notis>(
         pagingController: _pagingController,
@@ -47,12 +49,12 @@ class _NotiserPageState extends State<NotiserPage> {
                     ),
                     SizedBox(height: 4),
                     notis.data?["extra"] != null ? Text(notis.data!["extra"]!) : Container(),
-                    Text("Skickades " + (DateFormat('EEE d LLL y kk:mm').format(notis.created_at!))),
+                    Text(t.notificationsSent + (DateFormat('EEE d LLL y kk:mm').format(notis.created_at!))),
                   ]),
                 ),
               ));
         }, noItemsFoundIndicatorBuilder: (context) {
-          return Container(height: 400, child: Center(child: Text("Inga notiser tillgängliga", style: Theme.of(context).textTheme.headline6)));
+          return Container(height: 400, child: Center(child: Text(t.notificationsNone, style: Theme.of(context).textTheme.headline6)));
         }),
       ),
     );

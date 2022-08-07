@@ -81,5 +81,8 @@
     "otherSettings": "Settings",
     "otherLogOut": "Log out",
     "otherLogOutConfirm": "Are you sure you want to log out?",
-    "otherCancel": "Cancel"
+    "otherCancel": "Cancel",
+
+    "notificationsSent": "Sent",
+    "notificationsNone": "No notifications available"
 }   

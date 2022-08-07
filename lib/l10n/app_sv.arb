@@ -82,5 +82,8 @@
     "otherSettings": "Inställningar",
     "otherLogOut": "Logga ut",
     "otherLogOutConfirm": "Är du säker på att du vill logga ut?",
-    "otherCancel": "Avbryt"
+    "otherCancel": "Avbryt",
+
+    "notificationsSent": "Skickades",
+    "notificationsNone": "Inga notiser tillgängliga"
 }
