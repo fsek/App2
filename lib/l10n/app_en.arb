@@ -3,6 +3,7 @@
     "language": "Language",
     "swedish": "Swedish",
     "english": "English",
+
     "eventPriority": "Priority:",
     "eventOther": "Other",
     "eventChooseGroup": "Choose group:",
@@ -35,5 +36,29 @@
     "eventFoodServed": "  Food served",
     "eventAlcoholServed": "  Alocohol served",
     "eventHasSignup": "  Sign-up required",
-    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:"
-}
+    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
+
+    "settingsSettings": "Settings",
+    "settingsSave": "Save",
+    "settingsProgramme": "Programme",
+    "settingsStartYear": "Starting year",
+    "settingsFirstName": "First name",
+    "settingsLastName": "Last name",
+    "settingsParagraph": "The below fields are used only for guild elections, booking the guild car and for working in Hilbert Café.\nCan be seen by the board, admins and people responsable for elections, booking and the café.",
+    "settingsPhoneNumber": "Phone number",
+    "settingsShowPhoneNumber": "Show phone number to group members",
+    "settingsFoodPrefs": "Food preferences",
+    "settingsOther": "Other",
+    "settingsFoodPrefsPrivacy": "The food preferences can only be seen by those\nwho are responsible for the events you have signed up for.",
+    "settingsNotificationsSignUp": "Notifications for event sign-ups",
+    "settingsNotificationsSignUpClosing": "Notifications for event sign-ups close",
+    "settingsNotificationsSignUpOpening": "Notifications when event sign-ups open",
+    "settingsMemberSince": "Member since",
+    "settingsOtherFoodPrefs": "Other food preferences / allergies",
+    "settingsSaving": "Saving",
+    "settingsWarning": "Warning",
+    "settingsWarningText": "The changes could not be saved ):\n Check your connection and the obligatory fields",
+    "settingsUnsaved": "Unsaved changes",
+    "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
+    "settingsDiscard": "Discard"
+}   
