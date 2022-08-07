@@ -35,5 +35,51 @@
     "eventFoodServed": "  Food served",
     "eventAlcoholServed": "  Alocohol served",
     "eventHasSignup": "  Sign-up required",
-    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:"
+    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
+    
+    "albumPhotographers": "Photographers: ",
+    "albumNoPhotographers": "No photographers",
+
+    "galleryTitle": "Image gallery",
+    "galleryOf": "of",
+
+    "homeNoNews": "No news available",
+
+    "groupWriteProtected": "Chat is write-protected",
+    "groupWhatToDo": "What do you want to do with the message?",
+    "groupEdit": "Edit",
+    "groupSave": "Spara",
+    "groupRemove": "Remove",
+
+    "messagesMessages": "Messages",
+
+    
+    "nolleguideWeAtFsek": "We at F-sek",
+    "nolleguideEtiquette": "Etiquette",
+    "nolleguideWordlist": "Wordlist",
+
+    "introductionLocked": "Locked",
+    "introductionInterrupt": "Cancel/\nRemove",
+    "introductionApprove": "Approve",
+    "introductionError": "Something went wrong. Try again later.",
+    "introductionPoints": "Points?",
+    "introductionInterrupt2": "Cancel",
+    "introductionDestroyMission": "Are you sure that you want to destroy the mission?",
+    "introductionInterrupt3": "CANCEL",
+    "introductionDestroy": "DESTROY",
+    "introductionMissions": "MISSIONS",
+    "introductionMyGroup": "MY GROUP",
+    "introductionAdventureMissions": "Adventure missions",
+    "introductionGuildChants": "Guild chants",
+    "introductionSearch": "Search",
+    "introductionNoMatches": "No matches found :^(",
+    "introductionEntireSongBook": "The entire song book",
+    "introductionCompletedMissions": "completed missions",
+    "introductionPlacement": "Placement",
+    "introductionGroupName": "Group name",
+    "introductionPoints2": "Points",
+    "introductionMaxPoints": "Max points",
+    "introductionCompleted": "Completed",
+    "introductionPendingApproval": "Pending aproval",
+    "introductionNotCompleted": "Not completed"
 }

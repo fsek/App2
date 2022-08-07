@@ -35,5 +35,53 @@
     "eventFoodServed": "  Mat serveras",
     "eventAlcoholServed": "  Alokohol serveras",
     "eventHasSignup": "  Kräver anmälan",
-    "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:"
+    "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
+    
+    "albumPhotographers": "Fotografer: ",
+    "albumNoPhotographers": "Inga fotografer",
+
+    "galleryTitle": "Bildgalleri",
+    "galleryImage": "Bild",
+    "galleryOf": "av",
+    
+    "homeNoNews": "Inga nyheter tillgängliga",
+
+    "groupWriteProtected": "Chatten är skrivskyddad",
+    "groupWhatToDo": "Vad vill du göra med meddelandet?",
+    "groupEdit": "Redigera",
+    "groupSave": "Spara",
+    "groupRemove": "Ta bort",
+
+    "messagesMessages": "Meddelanden",
+
+    "nolleguideWeAtFsek": "Vi på F-sek",
+    "nolleguideEtiquette": "Vett & Etikett",
+    "nolleguideWordlist": "Ordlista",
+
+    "introductionLocked": "Låst",
+    "introductionInterrupt": "Avbryt/\nTa bort",
+    "introductionApprove": "Godkänn",
+    "introductionError": "Oj, nåt gick fel. Försök igen senare.",
+    "introductionPoints": "Poäng?",
+    "introductionInterrupt2": "Abryt",
+    "introductionDestroyMission": "Säkert på att du vill förinta uppdraget?",
+    "introductionInterrupt3": "AVBRYT",
+    "introductionDestroy": "FÖRINTA",
+    "introductionMissions": "UPPDRAG",
+    "introductionMyGroup": "MIN GRUPP",
+    "introductionAdventureMissions": "Äventyrsuppdrag",
+    "introductionGuildChants": "Sektionsramsor",
+    "introductionSearch": "Sök",
+    "introductionNoMatches": "Finns inga matchningar :^(",
+    "introductionEntireSongBook": "Hela Sångboken",
+    "introductionCompletedMissions": "avklarade uppdrag",
+    "introductionPlacement": "Placering",
+    "introductionGroupName": "Gruppnamn",
+    "introductionPoints2": "Poäng",
+    "introductionMaxPoints": "Maxpoäng",
+    "introductionCompleted": "Avklarat",
+    "introductionPendingApproval": "Väntar på godkännande",
+    "introductionNotCompleted": "Ej avklarat"
+
+
 }

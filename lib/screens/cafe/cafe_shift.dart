@@ -4,6 +4,7 @@ import 'package:fsek_mobile/models/cafe/cafe_user.dart';
 import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CafeShiftPage extends StatefulWidget {
   final int shiftId;
