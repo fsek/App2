@@ -61,5 +61,20 @@
     "settingsWarningText": "Ändringarna kunde inte sparas ):\nKolla din täckning och de obligatiska fälten.",
     "settingsUnsaved": "Osparade ändringar",
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
-    "settingsDiscard": "Släng"
+    "settingsDiscard": "Släng",
+
+    "otherSongbook": "Sångbok",
+    "otherGallery": "Bildgalleri",
+    "otherCafe": "Hilbert Café",
+    "otherAboutGuild": "F-sektionen",
+    "otherFap": "F-appen",
+    "otherAccount": "Konto",
+    "otherLanguage": "Språk",
+    "otherContact": "Kontakt",
+    "otherAnon": "Anonym kontaktsida",
+    "otherAbout": "Om",
+    "otherSettings": "Inställningar",
+    "otherLogOut": "Logga ut",
+    "otherLogOutConfirm": "Är du säker på att du vill logga ut?",
+    "otherCancel": "Avbryt"
 }

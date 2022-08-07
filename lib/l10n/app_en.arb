@@ -60,5 +60,20 @@
     "settingsWarningText": "The changes could not be saved ):\n Check your connection and the obligatory fields",
     "settingsUnsaved": "Unsaved changes",
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
-    "settingsDiscard": "Discard"
+    "settingsDiscard": "Discard",
+
+    "otherSongbook": "Songbook",
+    "otherGallery": "Picture Gallery",
+    "otherCafe": "Hilbert Café",
+    "otherAboutGuild": "The F guild",
+    "otherFap": "The F-app",
+    "otherAccount": "Account",
+    "otherLanguage": "Language",
+    "otherContact": "Contact",
+    "otherAnon": "Anonymous contact page",
+    "otherAbout": "About",
+    "otherSettings": "Settings",
+    "otherLogOut": "Log out",
+    "otherLogOutConfirm": "Are you sure you want to log out?",
+    "otherCancel": "Cancel"
 }   
