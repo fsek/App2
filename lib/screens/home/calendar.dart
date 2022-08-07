@@ -29,7 +29,10 @@ class _CalendarState extends State<Calendar> {
   }
 
   void openEventPage(CalendarEvent event) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id ?? -1)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -37,6 +40,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   Widget createEventCard(CalendarEvent event) {
+    String locale = Localizations.localeOf(context).toString();
     return Container(
       child: Card(
         child: InkWell(
@@ -66,11 +70,14 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(
+                              event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm")
+                              .format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", "sv_SE").format(event.start?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale)
+                              .format(event.start?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -109,6 +116,12 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).toString();
+    if (locale == "sv") {
+      DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay);
+    } else {
+      DateFormat("MMMMEEEEd", "en_US").format(_selectedDay);
+    }
     return Container(
       height: MediaQuery.of(context).size.height,
       color: Colors.white,
@@ -120,7 +133,7 @@ class _CalendarState extends State<Calendar> {
               children: [
                 TableCalendar(
                   availableGestures: AvailableGestures.horizontalSwipe,
-                  locale: "sv_SE",
+                  locale: locale,
                   startingDayOfWeek: StartingDayOfWeek.monday,
                   firstDay: DateTime.now().subtract(Duration(days: 365 * 5)),
                   lastDay: DateTime.now().add(Duration(days: 365 * 5)),
@@ -135,7 +148,8 @@ class _CalendarState extends State<Calendar> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay = focusedDay; // update `_focusedDay` here as well
+                      _focusedDay =
+                          focusedDay; // update `_focusedDay` here as well
                       _selectedEvents = _getEventsForDay(selectedDay);
                     });
                   },
@@ -153,7 +167,7 @@ class _CalendarState extends State<Calendar> {
                   color: Colors.orange[600],
                   child: Text(
                     /* It's too late to write pretty code, take this formatting space*/
-                    "  " + DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay),
+                    "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,

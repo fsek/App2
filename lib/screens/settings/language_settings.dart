@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/services/abstract.service.dart';
 
 class LanguageSettingsPage extends StatefulWidget {
   LanguageSettingsPage({Key? key}) : super(key: key);
@@ -23,6 +24,11 @@ class LanguageSettingsState<LanguageSettingsPage> extends State {
       () {
         this._locale = locale!;
         FsekMobileApp.of(context)!.setLocale(locale);
+        if (_locale == "en") {
+          AbstractService.updateApiUrl(false);
+        } else {
+          AbstractService.updateApiUrl(true);
+        }
       },
     );
   }
