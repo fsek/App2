@@ -24,7 +24,7 @@ class ImageBrowserPage extends StatelessWidget {
               minScale: 0.5,
               maxScale: 4,
               child: Image.network(
-                "${Environment.API_URL}${album.images![index].file!.large!}",
+                "${Environment.API_URL}${album.images![index].file!.large!["url"]!}",
                 loadingBuilder: (context, widget, loadingProgress) {
                   if(loadingProgress == null)
                     return widget;
