@@ -4,6 +4,8 @@ import 'package:fsek_mobile/models/cafe/cafe_user.dart';
 import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CafeShiftPage extends StatefulWidget {
   final int shiftId;
@@ -67,30 +69,31 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
   }
 
   Future<void> successSignup() {
-    return generalPopup("Du är nu uppskriven på passet!",
-        "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.");
+    var t = AppLocalizations.of(context)!; 
+    return generalPopup(t.cafeShiftSignup, t.cafeShiftSignupText);
   }
 
   Future<void> failSignup() {
-    return generalPopup("Något gick fel!",
-        "Du kanske redan är anmäld på ett pass vid samma tid?");
+    var t = AppLocalizations.of(context)!; 
+    return generalPopup(t.cafeShiftFail, t.cafeShiftFailSignupText);
   }
 
   Future<void> successUnsign() {
-    return generalPopup("Du är nu avanmäld från passet!",
-        "Tipsa en kompis om att anmäla sig på passet istället!");
+    var t = AppLocalizations.of(context)!; 
+    return generalPopup(t.cafeShiftSuccessUnsign, t.cafeShiftSuccessUnsignText); 
   }
 
   Future<void> failUnsign() {
-    return generalPopup(
-        "Något gick fel!", "Det gick inte att avanmäla dig från passet.");
+    var t = AppLocalizations.of(context)!; 
+    return generalPopup(t.cafeShiftFail, t.cafeShiftFailUnsignText); 
   }
 
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!; 
     if (shift == null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Cafépass'),
+          title: Text(t.cafeShiftCafeShift),
         ),
       );
     }
@@ -100,11 +103,11 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
     String headerText = "";
     TextButton? signupButton;
     if (shift!.isme ?? false) {
-      headerText = "Du är anmäld ";
+      headerText = t.cafeShiftSignedUp;
       signupButton = TextButton(
         onPressed: () => unsign(shift!),
         child: Text(
-          "Avanmäl mig :((",
+          t.cafeShiftRemoveSignup,
           style: TextStyle(fontSize: 32),
         ),
         style: ButtonStyle(
@@ -114,11 +117,11 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
       );
     } else {
       // if someone else is on the shift, or if it is an empty shift
-      headerText = (user == null) ? "Anmälan " : "${user!.name}\när anmäld ";
+      headerText = (user == null) ? t.cafeShiftSignup2 : "${user!.name}\n${t.cafeShiftIsSignedUp} ";
       signupButton = (user == null)
           ? TextButton(
               onPressed: () => signup(shift!),
-              child: Text("Anmäl mig :))", style: TextStyle(fontSize: 32)),
+              child: Text(t.cafeShiftSignMeUp, style: TextStyle(fontSize: 32)),
               style: ButtonStyle(
                 fixedSize: MaterialStateProperty.all(Size(300, 75)),
               ),
@@ -126,10 +129,10 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
           : null; // if another person is on the shift, don't show a signup button
     }
     headerText +=
-        "till pass\n${Time.format(shift!.start ?? DateTime.now(), "%D")} kl ${shift!.duration}";
+        "${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cafépass'),
+        title: Text(t.cafeShiftCafeShift),
       ),
       body: Center(
         child: Column(

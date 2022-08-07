@@ -25,7 +25,7 @@ class LanguageSettingsState<LanguageSettingsPage> extends State {
         this._locale = locale!;
         FsekMobileApp.of(context)!.setLocale(locale);
         if (_locale == "en") {
-          AbstractService.updateApiUrl(false);
+          AbstractService.updateApiUrl(true);
         } else {
           AbstractService.updateApiUrl(true);
         }
