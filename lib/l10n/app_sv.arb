@@ -4,6 +4,12 @@
     "swedish": "Svenska",
     "english": "Engelska",
 
+    "home" : "Hem",
+    "calendar" : "Kalender",
+    "notifications" : "Notiser",
+    "other" : "Övrigt",
+    "introduction" : "Nollning",
+
     "eventPriority": "Prioritering:",
     "eventOther": "Övrigt",
     "eventChooseGroup": "Välj grupp:",

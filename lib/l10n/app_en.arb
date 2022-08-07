@@ -3,6 +3,12 @@
     "language": "Language",
     "swedish": "Swedish",
     "english": "English",
+    
+    "home" : "Home",
+    "calendar" : "Calendar",
+    "notifications" : "Notifications",
+    "other" : "Other",
+    "introduction" : "Nollning",
 
     "eventPriority": "Priority:",
     "eventOther": "Other",
