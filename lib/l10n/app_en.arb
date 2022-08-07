@@ -33,6 +33,7 @@
     "eventPrice": "Price: ",
     "eventCostsMoney": "  Costs money",
     "eventFoodServed": "  Food served",
-    "eventAlcohol": "  Alocohol served",
+    "eventAlcoholServed": "  Alocohol served",
     "eventHasSignup": "  Sign-up required",
+    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:"
 }

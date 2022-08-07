@@ -25,5 +25,15 @@
     "eventCancel": "AVBRYT",
     "eventConfirmRemoveSignUp": "AVANMÄL MIG",
     "eventGroup": "Grupp :",
-    "eventPriority2": "Prioritet: "
+    "eventPriority2": "Prioritet: ",
+    "eventTitle": "Evenemang",
+    "eventNoTitle": "ingen titel",
+    "eventNoDescription": "ingen beskrivning",
+    "eventDressCode": "Klädkod: ",
+    "eventPrice": "Pris: ",
+    "eventCostsMoney": "  Kostar pengar",
+    "eventFoodServed": "  Mat serveras",
+    "eventAlcoholServed": "  Alokohol serveras",
+    "eventHasSignup": "  Kräver anmälan",
+    "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:"
 }

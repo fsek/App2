@@ -615,14 +615,14 @@ class _EventPageState extends State<EventPage> {
     if (event == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(t.eventTitle),
+          title: Text(t.eventTitle),
         ),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(t.eventTitle),
+        title: Text(t.eventTitle),
       ),
       body: Container(
         width: double.infinity,
@@ -768,7 +768,7 @@ class _EventPageState extends State<EventPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Vid frågor om eventet, kontakta eventansvarig:",
+                          t.eventInCaseOfQuestions,
                         ),
                         InkWell(
                           child: new Text(
