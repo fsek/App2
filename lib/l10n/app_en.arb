@@ -84,5 +84,17 @@
     "otherCancel": "Cancel",
 
     "notificationsSent": "Sent",
-    "notificationsNone": "No notifications available"
+    "notificationsNone": "No notifications available",
+
+    "contactContact": "Contact",
+    "contactPerson": "Contact to position in the guild",
+    "contactDescription": "Description",
+    "contactInfo": "Contact information",
+    "contactHeldBy": "The position is held by: ",
+    "contactMessage": "Message",
+    "contactWriteMessage": "Write your message here",
+    "contactSend": "Send",
+    "contactHasBeenSent": "Your message has been sent! :D",
+    "contactHasNotBeenSent": "Your message has not been sent ):\nCheck your connection and try again!.",
+    "contactEmpty": "Your message is emtpy. Nothing has been sent."
 }   

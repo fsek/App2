@@ -85,5 +85,17 @@
     "otherCancel": "Avbryt",
 
     "notificationsSent": "Skickades",
-    "notificationsNone": "Inga notiser tillgängliga"
+    "notificationsNone": "Inga notiser tillgängliga",
+
+    "contactContact": "Kontakt",
+    "contactPerson": "Kontakt till postinnehavare",
+    "contactDescription": "Beskrivning",
+    "contactInfo": "Kontaktinformation",
+    "contactHeldBy": "Posten innehavs av: ",
+    "contactMessage": "Meddelande",
+    "contactWriteMessage": "Skriv ditt meddelande här",
+    "contactSend": "Skicka",
+    "contactHasBeenSent": "Ditt meddelande har skickas! :D",
+    "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
+    "contactEmpty": "Ditt meddelande är tomt. Inget har skickats."
 }
