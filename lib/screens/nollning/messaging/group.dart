@@ -37,9 +37,8 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    var t = AppLocalizations.of(context)!;
     _controller = TextEditingController(
-        text: widget.group.group_type == "info" ? t.groupWriteProtected : "");
+        text: widget.group.group_type == "info" ? "" : "");
     _pagingController.addPageRequestListener((pageKey) {
       loadMoreMessages(widget.group.id!, pageKey);
     });
@@ -52,6 +51,16 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    String groupWriteProtectedText = t.groupWriteProtected;
+    setState(() {
+      _controller = TextEditingController(
+          text:
+              widget.group.group_type == "info" ? groupWriteProtectedText : "");
+      _pagingController.addPageRequestListener((pageKey) {
+        loadMoreMessages(widget.group.id!, pageKey);
+      });
+    });
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.group.name!),
