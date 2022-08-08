@@ -143,7 +143,21 @@
     "introductionMaxPoints": "Maxpoäng",
     "introductionCompleted": "Avklarat",
     "introductionPendingApproval": "Väntar på godkännande",
-    "introductionNotCompleted": "Ej avklarat"
+    "introductionNotCompleted": "Ej avklarat",
 
-
+    "cafeShiftSignup": "Du är nu uppskriven på passet!",
+    "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
+    "cafeShiftFail": "Något gick fel!",
+    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid", 
+    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!", 
+    "cafeShiftSuccessUnsignText": "Tipsa en kompis om att anmäla sig på passet istället!",
+    "cafeShiftFailUnsignText": "Det gick inte att avanmäla dig från passet.",
+    "cafeShiftCafeShift": "Cafépass",
+    "cafeShiftSignedUp": "Du är anmäld ",
+    "cafeShiftRemoveSignup": "Avanmäl mig :((",
+    "cafeShiftSignup2": "Anmälan ",
+    "cafeShiftIsSignedUp": "är anmäld",
+    "cafeShiftSignMeUp": "Anmäl mig :))", 
+    "cafeShiftForShift": "till pass",
+    "cafeShiftClock": " kl "
 }
