@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:ui' as ui;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PeoplePage extends StatefulWidget {
   @override
@@ -87,9 +88,10 @@ class _PeoplePageState extends State<PeoplePage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Vi på F-sek"),
+        title: Text(t.nolleguideWeAtFsek),
       ),
       body: Container(
         child: Column(

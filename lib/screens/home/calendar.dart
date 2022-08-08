@@ -53,7 +53,7 @@ class _CalendarState extends State<Calendar> {
                 Container(
                   margin: EdgeInsets.only(bottom: 7),
                   child: Text(
-                    event.title ?? "ingen titel",
+                    event.title ?? "no title",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.orange[600],
