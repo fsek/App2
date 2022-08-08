@@ -83,7 +83,7 @@ class AlbumPage extends StatelessWidget {
     for (int i = 0; i < album.images!.length; i++) {
       result.add(Ink.image(
         image: NetworkImage(
-            "${Environment.API_URL}${album.images![i].file!.thumb!}"),
+            "${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
         fit: BoxFit.cover,
         child: InkWell(
           onTap: () => openImageBrowser(context, i),

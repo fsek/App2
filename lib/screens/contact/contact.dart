@@ -5,6 +5,8 @@ import 'package:fsek_mobile/services/contact.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ContactPage extends StatefulWidget {
   _ContactPageState createState() => _ContactPageState();
 }
@@ -30,10 +32,11 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     if (contacts!.isEmpty) {
       return Scaffold(
           appBar: AppBar(
-              title: Text("Kontakt",
+              title: Text(t.contactContact,
                   style: Theme.of(context).textTheme.headline5)),
           body: Center(
               child: CircularProgressIndicator(color: Colors.orange[600])));
@@ -41,7 +44,7 @@ class _ContactPageState extends State<ContactPage> {
     return Scaffold(
         appBar: AppBar(
             title:
-                Text("Kontakt", style: Theme.of(context).textTheme.headline5)),
+                Text(t.contactContact, style: Theme.of(context).textTheme.headline5)),
         //Bilder och skit kommer senare
         body: SingleChildScrollView(
           child: Column(
@@ -84,7 +87,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 8),
-                    child: Text("Kontktperson",
+                    child: Text(t.contactPerson,
                         style: Theme.of(context).textTheme.subtitle2),
                   )),
               Padding(
@@ -108,7 +111,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
-                    child: Text("Beskrivning",
+                    child: Text(t.contactDescription,
                         style: Theme.of(context).textTheme.subtitle2),
                   )),
               Padding(
@@ -121,7 +124,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
-                    child: Text("Kontaktinformation",
+                    child: Text(t.contactInfo,
                         style: Theme.of(context).textTheme.subtitle2),
                   )),
               Padding(
@@ -132,7 +135,7 @@ class _ContactPageState extends State<ContactPage> {
                     RichText(
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
-                          text: "E-post: ",
+                          text: "Email: ",
                           style: Theme.of(context).textTheme.bodyText2),
                       TextSpan(
                           text: currentContact!.email!,
@@ -144,7 +147,7 @@ class _ContactPageState extends State<ContactPage> {
                     RichText(
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
-                          text: "Posten innehavs av: ",
+                          text: t.contactHeldBy,
                           style: Theme.of(context).textTheme.bodyText2),
                       TextSpan(
                           text: _getPostUserNames(),
@@ -158,7 +161,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
-                    child: Text("Meddelande",
+                    child: Text(t.contactMessage,
                         style: Theme.of(context).textTheme.subtitle2),
                   )),
               SizedBox(
@@ -170,7 +173,7 @@ class _ContactPageState extends State<ContactPage> {
                     controller: controller,
                     maxLines: 4,
                     decoration:
-                        InputDecoration(hintText: "Skriv ditt meddelande här"),
+                        InputDecoration(hintText: t.contactWriteMessage),
                     onChanged: (input) => localMessage = input,
                   ),
                 ),
@@ -188,7 +191,7 @@ class _ContactPageState extends State<ContactPage> {
                     child: InkWell(
                         child: Center(
                             child: Text(
-                          "Skicka",
+                          t.contactSend,
                           style: Theme.of(context).textTheme.button,
                         )),
                         onTap: () => _sendMessage(localMessage)),
@@ -233,19 +236,19 @@ class _ContactPageState extends State<ContactPage> {
     });
   }
   void _successPopup(){
+    var t = AppLocalizations.of(context)!;
     FocusScope.of(context).unfocus();
-    showDialog(context: context, builder: _popUp("Yay!!", "Ditt meddelande har "
-    "skickas! :D"));
+    showDialog(context: context, builder: _popUp("Yay!!", t.contactHasBeenSent));
   }
   void _failPopup(){
+    var t = AppLocalizations.of(context)!;
     FocusScope.of(context).unfocus(); 
-    showDialog(context: context, builder: _popUp("Åh nej!", "Ditt meddelande kunde"
-    "inte skickas ): Kolla om du har täckning och försök igen.")); 
+    showDialog(context: context, builder: _popUp("Oh no!", t.contactHasNotBeenSent)); 
   }
   void _emptyPopup(){
+    var t = AppLocalizations.of(context)!;
     FocusScope.of(context).unfocus(); 
-    showDialog(context: context, builder: _popUp("Hmmm", "Ditt meddelande är "
-    "tomt. Inget har skickats.")); 
+    showDialog(context: context, builder: _popUp("Hmmm", t.contactEmpty)); 
   }
 
   Widget Function(BuildContext) _popUp(String title, String text) {

@@ -41,11 +41,11 @@ void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
-    Destination(0, 'Hem', Icons.home, HomePage()),
-    Destination(1, 'Kalender', Icons.calendar_today, Calendar()),
-    Destination(2, 'Notiser', Icons.notifications, NotiserPage()),
-    Destination(3, 'Övrigt', Icons.list, OtherContent()),
-    Destination(4, 'Nollning', Icons.home, NollningPage()),
+    Destination(0, Icons.home, HomePage()),
+    Destination(1, Icons.calendar_today, Calendar()),
+    Destination(2, Icons.notifications, NotiserPage()),
+    Destination(3, Icons.list, OtherContent()),
+    Destination(4, Icons.home, NollningPage()),
   ];
   route.navbarDestinations = navbarDestinations;
   route.routes = {
