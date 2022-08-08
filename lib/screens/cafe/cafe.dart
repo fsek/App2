@@ -108,6 +108,7 @@ class _CafePageState extends State<CafePage> {
 
   @override
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).toString();
     return Scaffold(
       appBar: AppBar(
         title: Text("Hilbert Café"),
@@ -118,7 +119,7 @@ class _CafePageState extends State<CafePage> {
           children: [
             TableCalendar(
               availableGestures: AvailableGestures.horizontalSwipe,
-              locale: "sv_SE",
+              locale: locale,
               startingDayOfWeek: StartingDayOfWeek.monday,
               firstDay: DateTime.now().subtract(Duration(days: 365 * 5)),
               lastDay: DateTime.now().add(Duration(days: 365 * 5)),
@@ -149,7 +150,7 @@ class _CafePageState extends State<CafePage> {
               color: Colors.orange[600],
               child: Text(
                 /* It's too late to write pretty code, take this formatting space*/
-                "  " + DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay),
+                "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white,
