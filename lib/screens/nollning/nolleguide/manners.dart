@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 
 import '../article_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MannersPage extends StatefulWidget {
   @override

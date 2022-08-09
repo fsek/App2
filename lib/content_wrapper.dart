@@ -59,6 +59,15 @@ class _ContentWrapperState extends State<ContentWrapper>
 
   @override
   Widget build(BuildContext context) {
+    //index to string
+    var t = AppLocalizations.of(context)!;
+    Map<int, String> indexToTitle = {
+      0 : t.home,
+      1 : t.calendar,
+      2 : t.notifications,
+      3 : t.other,
+      4 : t.introduction
+    }; 
     // Shows state messages
     for (String message in widget.messages) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -173,7 +182,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                     .sublist(0, 4)
                     .map((Destination destination) {
                   return FsekAppBarItem(
-                      iconData: destination.icon, text: destination.title);
+                      iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],
               selectedColor: Colors.white,

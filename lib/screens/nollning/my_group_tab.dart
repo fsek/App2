@@ -4,6 +4,7 @@ import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyGroupTab extends StatefulWidget {
   @override
@@ -51,10 +52,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
       if (totalMissionsList!.elementAt(i) == 0) {
         progressList!.add(0);
       } else {
-        progressList!.add(acceptedMissionsList!.elementAt(i) / totalMissionsList!.elementAt(i));
+        progressList!.add(acceptedMissionsList!.elementAt(i) /
+            totalMissionsList!.elementAt(i));
       }
     }
     double circleSize = MediaQuery.of(context).size.height / 5.5;
+    var t = AppLocalizations.of(context)!;
     return Stack(
       children: [
         Image.asset(
@@ -66,7 +69,8 @@ class _MyGroupTabState extends State<MyGroupTab> {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 35),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height / 35),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -77,7 +81,8 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       minHeight: 10,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8, right: 10, left: 10),
+                      padding:
+                          const EdgeInsets.only(top: 8, right: 10, left: 10),
                       child: Text(
                         adventureData?.group_name ?? "",
                         textAlign: TextAlign.center,
@@ -91,7 +96,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        "$totalPoints poäng",
+                        "$totalPoints ${t.introductionPoints2}",
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 35,
                           color: Colors.white,
@@ -103,21 +108,41 @@ class _MyGroupTabState extends State<MyGroupTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(imgPath: "assets/img/vecka_0.png", progress: progressList!.elementAt(0), borderColor: Colors.purple[900]!, size: circleSize),
-                    _weekProgressCircle(imgPath: "assets/img/vecka_1.png", progress: progressList!.elementAt(1), borderColor: Colors.blue[900]!, size: circleSize),
+                    _weekProgressCircle(
+                        imgPath: "assets/img/vecka_0.png",
+                        progress: progressList!.elementAt(0),
+                        borderColor: Colors.purple[900]!,
+                        size: circleSize),
+                    _weekProgressCircle(
+                        imgPath: "assets/img/vecka_1.png",
+                        progress: progressList!.elementAt(1),
+                        borderColor: Colors.blue[900]!,
+                        size: circleSize),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(imgPath: "assets/img/vecka_4.png", progress: progressList!.elementAt(4), borderColor: Colors.orange, size: circleSize),
+                    _weekProgressCircle(
+                        imgPath: "assets/img/vecka_4.png",
+                        progress: progressList!.elementAt(4),
+                        borderColor: Colors.orange,
+                        size: circleSize),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _weekProgressCircle(imgPath: "assets/img/vecka_2.png", progress: progressList!.elementAt(2), borderColor: Colors.red[900]!, size: circleSize),
-                    _weekProgressCircle(imgPath: "assets/img/vecka_3.png", progress: progressList!.elementAt(3), borderColor: Colors.green[900]!, size: circleSize),
+                    _weekProgressCircle(
+                        imgPath: "assets/img/vecka_2.png",
+                        progress: progressList!.elementAt(2),
+                        borderColor: Colors.red[900]!,
+                        size: circleSize),
+                    _weekProgressCircle(
+                        imgPath: "assets/img/vecka_3.png",
+                        progress: progressList!.elementAt(3),
+                        borderColor: Colors.green[900]!,
+                        size: circleSize),
                   ],
                 ),
               ],
@@ -128,7 +153,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
     );
   }
 
-  Widget _weekProgressCircle({required String imgPath, required double progress, Color borderColor = Colors.black, bool active = true, double size = 150}) {
+  Widget _weekProgressCircle(
+      {required String imgPath,
+      required double progress,
+      Color borderColor = Colors.black,
+      bool active = true,
+      double size = 150}) {
     return Stack(alignment: Alignment.center, children: [
       Container(
         foregroundDecoration: BoxDecoration(

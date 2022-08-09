@@ -5,6 +5,8 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:intl/intl.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -32,8 +34,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     if (user == null) {
-      return Scaffold(appBar: AppBar(title: Text("Inställningar")), body: Center(child: CircularProgressIndicator(color: Colors.orange[600])));
+      return Scaffold(appBar: AppBar(title: Text(t.settingsSettings)), body: Center(child: CircularProgressIndicator(color: Colors.orange[600])));
     }
     return WillPopScope(
       onWillPop: () async {
@@ -42,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Inställningar"),
+            title: Text(t.settingsSettings),
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 16),
@@ -50,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: GestureDetector(
                     onTap: () => _save(),
                     child: Text(
-                      "Spara",
+                      t.settingsSave,
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
@@ -63,15 +66,15 @@ class _SettingsPageState extends State<SettingsPage> {
             Padding(
                 padding: EdgeInsets.all(8),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  _makeTextField("Förnamn*", () => user!.firstname!, (input) {
+                  _makeTextField(t.settingsFirstName + "*", () => user!.firstname!, (input) {
                     changedSetting = true;
                     user!.firstname = input;
                   }),
-                  _makeTextField("Efternamn*", () => user!.lastname!, (input) {
+                  _makeTextField(t.settingsLastName + "*", () => user!.lastname!, (input) {
                     changedSetting = true;
                     user!.lastname = input;
                   }),
-                  _makeDropDown<String>("Program", programs, () => user!.program, (program) {
+                  _makeDropDown<String>(t.settingsProgramme, programs, () => user!.program, (program) {
                     setState(() {
                       if (program != user!.program) {
                         changedSetting = true;
@@ -79,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       }
                     });
                   }),
-                  _makeDropDown<int>("Startår", years, () => user!.start_year, (year) {
+                  _makeDropDown<int>(t.settingsStartYear, years, () => user!.start_year, (year) {
                     setState(() {
                       if (year != user!.start_year) {
                         changedSetting = true;
@@ -94,10 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: Colors.grey[200],
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                  child: Text("Nedstående fält används endast för "
-                      "sektionsval, bilbokning samt arbete i Hilbert Café. "
-                      "Kan ses av styrelse, administratörer samt ansvariga för"
-                      "  val, bokning eller caféet"),
+                  child: Text(t.settingsParagraph),
                 ),
               ),
             ),
@@ -108,11 +108,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   changedSetting = true;
                   user!.student_id = input;
                 }),
-                _makeTextField("Telefon", () => user!.phone != null ? user!.phone! : "", (input) {
+                _makeTextField(t.settingsPhoneNumber, () => user!.phone != null ? user!.phone! : "", (input) {
                   changedSetting = true;
                   user!.phone = input;
                 }, num: true),
-                _makeCheckBox("Visa tel. för gruppmedlemmar", () => user!.display_phone, (bool? change) {
+                _makeCheckBox(t.settingsShowPhoneNumber, () => user!.display_phone, (bool? change) {
                   setState(() {
                     changedSetting = true;
                     user!.display_phone = change;
@@ -120,7 +120,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 }),
                 DropdownButton(
                   isExpanded: true,
-                  hint: Text("Matpreferenser"),
+                  hint: Text(t.settingsFoodPrefs),
                   items: foodPrefs
                       .map((foodPref) => DropdownMenuItem(
                           child: Row(children: [
@@ -145,33 +145,32 @@ class _SettingsPageState extends State<SettingsPage> {
                           ]),
                           value: foodPref))
                       .toList()
-                        ..add(DropdownMenuItem(
-                          child: Row(children: [
-                            Text("Annat"),
-                            Spacer(),
-                            StatefulBuilder(builder: (BuildContext context, StateSetter setChildState) {
-                              return Checkbox(
-                                  checkColor: Colors.white,
-                                  fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                                  value: extraPref,
-                                  onChanged: (bool? add) {
-                                    setChildState(() {
-                                      extraPref = add!;
-                                    });
-                                    setState(() {});
-                                  });
-                            })
-                          ]),
-                          value: "Annat",
-                        )),
+                    ..add(DropdownMenuItem(
+                      child: Row(children: [
+                        Text(t.settingsOther),
+                        Spacer(),
+                        StatefulBuilder(builder: (BuildContext context, StateSetter setChildState) {
+                          return Checkbox(
+                              checkColor: Colors.white,
+                              fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+                              value: extraPref,
+                              onChanged: (bool? add) {
+                                setChildState(() {
+                                  extraPref = add!;
+                                });
+                                setState(() {});
+                              });
+                        })
+                      ]),
+                      value: t.settingsOther,
+                    )),
                   onChanged: (_) {
                     setState(() {});
                   },
                 ),
                 _extraPrefTextField(),
                 Text(
-                  "Matprefersener kan endast ses av de som arrangerar"
-                  " evenmang som du anmält dig till.",
+                  t.settingsFoodPrefsPrivacy,
                   style: TextStyle(color: Colors.grey[600]),
                 )
               ]),
@@ -182,10 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: Colors.grey[200],
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                  child: Text("Nedstående fält används endast för "
-                      "sektionsval, bilbokning samt arbete i Hilbert Café. "
-                      "Kan ses av styrelse, administratörer samt ansvariga för"
-                      "  val, bokning eller caféet"),
+                  child: Text(t.settingsParagraph),
                 ),
               ),
             ),
@@ -194,25 +190,25 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _makeCheckBox("Notiser för eventanmälan", () => user!.notify_event_users, (bool? change) {
+                  _makeCheckBox(t.settingsNotificationsSignUp, () => user!.notify_event_users, (bool? change) {
                     setState(() {
                       changedSetting = true;
                       user!.notify_event_users = change;
                     });
                   }),
-                  _makeCheckBox("Notiser för meddelande", () => user!.notify_messages, (bool? change) {
+                  _makeCheckBox(t.settingsNotificationsMessage, () => user!.notify_messages, (bool? change) {
                     setState(() {
                       changedSetting = true;
                       user!.notify_messages = change;
                     });
                   }),
-                  _makeCheckBox("Notiser före eventanmälan stänger", () => user!.notify_event_closing, (bool? change) {
+                  _makeCheckBox(t.settingsNotificationsSignUpClosing, () => user!.notify_event_closing, (bool? change) {
                     setState(() {
                       changedSetting = true;
                       user!.notify_event_closing = change;
                     });
                   }),
-                  _makeCheckBox("Notiser när eventanmälan öppnar", () => user!.notify_event_open, (bool? change) {
+                  _makeCheckBox(t.settingsNotificationsSignUpOpening, () => user!.notify_event_open, (bool? change) {
                     setState(() {
                       changedSetting = true;
                       user!.notify_event_open = change;
@@ -225,7 +221,7 @@ class _SettingsPageState extends State<SettingsPage> {
               width: double.infinity,
               child: Container(
                 color: Colors.grey[200],
-                child: Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28), child: Text("Medlemskap sedan ${_makeTimestamp()}")),
+                child: Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28), child: Text(t.settingsMemberSince + " ${_makeTimestamp()}")),
               ),
             ),
           ]))),
@@ -233,11 +229,12 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _extraPrefTextField() {
+    var t = AppLocalizations.of(context)!;
     if (extraPref) {
       return Padding(
           padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text("Andra matpreferenser/allergier"),
+            Text(t.settingsOtherFoodPrefs),
             TextField(
               controller: TextEditingController(text: user!.food_custom),
               decoration: InputDecoration(
@@ -302,7 +299,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   //Sometimes causes render overflow. Seems to be when saving while keyboard is active. Feels weird ):
   Widget Function(BuildContext) _savingPopup() {
-    return (BuildContext context) => SimpleDialog(title: Text("Sparar", style: Theme.of(context).textTheme.headline5), children: [
+    var t = AppLocalizations.of(context)!;
+    return (BuildContext context) => SimpleDialog(title: Text(t.settingsSaving, style: Theme.of(context).textTheme.headline5), children: [
           Column(
             children: [
               CircularProgressIndicator(
@@ -314,12 +312,12 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget Function(BuildContext) _failedPopup() {
-    return (BuildContext context) => SimpleDialog(title: Text("Varning", style: Theme.of(context).textTheme.headline5), children: [
+    var t = AppLocalizations.of(context)!;
+    return (BuildContext context) => SimpleDialog(title: Text(t.settingsWarning, style: Theme.of(context).textTheme.headline5), children: [
           Center(
             child: Padding(
               padding: EdgeInsets.all(8),
-              child: Text("Ändringarna kunde inte sparas ): "
-                  "Kolla din täckning och de obligatiska fälten."),
+              child: Text(t.settingsWarningText),
             ),
           ),
           Align(
@@ -332,14 +330,14 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget Function(BuildContext) _saveOnClosePopup() {
+    var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
-          title: Text("Osparade Ändringar", style: Theme.of(context).textTheme.headline5),
+          title: Text(t.settingsUnsaved, style: Theme.of(context).textTheme.headline5),
           children: [
             Center(
               child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Text("Du har orsparade ändringar. "
-                      "Vill du spara eller slänga dessa?")),
+                  child: Text(t.settingsUnsavedText)),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -349,14 +347,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text("Stäng")),
+                      child: Text(t.settingsDiscard)),
                   Spacer(),
                   TextButton(
                       onPressed: () async {
                         _save();
                         Navigator.pop(context);
                       },
-                      child: Text("Spara"))
+                      child: Text(t.settingsSave))
                 ],
               ),
             )
