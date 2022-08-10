@@ -44,18 +44,12 @@ class _GalleryPageState extends State<GalleryPage> {
                     elevation: 2,
                     isExpanded: true,
                     value: selectedYear,
-                    items: galleries?[0]
-                        .years!
-                        .map((int year) => DropdownMenuItem(
-                            child: Text(year.toString()), value: year))
-                        .toList(),
+                    items: galleries?[0].years!.map((int year) => DropdownMenuItem(child: Text(year.toString()), value: year)).toList(),
                     onChanged: (int? newYear) {
                       setState(() {
                         if (selectedYear != newYear) {
                           selectedYear = newYear!;
-                          locator<GalleryService>()
-                              .getGalleries(year: selectedYear.toString())
-                              .then((value) {
+                          locator<GalleryService>().getGalleries(year: selectedYear.toString()).then((value) {
                             setState(() {
                               this.galleries = value;
                             });
@@ -105,35 +99,27 @@ class _GalleryPageState extends State<GalleryPage> {
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.date_range,
-                        color: Theme.of(context).primaryColor),
+                    Icon(Icons.date_range, color: Theme.of(context).primaryColor),
                     SizedBox(
                       width: 2,
                     ),
                     Text(
                       DateFormat('d MMM yyyy').format(elem.start_date!),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.apply(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.white),
                     )
                   ]),
                   SizedBox(
                     height: 3,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.location_pin,
-                        color: Theme.of(context).primaryColor),
+                    Icon(Icons.location_pin, color: Theme.of(context).primaryColor),
                     SizedBox(
                       width: 2,
                     ),
                     Flexible(
                       child: Text(
                         elem.location.toString(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2
-                            ?.apply(color: Colors.white),
+                        style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -148,10 +134,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     ),
                     Text(
                       elem.image_count.toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          ?.apply(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.white),
                     ),
                   ]),
                 ],
@@ -161,8 +144,7 @@ class _GalleryPageState extends State<GalleryPage> {
         ),
         Ink.image(
             colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-            image:
-                NetworkImage("${Environment.API_URL}${elem.thumb.toString()}"),
+            image: getPicture(elem),
             fit: BoxFit.cover,
             child: InkWell(
               onTap: () => goToAlbum(elem.id!),
@@ -174,10 +156,19 @@ class _GalleryPageState extends State<GalleryPage> {
 
   void goToAlbum(int id) {
     locator<AlbumService>().getAlbum(id).then((album) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => AlbumPage(album: album)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AlbumPage(album: album)));
     });
 
     //Send to correct page and then fetch complete album on other page :^)
+  }
+
+  //Make sure that there is a url to fetch from
+  ImageProvider<Object> getPicture(Gallery elem) {
+    ImageProvider<Object> imageProv = AssetImage("assets/img/f_logo.png"); //default
+
+    if (elem.thumb != null) {
+      imageProv = NetworkImage("${Environment.API_URL}${elem.thumb.toString()}");
+    }
+    return imageProv;
   }
 }

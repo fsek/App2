@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/models/gallery/imageFile.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'contact.g.dart'; 
@@ -6,9 +7,10 @@ part 'contact.g.dart';
 class Contact {
   int? id; 
   String? email; 
-  String? name; 
+  String? name;
   String? text; 
-  List<String>? users; 
+  List<String>? users;
+  Map<String, Map<String, dynamic>>? avatar;
 
   Contact();
 
