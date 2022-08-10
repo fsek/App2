@@ -162,5 +162,36 @@
 
     "articleEtiquette": "Etiquette",
     
-    "mannersEtiquette": "Etiquette"
+    "mannersEtiquette": "Etiquette",
+
+
+    "aboutGuildGuild": "The F-guild", 
+    "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
+    "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
+    "aboutGuildThree": "among members and look after their common interests.", 
+
+    "aboutGuildFour": "The guild has its spaces in the Math building where you can find common rooms, microwave-ovens, ",
+    "aboutGuildFive": "and the guild’s own Hilbert Café - where you can buy coffee and great baguettes.", 
+
+    "aboutGuildSix": "The F-guild has several councils in charge of different parts of the activities of the guild. ",
+    "aboutGuildSeven": "Each council is headed by a chairman who is also a part of the guild’s council of executives. ",
+    "abotuGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
+
+    "aboutGuildNine": "As a member of the guild you can choose to be active and committed or take ",
+    "aboutGuildTen": "part at some events. We hope that you will enjoy your time in the F-guild. ",
+    "aboutGuildEleven": "If you have any questions you can always get in touch with someone from the board, via the Contact tab",
+    "aboutGuildTwelve": "on the website or in Ledningscentralen in the far left of the Hilbert corridor (behind Hilbert Café)!",
+
+    "fapSuper": "su-perman",
+    "fapSpider": "Webmaster", 
+    "fapSpiderMaster": "Spider Master",
+    "fapAbout": "About the F-app",
+    "fapFap": "F-app",
+    "fapVersion": "Version: yes", 
+    "fapPower": "Powered by coffee, the Tears of su-permen and Flutter",
+    "fapConstructed": "Bodged together by the su-permen and Webmasters of the F-guild",
+    "fapInspired": "What inspired the web during ",
+    "fapDev": "development"
+
+
 }
