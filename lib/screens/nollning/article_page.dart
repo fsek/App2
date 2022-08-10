@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/article.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArticlePage extends StatelessWidget {
   const ArticlePage({Key? key, required this.a}) : super(key: key);
@@ -13,7 +14,7 @@ class ArticlePage extends StatelessWidget {
     String locale = Localizations.localeOf(context).toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vett & Etikett'),
+        title: Text(AppLocalizations.of(context)!.articleEtiquette),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -21,9 +22,11 @@ class ArticlePage extends StatelessWidget {
           children: [
             Container(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                child: Text(a.title![locale]!,
-                    style: Theme.of(context).textTheme.headline6),
+                padding: EdgeInsets.fromLTRB(15, 10, 8, 2),
+                child: Text(
+                  a.title![locale]!,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                ),
               ),
             ),
             Divider(
@@ -34,6 +37,11 @@ class ArticlePage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 10.0),
                 child: Html(
                   data: a.content![locale]!,
+                  style: {
+                    "body": Style(
+                      fontSize: FontSize(16.0),
+                    ),
+                  },
                 ),
               ),
             ),

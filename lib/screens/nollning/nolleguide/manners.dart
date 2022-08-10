@@ -75,7 +75,7 @@ class _MannersPageState extends State<MannersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Vett & Etikett"),
+        title: Text(AppLocalizations.of(context)!.mannersEtiquette),
       ),
       body: Container(
         margin: EdgeInsets.all(10),

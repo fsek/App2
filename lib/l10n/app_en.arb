@@ -158,5 +158,9 @@
     "cafeShiftIsSignedUp": "is signed up",  
     "cafeShiftSignMeUp": "Sign me up :))",
     "cafeShiftForShift": "for shift",
-    "cafeShiftClock" : " "
+    "cafeShiftClock": " ",
+
+    "articleEtiquette": "Etiquette",
+    
+    "mannersEtiquette": "Etiquette"
 }
