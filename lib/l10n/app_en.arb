@@ -19,6 +19,7 @@
     "eventNoSpot": "Unfortunatley you did not get a spot for the event.",
     "eventGotSpot": "You got a spot!",
     "eventSignUp": "Sign up",
+    "eventLotterySpot": "Your sign-up has been registered",
     "eventNbrSignUps": " Number of sign-ups: ",
     "eventNbrSpots": " Number of spots: ",
     "eventSignUpOpens": " Sign up opens: ",
