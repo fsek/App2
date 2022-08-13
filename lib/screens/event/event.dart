@@ -270,28 +270,52 @@ class _EventPageState extends State<EventPage> {
               groupName = event!.event_user!.group_custom ?? "";
             }
             String userType = event!.event_user!.user_type ?? t.eventOther;
-            if (event!.event_user?.reserve ?? false) {
-              signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.cancel,
-                        color: Colors.red[300],
-                      ),
-                      Text(
-                        t.eventNoSpot,
-                        style: TextStyle(
+            if (!(event!.event_signup!.lottery ?? false)) {
+              if (event!.event_user?.reserve ?? false) {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
                           color: Colors.red[300],
                         ),
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              } else {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green[300],
+                        ),
+                        Text(
+                          t.eventGotSpot,
+                          style: TextStyle(
+                            color: Colors.green[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              }
             } else {
               signup = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,13 +323,13 @@ class _EventPageState extends State<EventPage> {
                   Row(
                     children: [
                       Icon(
-                        Icons.check_circle,
-                        color: Colors.green[300],
+                        Icons.info_outline_rounded,
+                        color: Colors.orange[600],
                       ),
                       Text(
-                        t.eventGotSpot,
+                        t.eventLotterySpot,
                         style: TextStyle(
-                          color: Colors.green[300],
+                          color: Colors.orange[600],
                         ),
                       ),
                     ],
