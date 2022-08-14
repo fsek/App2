@@ -24,7 +24,7 @@ class _EventPageState extends State<EventPage> {
   Group? group;
   String? answer;
   String? customGroup;
-  List<String>? foodPreferences;
+  Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
   bool displayGroupInput = true;
   bool? drinkPackageAnswer;
@@ -50,11 +50,12 @@ class _EventPageState extends State<EventPage> {
               this.event = value;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
 
@@ -71,11 +72,12 @@ class _EventPageState extends State<EventPage> {
               this.answer = null;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
   }
@@ -441,6 +443,11 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget signupWidget(AppLocalizations t) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       if (event?.can_signup ?? false) return Container();
     }
@@ -473,7 +480,7 @@ class _EventPageState extends State<EventPage> {
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences),
-                  ...?foodPreferences
+                  ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text("  " + foodPreference)),
                   Text("  " + (foodCustom ?? "")),
@@ -576,6 +583,11 @@ class _EventPageState extends State<EventPage> {
 
   List<Widget> _signupDetails(String? groupName, String? userType) {
     var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     Widget drinkPackage = Container();
     if (event!.drink_package ?? false) {
       if (event!.event_user!.drink_package_answer ?? false) {
@@ -651,7 +663,7 @@ class _EventPageState extends State<EventPage> {
                   text: t.eventFoodPreferences + " ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences
+          ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
@@ -679,6 +691,10 @@ class _EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       return Scaffold(
         appBar: AppBar(
