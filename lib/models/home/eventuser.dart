@@ -10,8 +10,10 @@ class EventUser {
   int? group_id;
   String? group_custom;
   bool? reserve;
+  bool? drink_package_answer;
 
-  EventUser(this.answer, this.group_id, this.group_custom, this.user_type);
+  EventUser(this.answer, this.group_id, this.group_custom, this.user_type,
+      this.drink_package_answer);
 
   factory EventUser.fromJson(Map<String, dynamic> json) =>
       _$EventUserFromJson(json);

@@ -27,6 +27,7 @@ class _EventPageState extends State<EventPage> {
   List<String>? foodPreferences;
   String? foodCustom;
   bool displayGroupInput = true;
+  bool? drinkPackageAnswer;
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
     "p": Style(
@@ -81,7 +82,8 @@ class _EventPageState extends State<EventPage> {
   }
 
   void sendSignup() async {
-    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType);
+    EventUser eventUser =
+        EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
@@ -239,7 +241,7 @@ class _EventPageState extends State<EventPage> {
 
     if (event!.can_signup!) {
       if (event!.event_signup!.open!)
-        signup = signupWidget();
+        signup = signupWidget(t);
       else {
         if (event!.event_signup!.closed!) {
           if (event!.event_user == null) {
@@ -442,12 +444,25 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget signupWidget() {
-    var t = AppLocalizations.of(context)!;
+  Widget signupWidget(AppLocalizations t) {
     if (event == null) {
       if (event?.can_signup ?? false) return Container();
     }
-
+    Widget drinkPackageInput = Container();
+    if (event!.drink_package ?? false) {
+      drinkPackageInput = Row(
+        children: [
+          Text(" ${t.eventDrinkPackage}"),
+          Checkbox(
+              value: drinkPackageAnswer ?? false,
+              onChanged: (value) {
+                setState(() {
+                  this.drinkPackageAnswer = value;
+                });
+              }),
+        ],
+      );
+    }
     if (event?.event_user == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -458,6 +473,7 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
+              drinkPackageInput,
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences),
@@ -564,6 +580,36 @@ class _EventPageState extends State<EventPage> {
 
   List<Widget> _signupDetails(String? groupName, String? userType) {
     var t = AppLocalizations.of(context)!;
+    Widget drinkPackage = Container();
+    if (event!.drink_package ?? false) {
+      if (event!.event_user!.drink_package_answer ?? false) {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventYes,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      } else {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventNo,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      }
+    }
     return [
       RichText(
           text: TextSpan(
@@ -601,6 +647,7 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
+      drinkPackage,
       Wrap(
         children: [
           RichText(
