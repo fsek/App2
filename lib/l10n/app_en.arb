@@ -44,7 +44,9 @@
     "eventAlcoholServed": "  Alocohol served",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
-
+    "eventDrinkPackage": "Drink package: ",
+    "eventYes": "Yes",
+    "eventNo": "No",
     "settingsSettings": "Settings",
     "settingsSave": "Save",
     "settingsProgramme": "Programme",

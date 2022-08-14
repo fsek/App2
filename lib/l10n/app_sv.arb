@@ -42,6 +42,9 @@
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
     "eventAlcoholServed": "  Alokohol serveras",
+    "eventDrinkPackage": "Alkoholpaket: ",
+    "eventYes": "Ja",
+    "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
 
