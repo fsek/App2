@@ -14,12 +14,14 @@ class PeoplePage extends StatefulWidget {
 class _PeoplePageState extends State<PeoplePage> {
   List<Person> people = [];
   Person? _selectedPerson;
+  int? _selectedPersonIndex;
   _PeoplePageState() {
     _loadPeople().then(
       (value) => setState(
         () {
           this.people = value;
           this._selectedPerson = people[0];
+          this._selectedPersonIndex = 0;
         },
       ),
     );
@@ -39,6 +41,11 @@ class _PeoplePageState extends State<PeoplePage> {
     setState(
       () {
         _selectedPerson = p;
+        if (p != null) {
+          _selectedPersonIndex = people.indexOf(p);
+        } else {
+          _selectedPersonIndex = 0;
+        }
       },
     );
   }
@@ -82,7 +89,16 @@ class _PeoplePageState extends State<PeoplePage> {
     if (_selectedPerson == null) {
       return Container();
     } else {
-      return _MainPersonCard(person: _selectedPerson!);
+      return InkWell(
+        onDoubleTap: () => setState(() {
+          _selectedPersonIndex = _selectedPersonIndex! + 1;
+          if (_selectedPersonIndex! >= people.length) {
+            _selectedPersonIndex = 0;
+          }
+          _selectedPerson = people[_selectedPersonIndex!];
+        }),
+        child: _MainPersonCard(person: _selectedPerson!),
+      );
     }
   }
 
@@ -126,6 +142,11 @@ class _MainPersonCard extends StatelessWidget {
   build(BuildContext context) {
     String locale = Localizations.localeOf(context).toString();
     String imageBasePath = "assets/img/";
+    Widget position = Container();
+    if (person.position != null) {
+      position = Text(person.position![locale]!,
+          style: TextStyle(fontSize: 18, color: Colors.white));
+    }
     return Container(
       margin: EdgeInsets.all(20),
       child: ListView(
@@ -143,8 +164,7 @@ class _MainPersonCard extends StatelessWidget {
                     person.name![locale]!,
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
-                  Text(person.position![locale]!,
-                      style: TextStyle(fontSize: 18, color: Colors.white))
+                  position,
                 ],
               ),
             ),

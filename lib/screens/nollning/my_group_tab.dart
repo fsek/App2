@@ -61,91 +61,105 @@ class _MyGroupTabState extends State<MyGroupTab> {
     return Stack(
       children: [
         Image.asset(
-          "assets/img/Fapp-alternativ.png",
+          "assets/img/bakgrund_grass_scaled.png",
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).size.height / 35),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    LinearProgressIndicator(
-                      value: (totalPoints ?? 0) / (maxTotalPoints ?? 1),
-                      minHeight: 10,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, right: 10, left: 10),
-                      child: Text(
-                        adventureData?.group_name ?? "",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height / 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      LinearProgressIndicator(
+                        value: (totalPoints ?? 0) /
+                            (((maxTotalPoints ?? 1) > 0)
+                                ? (maxTotalPoints ?? 1)
+                                : 1),
+                        minHeight: 10,
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, right: 10, left: 10),
+                        child: Text(
+                          adventureData?.group_name ?? "",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        "$totalPoints ${t.introductionPoints2}",
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height / 35,
-                          color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          "$totalPoints ${t.introductionPoints2}",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 35,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _weekProgressCircle(
-                        imgPath: "assets/img/vecka_0.png",
-                        progress: progressList!.elementAt(0),
-                        borderColor: Colors.purple[900]!,
-                        size: circleSize),
-                    _weekProgressCircle(
-                        imgPath: "assets/img/vecka_1.png",
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _weekProgressCircle(
+                          imgPath: "assets/img/Sten.png",
+                          progress: progressList!.elementAt(0),
+                          borderColor: Colors.purple[900]!,
+                          size: circleSize,
+                          text: "Vecka 0"),
+                      _weekProgressCircle(
+                        imgPath: "assets/img/Sten.png",
                         progress: progressList!.elementAt(1),
                         borderColor: Colors.blue[900]!,
-                        size: circleSize),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _weekProgressCircle(
-                        imgPath: "assets/img/vecka_4.png",
+                        size: circleSize,
+                        text: "Vecka 1",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _weekProgressCircle(
+                        imgPath: "assets/img/Sten.png",
                         progress: progressList!.elementAt(4),
                         borderColor: Colors.orange,
-                        size: circleSize),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _weekProgressCircle(
-                        imgPath: "assets/img/vecka_2.png",
-                        progress: progressList!.elementAt(2),
-                        borderColor: Colors.red[900]!,
-                        size: circleSize),
-                    _weekProgressCircle(
-                        imgPath: "assets/img/vecka_3.png",
+                        size: circleSize,
+                        text: "Vecka 2",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _weekProgressCircle(
+                          imgPath: "assets/img/Sten.png",
+                          progress: progressList!.elementAt(2),
+                          borderColor: Colors.red[900]!,
+                          size: circleSize,
+                          text: "Vecka 3"),
+                      _weekProgressCircle(
+                        imgPath: "assets/img/Sten.png",
                         progress: progressList!.elementAt(3),
                         borderColor: Colors.green[900]!,
-                        size: circleSize),
-                  ],
-                ),
-              ],
+                        size: circleSize,
+                        text: "Vecka 4",
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         )
@@ -158,49 +172,61 @@ class _MyGroupTabState extends State<MyGroupTab> {
       required double progress,
       Color borderColor = Colors.black,
       bool active = true,
-      double size = 150}) {
-    return Stack(alignment: Alignment.center, children: [
-      Container(
-        foregroundDecoration: BoxDecoration(
-          // Only grey out img if not active
-          color: active ? Colors.transparent : Colors.grey,
-          backgroundBlendMode: BlendMode.saturation,
-          borderRadius: BorderRadius.circular(150),
+      double size = 150,
+      String? text}) {
+    Widget textBox = Container();
+    if (text != null) {
+      textBox = Text(
+        text,
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      );
+    }
+
+    return Column(children: [
+      Stack(alignment: Alignment.center, children: [
+        Container(
+          foregroundDecoration: BoxDecoration(
+            // Only grey out img if not active
+            color: active ? Colors.transparent : Colors.grey,
+            backgroundBlendMode: BlendMode.saturation,
+            borderRadius: BorderRadius.circular(150),
+          ),
+          child: Image.asset(
+            imgPath,
+            height: size,
+          ),
         ),
-        child: Image.asset(
-          imgPath,
+        SizedBox(
+          child: CircularProgressIndicator(
+            value: progress,
+            color: borderColor,
+            strokeWidth: 8.0,
+          ),
+          width: size,
           height: size,
         ),
-      ),
-      SizedBox(
-        child: CircularProgressIndicator(
-          value: progress,
-          color: borderColor,
-          strokeWidth: 8.0,
+        // OBSERVE: How to give text border, as recomended by official docs
+        // Stroked text as border.
+        Text(
+          "${(progress * 100).round()}%",
+          style: TextStyle(
+            fontSize: 30,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.black,
+          ),
         ),
-        width: size,
-        height: size,
-      ),
-      // OBSERVE: How to give text border, as recomended by official docs
-      // Stroked text as border.
-      Text(
-        "${(progress * 100).round()}%",
-        style: TextStyle(
-          fontSize: 30,
-          foreground: Paint()
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 6
-            ..color = Colors.black,
+        // Solid text as fill.
+        Text(
+          "${(progress * 100).round()}%",
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.grey[300],
+          ),
         ),
-      ),
-      // Solid text as fill.
-      Text(
-        "${(progress * 100).round()}%",
-        style: TextStyle(
-          fontSize: 30,
-          color: Colors.grey[300],
-        ),
-      ),
+      ]),
+      textBox
     ]);
   }
 
