@@ -52,7 +52,6 @@ class _EventPageState extends State<EventPage> {
           this.foodPreferences = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            print(this.foodPreferences?[i]);
             this.foodPreferences![i] =
                 foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
@@ -90,7 +89,6 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.post(
         "/events/" + eventId.toString() + "/event_users",
         mapBody: eventUser.toJson());
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -101,8 +99,6 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.delete(
       "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
     );
-
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
