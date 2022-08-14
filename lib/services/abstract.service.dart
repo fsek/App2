@@ -113,21 +113,17 @@ class AbstractService {
   }
 
   static Map _returnResponse(http.Response response) {
-    print(response.body);
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
         // print(responseJson);
         return responseJson;
       case 400:
-        print(response.body.toString());
         throw BadRequestException(HttpErrorMessage.Message[399]);
       case 401:
       case 403:
-        print(response.body.toString());
         throw UnauthorisedException(HttpErrorMessage.Message[401]);
       case 503:
-        print(response.body.toString());
         throw ServiceUnavailableException(HttpErrorMessage.Message[503]);
       case 500:
       default:
