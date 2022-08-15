@@ -91,7 +91,7 @@ class _MannersPageState extends State<MannersPage> {
               data: a.content![locale]!,
               style: {
                 "body": Style(
-                  fontSize: FontSize(14.0),
+                  fontSize: FontSize(16.0),
                 ),
               },
             ),
