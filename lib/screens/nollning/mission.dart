@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MissionPage extends StatelessWidget {
   const MissionPage({Key? key, required this.mission}) : super(key: key);
@@ -8,27 +9,30 @@ class MissionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(mission.title!),
       ),
       body: Column(
         children: [
-          Text("Maxpoäng: ${mission.max_points}"),
+          Text("${t.introductionMaxPoints}: ${mission.max_points}"),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _getStatus(mission),
+            children: _getStatus(mission, context),
           )
         ],
       ),
     );
   }
 
-  List<Widget> _getStatus(AdventureMission mission) {
+  List<Widget> _getStatus(AdventureMission mission, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     if (mission.is_accepted!) {
       return [
         Text("Status: "),
-        Text("Avklarat"),
+        Text(t.introductionCompleted),
         Icon(
           Icons.check_circle_outline_rounded,
           color: Colors.green,
@@ -37,7 +41,7 @@ class MissionPage extends StatelessWidget {
     } else if (mission.is_pending!) {
       return [
         Text("Status: "),
-        Text("Väntar på godkännande"),
+        Text(t.introductionPendingApproval),
         Icon(
           Icons.schedule_rounded,
           color: Colors.yellow,
@@ -46,7 +50,7 @@ class MissionPage extends StatelessWidget {
     } else {
       return [
         Text("Status: "),
-        Text("Ej avklarat"),
+        Text(t.introductionNotCompleted),
         Icon(
           Icons.remove_circle_outline_rounded,
           color: Colors.grey,

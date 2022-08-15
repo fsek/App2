@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -14,17 +16,27 @@ class _NollningPageState extends State<NollningPage> {
 
   @override
   Widget build(BuildContext context) {
+    String backgroundPath = "assets/img/bakgrund_scaled.png";
+    DateTime now = DateTime.now();
+    DateTime kmTakeOverStart = DateTime(2022, 8, 15, 0, 0);
+    DateTime kmTakeOverEnd = DateTime(2022, 8, 16, 0, 0);
+    if (kmTakeOverStart.compareTo(now) < 0 &&
+        kmTakeOverEnd.compareTo(now) > 0) {
+      backgroundPath = "assets/img/Fapp-alternativ.png";
+    }
     return Stack(children: [
       Image.asset(
-        "assets/img/nollningbakgrundtest.png", //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
+        backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
       ),
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
+          padding: EdgeInsets.fromLTRB(0,
+              MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +57,18 @@ class _NollningPageState extends State<NollningPage> {
                       ),
                     ),
                     InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/nolleguide');
+                      },
+                      child: Image.asset(
+                        "assets/img/Nolleguiden.png",
+                        height: 100,
+                      ),
+                    ),
+                    InkWell(
                       onTap: () => Navigator.pushNamed(context, '/messages'),
                       child: Image.asset(
-                        "assets/img/Meddelande.png",
+                        "assets/img/Meddelanden.png",
                         height: 100,
                       ),
                     ),
@@ -59,19 +80,22 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/emergency_contacts');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => IntroductionSchedule()));
                       },
                       child: Image.asset(
-                        "assets/img/information.png",
+                        "assets/img/schedulebutton.png",
                         height: 100,
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/chant_book');
+                        Navigator.pushNamed(context, '/song_book');
                       },
                       child: Image.asset(
-                        "assets/img/skrikbok.png",
+                        "assets/img/Sångbok.png",
                         height: 100,
                         // scale: 2,
                       ),
