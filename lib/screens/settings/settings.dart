@@ -13,10 +13,37 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   User? user;
-  static const programs = ["Teknisk Fysik", "Teknisk Matematik", "Teknisk Nanovetenskap", "Oklart"];
-  static const foodPrefs = ["vegetarian", "vegan", "pescetarian", "milk", "gluten"];
-  static const foodPrefsDisplay = {"vegetarian": "Vegetarian", "vegan": "Vegan", "pescetarian": "Pescetarian", "milk": "Mjölkallergi", "gluten": "Gluten"};
-  static List<int> years = List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
+  static const programs = [
+    "Teknisk Fysik",
+    "Teknisk Matematik",
+    "Teknisk Nanovetenskap",
+    "Oklart"
+  ];
+  static const foodPrefs = [
+    "vegetarian",
+    "vegan",
+    "pescetarian",
+    "milk",
+    "gluten"
+  ];
+  static const foodPrefsDisplay = {
+    "sv": {
+      "vegetarian": "Vegetarian",
+      "vegan": "Vegan",
+      "pescetarian": "Pescetarian",
+      "milk": "Mjölkallergi",
+      "gluten": "Gluten"
+    },
+    "en": {
+      "vegetarian": "Vegetarian",
+      "vegan": "Vegan",
+      "pescetarian": "Pescetarian",
+      "milk": "Milk Allergy",
+      "gluten": "Gluten"
+    }
+  };
+  static List<int> years =
+      List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
 
   bool extraPref = false;
   bool changedSetting = false;
@@ -27,20 +54,28 @@ class _SettingsPageState extends State<SettingsPage> {
       setState(() {
         user = value;
         extraPref = user!.food_custom != "";
-        print(user!.food_custom);
       });
     });
     super.initState();
   }
 
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     var t = AppLocalizations.of(context)!;
     if (user == null) {
-      return Scaffold(appBar: AppBar(title: Text(t.settingsSettings)), body: Center(child: CircularProgressIndicator(color: Colors.orange[600])));
+      return Scaffold(
+          appBar: AppBar(title: Text(t.settingsSettings)),
+          body: Center(
+              child: CircularProgressIndicator(color: Colors.orange[600])));
     }
     return WillPopScope(
       onWillPop: () async {
-        if (changedSetting) await showDialog(context: context, builder: _saveOnClosePopup());
+        if (changedSetting)
+          await showDialog(context: context, builder: _saveOnClosePopup());
         return true;
       },
       child: Scaffold(
@@ -62,169 +97,205 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ), //Alot of the code here is duplicate. could be made much more compact
           body: SingleChildScrollView(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  _makeTextField(t.settingsFirstName + "*", () => user!.firstname!, (input) {
-                    changedSetting = true;
-                    user!.firstname = input;
-                  }),
-                  _makeTextField(t.settingsLastName + "*", () => user!.lastname!, (input) {
-                    changedSetting = true;
-                    user!.lastname = input;
-                  }),
-                  _makeDropDown<String>(t.settingsProgramme, programs, () => user!.program, (program) {
-                    setState(() {
-                      if (program != user!.program) {
-                        changedSetting = true;
-                        user!.program = program;
-                      }
-                    });
-                  }),
-                  _makeDropDown<int>(t.settingsStartYear, years, () => user!.start_year, (year) {
-                    setState(() {
-                      if (year != user!.start_year) {
-                        changedSetting = true;
-                        user!.start_year = year;
-                      }
-                    });
-                  }),
-                ])),
-            SizedBox(
-              width: double.infinity,
-              child: Container(
-                color: Colors.grey[200],
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                  child: Text(t.settingsParagraph),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                _makeTextField("LUCAT-id", () => user!.student_id != null ? user!.student_id! : "", (input) {
-                  changedSetting = true;
-                  user!.student_id = input;
-                }),
-                _makeTextField(t.settingsPhoneNumber, () => user!.phone != null ? user!.phone! : "", (input) {
-                  changedSetting = true;
-                  user!.phone = input;
-                }, num: true),
-                _makeCheckBox(t.settingsShowPhoneNumber, () => user!.display_phone, (bool? change) {
-                  setState(() {
-                    changedSetting = true;
-                    user!.display_phone = change;
-                  });
-                }),
-                DropdownButton(
-                  isExpanded: true,
-                  hint: Text(t.settingsFoodPrefs),
-                  items: foodPrefs
-                      .map((foodPref) => DropdownMenuItem(
-                          child: Row(children: [
-                            Text(foodPrefsDisplay[foodPref]!),
-                            Spacer(),
-                            StatefulBuilder(builder: (BuildContext context, StateSetter setChildState) {
-                              return Checkbox(
-                                checkColor: Colors.white,
-                                fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                                value: user!.food_preferences!.contains(foodPref),
-                                onChanged: (bool? add) {
-                                  setChildState(() {
-                                    changedSetting = true;
-                                    if (add!)
-                                      user!.food_preferences!.add(foodPref);
-                                    else
-                                      user!.food_preferences!.remove(foodPref);
-                                  });
-                                },
-                              );
-                            })
-                          ]),
-                          value: foodPref))
-                      .toList()
-                    ..add(DropdownMenuItem(
-                      child: Row(children: [
-                        Text(t.settingsOther),
-                        Spacer(),
-                        StatefulBuilder(builder: (BuildContext context, StateSetter setChildState) {
-                          return Checkbox(
-                              checkColor: Colors.white,
-                              fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-                              value: extraPref,
-                              onChanged: (bool? add) {
-                                setChildState(() {
-                                  extraPref = add!;
-                                });
-                                setState(() {});
-                              });
-                        })
-                      ]),
-                      value: t.settingsOther,
-                    )),
-                  onChanged: (_) {
-                    setState(() {});
-                  },
-                ),
-                _extraPrefTextField(),
-                Text(
-                  t.settingsFoodPrefsPrivacy,
-                  style: TextStyle(color: Colors.grey[600]),
-                )
-              ]),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Container(
-                color: Colors.grey[200],
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
-                  child: Text(t.settingsParagraph),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _makeCheckBox(t.settingsNotificationsSignUp, () => user!.notify_event_users, (bool? change) {
-                    setState(() {
-                      changedSetting = true;
-                      user!.notify_event_users = change;
-                    });
-                  }),
-                  _makeCheckBox(t.settingsNotificationsMessage, () => user!.notify_messages, (bool? change) {
-                    setState(() {
-                      changedSetting = true;
-                      user!.notify_messages = change;
-                    });
-                  }),
-                  _makeCheckBox(t.settingsNotificationsSignUpClosing, () => user!.notify_event_closing, (bool? change) {
-                    setState(() {
-                      changedSetting = true;
-                      user!.notify_event_closing = change;
-                    });
-                  }),
-                  _makeCheckBox(t.settingsNotificationsSignUpOpening, () => user!.notify_event_open, (bool? change) {
-                    setState(() {
-                      changedSetting = true;
-                      user!.notify_event_open = change;
-                    });
-                  })
-                ],
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Container(
-                color: Colors.grey[200],
-                child: Padding(padding: EdgeInsets.fromLTRB(12, 28, 12, 28), child: Text(t.settingsMemberSince + " ${_makeTimestamp()}")),
-              ),
-            ),
-          ]))),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _makeTextField(
+                              t.settingsFirstName + "*", () => user!.firstname!,
+                              (input) {
+                            changedSetting = true;
+                            user!.firstname = input;
+                          }),
+                          _makeTextField(
+                              t.settingsLastName + "*", () => user!.lastname!,
+                              (input) {
+                            changedSetting = true;
+                            user!.lastname = input;
+                          }),
+                          _makeDropDown<String>(t.settingsProgramme, programs,
+                              () => user!.program, (program) {
+                            setState(() {
+                              if (program != user!.program) {
+                                changedSetting = true;
+                                user!.program = program;
+                              }
+                            });
+                          }),
+                          _makeDropDown<int>(t.settingsStartYear, years,
+                              () => user!.start_year, (year) {
+                            setState(() {
+                              if (year != user!.start_year) {
+                                changedSetting = true;
+                                user!.start_year = year;
+                              }
+                            });
+                          }),
+                        ])),
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    color: Colors.grey[200],
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                      child: Text(t.settingsParagraph),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _makeTextField(
+                            "LUCAT-id",
+                            () => user!.student_id != null
+                                ? user!.student_id!
+                                : "", (input) {
+                          changedSetting = true;
+                          user!.student_id = input;
+                        }),
+                        _makeTextField(t.settingsPhoneNumber,
+                            () => user!.phone != null ? user!.phone! : "",
+                            (input) {
+                          changedSetting = true;
+                          user!.phone = input;
+                        }, num: true),
+                        _makeCheckBox(t.settingsShowPhoneNumber,
+                            () => user!.display_phone, (bool? change) {
+                          setState(() {
+                            changedSetting = true;
+                            user!.display_phone = change;
+                          });
+                        }),
+                        DropdownButton(
+                          isExpanded: true,
+                          hint: Text(t.settingsFoodPrefs),
+                          items: foodPrefs
+                              .map((foodPref) => DropdownMenuItem(
+                                  child: Row(children: [
+                                    Text(foodPrefsDisplay[locale]![foodPref]!),
+                                    Spacer(),
+                                    StatefulBuilder(builder:
+                                        (BuildContext context,
+                                            StateSetter setChildState) {
+                                      return Checkbox(
+                                        checkColor: Colors.white,
+                                        fillColor:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) => Colors.orange[600]),
+                                        value: user!.food_preferences!
+                                            .contains(foodPref),
+                                        onChanged: (bool? add) {
+                                          setChildState(() {
+                                            changedSetting = true;
+                                            if (add!)
+                                              user!.food_preferences!
+                                                  .add(foodPref);
+                                            else
+                                              user!.food_preferences!
+                                                  .remove(foodPref);
+                                          });
+                                        },
+                                      );
+                                    })
+                                  ]),
+                                  value: foodPref))
+                              .toList()
+                            ..add(DropdownMenuItem(
+                              child: Row(children: [
+                                Text(t.settingsOther),
+                                Spacer(),
+                                StatefulBuilder(builder: (BuildContext context,
+                                    StateSetter setChildState) {
+                                  return Checkbox(
+                                      checkColor: Colors.white,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                              (states) => Colors.orange[600]),
+                                      value: extraPref,
+                                      onChanged: (bool? add) {
+                                        setChildState(() {
+                                          extraPref = add!;
+                                        });
+                                        setState(() {});
+                                      });
+                                })
+                              ]),
+                              value: t.settingsOther,
+                            )),
+                          onChanged: (_) {
+                            setState(() {});
+                          },
+                        ),
+                        _extraPrefTextField(),
+                        Text(
+                          t.settingsFoodPrefsPrivacy,
+                          style: TextStyle(color: Colors.grey[600]),
+                        )
+                      ]),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    color: Colors.grey[200],
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                      child: Text(t.settingsParagraph),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _makeCheckBox(t.settingsNotificationsSignUp,
+                          () => user!.notify_event_users, (bool? change) {
+                        setState(() {
+                          changedSetting = true;
+                          user!.notify_event_users = change;
+                        });
+                      }),
+                      _makeCheckBox(t.settingsNotificationsMessage,
+                          () => user!.notify_messages, (bool? change) {
+                        setState(() {
+                          changedSetting = true;
+                          user!.notify_messages = change;
+                        });
+                      }),
+                      _makeCheckBox(t.settingsNotificationsSignUpClosing,
+                          () => user!.notify_event_closing, (bool? change) {
+                        setState(() {
+                          changedSetting = true;
+                          user!.notify_event_closing = change;
+                        });
+                      }),
+                      _makeCheckBox(t.settingsNotificationsSignUpOpening,
+                          () => user!.notify_event_open, (bool? change) {
+                        setState(() {
+                          changedSetting = true;
+                          user!.notify_event_open = change;
+                        });
+                      })
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    color: Colors.grey[200],
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+                        child: Text(
+                            t.settingsMemberSince + " ${_makeTimestamp()}")),
+                  ),
+                ),
+              ]))),
     );
   }
 
@@ -233,7 +304,8 @@ class _SettingsPageState extends State<SettingsPage> {
     if (extraPref) {
       return Padding(
           padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(t.settingsOtherFoodPrefs),
             TextField(
               controller: TextEditingController(text: user!.food_custom),
@@ -249,19 +321,26 @@ class _SettingsPageState extends State<SettingsPage> {
     return SizedBox.shrink();
   }
 
-  Widget _makeTextField(String displayText, String Function() attrGetter, void Function(String?) modUser, {bool num = false}) {
+  Widget _makeTextField(String displayText, String Function() attrGetter,
+      void Function(String?) modUser,
+      {bool num = false}) {
     return Padding(
         padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(displayText, style: TextStyle(fontSize: 16)),
-            TextField(controller: TextEditingController(text: attrGetter()), decoration: InputDecoration(border: UnderlineInputBorder()), keyboardType: num ? TextInputType.number : null, onChanged: (change) => modUser(change))
+            TextField(
+                controller: TextEditingController(text: attrGetter()),
+                decoration: InputDecoration(border: UnderlineInputBorder()),
+                keyboardType: num ? TextInputType.number : null,
+                onChanged: (change) => modUser(change))
           ],
         ));
   }
 
-  Widget _makeDropDown<T>(String displayText, List<T> dropDownItems, T? Function() attrGetter, void Function(T?) modUser) {
+  Widget _makeDropDown<T>(String displayText, List<T> dropDownItems,
+      T? Function() attrGetter, void Function(T?) modUser) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Column(
@@ -271,19 +350,29 @@ class _SettingsPageState extends State<SettingsPage> {
             displayText,
             style: TextStyle(fontSize: 16),
           ),
-          DropdownButton<T>(autofocus: false, isExpanded: true, value: attrGetter(), items: dropDownItems.map((item) => DropdownMenuItem(child: Text(item.toString()), value: item)).toList(), onChanged: (T? change) => modUser(change))
+          DropdownButton<T>(
+              autofocus: false,
+              isExpanded: true,
+              value: attrGetter(),
+              items: dropDownItems
+                  .map((item) => DropdownMenuItem(
+                      child: Text(item.toString()), value: item))
+                  .toList(),
+              onChanged: (T? change) => modUser(change))
         ],
       ),
     );
   }
 
-  Widget _makeCheckBox(String displayText, bool? Function() attrGetter, void Function(bool?) modUser) {
+  Widget _makeCheckBox(String displayText, bool? Function() attrGetter,
+      void Function(bool?) modUser) {
     return Row(children: [
       Text(displayText),
       Spacer(),
       Checkbox(
         checkColor: Colors.white,
-        fillColor: MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+        fillColor:
+            MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
         value: attrGetter(),
         onChanged: (bool? change) => modUser(change),
       )
@@ -300,39 +389,46 @@ class _SettingsPageState extends State<SettingsPage> {
   //Sometimes causes render overflow. Seems to be when saving while keyboard is active. Feels weird ):
   Widget Function(BuildContext) _savingPopup() {
     var t = AppLocalizations.of(context)!;
-    return (BuildContext context) => SimpleDialog(title: Text(t.settingsSaving, style: Theme.of(context).textTheme.headline5), children: [
-          Column(
+    return (BuildContext context) => SimpleDialog(
+            title: Text(t.settingsSaving,
+                style: Theme.of(context).textTheme.headline5),
             children: [
-              CircularProgressIndicator(
-                color: Colors.orange[600],
-              ),
-            ],
-          )
-        ]);
+              Column(
+                children: [
+                  CircularProgressIndicator(
+                    color: Colors.orange[600],
+                  ),
+                ],
+              )
+            ]);
   }
 
   Widget Function(BuildContext) _failedPopup() {
     var t = AppLocalizations.of(context)!;
-    return (BuildContext context) => SimpleDialog(title: Text(t.settingsWarning, style: Theme.of(context).textTheme.headline5), children: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(t.settingsWarningText),
-            ),
-          ),
-          Align(
-              alignment: Alignment.bottomRight,
-              child: IconButton(
-                icon: Icon(Icons.check, color: Colors.grey[800]),
-                onPressed: () => Navigator.pop(context),
-              ))
-        ]);
+    return (BuildContext context) => SimpleDialog(
+            title: Text(t.settingsWarning,
+                style: Theme.of(context).textTheme.headline5),
+            children: [
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(t.settingsWarningText),
+                ),
+              ),
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                    icon: Icon(Icons.check, color: Colors.grey[800]),
+                    onPressed: () => Navigator.pop(context),
+                  ))
+            ]);
   }
 
   Widget Function(BuildContext) _saveOnClosePopup() {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
-          title: Text(t.settingsUnsaved, style: Theme.of(context).textTheme.headline5),
+          title: Text(t.settingsUnsaved,
+              style: Theme.of(context).textTheme.headline5),
           children: [
             Center(
               child: Padding(

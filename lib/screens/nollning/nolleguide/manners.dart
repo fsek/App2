@@ -45,7 +45,7 @@ class _MannersPageState extends State<MannersPage> {
     String locale = Localizations.localeOf(context).toString();
     Widget mightBeImage = SizedBox(height: 10);
     if (a.image != "") {
-      mightBeImage = Image.asset(a.image!);
+      mightBeImage = Image.asset("assets/img/${a.image!}");
       const SizedBox(height: 10);
     }
     return Card(

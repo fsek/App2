@@ -18,6 +18,7 @@
     "eventNotSignedUp": "Du var inte anmäld",
     "eventNoSpot": "Du fick tyvärr inte plats till eventet.",
     "eventGotSpot": "Du har fått plats!",
+    "eventLotterySpot": "Din anmälan är mottagen.",
     "eventSignUp": "Anmälan",
     "eventNbrSignUps": " Antal anmälda: ",
     "eventNbrSpots": " Antal platser: ",
@@ -27,7 +28,7 @@
     "eventWebMasters": "spindelmännen",
     "eventFoodPreferences": " Matpreferenser:",
     "eventSendSignup": "Skicka Anmälan",
-    "eventDesignup": "Avanmälan",
+    "eventDesignup": "Avanmäl",
     "eventConfirmCancel": "Är du säker på att du vill avanmäla dig?",
     "eventCancel": "AVBRYT",
     "eventConfirmRemoveSignUp": "AVANMÄL MIG",
@@ -41,6 +42,9 @@
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
     "eventAlcoholServed": "  Alokohol serveras",
+    "eventDrinkPackage": "Alkoholpaket: ",
+    "eventYes": "Ja",
+    "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
 
@@ -117,7 +121,7 @@
     "messagesMessages": "Meddelanden",
 
     "nolleguideWeAtFsek": "Vi på F-sek",
-    "nolleguideEtiquette": "Vett & Etikett",
+    "nolleguideEtiquette": "Allt du behöver veta",
     "nolleguideWordlist": "Ordlista",
 
     "introductionLocked": "Låst",
@@ -161,7 +165,7 @@
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
 
-    "articleEtiquette": "Vett & etikett",
+    "articleEtiquette": "Allt du behöver veta",
 
-    "mannersEtiquette": "Vett & etikett"
+    "mannersEtiquette": "Allt du behöver veta"
 }

@@ -62,12 +62,12 @@ class _ContentWrapperState extends State<ContentWrapper>
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
-      0 : t.home,
-      1 : t.calendar,
-      2 : t.notifications,
-      3 : t.other,
-      4 : t.introduction
-    }; 
+      0: t.home,
+      1: t.calendar,
+      2: t.notifications,
+      3: t.other,
+      4: t.introduction
+    };
     // Shows state messages
     for (String message in widget.messages) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -150,13 +150,14 @@ class _ContentWrapperState extends State<ContentWrapper>
                 setState(() {
                   _currentIndex = widget.navbarDestinations.length - 1;
                 });
-                locator<ThemeService>().theme = nollning2021theme;
+                locator<ThemeService>().theme = nollning2022theme;
                 locator<ThemeService>().backgroundColors =
-                    nollning2021Background;
+                    nollning2022Background;
                 widget.onNavigation!.add(NollningPage);
               },
               child: Image(
                 image: AssetImage("assets/img/nollning_moose_icon.png"),
+                fit: BoxFit.cover,
               ),
               tooltip: 'F-sektionen',
               elevation: 2.0,
@@ -182,7 +183,8 @@ class _ContentWrapperState extends State<ContentWrapper>
                     .sublist(0, 4)
                     .map((Destination destination) {
                   return FsekAppBarItem(
-                      iconData: destination.icon, text: indexToTitle[destination.index]);
+                      iconData: destination.icon,
+                      text: indexToTitle[destination.index]);
                 }).toList()
               ],
               selectedColor: Colors.white,
