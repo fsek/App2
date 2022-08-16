@@ -71,6 +71,12 @@
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
     "settingsDiscard": "Discard",
 
+    "songbookSearch": "Search",
+    "songbookSongbook": "Songbook",
+    "songbookNoMatches": "No matchese found :^(",
+    "songbookMelody": "Melody",
+    "songbookAuthor": "Author",
+
     "otherSongbook": "Songbook",
     "otherGallery": "Picture Gallery",
     "otherCafe": "Hilbert Café",
@@ -162,6 +168,8 @@
     "cafeShiftSignMeUp": "Sign me up :))",
     "cafeShiftForShift": "for shift",
     "cafeShiftClock": " ",
+    "cafeShiftShift": " Available shift",
+    
     "articleEtiquette": "All you need to know",
     
     "mannersEtiquette": "All you need to know"

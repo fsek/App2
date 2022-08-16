@@ -29,11 +29,11 @@ class _GuidePageState extends State<GuidePage> {
     var t = AppLocalizations.of(context)!;
     String backgroundPath = "assets/img/bakgrund_scaled.png";
     DateTime now = DateTime.now();
-    DateTime kmTakeOverStart = DateTime(2022, 8, 15, 0, 0);
-    DateTime kmTakeOverEnd = DateTime(2022, 8, 16, 0, 0);
+    DateTime kmTakeOverStart = DateTime(2022, 9, 2, 21, 0);
+    DateTime kmTakeOverEnd = DateTime(2022, 9, 10, 10, 0);
     if (kmTakeOverStart.compareTo(now) < 0 &&
         kmTakeOverEnd.compareTo(now) > 0) {
-      backgroundPath = "assets/img/Fapp-alternativ.png";
+      backgroundPath = "assets/img/bakgrund_km_scaled.png";
     }
 
     return Stack(

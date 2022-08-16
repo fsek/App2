@@ -153,7 +153,7 @@ class _MainPersonCard extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 300,
+            height: MediaQuery.of(context).size.width,
             child: Container(
               margin: EdgeInsets.all(10),
               child: Column(
@@ -170,7 +170,7 @@ class _MainPersonCard extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: AssetImage(
                     imageBasePath + (person.image ?? "underConstruction.png")),
               ),

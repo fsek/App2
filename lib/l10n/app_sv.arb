@@ -73,6 +73,12 @@
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
 
+    "songbookSearch": "Sök",
+    "songbookSongbook": "Sångbok",
+    "songbookNoMatches": "Finns inga matchningar :^(",
+    "songbookMelody": "Melodi",
+    "songbookAuthor": "Författare",
+
     "otherSongbook": "Sångbok",
     "otherGallery": "Bildgalleri",
     "otherCafe": "Hilbert Café",
@@ -164,6 +170,7 @@
     "cafeShiftSignMeUp": "Anmäl mig :))", 
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
+    "cafeShiftShift": " Ledigt pass",
 
     "articleEtiquette": "Allt du behöver veta",
 

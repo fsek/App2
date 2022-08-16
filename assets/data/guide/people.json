@@ -31,7 +31,7 @@
             }
         },
         {
-          "image": "",
+          "image": "overfos.png",
             "name": {
                 "sv": "Överfös Erik",
                 "en": "Överfös Erik"
@@ -46,8 +46,8 @@
             }
         },
         {
+            "image": "The board.jpg",
             "name": {
-                "image": "The board.jpg",
                 "sv": "Styrelsen",
                 "en": "The board"
             },
@@ -286,7 +286,7 @@
             }
         },
         {
-            "image": "Øverstar.jpg",
+            "image": "Overstar.jpg",
             "name": {
                 "sv": "Øverstarna",
                 "en": "Øverstar"
