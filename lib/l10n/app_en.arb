@@ -19,6 +19,7 @@
     "eventNoSpot": "Unfortunatley you did not get a spot for the event.",
     "eventGotSpot": "You got a spot!",
     "eventSignUp": "Sign up",
+    "eventLotterySpot": "Your sign-up has been registered",
     "eventNbrSignUps": " Number of sign-ups: ",
     "eventNbrSpots": " Number of spots: ",
     "eventSignUpOpens": " Sign up opens: ",
@@ -43,7 +44,9 @@
     "eventAlcoholServed": "  Alocohol served",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
-
+    "eventDrinkPackage": "Drink package: ",
+    "eventYes": "Yes",
+    "eventNo": "No",
     "settingsSettings": "Settings",
     "settingsSave": "Save",
     "settingsProgramme": "Programme",
@@ -67,6 +70,12 @@
     "settingsUnsaved": "Unsaved changes",
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
     "settingsDiscard": "Discard",
+
+    "songbookSearch": "Search",
+    "songbookSongbook": "Songbook",
+    "songbookNoMatches": "No matchese found :^(",
+    "songbookMelody": "Melody",
+    "songbookAuthor": "Author",
 
     "otherSongbook": "Songbook",
     "otherGallery": "Picture Gallery",
@@ -119,7 +128,7 @@
 
     
     "nolleguideWeAtFsek": "We at F-sek",
-    "nolleguideEtiquette": "Etiquette",
+    "nolleguideEtiquette": "All you need to know",
     "nolleguideWordlist": "Wordlist",
 
     "introductionLocked": "Locked",
@@ -162,12 +171,11 @@
     "cafeShiftSignMeUp": "Sign me up :))",
     "cafeShiftForShift": "for shift",
     "cafeShiftClock": " ",
-
-    "articleEtiquette": "Etiquette",
+    "cafeShiftShift": " Available shift",
     
-    "mannersEtiquette": "Etiquette",
-
-
+    "articleEtiquette": "All you need to know",
+    "mannersEtiquette": "All you need to know", 
+    
     "aboutGuildGuild": "The F-guild", 
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",

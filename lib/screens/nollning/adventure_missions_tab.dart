@@ -268,7 +268,6 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
                   points = int.parse(_textFieldController.text);
                   Navigator.pop(context, points);
                 }
-                print(_textFieldController.text);
               },
             ),
           ],

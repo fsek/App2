@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/article.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -14,12 +15,17 @@ class MannersPage extends StatefulWidget {
 class _MannersPageState extends State<MannersPage> {
   @override
   List<Article> articles = [];
+  Article? welcomeArticle;
 
   _MannersPageState() {
     _loadArticles().then(
       (value) => setState(
         () {
           this.articles = value;
+          welcomeArticle = value[0];
+          if (welcomeArticle != null) {
+            articles.removeAt(0);
+          }
         },
       ),
     );
@@ -37,6 +43,11 @@ class _MannersPageState extends State<MannersPage> {
 
   Widget _createArticleCard(Article a) {
     String locale = Localizations.localeOf(context).toString();
+    Widget mightBeImage = SizedBox(height: 10);
+    if (a.image != "") {
+      mightBeImage = Image.asset("assets/img/${a.image!}");
+      const SizedBox(height: 10);
+    }
     return Card(
       child: InkWell(
         onTap: () => openArticle(a),
@@ -54,10 +65,40 @@ class _MannersPageState extends State<MannersPage> {
               SizedBox(
                 height: 6,
               ),
-              Image.asset(a.image!),
-              const SizedBox(height: 10),
+              mightBeImage,
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget welcomeArticleCard(Article? a) {
+    String locale = Localizations.localeOf(context).toString();
+    if (a == null) {
+      return Container();
+    }
+    return Card(
+      child: ListTile(
+        title: Text(
+          a.title![locale]!,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Html(
+              data: a.content![locale]!,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(16.0),
+                ),
+              },
+            ),
+            SizedBox(
+              height: 6,
+            ),
+          ],
         ),
       ),
     );
@@ -83,6 +124,7 @@ class _MannersPageState extends State<MannersPage> {
           children: [
             Column(
               children: [
+                welcomeArticleCard(welcomeArticle),
                 ...articles.map(
                   (Article a) => _createArticleCard(a),
                 ),

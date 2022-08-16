@@ -32,16 +32,25 @@ class OtherContent extends StatelessWidget {
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
+    /* I am so sorry for this Teo */
     routeMap = {
-      t.otherSongbook: SongbookPage(),
-      t.otherGallery: GalleryPage(),
-      t.otherCafe: CafePage(),
-      t.otherAboutGuild: AboutGuildPage(),
-      t.otherFap: FapPage(),
-      t.otherAccount: SettingsPage(),
-      t.otherLanguage: LanguageSettingsPage(),
-      t.otherContact: ContactPage(),
-      t.otherAnon: Container()
+      "Songbook": SongbookPage(),
+      "Picture Gallery": GalleryPage(),
+      "Hilbert Café": CafePage(),
+      "The F guild": AboutGuildPage(),
+      "The F-app": FapPage(),
+      "Account": SettingsPage(),
+      "Language": LanguageSettingsPage(),
+      "Contact": ContactPage(),
+      "Anonymous contact page": Container(),
+      "Sångbok": SongbookPage(),
+      "Bildgalleri": GalleryPage(),
+      "F-sektionen": AboutGuildPage(),
+      "F-appen": FapPage(),
+      "Konto": SettingsPage(),
+      "Språk": LanguageSettingsPage(),
+      "Kontakt": ContactPage(),
+      "Anonym kontaktsida": Container()
     };
 
     return ListView(
@@ -77,8 +86,11 @@ class OtherContent extends StatelessWidget {
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
                     if (logout ?? false) {
-                      locator<NotificationsService>().logOutDevice().then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+                      locator<NotificationsService>()
+                          .logOutDevice()
+                          .then((value) {
+                        BlocProvider.of<AuthenticationBloc>(context)
+                            .add(LoggedOut());
                       });
                     }
                   },
@@ -112,7 +124,8 @@ class OtherContent extends StatelessWidget {
         });
   }
 
-  List<Widget> _generateListTiles(List<String> tileTexts, BuildContext context) {
+  List<Widget> _generateListTiles(
+      List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
@@ -122,7 +135,9 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
+          trailing: tileText != t.otherAnon
+              ? SizedBox.shrink()
+              : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -135,7 +150,8 @@ class OtherContent extends StatelessWidget {
       launch("http://contact.fsektionen.se");
       return;
     }
-    Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {

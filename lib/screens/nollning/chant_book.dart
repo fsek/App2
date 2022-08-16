@@ -54,7 +54,6 @@ class _ChantBookPageState extends State<ChantBookPage> {
                     //Unfocusing from the searchbar from any tap would be nice but it is minor
                     child: Focus(
                   onFocusChange: (focus) {
-                    print(focus);
                     setState(() {
                       searchFocus = focus;
                     });

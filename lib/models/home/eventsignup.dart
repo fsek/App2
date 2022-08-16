@@ -6,6 +6,7 @@ class EventSignup {
   int? id;
   int? event_id;
   bool? for_members;
+  bool? lottery;
   int? slots;
   DateTime? closes;
   DateTime? opens;

@@ -24,9 +24,10 @@ class _EventPageState extends State<EventPage> {
   Group? group;
   String? answer;
   String? customGroup;
-  List<String>? foodPreferences;
+  Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
   bool displayGroupInput = true;
+  bool? drinkPackageAnswer;
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
     "p": Style(
@@ -49,12 +50,12 @@ class _EventPageState extends State<EventPage> {
               this.event = value;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            print(this.foodPreferences?[i]);
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
 
@@ -71,17 +72,19 @@ class _EventPageState extends State<EventPage> {
               this.answer = null;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
   }
 
   void sendSignup() async {
-    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType);
+    EventUser eventUser =
+        EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
@@ -90,7 +93,6 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.post(
         "/events/" + eventId.toString() + "/event_users",
         mapBody: eventUser.toJson());
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -101,8 +103,6 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.delete(
       "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
     );
-
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -239,7 +239,7 @@ class _EventPageState extends State<EventPage> {
 
     if (event!.can_signup!) {
       if (event!.event_signup!.open!)
-        signup = signupWidget();
+        signup = signupWidget(t);
       else {
         if (event!.event_signup!.closed!) {
           if (event!.event_user == null) {
@@ -270,28 +270,52 @@ class _EventPageState extends State<EventPage> {
               groupName = event!.event_user!.group_custom ?? "";
             }
             String userType = event!.event_user!.user_type ?? t.eventOther;
-            if (event!.event_user?.reserve ?? false) {
-              signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.cancel,
-                        color: Colors.red[300],
-                      ),
-                      Text(
-                        t.eventNoSpot,
-                        style: TextStyle(
+            if (!(event!.event_signup!.lottery ?? false)) {
+              if (event!.event_user?.reserve ?? false) {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
                           color: Colors.red[300],
                         ),
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              } else {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green[300],
+                        ),
+                        Text(
+                          t.eventGotSpot,
+                          style: TextStyle(
+                            color: Colors.green[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              }
             } else {
               signup = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,13 +323,13 @@ class _EventPageState extends State<EventPage> {
                   Row(
                     children: [
                       Icon(
-                        Icons.check_circle,
-                        color: Colors.green[300],
+                        Icons.info_outline_rounded,
+                        color: Colors.orange[600],
                       ),
                       Text(
-                        t.eventGotSpot,
+                        t.eventLotterySpot,
                         style: TextStyle(
-                          color: Colors.green[300],
+                          color: Colors.orange[600],
                         ),
                       ),
                     ],
@@ -418,12 +442,30 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget signupWidget() {
-    var t = AppLocalizations.of(context)!;
+  Widget signupWidget(AppLocalizations t) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       if (event?.can_signup ?? false) return Container();
     }
-
+    Widget drinkPackageInput = Container();
+    if (event!.drink_package ?? false) {
+      drinkPackageInput = Row(
+        children: [
+          Text(" ${t.eventDrinkPackage}"),
+          Checkbox(
+              value: drinkPackageAnswer ?? false,
+              onChanged: (value) {
+                setState(() {
+                  this.drinkPackageAnswer = value;
+                });
+              }),
+        ],
+      );
+    }
     if (event?.event_user == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -434,10 +476,11 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
+              drinkPackageInput,
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences),
-                  ...?foodPreferences
+                  ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text("  " + foodPreference)),
                   Text("  " + (foodCustom ?? "")),
@@ -540,6 +583,41 @@ class _EventPageState extends State<EventPage> {
 
   List<Widget> _signupDetails(String? groupName, String? userType) {
     var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    Widget drinkPackage = Container();
+    if (event!.drink_package ?? false) {
+      if (event!.event_user!.drink_package_answer ?? false) {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventYes,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      } else {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventNo,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      }
+    }
     return [
       RichText(
           text: TextSpan(
@@ -577,6 +655,7 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
+      drinkPackage,
       Wrap(
         children: [
           RichText(
@@ -584,7 +663,7 @@ class _EventPageState extends State<EventPage> {
                   text: t.eventFoodPreferences + " ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences
+          ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
@@ -612,6 +691,10 @@ class _EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       return Scaffold(
         appBar: AppBar(

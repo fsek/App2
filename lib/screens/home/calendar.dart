@@ -111,6 +111,7 @@ class _CalendarState extends State<Calendar> {
   Future<void> _onRefresh() async {
     locator<EventService>().getEvents().then((value) => setState(() {
           this._events = value;
+          _selectedEvents = _getEventsForDay(_selectedDay);
         }));
   }
 

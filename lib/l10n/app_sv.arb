@@ -18,6 +18,7 @@
     "eventNotSignedUp": "Du var inte anmäld",
     "eventNoSpot": "Du fick tyvärr inte plats till eventet.",
     "eventGotSpot": "Du har fått plats!",
+    "eventLotterySpot": "Din anmälan är mottagen.",
     "eventSignUp": "Anmälan",
     "eventNbrSignUps": " Antal anmälda: ",
     "eventNbrSpots": " Antal platser: ",
@@ -27,7 +28,7 @@
     "eventWebMasters": "spindelmännen",
     "eventFoodPreferences": " Matpreferenser:",
     "eventSendSignup": "Skicka Anmälan",
-    "eventDesignup": "Avanmälan",
+    "eventDesignup": "Avanmäl",
     "eventConfirmCancel": "Är du säker på att du vill avanmäla dig?",
     "eventCancel": "AVBRYT",
     "eventConfirmRemoveSignUp": "AVANMÄL MIG",
@@ -41,6 +42,9 @@
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
     "eventAlcoholServed": "  Alokohol serveras",
+    "eventDrinkPackage": "Alkoholpaket: ",
+    "eventYes": "Ja",
+    "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
 
@@ -68,6 +72,12 @@
     "settingsUnsaved": "Osparade ändringar",
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
+
+    "songbookSearch": "Sök",
+    "songbookSongbook": "Sångbok",
+    "songbookNoMatches": "Finns inga matchningar :^(",
+    "songbookMelody": "Melodi",
+    "songbookAuthor": "Författare",
 
     "otherSongbook": "Sångbok",
     "otherGallery": "Bildgalleri",
@@ -122,7 +132,7 @@
     "messagesMessages": "Meddelanden",
 
     "nolleguideWeAtFsek": "Vi på F-sek",
-    "nolleguideEtiquette": "Vett & Etikett",
+    "nolleguideEtiquette": "Allt du behöver veta",
     "nolleguideWordlist": "Ordlista",
 
     "introductionLocked": "Låst",
@@ -165,10 +175,11 @@
     "cafeShiftSignMeUp": "Anmäl mig :))", 
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
+    "cafeShiftShift": " Ledigt pass",
 
-    "articleEtiquette": "Vett & etikett",
+    "articleEtiquette": "Allt du behöver veta",
+    "mannersEtiquette": "Allt du behöver veta",
 
-    "mannersEtiquette": "Vett & etikett",
 
     "aboutGuildGuild": "F-sektionen",
     "aboutGuildOne": "F-sektionen inom TLTH är en ideell förening för studenter som läser något av civilingenjörsprogrammen ",
@@ -197,5 +208,4 @@
     "fapConstructed": "Knackad av F-sektionens su-per och spindelmän:",
     "fapInspired": "Vad inspirerade nätet under ",
     "fapDev": "utvecklingen"
-
 }

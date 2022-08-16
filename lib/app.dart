@@ -51,6 +51,10 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
     setState(() {
       this._locale = Locale(locale);
       localeName = locale;
+      /* Cache the locale */
+      if (_storage != null) {
+        _storage!.write(key: 'cached-locale', value: localeName);
+      }
     });
   }
 
@@ -71,6 +75,13 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
                 setupPushNotifications();
               }));
         });
+      }
+      /* If we have saved a language setting we use that*/
+      if (_storage != null) {
+        String? cachedLocale = await _storage!.read('cached-locale');
+        if (cachedLocale != null) {
+          setLocale(cachedLocale);
+        }
       }
     });
     // Change background-listener
