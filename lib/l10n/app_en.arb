@@ -105,6 +105,9 @@
     "galleryOf": "of",
 
     "homeNoNews": "No news available",
+    "homeTitleUntranslated": "There is no translation available for this post :(",
+    "newsNotAvailableOne": "This post has not been translated. Consider contacting ", 
+    "newsNotAvailableTwo": " who published this and remind them to provide a translateion. :)", 
 
     "groupWriteProtected": "Chat is write-protected",
     "groupWhatToDo": "What do you want to do with the message?",
@@ -192,6 +195,5 @@
     "fapConstructed": "Bodged together by the su-permen and Webmasters of the F-guild",
     "fapInspired": "What inspired the web during ",
     "fapDev": "development"
-
 
 }

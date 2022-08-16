@@ -105,8 +105,13 @@
     "galleryTitle": "Bildgalleri",
     "galleryImage": "Bild",
     "galleryOf": "av",
-    
-    "homeNoNews": "Inga nyheter tillgängliga",
+
+    "homeNoNews": "Inga nyheter tillgänliga",
+    "homeTitleUntranslated": "Det finns ingen översättning tillgänglig för detta inlägget\n:(",
+    "newsNotAvailableOne": "Detta inlägget är inte tillgängligt på svenska. Överväg att kontakta ",
+    "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ", 
+
+
 
     "groupWriteProtected": "Chatten är skrivskyddad",
     "groupWhatToDo": "Vad vill du göra med meddelandet?",
@@ -182,7 +187,6 @@
     "aboutGuildEleven": "eller på vår hemsida. Annars kan du alltid svänga förbi styrelserummet som ligger i den södra delen av ",
     "aboutGuildTwelve": "Hilbertkorridoren; där hittar du nästan alltid någon sektionsaktiv. Vi hoppas att du ska trivas på sektionen!",
 
-
     "fapSuper": "su-perman",
     "fapSpider": "Spindelman", 
     "fapSpiderMaster": "Spindelförman",
@@ -193,4 +197,5 @@
     "fapConstructed": "Knackad av F-sektionens su-per och spindelmän:",
     "fapInspired": "Vad inspirerade nätet under ",
     "fapDev": "utvecklingen"
+
 }
