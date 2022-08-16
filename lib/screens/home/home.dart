@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget createNewsCard() {
-    var t = AppLocalizations.of(context);
+    var t = AppLocalizations.of(context)!;
     return RefreshIndicator(
         onRefresh: () => _onRefresh(),
         child: Container(
@@ -42,13 +42,12 @@ class _HomePageState extends State<HomePage> {
             shrinkWrap: true,
             builderDelegate: PagedChildBuilderDelegate<News>(
                 itemBuilder: (context, news, index) {
-              if (news.title == null) return Container();
 
               return Card(
-                  child: InkWell(
+                   child: InkWell(
                       onTap: () => openNews(news),
                       child: ListTile(
-                          title: Text(news.title!),
+                          title: Text((news.title == "" || news.title == null) ? t.homeTitleUntranslated: news.title!),
                           subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -65,7 +64,6 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.orange[600])
                               : SizedBox.shrink())));
             }, noItemsFoundIndicatorBuilder: (context) {
-              var t = AppLocalizations.of(context)!;
               return Container(
                   height: 400,
                   child: Center(

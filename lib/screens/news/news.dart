@@ -5,6 +5,7 @@ import 'package:fsek_mobile/models/home/news.dart';
 import 'package:fsek_mobile/util/time.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, required this.news}) : super(key: key);
@@ -13,8 +14,11 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool translated = (news.title != "" &&  news.content == null); 
     //make it look not terrible
-    return Scaffold(
+    var t = AppLocalizations.of(context)!;
+    if (translated){
+      return Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -61,6 +65,33 @@ class NewsPage extends StatelessWidget {
             ],
           ),
         ));
-  }
+    }
 
+    return Scaffold(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+                  child: Text(news.title=="" || news.title==null ? t.homeTitleUntranslated : news.title!,
+                      style: Theme.of(context).textTheme.headline6),
+              ),
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
+                  child: Text("${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}", 
+                    style:Theme.of(context).textTheme.bodyText1 ),
+                  ), 
+                ),
+            ],
+          ),
+        ));
+    }
 }
