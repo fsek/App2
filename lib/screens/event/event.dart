@@ -28,34 +28,19 @@ class _EventPageState extends State<EventPage> {
   String? foodCustom;
   bool displayGroupInput = true;
   bool? drinkPackageAnswer;
-  final Map<String, Style> _htmlStyle = {
-    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
-    "p": Style(
-        padding: EdgeInsets.zero,
-        margin: EdgeInsets.zero,
-        lineHeight: LineHeight(1.2))
-  };
+  final Map<String, Style> _htmlStyle = {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, lineHeight: LineHeight(1.2))};
 
-  static const foodPrefsDisplay = {
-    "vegetarian": "Vegetarian",
-    "vegan": "Vegan",
-    "pescetarian": "Pescetarian",
-    "milk": "Mjölkallergi",
-    "gluten": "Gluten"
-  };
+  static const foodPrefsDisplay = {"vegetarian": "Vegetarian", "vegan": "Vegan", "pescetarian": "Pescetarian", "milk": "Mjölkallergi", "gluten": "Gluten"};
   void initState() {
-    locator<EventService>()
-        .getEvent(widget.eventId)
-        .then((value) => setState(() {
-              this.event = value;
-            }));
+    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
+          this.event = value;
+        }));
     locator<UserService>().getUser().then((value) => setState(() {
           this.foodPreferences = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
             print(this.foodPreferences?[i]);
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+            this.foodPreferences![i] = foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
         }));
 
@@ -63,35 +48,29 @@ class _EventPageState extends State<EventPage> {
   }
 
   void update() {
-    locator<EventService>()
-        .getEvent(widget.eventId)
-        .then((value) => setState(() {
-              this.event = value;
-              this.userType = null;
-              this.group = null;
-              this.answer = null;
-            }));
+    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
+          this.event = value;
+          this.userType = null;
+          this.group = null;
+          this.answer = null;
+        }));
     locator<UserService>().getUser().then((value) => setState(() {
           this.foodPreferences = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+            this.foodPreferences![i] = foodPrefsDisplay[this.foodPreferences![i]] ?? "";
           }
         }));
   }
 
   void sendSignup() async {
-    EventUser eventUser =
-        EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
+    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
     }
     int eventId = event?.id ?? -1;
-    Map json = await AbstractService.post(
-        "/events/" + eventId.toString() + "/event_users",
-        mapBody: eventUser.toJson());
+    Map json = await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
     print(json);
     if (!json.containsKey('errors')) {}
     update();
@@ -202,7 +181,7 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget questionInput() {
-    if (event?.event_signup?.question == null) {
+    if (event?.event_signup?.question == null || event?.event_signup?.question == "") {
       return Container();
     }
     return Container(
@@ -390,12 +369,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_available_rounded,
                     ),
                     Text(
-                      t.eventSignUpOpens +
-                          DateFormat("d/M")
-                              .format(event!.event_signup!.opens!.toLocal()) +
-                          " " +
-                          DateFormat("jm", locale)
-                              .format(event!.event_signup!.opens!.toLocal()),
+                      t.eventSignUpOpens + DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
@@ -405,12 +379,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_busy_rounded,
                     ),
                     Text(
-                      t.eventSignUpCloses +
-                          DateFormat("d/M")
-                              .format(event!.event_signup!.closes!.toLocal()) +
-                          " " +
-                          DateFormat("jm", locale)
-                              .format(event!.event_signup!.closes!.toLocal()),
+                      t.eventSignUpCloses + DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
                 ),
@@ -444,13 +413,10 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget signupWidget(AppLocalizations t) {
-    if (event == null) {
-      if (event?.can_signup ?? false) return Container();
-    }
-    Widget drinkPackageInput = Container();
-    if (event!.drink_package ?? false) {
-      drinkPackageInput = Row(
+  Widget drinkPackageInput() {
+    var t = AppLocalizations.of(context)!;
+    if (event?.drink_package ?? false) {
+      return Row(
         children: [
           Text(" ${t.eventDrinkPackage}"),
           Checkbox(
@@ -462,7 +428,30 @@ class _EventPageState extends State<EventPage> {
               }),
         ],
       );
+    } else {
+      return Container();
     }
+  }
+
+  Widget signupWidget(AppLocalizations t) {
+    if (event == null) {
+      if (event?.can_signup ?? false) return Container();
+    }
+    // Widget drinkPackageInput = Container();
+    // if (event!.drink_package ?? false) {
+    //   drinkPackageInput = Row(
+    //     children: [
+    //       Text(" ${t.eventDrinkPackage}"),
+    //       Checkbox(
+    //           value: drinkPackageAnswer ?? false,
+    //           onChanged: (value) {
+    //             setState(() {
+    //               this.drinkPackageAnswer = value;
+    //             });
+    //           }),
+    //     ],
+    //   );
+    // }
     if (event?.event_user == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -473,13 +462,11 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
-              drinkPackageInput,
+              drinkPackageInput(),
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences),
-                  ...?foodPreferences
-                      ?.where((element) => element.isNotEmpty)
-                      .map((foodPreference) => Text("  " + foodPreference)),
+                  ...?foodPreferences?.where((element) => element.isNotEmpty).map((foodPreference) => Text("  " + foodPreference)),
                   Text("  " + (foodCustom ?? "")),
                 ],
               ),
@@ -584,80 +571,29 @@ class _EventPageState extends State<EventPage> {
     if (event!.drink_package ?? false) {
       if (event!.event_user!.drink_package_answer ?? false) {
         drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: t.eventYes,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
+          text: TextSpan(text: t.eventDrinkPackage, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), children: [TextSpan(text: t.eventYes, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))]),
         );
       } else {
         drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: t.eventNo,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
+          text: TextSpan(text: t.eventDrinkPackage, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), children: [TextSpan(text: t.eventNo, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))]),
         );
       }
     }
     return [
-      RichText(
-          text: TextSpan(
-              text: t.eventGroup,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(
-                text: groupName,
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
-      RichText(
-          text: TextSpan(
-              text: t.eventPriority2,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(
-                text: userType,
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
+      RichText(text: TextSpan(text: t.eventGroup, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
+      RichText(text: TextSpan(text: t.eventPriority2, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))])),
       event!.event_signup!.question != ""
           ? RichText(
               text: TextSpan(
                   text: event!.event_signup!.question!,
-                  children: [
-                    TextSpan(text: " "),
-                    TextSpan(
-                        text: event!.event_user!.answer,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.black))
-                  ],
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black)))
+                  children: [TextSpan(text: " "), TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
       drinkPackage,
       Wrap(
         children: [
-          RichText(
-              text: TextSpan(
-                  text: t.eventFoodPreferences + " ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences
-              ?.where((element) => element.isNotEmpty)
-              .map((foodPreferences) => Text(foodPreferences + " ")),
+          RichText(text: TextSpan(text: t.eventFoodPreferences + " ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+          ...?foodPreferences?.where((element) => element.isNotEmpty).map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
         ],
       ),
@@ -719,15 +655,12 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(
-                              event?.starts_at?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.starts_at?.toLocal() ?? DateTime.now()) +
                           getDots() +
                           " - " +
-                          DateFormat("HH:mm").format(
-                              event?.ends_at?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.ends_at?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale).format(
-                              event?.starts_at?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale).format(event?.starts_at?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -754,8 +687,7 @@ class _EventPageState extends State<EventPage> {
                   child: Html(
                       data: event?.description ?? t.eventNoDescription,
                       style: _htmlStyle,
-                      onLinkTap: (String? url, RenderContext context,
-                          Map<String, String> attributes, element) {
+                      onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, element) {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
@@ -765,16 +697,8 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [
-                        Text(t.eventDressCode),
-                        ...?event?.dress_code
-                            ?.map((dressCode) => Text(dressCode + " "))
-                      ]),
-                      Visibility(
-                          visible: event!.cash ?? false,
-                          child: Text(t.eventPrice +
-                              (event?.price?.toString() ?? "") +
-                              " kr")),
+                      Row(children: [Text(t.eventDressCode), ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))]),
+                      Visibility(visible: event!.cash ?? false, child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
                     ],
                   ),
                 ),
@@ -786,10 +710,7 @@ class _EventPageState extends State<EventPage> {
                       Visibility(
                         visible: event!.cash ?? false,
                         child: Row(
-                          children: [
-                            Icon(Icons.attach_money_rounded),
-                            Text(t.eventCostsMoney)
-                          ],
+                          children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
                         ),
                       ),
                       Visibility(
@@ -848,10 +769,7 @@ class _EventPageState extends State<EventPage> {
                               color: Colors.blue[300],
                             ),
                           ),
-                          onTap: () => launchUrl(Uri.parse(
-                            "https://www.fsektionen.se/kontakter/" +
-                                (event!.contact?.id ?? 0).toString())
-                          ),
+                          onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString())),
                         ),
                         const Divider(),
                       ],

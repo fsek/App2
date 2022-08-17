@@ -41,8 +41,8 @@
     "eventPrice": "Pris: ",
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
-    "eventAlcoholServed": "  Alokohol serveras",
-    "eventDrinkPackage": "Alkoholpaket: ",
+    "eventAlcoholServed": "  Alkohol serveras",
+    "eventDrinkPackage": "Vill du ha alkoholpaket?\n(OBS! Detta är inte bindande): ",
     "eventYes": "Ja",
     "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
@@ -102,14 +102,14 @@
     "contactHasBeenSent": "Ditt meddelande har skickas! :D",
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
-    
+
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
 
     "galleryTitle": "Bildgalleri",
     "galleryImage": "Bild",
     "galleryOf": "av",
-    
+
     "homeNoNews": "Inga nyheter tillgängliga",
 
     "groupWriteProtected": "Chatten är skrivskyddad",
@@ -152,8 +152,8 @@
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
     "cafeShiftFail": "Något gick fel!",
-    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid", 
-    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!", 
+    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid",
+    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!",
     "cafeShiftSuccessUnsignText": "Tipsa en kompis om att anmäla sig på passet istället!",
     "cafeShiftFailUnsignText": "Det gick inte att avanmäla dig från passet.",
     "cafeShiftCafeShift": "Cafépass",
@@ -161,7 +161,7 @@
     "cafeShiftRemoveSignup": "Avanmäl mig :((",
     "cafeShiftSignup2": "Anmälan ",
     "cafeShiftIsSignedUp": "är anmäld",
-    "cafeShiftSignMeUp": "Anmäl mig :))", 
+    "cafeShiftSignMeUp": "Anmäl mig :))",
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
 
