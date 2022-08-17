@@ -17,7 +17,7 @@ class _FapPageState extends State<FapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var t = AppLocalizations.of(context)!; 
+    var t = AppLocalizations.of(context)!;
     List<String> knackare = [
       "Ludwig Linder, ${t.fapSuper} 2021",
       "Lukas Gustavsson, ${t.fapSpiderMaster} 20/21",
@@ -25,6 +25,7 @@ class _FapPageState extends State<FapPage> {
       "Emil Manelius, ${t.fapSpiderMaster} 21/22",
       "Nils Thorin, ${t.fapSpider} 2021",
       "Simon Löwgren, ${t.fapSpider} 2021",
+      "Magdalena Ohlsson, ${t.fapSpider} 2022",
     ];
     List<String> inspiration = ["https://www.youtube.com/watch?v=k238XpMMn38"];
     TapGestureRecognizer fredmansTap = TapGestureRecognizer()
@@ -44,7 +45,10 @@ class _FapPageState extends State<FapPage> {
           children: [
             Text(
               t.fapFap,
-              style: Theme.of(context).textTheme.headline4?.apply(color: Colors.orange[600]),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.apply(color: Colors.orange[600]),
             ),
             SizedBox(
               height: 10,
@@ -59,7 +63,10 @@ class _FapPageState extends State<FapPage> {
             ),
             Text(
               t.fapConstructed,
-              style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.orange[700]),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.apply(color: Colors.orange[700]),
             ),
             ...(knackare.map((e) => Text(e)).toList()),
             SizedBox(
@@ -69,7 +76,7 @@ class _FapPageState extends State<FapPage> {
               text: TextSpan(
                 style: TextStyle(color: Colors.black),
                 children: <TextSpan>[
-                  TextSpan(text:t.fapInspired),
+                  TextSpan(text: t.fapInspired),
                   TextSpan(
                     text: t.fapDev,
                     style: TextStyle(color: Colors.grey[700]),
@@ -78,7 +85,11 @@ class _FapPageState extends State<FapPage> {
                 ],
               ),
             ),
-            ...(inspiration.map((e) => TextButton(onPressed: () => launch(e), child: Text("Link " + inspiration.indexOf(e).toString()))).toList()),
+            ...(inspiration
+                .map((e) => TextButton(
+                    onPressed: () => launch(e),
+                    child: Text("Link " + inspiration.indexOf(e).toString())))
+                .toList()),
             Spacer(),
             Row(
               children: [
@@ -119,7 +130,8 @@ class _FapPageState extends State<FapPage> {
         builder: (context) {
           return AlertDialog(
             title: Text("Your Beer Life has Ended"),
-            content: Text("You are a disgrace to spoders everywhere across the world, no more beer for you"),
+            content: Text(
+                "You are a disgrace to spoders everywhere across the world, no more beer for you"),
             actions: [
               TextButton(
                 child: Text("Unlit fam"),
@@ -138,7 +150,8 @@ class _FapPageState extends State<FapPage> {
         builder: (context) {
           return AlertDialog(
             title: Text("A New Life with Beer"),
-            content: Text("Congratulations fren, a new life will start on friday 15.00"),
+            content: Text(
+                "Congratulations fren, a new life will start on friday 15.00"),
             actions: [
               TextButton(
                 child: Text("Lit fam"),
