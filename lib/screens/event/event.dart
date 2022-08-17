@@ -437,21 +437,6 @@ class _EventPageState extends State<EventPage> {
     if (event == null) {
       if (event?.can_signup ?? false) return Container();
     }
-    // Widget drinkPackageInput = Container();
-    // if (event!.drink_package ?? false) {
-    //   drinkPackageInput = Row(
-    //     children: [
-    //       Text(" ${t.eventDrinkPackage}"),
-    //       Checkbox(
-    //           value: drinkPackageAnswer ?? false,
-    //           onChanged: (value) {
-    //             setState(() {
-    //               this.drinkPackageAnswer = value;
-    //             });
-    //           }),
-    //     ],
-    //   );
-    // }
     if (event?.event_user == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
