@@ -5,6 +5,7 @@ import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/services/home.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,7 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PagingController<int, News> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, News> _pagingController =
+      PagingController(firstPageKey: 1);
 
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
@@ -31,35 +33,42 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget createNewsCard() {
+    var t = AppLocalizations.of(context)!;
     return RefreshIndicator(
         onRefresh: () => _onRefresh(),
         child: Container(
           child: PagedListView<int, News>(
             pagingController: _pagingController,
             shrinkWrap: true,
-            builderDelegate: PagedChildBuilderDelegate<News>(itemBuilder: (context, news, index) {
-              if (news.title == null) return Container();
+            builderDelegate: PagedChildBuilderDelegate<News>(
+                itemBuilder: (context, news, index) {
 
               return Card(
-                  child: InkWell(
+                   child: InkWell(
                       onTap: () => openNews(news),
                       child: ListTile(
-                        title: Text(news.title!),
-                        subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Text(news.user!.name!),
-                          SizedBox(height: 6),
-                          Text(
-                            news.created_at.toString().substring(0, 16),
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ]),
-                        isThreeLine: true,
-                        trailing: (news.is_pinned?? false) ? 
-                            Icon(Icons.push_pin_outlined, color: Colors.orange[600]) : 
-                            SizedBox.shrink()
-                      )));
+                          title: Text((news.title == "" || news.title == null) ? t.homeTitleUntranslated: news.title!),
+                          subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(news.user!.name!),
+                                SizedBox(height: 6),
+                                Text(
+                                  news.created_at.toString().substring(0, 16),
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ]),
+                          isThreeLine: true,
+                          trailing: (news.is_pinned ?? false)
+                              ? Icon(Icons.push_pin_outlined,
+                                  color: Colors.orange[600])
+                              : SizedBox.shrink())));
             }, noItemsFoundIndicatorBuilder: (context) {
-              return Container(height: 400, child: Center(child: Text("Inga nyheter tillgängliga", style: Theme.of(context).textTheme.headline6)));
+              return Container(
+                  height: 400,
+                  child: Center(
+                      child: Text(t.homeNoNews,
+                          style: Theme.of(context).textTheme.headline6)));
             }),
           ),
         ));
@@ -67,7 +76,8 @@ class _HomePageState extends State<HomePage> {
 
   void openNews(News news) {
     //redirect to other page and shit
-    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsPage(news: news)));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => NewsPage(news: news)));
   }
 
   void loadMoreNews(int page) {
@@ -76,7 +86,8 @@ class _HomePageState extends State<HomePage> {
         _pagingController.appendLastPage(value.news ?? []);
       } else if (page == 1) {
         locator<HomeService>().getPinnedNews().then((pinned) {
-           _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
+          _pagingController.appendPage(
+              (pinned.news ?? []) + (value.news ?? []), page + 1);
         });
       } else {
         _pagingController.appendPage(value.news ?? [], page + 1);

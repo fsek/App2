@@ -6,6 +6,7 @@ import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CafePage extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _CafePageState extends State<CafePage> {
   }
 
   Widget createCafeShiftCard(CafeShift shift) {
+    var t = AppLocalizations.of(context)!;
     return Card(
       color: (shift.user != null) ? Colors.orange[100] : null,
       child: InkWell(
@@ -55,7 +57,7 @@ class _CafePageState extends State<CafePage> {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      shift.user?.name ?? "Ledigt pass",
+                      shift.user?.name ?? t.cafeShiftShift,
                       style: TextStyle(
                         fontSize: 18,
                       ),
@@ -108,6 +110,7 @@ class _CafePageState extends State<CafePage> {
 
   @override
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).toString();
     return Scaffold(
       appBar: AppBar(
         title: Text("Hilbert Café"),
@@ -118,7 +121,7 @@ class _CafePageState extends State<CafePage> {
           children: [
             TableCalendar(
               availableGestures: AvailableGestures.horizontalSwipe,
-              locale: "sv_SE",
+              locale: locale,
               startingDayOfWeek: StartingDayOfWeek.monday,
               firstDay: DateTime.now().subtract(Duration(days: 365 * 5)),
               lastDay: DateTime.now().add(Duration(days: 365 * 5)),
@@ -149,7 +152,7 @@ class _CafePageState extends State<CafePage> {
               color: Colors.orange[600],
               child: Text(
                 /* It's too late to write pretty code, take this formatting space*/
-                "  " + DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay),
+                "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white,

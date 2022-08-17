@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/gallery/album.dart';
-import 'package:fsek_mobile/models/gallery/albumImage.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AlbumPage extends StatelessWidget {
   const AlbumPage({Key? key, required this.album}) : super(key: key);
@@ -11,6 +11,7 @@ class AlbumPage extends StatelessWidget {
 
   @override
   build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return Scaffold(
         appBar: AppBar(),
         body: Column(
@@ -21,38 +22,28 @@ class AlbumPage extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.grey[50]),
               child: ExpansionTile(
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                childrenPadding: EdgeInsets.fromLTRB(8, 0 ,8 ,8),
-                title: 
-                  Text(
-                    album.title!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        ?.apply(color: Colors.orange[800]),
-                  ),
+                childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                title: Text(
+                  album.title!,
+                  style: Theme.of(context).textTheme.headline4?.apply(color: Colors.orange[800]),
+                ),
                 children: [
                   SizedBox(
                     height: 16,
                     width: double.infinity,
                   ),
-                  Text(album.description ?? "-", 
-                    textAlign: TextAlign.start,),
+                  Text(
+                    album.description ?? "-",
+                    textAlign: TextAlign.start,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   RichText(
                       text: TextSpan(
-                          text: "Fotografter: ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              ?.apply(color: Colors.orange[800]),
-                          children: [
-                        TextSpan(
-                            text: album.photographers?.join(", ") ??
-                                "No photographers",
-                            style: Theme.of(context).textTheme.bodyText2)
-                      ])),
+                          text: t.albumPhotographers,
+                          style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.orange[800]),
+                          children: [TextSpan(text: album.photographers?.join(", ") ?? t.albumNoPhotographers, style: Theme.of(context).textTheme.bodyText2)])),
                   SizedBox(
                     height: 10,
                   ),
@@ -81,14 +72,22 @@ class AlbumPage extends StatelessWidget {
   List<Widget> generateImages(BuildContext context) {
     List<Widget> result = [];
     for (int i = 0; i < album.images!.length; i++) {
-      result.add(Ink.image(
-        image: NetworkImage(
-            "${Environment.API_URL}${album.images![i].file!.thumb!}"),
-        fit: BoxFit.cover,
-        child: InkWell(
-          onTap: () => openImageBrowser(context, i),
-        ),
-      ));
+      Ink ink = Ink.image(
+          image: AssetImage("assets/img/f_logo.png"),
+          fit: BoxFit.cover,
+          child: InkWell(
+            onTap: () => openImageBrowser(context, i),
+          )); //default pic
+
+      if (album.images![i].file!.thumb!["url"] != null) {
+        ink = Ink.image(
+            image: NetworkImage("${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
+            fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () => openImageBrowser(context, i),
+            ));
+      }
+      result.add(ink);
     }
 
     return result;

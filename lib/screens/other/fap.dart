@@ -4,6 +4,7 @@ import 'package:fsek_mobile/models/fredmansky/fredmansky.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FapPage extends StatefulWidget {
   @override
@@ -16,13 +17,14 @@ class _FapPageState extends State<FapPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!; 
     List<String> knackare = [
-      "Ludwig Linder, su-perman 2021",
-      "Lukas Gustavsson, Spindelförman 20/21",
-      "Teodor Åberg, su-perman 2021",
-      "Emil Manelius, Spindelförman 21/22",
-      "Nils Thorin, Spindelman 2021",
-      "Simon Löwgren, Spindelman 2021",
+      "Ludwig Linder, ${t.fapSuper} 2021",
+      "Lukas Gustavsson, ${t.fapSpiderMaster} 20/21",
+      "Teodor Åberg, ${t.fapSuper} 2021",
+      "Emil Manelius, ${t.fapSpiderMaster} 21/22",
+      "Nils Thorin, ${t.fapSpider} 2021",
+      "Simon Löwgren, ${t.fapSpider} 2021",
     ];
     List<String> inspiration = ["https://www.youtube.com/watch?v=k238XpMMn38"];
     TapGestureRecognizer fredmansTap = TapGestureRecognizer()
@@ -33,7 +35,7 @@ class _FapPageState extends State<FapPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Om F-appen"),
+        title: Text(t.fapAbout),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,22 +43,22 @@ class _FapPageState extends State<FapPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "F-appen",
+              t.fapFap,
               style: Theme.of(context).textTheme.headline4?.apply(color: Colors.orange[600]),
             ),
             SizedBox(
               height: 10,
             ),
-            Text("Version: ja"),
+            Text(t.fapVersion),
             SizedBox(
               height: 10,
             ),
-            Text("Powered by Kaffe, su-permannatårar, och Flutter"),
+            Text(t.fapPower),
             SizedBox(
               height: 10,
             ),
             Text(
-              "Knackad av F-sektionens su-per- och spindelmän:",
+              t.fapConstructed,
               style: Theme.of(context).textTheme.bodyText1?.apply(color: Colors.orange[700]),
             ),
             ...(knackare.map((e) => Text(e)).toList()),
@@ -67,9 +69,9 @@ class _FapPageState extends State<FapPage> {
               text: TextSpan(
                 style: TextStyle(color: Colors.black),
                 children: <TextSpan>[
-                  TextSpan(text: "Vad inspirerade nätet under "),
+                  TextSpan(text:t.fapInspired),
                   TextSpan(
-                    text: "utvecklingen:",
+                    text: t.fapDev,
                     style: TextStyle(color: Colors.grey[700]),
                     recognizer: fredmansTap,
                   ),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
+import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
@@ -14,35 +15,50 @@ import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtherContent extends StatelessWidget {
-  final catagories = ["Sångbok", "Bildgalleri", "Hilbert Café"];
-  final about = ["F-sektionen", "F-appen"];
-  final settings = ["Konto"];
-  final support = ["Kontakt", "Anonym kontaktsida"];
-  final Map<String, Widget> routeMap = {
-    "Sångbok": SongbookPage(),
-    "Bildgalleri": GalleryPage(),
-    "Hilbert Café": CafePage(),
-    // PlaceholderPage(
-    //     title: "Hilbert Café",
-    //     disc: "Här kommer du kunna "
-    //         "Se tillgängliga pass och boka in dig ifall du är sugen på att jobba"),
-    "F-sektionen": AboutGuildPage(),
-    "F-appen": FapPage(),
-    "Konto": SettingsPage(),
-    "Kontakt": ContactPage(),
-    "Anonym kontaktsida": Container()
-  };
+  //TODO fix this
+  static List<String> categories = [];
+  static List<String> about = [];
+  static List<String> settings = [];
+  static List<String> support = [];
+  static Map<String, Widget> routeMap = {};
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    about = [t.otherAboutGuild, t.otherFap];
+    settings = [t.otherAccount, t.otherLanguage];
+    support = [t.otherContact, t.otherAnon];
+    /* I am so sorry for this Teo */
+    routeMap = {
+      "Songbook": SongbookPage(),
+      "Picture Gallery": GalleryPage(),
+      "Hilbert Café": CafePage(),
+      "The F guild": AboutGuildPage(),
+      "The F-app": FapPage(),
+      "Account": SettingsPage(),
+      "Language": LanguageSettingsPage(),
+      "Contact": ContactPage(),
+      "Anonymous contact page": Container(),
+      "Sångbok": SongbookPage(),
+      "Bildgalleri": GalleryPage(),
+      "F-sektionen": AboutGuildPage(),
+      "F-appen": FapPage(),
+      "Konto": SettingsPage(),
+      "Språk": LanguageSettingsPage(),
+      "Kontakt": ContactPage(),
+      "Anonym kontaktsida": Container()
+    };
+
     return ListView(
-        children: _generateListTiles(catagories, context) +
+        children: _generateListTiles(categories, context) +
             [
               ListTile(
                   title: Text(
-                "Om",
+                t.otherAbout,
                 style: _style(),
               ))
             ] +
@@ -50,7 +66,7 @@ class OtherContent extends StatelessWidget {
             [
               ListTile(
                   title: Text(
-                "Inställningar",
+                t.otherSettings,
                 style: _style(),
               ))
             ] +
@@ -64,7 +80,7 @@ class OtherContent extends StatelessWidget {
                     child: ListTile(
                   tileColor: Colors.red[600],
                   title: Text(
-                    "Logga ut",
+                    t.otherLogOut,
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
@@ -84,20 +100,21 @@ class OtherContent extends StatelessWidget {
   }
 
   Future<bool?> _confirmLogout(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Är du säker på att du vill logga ut?"),
+            title: Text(t.otherLogOutConfirm),
             actions: [
               TextButton(
-                child: Text("AVBRYT"),
+                child: Text(t.otherCancel.toUpperCase()),
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
               ),
               TextButton(
-                child: Text("LOGGA UT"),
+                child: Text(t.otherLogOut.toUpperCase()),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -110,6 +127,7 @@ class OtherContent extends StatelessWidget {
   List<Widget> _generateListTiles(
       List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
+    var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
       tiles.add(Card(
         margin: EdgeInsets.all(2),
@@ -117,7 +135,7 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != "Anonym kontaktsida"
+          trailing: tileText != t.otherAnon
               ? SizedBox.shrink()
               : Icon(Icons.open_in_new_rounded),
         )),
@@ -127,7 +145,8 @@ class OtherContent extends StatelessWidget {
   }
 
   void goToTilePage(String title, BuildContext context) {
-    if (title == "Anonym kontaktsida") {
+    var t = AppLocalizations.of(context)!;
+    if (title == t.otherAnon) {
       launch("http://contact.fsektionen.se");
       return;
     }

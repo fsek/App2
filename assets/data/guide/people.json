@@ -1,0 +1,305 @@
+{
+    "people": [
+        {
+            "image": "President.jpg",
+            "name": {
+                "sv": "Nils Thorin, π20",
+                "en": "Nils Thorin, π20"
+            },
+            "position": {
+                "sv": "Ordförande",
+                "en": "President"
+            },
+            "text": {
+                "sv": "Halloj! Hjärtligt välkommen till LTH och F-sektionen! Jag heter Nils och är ordförande för F-sektionen, vilket betyder att jag ytterst ansvarig för sektionens verksamhet och ser till att allt rullar på som det ska. Jag sitter med i sektionens styrelse, och tillsammans med min vice ordförande Emma leder vi samarbetet mellan utskottsordföranden. Jag är även sektionens ansikte utåt och ansvarar för kontakten med teknologkåren, huset och annat ”vuxet” folk.\nNog om mig! Jag vill gratulera dig till antagningen och till gemenskapen som är F-sektionen. Du har just nu fem fantastiska veckor framför dig, fixade av vårt fenomenala Fös. Ta tillfället i akt och våga pröva på nya grejer, träffa nya vänner och ha det riktigt, riktigt kul! I Lunds studentliv finns så otroligt mycket att göra, och jag är säker på att du hittar din plats i det!",
+                "en": "Hello there! A warm welcome to LTH and the F-guild! My name is Nils and I am president of the F-guild, which means I am responsible for the guild’s activities, and I make sure that everything works as it should. I sit in the guild’s board, and together with my vice president Emma we lead the collaboration between all the committe chairs. I am also the public face of the guild and its representative towards the student union, the house and other ”grown-ups”.\nBut enough about me! I wish to congratulate you to the admission and to the community that is the F-guild. You now have five phenomenal weeks ahead of you, fixed by our fantastic Fös. Take the opportunity and try new things, meet new friends and have a really, really good time! In Lund’s student life there is something for everyone, and I am sure you will find your place in it!"
+            }
+        },
+        {
+            "image": "Vice president.jpg",
+            "name": {
+                "sv": "Emma Engdahl, π18",
+                "en": "Emma Engdahl, π18"
+            },
+            "position": {
+                "sv": "Vice ordförande",
+                "en": "Vice president"
+            },
+            "text": {
+                "sv": "Hej! Jag heter Emma och är vice ordförande på F-sektionen. Det innebär att jag sitter med i både sektionens styrelse och nämnd, där jag främst sysslar med administrativt arbete. Jag fokuserar mycket på samarbetet mellan styrelsen och nämnden, med en god sammanhållning och öppen kommunikation som mål. En stor del av mitt arbete gör jag i samråd med sektionsordförande Nils. Om du undrar något om sektionen, vill prata om engagemang eller har en bra idé till ett projekt så får du gärna komma fram och snacka med mig! Simma lugnt och njut av nollningen!",
+                "en": "Hi! My name is Emma and I'm the Vice President of the Guild. That means I am a part of both the Board and The Council of Executives, where I mostly spend time on administration. I focus a lot on the cooperation between the Board and the Council, aiming towards a cohesion and an open communication. Moreover I do a lot of my work together with the President of the Guild, Nils. If you have any questions regarding the Guild, if you want to talk about commitment in the Guild or if you have a fun idea for a project, you are more than welcome to come talk to me! Take it easy and enjoy the Introduction!"
+            }
+        },
+        {
+          "image": "overfos.png",
+            "name": {
+                "sv": "Överfös Erik",
+                "en": "Överfös Erik"
+            },
+            "position": {
+                "sv": "Överfös",
+                "en": "Överfös"
+            },
+            "text": {
+                "sv": "Hejsan Nollan!\n\nMitt namn är Erik och jag är Överfös på F-sektionen. Som Överfös har jag huvudansvar för F-sektionens nollning 2022. Vägen till nollningen är ett fantastiskt äventyr som jag delat med mina härliga Cofös. Tillsammans utgör vi Föset! Målet med vårt arbete är att skapa den mest fantastiska nollningen någonsin för er F-studenter!\n\nUnder våren så har vi arbetat intensivt med bland annat rekrytering av funktionärer, hållit i utbildningar, planerat roliga nollningsevenemang och knytit kontakter med företag. Nu är det äntligen dags! Vi i Föset är slutligen färdiga med allt arbete och tillsammans med våra nollningsfunktionärer är vi galet taggade på att äntligen få träffa alla nya studenter och njuta av nollningen tillsammans med Dig! Lite extra taggade är vi också på en nollning utan restriktioner såklart!\n\nJag hoppas du får uppleva en magisk nollning samt att du får en fantastisk start här på LTH, F-sektionen och knyter många vänskapsband för livet.\n\n// Ert Urskogs Överfös Erik",
+                "en": "Hello!\n\nMy name is Erik and I am the Överfös (Head of the Introductions Committee) at the F-guild. As Överfös, I have the main responsibility for the 2022 F-guild introduction. The road to the introduction is a fantastic adventure that I have shared with my lovely Cofös. Together we are the Fös! The goal of our work is to create the most wonderful introduction ever for you F-students!\n\n During the spring we have been working hard on recruiting volunteers, holding training sessions, planning fun events and making contacts with companies. Now it's finally time! We in the Fös are finally finished with all the work and together we along with our volunteers are excited to finally meet all the new students and enjoy the introduction with you! We are also a little extra excited for an introduction without restrictions of course!\n\n I hope you have a magical introduction and a great start here at LTH, the F-guild and make many friendships for life.\n\n // The Överfös of the Enchanted Forest, Erik"
+            }
+        },
+        {
+            "image": "The board.jpg",
+            "name": {
+                "sv": "Styrelsen",
+                "en": "The board"
+            },
+            "position": {
+                "sv": "",
+                "en": ""
+            },
+            "text": {
+                "sv": "Hejsan! Det är vi som är F-sektionens styrelse. Det är vi som gemensamt är ansvariga för sektionen. Men vad gör en styrelse? Vi har hand om sektionens administrativa verksamhet och försöker förbättra sektionen utifrån ett långsiktigt perspektiv. Det är vi som fattar beslut som är för stora för en utskottsordförande, men inte så stora att det ska tas på ett sektionsmöte. Dessa beslut handlar t.ex. om sektionens ekonomi och vilka funktionärer som ska ha access till vilka lokaler. Om ni har några frågor om vårt arbete är det bara att kontakta oss! Ni kan hitta oss hängandes i Hilbert café eller bara skicka ett mail till styrelsen@fsektionen.se.",
+                "en": "Hey there! We are the board of the F-guild. Together we are responsible for the guild. But what does a board do? We take care of the administrative parts of the guild and try to improve the guild from a long-term perspective. We also make decisions that are too big for an executive but not so big they should be decided during our guild assembly. These decisions are usually about our economy and which volunteers should have access to which rooms. If you have any questions about our work contact us anytime! You can find us hanging out in Hilbert café or you can email us at styrelsen@fsektionen.se."
+            }
+        },
+        {
+            "image": "Treasurer.jpg",
+            "name": {
+                "sv": "Erik Nilsson, F20",
+                "en": "Erik Nilsson, F20"
+            },
+            "position": {
+                "sv": "Kassör",
+                "en": "Treasurer"
+            },
+            "text": {
+                "sv": "Hej! Jag heter Erik och läser tredje året teknisk fysik. Utöver det sitter jag även som kassör, vilket innebär att jag ansvarar för bokföring, fakturor och att sektionen har en budget att följa. Till min hjälp har jag nollningskassören, cafémästaren och den vice sexmästaren som löser bokföring på sina respektive områden. Om du undrar något om sektionens ekonomi eller bara har lust att snacka allmänt - leta upp mig på Fsektionen.se eller i MH!",
+                "en": "Hi! My name is Erik and I'm in my third year of engineering physics. Additionally, I also act as Treasurer of the guild, meaning I'm responsible for book-keeping, invoicing and proposing a budget for the guild. To my aid I have the Deputy Treasurer in charge of Introduction, the Head of the Café and the Deputy Head of Festivities, which are responsible for book-keeping of their respective areas. If you have any questions about the guild economy, or just generally want to chat - find me on Fsektionen.se or somewhere in MH!"
+            }
+        },
+        {
+            "image": "Minister for education.jpg",
+            "name": {
+                "sv": "Samuel Ekström, π18",
+                "en": "Samuel Ekström, π18"
+            },
+            "position": {
+                "sv": "Utbildningsminister",
+                "en": "Minister for education"
+            },
+            "text": {
+                "sv": "Hej! Mitt namn är Samuel Ekström och jag är utbildningsminister för F-sektionen och ansvarar därför över studierådet. Studierådet är sektionens och studenternas sätt att påverka och förbättra både utbildningen och arbetsmiljön. Studiebevakning, utskottets huvuduppgift, utförs tydligast av de 3 kursombuden från varje klass vilka samlar in klassens åsikter om utbildningen. Dessa åsikter framförs på möten som hålls en gång per läsperiod. Syftet med dessa möten är att fånga upp problem som uppstått under den aktuella kursomgången. Mer långsiktigt sker uppföljning av dessa via CEQ-enkäter som skickas ut i slutet av kursen där du kan framföra dina åsikter igen. Om nödvändigt hålls därefter möten där långsiktig förändring diskuteras\nStudierådet har dock ännu fler poster, exempelvis studierådsordförande vilka har mer övergripande ansvar över studiebevakningen och programmets upplägg och sen har vi ledamöterna i studierådet som anordnar spännade evenemang t.ex. lunchföreläsningar, bokbytardagar och pluggkvällar.\nVidare finns även Her-Tech-Future-ansvariga vilka uppmuntrar tjejer att söka tekniska utbildningar, studerandeskyddsombudet som säkerställer att arbetsmiljön är trivsam och de två världsmästarna har hand om utbytesstudenter. Tillsammans är vi F-sektionens studieråd och har du några frågor eller funderingar så tveka inte att kontakta oss!",
+                "en": "Hi! My name is Samuel Ekström and I am the Minister for Education of the F-guild and is thus responsible for the Students’ Educational Council (SEC). The SEC is the F-guild’s way of influencing and improving our education and study environment. Monitoring our education, the prime duty of the SEC, is most visibly carried out by the 3 course representatives from each class, who gather the students’ opinions about their education. These opinions are then presented at meetings held twice every term. The goal of these meetings is to catch problems that have arisen during the current course rendition. Longer term follow-ups happen through the CEQ system, where you again get the chance to share your opinions at the end of the course. If deemed necessary a meeting is then held where long term change is discussed.\nHowever, the SEC has lots of other positions, like President of the Educational Council which have a more overarching responsibility for the education monitoring and the layout of the programme. There are also the members of the Educational Council who arrange exciting events like lunch lectures, book trade days and study evenings.\nYet another couple of positions in the SEC is Her Tech Future-overseer, they make sure to encourage girls to apply for engineering educations, Safety Representative the person that maintains a pleasant work environment and the two Representatives to the International Affairs Committee of TLTH who takes care of international students. Together we are the SEC of the F-guild and if you have any questions or would like to know more, don’t hesitate to contact us!"
+            }
+        },
+        {
+            "image": "Minister of truth.jpg",
+            "name": {
+                "sv": "Gustav Arvidsson, F19",
+                "en": "Gustav Arvidsson, F19"
+            },
+            "position": {
+                "sv": "Sanningsminister",
+                "en": "Minister of truth"
+            },
+            "text": {
+                "sv": "Hej! Mitt namn är Gustav och jag är sektionens Sanningsminister. Att vara Sanningsminister innebär att jag har ansvar för Sanningsministeriet, den del av sektionen som sköter informationsspridning. Utskottet består även av fotografer, sanningsspridare(designers), arkivarier och redaktionen för sektionens tidning “Von Tänen”. Prenumerera gärna på sektionens nyhetsbrev “Vecktorn” på hemsidan, där du får diverse information kopplat till sektionen via mejl varje söndag. Fråga mig om du har några frågor om utskottet eller informationsspridning!",
+                "en": "Hello! My name is Gustav and I am the Guild’s Minister of Truth. As The Minister of Truth I am responsible for the Ministry of Truth, which handles the dissemination of information for the Guild. The Ministry of Truth also consists of photographers, minions of truth (designers), archivists and the editorial staff of the Guild’s newspaper “Von Tänen”. If you want to, you can subscribe to the Guild’s newsletter called “Vecktorn” (or “Weektorn” in English) where you get some information about the guild. You do this on the website. Do not hesitate to ask me questions about the committee or dissemination of information!"
+            }
+        },
+        {
+            "image": "Minister of culture.jpg",
+            "name": {
+                "sv": "Lisa Nilén, F20",
+                "en": "Lisa Nilén, F20"
+            },
+            "position": {
+                "sv": "Kulturminister",
+                "en": "Minister of culture"
+            },
+            "text": {
+                "sv": "Hej! Jag heter Lisa och är Kulturminister på F-sektionen, det vill säga utskottsordförande för Kulturministeriet. Kulturministeriet är ett utskott bestående av massor av olika roliga poster. Vi har idrottsförman och atleter, reisemeister och reiseleiters, @1337 (uttalas atleet), fanbärare, trumpetare, tandemgeneraler, sångarstridsförmän och vi anordnar en massa roliga grejer så du ska ha så kul som möjligt under din studietid! \nExempel på sånt vi gör med är badminton-och-squash-fredagar, bussresor, gamingturneringar, sektionslag i olika sportserier, ölprovningar och sittningar! Vi säljer även massor av märken och annan rolig F-merch.\nHar du några frågor eller bara vill småprata lite så får du gärna höra av dig eller leta upp mig, jag springer ofta runt i frack med ett F på ryggen :)",
+                "en": "Hey! My name is Lisa and I am Minister for Culture in the F-guild, i.e. chairman of the Ministry of Culture. The Ministry of Culture is a committee consisting of lots of different fun positions. We have sports foreman and athletes, reisemeister and reiseleiters, @1337 (pronounced atleet), standard bearers, trumpeters, tandem relay generals, song contest team leader and we organize a lot of fun stuff so you can have as much fun as possible during your studies!\nExamples of things we do with are badminton-and-squash Fridays, bus trips, gaming tournaments, guild teams in various sports series, beer tastings and sittings! We also sell lots of patches and other fun F-merch.\nIf you have any questions or just want to chat a little, please contact me or find me. I often run around in a tailcoat tuxedo jacket with an F on my back :)"
+            }
+        },
+        {
+            "image": "Head of festivities.jpg",
+            "name": {
+                "sv": "Peter Stahre, F20",
+                "en": "Peter Stahre, F20"
+            },
+            "position": {
+                "sv": "Sexmästare",
+                "en": "Head of festivities"
+            },
+            "text": {
+                "sv": "Halloj! Jag heter Peter Stahre och är sexmästare här på sektionen! Sexmästaren är utskottsansvarig för  sexmästeriet, ett av sektionens största utskott som ordnar ihop sektionens mer festliga evenemang, såsom pubar, sittningar och dansgolv. Under mig har jag även mina sju otroliga mästare, två stycken pubmästare, två hofmästare, två köksmästare och min käre vice sexmästare. Vi planerar och styr upp så att våra fantastiska jobbare kan ge gästerna en riktig dunderkväll. Dessa jobbare ser man bland annat servera mat, skaka drinkar i bardisken eller tjöta runt i köket. Vi i sexet har enkelt jävla kul i att se till att alla andra också har det kul! Det var nog alles om mig och oss, har du några undringar om allt mellan himmel och jord så äre bara att kontakta mig. Annars hoppas jag vi ses på nästa sittning!",
+                "en": "Hi there! My name is Peter Stahre and I'm the Master of Festivities here at the section! The Master of Festivities is responsible for the Festivities committee, one of the section's largest committees that organizes the section's more festive events, such as pubs, sittings and clubs. In the committee there is also my seven incredible masters, two pub masters, two Head waiters, two kitchen masters and my dear vice sex master. We plan and organize so that our fantastic workers can give the guests an amazing evening. These workers can be seen serving food, shaking drinks at the bar or vibing in the kitchen. The Festivities committee simply has a real good time in making sure everyone else has a real good time! That's probably it about me and us, if you have any questions, feel free to contact me. Otherwise, I hope to see you at our next event!"
+            }
+        },
+        {
+            "image": "Head of corporate.jpg",
+            "name": {
+                "sv": "Alex Brandner, π21",
+                "en": "Alex Brandner, π21"
+            },
+            "position": {
+                "sv": "Näringslivsansvarig",
+                "en": "Head of corporate"
+            },
+            "text": {
+                "sv": "Tja! Mitt namn är Alex Brandner och jag är näringslivsansvarig på sektionen. Det innebär också att jag är utskottsordförande för näringslivsutskottet. Vårt främsta mål är att ge sektionens medlemmar insyn i framtida karriärmöjligheter, samt möjlighet till kontakt med potentiella arbetsgivare. Vi kommer synas under flera delar av nollningen så tveka inte på att ställa frågor ifall du vill veta mer om vår verksamhet!",
+                "en": "Hey! My name is Alex Brandner and I am head of corporate relations in the F-guild. This also means that I am head of the corporate relations committee. Our main goal is to give members of the guild insight into future career opportunities, as well as to help members establish contact with potential employers. We will be visible during several parts of the introduction so feel free to ask if you want to know more about our work!"
+            }
+        },
+        {
+            "image": "Project manager of FARAD.jpg",
+            "name": {
+                "sv": "William Östlund, F21",
+                "en": "William Östlund, F21"
+            },
+            "position": {
+                "sv": "Projektledare FARAD",
+                "en": "Project manager of FARAD"
+            },
+            "text": {
+                "sv": "God dag! Jag heter William Östlund och är projektledare för FARAD, F-sektionens arbetsmarknadsdagar. FARAD kommer att äga rum i januari 2023 och utgörs av en stor mässa, följd av pubevent, lunchföreläsningar och olika case med företag. Hela FARAD arrangeras av projektgruppen FARAD, som är en del av FNU och består av mig och mina ledamöter. Vi raggar företag och samordnar med ansvariga på LTH och på sektionen för att göra FARAD så bra som möjligt! Målet med mässan och övriga evenemang är att vi studenter ska kunna hitta bra arbetsgivare samtidigt som F-sektionen håvar in feta cash. Du är varmt välkommen att snacka med mig om du har skojiga idéer till FARAD eller bara vill prata av dig :)",
+                "en": "Hello there! My name is William Östlund and I am the project manager of FARAD, the F-Guild’s great career fair. FARAD will take place in January 2023 and consists of one whole day career fair, followed by pub events, lunch lectures and company case events throughout the week. FARAD is also the name of a project group, which I’m the manager of. The members of this group work with contacting companies and overall making FARAD as good as possible! The purpose of the FARAD week is that we, as students, can find good employers, while the F-Guild simultaneously makes the big bucks. Feel free to talk to me if you have any fun ideas for FARAD or if you just want to chat :)"
+            }
+        },
+        {
+            "image": "Master of gadgets.jpg",
+            "name": {
+                "sv": "Rebecca Jungåker, F21",
+                "en": "Rebecca Jungåker, F21"
+            },
+            "position": {
+                "sv": "Prylmästare",
+                "en": "Master of gadgets"
+            },
+            "text": {
+                "sv": "Hej! Jag heter Rebecca och är sektionens prylmästare. På prylmästeriet ansvarar vi för alltifrån skåp och access till den fräsiga F-bilen. Behöver du verktyg till att fixa en cykel eller bygga nåt kul har vi materielen att lösa det och har du förbättringsförslag på F-sektionens hemsida eller app är det oss du ska vända dig till! Till min hjälp har jag Bilförmannen och Spindelförmannen samt våra grymma fixare och spindelmän. Vi genomför även diverse coola projekt för att stärka sektionens förträfflighet! Skriv till oss om du vill hjälpa till eller har någon fråga.",
+                "en": "Hi! My name is Rebecca and I am Pylmästare (Master of gadgets). At Prylmästeriet, we take care of lockers, access, the awesome F-car, and much more. Do you need tools to fix your bike or build something cool? We have them!! Do you have issues with the website or the app? We can fix them! Helping me  I have the Car Foreman and the Web Foreman/Spiderformen, as well as our great Fixers and Spidermen. We do a bunch of fun projects to improve and enrich the superiority of the F-Guild. You can always contact me if you have any questions!"
+            }
+        },
+        {
+            "image": "cafe_people.jpg",
+            "name": {
+                "sv": "Samuel (F19) & Teodor (π18)",
+                "en": "Samuel (F19) & Teodor (π18)"
+            },
+            "position": {
+                "sv": "Cafémästare & Vice cafémästare",
+                "en": "Head of the Café & Deputy head of the Café"
+            },
+            "text": {
+                "sv": "Hej! Vi heter Samuel och Teodor, och det är vi som är Cafémästarna i F-sektionens egna Hilbert Café. Här säljer vi bland annat mackor, sallader, fika och det billigaste kaffet på campus! Alla sektionsmedlemmar kan anmäla sig till att jobba ett pass i caféet och få gratis lunch, fika och andra belöningar. För att anmäla dig till ett pass går du in på hemsidan eller F-appen! Klarar du av detta så har du tillräckliga förkunskaper för att jobba! Om du ser oss får du gärna komma fram och prata, eller bara ge oss en kram!",
+                "en": "Greetings! We are Samuel and Teodor and we are the heads of Hilbert Café, the F-guild's own café. Here you can find sandwiches, salads, fika and the cheapest coffee on campus! All members of the guild can sign up for working a shift in the café, and as thanks receive free lunch, fika and other rewards. You sign up using either the website or the app. If you can manage this, then you are definitely qualified to work! If you ever see us, please come talk to us! Maybe even give us a hug?"
+            }
+        },
+        {
+            "image": "President of the equality committee.jpg",
+            "name": {
+                "sv": "Axel Helgstrand (F18)",
+                "en": "Axel Helgstrand (F18)"
+            },
+            "position": {
+                "sv": "Likabehandlingsordförande",
+                "en": "President of the equality committee"
+            },
+            "text": {
+                "sv": "Hej! Jag heter Axel och är sektionens Likabehandlingsordförande (aka LiBO). Det betyder att med min vice likabehandlingsordförande Marisa driver jag sektionens likabehandlingutskott (aka LiBU) som består av ett gäng fantastiska ledamöter! Vi i LiBU driver sektiones interna likabehandlingsarbete, våra mål är att alla ska kunna känna sig välkomna, bli rättvist behandlade och ha något sammanhang på sektionen där man känner att man hör hemma. Detta uppnår vi genom att varje år sammanställa sektionens likabehandlingsplan, anordna utbildningar till de andra utskotten och hålla i event. Till oss i utskottet kan du alltid komma om du känner dig orättvist behandlad, på sektionen så som i utbildningen, och om du har ett känsligt eller personligt ärende så har jag, LiBO, tystnadsplikt. Du kan känna igen oss på våra unika blå-vit-gröna tofsar, så bara kom och prata med oss! Som LiBO är jag även studiesocialt ansvarig representerar sektionen i likabehandlings och studiesociala frågor på kåren där jag sitter i ett kollegie med studiesocialt ansvariga från runt omkring LTH's sektionen.",
+                "en": "Hi! My name is Axel, and I'm the President of the Committee for Student Equality (aka LiBO). That means that, together with my vice president Marisa, I lead the Committee for Student Equality (aka LiBU) that consists of a number of amazing members! We in LiBU are responsible for the guilds internal equality questions, our goals are that everyone should feel welcome, be fairly treated, and feel like they have a place where they belong in the guild. We achieve this by every year putting together the guilds equality plan, organizing educations for the other committees and, and by arranging events. You can always come to us in LiBU if you feel unfairly treated, either in the guild or in your education, and it might be good to know that I, LiBO, am bound to secrecy if you have an extra sensitive or personal issue. As LiBO I am also responsible for social affairs and represent the guild in equality and social questions at the student union in a group of others of the same position from the other LTH guilds."
+            }
+        },
+        {
+            "image": "The committee of medals and honours.jpg",
+            "name": {
+                "sv": "Carl Boklund (N16 & π21)",
+                "en": "Carl Boklund (N16 & π21)"
+            },
+            "position": {
+                "sv": "Medaljkommittén",
+                "en": "The committee of medals and honours"
+            },
+            "text": {
+                "sv": "Varmt välkommen Nollan! Mitt namn är Carl Boklund och jag är Sektionshärold här på F-sektionen. Tillsammans med mina fenomenala Persevanter utgör vi Medaljkommittén, vilken ansvarar för nyproduktion, inköp samt utdelning av medaljer och ceremonierna kring dessa. För oss är högtider, såväl som traditioner, av största vikt och vi arbetar ständigt för att synliggöra dessa för alla sektionens medlemmar. Vår ambition är att ni ska få vara med i att ta del av F-sektionens rika anor på ett elegant och underhållande vis, men likväl ser vi fram emot att få se er sätta er egen prägel på sektionen. Vi är oerhört exalterade inför att få lära känna er och att ni ska få lära känna oss.",
+                "en": "Welcome! My name is Carl Boklund and I hold the position of Chief Herald at the guild. Together with my phenomenal Persuivants we form The Committee of Medals and Honours which is responsible for all things related to medals and associated ceremonies. We firmly believe that traditions are of utmost importance and so we do our best in trying to promote and celebrate the heritage of the guild, however we are also interested in seeing how these traditions can be improved upon and evolve. We very much look forward to getting to know all of you and for you to get to know us."
+            }
+        },
+        {
+            "image": "FREJA.jpg",
+            "name": {
+                "sv": "Föreningen FREJA",
+                "en": "Organisation FREJA"
+            },
+            "position": {
+                "sv": "",
+                "en": ""
+            },
+            "text": {
+                "sv": "Hejsan Nollan!\n\nJag heter Vilma och är ordförande i föreningen FREJA.\n\nFREJA är en förening för alla tjejer och icke-binära som studerar eller har studerat på f-sektionen, vårt mål är att skapa gemenskap och en naturlig mötesplats för våra medlemmar och genom det bidra till en mer jämställd teknikbransch.\n\nJag tillsammans med resten av FREJAs styrelse ordnar kul event för främst våra medlemmar men ibland även för hela sektionen. Vi anordnar tjejträffen dagen innan nollningen drar igång och under nollningen kommer du få träffa oss på bland annat sektionssafarit.\n\nKika in vår instagram @frejalth för att se vad vi håller på med!\n\nHoppas vi ses!\n\n/ Vilma, Ordförande i FREJA",
+                "en": "Dear Mentee!\n\nMy name is Vilma and I am the president of the organisation FREJA.\n\nFREJA is an organisation for all girls and non-binary people who are studying or have studied at the F-guild, our goal is to create community and a natural meeting place for our members and through that contribute to a more gender equal technology industry.\n\nI together with the rest of the FREJA board organize fun events for mainly our members but sometimes also for the whole section. We organize the girls' meeting the day before the launch and during the launch you will get to meet us at, among other things, section safaris. \n\nCheck out our instagram @frejalth to see what we're up to!\n\nHope to see you there!\n\n/ Vilma, President of FREJA"
+            }
+        },
+        {
+            "image": "TLTH Sabbatical Officers.jpg",
+            "name": {
+                "sv": "Heltidarna",
+                "en": "Sabbatical Officers"
+            },
+            "position": {
+                "sv": "Teknologkåren",
+                "en": "Teknologkåren (The student union)"
+            },
+            "text": {
+                "sv": "Hejsan nollan! \n\nSå härligt att du har tagit dig till Lund och LTH - ett stort grattis från alla oss på Teknologkåren vid Lunds Tekniska Högskola. Vi är ett gäng heltidare som normalt också studerar på LTH, men i år har vi tagit uppehåll från studierna för att jobba på heltid och göra din studietid så bra som möjligt! \n\nVi på Teknologkåren med våra sektioner arbetar för att din utbildning ska fortsätta vara en av de bästa i Sverige och ständigt förbättras. Vi ser till att det finns kontakt med näringslivet och har evenemang såsom arbetsmarknadsmässan ARKAD, och vi ser till att det erbjuds fritidsaktiviteter som idrottsaktiviteter, en sångtävling baler och inte minst - Nollning! \n\nDe närmsta veckorna kommer nollningen förhoppningsvis guida dig in i högskolestudierna och Lunds studentliv. Nollningen kan ibland kännas lång och det är mycket att ta in, men tveka då inte att ta kontakt med någon på din sektion eller oss på Teknologkåren så hjälper vi till med allt vi kan! \n\nNollningen på LTH är fantastiskt spektakulär och vi här på Teknologkåren är avundsjuka på dig som har en hel nollning framför dig! Om vi får komma med ett råd så är det att verkligen ta chansen att uppleva nya saker, träffa nya människor och utforska studentlivet. Här finns något för alla!\n\nÅterigen, varmt välkommen nyblivna teknolog! Har du frågor så har vi förhoppningsvis svar på Teknologkåren, och vi finns här för dig! \n\nVi ses i höst, \n\nHeltidarna\nTeknologkåren vid Lunds Tekniska Högskola",
+                "en": "Dear Mentee!\n\nHow wonderful that you have made it to Lund and LTH - a big congratulations from all of us at Teknologkåren at the Faculty of Engineering LTH. We are a bunch of Sabbatical Officers who normally also study at LTH, but this year we have taken a break from our studies to work full-time and make your student time as good as possible! \n\nWe at Teknologkåren with our guilds work to ensure that your education continues to be one of the best in Sweden and is constantly improving. We make sure that there is contact with the business community and have events such as the job fair ARKAD, and we make sure that extracurricular activities are offered such as sports activities, a singing competition, balls and not least - the Introduction! \n\nOver the next few weeks, the Introduction will hopefully guide you into your university studies and student life in Lund. The Introduction can sometimes feel long and there is a lot to take in, but don't hesitate to contact someone in your guild or us at Teknologkåren and we will help you with everything we can! \n\nThe Introduction at LTH is amazingly spectacular and we at Teknologkåren are jealous of you who have a whole introduction ahead of you! If we can give you one piece of advice, it's to really take the chance to experience new things, meet new people and explore student life. There's something for everyone here!\n\nOnce again, a warm welcome to all you new students! If you have any questions, hopefully we have answers at the Teknologkåren, and we are here for you! \n\nSee you in the autumn, \n\nThe Sabbatical Officers\nTeknologkåren at the Faculty of Engineering LTH"
+            }
+        },
+        {
+            "image": "Head of Introduction.jpg",
+            "name": {
+                "sv": "Sean Jentz",
+                "en": "Sean Jentz"
+            },
+            "position": {
+                "sv": "Nollegeneralen",
+                "en": "Head of Introduction LTH"
+            },
+            "text": {
+                "sv": "Halli hallå!\nNu är det min tur att hälsa dig välkommen till LTH! Mitt namn är Sean Jentz och i år är det jag som sitter på posten som Nollegeneral för vår fina kår. Jag ansvarar för samordnandet av nollningen mellan alla sektioner, utöver vilket jag tillsammans med min Nolleamiral Victor agerar ledare för Øverstarna och deras planering av kårens event. Mig lär ni alltså se vid lite större event, så tveka inte att säga hej när ni får chansen! Annars är jag en vanlig student precis som alla andra och påbörjar mitt femte år här på LTH nu till hösten. Nog om mig, ni har ju en nollning att se fram emot! Se till att ta chansen och vara med där du kan, nollningen och studentlivet är något av det finaste vi har i Lund och en otroligt stor del av stadens själ. Allt ni kommer uppleva är planerat av ideella studenter som verkligen vill att ni hittar er plats i plugget och på LTH och även om kanske inte allt tycker att allt är kul, så vi är ett ganska stort gäng filurer på kåren och sektionerna som planerat denna fartfyllda färd in i studentlivet och allt vad det innebär, så ta chansen att hänga med!\nMvh,\nNollegeneral Sean",
+                "en": "Hello there!\n\nNow it's my turn to welcome you to LTH! My name is Sean Jentz and this year I'm the Head of Introduction of our student union TLTH. I am responsible for the coordination of the introduction between all guilds, in addition to which I, together with my Chief of Introduction Victor, act as the leader of the Øverstar and their planning of the union's events. You'll see me at some of the bigger events, so don't hesitate to say hello when you get the chance! Otherwise, I'm a regular student just like\neveryone else, starting my fifth year here at LTH this fall. Enough about me, you have an introduction to look forward to! Make sure you take the chance and join in wherever you can, the introduction and student life is one of the finest things we have in Lund and an incredibly important part of the city's soul. Everything you will experience is planned by non-profit students who really want you to find your place in the student life and at LTH and although not everything may be fun, we are a\npretty big bunch of people at the student union and guilds who planned this fast-paced journey into student life and all that it entails, so take the chance to join in!\n\nMvh,\nHead of Introduction Sean"
+            }
+        },
+        {
+            "image": "Chief of Introduction.jpg",
+            "name": {
+                "sv": "Victor Mattsson",
+                "en": "Victor Mattsson"
+            },
+            "position": {
+                "sv": "Nolleamiralen",
+                "en": "Chief of Introduction LTH"
+            },
+            "text": {
+                "sv": "Hej och välkommen!\n\nVa kul att du har hittat till LTH! Jag heter Victor Mattsson och jag har i år uppdraget som Nolleamiral. Det innebär att jag agerar ledare tillsammans med Nollegeneralen Sean för  Øverstarna och planeringen av kårens nollningsevent. Vi har jobbat hårt hela våren för att kunna välkomna er på bästa sätt, så vi är väldigt glada att just DU äntligen är här!\nUnder dessa kommande veckor kommer du och hundratals andra nya studenter få möjligheten att uppleva en del av allt Lunds studentliv har att erbjuda. Allt ifrån festliga sittningar till bad och lek i sjön Sjøn.\n\nStörsta delen av nollningen kommer att ske på din egna sektion, men jag tillsammans med mina Øverstar anordnar också event utöver dessa så att du även kan få lära känna folk från de andra sektionerna. Dessa inkluderar bland annat Regattan, Lunchbeat och S-phesten!\n\nNollningen på LTH är en fantastisk upplevelse speciellt gjord för er, de nya nollorna på LTH. Det finns något för alla så se till att ta vara på chansen och återigen välkommen till LTH!\n\nMvh\nNolleamiral Victor",
+                "en": "Hello and welcome!\n\nHow nice that you have found LTH! My name is Victor Mattsson and this year I have the mission as Chief of Introduction. This means that I act as a leader together with the Head of Introduction Sean for the Øverstarna and the planning of Teknologkårens Introduction events. We have been working hard all spring to welcome you in the best possible way, so we are very happy that YOU are finally here!\nOver the next few weeks, you and hundreds of other new students will have the opportunity to experience some of all that Lund's student life has to offer. From festive dinners to swimming and playing in sjøn Sjøn.\n\nMost of the introduction will take place in your own guild, but I together with my Øverstar will also organise events in addition to these so that you can also get to know people from the other guilds. These include the Regatta, Lunchbeat and S-phesten!\n\nThe Introduction at LTH is a great experience made especially for you, the new students at LTH. There is something for everyone so be sure to take advantage of the opportunity and once again welcome to LTH!\n\nSincerely\nChief of Introduction Victor"
+            }
+        },
+        {
+            "image": "Overstar.jpg",
+            "name": {
+                "sv": "Øverstarna",
+                "en": "Øverstar"
+            },
+            "position": {
+                "sv": "Teknologkåren",
+                "en": "Teknologkåren (The student union)"
+            },
+            "text": {
+                "sv": "Hejsan Nollan!\n\nDet är vi som är Øverstar och vi representerar Teknologkårens nollning som du så snart kommer få uppleva. Vi är så glada att just du ska börja på LTH och vi kan lova dig att du kommer få en fantastisk tid framöver på din sektion, fantastiska vänner och en fantastisk nollning. Efter flera år i lite mer isolerande tider är vi Øverstar glada att äntligen ge oss ut och genomföra en storslagen nollning som vi bara drömt om hittills. Du väntas att uppleva en otrolig nollning på din sektion, men även en nollning utanför sektionen där du får en chans att visa vilken färg som är bäst på hela LTH och kanske lära dig något om de andra sektionerna. Det är just vi, Øverstarna tillsammans med Nolleamiral och Nollegeneral som bidrar med det där lilla extra och genomför de stora eventen där du får visa din sektions anda. Du kommer få uppleva en storslagen Nollehelg med tusentals nollor där du får representera din egen sektion i något uppdrag som testar din kreativitet. Utöver det håller vi i andra event som också är sektionsöverskridande!\n\nVi är så taggade på att träffa alla er nollor och att just vi bidrar till några av era bästa veckor under den här studietiden. Glöm inte att ha kul och ta vara på tiden under nollningen. Det är något ni länge kommer drömma tillbaka till. Ni känner igen oss Øverstar i våra blåa mantlar gåendes runt på LTH och såklart på våra event.\n\nVi ses på campus!\n\nKram, Øverstarna <3\nBILDTEXT: Från vänster ser ni Nollegeneral Sean, Øverste Supernova, Øverste Dunder, Øverste Marcus och Øverste Ahmed.",
+                "en": "Dear Mentee!\n\nWe are the Øverstar and we represent Teknologkårens Introduction that you will soon experience. We are so excited that you are about to start at LTH and we can promise you that you will have a great time in your guild, great friends and a great introduction. After several years of more isolating times, we Øverstar are excited to finally go out and have a grand introduction that we have only dreamed of so far. You are sure to experience an incredible introduction at your guild, but also an\nintroduction outside the guild where you get a chance to show you colour (literally) at LTH and maybe learn something about the other guilds. It is we, the Øverstar together with the Head of Introduction and the Chief of Introduction who carry out the big events where you get to show your guild's spirit. You will experience a great Introduction Weekend with thousands of mentees where you get to represent your own guild in some mission that tests your creativity. On top of that, we also hold\nother university-wide events!\n\nWe are so excited to meet all of you mentees and for us to contribute to some of the best weeks of your university time. Don't forget to have fun and make the most of your time during the introduction. It's something you'll dream back to for a long time. You will recognize us Øverstar in our blue capes walking around LTH and of course at our events.\n\nSee you on campus!\n\nLove, the Øverstar <3\n\nCaption: \nFrom the left: Head of lntroduction Sean, Øverste Supernova, Øverste Dunder, Øverste Marcus och Øverste Ahmed. "
+            }
+        }
+
+    ]
+}

@@ -9,6 +9,7 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -23,9 +24,10 @@ class _EventPageState extends State<EventPage> {
   Group? group;
   String? answer;
   String? customGroup;
-  List<String>? foodPreferences;
+  Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
   bool displayGroupInput = true;
+  bool? drinkPackageAnswer;
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
     "p": Style(
@@ -48,12 +50,12 @@ class _EventPageState extends State<EventPage> {
               this.event = value;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            print(this.foodPreferences?[i]);
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
 
@@ -70,17 +72,19 @@ class _EventPageState extends State<EventPage> {
               this.answer = null;
             }));
     locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences = [...(value.food_preferences ?? [])];
+          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
+          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences?.length ?? 0); i++) {
-            this.foodPreferences![i] =
-                foodPrefsDisplay[this.foodPreferences![i]] ?? "";
+          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+            this.foodPreferences['sv']![i] =
+                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
   }
 
   void sendSignup() async {
-    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType);
+    EventUser eventUser =
+        EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
@@ -89,7 +93,6 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.post(
         "/events/" + eventId.toString() + "/event_users",
         mapBody: eventUser.toJson());
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -100,19 +103,18 @@ class _EventPageState extends State<EventPage> {
     Map json = await AbstractService.delete(
       "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
     );
-
-    print(json);
     if (!json.containsKey('errors')) {}
     update();
   }
 
   Widget userTypeDropDown() {
+    var t = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Prioritering:"),
+          Text(t.eventPriority),
           DropdownButton<String?>(
             isExpanded: true,
             value: userType,
@@ -133,7 +135,7 @@ class _EventPageState extends State<EventPage> {
               })),
               DropdownMenuItem<String?>(
                 value: null,
-                child: Text("Övrigt"),
+                child: Text(t.eventOther),
               )
             ],
           ),
@@ -143,12 +145,13 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget groupDropdown() {
+    var t = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Välj grupp:"),
+          Text(t.eventChooseGroup),
           DropdownButton<Group?>(
             isExpanded: true,
             value: group,
@@ -174,7 +177,7 @@ class _EventPageState extends State<EventPage> {
               })),
               DropdownMenuItem<Group?>(
                 value: null,
-                child: Text("Annan"),
+                child: Text(t.eventOtherDifferent),
               )
             ],
           ),
@@ -188,7 +191,7 @@ class _EventPageState extends State<EventPage> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: "Skriv eget gruppnamn",
+                  hintText: t.eventCustomGroupName,
                 )),
           ),
         ],
@@ -226,7 +229,9 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget signupInfoWidget() {
+    var t = AppLocalizations.of(context)!;
     Widget signup;
+    String locale = Localizations.localeOf(context).toString();
     /* If no event or no event signup recieved */
     if (event == null || event?.event_signup == null) {
       return Container();
@@ -234,7 +239,7 @@ class _EventPageState extends State<EventPage> {
 
     if (event!.can_signup!) {
       if (event!.event_signup!.open!)
-        signup = signupWidget();
+        signup = signupWidget(t);
       else {
         if (event!.event_signup!.closed!) {
           if (event!.event_user == null) {
@@ -245,7 +250,7 @@ class _EventPageState extends State<EventPage> {
                   color: Colors.red[300],
                 ),
                 Text(
-                  "Du var inte anmäld",
+                  t.eventNotSignedUp,
                   style: TextStyle(
                     color: Colors.red[300],
                   ),
@@ -264,29 +269,53 @@ class _EventPageState extends State<EventPage> {
             } else {
               groupName = event!.event_user!.group_custom ?? "";
             }
-            String userType = event!.event_user!.user_type ?? "Övrigt";
-            if (event!.event_user?.reserve ?? false) {
-              signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.cancel,
-                        color: Colors.red[300],
-                      ),
-                      Text(
-                        "Du fick tyvärr inte plats till eventet.",
-                        style: TextStyle(
+            String userType = event!.event_user!.user_type ?? t.eventOther;
+            if (!(event!.event_signup!.lottery ?? false)) {
+              if (event!.event_user?.reserve ?? false) {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
                           color: Colors.red[300],
                         ),
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              } else {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green[300],
+                        ),
+                        Text(
+                          t.eventGotSpot,
+                          style: TextStyle(
+                            color: Colors.green[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              }
             } else {
               signup = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,13 +323,13 @@ class _EventPageState extends State<EventPage> {
                   Row(
                     children: [
                       Icon(
-                        Icons.check_circle,
-                        color: Colors.green[300],
+                        Icons.info_outline_rounded,
+                        color: Colors.orange[600],
                       ),
                       Text(
-                        "Du har fått plats!",
+                        t.eventLotterySpot,
                         style: TextStyle(
-                          color: Colors.green[300],
+                          color: Colors.orange[600],
                         ),
                       ),
                     ],
@@ -325,7 +354,7 @@ class _EventPageState extends State<EventPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Anmälan",
+            t.eventSignUp,
             style: TextStyle(fontSize: 25, color: Colors.orange[600]),
           ),
           const Divider(),
@@ -339,7 +368,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.person,
                     ),
                     Text(
-                      "  Antal anmälda: " + event!.event_user_count!.toString(),
+                      t.eventNbrSignUps + event!.event_user_count!.toString(),
                     ),
                   ],
                 ),
@@ -349,8 +378,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      "  Antal platser: " +
-                          event!.event_signup!.slots!.toString(),
+                      t.eventNbrSpots + event!.event_signup!.slots!.toString(),
                     ),
                   ],
                 ),
@@ -360,11 +388,11 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_available_rounded,
                     ),
                     Text(
-                      "  Anmälan öppnar: " +
+                      t.eventSignUpOpens +
                           DateFormat("d/M")
                               .format(event!.event_signup!.opens!.toLocal()) +
                           " " +
-                          DateFormat("jm", "sv_SE")
+                          DateFormat("jm", locale)
                               .format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
@@ -375,11 +403,11 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_busy_rounded,
                     ),
                     Text(
-                      "  Anmälan stänger: " +
+                      t.eventSignUpCloses +
                           DateFormat("d/M")
                               .format(event!.event_signup!.closes!.toLocal()) +
                           " " +
-                          DateFormat("jm", "sv_SE")
+                          DateFormat("jm", locale)
                               .format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
@@ -395,7 +423,7 @@ class _EventPageState extends State<EventPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Vid tekniska problem med anmälan, kontakta "),
+                Text(t.eventTechnicalDifficulties),
                 InkWell(
                   child: new Text(
                     "spindelmännen",
@@ -414,11 +442,30 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget signupWidget() {
+  Widget signupWidget(AppLocalizations t) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       if (event?.can_signup ?? false) return Container();
     }
-
+    Widget drinkPackageInput = Container();
+    if (event!.drink_package ?? false) {
+      drinkPackageInput = Row(
+        children: [
+          Text(" ${t.eventDrinkPackage}"),
+          Checkbox(
+              value: drinkPackageAnswer ?? false,
+              onChanged: (value) {
+                setState(() {
+                  this.drinkPackageAnswer = value;
+                });
+              }),
+        ],
+      );
+    }
     if (event?.event_user == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -429,10 +476,11 @@ class _EventPageState extends State<EventPage> {
               groupDropdown(),
               userTypeDropDown(),
               questionInput(),
+              drinkPackageInput,
               Wrap(
                 children: [
-                  Text("  Matpreferenser:"),
-                  ...?foodPreferences
+                  Text(t.eventFoodPreferences),
+                  ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text("  " + foodPreference)),
                   Text("  " + (foodCustom ?? "")),
@@ -451,7 +499,7 @@ class _EventPageState extends State<EventPage> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "Skicka anmälan",
+                        t.eventSendSignup,
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -472,7 +520,7 @@ class _EventPageState extends State<EventPage> {
       } else {
         groupName = event!.event_user!.group_custom ?? "";
       }
-      String userType = event!.event_user!.user_type ?? "Övrigt";
+      String userType = event!.event_user!.user_type ?? t.eventOther;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -495,7 +543,7 @@ class _EventPageState extends State<EventPage> {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "Avanmäl",
+                      t.eventDesignup,
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
@@ -509,20 +557,21 @@ class _EventPageState extends State<EventPage> {
   }
 
   Future<bool?> _confirmUnenroll(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Är du säker på att du vill avanmäla dig?"),
+            title: Text(t.eventConfirmCancel),
             actions: [
               TextButton(
-                child: Text("AVBRYT"),
+                child: Text(t.eventCancel),
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
               ),
               TextButton(
-                child: Text("AVANMÄL MIG"),
+                child: Text(t.eventConfirmRemoveSignUp),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -533,10 +582,46 @@ class _EventPageState extends State<EventPage> {
   }
 
   List<Widget> _signupDetails(String? groupName, String? userType) {
+    var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    Widget drinkPackage = Container();
+    if (event!.drink_package ?? false) {
+      if (event!.event_user!.drink_package_answer ?? false) {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventYes,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      } else {
+        drinkPackage = RichText(
+          text: TextSpan(
+              text: t.eventDrinkPackage,
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: t.eventNo,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black))
+              ]),
+        );
+      }
+    }
     return [
       RichText(
           text: TextSpan(
-              text: "Grupp: ",
+              text: t.eventGroup,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               children: [
@@ -547,7 +632,7 @@ class _EventPageState extends State<EventPage> {
           ])),
       RichText(
           text: TextSpan(
-              text: "Prioritet: ",
+              text: t.eventPriority2,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               children: [
@@ -570,14 +655,15 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
+      drinkPackage,
       Wrap(
         children: [
           RichText(
               text: TextSpan(
-                  text: "Matpreferenser: ",
+                  text: t.eventFoodPreferences + " ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences
+          ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
@@ -603,17 +689,23 @@ class _EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
     if (event == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Evenemang'),
+          title: Text(t.eventTitle),
         ),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Evenemang'),
+        title: Text(t.eventTitle),
       ),
       body: Container(
         width: double.infinity,
@@ -624,7 +716,7 @@ class _EventPageState extends State<EventPage> {
             child: ListView(
               children: [
                 Text(
-                  event?.title ?? "ingen titel",
+                  event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.orange[600],
@@ -646,7 +738,7 @@ class _EventPageState extends State<EventPage> {
                           DateFormat("HH:mm").format(
                               event?.ends_at?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", "sv_SE").format(
+                          DateFormat("MMMMd", locale).format(
                               event?.starts_at?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
@@ -672,7 +764,7 @@ class _EventPageState extends State<EventPage> {
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                      data: event?.description ?? "ingen beskrivning",
+                      data: event?.description ?? t.eventNoDescription,
                       style: _htmlStyle,
                       onLinkTap: (String? url, RenderContext context,
                           Map<String, String> attributes, element) {
@@ -686,13 +778,13 @@ class _EventPageState extends State<EventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        Text("Klädkod: "),
+                        Text(t.eventDressCode),
                         ...?event?.dress_code
                             ?.map((dressCode) => Text(dressCode + " "))
                       ]),
                       Visibility(
                           visible: event!.cash ?? false,
-                          child: Text("Pris: " +
+                          child: Text(t.eventPrice +
                               (event?.price?.toString() ?? "") +
                               " kr")),
                     ],
@@ -708,7 +800,7 @@ class _EventPageState extends State<EventPage> {
                         child: Row(
                           children: [
                             Icon(Icons.attach_money_rounded),
-                            Text("  Kostar pengar")
+                            Text(t.eventCostsMoney)
                           ],
                         ),
                       ),
@@ -719,7 +811,7 @@ class _EventPageState extends State<EventPage> {
                             Icon(
                               Icons.restaurant_rounded,
                             ),
-                            Text("  Mat serveras")
+                            Text(t.eventFoodServed)
                           ],
                         ),
                       ),
@@ -730,7 +822,7 @@ class _EventPageState extends State<EventPage> {
                             Icon(
                               Icons.wine_bar_rounded,
                             ),
-                            Text("  Alkohol serveras")
+                            Text(t.eventAlcoholServed)
                           ],
                         ),
                       ),
@@ -741,7 +833,7 @@ class _EventPageState extends State<EventPage> {
                             Icon(
                               Icons.event_rounded,
                             ),
-                            Text("  Kräver anmälan")
+                            Text(t.eventHasSignup)
                           ],
                         ),
                       ),
@@ -759,7 +851,7 @@ class _EventPageState extends State<EventPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Vid frågor om eventet, kontakta eventansvarig:",
+                          t.eventInCaseOfQuestions,
                         ),
                         InkWell(
                           child: new Text(

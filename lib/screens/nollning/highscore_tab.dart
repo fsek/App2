@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HighscoreTab extends StatefulWidget {
   @override
@@ -32,18 +33,26 @@ class _HighscoreTabState extends State<HighscoreTab> {
       );
     }
     _groups!.sort((g1, g2) => compareGroups(g1, g2));
+    var t = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
           child: IgnorePointer(
               // This is incredibly bad code but it just won't scale correctly across devices otherwise
-              child: TabBar(indicatorColor: Theme.of(context).bottomAppBarTheme.color, tabs: [Tab(text: "Placering"), Tab(text: "Gruppnamn"), Tab(text: "Poäng")])),
+              child: TabBar(
+                  indicatorColor: Theme.of(context).bottomAppBarTheme.color,
+                  tabs: [
+                Tab(text: t.introductionPlacement),
+                Tab(text: t.introductionGroupName),
+                Tab(text: t.introductionPoints2)
+              ])),
           color: Theme.of(context).bottomAppBarTheme.color,
         ),
         Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              this._groups = await locator<NollningService>().getNollningGroups();
+              this._groups =
+                  await locator<NollningService>().getNollningGroups();
               setState(() {});
             },
             child: ListView.builder(
@@ -60,6 +69,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
   }
 
   Widget _listItem(int index) {
+    var t = AppLocalizations.of(context)!;
     switch (index) {
       case 0:
         return ListTile(
@@ -78,7 +88,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 25),
           ),
-          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
+          subtitle: Text(
+              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -101,7 +112,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
+          subtitle: Text(
+              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -124,7 +136,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
+          subtitle: Text(
+              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -146,7 +159,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 18),
           ),
-          subtitle: Text("${_groups![index].finished_missions} avklarade uppdrag"),
+          subtitle: Text(
+              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
