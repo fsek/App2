@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
+import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -55,6 +56,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       if (_storage != null) {
         _storage!.write(key: 'cached-locale', value: localeName);
       }
+      AbstractService.updateApiUrl(locale == "sv");
     });
   }
 
