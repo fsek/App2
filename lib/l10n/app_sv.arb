@@ -41,7 +41,7 @@
     "eventPrice": "Pris: ",
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
-    "eventAlcoholServed": "  Alokohol serveras",
+    "eventAlcoholServed": "  Alkohol serveras",
     "eventDrinkPackage": "Alkoholpaket: ",
     "eventYes": "Ja",
     "eventNo": "Nej",
@@ -159,6 +159,7 @@
     "introductionCompleted": "Avklarat",
     "introductionPendingApproval": "Väntar på godkännande",
     "introductionNotCompleted": "Ej avklarat",
+    "introductionWeek": "Vecka",
 
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",

@@ -14,8 +14,7 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool translated = (news.title != "" &&  news.content == null); 
-    //make it look not terrible
+    bool translated = (news.title != "" &&  news.content != null);
     var t = AppLocalizations.of(context)!;
     if (translated){
       return Scaffold(
