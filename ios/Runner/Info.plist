@@ -48,5 +48,9 @@
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Platsdata används för att få fram plats</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Platsdata används för att få fram plats</string>
 </dict>
 </plist>
