@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
+import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
@@ -85,6 +86,11 @@ class _SongbookPageState extends State<SongbookPage> {
                                     }))
                             : SizedBox.shrink()),
                     onChanged: (search) {
+                      //Easteregg:
+                      if (search == "hmm") {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => HmmPage()));
+                      }
                       List<String> searchTerms =
                           search.toLowerCase().trim().split(new RegExp(r"\s+"));
                       setState(() {
