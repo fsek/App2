@@ -381,12 +381,12 @@ class _SettingsPageState extends State<SettingsPage> {
 
   String _makeTimestamp() {
     DateTime memberSince = DateTime.parse(user!.member_at!);
+    String locale = Localizations.localeOf(context).toString();
 
     return "${DateFormat.Hm().format(memberSince)}, ${DateFormat.d().format(memberSince)} "
-        /*"${DateFormat.MMMM('sv_SE').format(memberSince)} */ "${DateFormat.y().format(memberSince)}"; //Doesnt work now
+        "${DateFormat.MMM(locale).format(memberSince)} ${DateFormat.y().format(memberSince)}";
   }
 
-  //Sometimes causes render overflow. Seems to be when saving while keyboard is active. Feels weird ):
   Widget Function(BuildContext) _savingPopup() {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
