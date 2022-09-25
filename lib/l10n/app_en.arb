@@ -60,6 +60,7 @@
     "settingsOther": "Other",
     "settingsFoodPrefsPrivacy": "The food preferences can only be seen by those\nwho are responsible for the events you have signed up for.",
     "settingsNotificationsSignUp": "Notifications for event sign-ups",
+    "settingsNotificationsMessage": "Notifications for messages",
     "settingsNotificationsSignUpClosing": "Notifications for event sign-ups close",
     "settingsNotificationsSignUpOpening": "Notifications when event sign-ups open",
     "settingsMemberSince": "Member since",
@@ -187,7 +188,7 @@
 
     "aboutGuildSix": "The F-guild has several councils in charge of different parts of the activities of the guild. ",
     "aboutGuildSeven": "Each council is headed by a chairman who is also a part of the guild’s council of executives. ",
-    "abotuGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
+    "aboutGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
 
     "aboutGuildNine": "As a member of the guild you can choose to be active and committed or take ",
     "aboutGuildTen": "part at some events. We hope that you will enjoy your time in the F-guild. ",
