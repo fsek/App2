@@ -10,6 +10,7 @@ import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/settings/settings.dart'; //For the food-prefs link
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -105,6 +106,16 @@ class _EventPageState extends State<EventPage> {
     );
     if (!json.containsKey('errors')) {}
     update();
+  }
+
+  //Bör denna vara async som de andra funktionerna?
+  void goToSettings() {
+    Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SettingsPage()))
+        .then((_) {
+      //uppdaterar sidan så man ser sin ändring
+      initState();
+    });
   }
 
   Widget userTypeDropDown() {
@@ -480,28 +491,46 @@ class _EventPageState extends State<EventPage> {
               drinkPackageInput,
               Wrap(
                 children: [
-                  Text(t.eventFoodPreferences),
+                  Text(t.eventFoodPreferences + " ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black)),
                   ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
-                      .map((foodPreference) => Text("  " + foodPreference)),
+                      .map((foodPreference) => Text(foodPreference + " ")),
                   Text("  " + (foodCustom ?? "")),
                 ],
               ),
+              Wrap(children: [
+                Text(
+                  t.eventFoodPrefInfo,
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                GestureDetector(
+                  child: Text(t.eventLinkToFoodPrefs,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.orange[600])),
+                  onTap: () => goToSettings(),
+                ),
+              ]),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
-              SizedBox(
-                height: 50,
-                width: 200,
-                child: InkWell(
-                  onTap: () => sendSignup(),
-                  child: Card(
-                    color: Colors.orange[400],
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        t.eventSendSignup,
-                        style: TextStyle(fontSize: 20),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: InkWell(
+                    onTap: () => sendSignup(),
+                    child: Card(
+                      color: Colors.orange[400],
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          t.eventSendSignup,
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
@@ -527,10 +556,10 @@ class _EventPageState extends State<EventPage> {
         children: [
           ..._signupDetails(groupName, userType),
           SizedBox(
-            height: 8,
+            height: 16,
           ),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: SizedBox(
               height: 50,
               width: 200,
@@ -670,6 +699,19 @@ class _EventPageState extends State<EventPage> {
           Text(foodCustom ?? ""),
         ],
       ),
+      Wrap(children: [
+        Text(
+          t.eventFoodPrefInfo,
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ),
+        GestureDetector(
+          child: Text(t.eventLinkToFoodPrefs,
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Colors.orange[600])),
+          onTap: () => goToSettings(),
+        ),
+      ]),
     ];
   }
 
