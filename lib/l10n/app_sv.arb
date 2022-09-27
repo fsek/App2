@@ -113,15 +113,12 @@
     "albumNoPhotographers": "Inga fotografer",
 
     "galleryTitle": "Bildgalleri",
-    "galleryImage": "Bild",
     "galleryOf": "av",
 
     "homeNoNews": "Inga nyheter tillgänliga",
     "homeTitleUntranslated": "Det finns ingen översättning tillgänglig för detta inlägget\n:(",
     "newsNotAvailableOne": "Detta inlägget är inte tillgängligt på svenska. Överväg att kontakta ",
     "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ", 
-
-
 
     "groupWriteProtected": "Chatten är skrivskyddad",
     "groupWhatToDo": "Vad vill du göra med meddelandet?",
@@ -180,7 +177,6 @@
 
     "articleEtiquette": "Allt du behöver veta",
     "mannersEtiquette": "Allt du behöver veta",
-
 
     "aboutGuildGuild": "F-sektionen",
     "aboutGuildOne": "F-sektionen inom TLTH är en ideell förening för studenter som läser något av civilingenjörsprogrammen ",
