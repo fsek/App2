@@ -93,6 +93,7 @@ class FsekAppBarState extends State<FsekAppBar> {
                 Text(
                   item.text!,
                   style: TextStyle(color: color),
+                  softWrap: false,
                 )
               ],
             ),
