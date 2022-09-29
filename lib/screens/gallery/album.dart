@@ -13,32 +13,44 @@ class AlbumPage extends StatelessWidget {
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text(album.title!), actions: [],),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  children: generateImages(context),
+                ),
+              ),
+            ),Container(
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.grey[50]),
               child: ExpansionTile(
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
                 title: Text(
-                  album.title!,
-                  style: Theme.of(context).textTheme.headline4?.apply(color: Colors.orange[800]),
+                  "Mer info",
                 ),
                 children: [
                   SizedBox(
-                    height: 16,
+                    height: 8,
                     width: double.infinity,
                   ),
                   Text(
-                    album.description ?? "-",
+                    album.title ?? "-",
                     textAlign: TextAlign.start,
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
+                  Text(album.description!), SizedBox(height:10),
                   RichText(
                       text: TextSpan(
                           text: t.albumPhotographers,
@@ -50,17 +62,6 @@ class AlbumPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: GridView.count(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: generateImages(context),
-                ),
-              ),
-            )
           ],
         ));
   }
