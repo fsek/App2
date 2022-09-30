@@ -29,11 +29,17 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
           IconButton(
             icon: Icon(Icons.download),
             onPressed: () async {
-              http.Response image = await http.get(Uri.parse(
-                  "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-              ImageSave.saveImage(
-                  image.bodyBytes, "${widget.album.images![index].filename!}", albumName: "F-Sektionen");
-              //This could probably be done better.
+              try {
+                http.Response image = await http.get(Uri.parse(
+                    "${Environment.API_URL}${widget.album.images![index].file!
+                        .large!["url"]!}"));
+                ImageSave.saveImage(
+                    image.bodyBytes,
+                    "${widget.album.images![index].filename!}");
+                ScaffoldMessenger.of(context).showSnackBar(
+                    new SnackBar(content: Text(t.galleryImageDownloaded),));
+              } on Exception catch (_) {
+                ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: Text(t.galleryImageDownloadError),));}
             },
           )
         ],

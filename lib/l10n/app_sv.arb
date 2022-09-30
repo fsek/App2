@@ -114,6 +114,8 @@
 
     "galleryTitle": "Bildgalleri",
     "galleryOf": "av",
+    "galleryImageDownloaded": "Bild sparad",
+    "galleryImageDownloadError": "Ett fel uppstod vid nedladdning",
 
     "homeNoNews": "Inga nyheter tillgänliga",
     "homeTitleUntranslated": "Det finns ingen översättning tillgänglig för detta inlägget\n:(",

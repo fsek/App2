@@ -114,6 +114,8 @@
 
     "galleryTitle": "Image gallery",
     "galleryOf": "of",
+    "galleryImageDownloaded": "Image downloaded",
+    "galleryImageDownloadError": "An error occurred while downloading",
 
     "homeNoNews": "No news available",
     "homeTitleUntranslated": "There is no translation available for this post :(",
