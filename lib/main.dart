@@ -40,6 +40,7 @@ class SimpleBlocObserver extends BlocObserver {
 
 void main() async {
   setupLocator();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.home, HomePage()),
@@ -120,7 +121,6 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
   runZonedGuarded<void>(() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(FsekMobileApp());
   }, (Object error, StackTrace stackTrace) {
     // Whenever an error occurs, call the `_reportError` function. This sends
