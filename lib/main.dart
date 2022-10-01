@@ -40,6 +40,7 @@ class SimpleBlocObserver extends BlocObserver {
 
 void main() async {
   setupLocator();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.home, HomePage()),
