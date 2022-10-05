@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -11,6 +12,7 @@ import 'services/service_locator.dart';
 import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ContentWrapper extends StatefulWidget {
   ContentWrapper(
@@ -31,6 +33,11 @@ class _ContentWrapperState extends State<ContentWrapper>
   late List<Key> _destinationKeys;
   late List<AnimationController> _faders;
   int _currentIndex = 0;
+  int _soundCounter = 0;
+  // Time that the F-logo was first pressed, used to reset counter after a while
+  DateTime? _logoFirstPress;
+  // Has the logo been pressed yet
+  bool _logoPressed = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -57,6 +64,15 @@ class _ContentWrapperState extends State<ContentWrapper>
     super.dispose();
   }
 
+  playSound() async {
+    List<String> files = ["moose.mp4", "moose2.mp4"];
+    // Get a random index between 0 and 1 and play matching sound
+    var random = new Random();
+    int index = random.nextInt(2);
+    String toPlay = files[index];
+    AudioPlayer().play(AssetSource('audio/' + toPlay));
+  }
+
   @override
   Widget build(BuildContext context) {
     //index to string
@@ -81,9 +97,34 @@ class _ContentWrapperState extends State<ContentWrapper>
         padding: EdgeInsets.all(6),
         child: Row(
           children: [
-            Image(
-              image: AssetImage("assets/img/f_logo_black.png"),
-              width: 64,
+            IconButton(
+              icon: Image(
+                image: AssetImage("assets/img/f_logo_black.png"),
+                width: 64,
+              ),
+              onPressed: () => {
+                _soundCounter++,
+                if (!_logoPressed)
+                  {
+                    _logoFirstPress = DateTime.now(),
+                    _logoPressed = true,
+                  }
+                else if (DateTime.now().difference(_logoFirstPress!).inSeconds >
+                    20)
+                  {
+                    _soundCounter = 1,
+                    _logoFirstPress = DateTime.now(),
+                    _logoPressed = true,
+                  },
+                if (_soundCounter == 3)
+                  {
+                    playSound(),
+                    _soundCounter = 0,
+                    _logoPressed = false,
+                  }
+              },
+              padding: EdgeInsets.all(0.0),
+              iconSize: 64,
             ),
             SizedBox(
               width: 8,

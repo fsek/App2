@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutGuildPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -15,13 +14,16 @@ class AboutGuildPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(t.aboutGuildGuild, style: Theme.of(context).textTheme.headline6),
+                  Text(t.aboutGuildGuild,
+                      style: Theme.of(context).textTheme.headline6),
                   SizedBox(
                     height: 8,
                   ),
-                  Text("${t.aboutGuildOne}${t.aboutGuildTwo}${t.aboutGuildThree}"
+                  Text(
+                      "${t.aboutGuildOne}${t.aboutGuildTwo}${t.aboutGuildThree}"
                       "\n\n${t.aboutGuildFour}${t.aboutGuildFive}\n\n${t.aboutGuildSix}"
-                      "${t.aboutGuildSeven}${t.aboutGuildEight}\n\n${t.aboutGuildNine}${t.aboutGuildTen}${t.aboutGuildEleven}${t.aboutGuildTwelve}", style: TextStyle(height: 1.5)),
+                      "${t.aboutGuildSeven}${t.aboutGuildEight}\n\n${t.aboutGuildNine}${t.aboutGuildTen}${t.aboutGuildEleven}${t.aboutGuildTwelve}",
+                      style: TextStyle(height: 1.5)),
                 ],
               ),
             )));
