@@ -84,10 +84,10 @@ flutter:
   fonts:
    - family: Brandon Grotesque
      fonts:
-      - asset: assets/BrandonGrotesque-Regular.ttf
+      - asset: assets/fonts/BrandonGrotesque-Regular.ttf
    - family: VT323
      fonts:
-      - asset: assets/VT323-Regular.ttf
+      - asset: assets/fonts/VT323-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
