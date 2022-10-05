@@ -173,6 +173,8 @@
     "cafeShiftForShift": "for shift",
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
+    "cafeShiftCantUnsignHeader": "Cannot remove sign-up",
+    "cafeShiftCantUnsignButton": "If you really need to remove your sign-up, write to the Head of the Café at cafe@fsektionen.se",
     
     "articleEtiquette": "All you need to know",
     "mannersEtiquette": "All you need to know", 

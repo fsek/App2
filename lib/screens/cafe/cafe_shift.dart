@@ -98,14 +98,15 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
     // if you are signed up for the shift
     if (shift!.isme ?? false) {
       // if you are too close to the shift starting, you can't remove the signup
-      DateTime twelveDayBefore = shift!.start!.subtract(Duration(days: 1));
-      if (DateTime.now().isAfter(twelveDayBefore)) {
-        headerText = "ayylamo";
+      DateTime dayBefore = shift!.start!.subtract(Duration(days: 1));
+      DateTime stopTime = DateTime(dayBefore.year, dayBefore.month, dayBefore.day, 12, 00);
+      if (DateTime.now().isAfter(stopTime)) {
+        headerText = t.cafeShiftCantUnsignHeader;
         signupButton = TextButton(
           onPressed: () => {},
           child: Text(
-            "don't do it amn",
-            style: TextStyle(fontSize: 32),
+            t.cafeShiftCantUnsignButton,
+            style: TextStyle(fontSize: 12),
           ),
           style: ButtonStyle(
             fixedSize: MaterialStateProperty.all(Size(300, 75)),
@@ -140,7 +141,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
             )
           : null; // if another person is on the shift, don't show a signup button
     }
-    headerText += "${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
+    headerText += " ${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
     return Scaffold(
       appBar: AppBar(
         title: Text(t.cafeShiftCafeShift),

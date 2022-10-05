@@ -177,6 +177,8 @@
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
     "cafeShiftShift": " Ledigt pass",
+    "cafeShiftCantUnsignHeader": "Kan inte avanmäla",
+    "cafeShiftCantUnsignButton": "Om du verkligen behöver avanmäla dig, skriv då till Cafémästaren på cafe@fsektionen.se",
 
     "articleEtiquette": "Allt du behöver veta",
     "mannersEtiquette": "Allt du behöver veta",
