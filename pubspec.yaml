@@ -83,13 +83,17 @@ flutter:
    - assets/audio/
    - assets/img/
    - assets/img/memes/
+   - assets/img/moose_game/
    - assets/data/guide/
 
 
   fonts:
    - family: Brandon Grotesque
      fonts:
-      - asset: assets/BrandonGrotesque-Regular.ttf
+      - asset: assets/fonts/BrandonGrotesque-Regular.ttf
+   - family: VT323
+     fonts:
+      - asset: assets/fonts/VT323-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
