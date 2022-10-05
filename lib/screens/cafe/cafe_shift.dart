@@ -9,8 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CafeShiftPage extends StatefulWidget {
   final int shiftId;
   final CafeUser? user;
-  CafeShiftPage({Key? key, required this.shiftId, required this.user})
-      : super(key: key);
+  CafeShiftPage({Key? key, required this.shiftId, required this.user}) : super(key: key);
   @override
   _CafeShiftPageState createState() => _CafeShiftPageState();
 }
@@ -26,25 +25,19 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
   }
 
   Future<void> _update() async {
-    locator<CafeService>()
-        .getShift(widget.shiftId)
-        .then((value) => setState(() {
-              this.shift = value;
-            }));
+    locator<CafeService>().getShift(widget.shiftId).then((value) => setState(() {
+          this.shift = value;
+        }));
   }
 
   void signup(CafeShift shift) async {
-    await locator<CafeService>()
-        .cafeShiftSignup(shift)
-        .then((value) => successSignup(), onError: (e) => failSignup());
+    await locator<CafeService>().cafeShiftSignup(shift).then((value) => successSignup(), onError: (e) => failSignup());
     _update();
   }
 
   void unsign(CafeShift shift) async {
     user = null; // bcuz garbage api lul
-    await locator<CafeService>()
-        .cafeShiftUnsign(shift)
-        .then((value) => successUnsign(), onError: (e) => failUnsign());
+    await locator<CafeService>().cafeShiftUnsign(shift).then((value) => successUnsign(), onError: (e) => failUnsign());
     _update();
   }
 
@@ -99,26 +92,44 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
 
     // Different text if user is already signed up to shift
     // also different button for signup/unsignup
+    // Should also stop user from signing up if too close to the shift
     String headerText = "";
     TextButton? signupButton;
+    // if you are signed up for the shift
     if (shift!.isme ?? false) {
-      headerText = t.cafeShiftSignedUp;
-      signupButton = TextButton(
-        onPressed: () => unsign(shift!),
-        child: Text(
-          t.cafeShiftRemoveSignup,
-          style: TextStyle(fontSize: 32),
-        ),
-        style: ButtonStyle(
-          fixedSize: MaterialStateProperty.all(Size(300, 75)),
-          backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-        ),
-      );
+      // if you are too close to the shift starting, you can't remove the signup
+      DateTime twelveDayBefore = shift!.start!.subtract(Duration(days: 1));
+      if (DateTime.now().isAfter(twelveDayBefore)) {
+        headerText = "ayylamo";
+        signupButton = TextButton(
+          onPressed: () => {},
+          child: Text(
+            "don't do it amn",
+            style: TextStyle(fontSize: 32),
+          ),
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all(Size(300, 75)),
+            backgroundColor: MaterialStateProperty.all(Colors.grey),
+          ),
+        );
+        // otherwise have a normal signup :))
+      } else {
+        headerText = t.cafeShiftSignedUp;
+        signupButton = TextButton(
+          onPressed: () => unsign(shift!),
+          child: Text(
+            t.cafeShiftRemoveSignup,
+            style: TextStyle(fontSize: 32),
+          ),
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all(Size(300, 75)),
+            backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+          ),
+        );
+      }
     } else {
       // if someone else is on the shift, or if it is an empty shift
-      headerText = (user == null)
-          ? t.cafeShiftSignup2
-          : "${user!.name}\n${t.cafeShiftIsSignedUp} ";
+      headerText = (user == null) ? t.cafeShiftSignup2 : "${user!.name}\n${t.cafeShiftIsSignedUp} ";
       signupButton = (user == null)
           ? TextButton(
               onPressed: () => signup(shift!),
@@ -129,8 +140,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
             )
           : null; // if another person is on the shift, don't show a signup button
     }
-    headerText +=
-        "${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
+    headerText += "${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
     return Scaffold(
       appBar: AppBar(
         title: Text(t.cafeShiftCafeShift),
