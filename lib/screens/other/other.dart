@@ -4,6 +4,7 @@ import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
+import 'package:fsek_mobile/screens/other/dinosaur.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
@@ -29,7 +30,7 @@ class OtherContent extends StatelessWidget {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
-    about = [t.otherAboutGuild, t.otherFap];
+    about = [t.otherAboutGuild, t.otherFap, "Dinosaur"];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
     /* I am so sorry for this Teo */
@@ -47,6 +48,7 @@ class OtherContent extends StatelessWidget {
       "Bildgalleri": GalleryPage(),
       "F-sektionen": AboutGuildPage(),
       "F-appen": FapPage(),
+      "Dinosaur": DinosaurPage(),
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
