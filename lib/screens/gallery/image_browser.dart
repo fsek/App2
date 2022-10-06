@@ -34,8 +34,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     "${Environment.API_URL}${widget.album.images![index].file!
                         .large!["url"]!}"));
                 ImageSave.saveImage(
-                    image.bodyBytes,
-                    "${widget.album.images![index].filename!}");
+                    image.bodyBytes, "${widget.album.images![index].filename!}", albumName: "F-Sektionen");
                 ScaffoldMessenger.of(context).showSnackBar(
                     new SnackBar(content: Text(t.galleryImageDownloaded),));
               } on Exception catch (_) {
