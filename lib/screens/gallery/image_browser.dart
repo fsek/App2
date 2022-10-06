@@ -32,7 +32,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
               http.Response image = await http.get(Uri.parse(
                   "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
               ImageSave.saveImage(
-                  image.bodyBytes, "${widget.album.images![index].filename!}");
+                  image.bodyBytes, "${widget.album.images![index].filename!}", albumName: "F-Sektionen");
               //This could probably be done better.
             },
           )
