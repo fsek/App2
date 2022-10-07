@@ -114,7 +114,7 @@ class _EventPageState extends State<EventPage> {
             context, MaterialPageRoute(builder: (context) => SettingsPage()))
         .then((_) {
       //uppdaterar sidan så man ser sin ändring
-      initState();
+      update();
     });
   }
 
