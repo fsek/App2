@@ -6,7 +6,7 @@ part 'notis.g.dart';
 class Notis {
   int? id; 
   DateTime? created_at; 
-  bool? seen; 
+  bool? seen; //Seems to be legacy field from backend. Use 'visited'
   bool? visited;
   Map<String, String?>? data;
   int? event_id;

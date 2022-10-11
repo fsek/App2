@@ -37,7 +37,7 @@ class _NotiserPageState extends State<NotiserPage> {
           if (notis.data == null) return Container();
 
           return Card(
-              color: notis.seen ?? false ? Colors.white : Colors.orange[200],
+              color: notis.visited ?? false ? Colors.white : Colors.orange[200],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
@@ -79,7 +79,7 @@ class _NotiserPageState extends State<NotiserPage> {
   void seeNotis(Notis notis) {
     locator<NotiserService>().visitNotis(notis.id!);
     setState(() {
-      _pagingController.itemList!.singleWhere((element) => element.id == notis.id).seen = true;
+      _pagingController.itemList!.singleWhere((element) => element.id == notis.id).visited = true;
     });
     Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: notis.event_id!)));
   }
