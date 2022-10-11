@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/widgets/easterEggCodeDialog.dart';
+import 'package:fsek_mobile/widgets/easterEgg/animated_flyer.dart';
+import 'package:fsek_mobile/widgets/easterEgg/easterEgg_code_dialog.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
@@ -84,11 +85,17 @@ class FsekAppBarState extends State<FsekAppBar> {
 
     return BottomAppBar(
       shape: widget.notchedShape,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: items,
-      ),
+      child: Stack(
+        clipBehavior: Clip.none, 
+        children: [
+          AnimatedFlyer(),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: items,
+          ),
+        ],
+      )
     );
   }
 
