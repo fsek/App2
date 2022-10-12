@@ -17,24 +17,13 @@ class _GuidePageState extends State<GuidePage> {
             assetPath,
             height: 100,
           ),
-          Text(
-            label,
-            style: TextStyle(color: Colors.white),
-          ),
         ]));
   }
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/bakgrund_scaled.png";
-    DateTime now = DateTime.now();
-    DateTime kmTakeOverStart = DateTime(2022, 9, 2, 21, 0);
-    DateTime kmTakeOverEnd = DateTime(2022, 9, 10, 20, 0);
-    if (kmTakeOverStart.compareTo(now) < 0 &&
-        kmTakeOverEnd.compareTo(now) > 0) {
-      backgroundPath = "assets/img/bakgrund_km_scaled.png";
-    }
+    String backgroundPath = "assets/img/jubel_background.png";
 
     return Stack(
       children: [
@@ -54,16 +43,14 @@ class _GuidePageState extends State<GuidePage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Spacer(
-                flex: 4,
+                flex: 2,
               ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _navigationButton(
-                      '/manners',
-                      "assets/img/Allt du behöver veta.png",
-                      t.nolleguideEtiquette),
+                      '/manners', "assets/img/info.png", t.nolleguideEtiquette),
                   _navigationButton('/people', "assets/img/Personer.png",
                       t.nolleguideWeAtFsek),
                   _navigationButton('/wordlist', "assets/img/Ordlista.png",

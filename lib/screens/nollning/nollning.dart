@@ -16,14 +16,7 @@ class _NollningPageState extends State<NollningPage> {
 
   @override
   Widget build(BuildContext context) {
-    String backgroundPath = "assets/img/bakgrund_scaled.png";
-    DateTime now = DateTime.now();
-    DateTime kmTakeOverStart = DateTime(2022, 9, 2, 21, 0);
-    DateTime kmTakeOverEnd = DateTime(2022, 9, 10, 20, 0);
-    if (kmTakeOverStart.compareTo(now) < 0 &&
-        kmTakeOverEnd.compareTo(now) > 0) {
-      backgroundPath = "assets/img/bakgrund_km_scaled.png";
-    }
+    String backgroundPath = "assets/img/jubel_background.png";
     return Stack(children: [
       Image.asset(
         backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
@@ -49,15 +42,6 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/adventure_missions');
-                      },
-                      child: Image.asset(
-                        "assets/img/Uppdrag.png",
-                        height: 100,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
                         Navigator.pushNamed(context, '/nolleguide');
                       },
                       child: Image.asset(
@@ -65,16 +49,9 @@ class _NollningPageState extends State<NollningPage> {
                         height: 100,
                       ),
                     ),
-                    InkWell(
-                      onTap: () => Navigator.pushNamed(context, '/messages'),
-                      child: Image.asset(
-                        "assets/img/Meddelanden.png",
-                        height: 100,
-                      ),
-                    ),
                   ],
                 ),
-                Spacer(),
+                //Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
