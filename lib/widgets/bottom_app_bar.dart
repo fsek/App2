@@ -42,29 +42,37 @@ class FsekAppBar extends StatefulWidget {
 class FsekAppBarState extends State<FsekAppBar> {
   List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
+  bool bababoeActive = true;
 
   void  _processEasterEggClick(int? index) async {
-    
+    // takes index of which nav bar item was clicked
+    if(index == null) return;
     if(DateTime.now().difference(lastEasterEggClick).inSeconds > 5) {
       appBarItemsClickedAmounts = [0, 0, 0, 0];
     }
     lastEasterEggClick = DateTime.now();
 
-    List<int> amounts = appBarItemsClickedAmounts;
-    // takes index of which nav bar item was clicked
-    if(index == null) return;
-    
     for(int i = 0; i < index; i++) {
-      if(amounts[i] != widget.easterEggClicksGoal[i]) {
+      if(appBarItemsClickedAmounts[i] != widget.easterEggClicksGoal[i]) {
         return; // Not registering clicks at index beyond completed ones
       }
     }
-    amounts[index]++;
+    appBarItemsClickedAmounts[index]++;
+    print(appBarItemsClickedAmounts);
     // 6 1 2 2 clicked: Easter egg codes activated
-    if(listEquals(amounts, widget.easterEggClicksGoal)) {
+    if(listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
       String? easterEggCode = await easterEggCodeDialog(context);
       if(easterEggCode == null) return; // User cancels dialog i think
-      
+      if(easterEggCode == 'b') {
+        setState(() {
+          bababoeActive = true;
+          Future.delayed(const Duration(seconds: 5), () {
+            setState(() {
+              bababoeActive = false;
+            });
+          });
+        });
+      }
     }
     
   }
@@ -88,7 +96,7 @@ class FsekAppBarState extends State<FsekAppBar> {
       child: Stack(
         clipBehavior: Clip.none, 
         children: [
-          AnimatedFlyer(),
+          Visibility(child:  AnimatedFlyer(), visible: bababoeActive),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
