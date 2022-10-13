@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/widgets/easterEgg/animated_flyer.dart';
+import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easterEgg_code_dialog.dart';
 
 class FsekAppBarItem {
@@ -42,7 +42,7 @@ class FsekAppBar extends StatefulWidget {
 class FsekAppBarState extends State<FsekAppBar> {
   List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
-  bool bababoeActive = true;
+  bool bababoeActive = false;
 
   void  _processEasterEggClick(int? index) async {
     // takes index of which nav bar item was clicked
@@ -58,23 +58,24 @@ class FsekAppBarState extends State<FsekAppBar> {
       }
     }
     appBarItemsClickedAmounts[index]++;
-    print(appBarItemsClickedAmounts);
+    if(!listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
+      return;
+    }
+
     // 6 1 2 2 clicked: Easter egg codes activated
-    if(listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
-      String? easterEggCode = await easterEggCodeDialog(context);
-      if(easterEggCode == null) return; // User cancels dialog i think
-      if(easterEggCode == 'b') {
-        setState(() {
-          bababoeActive = true;
-          Future.delayed(const Duration(seconds: 5), () {
-            setState(() {
-              bababoeActive = false;
-            });
+    String? easterEggCode = await easterEggCodeDialog(context);
+    if(easterEggCode == null) return; // User cancels dialog i think
+    //For more than one code, please don't stack else if's
+    if(easterEggCode == 'b') {
+      setState(() {
+        bababoeActive = true;
+        Future.delayed(const Duration(seconds: 5), () {
+          setState(() {
+            bababoeActive = false;
           });
         });
-      }
+      });
     }
-    
   }
 
   @override
@@ -96,7 +97,7 @@ class FsekAppBarState extends State<FsekAppBar> {
       child: Stack(
         clipBehavior: Clip.none, 
         children: [
-          Visibility(child:  AnimatedFlyer(), visible: bababoeActive),
+          Visibility(child:  AnimatedNils(), visible: bababoeActive),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
