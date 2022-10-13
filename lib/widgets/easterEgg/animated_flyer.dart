@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 const double periodSeconds = 2;
 const int refreshIntervalMilliseconds = 10;
 
@@ -15,6 +14,7 @@ class _AnimatedFlyerState extends State<AnimatedFlyer> {
 
   void animate() async {
     print("Hej");
+    AudioPlayer().play(AssetSource('audio/' + toPlay));
     setState(() {
       xPos = 50 +100 *cos(DateTime.now().millisecondsSinceEpoch *2 *pi / (periodSeconds * 1000));
       yPos = -400 + 200 * sin(DateTime.now().millisecondsSinceEpoch * 2*pi/(periodSeconds * 1000));
