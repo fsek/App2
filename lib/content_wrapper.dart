@@ -72,7 +72,7 @@ class _ContentWrapperState extends State<ContentWrapper>
     for (String message in widget.messages) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFFFFC38D),
       ));
     }
     widget.messages.clear(); // clears all showed messages
@@ -156,7 +156,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                 widget.onNavigation!.add(NollningPage);
               },
               child: Image(
-                image: AssetImage("assets/img/nollning_moose_icon.png"),
+                image: AssetImage("assets/img/jubel_logo.png"),
                 fit: BoxFit.cover,
               ),
               tooltip: 'F-sektionen',

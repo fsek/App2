@@ -49,15 +49,15 @@ final List<Color> nollning2021Background = [
 ];
 final ThemeData nollning2022theme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: Color(0xFF7BA06E),
+  primaryColor: Color(0xFFFFC38D),
   colorScheme: ThemeData()
       .colorScheme
-      .copyWith(primary: Color(0xFF7BA06E), secondary: Color(0xFF7BA06E)),
+      .copyWith(primary: Color(0xFFFFC38D), secondary: Color(0xFFFFC38D)),
   textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7BA06E)),
+          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFFFC38D)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white))),
-  bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFF7BA06E)),
+  bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFFFFC38D)),
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder:
         UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
@@ -67,6 +67,6 @@ final ThemeData nollning2022theme = ThemeData(
 );
 
 final List<Color> nollning2022Background = [
-  Color(0xFF7BA06E),
-  Color(0xFF7BA06E),
+  Color(0xFFFFC38D),
+  Color(0xFFFFC38D),
 ];
