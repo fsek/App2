@@ -23,7 +23,7 @@ class _GuidePageState extends State<GuidePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/jubel_background.png";
+    String backgroundPath = "assets/img/jubel_background_nolleguide.png";
 
     return Stack(
       children: [
@@ -45,7 +45,6 @@ class _GuidePageState extends State<GuidePage> {
               Spacer(
                 flex: 2,
               ),
-              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

@@ -9,14 +9,10 @@ class IntroductionSchedule extends StatelessWidget {
         title: Text("Schema"),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(
-            MediaQuery.of(context).size.width / 23,
-            0,
-            0,
-            0), //maybe change padding to fix pixels, might look wierd on some phones
         reverse: true,
         child: Image(
           image: AssetImage("assets/img/Schema.png"),
+          width: MediaQuery.of(context).size.width,
         ),
       ),
     );

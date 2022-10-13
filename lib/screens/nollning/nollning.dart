@@ -16,7 +16,7 @@ class _NollningPageState extends State<NollningPage> {
 
   @override
   Widget build(BuildContext context) {
-    String backgroundPath = "assets/img/jubel_background.png";
+    String backgroundPath = "assets/img/jubel_background_home.png";
     return Stack(children: [
       Image.asset(
         backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
@@ -35,7 +35,7 @@ class _NollningPageState extends State<NollningPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Spacer(
-                  flex: 4,
+                  flex: 6,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
