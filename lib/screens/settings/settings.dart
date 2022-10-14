@@ -221,6 +221,9 @@ class _SettingsPageState extends State<SettingsPage> {
                                       onChanged: (bool? add) {
                                         setChildState(() {
                                           extraPref = add!;
+                                          if (!(add!)){
+                                            user!.food_custom! = ""
+                                          }
                                         });
                                         setState(() {});
                                       });
@@ -416,12 +419,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Align(
-                  alignment: Alignment.bottomRight,
+                alignment: Alignment.bottomRight,
+                child: Paddin(EdgeInsets.all(8),
                   child: IconButton(
                     icon: Icon(Icons.check, color: Colors.grey[800]),
                     onPressed: () => Navigator.pop(context),
-                  ))
-            ]);
+                  )
+                )
+              )
+            ]
+            );
   }
 
   Widget Function(BuildContext) _saveOnClosePopup() {
@@ -437,15 +444,17 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Row(
-                children: [
-                  TextButton(
+              child:Padding(
+                padding: EdgeInsets.all(8)
+                child: Row(
+                  children: [
+                    TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
                       child: Text(t.settingsDiscard)),
-                  Spacer(),
-                  TextButton(
+                    Spacer(),
+                    TextButton(
                       onPressed: () async {
                         _save();
                         Navigator.pop(context);
@@ -453,6 +462,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       child: Text(t.settingsSave))
                 ],
               ),
+              )
             )
           ],
         );
@@ -463,7 +473,7 @@ class _SettingsPageState extends State<SettingsPage> {
     showDialog(context: context, builder: _savingPopup());
     locator<UserService>().updateUser(user!).then((value) {
       setState(() {
-        extraPref = user!.food_custom != "";
+        changedSetting = false;
       });
       Navigator.pop(context);
     }).catchError((error) {
