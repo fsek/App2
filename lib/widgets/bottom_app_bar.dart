@@ -44,7 +44,7 @@ class FsekAppBarState extends State<FsekAppBar> {
   DateTime lastEasterEggClick = DateTime.now();
   bool bababoeActive = false;
 
-  void  _processEasterEggClick(int? index) async {
+  void _processEasterEggClick(int? index) async {
     // takes index of which nav bar item was clicked
     if(index == null) return;
     if(DateTime.now().difference(lastEasterEggClick).inSeconds > 5) {
@@ -68,7 +68,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     if(easterEggCode == 'bababoe') {
       setState(() {
         bababoeActive = true;
-        Future.delayed(const Duration(seconds: 5), () {
+        Future.delayed(const Duration(seconds: 8), () {
           setState(() {
             bababoeActive = false;
           });

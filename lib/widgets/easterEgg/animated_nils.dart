@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 const double periodSeconds = 2;
 const int refreshIntervalMilliseconds = 10;
@@ -19,7 +19,7 @@ SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    // AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
+    AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
     animation = AnimationController(
       vsync: this,
       duration: new Duration(seconds: 1)
