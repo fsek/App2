@@ -61,12 +61,11 @@ class FsekAppBarState extends State<FsekAppBar> {
     if(!listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
       return;
     }
-
     // 6 1 2 2 clicked: Easter egg codes activated
     String? easterEggCode = await easterEggCodeDialog(context);
     if(easterEggCode == null) return; // User cancels dialog i think
     //For more than one code, please don't stack else if's
-    if(easterEggCode == 'b') {
+    if(easterEggCode == 'bababoe') {
       setState(() {
         bababoeActive = true;
         Future.delayed(const Duration(seconds: 5), () {
