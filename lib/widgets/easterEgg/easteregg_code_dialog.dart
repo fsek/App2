@@ -15,12 +15,12 @@ Future<String?> easterEggCodeDialog(BuildContext context) {
             keyboardType: TextInputType.text,
             controller: _textFieldController,
             decoration: InputDecoration(
-              hintText: "Code here",
+              hintText: "Secret",
             ),
           ),
           actions: [
             TextButton(
-              child: Text("Avbryt"),
+              child: Text("Cancel"),
               onPressed: () {
                 Navigator.pop(context);
               },
