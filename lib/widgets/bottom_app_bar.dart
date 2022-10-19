@@ -68,7 +68,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     if(easterEggCode == 'bababoe') {
       setState(() {
         bababoeActive = true;
-        Future.delayed(const Duration(seconds: 8), () {
+        Future.delayed(const Duration(seconds: 9), () {
           setState(() {
             bababoeActive = false;
           });
