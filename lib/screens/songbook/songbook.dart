@@ -20,9 +20,6 @@ class _SongbookPageState extends State<SongbookPage>
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
   String initChar = "";
-  //Kinda cursed/temporary fix to onchanged running multiple times per change
-  //For some reason the onchanged gets called multiple times when editing the text
-  bool displayed = false;
 
   TextEditingController _controller = TextEditingController();
 
@@ -109,19 +106,14 @@ class _SongbookPageState extends State<SongbookPage>
                                   : SizedBox.shrink()),
                           onChanged: (search) {
                             //Easteregg:
-                            if (!displayed) {
-                              displayed = true;
-                              if (search == "hmm") {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HmmPage()));
-                              } else if (search == "do a barrel roll") {
-                                FocusScope.of(context).unfocus();
-                                animationController.forward(from: 0);
-                              }
-                            } else {
-                              displayed = false;
+                            if (search == "hmm") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HmmPage()));
+                            } else if (search == "do a barrel roll") {
+                              FocusScope.of(context).unfocus();
+                              animationController.forward(from: 0);
                             }
                             List<String> searchTerms = search
                                 .toLowerCase()
