@@ -8,6 +8,7 @@ import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/screens/game/highscore.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
@@ -28,7 +29,9 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+
+    var otherHighscore = "Highscore temp";
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, otherHighscore];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -37,6 +40,7 @@ class OtherContent extends StatelessWidget {
       "Songbook": SongbookPage(),
       "Picture Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
+      "Highscore temp": HighscorePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
       "Account": SettingsPage(),

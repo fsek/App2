@@ -29,6 +29,7 @@ class User {
   bool? notify_event_closing;
   int? terms_version;
   bool? notify_event_open;
+  int? game_highscore;
 
   User();
 
