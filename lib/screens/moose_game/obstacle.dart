@@ -16,7 +16,7 @@ List<Sprite> possibleSprites = [
 
 class Obstacle extends GameObject {
 
-  Obstacle(double floorY) : super(Vector2(3, floorY)) {
+  Obstacle(double xPosition, double floorY) : super(Vector2(xPosition, floorY)) {
     sprite = possibleSprites[Random().nextInt(possibleSprites.length)];
     print(sprite.imagePath);
   }

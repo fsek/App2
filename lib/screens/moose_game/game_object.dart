@@ -9,12 +9,12 @@ abstract class GameObject {
 
   GameObject(this.position);
 
-  Widget render(double pixelsPerUnit) {
+  Widget render(Size pixelSize, double worldScale) {
     return Image.asset(
       sprite.imagePath,
-      scale: 1 / (pixelsPerUnit / sprite.imageWidth),
-      width: pixelsPerUnit,
-      height: pixelsPerUnit,
+      scale: 1 / worldScale,
+      width: pixelSize.width,
+      height: pixelSize.height,
       filterQuality: FilterQuality.none,
       );
   }

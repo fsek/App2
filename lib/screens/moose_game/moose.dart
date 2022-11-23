@@ -13,11 +13,11 @@ enum MooseState {
 
 class Moose extends GameObject {
   Sprite mooseRun = Sprite("assets/img/moose_game/hilbert_pixel_run.gif", 24, 24);
-  Sprite mooseDuck = Sprite("assets/img/mosse_game/hilbert_pixel_duck.png", 24, 24);
+  Sprite mooseDuck = Sprite("assets/img/moose_game/hilbert_pixel_duck.png", 24, 24);
   
   double yVelocity = 0;
-  final double jumpForce = 8;
-  final double gravity = 22;
+  final double jumpForce = 10;
+  final double gravity = 38;
   MooseState state = MooseState.running;
 
   late double floorY;
@@ -44,5 +44,11 @@ class Moose extends GameObject {
       state = MooseState.jumping;
       yVelocity = jumpForce;
     }
+  }
+
+  void reset() {
+    yVelocity = 0;
+    state = MooseState.running;
+    position.y = floorY;
   }
 }
