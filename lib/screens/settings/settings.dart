@@ -135,6 +135,14 @@ class _SettingsPageState extends State<SettingsPage> {
                               }
                             });
                           }),
+                          // TODO use translate var
+                          if (user!.game_nickname != null)
+                            _makeTextField(
+                                "Game nickname", () => user!.game_nickname!,
+                                (input) {
+                              changedSetting = true;
+                              user!.game_nickname = input;
+                            }),
                         ])),
                 SizedBox(
                   width: double.infinity,

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/user/user.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/user.service.dart';
+import 'package:fsek_mobile/widgets/input_dialog.dart';
+import 'package:fsek_mobile/services/game.service.dart';
+import 'package:fsek_mobile/models/game/game_score_entry.dart';
 
 class HighscorePage extends StatefulWidget {
   @override
@@ -10,14 +15,17 @@ class HighscorePage extends StatefulWidget {
 class _HighscorePageState extends State<HighscorePage>
     with TickerProviderStateMixin {
   // Change to user when implemented with api
-  //list for what is being shown on screen (the "results of a search")
-  // even as nothing has been searched. does change throughout.
-  List<User> results = [];
 
-  //actual list of all users that gets sorted, never changed
-  List<User> users = [];
+  // list for what is being shown on screen (the "results of a search")
+  // even when nothing has been searched. does change throughout.
+  List<GameScoreEntry> results = [];
 
-  //idk i "borrowed" the songbook and they were bad but probably needed so here they are.
+  // actual list of all users that gets sorted, never changed
+  List<GameScoreEntry> allScores = [];
+
+  User? user;
+
+  //idk i "borrowed" the songbook and they were bad and probably not needed but here they are.
   bool searchFocus = false;
   String initChar = "";
 
@@ -25,38 +33,32 @@ class _HighscorePageState extends State<HighscorePage>
 
   @override
   void initState() {
-    // Temp way to represent user dont push
-    User test = User();
-    test.game_highscore = 20;
-    test.firstname = "User 1";
+    locator<GameScoreService>().getScores().then((value) => setState(() {
+          allScores = value;
+          allScores
+              .sort((a, b) => a.score!.compareTo(b.score!)); // handle null?
+          results = List.from(allScores);
+        }));
+    locator<UserService>().getUser().then((value) async {
+      user = value;
+      //Set users nickname if first time playing game
+      // TODO add translate var
+      if (user!.game_nickname == null) {
+        String? nickname = await inputDialog(context,
+            "Enter a nickname (can be changed in settings)", "Name", true);
 
-    User test2 = User();
-    test2.game_highscore = 5;
-    test2.firstname = "Jag heter 2";
+        // If cancelled then go back
+        if (nickname == null) return;
 
-    User test3 = User();
-    test3.game_highscore = 12;
-    test3.firstname = "Mitt namn är 3";
+        //TODO add unique check with the api
 
-    User test4 = User();
-    test4.game_highscore = 0;
-    test4.firstname = "samin 4";
-
-    User test5 = User();
-    test5.game_highscore = -5;
-    test5.firstname = "ville 5";
-
-    User test6 = User();
-    test6.game_highscore = 69;
-    test6.firstname = "villes mamma";
-
-    User test7 = User();
-    test7.game_highscore = 6969;
-    test7.firstname = "samins mamma";
-
-    users = [test, test2, test3, test4, test5, test6, test7];
-    users.sort((a, b) => b.game_highscore!.compareTo(a.game_highscore!));
-    results = users;
+        // If no name is entered then use the users real name
+        user!.game_nickname = nickname == "" ? user!.firstname : nickname;
+      }
+      setState(() {
+        user!.game_score = 0;
+      });
+    });
 
     super.initState();
   }
@@ -69,13 +71,13 @@ class _HighscorePageState extends State<HighscorePage>
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    var itemCount = users.length; //change to amount of users on highscore
-    var userName = "Name Nameson";
 
     return GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => {
+              FocusScope.of(context).unfocus(),
+            },
         child: Scaffold(
-          appBar: AppBar(title: Text("Highscore!")), //change to translate var
+          appBar: AppBar(title: Text("Highscore!")),
           body: Column(
             children: [
               FocusScope(
@@ -108,7 +110,7 @@ class _HighscorePageState extends State<HighscorePage>
                               onPressed: () => setState(() {
                                     _controller.clear();
                                     FocusScope.of(context).unfocus();
-                                    results = users;
+                                    results = allScores;
                                   }))
                           : SizedBox.shrink()),
                   onChanged: (search) {
@@ -116,17 +118,19 @@ class _HighscorePageState extends State<HighscorePage>
                         search.toLowerCase().trim().split(new RegExp(r"\s+"));
                     setState(() {
                       initChar = "";
-                      results = users.where((user) {
-                        return searchTerms.every((term) =>
-                            user.firstname!.toLowerCase().contains(term));
+                      //TODO change this with api so it looks better
+                      results = allScores.where((test_person) {
+                        return searchTerms.every((term) => test_person
+                            .user!.game_nickname!
+                            .toLowerCase()
+                            .contains(term));
                       }).toList();
-                      itemCount = results.length;
                     });
                   },
                 ),
               )),
               Expanded(
-                  child: itemCount > 0
+                  child: results.length > 0
                       ? ListView.builder(
                           itemCount: results.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -134,16 +138,19 @@ class _HighscorePageState extends State<HighscorePage>
                                 shape: ContinuousRectangleBorder(
                                     side: BorderSide(color: Color(0xFFf77e14))),
                                 child: ListTile(
-                                  leading: users.indexOf(results[index]) < 3
+                                  leading: allScores.indexOf(results[index]) < 3
                                       ? _findMedal(
-                                          users.indexOf(results[index]))
+                                          allScores.indexOf(results[index]))
                                       : Text(
-                                          "${users.indexOf(results[index]) + 1}."),
-                                  title: index < results.length
-                                      ? Text("${results[index].firstname}")
-                                      : Text("name nameson"),
-                                  trailing:
-                                      Text("${results[index].game_highscore}"),
+                                          "${allScores.indexOf(results[index]) + 1}."),
+                                  title: results[index].user!.game_nickname !=
+                                          null
+                                      ? Text(
+                                          "${results[index].user!.game_nickname}")
+                                      : Text(
+                                          "${results[index].user!.firstname}"),
+                                  trailing: Text(
+                                      "${results[index].user!.game_score}"),
                                 ));
                           },
                         ) // change for translate variable later
