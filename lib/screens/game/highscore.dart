@@ -43,21 +43,37 @@ class _HighscorePageState extends State<HighscorePage>
       user = value;
       //Set users nickname if first time playing game
       // TODO add translate var
-      if (user!.game_nickname == null) {
-        String? nickname = await inputDialog(context,
+      if (user!.game_nickname != null) return;
+        
+      String? enteredName = "";
+      
+      while(enteredName.isEmpty) {
+
+        String? enteredName = await inputDialog(context,
             "Enter a nickname (can be changed in settings)", "Name", true);
 
         // If cancelled then go back
-        if (nickname == null) return;
+        if (enteredName == null) return;
+        if(enteredName.isEmpty) continue;
 
-        //TODO add unique check with the api
-
-        // If no name is entered then use the users real name
-        user!.game_nickname = nickname == "" ? user!.firstname : nickname;
+        user!.game_nickname = enteredName;
+        
+        try {//Try setting nickname in backend. Fails if it was not unique
+          await locator<UserService>().updateUser(user!);
+        } catch(err) {
+          continue;
+        }
       }
-      setState(() {
-        user!.game_score = 0;
-      });
+
+      // If no name is entered then use the users real name
+      //Vi får collisions här ändå
+      // user!.game_nickname = nickname == "" ? user!.firstname : nickname;
+    
+
+      //Här också tar bort för att det är ett objekt som användaren inte har förrän spel klart 
+      // setState(() {
+      //   user!.game_score = 0;
+      // });
     });
 
     super.initState();
