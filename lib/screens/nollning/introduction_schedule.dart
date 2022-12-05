@@ -4,6 +4,7 @@ class IntroductionSchedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFE1C9),
       appBar: AppBar(
         title: Text("Schema"),
       ),

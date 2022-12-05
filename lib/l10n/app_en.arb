@@ -18,21 +18,23 @@
     "eventNotSignedUp": "You were not signed up",
     "eventNoSpot": "Unfortunatley you did not get a spot for the event.",
     "eventGotSpot": "You got a spot!",
-    "eventSignUp": "Sign up",
     "eventLotterySpot": "Your sign-up has been registered",
+    "eventSignUp": "Sign up",
     "eventNbrSignUps": " Number of sign-ups: ",
     "eventNbrSpots": " Number of spots: ",
     "eventSignUpOpens": " Sign up opens: ",
     "eventSignUpCloses": " Sign up closes: ",
     "eventTechnicalDifficulties": " In case of technical difficulties, contact ",
     "eventWebMasters": "the web masters",
-    "eventFoodPreferences": " Food preferences:",
+    "eventFoodPreferences": "Food preferences:",
     "eventSendSignup": "Submit",
+    "eventFoodPrefInfo": "You can change these in Settings > Food preferences",
+    "eventLinkToFoodPrefs": "Shortcut to the settings",
     "eventDesignup": "Remove sign-up",
     "eventConfirmCancel": "Are you sure you want to remove your sign-up?",
     "eventCancel": "Cancel",
     "eventConfirmRemoveSignUp": "Remove sign-up",
-    "eventGroup": "Group :",
+    "eventGroup": "Group:",
     "eventPriority2": "Priority: ",
     "eventTitle": "Event",
     "eventNoTitle": "no title",
@@ -42,11 +44,12 @@
     "eventCostsMoney": "  Costs money",
     "eventFoodServed": "  Food served",
     "eventAlcoholServed": "  Alocohol served",
-    "eventHasSignup": "  Sign-up required",
-    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
     "eventDrinkPackage": "Drink package (non binding): ",
     "eventYes": "Yes",
     "eventNo": "No",
+    "eventHasSignup": "  Sign-up required",
+    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
+ 
     "settingsSettings": "Settings",
     "settingsSave": "Save",
     "settingsProgramme": "Programme",
@@ -60,6 +63,7 @@
     "settingsOther": "Other",
     "settingsFoodPrefsPrivacy": "The food preferences can only be seen by those\nwho are responsible for the events you have signed up for.",
     "settingsNotificationsSignUp": "Notifications for event sign-ups",
+    "settingsNotificationsMessage": "Notifications for messages",
     "settingsNotificationsSignUpClosing": "Notifications for event sign-ups close",
     "settingsNotificationsSignUpOpening": "Notifications when event sign-ups open",
     "settingsMemberSince": "Member since",
@@ -113,6 +117,8 @@
 
     "galleryTitle": "Image gallery",
     "galleryOf": "of",
+    "galleryImageDownloaded": "Image downloaded",
+    "galleryImageDownloadError": "An error occurred while downloading",
 
     "homeNoNews": "No news available",
     "homeTitleUntranslated": "There is no translation available for this post :(",
@@ -127,7 +133,6 @@
 
     "messagesMessages": "Messages",
 
-    
     "nolleguideWeAtFsek": "We at F-sek",
     "nolleguideEtiquette": "All you need to know",
     "nolleguideWordlist": "Wordlist",
@@ -157,7 +162,7 @@
     "introductionPendingApproval": "Pending aproval",
     "introductionNotCompleted": "Not completed",
     "introductionWeek": "Week",
-    "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:", 
+ 
     "cafeShiftSignup": "You have signed up for the shift",
     "cafeShiftSignupText": "Thank you for wanting to work in the café! Remember to remove your sing-up if you can't make it.",
     "cafeShiftFail": "Something went wrong!",
@@ -188,7 +193,7 @@
 
     "aboutGuildSix": "The F-guild has several councils in charge of different parts of the activities of the guild. ",
     "aboutGuildSeven": "Each council is headed by a chairman who is also a part of the guild’s council of executives. ",
-    "abotuGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
+    "aboutGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
 
     "aboutGuildNine": "As a member of the guild you can choose to be active and committed or take ",
     "aboutGuildTen": "part at some events. We hope that you will enjoy your time in the F-guild. ",
@@ -205,5 +210,4 @@
     "fapConstructed": "Bodged together by the su-permen and Webmasters of the F-guild",
     "fapInspired": "What inspired the web during ",
     "fapDev": "development"
-
 }

@@ -1,4 +1,9 @@
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
+import 'package:fsek_mobile/widgets/easterEgg/easterEgg_code_dialog.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
@@ -29,30 +34,76 @@ class FsekAppBar extends StatefulWidget {
   final NotchedShape? notchedShape;
   final ValueChanged<int?> onTabSelected;
   final int currentIndex;
-
+  final List<int> easterEggClicksGoal = [6, 1, 2, 2];
   @override
   State<StatefulWidget> createState() => FsekAppBarState();
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
+  List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
+  DateTime lastEasterEggClick = DateTime.now();
+  bool bababoeActive = false;
+
+  void _processEasterEggClick(int? index) async {
+    // takes index of which nav bar item was clicked
+    if(index == null) return;
+    if(DateTime.now().difference(lastEasterEggClick).inSeconds > 5) {
+      appBarItemsClickedAmounts = [0, 0, 0, 0];
+    }
+    lastEasterEggClick = DateTime.now();
+
+    for(int i = 0; i < index; i++) {
+      if(appBarItemsClickedAmounts[i] != widget.easterEggClicksGoal[i]) {
+        return; // Not registering clicks at index beyond completed ones
+      }
+    }
+    appBarItemsClickedAmounts[index]++;
+    if(!listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
+      return;
+    }
+    // 6 1 2 2 clicked: Easter egg codes activated
+    String? easterEggCode = await easterEggCodeDialog(context);
+    if(easterEggCode == null) return; // User cancels dialog i think
+    //For more than one code, please don't stack else if's
+    if(easterEggCode == 'bababoe') {
+      setState(() {
+        bababoeActive = true;
+        Future.delayed(const Duration(seconds: 9), () {
+          setState(() {
+            bababoeActive = false;
+          });
+        });
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> items = List.generate(widget.items!.length, (int index) {
       return _buildTabItem(
         item: widget.items![index],
         index: index,
-        onPressed: (i) => widget.onTabSelected(i),
+        onPressed: (i) => {
+          _processEasterEggClick(i),
+          widget.onTabSelected(i),
+        },
       );
     });
     items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
       shape: widget.notchedShape,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: items,
-      ),
+      child: Stack(
+        clipBehavior: Clip.none, 
+        children: [
+          Visibility(child:  AnimatedNils(), visible: bababoeActive),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: items,
+          ),
+        ],
+      )
     );
   }
 
@@ -93,6 +144,7 @@ class FsekAppBarState extends State<FsekAppBar> {
                 Text(
                   item.text!,
                   style: TextStyle(color: color),
+                  softWrap: false,
                 )
               ],
             ),

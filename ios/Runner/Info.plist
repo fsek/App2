@@ -52,5 +52,7 @@
 	<string>Platsdata används för att få fram plats</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Platsdata används för att få fram plats</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Permission to access the phone's image gallery for the purpose of saving images from the image gallery</string>
 </dict>
 </plist>
