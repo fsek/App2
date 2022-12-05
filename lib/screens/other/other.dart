@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/better_cafe/better_cafe.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,12 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [
+      t.otherSongbook,
+      t.otherGallery,
+      t.otherCafe,
+      t.otherBetterCafe
+    ];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -37,6 +43,7 @@ class OtherContent extends StatelessWidget {
       "Songbook": SongbookPage(),
       "Picture Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
+      "New Hilbert Café": BetterCafePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
       "Account": SettingsPage(),
@@ -44,6 +51,7 @@ class OtherContent extends StatelessWidget {
       "Contact": ContactPage(),
       "Anonymous contact page": Container(),
       "Sångbok": SongbookPage(),
+      "Nya Hilbert Café": BetterCafePage(),
       "Bildgalleri": GalleryPage(),
       "F-sektionen": AboutGuildPage(),
       "F-appen": FapPage(),
