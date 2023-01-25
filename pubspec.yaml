@@ -84,6 +84,7 @@ flutter:
    - assets/img/
    - assets/img/memes/
    - assets/data/guide/
+   - assets/data/
 
 
   fonts:

@@ -1,0 +1,25 @@
+{
+    "menu_items": [
+        {
+        "item":{
+            "sv": "kaffe",
+            "en": "coffee"
+        },
+        "price": "5 kr"
+    },
+    {
+        "item":{
+            "sv": "kaffekort",
+            "en": "coffee card"
+        },
+        "price": "100 kr"
+    },
+    {
+        "item":{
+            "sv": "läsk",
+            "en": "soda"
+        },
+        "price": "10 kr"
+    }
+    ]
+}
