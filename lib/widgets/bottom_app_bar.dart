@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
-import 'package:fsek_mobile/widgets/easterEgg/easterEgg_code_dialog.dart';
+import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
