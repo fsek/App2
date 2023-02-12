@@ -20,6 +20,20 @@
             "en": "soda"
         },
         "price": "10 kr"
+    },
+    {
+        "item":{
+            "sv": "chokladboll",
+            "en": "chocolate ball"
+        },
+        "price": "10 kr"
+    },
+    {
+        "item":{
+            "sv": "lemonad",
+            "en": "lemonade"
+        },
+        "price": "16 kr"
     }
     ]
 }
