@@ -34,11 +34,32 @@ class _ContentWrapperState extends State<ContentWrapper>
   late List<AnimationController> _faders;
   int _currentIndex = 0;
   int _soundCounter = 0;
+
   // Time that the F-logo was first pressed, used to reset counter after a while
   DateTime? _logoFirstPress;
+
   // Has the logo been pressed yet
   bool _logoPressed = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  // Sound behaviours on ios and android, mainly to make iphone use speakers properly
+  final AudioContext audioContext = AudioContext(
+    iOS: AudioContextIOS(
+      defaultToSpeaker: true,
+      category: AVAudioSessionCategory.playback,
+      options: [
+        AVAudioSessionOptions.defaultToSpeaker,
+        AVAudioSessionOptions.mixWithOthers,
+      ],
+    ),
+    android: AudioContextAndroid(
+      isSpeakerphoneOn: true,
+      stayAwake: true,
+      contentType: AndroidContentType.sonification,
+      usageType: AndroidUsageType.assistanceSonification,
+      audioFocus: AndroidAudioFocus.none,
+    ),
+  );
 
   @override
   void initState() {
@@ -54,6 +75,9 @@ class _ContentWrapperState extends State<ContentWrapper>
     //Each destination shall have its own key
     _destinationKeys = List<Key>.generate(
         widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
+
+    // For customizing sound behaviours
+    AudioPlayer.global.setGlobalAudioContext(audioContext);
 
     super.initState();
   }
