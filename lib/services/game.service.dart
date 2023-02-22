@@ -10,4 +10,9 @@ class GameScoreService extends AbstractService {
         .toList();
     return result;
   }
+  Future<Map> postScore({ score: int }) {
+    return AbstractService.post("/game_scores", mapBody: {
+      score: score
+    });
+  }
 }
