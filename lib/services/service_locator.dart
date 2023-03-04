@@ -1,4 +1,5 @@
 import 'package:fsek_mobile/services/cafe.service.dart';
+import 'package:fsek_mobile/services/document.service.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/messages.service.dart';
 import 'package:fsek_mobile/services/notiser.service.dart';
@@ -38,4 +39,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => NotiserService());
   locator.registerLazySingleton(() => CafeService());
   locator.registerLazySingleton(() => FredmanskyService());
+  locator.registerLazySingleton(() => DocumentService());
 }
