@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
+import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -28,8 +29,7 @@ class _NollningPageState extends State<NollningPage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0,
-              MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
+          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +42,12 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/nolleguide');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PdfPage(url: "https://fsektionen.se/dokument/276")));
+
+                        // Navigator.pushNamed(context, '/nolleguide');
                       },
                       child: Image.asset(
                         "assets/img/Nolleguiden.png",
@@ -57,10 +62,7 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => IntroductionSchedule()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule()));
                       },
                       child: Image.asset(
                         "assets/img/schedulebutton.png",

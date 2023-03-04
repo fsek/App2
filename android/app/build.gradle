@@ -35,13 +35,15 @@ if (keystorePropertiesFile.exists()) {
 android {
     compileSdkVersion 33
 
+    ndkVersion "25.2.9519653"
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
         applicationId "se.fsektionen.fapp"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
