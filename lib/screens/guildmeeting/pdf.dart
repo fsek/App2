@@ -10,6 +10,7 @@ class PdfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(),
       body: PDF(
