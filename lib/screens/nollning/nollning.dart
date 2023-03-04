@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
+import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -42,7 +43,8 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/nolleguide');
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutGuildMeetingPage()));
                       },
                       child: Image.asset(
                         "assets/img/Nolleguiden.png",
