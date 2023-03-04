@@ -15,7 +15,7 @@ class DocumentService extends AbstractService {
       return null;
     }
     Map json = await AbstractService.get("/document_collections/$id");
-    return DocumentCollection.fromJson(json as Map<String, dynamic>);
+    return DocumentCollection.fromJson(json["document_collection"] as Map<String, dynamic>);
   }
 
   int? idFromCollectionName(List<DocumentCollection> collections, String name) {
@@ -49,13 +49,14 @@ class DocumentService extends AbstractService {
     List<ElectionDocument> answers = docCollection.election_documents!.where((document) => document.document_type == "motionssvar").toList();
     List<List<ElectionDocument?>> motionsAndAnswers = [];
     for (ElectionDocument motion in motions) {
+      ElectionDocument? ans;
       for (ElectionDocument answer in answers) {
         if (motion.id == answer.reference) {
-          motionsAndAnswers.add([motion, answer]);
+          ans = answer;
           break;
         }
       }
-      motionsAndAnswers.add([motion, null]);
+      motionsAndAnswers.add([motion, ans]);
     }
     return motionsAndAnswers;
   }
