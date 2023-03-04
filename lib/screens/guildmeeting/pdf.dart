@@ -21,9 +21,6 @@ class PdfPage extends StatelessWidget {
         onError: (error) {
           print(error.toString());
         },
-        onPageError: (page, error) {
-          print('$page: ${error.toString()}');
-        },
         onPageChanged: (int? page, int? total) {
           print('page change: $page/$total');
         },

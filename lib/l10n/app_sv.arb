@@ -208,5 +208,7 @@
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",
     "fapConstructed": "Knackad av F-sektionens su-per och spindelmän:",
     "fapInspired": "Vad inspirerade nätet under ",
-    "fapDev": "utvecklingen"
+    "fapDev": "utvecklingen",
+
+    "noProposition": "Det finns inga propositioner för detta möte på hemsidan."
 }

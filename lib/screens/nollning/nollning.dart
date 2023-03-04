@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
+import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -42,10 +43,7 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PdfPage(url: "https://fsektionen.se/dokument/276")));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));
 
                         // Navigator.pushNamed(context, '/nolleguide');
                       },

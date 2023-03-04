@@ -208,5 +208,7 @@
     "fapPower": "Powered by coffee, the Tears of su-permen and Flutter",
     "fapConstructed": "Bodged together by the su-permen and Webmasters of the F-guild",
     "fapInspired": "What inspired the web during ",
-    "fapDev": "development"
+    "fapDev": "development",
+
+    "noProposition": "There are no motions from the board on the website."
 }

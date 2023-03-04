@@ -29,9 +29,11 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
   @override
   void initState() {
     locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
-          this.documents = value;
-          documents.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
+          this.documents = value!;
+          documents.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
           allDocuments = List.from(documents);
+          documents = [];
+          allDocuments = [];
         }));
     super.initState();
   }
@@ -106,7 +108,7 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text(t.songbookNoMatches),
+                            child: Text(t.noProposition),
                           ),
                   )
                 ],
@@ -138,8 +140,7 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
                   bottom: BorderSide(color: Colors.grey[400]!),
                 )),
                 child: InkWell(
-                  onTap: () =>
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!))),
+                  onTap: () => openFile(document),
 // openFile(song.id!),
                   child: ListTile(title: Text(document.document_name == null ? "" : document.document_name!)),
                 ))
@@ -148,6 +149,7 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
   }
 
   void openFile(ElectionDocument document) {
+    print(document.url! + " is url");
     Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!)));
   }
 }
