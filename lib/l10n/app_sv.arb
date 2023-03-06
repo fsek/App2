@@ -210,5 +210,9 @@
     "fapInspired": "Vad inspirerade nätet under ",
     "fapDev": "utvecklingen",
 
+
+    "otherDocuments": "Övriga dokument",
+    "noOtherDocuments": "Det finns inga övriga dokument",
+
     "noProposition": "Det finns inga propositioner för detta möte på hemsidan."
 }
