@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class PdfPage extends StatelessWidget {
-  const PdfPage({Key? key, required this.url}) : super(key: key);
-
+  const PdfPage({Key? key, required this.url, required this.title}) : super(key: key);
+  final String title;
   final String url;
 
   @override
@@ -12,7 +12,7 @@ class PdfPage extends StatelessWidget {
     var t = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text(title),),
       body: PDF(
         enableSwipe: true,
         swipeHorizontal: false,

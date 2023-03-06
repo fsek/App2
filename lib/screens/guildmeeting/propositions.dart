@@ -150,6 +150,6 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
 
   void openFile(ElectionDocument document) {
     print(document.url! + " is url");
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!, title: document.document_name!)));
   }
 }
