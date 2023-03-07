@@ -4,32 +4,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/better_cafe/menu_item.dart';
+import 'package:fsek_mobile/screens/cafe/cafe.dart';
 
+import '../../models/better_cafe/cafe_day.dart';
 import '../../models/better_cafe/sandwich.dart';
 
 class BetterCafePage extends StatefulWidget {
-  BetterCafePage({Key? key}) : super(key: key);
-
   @override
   _BetterCafePageState createState() => _BetterCafePageState();
 }
 
 class _BetterCafePageState extends State<BetterCafePage> {
-  List<MenuItem> data = [];
-  List<Sandwich> dataS = [];
+  List<MenuItem> items = [];
+  List<CafeDay> days = [];
 
   _BetterCafePageState() {
     _loadMenuItems().then(
       (value) => setState(
         () {
-          this.data = value;
+          this.items = value;
         },
       ),
     );
-    _loadSandwiches().then(
+    _loadCafeDays().then(
       (value) => setState(
         () {
-          this.dataS = value;
+          this.days = value;
         },
       ),
     );
@@ -45,12 +45,12 @@ class _BetterCafePageState extends State<BetterCafePage> {
     return out;
   }
 
-  Future<List<Sandwich>> _loadSandwiches() async {
+  Future<List<CafeDay>> _loadCafeDays() async {
     final String raw =
-        await rootBundle.loadString('assets/data/sandwiches.json');
+        await rootBundle.loadString('assets/data/cafe_days.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
-    List<Sandwich> out = (jsonRaw['sandwiches'] as List)
-        .map((data) => Sandwich.fromJson(data))
+    List<CafeDay> out = (jsonRaw['cafe_days'] as List)
+        .map((data) => CafeDay.fromJson(data))
         .toList();
     return out;
   }
@@ -63,10 +63,25 @@ class _BetterCafePageState extends State<BetterCafePage> {
     );
   }
 
-  Widget _createSandwichMenu(Sandwich sand) {
+  Widget _createSandwichMenu(CafeDay cafeday) {
     String locale = Localizations.localeOf(context).toString();
+    String sandwichString = "";
+
+    //loop thorugh the sandwiches of the day and build a nice looking string
+    //for the subtitle below
+    cafeday.sandwiches!.forEach((sandwich) => sandwichString = sandwichString +
+        sandwich.name![locale]! +
+        " " +
+        sandwich.price! +
+        '\n');
+
     return ListTile(
-      title: Text(sand.sandwich![locale]! + " " + sand.price!),
+      title: Text(
+        cafeday.weekday![locale]!,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(sandwichString,
+          style: TextStyle(color: Colors.black.withOpacity(0.9))),
       visualDensity: VisualDensity(vertical: -4),
     );
   }
@@ -84,8 +99,6 @@ class _BetterCafePageState extends State<BetterCafePage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(60, 5, 60, 5),
                 child: Image.asset('assets/img/cafe_logo.png',
-                    // width: MediaQuery.of(context).size.width * 1 / 2,
-                    //scale: 0.5,
                     alignment: Alignment.topCenter),
               ),
               Text(
@@ -109,13 +122,8 @@ class _BetterCafePageState extends State<BetterCafePage> {
                     ),
                     subtitle: Text(
                         'Här kan du kolla igenom kaféets klassiker och dess priser'),
-                    // trailing: Icon(
-                    //   _tileExpanded
-                    //       ? Icons.arrow_drop_down
-                    //       : Icons.arrow_drop_down,
-                    // ),
                     children: [
-                      ...data.map(
+                      ...items.map(
                         (MenuItem mi) => _createMenu(mi),
                       )
                     ],
@@ -131,11 +139,20 @@ class _BetterCafePageState extends State<BetterCafePage> {
                     ),
                     subtitle: Text('Här kan du se veckans smarriga mackor'),
                     children: [
-                      ...dataS.map(
-                        (Sandwich sand) => _createSandwichMenu(sand),
+                      ...days.map(
+                        (CafeDay day) => _createSandwichMenu(day),
                       )
                     ],
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => CafePage())));
+                    },
+                    child: Text('Jobba i caféet'),
+                  ) //InkWell()
                 ],
               )
             ],

@@ -1,0 +1,55 @@
+{
+    "cafe_days": [
+        {
+        "weekday":{
+            "sv": "Måndag",
+            "en": "Monday"
+        },
+        "sandwiches":[
+            {
+                "name":{
+                    "sv": "Hummusmacka",
+                    "en": "Hummus sandwich"
+                },
+                "price": "30 kr"
+            },
+            {
+                "name":{
+                    "sv": "Aprikos brie",
+                    "en": "Apricot brie"
+                },
+                "price": "30 kr"
+            }
+        ]
+    },
+    {
+        "weekday":{
+            "sv": "Tisdag",
+            "en": "Tuesday"
+        },
+        "sandwiches":[
+            {
+                "name":{
+                    "sv": "Aprikos brie",
+                    "en": "Apricot brie"
+                },
+                "price": "30 kr"
+            },
+            {
+                "name":{
+                    "sv": "Ärtpesto",
+                    "en": "Pea pesto"
+                },
+                "price": "30 kr"
+            },
+            {
+                "name":{
+                    "sv": "Pulled vego",
+                    "en": "Pulled vego"
+                },
+                "price": "30 kr"
+            }
+        ]
+    }
+    ]
+}
