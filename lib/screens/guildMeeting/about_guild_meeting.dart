@@ -28,22 +28,46 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("""Mötet kommer äga rum den 24 till 25 april. Kandidera och nominera kan du göra via valsidan. Motioner skickas till sekreteraren innan motionsstoppet.Följande datum och tider gäller för terminsmötet 24 till 25 april - Vårterminsmötet (MH:G preliminärt)
-
-                  Mötet öppnar och återupptas kl. 17.59 på samtliga datum.
-
-                  Följande datum gäller inför terminsmötet
-
-                  10 februari - Valet öppnar på hemsidan.
-                  3 mars - Valet stänger på hemsidan för mötesvalda poster.
-                  23 mars - Motionsstopp
-                  30 mars - Anslag av föredragningslistan.
-
-                  För mer information om vad de olika händelserna innebär, se kalendern på hemsidan.
-                  Har du ytterligare frågor angående mötet, kontakta styrelsen.
-
-                  I sektionens tjänst,
-                  Hanna Areskoug, sekreterare 2023""", style: TextStyle(height: 1.5)),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: """Mötet kommer äga rum den 24 till 25 april. Kandidera och nominera kan du göra via """,
+                          style: TextStyle(height: 1.5)),
+                        TextSpan(
+                          text: """valsidan""",
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          recognizer: new TapGestureRecognizer()
+                            ..onTap = () { launch('https://fsektionen.se/val');
+                            },
+                        ),
+                        TextSpan(
+                          text: """. Motioner skickas till """,
+                          style: TextStyle(height: 1.5)),
+                        TextSpan(
+                          text: """sekreteraren""",
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          recognizer: new TapGestureRecognizer()
+                            ..onTap = () { launch('mailto:sekreterare@fsektionen.se');
+                            },
+                        ),
+                        TextSpan(
+                          text: """ innan motionsstoppet.\n\nFöljande datum och tider gäller för terminsmötet 24 till 25 april - Vårterminsmötet (MH:G preliminärt):\nMötet öppnar och återupptas kl. 17.59 på samtliga datum.\n\nFöljande datum gäller inför terminsmötet:\n10 februari - Valet öppnar på hemsidan.\n3 mars - Valet stänger på hemsidan för mötesvalda poster.\n23 mars - Motionsstop\n30 mars - Anslag av föredragningslistan.\n\nFör mer information om vad de olika händelserna innebär, se kalendern på hemsidan. Har du ytterligare frågor angående mötet, kontakta """,
+                          style: TextStyle(height: 1.5)),
+                        TextSpan(
+                          text: """styrelsen""",
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          recognizer: new TapGestureRecognizer()
+                            ..onTap = () { launch('mailto:styrelsen@fsektionen.se');
+                            },
+                        ),
+                        TextSpan(
+                          text: """.\n\nI sektionens tjänst,\nHanna Areskoug, sekreterare 2023""",
+                          style: TextStyle(height: 1.5))
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 24,
                   ),
@@ -67,7 +91,17 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             },
                         ),
                         TextSpan(
-                          text: """ eller den relevanta utskottsordföranden beroende på vad din idé behandlar. Färdiga motioner skickas in till """,
+                          text: """ eller den relevanta """,
+                          style: TextStyle(height: 1.5)),
+                        TextSpan(
+                          text: """utskottsordföranden""",
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          recognizer: new TapGestureRecognizer()
+                            ..onTap = () { launch('https://fsektionen.se/kontakter');
+                            },
+                        ),
+                        TextSpan(
+                          text: """ beroende på vad din idé behandlar. Färdiga motioner skickas in till """,
                           style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: """sekreteraren""",
