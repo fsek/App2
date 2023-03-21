@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
+import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
+import 'package:fsek_mobile/screens/guildmeeting/new_test_page.dart';
+
+import '../../services/document.service.dart';
+import '../../services/service_locator.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -43,8 +48,7 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));
-
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PropositionsPage()));
                         // Navigator.pushNamed(context, '/nolleguide');
                       },
                       child: Image.asset(
@@ -60,7 +64,8 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TestPage4()));
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => MotionsPage()));
                       },
                       child: Image.asset(
                         "assets/img/schedulebutton.png",

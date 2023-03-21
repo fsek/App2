@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
@@ -8,12 +9,12 @@ import 'package:fsek_mobile/services/document.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/document_collection.dart';
 
-class DocumentPage extends StatefulWidget {
+class PropositionsPage extends StatefulWidget {
   @override
-  _DocumentPageState createState() => _DocumentPageState();
+  _PropositionsPageState createState() => _PropositionsPageState();
 }
 
-class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMixin {
+class _PropositionsPageState extends State<PropositionsPage> with TickerProviderStateMixin {
   List<ElectionDocument> documents = [];
   List<ElectionDocument> allDocuments = [];
 
@@ -23,17 +24,12 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
 
   TextEditingController _controller = TextEditingController();
 
-  late AnimationController animationController;
-  late Animation<double> animation;
-
   @override
   void initState() {
     locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
           this.documents = value!;
           documents.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
           allDocuments = List.from(documents);
-          documents = [];
-          allDocuments = [];
         }));
     super.initState();
   }
@@ -46,14 +42,14 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    return allDocuments == []
+    return listEquals(allDocuments, [])
         ? Scaffold(
-            appBar: AppBar(title: Text(t.songbookSongbook)),
+            appBar: AppBar(title: Text("Propositioner")),
             body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              appBar: AppBar(title: Text(t.songbookSongbook)),
+              appBar: AppBar(title: Text("")),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -117,39 +113,22 @@ class _DocumentPageState extends State<DocumentPage> with TickerProviderStateMix
   }
 
   Widget _generateDocumentTile(ElectionDocument document) {
-    //This way of doing it is probably really stupid. but so be it
-    List<Widget> index = [];
-    if (document.document_name![0] != initChar) {
-      initChar = document.document_name![0];
-      index.add(Container(
-        decoration: BoxDecoration(color: Colors.grey[300]),
-        child: ListTile(
-          title: Text(
-            initChar,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      ));
-    }
     return Column(
-      children: index +
-          [
-            Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                  bottom: BorderSide(color: Colors.grey[400]!),
-                )),
-                child: InkWell(
-                  onTap: () => openFile(document),
-// openFile(song.id!),
-                  child: ListTile(title: Text(document.document_name == null ? "" : document.document_name!)),
-                ))
-          ],
+      children: [
+        Container(
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(color: Colors.grey[400]!),
+            )),
+            child: InkWell(
+              onTap: () => openFile(document),
+              child: ListTile(title: Text(document.document_name == null ? "" : document.document_name!)),
+            ))
+      ],
     );
   }
 
   void openFile(ElectionDocument document) {
-    print(document.url! + " is url");
     Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!)));
   }
 }
