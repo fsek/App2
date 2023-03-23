@@ -37,9 +37,7 @@ class _NollningPageState extends State<NollningPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Spacer(
-                  flex: 6,
-                ),
+                Spacer(flex: 6),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -55,6 +53,7 @@ class _NollningPageState extends State<NollningPage> {
                     ),
                   ],
                 ),
+                Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -69,6 +68,7 @@ class _NollningPageState extends State<NollningPage> {
                     )
                   ],
                 ),
+                Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -85,9 +85,7 @@ class _NollningPageState extends State<NollningPage> {
                     ),
                   ],
                 ),
-                Spacer(
-                  flex: 4,
-                ),
+                Spacer(flex: 4),
               ],
             ),
           ),
