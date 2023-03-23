@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/better_cafe/menu_item.dart';
-import 'package:fsek_mobile/screens/cafe/cafe.dart';
+import 'package:fsek_mobile/screens/better_cafe/cafe_work.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/services/cafe.service.dart';
 
 import '../../models/better_cafe/cafe_day.dart';
-import '../../models/better_cafe/sandwich.dart';
 
 class BetterCafePage extends StatefulWidget {
   @override
@@ -88,78 +88,81 @@ class _BetterCafePageState extends State<BetterCafePage> {
 
   Widget build(BuildContext context) {
     bool _tileExpanded = false;
-    return Stack(children: [
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Hilbert Café"),
-        ),
-        body: Container(
-          child: ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(60, 5, 60, 5),
-                child: Image.asset('assets/img/cafe_logo.png',
-                    alignment: Alignment.topCenter),
-              ),
-              Text(
-                "Välkommen till Hilbert Café!",
-                style: TextStyle(
-                  color: Colors.orange[800],
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Column(
-                children: <Widget>[
-                  ExpansionTile(
-                    title: Text(
-                      'Meny',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                        'Här kan du kolla igenom kaféets klassiker och dess priser'),
-                    children: [
-                      ...items.map(
-                        (MenuItem mi) => _createMenu(mi),
-                      )
-                    ],
-                    onExpansionChanged: (bool expanded) {
-                      setState(() => _tileExpanded = expanded);
-                    },
-                  ),
-                  ExpansionTile(
-                    title: Text(
-                      'Veckans mackmeny, vecka:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text('Här kan du se veckans smarriga mackor'),
-                    children: [
-                      ...days.map(
-                        (CafeDay day) => _createSandwichMenu(day),
-                      )
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => CafePage())));
-                    },
-                    child: Text('Jobba i caféet'),
-                  ) //InkWell()
-                ],
-              )
-            ],
-          ),
-        ),
-        // backgroundColor: Colors.white,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hilbert Café"),
       ),
-    ]);
+      body: Container(
+        child: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(60, 5, 60, 5),
+              child: Image.asset('assets/img/cafe_logo.png',
+                  alignment: Alignment.topCenter),
+            ),
+            Text(
+              "Välkommen till Hilbert Café!",
+              style: TextStyle(
+                color: Colors.orange[800],
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Column(
+              children: <Widget>[
+                ExpansionTile(
+                  title: Text(
+                    'Meny',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                      'Här kan du kolla igenom kaféets klassiker och dess priser'),
+                  children: [
+                    ...items.map(
+                      (MenuItem mi) => _createMenu(mi),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded) {
+                    setState(() => _tileExpanded = expanded);
+                  },
+                ),
+                ExpansionTile(
+                  title: Text(
+                    'Veckans mackmeny, läsvecka:',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text('Här kan du se veckans smarriga mackor'),
+                  children: [
+                    ...days.map(
+                      (CafeDay day) => _createSandwichMenu(day),
+                    )
+                  ],
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => CafeWorkPage())));
+                  },
+                  child: Text('Jobba i caféet'),
+                ),
+                Text("Glutenintolerant? Beställ macka här!"),
+                TextButton(
+                    onPressed: () {
+                      launch("http://contact.fsektionen.se");
+                    },
+                    child: Text("Specialmacka:D"))
+              ],
+            )
+          ],
+        ),
+      ),
+      // backgroundColor: Colors.white,
+    );
   }
 }
