@@ -12,7 +12,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
     
     return Scaffold(
         appBar: AppBar(
-          title: Text("Om sektionsmötet"),
+          title: Text(t.guildMeetingTitle),
         ),
         body: Container(
             padding: EdgeInsets.all(8),
@@ -23,7 +23,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("VT 2023",
+                  Text(t.guildMeetingCurr,
                    style: Theme.of(context).textTheme.headline6),
                   SizedBox(
                     height: 8,
@@ -33,37 +33,45 @@ class AboutGuildMeetingPage extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: """Mötet kommer äga rum den 24 till 25 april. Kandidera och nominera kan du göra via """,
+                          text: t.guildMeetingNominateOne,
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """valsidan""",
+                          text: t.guildMeetingNominateTwo,
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('https://fsektionen.se/val');
                             },
                         ),
                         TextSpan(
-                          text: """. Motioner skickas till """,
+                          text: t.guildMeetingSendMotionOne,
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """sekreteraren""",
+                          text: t.guildMeetingSendMotionTwo,
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:sekreterare@fsektionen.se');
                             },
                         ),
                         TextSpan(
-                          text: """ innan motionsstoppet.\n\nFöljande datum och tider gäller för terminsmötet 24 till 25 april - Vårterminsmötet (MH:G preliminärt):\nMötet öppnar och återupptas kl. 17.59 på samtliga datum.\n\nFöljande datum gäller inför terminsmötet:\n10 februari - Valet öppnar på hemsidan.\n3 mars - Valet stänger på hemsidan för mötesvalda poster.\n23 mars - Motionsstop\n30 mars - Anslag av föredragningslistan.\n\nFör mer information om vad de olika händelserna innebär, se kalendern på hemsidan. Har du ytterligare frågor angående mötet, kontakta """,
+                          text: " ${t.guildMeetingSendMotionThree}\n\n"
+                          "${t.guildMeetingTimePlaceOne}${t.guildMeetingTimePlaceTwo}\n"
+                          "${t.guildMeetingTimePlaceThree}\n\n"
+                          "${t.guildMeetingDeadlinesOne}:\n"
+                          "${t.guildMeetingDeadLinesTwo}\n"
+                          "${t.guildMeetingDeadLinesThree}\n"
+                          "${t.guildMeetingDeadLinesFour}\n"
+                          "${t.guildMeetingDeadLinesFive}\n\n"
+                          "${t.guildMeetingETC}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """styrelsen""",
+                          text: "${t.guildMeetingBoard}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:styrelsen@fsektionen.se');
                             },
                         ),
                         TextSpan(
-                          text: """.\n\nI sektionens tjänst,\nHanna Areskoug, sekreterare 2023""",
+                          text: """.\n\nI sektionens tjänst,\nHanna Areskoug, sekreterare 2023""", //  
                           style: TextStyle(height: 1.5))
                       ],
                     ),
@@ -71,7 +79,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 24,
                   ),
-                  Text("Motioner och propositioner",
+                  Text("${t.guildMeetingAboutOne}",
                    style: Theme.of(context).textTheme.headline6),
                   SizedBox(
                     height: 8,
@@ -81,37 +89,38 @@ class AboutGuildMeetingPage extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: """Under terminsmötet kommer diverse förslag på förändringar och användningar av sektionens pengar att avhandlas. Dessa s.k. motioner och propositioner inkommer från sektionens gemene medlem respektive sektionens styrelse. Om du har en idé på en motion och vill ha tips eller hjälp att skriva den, kontakta """,
+                          text: "${guildMeetingAboutOne}${guildMeetingAboutTwo}"
+                                "${guildMeetingAboutThree}${guildMeetingAboutFour}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """styrelsen""",
+                          text: "${guildMeetingBoard}}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:styrelsen@fsektionen.se');
                             },
                         ),
                         TextSpan(
-                          text: """ eller den relevanta """,
+                          text: "${guildMeetingAboutFive}}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """utskottsordföranden""",
+                          text: "${guildMeetingAboutSix}}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('https://fsektionen.se/kontakter');
                             },
                         ),
                         TextSpan(
-                          text: """ beroende på vad din idé behandlar. Färdiga motioner skickas in till """,
+                          text: "${guildMeetingAboutSeven}${guildMeetingAboutEight}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """sekreteraren""",
+                          text: "${guildMeetingAboutNine}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:sekreterare@fsektionen.se');
                             },
                         ),
                         TextSpan(
-                          text: """ innan motionsstoppet.""",
+                          text: "${t.guildMeetingAboutTen}",
                           style: TextStyle(height: 1.5))
                       ],
                     ),
@@ -119,7 +128,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 24,
                   ),
-                  Text("Engagemang och val",
+                  Text("${t.guildMeetingElectionInfoOne}",
                    style: Theme.of(context).textTheme.headline6),
                   SizedBox(
                     height: 8,
@@ -129,17 +138,18 @@ class AboutGuildMeetingPage extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: """Ett sätt att engagera sig inom F-sektionen är att söka några av våra poster i anslutning till höst- eller vårterminsmöte. Kandidatur till en post sker via """,
+                          text: "${t.guildMeetingElectionInfoTwo}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: """valsidan""",
+                          text: "${t.guildMeetingElectionInfoThree}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('https://fsektionen.se/val');
                             },
                         ),
                         TextSpan(
-                          text: """. Det går också att nominera någon du anser lämplig till en specifik post, denna person måste sedan själv gå in och kandidera. Större poster väljes under mötet och resterande poster väljes i efterhand av styrelsen. För mer information om engagemang och val se Policy för val.""",
+                          text: "${t.guildMeetingElectionInfoFour}${t.guildMeetingElectionInfoFive}"
+                          "",
                           style: TextStyle(height: 1.5)),
                       ],
                     ),
@@ -147,22 +157,22 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 24,
                   ),
-                  Text("Poster som väljs under sektionsmötet (större poster)",
+                  Text("${t.guildMeetingElectionInfoSix}",
                     style: Theme.of(context).textTheme.subtitle1),
                   SizedBox(
                     height: 8,
                   ),
-                  Text("""Söker du en post som väljes under ett sektionsmöte kommer du bli kallad för intervju av valberedningen. Av alla sökande kommer valberedningen sedan nominera en kandidat till sektionsmötet. Den som inte blir nominerad av valberedningen kan fortfarande motkandidera under mötet. Alla kandidater till en post anslås på en plansch där de presenteras med bild och text. Du kan alltid kandidera till en post under mötet trots att du inte kandiderat via webplatsen.""",
+                  Text("${t.guildMeetingElectionInfoSeven}${t.guildMeetingElectionInfoEight}${guildMeetingElectionInfoNine}",
                    style: TextStyle(height: 1.5)),
                   SizedBox(
                     height: 24,
                   ),
-                  Text("Val förrättade av styrelsen",
+                  Text("${t.guildMeetingBoardElectionOne}",
                    style: Theme.of(context).textTheme.subtitle1),
                   SizedBox(
                     height: 8,
                   ),
-                  Text("""Söker du en sådan post som inte väljs under mötet kommer du kallas på intervju efter mötet. Detta mötet brukar hållas av nya och gamla utskottsordförande och ibland någon från valberedningen och någon som avgår från samma post. Denna grupp av människor nominerar därefter rekommenderat antal personer till den aktuella posten. Det är sedan styrelsen som i valmöte väljer in funktionärerna.""",
+                  Text("${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionTwo}",
                    style: TextStyle(height: 1.5)),
                   SizedBox(
                     height: 24,
