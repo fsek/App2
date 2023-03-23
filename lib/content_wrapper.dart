@@ -205,30 +205,6 @@ class _ContentWrapperState extends State<ContentWrapper>
               }
             }).toList())),
           ])),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          /*floatingActionButton: Container(
-            height: 100,
-            width: 100,
-          child: FloatingActionButton(
-            onPressed: () {
-              setState(() {
-                _currentIndex = widget.navbarDestinations.length - 1;
-              });
-              locator<ThemeService>().theme = nollning2022theme;
-              locator<ThemeService>().backgroundColors =
-                  nollning2022Background;
-              widget.onNavigation!.add(NollningPage);
-            },
-            //child: Image(
-            //image: AssetImage("assets/img/jubel_logo.png"),
-            //fit: BoxFit.cover,
-            //),
-            tooltip: 'F-sektionen',
-            elevation: 2.0,
-            backgroundColor: Colors.transparent,
-          ),
-          ),*/
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
@@ -244,9 +220,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                     .navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations
-                    .sublist(0, 5)
-                    .map((Destination destination) {
+                ...widget.navbarDestinations.map((Destination destination) {
                   return FsekAppBarItem(
                       iconData: destination.icon,
                       text: indexToTitle[destination.index]);

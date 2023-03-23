@@ -93,7 +93,6 @@ class FsekAppBarState extends State<FsekAppBar> {
         },
       );
     });
-    // items.insert(items.length >> 1, _buildMiddleTabItem()); //created empty space in the middle of the bottom app bar for the Introduction button
 
     return BottomAppBar(
         shape: widget.notchedShape,
@@ -109,21 +108,6 @@ class FsekAppBarState extends State<FsekAppBar> {
           ],
         ));
   }
-
-  /* Widget _buildMiddleTabItem() {
-    return Expanded(
-      child: SizedBox(
-        height: widget.height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: widget.iconSize),
-          ],
-        ),
-      ),
-    );
-  }*/
 
   Widget _buildTabItem({
     required FsekAppBarItem item,
