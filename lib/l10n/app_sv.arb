@@ -110,7 +110,7 @@
     "contactHasBeenSent": "Ditt meddelande har skickas! :D",
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
-    
+
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
 
@@ -122,7 +122,7 @@
     "homeNoNews": "Inga nyheter tillgänliga",
     "homeTitleUntranslated": "Det finns ingen översättning tillgänglig för detta inlägget\n:(",
     "newsNotAvailableOne": "Detta inlägget är inte tillgängligt på svenska. Överväg att kontakta ",
-    "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ", 
+    "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ",
 
     "groupWriteProtected": "Chatten är skrivskyddad",
     "groupWhatToDo": "Vad vill du göra med meddelandet?",
@@ -165,8 +165,8 @@
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
     "cafeShiftFail": "Något gick fel!",
-    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid", 
-    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!", 
+    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid",
+    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!",
     "cafeShiftSuccessUnsignText": "Tipsa en kompis om att anmäla sig på passet istället!",
     "cafeShiftFailUnsignText": "Det gick inte att avanmäla dig från passet.",
     "cafeShiftCafeShift": "Cafépass",
@@ -174,7 +174,7 @@
     "cafeShiftRemoveSignup": "Avanmäl mig :((",
     "cafeShiftSignup2": "Anmälan ",
     "cafeShiftIsSignedUp": "är anmäld",
-    "cafeShiftSignMeUp": "Anmäl mig :))", 
+    "cafeShiftSignMeUp": "Anmäl mig :))",
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
     "cafeShiftShift": " Ledigt pass",
@@ -200,19 +200,20 @@
     "aboutGuildTwelve": "Hilbertkorridoren; där hittar du nästan alltid någon sektionsaktiv. Vi hoppas att du ska trivas på sektionen!",
 
     "fapSuper": "su-perman",
-    "fapSpider": "Spindelman", 
+    "fapSpider": "Spindelman",
     "fapSpiderMaster": "Spindelförman",
     "fapAbout": "om F-appen",
     "fapFap": "F-appen",
-    "fapVersion": "Version: ja", 
+    "fapVersion": "Version: ja",
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",
     "fapConstructed": "Knackad av F-sektionens su-per och spindelmän:",
     "fapInspired": "Vad inspirerade nätet under ",
     "fapDev": "utvecklingen",
 
 
-    "otherDocuments": "Övriga dokument",
-    "noOtherDocuments": "Det finns inga övriga dokument",
+    "otherDocuments": "Övriga mötesdokument",
+    "noOtherDocuments": "Det finns inga övriga mötesdokument",
+    "otherTitleMissing": "Titel saknas",
 
     "noProposition": "Det finns inga propositioner för detta möte på hemsidan."
 }

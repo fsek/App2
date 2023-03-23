@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
@@ -20,13 +21,13 @@ class _NollningPageState extends State<NollningPage> {
   Widget build(BuildContext context) {
     String backgroundPath = "assets/img/jubel_background_home.png";
     return Stack(children: [
-      Image.asset(
-        backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-        alignment: Alignment.topCenter,
-      ),
+      // Image.asset(
+      //   backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
+      //   height: MediaQuery.of(context).size.height,
+      //   width: MediaQuery.of(context).size.width,
+      //   fit: BoxFit.cover,
+      //   alignment: Alignment.topCenter,
+      // ),
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -43,39 +44,43 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));
-
-                        // Navigator.pushNamed(context, '/nolleguide');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OtherDocumentsPage()));
                       },
-                      child: Image.asset(
-                        "assets/img/Nolleguiden.png",
-                        height: 100,
-                      ),
+                      child: Text("About guild meeting"),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Text("Before VT-meeting"),
                     ),
                   ],
                 ),
-                //Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule()));
-                      },
-                      child: Image.asset(
-                        "assets/img/schedulebutton.png",
-                        height: 100,
-                      ),
-                    ),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));
+                        },
+                        child: Text("Motions")),
+                    InkWell(
+                      onTap: () {},
+                      child: Text("Propositions"),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: ((context) => PdfPage(url: "https://fsektionen.se/dokument/1089", title: "Kandidaturplanch"))));
+                        },
+                        child: Text("Candidacy planch")),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/song_book');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OtherDocumentsPage()));
                       },
-                      child: Image.asset(
-                        "assets/img/Sångbok.png",
-                        height: 100,
-                        // scale: 2,
-                      ),
+                      child: Text("Other meeting documents"),
                     ),
                   ],
                 ),
