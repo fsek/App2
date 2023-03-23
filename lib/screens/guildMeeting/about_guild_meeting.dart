@@ -1,4 +1,4 @@
-mport 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,10 +57,10 @@ class AboutGuildMeetingPage extends StatelessWidget {
                           "${t.guildMeetingTimePlaceOne}${t.guildMeetingTimePlaceTwo}\n"
                           "${t.guildMeetingTimePlaceThree}\n\n"
                           "${t.guildMeetingDeadlinesOne}:\n"
-                          "${t.guildMeetingDeadLinesTwo}\n"
-                          "${t.guildMeetingDeadLinesThree}\n"
-                          "${t.guildMeetingDeadLinesFour}\n"
-                          "${t.guildMeetingDeadLinesFive}\n\n"
+                          "${t.guildMeetingDeadlinesTwo}\n"
+                          "${t.guildMeetingDeadlinesThree}\n"
+                          "${t.guildMeetingDeadlinesFour}\n"
+                          "${t.guildMeetingDeadlinesFive}\n\n"
                           "${t.guildMeetingETC}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
@@ -89,31 +89,30 @@ class AboutGuildMeetingPage extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "${guildMeetingAboutOne}${guildMeetingAboutTwo}"
-                                "${guildMeetingAboutThree}${guildMeetingAboutFour}",
+                          text: "${t.guildMeetingAboutTwo}${t.guildMeetingAboutThree}${t.guildMeetingAboutFour}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: "${guildMeetingBoard}}",
+                          text: "${t.guildMeetingBoard}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:styrelsen@fsektionen.se');
                             },
                         ),
                         TextSpan(
-                          text: "${guildMeetingAboutFive}}",
+                          text: "${t.guildMeetingAboutFive}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: "${guildMeetingAboutSix}}",
+                          text: "${t.guildMeetingAboutSix}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('https://fsektionen.se/kontakter');
                             },
                         ),
                         TextSpan(
-                          text: "${guildMeetingAboutSeven}${guildMeetingAboutEight}",
+                          text: "${t.guildMeetingAboutSeven}${t.guildMeetingAboutEight}",
                           style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: "${guildMeetingAboutNine}",
+                          text: "${t.guildMeetingAboutNine}",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () { launch('mailto:sekreterare@fsektionen.se');
@@ -162,7 +161,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("${t.guildMeetingElectionInfoSeven}${t.guildMeetingElectionInfoEight}${guildMeetingElectionInfoNine}",
+                  Text("${t.guildMeetingElectionInfoSeven}${t.guildMeetingElectionInfoEight}${t.guildMeetingElectionInfoNine}",
                    style: TextStyle(height: 1.5)),
                   SizedBox(
                     height: 24,
@@ -172,7 +171,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionTwo}",
+                  Text("${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionThree}${t.guildMeetingBoardElectionFour}",
                    style: TextStyle(height: 1.5)),
                   SizedBox(
                     height: 24,
