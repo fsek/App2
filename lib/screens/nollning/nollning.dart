@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
+import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 
@@ -44,7 +45,7 @@ class _NollningPageState extends State<NollningPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OtherDocumentsPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AboutGuildMeetingPage()));
                       },
                       child: Text("About guild meeting"),
                     ),

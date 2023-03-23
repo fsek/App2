@@ -13,6 +13,7 @@ import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
+import 'screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
@@ -59,7 +60,7 @@ void main() async {
     '/nolleguide': (context) => GuidePage(),
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
-    '/wordlist': (context) => WordListPage()
+    '/wordlist': (context) => WordListPage(),
   };
 
   locator<ThemeService>().theme = ThemeData(
