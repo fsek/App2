@@ -4,8 +4,9 @@
     "swedish": "Swedish",
     "english": "English",
 
-    "home" : "Home",
+    "news" : "News",
     "calendar" : "Calendar",
+    "home" : "Home",
     "notifications" : "Notifications",
     "other" : "Other",
     "introduction" : "Nollning",

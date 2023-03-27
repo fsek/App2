@@ -4,8 +4,9 @@
     "swedish": "Svenska",
     "english": "Engelska",
 
-    "home" : "Hem",
+    "news" : "Nyheter",
     "calendar" : "Kalender",
+    "home" : "Hem",
     "notifications" : "Notiser",
     "other" : "Övrigt",
     "introduction" : "Nollning",
