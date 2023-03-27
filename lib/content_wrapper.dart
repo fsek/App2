@@ -102,11 +102,11 @@ class _ContentWrapperState extends State<ContentWrapper>
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
-      0: t.news,
+      0: t.home,
       1: t.calendar,
-      2: t.home,
-      3: t.notifications,
-      4: t.other,
+      2: t.notifications,
+      3: t.other,
+      4: t.introduction
     };
     // Shows state messages
     for (String message in widget.messages) {
@@ -205,6 +205,30 @@ class _ContentWrapperState extends State<ContentWrapper>
               }
             }).toList())),
           ])),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Container(
+            height: 100,
+            width: 100,
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = widget.navbarDestinations.length - 1;
+                });
+                locator<ThemeService>().theme = nollning2022theme;
+                locator<ThemeService>().backgroundColors =
+                    nollning2022Background;
+                widget.onNavigation!.add(NollningPage);
+              },
+              child: Image(
+                image: AssetImage("assets/img/jubel_logo.png"),
+                fit: BoxFit.cover,
+              ),
+              tooltip: 'F-sektionen',
+              elevation: 2.0,
+              backgroundColor: Colors.transparent,
+            ),
+          ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
@@ -220,7 +244,9 @@ class _ContentWrapperState extends State<ContentWrapper>
                     .navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.map((Destination destination) {
+                ...widget.navbarDestinations
+                    .sublist(0, 4)
+                    .map((Destination destination) {
                   return FsekAppBarItem(
                       iconData: destination.icon,
                       text: indexToTitle[destination.index]);
