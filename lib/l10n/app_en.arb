@@ -210,5 +210,12 @@
     "fapInspired": "What inspired the web during ",
     "fapDev": "development",
 
-    "noProposition": "There are no motions from the board on the website."
+    "noProposition": "There are no motions from the board on the website.",
+    "noMotion": "There are no motions on the website.",
+    
+    "propositionsPageTitle": "Motions from the board",
+    "motionsPageTitle": "Motions",
+    "readMotion": "Read motion",
+    "readMotionAnswer": "Read motion answer",
+    "readProposition": "Read motion from the board"
 }

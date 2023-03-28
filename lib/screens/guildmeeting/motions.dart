@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
-import 'package:fsek_mobile/screens/guildmeeting/proposition_card.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/models/documents/document_collection.dart';
 
-class PropositionsPage extends StatefulWidget {
+import 'motion_card.dart';
+
+class MotionsPage extends StatefulWidget {
   @override
-  _PropositionsPageState createState() => _PropositionsPageState();
+  _MotionsPageState createState() => _MotionsPageState();
 }
 
-class _PropositionsPageState extends State<PropositionsPage> with TickerProviderStateMixin {
-  List<ElectionDocument> documents = [];
-  List<ElectionDocument> allDocuments = [];
+class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin {
+  List<List<ElectionDocument?>>? documents = [];
+  List<List<ElectionDocument?>>? allDocuments = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
@@ -23,12 +25,20 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
 
   TextEditingController _controller = TextEditingController();
 
+  late AnimationController animationController;
+  late Animation<double> animation;
+
   @override
   void initState() {
-    locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
-          this.documents = value!;
-          documents.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
-          allDocuments = List.from(documents);
+    locator<DocumentService>().getMotionsAndAnswers("Val").then((value) => setState(() {
+          if (value != null) {
+            this.documents = value;
+            // 0th value is the motion, which should always exist if we get a non null response
+            documents!.sort((a, b) => a[0]!.document_name!.compareTo(b[0]!.document_name!));
+            allDocuments = List.from(documents!);
+          } else {
+            this.documents = null;
+          }
         }));
     super.initState();
   }
@@ -43,19 +53,19 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
     var t = AppLocalizations.of(context)!;
     return listEquals(allDocuments, [])
         ? Scaffold(
-            appBar: AppBar(title: Text(t.propositionsPageTitle)),
+            appBar: AppBar(title: Text(t.motionsPageTitle)),
             body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              appBar: AppBar(title: Text(t.propositionsPageTitle)),
+              appBar: AppBar(title: Text(t.motionsPageTitle)),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FocusScope(
                       child: Focus(
                     onFocusChange: (focus) {
-                      print(focus);
+                      //print(focus);
                       setState(() {
                         searchFocus = focus;
                       });
@@ -86,20 +96,26 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
                                       }))
                               : SizedBox.shrink()),
                       onChanged: (search) {
+                        print(search == "");
+                        print(search);
                         List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
-                          documents = allDocuments.where((document) {
-                            return searchTerms.every((term) => document.document_name!.toLowerCase().contains(term));
+                          documents = allDocuments!.where((document) {
+                            return searchTerms
+                                .every((term) => document[0]!.document_name!.toLowerCase().contains(term));
                           }).toList();
                         });
                       },
                     ),
                   )),
                   Expanded(
-                    child: documents.isNotEmpty
+                    child: documents!.isNotEmpty
                         ? ListView(
-                            children: documents.map((document) => _generateDocumentTile(document)).toList(),
+                            children: documents!
+                                .map((document) =>
+                                    _generateDocumentTile(document[0]!, document.length > 1 ? document[1] : null))
+                                .toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
@@ -111,10 +127,10 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
             ));
   }
 
-  Widget _generateDocumentTile(ElectionDocument document) {
-    return Column(
-      children: [PropositionCard(proposition: document)],
-    );
+  Widget _generateDocumentTile(ElectionDocument motion, ElectionDocument? motion_answer) {
+    return Column(children: [
+      MotionCard(motion: motion, motionResponse: motion_answer),
+    ]);
   }
 
   void openFile(ElectionDocument document) {

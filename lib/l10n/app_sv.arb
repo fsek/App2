@@ -210,5 +210,12 @@
     "fapInspired": "Vad inspirerade nätet under ",
     "fapDev": "utvecklingen",
 
-    "noProposition": "Det finns inga propositioner för detta möte på hemsidan."
+    "noProposition": "Det finns inga propositioner för detta möte på hemsidan.",
+    "noMotion": "There are no motions on the website.",
+    
+    "propositionsPageTitle": "Propositioner",
+    "motionsPageTitle": "Motioner",
+    "readMotion": "Läs motion",
+    "readMotionAnswer": "Läs motionssvar",
+    "readProposition": "Läs proposition"
 }
