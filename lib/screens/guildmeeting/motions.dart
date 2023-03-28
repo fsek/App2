@@ -31,13 +31,14 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
   @override
   void initState() {
     locator<DocumentService>().getMotionsAndAnswers("Val").then((value) => setState(() {
-          if (value != null) {
+          if (!listEquals(value, [])) {
             this.documents = value;
             // 0th value is the motion, which should always exist if we get a non null response
             documents!.sort((a, b) => a[0]!.document_name!.compareTo(b[0]!.document_name!));
             allDocuments = List.from(documents!);
           } else {
             this.documents = null;
+            allDocuments = null;
           }
         }));
     super.initState();
@@ -101,16 +102,18 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
                         List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
-                          documents = allDocuments!.where((document) {
-                            return searchTerms
-                                .every((term) => document[0]!.document_name!.toLowerCase().contains(term));
-                          }).toList();
+                          if (documents != null) {
+                            documents = allDocuments!.where((document) {
+                              return searchTerms
+                                  .every((term) => document[0]!.document_name!.toLowerCase().contains(term));
+                            }).toList();
+                          }
                         });
                       },
                     ),
                   )),
                   Expanded(
-                    child: documents!.isNotEmpty
+                    child: documents != null
                         ? ListView(
                             children: documents!
                                 .map((document) =>
@@ -119,7 +122,7 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text(t.noProposition),
+                            child: Text(t.noMotions),
                           ),
                   )
                 ],

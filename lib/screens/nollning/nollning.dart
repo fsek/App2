@@ -71,7 +71,11 @@ class _NollningPageState extends State<NollningPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/song_book');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PdfPage(url: "https://fsektionen.se/dokument/1036")));
+                        //Navigator.pushNamed(context, '/song_book');
                       },
                       child: Image.asset(
                         "assets/img/Sångbok.png",
