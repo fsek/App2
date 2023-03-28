@@ -4,7 +4,6 @@ import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
-import 'package:fsek_mobile/screens/guildmeeting/new_test_page.dart';
 import '../../services/document.service.dart';
 import '../../services/service_locator.dart';
 
