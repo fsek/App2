@@ -262,5 +262,12 @@
     "noOtherDocuments": "There are no other documents",
     "otherTitleMissing": "Title missing",
 
-    "noProposition": "There are no motions from the board on the website."
+    "noProposition": "There are no motions from the board on the website.",
+
+    "guildMeetingButtonAbout": "About guild meeting",
+    "guildMeetingButtonBefore": "Before the meeting",
+    "guildMeetingButtonMotions": "Motions",
+    "guildMeetingButtonProposition": "Propositions",
+    "guildMeetingButtonPoster": "Candidacy poster",
+    "guildMeetingButtonOther": "Other documents"
 }

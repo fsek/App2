@@ -71,20 +71,19 @@ class AboutGuildMeetingPage extends StatelessWidget {
                   ),
                   SizedBox(height: 24),
                   Text("${t.guildMeetingAboutTitle}", style: Theme.of(context).textTheme.headline6),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  SizedBox(height: 8),
                   Text("${t.guildMeetingAboutOne}", style: Theme.of(context).textTheme.subtitle1),
+                  SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
                             text: "${t.guildMeetingAboutTwo}"
-                                "${t.guildMeetingAboutThree}${t.guildMeetingAboutFour}",
+                                "${t.guildMeetingAboutThree} ${t.guildMeetingAboutFour}",
                             style: TextStyle(height: 1.5)),
                         TextSpan(
-                          text: "${t.guildMeetingBoard} ",
+                          text: " ${t.guildMeetingBoard} ",
                           style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
@@ -113,13 +112,9 @@ class AboutGuildMeetingPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 24,
-                  ),
+                  SizedBox(height: 24),
                   Text("${t.guildMeetingElectionInfoOne}", style: Theme.of(context).textTheme.headline6),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(color: Colors.black),
@@ -133,7 +128,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                               launchUrl(Uri.parse('https://fsektionen.se/val'));
                             },
                         ),
-                        TextSpan(text: "${t.guildMeetingElectionInfoFour}${t.guildMeetingElectionInfoFive}", style: TextStyle(height: 1.5)),
+                        TextSpan(text: "${t.guildMeetingElectionInfoFour} ${t.guildMeetingElectionInfoFive}", style: TextStyle(height: 1.5)),
                       ],
                     ),
                   ),

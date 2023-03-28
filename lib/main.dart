@@ -63,29 +63,29 @@ void main() async {
     '/wordlist': (context) => WordListPage(),
   };
 
-  locator<ThemeService>().theme = ThemeData(
-      brightness: Brightness.light,
-      primaryColor: Colors.orange[800],
-      colorScheme: ThemeData().colorScheme.copyWith(
-          primary: Colors.orange[800], secondary: Colors.orangeAccent),
-      textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.orange))),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.orange))),
-      inputDecorationTheme: InputDecorationTheme(
-        focusedBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-        labelStyle: TextStyle(color: Colors.orange),
-        hintStyle: TextStyle(color: Colors.grey[600]),
-      ));
-  locator<ThemeService>().backgroundColors = [
-    Color(0xFFf77e14),
-    Color(0xFFe6660b),
-  ];
+  // locator<ThemeService>().theme = ThemeData(
+  //     brightness: Brightness.light,
+  //     primaryColor: Colors.orange[800],
+  //     colorScheme: ThemeData().colorScheme.copyWith(
+  //         primary: Colors.orange[800], secondary: Colors.orangeAccent),
+  //     textButtonTheme: TextButtonThemeData(
+  //         style: ButtonStyle(
+  //             backgroundColor:
+  //                 MaterialStateProperty.all<Color>(Colors.orange))),
+  //     elevatedButtonTheme: ElevatedButtonThemeData(
+  //         style: ButtonStyle(
+  //             backgroundColor:
+  //                 MaterialStateProperty.all<Color>(Colors.orange))),
+  //     inputDecorationTheme: InputDecorationTheme(
+  //       focusedBorder:
+  //           UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
+  //       labelStyle: TextStyle(color: Colors.orange),
+  //       hintStyle: TextStyle(color: Colors.grey[600]),
+  //     ));
+  // locator<ThemeService>().backgroundColors = [
+  //   Color(0xFFf77e14),
+  //   Color(0xFFe6660b),
+  // ];
   locator<ThemeService>().theme = fsekTheme;
   locator<ThemeService>().backgroundColors = fsekBackground;
   locator<ThemeService>().loginIcon = [
@@ -95,11 +95,7 @@ void main() async {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {

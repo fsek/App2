@@ -262,5 +262,12 @@
     "noOtherDocuments": "Det finns inga övriga mötesdokument",
     "otherTitleMissing": "Titel saknas",
 
-    "noProposition": "Det finns inga propositioner för detta möte på hemsidan."
+    "noProposition": "Det finns inga propositioner för detta möte på hemsidan.",
+
+    "guildMeetingButtonAbout": "Om sektionsmötet",
+    "guildMeetingButtonBefore": "Inför sektionsmötet",
+    "guildMeetingButtonMotions": "Motioner",
+    "guildMeetingButtonProposition": "Propositioner",
+    "guildMeetingButtonPoster": "Kandidaturplansch",
+    "guildMeetingButtonOther": "Övriga mötesdokument"
 }
