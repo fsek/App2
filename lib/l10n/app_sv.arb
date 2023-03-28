@@ -264,10 +264,12 @@
 
     "noProposition": "Det finns inga propositioner för detta möte på hemsidan.",
 
+    "noCandidacyPoster": "Det finns ingen kandidaturplanch för detta möte ännu.",
+
     "guildMeetingButtonAbout": "Om sektionsmötet",
     "guildMeetingButtonBefore": "Inför sektionsmötet",
     "guildMeetingButtonMotions": "Motioner",
     "guildMeetingButtonProposition": "Propositioner",
     "guildMeetingButtonPoster": "Kandidaturplansch",
-    "guildMeetingButtonOther": "Övriga mötesdokument"
+    "guildMeetingButtonOther": "Övriga dokument"
 }

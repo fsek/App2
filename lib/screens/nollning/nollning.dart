@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/guildMeeting/candidacy_poster.dart';
 import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
 import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
-import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,7 +20,8 @@ class _NollningPageState extends State<NollningPage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/bakgrund.png";
+    double edgePadding = MediaQuery.of(context).size.width / 25;
+    String backgroundPath = "assets/img/vt_bakgrund.png";
     return Stack(children: [
       Image.asset(
         backgroundPath, //Sizing here is a bit wonky. nollningbakgrundtest is better than original though. Edited in paint so quality is shite
@@ -32,20 +33,7 @@ class _NollningPageState extends State<NollningPage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
-          // child: GridView.count(
-          //   physics: NeverScrollableScrollPhysics(),
-          //   shrinkWrap: true,
-          //   crossAxisCount: 2,
-          //   children: [
-          //     button(t.guildMeetingButtonAbout, AboutGuildMeetingPage()),
-          //     button(t.guildMeetingButtonPoster, PdfPage(url: "https://fsektionen.se/dokument/1089", title: "Kandidaturplanch")),
-          //     button(t.guildMeetingButtonMotions, DocumentPage()),
-          //     button(t.guildMeetingButtonProposition, DocumentPage()),
-          //     button(t.guildMeetingButtonOther, OtherDocumentsPage()),
-          //   ],
-          // )
-
+          padding: EdgeInsets.fromLTRB(edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +43,7 @@ class _NollningPageState extends State<NollningPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     button(t.guildMeetingButtonAbout, AboutGuildMeetingPage()),
-                    button(t.guildMeetingButtonPoster, PdfPage(url: "https://fsektionen.se/dokument/1089", title: "Kandidaturplanch")),
+                    button(t.guildMeetingButtonPoster, CandidacyPosterPage()),
                   ],
                 ),
                 Spacer(),
@@ -84,17 +72,18 @@ class _NollningPageState extends State<NollningPage> {
   }
 
   Widget button(String text, Widget destination) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(text),
-      style: ElevatedButton.styleFrom(
-          primary: Color(0x40005E77),
+      style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor: Color.fromARGB(255, 0, 93, 119).withOpacity(0.25),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
-          minimumSize: Size(MediaQuery.of(context).size.width / 2.2, 60)),
+          minimumSize: Size(MediaQuery.of(context).size.width / 2.4, 80)),
     );
   }
 }

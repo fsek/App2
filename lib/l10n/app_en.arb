@@ -264,6 +264,8 @@
 
     "noProposition": "There are no motions from the board on the website.",
 
+    "noCandidacyPoster": "There is no candidacy poster for this election yet.",
+
     "guildMeetingButtonAbout": "About guild meeting",
     "guildMeetingButtonBefore": "Before the meeting",
     "guildMeetingButtonMotions": "Motions",
