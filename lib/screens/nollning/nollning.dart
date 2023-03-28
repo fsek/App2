@@ -4,6 +4,7 @@ import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
 import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
 
 class NollningPage extends StatefulWidget {
   static const routeName = '/nollningpage';
@@ -50,8 +51,8 @@ class _NollningPageState extends State<NollningPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    button(t.guildMeetingButtonMotions, DocumentPage()),
-                    button(t.guildMeetingButtonProposition, DocumentPage()),
+                    button(t.guildMeetingButtonMotions, MotionsPage()),
+                    button(t.guildMeetingButtonProposition, PropositionsPage()),
                   ],
                 ),
                 Spacer(),

@@ -17,6 +17,8 @@ class PdfPage extends StatelessWidget {
         swipeHorizontal: false,
         autoSpacing: false,
         pageFling: false,
+        fitPolicy: FitPolicy.WIDTH,
+        fitEachPage: false,
         onError: (error) {
           print(error.toString());
         },

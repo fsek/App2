@@ -271,5 +271,12 @@
     "guildMeetingButtonMotions": "Motions",
     "guildMeetingButtonProposition": "Propositions",
     "guildMeetingButtonPoster": "Candidacy poster",
-    "guildMeetingButtonOther": "Other documents"
+    "guildMeetingButtonOther": "Other documents",
+    "noMotion": "There are no motions on the website.",
+
+    "propositionsPageTitle": "Motions from the board",
+    "motionsPageTitle": "Motions",
+    "readMotion": "Read motion",
+    "readMotionAnswer": "Read motion answer",
+    "readProposition": "Read motion from the board"
 }

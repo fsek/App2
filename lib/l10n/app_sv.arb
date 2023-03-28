@@ -271,5 +271,12 @@
     "guildMeetingButtonMotions": "Motioner",
     "guildMeetingButtonProposition": "Propositioner",
     "guildMeetingButtonPoster": "Kandidaturplansch",
-    "guildMeetingButtonOther": "Övriga dokument"
+    "guildMeetingButtonOther": "Övriga dokument",
+    "noMotion": "There are no motions on the website.",
+
+    "propositionsPageTitle": "Propositioner",
+    "motionsPageTitle": "Motioner",
+    "readMotion": "Läs motion",
+    "readMotionAnswer": "Läs motionssvar",
+    "readProposition": "Läs proposition"
 }
