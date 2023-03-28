@@ -116,8 +116,4 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
       children: [PropositionCard(proposition: document)],
     );
   }
-
-  void openFile(ElectionDocument document) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!)));
-  }
 }

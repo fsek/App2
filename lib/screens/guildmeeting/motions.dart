@@ -132,8 +132,4 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
       MotionCard(motion: motion, motionResponse: motion_answer),
     ]);
   }
-
-  void openFile(ElectionDocument document) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!)));
-  }
 }
