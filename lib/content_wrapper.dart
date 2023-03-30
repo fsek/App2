@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
 import 'models/user/user.dart';
-import 'screens/nollning/nollning.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
 import 'widgets/bottom_app_bar.dart';
@@ -96,11 +94,11 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
-      0: t.home,
+      0: t.news,
       1: t.calendar,
-      2: t.notifications,
-      3: t.other,
-      4: t.introduction,
+      2: t.home,
+      3: t.notifications,
+      4: t.other,
     };
     // Shows state messages
     for (String message in widget.messages) {
@@ -192,28 +190,6 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
               }
             }).toList())),
           ])),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Container(
-            height: 100,
-            width: 100,
-            child: FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  _currentIndex = widget.navbarDestinations.length - 1;
-                });
-                locator<ThemeService>().theme = fsekTheme;
-                locator<ThemeService>().backgroundColors = fsekBackground;
-                widget.onNavigation!.add(NollningPage);
-              },
-              child: Image(
-                image: AssetImage("assets/img/jubel_logo.png"),
-                fit: BoxFit.cover,
-              ),
-              tooltip: 'F-sektionen',
-              elevation: 2.0,
-              backgroundColor: Colors.transparent,
-            ),
-          ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
@@ -228,7 +204,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
+                ...widget.navbarDestinations.map((Destination destination) {
                   return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],

@@ -7,13 +7,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fsek_mobile/screens/home/home.dart';
-import 'package:fsek_mobile/screens/home/calendar.dart';
+import 'package:fsek_mobile/screens/news/news.dart';
+import 'package:fsek_mobile/screens/calendar/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
-import 'screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
@@ -24,11 +23,10 @@ import 'screens/nollning/emergency_contacts.dart';
 import 'screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
-import 'screens/nollning/nollning.dart';
+import 'screens/home/home.dart';
 import 'services/navigation.service.dart';
 import 'services/service_locator.dart';
 import 'services/theme.service.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
 class SimpleBlocObserver extends BlocObserver {
@@ -43,11 +41,11 @@ void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
-    Destination(0, Icons.home, HomePage()),
+    Destination(0, Icons.new_releases_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
-    Destination(2, Icons.notifications, NotiserPage()),
-    Destination(3, Icons.list, OtherContent()),
-    Destination(4, Icons.home, NollningPage()),
+    Destination(2, Icons.home, HomePage()),
+    Destination(3, Icons.notifications, NotiserPage()),
+    Destination(4, Icons.list, OtherContent()),
   ];
   route.navbarDestinations = navbarDestinations;
   route.routes = {
@@ -56,7 +54,7 @@ void main() async {
     '/messages': (context) => MessagesPage(),
     '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
-    '/nollningpage': (context) => NollningPage(),
+    '/homepage': (context) => HomePage(),
     '/nolleguide': (context) => GuidePage(),
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
