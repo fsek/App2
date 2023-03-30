@@ -41,7 +41,7 @@ void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
-    Destination(0, Icons.new_releases_outlined, NewsPage()),
+    Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
     Destination(3, Icons.notifications, NotiserPage()),
@@ -61,29 +61,6 @@ void main() async {
     '/wordlist': (context) => WordListPage(),
   };
 
-  // locator<ThemeService>().theme = ThemeData(
-  //     brightness: Brightness.light,
-  //     primaryColor: Colors.orange[800],
-  //     colorScheme: ThemeData().colorScheme.copyWith(
-  //         primary: Colors.orange[800], secondary: Colors.orangeAccent),
-  //     textButtonTheme: TextButtonThemeData(
-  //         style: ButtonStyle(
-  //             backgroundColor:
-  //                 MaterialStateProperty.all<Color>(Colors.orange))),
-  //     elevatedButtonTheme: ElevatedButtonThemeData(
-  //         style: ButtonStyle(
-  //             backgroundColor:
-  //                 MaterialStateProperty.all<Color>(Colors.orange))),
-  //     inputDecorationTheme: InputDecorationTheme(
-  //       focusedBorder:
-  //           UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-  //       labelStyle: TextStyle(color: Colors.orange),
-  //       hintStyle: TextStyle(color: Colors.grey[600]),
-  //     ));
-  // locator<ThemeService>().backgroundColors = [
-  //   Color(0xFFf77e14),
-  //   Color(0xFFe6660b),
-  // ];
   locator<ThemeService>().theme = fsekTheme;
   locator<ThemeService>().backgroundColors = fsekBackground;
   locator<ThemeService>().loginIcon = [

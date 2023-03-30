@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button
+                    SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button matches up with the grid above
                     button(t.guildMeetingButtonOther, OtherDocumentsPage()),
                   ],
                 ),
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           backgroundColor: Color.fromARGB(255, 0, 93, 119).withOpacity(0.25),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12), // <-- Radius
+            borderRadius: BorderRadius.circular(12),
           ),
           minimumSize: Size(MediaQuery.of(context).size.width / 2.4, 80)),
     );
