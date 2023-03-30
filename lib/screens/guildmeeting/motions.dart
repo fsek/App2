@@ -2,11 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/models/documents/document_collection.dart';
 
 import 'motion_card.dart';
 
@@ -53,9 +50,7 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return listEquals(allDocuments, [])
-        ? Scaffold(
-            appBar: AppBar(title: Text(t.motionsPageTitle)),
-            body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
+        ? Scaffold(appBar: AppBar(title: Text(t.motionsPageTitle)), body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -104,8 +99,7 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
                           initChar = "";
                           if (documents != null) {
                             documents = allDocuments!.where((document) {
-                              return searchTerms
-                                  .every((term) => document[0]!.document_name!.toLowerCase().contains(term));
+                              return searchTerms.every((term) => document[0]!.document_name!.toLowerCase().contains(term));
                             }).toList();
                           }
                         });
@@ -115,10 +109,7 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
                   Expanded(
                     child: documents != null
                         ? ListView(
-                            children: documents!
-                                .map((document) =>
-                                    _generateDocumentTile(document[0]!, document.length > 1 ? document[1] : null))
-                                .toList(),
+                            children: documents!.map((document) => _generateDocumentTile(document[0]!, document.length > 1 ? document[1] : null)).toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
