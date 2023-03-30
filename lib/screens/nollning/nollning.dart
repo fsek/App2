@@ -34,7 +34,8 @@ class _NollningPageState extends State<NollningPage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, 0),
+          padding: EdgeInsets.fromLTRB(
+              edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, 0, edgePadding),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
