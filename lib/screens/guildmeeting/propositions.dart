@@ -13,8 +13,8 @@ class PropositionsPage extends StatefulWidget {
 }
 
 class _PropositionsPageState extends State<PropositionsPage> with TickerProviderStateMixin {
-  List<ElectionDocument> documents = [];
-  List<ElectionDocument> allDocuments = [];
+  List<ElectionDocument>? documents = [];
+  List<ElectionDocument>? allDocuments = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
@@ -25,9 +25,14 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
   @override
   void initState() {
     locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
-          this.documents = value!;
-          documents.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
-          allDocuments = List.from(documents);
+          if (!listEquals(value, [])) {
+            this.documents = value!;
+            documents!.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
+            allDocuments = List.from(documents!);
+          } else {
+            this.documents = null;
+            allDocuments = null;
+          }
         }));
     super.initState();
   }
@@ -86,17 +91,19 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
                         List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
-                          documents = allDocuments.where((document) {
-                            return searchTerms.every((term) => document.document_name!.toLowerCase().contains(term));
-                          }).toList();
+                          if (allDocuments != null) {
+                            documents = allDocuments!.where((document) {
+                              return searchTerms.every((term) => document.document_name!.toLowerCase().contains(term));
+                            }).toList();
+                          }
                         });
                       },
                     ),
                   )),
                   Expanded(
-                    child: documents.isNotEmpty
+                    child: documents != null
                         ? ListView(
-                            children: documents.map((document) => _generateDocumentTile(document)).toList(),
+                            children: documents!.map((document) => _generateDocumentTile(document)).toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),

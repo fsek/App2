@@ -275,6 +275,8 @@
     "guildMeetingButtonOther": "Övriga dokument",
     "noMotion": "There are no motions on the website.",
 
+    "noMotions": "Det finns inga motioner för detta möte på hemsidan.",
+    
     "propositionsPageTitle": "Propositioner",
     "motionsPageTitle": "Motioner",
     "readMotion": "Läs motion",
