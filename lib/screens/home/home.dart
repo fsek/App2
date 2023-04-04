@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
-    String backgroundPath = "assets/img/vt_bakgrund.png";
+    String backgroundPath = "assets/img/vt_bakgrund_ny.png";
     return Stack(children: [
       Image.asset(
         backgroundPath,
@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+          padding: EdgeInsets.fromLTRB(
+              edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +60,9 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button matches up with the grid above
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width /
+                            48), // space so that the fifth button matches up with the grid above
                     button(t.guildMeetingButtonOther, OtherDocumentsPage()),
                   ],
                 ),

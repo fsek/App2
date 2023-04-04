@@ -13,7 +13,6 @@ class PropositionCard extends StatefulWidget {
 }
 
 class _PropositionCardState extends State<PropositionCard> {
-  // TODO change with new colors from ministry of truth
   Color buttonColor = Colors.orange[700]!.withOpacity(0.3);
   Color backgroundColor = Colors.orange[700]!.withOpacity(0.2);
   Color bottomColor = Colors.grey[400]!;
@@ -59,6 +58,7 @@ class _PropositionCardState extends State<PropositionCard> {
   }
 
   void openFile(ElectionDocument document) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!, title: document.document_name!)));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!, title: document.document_name!)));
   }
 }

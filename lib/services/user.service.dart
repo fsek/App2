@@ -51,7 +51,11 @@ class UserService extends AbstractService {
         setCurrentUser(User.fromJson(json["data"]));
         return DeviseToken.getFromHeaders(response.headers);
       } else {
-        return DeviseToken(error: json["error"][0]);
+        try {
+          return DeviseToken(error: json["error"][0]);
+        } on NoSuchMethodError {
+          return DeviseToken(error: json["errors"][0]);
+        }
       }
     } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
