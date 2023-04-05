@@ -29,7 +29,10 @@ class _FapPageState extends State<FapPage> {
       "William Lundgren, ${t.fapSpider} 2022",
       "Max Bäckström, ${t.fapSpider} 2022",
       "Cajsa Thulin, ${t.fapSpiderMaster} 22/23",
-      "Oskar Watsfeldt, ${t.fapSpider} 2022"
+      "Oskar Watsfeldt, ${t.fapSpider} 2022",
+      "Louise Drenth, ${t.fapSuper} 2023",
+      "Emma Engdahl, ${t.fapSpider} 2023",
+      "Hjalmar Mårtensson ${t.fapSpider} 2023"
     ];
     List<String> inspiration = ["https://www.youtube.com/watch?v=k238XpMMn38"];
     TapGestureRecognizer fredmansTap = TapGestureRecognizer()
