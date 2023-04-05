@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/services.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +69,11 @@ void main() async {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
+    Text("F-sektionen",
+        style: TextStyle(
+            fontFamily: 'Helvetica Neue',
+            fontSize: 28.0,
+            color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -92,7 +95,6 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
   runZonedGuarded<void>(() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(FsekMobileApp());
   }, (Object error, StackTrace stackTrace) {
     // Whenever an error occurs, call the `_reportError` function. This sends
