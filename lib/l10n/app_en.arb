@@ -76,6 +76,12 @@
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
     "settingsDiscard": "Discard",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Milk Allergy",
+    "gluten": "Gluten",
+
     "songbookSearch": "Search",
     "songbookSongbook": "Songbook",
     "songbookNoMatches": "No matchese found :^(",

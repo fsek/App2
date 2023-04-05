@@ -76,6 +76,12 @@
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Mjölkallergi",
+    "gluten": "Gluten",
+
     "songbookSearch": "Sök",
     "songbookSongbook": "Sångbok",
     "songbookNoMatches": "Finns inga matchningar :^(",
