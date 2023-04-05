@@ -53,6 +53,11 @@ dependencies:
   image_save: ^5.0.0
   audioplayers: 1.0.0
   flutter_image_compress: ^1.0.0
+  pdf_render: ^1.3.0
+  path_provider: any
+  flutter_pdfview: ^1.2.2
+  permission_handler: ^10.2.0
+  flutter_cached_pdfview: ^0.4.1
 
 
 

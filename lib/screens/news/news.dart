@@ -1,96 +1,82 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/home/news.dart';
-import 'package:fsek_mobile/util/time.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/screens/news/single_news.dart';
+import 'package:fsek_mobile/services/home.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NewsPage extends StatelessWidget {
-  const NewsPage({Key? key, required this.news}) : super(key: key);
+class NewsPage extends StatefulWidget {
+  @override
+  _NewsPageState createState() => _NewsPageState();
+}
 
-  final News news;
+class _NewsPageState extends State<NewsPage> {
+  final PagingController<int, News> _pagingController = PagingController(firstPageKey: 1);
+
+  void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      loadMoreNews(pageKey);
+    });
+    super.initState();
+  }
+
+  Future<void> _onRefresh() async {
+    _pagingController.refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool translated = (news.title != "" &&  news.content != null);
-    var t = AppLocalizations.of(context)!;
-    if (translated){
-      return Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                  child: Text(news.title!,
-                      style: Theme.of(context).textTheme.headline6),
-                ),
-              ),
-              Divider(
-                thickness: 1,
-              ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Html(
-                      data: news.content!,
-                      style: {"p": Style(lineHeight: LineHeight(1.2))},
-                      onLinkTap: (String? url, RenderContext context,
-                          Map<String, String> attributes, element) {
-                        launch(url!);
-                      }),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                child: Row(children: [
-                  Text(
-                    news.user!.name!,
-                  ),
-                  Spacer(),
-                  Text(Time.format(news.created_at!, "%d %M %Y %h:%m"))
-                ]),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: news.image == null
-                    ? SizedBox.shrink()
-                    : Image.network(news.image!),
-              )
-            ],
-          ),
-        ));
-    }
+    return createNewsCard();
+  }
 
-    return Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                  child: Text(news.title=="" || news.title==null ? t.homeTitleUntranslated : news.title!,
-                      style: Theme.of(context).textTheme.headline6),
-              ),
-              ),
-              Divider(
-                thickness: 1,
-              ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Text("${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}", 
-                    style:Theme.of(context).textTheme.bodyText1 ),
-                  ), 
-                ),
-            ],
+  Widget createNewsCard() {
+    var t = AppLocalizations.of(context)!;
+    return RefreshIndicator(
+        onRefresh: () => _onRefresh(),
+        child: Container(
+          child: PagedListView<int, News>(
+            pagingController: _pagingController,
+            shrinkWrap: true,
+            builderDelegate: PagedChildBuilderDelegate<News>(itemBuilder: (context, news, index) {
+              return Card(
+                  child: InkWell(
+                      onTap: () => openNews(news),
+                      child: ListTile(
+                          title: Text((news.title == "" || news.title == null) ? t.homeTitleUntranslated : news.title!),
+                          subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(news.user!.name!),
+                            SizedBox(height: 6),
+                            Text(
+                              news.created_at.toString().substring(0, 16),
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ]),
+                          isThreeLine: true,
+                          trailing: (news.is_pinned ?? false) ? Icon(Icons.push_pin_outlined, color: Colors.orange[600]) : SizedBox.shrink())));
+            }, noItemsFoundIndicatorBuilder: (context) {
+              return Container(height: 400, child: Center(child: Text(t.homeNoNews, style: Theme.of(context).textTheme.headline6)));
+            }),
           ),
         ));
-    }
+  }
+
+  void openNews(News news) {
+    //redirect to other page and shit
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+  }
+
+  void loadMoreNews(int page) {
+    locator<HomeService>().getMoreNews(page).then((value) {
+      if (value.meta?.next_page == null) {
+        _pagingController.appendLastPage(value.news ?? []);
+      } else if (page == 1) {
+        locator<HomeService>().getPinnedNews().then((pinned) {
+          _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
+        });
+      } else {
+        _pagingController.appendPage(value.news ?? [], page + 1);
+      }
+    });
+  }
 }

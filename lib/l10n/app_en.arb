@@ -3,8 +3,9 @@
     "language": "Language",
     "swedish": "Swedish",
     "english": "English",
-    
+
     "home" : "Home",
+    "news" : "News",
     "calendar" : "Calendar",
     "notifications" : "Notifications",
     "other" : "Other",
@@ -49,7 +50,7 @@
     "eventNo": "No",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
- 
+
     "settingsSettings": "Settings",
     "settingsSave": "Save",
     "settingsProgramme": "Programme",
@@ -110,7 +111,7 @@
     "contactHasBeenSent": "Your message has been sent! :D",
     "contactHasNotBeenSent": "Your message has not been sent ):\nCheck your connection and try again!.",
     "contactEmpty": "Your message is emtpy. Nothing has been sent.",
-    
+
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
 
@@ -121,7 +122,7 @@
 
     "homeNoNews": "No news available",
     "homeTitleUntranslated": "There is no translation available for this post :(",
-    "newsNotAvailableOne": "This post has not been translated. Consider contacting ", 
+    "newsNotAvailableOne": "This post has not been translated. Consider contacting ",
     "newsNotAvailableTwo": " who published this and remind them to provide a translation. :)",
 
     "groupWriteProtected": "Chat is write-protected",
@@ -161,38 +162,38 @@
     "introductionPendingApproval": "Pending aproval",
     "introductionNotCompleted": "Not completed",
     "introductionWeek": "Week",
- 
+
     "cafeShiftSignup": "You have signed up for the shift",
     "cafeShiftSignupText": "Thank you for wanting to work in the café! Remember to remove your sing-up if you can't make it.",
     "cafeShiftFail": "Something went wrong!",
-    "cafeShiftFailSignupText": "You may already be signed up for another shift at the same time", 
-    "cafeShiftSuccessUnsign": "Your sign-up has been removed from the shift", 
+    "cafeShiftFailSignupText": "You may already be signed up for another shift at the same time",
+    "cafeShiftSuccessUnsign": "Your sign-up has been removed from the shift",
     "cafeShiftSuccessUnsignText": "Recruit a friend to work this shift instead!",
     "cafeShiftFailUnsignText": "The sign-up has not been removed from the shift.",
     "cafeShiftCafeShift": "Café shift",
     "cafeShiftSignedUp": "You have signed up ",
     "cafeShiftRemoveSignup": "Remove sign-up",
-    "cafeShiftSignup2": "Sign up ", 
-    "cafeShiftIsSignedUp": "is signed up",  
+    "cafeShiftSignup2": "Sign up ",
+    "cafeShiftIsSignedUp": "is signed up",
     "cafeShiftSignMeUp": "Sign me up :))",
     "cafeShiftForShift": "for shift",
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
-    
+
     "articleEtiquette": "All you need to know",
-    "mannersEtiquette": "All you need to know", 
-    
-    "aboutGuildGuild": "The F-guild", 
+    "mannersEtiquette": "All you need to know",
+
+    "aboutGuildGuild": "The F-guild",
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
-    "aboutGuildThree": "among members and look after their common interests.", 
+    "aboutGuildThree": "among members and look after their common interests.",
 
     "aboutGuildFour": "The guild has its spaces in the Math building where you can find common rooms, microwave-ovens, ",
-    "aboutGuildFive": "and the guild’s own Hilbert Café - where you can buy coffee and great baguettes.", 
+    "aboutGuildFive": "and the guild’s own Hilbert Café - where you can buy coffee and great baguettes.",
 
     "aboutGuildSix": "The F-guild has several councils in charge of different parts of the activities of the guild. ",
     "aboutGuildSeven": "Each council is headed by a chairman who is also a part of the guild’s council of executives. ",
-    "aboutGuildEight": "The guild also has a board that’s in charge of the central function of the guild.", 
+    "aboutGuildEight": "The guild also has a board that’s in charge of the central function of the guild.",
 
     "aboutGuildNine": "As a member of the guild you can choose to be active and committed or take ",
     "aboutGuildTen": "part at some events. We hope that you will enjoy your time in the F-guild. ",
@@ -200,13 +201,84 @@
     "aboutGuildTwelve": "on the website or in Ledningscentralen in the far left of the Hilbert corridor (behind Hilbert Café)!",
 
     "fapSuper": "su-perman",
-    "fapSpider": "Webmaster", 
+    "fapSpider": "Webmaster",
     "fapSpiderMaster": "Spider Master",
     "fapAbout": "About the F-app",
     "fapFap": "F-app",
-    "fapVersion": "Version: yes", 
+    "fapVersion": "Version: yes",
     "fapPower": "Powered by coffee, the Tears of su-permen and Flutter",
     "fapConstructed": "Bodged together by the su-permen and Webmasters of the F-guild",
     "fapInspired": "What inspired the web during ",
-    "fapDev": "development"
+    "fapDev": "development",
+
+    "guildMeetingTitle": "Guild Assembly info",
+    "guildMeetingCurr": "Spring guild Assembly 2023",
+    "guildMeetingTime": "The Assembly will take place on the 24th and 25th of april.",
+    "guildMeetingNominateOne": "You can candidate and nominate for posts via the",
+    "guildMeetingNominateTwo": "election page.",
+    "guildMeetingSendMotionOne": "Motions are to be sent to the ",
+    "guildMeetingSendMotionTwo": "secretary",
+    "guildMeetingSendMotionThree": "before the motion deadline.",
+    "guildMeetingDeadlinesOne": "The following dates are set before the assembly:",
+    "guildMeetingDeadlinesTwo": "February 10th - The elections opens on the website.",
+    "guildMeetingDeadlinesThree": "March 3rd - The election closes for posts elected by the assembly.",
+    "guildMeetingDeadlinesFour": "March 23rd - Deadline for motion submission.",
+    "guildMeetingDeadlinesFive": "March 30rd - Publication of assembly agenda",
+    "guildMeetingTimePlaceOne": "The Assembly will take place at:",
+    "guildMeetingTimePlaceTwo": "24th to 25th of april - spring assembly (MH:G preliminarily). ",
+    "guildMeetingTimePlaceThree": "The assembly begins and is resumed at 17.59.",
+    "guildMeetingETC": "If you need clarifaction or have any questions, contact ",
+    "guildMeetingBoard": "the board",
+    "guildMeetingSignOff": "In service of the guild,\nHanna Areskoug, secretary 2023",
+
+    "guildMeetingAboutTitle": "Fall and Spring Semester Assemblies",
+    "guildMeetingAboutOne": "Motions",
+    "guildMeetingAboutTwo": "During the guild assembly propositions about changes to the organization and allocation of the guilds money will be handled. ",
+    "guildMeetingAboutThree": "The motions are separated by those motions proposed by the board and those proposed by other guild members. ",
+    "guildMeetingAboutFour": "If you have an idea for a motion and want inspiration or help writing it, contact ",
+    "guildMeetingAboutFive": "or the relevant ",
+    "guildMeetingAboutSix": "committee chair ",
+    "guildMeetingAboutSeven": "based on what your motion handles. ",
+    "guildMeetingAboutEight": "Completed motions are to be sent to the ",
+    "guildMeetingAboutNine": "secretary ",
+    "guildMeetingAboutTen": "before the deadline.",
+
+    "guildMeetingElectionInfoOne": "Engagements and elections",
+    "guildMeetingElectionInfoTwo": "One way to engage your self in the F-guild is to apply for posts during the autumn or spring assembly. Candidature for a post is done via the ",
+    "guildMeetingElectionInfoThree": "election page. ",
+    "guildMeetingElectionInfoFour": "It is also possible to nominate someone you deem as suitable for a post, though the nominee must accept for it to be valid. ",
+    "guildMeetingElectionInfoFive": "Larger post are elected by the guild assembly and remaining posts are designated by the board after the assembly.",
+    "guildMeetingElectionInfoSix": "Posts decided during the guild assembly (larger posts)",
+    "guildMeetingElectionInfoSeven": "If you are are running for a post that is elected by the guild assembly you will be called to an interview by the election committee. The election committee will nominate the candidate they deem most suitable. ",
+    "guildMeetingElectionInfoEight": "Those who are not nominated by the election committee can still candidate against the nominee during the assembly. All candidates for posts designated during the assembly be presented " ,
+    "guildMeetingElectionInfoNine": "with an image as well as text on a poster that is published ahead of the assembly. You always have the option to decide to run during the assembly without any prior registration.",
+
+    "guildMeetingBoardElectionOne": "Posts designated by the board",
+    "guildMeetingBoardElectionTwo": "If you are running for a post that is not delegated during the assembly you will be called for an interview afterwards. ",
+    "guildMeetingBoardElectionThree": "This interview is conducted by a nomination committee often consisting of old and new committee chairs and potentially other relevant peoples as well as representatives from the election committee. ",
+    "guildMeetingBoardElectionFour": "Based on these interviews the nomination committee nominates depending on the recommended number of seats for a post. Then the board elects volunteers based on these nominations.",
+
+
+    "otherDocuments": "Other documents",
+    "noOtherDocuments": "There are no other documents",
+    "otherTitleMissing": "Title missing",
+
+    "noProposition": "There are no motions from the board on the website.",
+
+    "noCandidacyPoster": "There is no candidacy poster for this election yet.",
+
+    "guildMeetingButtonAbout": "About guild meeting",
+    "guildMeetingButtonBefore": "Before the meeting",
+    "guildMeetingButtonMotions": "Motions",
+    "guildMeetingButtonProposition": "Propositions",
+    "guildMeetingButtonPoster": "Candidacy poster",
+    "guildMeetingButtonOther": "Other documents",
+
+    "noMotions": "There are no motions on the website.",
+
+    "propositionsPageTitle": "Motions from the board",
+    "motionsPageTitle": "Motions",
+    "readMotion": "Read motion",
+    "readMotionAnswer": "Read motion answer",
+    "readProposition": "Read motion from the board"
 }

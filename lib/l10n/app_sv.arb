@@ -5,6 +5,7 @@
     "english": "Engelska",
 
     "home" : "Hem",
+    "news" : "Nyheter",
     "calendar" : "Kalender",
     "notifications" : "Notiser",
     "other" : "Övrigt",
@@ -110,7 +111,7 @@
     "contactHasBeenSent": "Ditt meddelande har skickas! :D",
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
-    
+
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
 
@@ -122,7 +123,7 @@
     "homeNoNews": "Inga nyheter tillgänliga",
     "homeTitleUntranslated": "Det finns ingen översättning tillgänglig för detta inlägget\n:(",
     "newsNotAvailableOne": "Detta inlägget är inte tillgängligt på svenska. Överväg att kontakta ",
-    "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ", 
+    "newsNotAvailableTwo": " som skapade detta inlägget och påminn dem att översätta :) ",
 
     "groupWriteProtected": "Chatten är skrivskyddad",
     "groupWhatToDo": "Vad vill du göra med meddelandet?",
@@ -165,8 +166,8 @@
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
     "cafeShiftFail": "Något gick fel!",
-    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid", 
-    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!", 
+    "cafeShiftFailSignupText": "Du kanske redan är anmäld till ett pass vid samma tid",
+    "cafeShiftSuccessUnsign": "Du är nu avanmäld från passet!",
     "cafeShiftSuccessUnsignText": "Tipsa en kompis om att anmäla sig på passet istället!",
     "cafeShiftFailUnsignText": "Det gick inte att avanmäla dig från passet.",
     "cafeShiftCafeShift": "Cafépass",
@@ -174,7 +175,7 @@
     "cafeShiftRemoveSignup": "Avanmäl mig :((",
     "cafeShiftSignup2": "Anmälan ",
     "cafeShiftIsSignedUp": "är anmäld",
-    "cafeShiftSignMeUp": "Anmäl mig :))", 
+    "cafeShiftSignMeUp": "Anmäl mig :))",
     "cafeShiftForShift": "till pass",
     "cafeShiftClock": " kl ",
     "cafeShiftShift": " Ledigt pass",
@@ -200,13 +201,84 @@
     "aboutGuildTwelve": "Hilbertkorridoren; där hittar du nästan alltid någon sektionsaktiv. Vi hoppas att du ska trivas på sektionen!",
 
     "fapSuper": "su-perman",
-    "fapSpider": "Spindelman", 
+    "fapSpider": "Spindelman",
     "fapSpiderMaster": "Spindelförman",
     "fapAbout": "om F-appen",
     "fapFap": "F-appen",
-    "fapVersion": "Version: ja", 
+    "fapVersion": "Version: ja",
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",
     "fapConstructed": "Knackad av F-sektionens su-per och spindelmän:",
     "fapInspired": "Vad inspirerade nätet under ",
-    "fapDev": "utvecklingen"
+    "fapDev": "utvecklingen",
+
+    "guildMeetingTitle": "Om sektionsmötet",
+    "guildMeetingCurr": "Vårterminsmötet 2023",
+    "guildMeetingTime": "Mötet kommer äga rum den 24 till 25 april.",
+    "guildMeetingNominateOne": "Kandidera och nominera kan du göra via ",
+    "guildMeetingNominateTwo": "valsidan. ",
+    "guildMeetingSendMotionOne": "Motioner skickas till",
+    "guildMeetingSendMotionTwo": " sekreteraren",
+    "guildMeetingSendMotionThree": "innan motionsstoppet.",
+    "guildMeetingDeadlinesOne": "Följande datum gäller inför terminsmötet:",
+    "guildMeetingDeadlinesTwo": "10 februari - Valet öppnar på hemsidan.",
+    "guildMeetingDeadlinesThree": "3 mars - Valet stänger på hemsidan för mötesvalda poster.",
+    "guildMeetingDeadlinesFour": "23 mars - Motionsstopp",
+    "guildMeetingDeadlinesFive": "30 mars - Anslag av föredragningslistan.",
+    "guildMeetingTimePlaceOne": "Följande datum och tider gäller för terminsmötet: ",
+    "guildMeetingTimePlaceTwo": "24 till 25 april  - Vårterminsmötet (MH:G preliminärt). ",
+    "guildMeetingTimePlaceThree": "Mötet öppnar och återupptas kl. 17.59 på samtliga datum. ",
+    "guildMeetingETC": "Har du ytterligare frågar angående mötet, kontakta ",
+    "guildMeetingBoard": "styrelsen",
+    "guildMeetingSignOff": "I sektionens tjänst,\nHanna Areskoug, sekreterare 2023",
+
+    "guildMeetingAboutTitle": "Höst- och vårterminsmöten",
+    "guildMeetingAboutOne": "Motioner och propositioner",
+    "guildMeetingAboutTwo": "Under terminsmötet kommer diverse förslag på förändringar och användningar av sektionens pengar att avhandlas. ",
+    "guildMeetingAboutThree": "Dessa s.k. motioner och propositioner inkommer från sektionens gemene medlem respektive sektionens styrelse. ",
+    "guildMeetingAboutFour": "Om du har en idé på en motion och vill ha tips eller hjälp att skriva den, kontakta",
+    "guildMeetingAboutFive": "eller den relevanta ",
+    "guildMeetingAboutSix": "utskottsordföranden ",
+    "guildMeetingAboutSeven": "beroende på vad din idé behandlar.",
+    "guildMeetingAboutEight": "Färdiga motioner skickas in till ",
+    "guildMeetingAboutNine": "sekreteraren",
+    "guildMeetingAboutTen": "innan motionsstoppet.",
+
+    "guildMeetingElectionInfoOne": "Engagemang och val",
+    "guildMeetingElectionInfoTwo": "Ett sätt att engagera sig inom F-sektionen är att söka några av våra poster i anslutning till höst- eller vårterminsmötet. Kandidatur till en post sker via ",
+    "guildMeetingElectionInfoThree": "valsidan.",
+    "guildMeetingElectionInfoFour": "Det går också att nominera någon du anser lämplig till en specifik post men denna person måste sedan själv gå in och godta nomineringen. ",
+    "guildMeetingElectionInfoFive": "Större poster väljes under mötet och resterande poster väljes i efterhand av styrelsen. För mer information om engagemang och val, se Policy för val.",
+    "guildMeetingElectionInfoSix": "Poster som väljs under sektionsmötet (större poster)",
+    "guildMeetingElectionInfoSeven": "Söker du en post som väljes under sektionsmötet kommer du bli kallad för intervju av valberedningen. Valberedningen kommer sedan nominera den kandidat som de tycker är bäst lämpad för posten. ",
+    "guildMeetingElectionInfoEight": "Den som inte blir nominerad av valberedningen kan fortfarande motkandidera under mötet. Alla kandididater till en post på sektionsmötet anslås på en plansch ",
+    "guildMeetingElectionInfoNine": "där de presenteras med bild och text. Du kan alltid kandidera till en post under mötet trots att du inte kandiderat i förväg.",
+
+    "guildMeetingBoardElectionOne": "Val förrättade av styrelsen",
+    "guildMeetingBoardElectionTwo": "Söker du en post som inte väljs under sektionsmötet kommer du kallas på intervju efter sektionsmötet. ",
+    "guildMeetingBoardElectionThree": "Denna intervju hålls av en nomineringsgrupp ofta bestående av nya och gamla utskottsordföranden, eventuella förmän och eventuellt en valberedningsledamot. ",
+    "guildMeetingBoardElectionFour": "Nomineringsgruppen nominerar därefter ett rekommenderat antal personer till den aktuella posten. Det är sedan styrelsen som väljer in funktionärerna.",
+
+
+    "otherDocuments": "Övriga mötesdokument",
+    "noOtherDocuments": "Det finns inga övriga mötesdokument",
+    "otherTitleMissing": "Titel saknas",
+
+    "noProposition": "Det finns inga propositioner för detta möte på hemsidan.",
+
+    "noCandidacyPoster": "Det finns ingen kandidaturplanch för detta möte ännu.",
+
+    "guildMeetingButtonAbout": "Om sektionsmötet",
+    "guildMeetingButtonBefore": "Inför sektionsmötet",
+    "guildMeetingButtonMotions": "Motioner",
+    "guildMeetingButtonProposition": "Propositioner",
+    "guildMeetingButtonPoster": "Kandidaturplansch",
+    "guildMeetingButtonOther": "Övriga dokument",
+
+    "noMotions": "Det finns inga motioner för detta möte på hemsidan.",
+
+    "propositionsPageTitle": "Propositioner",
+    "motionsPageTitle": "Motioner",
+    "readMotion": "Läs motion",
+    "readMotionAnswer": "Läs motionssvar",
+    "readProposition": "Läs proposition"
 }

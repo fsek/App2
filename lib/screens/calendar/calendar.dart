@@ -29,10 +29,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   void openEventPage(CalendarEvent event) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => EventPage(eventId: event.id ?? -1)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -70,14 +67,11 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(
-                              event.start?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("HH:mm")
-                              .format(event.end?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale)
-                              .format(event.start?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -141,7 +135,6 @@ class _CalendarState extends State<Calendar> {
                   focusedDay: _focusedDay,
                   availableCalendarFormats: const {
                     CalendarFormat.month: 'Month',
-                    CalendarFormat.week: 'Week',
                   },
                   selectedDayPredicate: (day) {
                     return isSameDay(_selectedDay, day);
@@ -149,8 +142,7 @@ class _CalendarState extends State<Calendar> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay =
-                          focusedDay; // update `_focusedDay` here as well
+                      _focusedDay = focusedDay; // update `_focusedDay` here as well
                       _selectedEvents = _getEventsForDay(selectedDay);
                     });
                   },

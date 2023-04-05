@@ -12,18 +12,8 @@ class FsekAppBarItem {
 }
 
 class FsekAppBar extends StatefulWidget {
-  FsekAppBar({
-    this.items,
-    this.centerItemText,
-    this.height: 60.0,
-    this.iconSize: 24.0,
-    this.color,
-    this.selectedColor,
-    this.notchedShape,
-    required this.onTabSelected,
-    required this.currentIndex
-  }) {
-    assert(this.items!.length == 2 || this.items!.length == 4);
+  FsekAppBar({this.items, this.centerItemText, this.height: 60.0, this.iconSize: 24.0, this.color, this.selectedColor, this.notchedShape, required this.onTabSelected, required this.currentIndex}) {
+    assert(this.items!.length == 2 || this.items!.length == 5);
   }
   final List<FsekAppBarItem>? items;
   final String? centerItemText;
@@ -46,26 +36,26 @@ class FsekAppBarState extends State<FsekAppBar> {
 
   void _processEasterEggClick(int? index) async {
     // takes index of which nav bar item was clicked
-    if(index == null) return;
-    if(DateTime.now().difference(lastEasterEggClick).inSeconds > 5) {
+    if (index == null) return;
+    if (DateTime.now().difference(lastEasterEggClick).inSeconds > 5) {
       appBarItemsClickedAmounts = [0, 0, 0, 0];
     }
     lastEasterEggClick = DateTime.now();
 
-    for(int i = 0; i < index; i++) {
-      if(appBarItemsClickedAmounts[i] != widget.easterEggClicksGoal[i]) {
+    for (int i = 0; i < index; i++) {
+      if (appBarItemsClickedAmounts[i] != widget.easterEggClicksGoal[i]) {
         return; // Not registering clicks at index beyond completed ones
       }
     }
     appBarItemsClickedAmounts[index]++;
-    if(!listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
+    if (!listEquals(appBarItemsClickedAmounts, widget.easterEggClicksGoal)) {
       return;
     }
     // 6 1 2 2 clicked: Easter egg codes activated
     String? easterEggCode = await easterEggCodeDialog(context);
-    if(easterEggCode == null) return; // User cancels dialog i think
+    if (easterEggCode == null) return; // User cancels dialog i think
     //For more than one code, please don't stack else if's
-    if(easterEggCode == 'bababoe') {
+    if (easterEggCode == 'bababoe') {
       setState(() {
         bababoeActive = true;
         Future.delayed(const Duration(seconds: 9), () {
@@ -89,22 +79,22 @@ class FsekAppBarState extends State<FsekAppBar> {
         },
       );
     });
-    items.insert(items.length >> 1, _buildMiddleTabItem());
+    // Creates a middle space for the FloatingActionButton (usually nollning-button)
+    // items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
-      shape: widget.notchedShape,
-      child: Stack(
-        clipBehavior: Clip.none, 
-        children: [
-          Visibility(child:  AnimatedNils(), visible: bababoeActive),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: items,
-          ),
-        ],
-      )
-    );
+        shape: widget.notchedShape,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Visibility(child: AnimatedNils(), visible: bababoeActive),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: items,
+            ),
+          ],
+        ));
   }
 
   Widget _buildMiddleTabItem() {
