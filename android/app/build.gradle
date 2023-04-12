@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "se.fsektionen.fapp"
-        minSdkVersion 21
+        minSdkVersion 30
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
