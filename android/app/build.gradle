@@ -43,8 +43,8 @@ android {
 
     defaultConfig {
         applicationId "se.fsektionen.fapp"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion 28
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

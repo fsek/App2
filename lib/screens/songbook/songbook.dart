@@ -73,7 +73,6 @@ class _SongbookPageState extends State<SongbookPage>
                       FocusScope(
                           child: Focus(
                         onFocusChange: (focus) {
-                          print(focus);
                           setState(() {
                             searchFocus = focus;
                           });
