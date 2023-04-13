@@ -30,14 +30,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           email: event.username,
           pass: event.password,
         );
-      }
-      catch(ex) {
-        authenticationBloc.add(AppError(error: ex.toString())); // Make sure we show an error that we cant connect
+      } catch (ex) {
+        authenticationBloc.add(AppError(
+            error: ex
+                .toString())); // Make sure we show an error that we cant connect
         yield LoginInitial();
-        return;   
+        return;
       }
-      
-      if(token.error != null && token.error.isNotEmpty) {
+
+      if (token.error != null && token.error.isNotEmpty) {
         yield LoginFailure(error: token.error);
         return;
       }
