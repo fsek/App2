@@ -35,6 +35,7 @@ class _PropositionCardState extends State<PropositionCard> {
                   child: Text(
                 widget.proposition!.document_name!,
                 style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               )),
               SizedBox(height: 10),
               Row(
