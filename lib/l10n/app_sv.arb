@@ -82,6 +82,11 @@
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
 
+    "physics": "Teknisk Fysik",
+    "mathematics": "Teknisk Matematik",
+    "nano": "Teknisk Nanovetenskap",
+    "unknown": "Oklart",
+
     "songbookSearch": "Sök",
     "songbookSongbook": "Sångbok",
     "songbookNoMatches": "Finns inga matchningar :^(",

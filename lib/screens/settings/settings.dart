@@ -19,12 +19,6 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   User? user;
-  static const programs = [
-    "Teknisk Fysik",
-    "Teknisk Matematik",
-    "Teknisk Nanovetenskap",
-    "Oklart"
-  ];
 
   static List<int> years =
       List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
@@ -46,6 +40,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    Map<String, String> programs = {
+      "Teknisk Fysik": t.physics,
+      "Teknisk Matematik": t.mathematics,
+      "Teknisk Nanovetenskap": t.nano,
+      "Oklart": t.unknown,
+    };
+    Map<String, String> reverseProgramsMap = {
+      t.physics: "Teknisk Fysik",
+      t.mathematics: "Teknisk Matematik",
+      t.nano: "Teknisk Nanovetenskap",
+      t.unknown: "Oklart",
+    };
     if (user == null) {
       return Scaffold(
           appBar: AppBar(title: Text(t.otherAccount)),
@@ -94,9 +100,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 _makeDropDown<String>(
                   t.settingsProgramme,
-                  programs,
-                  user!.program,
-                  (program) => user!.program = program,
+                  programs.values.toList(),
+                  programs[user!.program],
+                  (program) => user!.program = reverseProgramsMap[program],
                 ),
                 _makeDropDown<int>(
                   t.settingsStartYear,

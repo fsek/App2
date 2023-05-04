@@ -82,6 +82,11 @@
     "milk": "Milk Allergy",
     "gluten": "Gluten",
 
+    "physics": "Engineering Physics",
+    "mathematics": "Engineering Mathematics ",
+    "nano": "Engineering Nanoscience",
+    "unknown": "Unknown",
+
     "songbookSearch": "Search",
     "songbookSongbook": "Songbook",
     "songbookNoMatches": "No matchese found :^(",
