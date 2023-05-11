@@ -7,12 +7,6 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/*Bugs fixed so far:
-- Save button not changing changedSettings to false again
-- Not saving settings doesn't make settings reverse when you go back into settings
-- Fix Selecting other in food preferences doesn't change changedSettings
-
-**/
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -346,7 +340,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             Center(
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
                 child: Text(t.settingsUnsavedText),
               ),
             ),
@@ -354,6 +348,7 @@ class _SettingsPageState extends State<SettingsPage> {
               alignment: Alignment.bottomCenter,
               child: Row(
                 children: [
+                  Spacer(),
                   TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(t.settingsDiscard)),
@@ -364,7 +359,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       Navigator.pop(context);
                     },
                     child: Text(t.settingsSave),
-                  )
+                  ),
+                  Spacer(),
                 ],
               ),
             )
@@ -375,6 +371,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _save() async {
     FocusScope.of(context).unfocus();
     showDialog(context: context, builder: _savingPopup());
+    if (!extraPref) user!.food_custom = "";
     locator<UserService>().updateUser(user!).then((value) {
       setState(() {
         extraPref = user!.food_custom != "";
