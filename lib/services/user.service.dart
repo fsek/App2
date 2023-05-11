@@ -98,6 +98,12 @@ class UserService extends AbstractService {
     return _user!;
   }
 
+  void syncUser() async {
+    //Force a sync of the user object check getUser for why
+    _user = null;
+    await getUser();
+  }
+
   Future<Map> updateUser(User updatedUser) async {
     try {
       var response = await AbstractService.put(
