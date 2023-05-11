@@ -183,9 +183,10 @@
     "articleEtiquette": "Allt du behöver veta",
     "mannersEtiquette": "Allt du behöver veta",
 
+    "aboutGuildTitle": "Om F-sektionen",
     "aboutGuildGuild": "F-sektionen",
     "aboutGuildOne": "F-sektionen inom TLTH är en ideell förening för studenter som läser något av civilingenjörsprogrammen ",
-    "aboutGuildTwo": "about Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
+    "aboutGuildTwo": "Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
     "aboutGuildThree": "bland medlemmarna och tillvarata medlemmarnas gemensamma intressen.",
 
     "aboutGuildFour": "Sektionen är belägen i Mattehuset och här hittar du bland annat uppehållsrum, mikrovågsugnar och gött häng. ",
@@ -203,7 +204,7 @@
     "fapSuper": "su-perman",
     "fapSpider": "Spindelman",
     "fapSpiderMaster": "Spindelförman",
-    "fapAbout": "om F-appen",
+    "fapAbout": "Om F-appen",
     "fapFap": "F-appen",
     "fapVersion": "Version: ja",
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",

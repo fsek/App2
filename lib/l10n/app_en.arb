@@ -83,7 +83,7 @@
     "songbookAuthor": "Author",
 
     "otherSongbook": "Songbook",
-    "otherGallery": "Picture Gallery",
+    "otherGallery": "Photo Gallery",
     "otherCafe": "Hilbert Café",
     "otherAboutGuild": "The F guild",
     "otherFap": "The F-app",
@@ -115,7 +115,7 @@
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
 
-    "galleryTitle": "Image gallery",
+    "galleryTitle": "Photo Gallery",
     "galleryOf": "of",
     "galleryImageDownloaded": "Image downloaded",
     "galleryImageDownloadError": "An error occurred while downloading",
@@ -181,9 +181,10 @@
     "cafeShiftShift": " Available shift",
 
     "articleEtiquette": "All you need to know",
-    "mannersEtiquette": "All you need to know",
-
-    "aboutGuildGuild": "The F-guild",
+    "mannersEtiquette": "All you need to know", 
+    
+    "aboutGuildTitle": "About The F-guild",
+    "aboutGuildGuild": "The F-guild", 
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
     "aboutGuildThree": "among members and look after their common interests.",

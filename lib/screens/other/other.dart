@@ -35,7 +35,7 @@ class OtherContent extends StatelessWidget {
     /* I am so sorry for this Teo */
     routeMap = {
       "Songbook": SongbookPage(),
-      "Picture Gallery": GalleryPage(),
+      "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
