@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
@@ -18,85 +20,77 @@ import 'fap.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtherContent extends StatelessWidget {
-  //TODO fix this
-  static List<String> categories = [];
-  static List<String> about = [];
-  static List<String> settings = [];
-  static List<String> support = [];
-  static Map<String, Widget> routeMap = {};
-
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
-    about = [t.otherAboutGuild, t.otherFap];
-    settings = [t.otherAccount, t.otherLanguage];
-    support = [t.otherContact, t.otherAnon];
-    /* I am so sorry for this Teo */
-    routeMap = {
-      "Songbook": SongbookPage(),
-      "Photo Gallery": GalleryPage(),
-      "Hilbert Café": CafePage(),
-      "The F guild": AboutGuildPage(),
-      "The F-app": FapPage(),
-      "Account": SettingsPage(),
-      "Language": LanguageSettingsPage(),
-      "Contact": ContactPage(),
-      "Anonymous contact page": Container(),
-      "Sångbok": SongbookPage(),
-      "Bildgalleri": GalleryPage(),
-      "F-sektionen": AboutGuildPage(),
-      "F-appen": FapPage(),
-      "Konto": SettingsPage(),
-      "Språk": LanguageSettingsPage(),
-      "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container()
-    };
 
-    return ListView(
-        children: _generateListTiles(categories, context) +
-            [
-              ListTile(
-                  title: Text(
-                t.otherAbout,
-                style: _style(),
-              ))
-            ] +
-            _generateListTiles(about, context) +
-            [
-              ListTile(
-                  title: Text(
-                t.otherSettings,
-                style: _style(),
-              ))
-            ] +
-            _generateListTiles(settings, context) +
-            [ListTile(title: Text("Support", style: _style()))] +
-            _generateListTiles(support, context) +
-            [
-              Card(
-                margin: EdgeInsets.all(2),
-                child: InkWell(
-                    child: ListTile(
-                  tileColor: Colors.red[600],
-                  title: Text(
-                    t.otherLogOut,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () async {
-                    bool? logout = await _confirmLogout(context);
-                    if (logout ?? false) {
-                      locator<NotificationsService>()
-                          .logOutDevice()
-                          .then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context)
-                            .add(LoggedOut());
-                      });
-                    }
-                  },
-                )),
-              )
-            ]);
+    return ListView(children: [
+      _generateListTile(t.otherSongbook, SongbookPage(), context),
+      _generateListTile(t.otherGallery, GalleryPage(), context),
+      _generateListTile(t.otherCafe, CafePage(), context),
+      _generateSeparator(t.otherAbout),
+      _generateListTile(t.otherAboutGuild, AboutGuildPage(), context),
+      _generateListTile(t.otherFap, FapPage(), context),
+      _generateSeparator(t.otherSettings),
+      _generateListTile(t.otherAccount, SettingsPage(), context),
+      _generateListTile(t.otherLanguage, LanguageSettingsPage(), context),
+      _generateSeparator("Support"),
+      _generateListTile(t.otherContact, ContactPage(), context),
+      _generateListTile(t.otherAnon, Container(), context,
+          isLink: true, linkTarget: "http://contact.fsektionen.se"),
+      _generateLogoutTile(context)
+    ]);
+  }
+
+  Widget _generateListTile(String text, Widget page, BuildContext context,
+      {bool isLink = false, String linkTarget = ""}) {
+    var t = AppLocalizations.of(context)!;
+    return Card(
+      margin: EdgeInsets.all(2),
+      child: InkWell(
+          child: ListTile(
+        title: Text(text),
+        onTap:
+            isLink ? () => launch(linkTarget) : () => _goToPage(page, context),
+        trailing: isLink ? Icon(Icons.open_in_new_rounded) : SizedBox.shrink(),
+      )),
+    );
+  }
+
+  Widget _generateSeparator(String text) {
+    return ListTile(
+        title: Text(
+      text,
+      style: _style(),
+    ));
+  }
+
+  void _goToPage(Widget page, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  Widget _generateLogoutTile(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    return Card(
+      margin: EdgeInsets.all(2),
+      child: InkWell(
+          child: ListTile(
+        tileColor: Colors.red[600],
+        title: Text(
+          t.otherLogOut,
+          style: TextStyle(color: Colors.white),
+        ),
+        onTap: () async {
+          bool? logout = await _confirmLogout(context);
+          if (logout ?? false) {
+            locator<NotificationsService>().logOutDevice().then((value) {
+              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            });
+          }
+        },
+      )),
+    );
   }
 
   Future<bool?> _confirmLogout(BuildContext context) {
@@ -122,36 +116,6 @@ class OtherContent extends StatelessWidget {
             ],
           );
         });
-  }
-
-  List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
-    List<Widget> tiles = [];
-    var t = AppLocalizations.of(context)!;
-    for (String tileText in tileTexts) {
-      tiles.add(Card(
-        margin: EdgeInsets.all(2),
-        child: InkWell(
-            child: ListTile(
-          title: Text(tileText),
-          onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon
-              ? SizedBox.shrink()
-              : Icon(Icons.open_in_new_rounded),
-        )),
-      ));
-    }
-    return tiles;
-  }
-
-  void goToTilePage(String title, BuildContext context) {
-    var t = AppLocalizations.of(context)!;
-    if (title == t.otherAnon) {
-      launch("http://contact.fsektionen.se");
-      return;
-    }
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {
