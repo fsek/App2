@@ -56,12 +56,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
             totalMissionsList!.elementAt(i));
       }
     }
-    double circleSize = MediaQuery.of(context).size.height / 5.5;
+    double circleSize = MediaQuery.of(context).size.height / 7;
     var t = AppLocalizations.of(context)!;
     return Stack(
       children: [
         Image.asset(
-          "assets/img/vt_bakgrund_ny.png",
+          "assets/img/nollning-23/uppdrag/uppdrag-homescreen.png",
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
@@ -78,13 +78,14 @@ class _MyGroupTabState extends State<MyGroupTab> {
                 children: [
                   Column(
                     children: [
-                      LinearProgressIndicator(
-                        value: (totalPoints ?? 0) /
-                            (((maxTotalPoints ?? 1) > 0)
-                                ? (maxTotalPoints ?? 1)
-                                : 1),
-                        minHeight: 10,
-                      ),
+                      //Kod som ska visa en bar med hur många poång av totalen man har klarat, dock va detta ej tydligt så borttaget
+                      // LinearProgressIndicator(
+                      //   value: (totalPoints ?? 0) /
+                      //       (((maxTotalPoints ?? 1) > 0)
+                      //           ? (maxTotalPoints ?? 1)
+                      //           : 1),
+                      //   minHeight: 10,
+                      // ),
                       Padding(
                         padding:
                             const EdgeInsets.only(top: 8, right: 10, left: 10),
@@ -99,32 +100,34 @@ class _MyGroupTabState extends State<MyGroupTab> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          "$totalPoints ${t.introductionPoints2}",
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 35,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                          padding: const EdgeInsets.only(bottom: 30.0),
+                          child: Text(
+                            "$totalPoints ${t.introductionPoints2}",
+                            style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height / 35,
+                              color: Colors.white,
+                            ),
+                          )),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _weekProgressCircle(
-                          imgPath: "assets/img/Sten.png",
-                          progress: progressList!.elementAt(0),
-                          borderColor: Colors.purple[900]!,
-                          size: circleSize,
-                          text: "${t.introductionWeek} 0"),
+                        imgPath:
+                            "assets/img/nollning-23/uppdrag/uppdrag-button-v0.png",
+                        progress: progressList!.elementAt(0),
+                        borderColor: Colors.white,
+                        size: circleSize,
+                        //text: "${t.introductionWeek} 0"
+                      ),
                       _weekProgressCircle(
-                        imgPath: "assets/img/Sten.png",
+                        imgPath:
+                            "assets/img/nollning-23/uppdrag/uppdrag-button-v1.png",
                         progress: progressList!.elementAt(1),
-                        borderColor: Colors.blue[900]!,
+                        borderColor: Colors.white,
                         size: circleSize,
-                        text: "${t.introductionWeek} 1",
+                        //text: "${t.introductionWeek} 1",
                       ),
                     ],
                   ),
@@ -132,11 +135,12 @@ class _MyGroupTabState extends State<MyGroupTab> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _weekProgressCircle(
-                        imgPath: "assets/img/Sten.png",
-                        progress: progressList!.elementAt(4),
-                        borderColor: Colors.orange,
+                        imgPath:
+                            "assets/img/nollning-23/uppdrag/uppdrag-button-v2.png",
+                        progress: progressList!.elementAt(2),
+                        borderColor: Colors.white,
                         size: circleSize,
-                        text: "${t.introductionWeek} 2",
+                        //text: "${t.introductionWeek} 2",
                       ),
                     ],
                   ),
@@ -144,17 +148,20 @@ class _MyGroupTabState extends State<MyGroupTab> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _weekProgressCircle(
-                          imgPath: "assets/img/Sten.png",
-                          progress: progressList!.elementAt(2),
-                          borderColor: Colors.red[900]!,
-                          size: circleSize,
-                          text: "${t.introductionWeek} 3"),
-                      _weekProgressCircle(
-                        imgPath: "assets/img/Sten.png",
+                        imgPath:
+                            "assets/img/nollning-23/uppdrag/uppdrag-button-v3.png",
                         progress: progressList!.elementAt(3),
-                        borderColor: Colors.green[900]!,
+                        borderColor: Colors.white,
                         size: circleSize,
-                        text: "${t.introductionWeek} 4",
+                        //text: "${t.introductionWeek} 3"
+                      ),
+                      _weekProgressCircle(
+                        imgPath:
+                            "assets/img/nollning-23/uppdrag/uppdrag-button-v4.png",
+                        progress: progressList!.elementAt(4),
+                        borderColor: Colors.white,
+                        size: circleSize,
+                        //text: "${t.introductionWeek} 4",
                       ),
                     ],
                   ),
@@ -200,31 +207,33 @@ class _MyGroupTabState extends State<MyGroupTab> {
           child: CircularProgressIndicator(
             value: progress,
             color: borderColor,
-            strokeWidth: 8.0,
+            strokeWidth: 6.0,
           ),
           width: size,
           height: size,
         ),
         // OBSERVE: How to give text border, as recomended by official docs
         // Stroked text as border.
-        Text(
-          "${(progress * 100).round()}%",
-          style: TextStyle(
-            fontSize: 30,
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 6
-              ..color = Colors.black,
-          ),
-        ),
-        // Solid text as fill.
-        Text(
-          "${(progress * 100).round()}%",
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.grey[300],
-          ),
-        ),
+        //Koden nedan fixar en procentsats i mitten av cirkeln för att visa hur
+        //många uppdrag som klarats, lämnar för framtida bruk:)
+        // Text(
+        //   "${(progress * 100).round()}%",
+        //   style: TextStyle(
+        //     fontSize: 30,
+        //     foreground: Paint()
+        //       ..style = PaintingStyle.stroke
+        //       ..strokeWidth = 6
+        //       ..color = Colors.black,
+        //   ),
+        // ),
+        // // Solid text as fill.
+        // Text(
+        //   "${(progress * 100).round()}%",
+        //   style: TextStyle(
+        //     fontSize: 30,
+        //     color: Colors.grey[300],
+        //   ),
+        // ),
       ]),
       textBox
     ]);

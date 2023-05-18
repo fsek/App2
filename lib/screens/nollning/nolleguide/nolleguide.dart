@@ -13,9 +13,12 @@ class _GuidePageState extends State<GuidePage> {
           Navigator.pushNamed(context, path);
         },
         child: Column(children: [
-          Image.asset(
-            assetPath,
-            height: 100,
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Image.asset(
+              assetPath,
+              height: 75,
+            ),
           ),
         ]));
   }
@@ -23,42 +26,50 @@ class _GuidePageState extends State<GuidePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/jubel_background_nolleguide.png";
+    String backgroundPath =
+        "assets/img/nollning-23/nolleguide/nolleguide-background.png";
 
     return Stack(
       children: [
-        Image.asset(
-          backgroundPath,
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-          alignment: Alignment.topCenter,
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 9),
+          child: Image.asset(
+            backgroundPath,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+            alignment: Alignment.topCenter,
+          ),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: const Text('Nolleguide'),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          body: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(
-                flex: 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Spacer(flex: 2),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Spacer(flex: 13),
                   _navigationButton(
-                      '/manners', "assets/img/info.png", t.nolleguideEtiquette),
-                  _navigationButton('/people', "assets/img/Personer.png",
+                      '/manners',
+                      "assets/img/nollning-23/nolleguide/resurs3.png",
+                      t.nolleguideEtiquette),
+                  _navigationButton(
+                      '/people',
+                      "assets/img/nollning-23/nolleguide/resurs4.png",
                       t.nolleguideWeAtFsek),
-                  _navigationButton('/wordlist', "assets/img/Ordlista.png",
+                  _navigationButton(
+                      '/wordlist',
+                      "assets/img/nollning-23/nolleguide/resurs5.png",
                       t.nolleguideWordlist),
+                  Spacer(flex: 5),
                 ],
               ),
-              Spacer(
-                flex: 1,
-              ),
+              Spacer(flex: 1),
             ],
           ),
         ),
