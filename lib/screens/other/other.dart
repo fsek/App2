@@ -12,6 +12,9 @@ import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
+import 'package:fsek_mobile/widgets/animations/animation_test.dart';
+import 'package:fsek_mobile/widgets/animations/size_animation.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
@@ -28,7 +31,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "AnimationsTest"];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -50,7 +53,8 @@ class OtherContent extends StatelessWidget {
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container()
+      "Anonym kontaktsida": Container(),
+      "AnimationsTest": AnimationPage()
     };
 
     return ListView(
@@ -86,11 +90,8 @@ class OtherContent extends StatelessWidget {
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
                     if (logout ?? false) {
-                      locator<NotificationsService>()
-                          .logOutDevice()
-                          .then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context)
-                            .add(LoggedOut());
+                      locator<NotificationsService>().logOutDevice().then((value) {
+                        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                       });
                     }
                   },
@@ -124,8 +125,7 @@ class OtherContent extends StatelessWidget {
         });
   }
 
-  List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
+  List<Widget> _generateListTiles(List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
@@ -135,9 +135,7 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon
-              ? SizedBox.shrink()
-              : Icon(Icons.open_in_new_rounded),
+          trailing: tileText != t.otherAnon ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -150,8 +148,7 @@ class OtherContent extends StatelessWidget {
       launch("http://contact.fsektionen.se");
       return;
     }
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {

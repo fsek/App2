@@ -5,6 +5,9 @@ import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+
+import '../nollning/adventure_missions.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -35,7 +38,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: EdgeInsets.fromLTRB(
-              edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+              edgePadding,
+              MediaQuery.of(context).size.height / 2.69420 /* lemao */,
+              edgePadding,
+              0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,28 +50,28 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    button(t.guildMeetingButtonAbout, AboutGuildMeetingPage()),
-                    button(t.guildMeetingButtonPoster, CandidacyPosterPage()),
+                    button("Nolleguide", GuidePage()),
+                    button("Uppdrag", AdventureMissionsPage()),
                   ],
                 ),
                 Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    button(t.guildMeetingButtonMotions, MotionsPage()),
-                    button(t.guildMeetingButtonProposition, PropositionsPage()),
+                    button("Här kan schemat ligga", MotionsPage()),
+                    button("Här kan SOS ligga", PropositionsPage()),
                   ],
                 ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width /
-                            48), // space so that the fifth button matches up with the grid above
-                    button(t.guildMeetingButtonOther, OtherDocumentsPage()),
-                  ],
-                ),
+                // Spacer(),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     SizedBox(
+                //         width: MediaQuery.of(context).size.width /
+                //             48), // space so that the fifth button matches up with the grid above
+                //     button(t.guildMeetingButtonOther, OtherDocumentsPage()),
+                //   ],
+                // ),
                 Spacer(flex: 5),
               ],
             ),
@@ -78,7 +84,8 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(text),
       style: TextButton.styleFrom(

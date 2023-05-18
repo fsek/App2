@@ -61,7 +61,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
     return Stack(
       children: [
         Image.asset(
-          "assets/img/bakgrund_grass_scaled.png",
+          "assets/img/vt_bakgrund_ny.png",
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
