@@ -9,12 +9,16 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-class NotiserPage extends StatefulWidget {
-  _NotiserPageState createState() => _NotiserPageState();
+
+class NotificationsPage extends StatefulWidget {
+  _NotificationsPageState createState() => _NotificationsPageState();
 }
 
-class _NotiserPageState extends State<NotiserPage> {
-  final Map<String, Style> _htmlStyle = {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, fontSize: FontSize(17))};
+class _NotificationsPageState extends State<NotificationsPage> {
+  final Map<String, Style> _htmlStyle = {
+    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
+    "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, fontSize: FontSize(17))
+  };
 
   final PagingController<int, Notis> _pagingController = PagingController(firstPageKey: 1);
 
@@ -54,7 +58,9 @@ class _NotiserPageState extends State<NotiserPage> {
                 ),
               ));
         }, noItemsFoundIndicatorBuilder: (context) {
-          return Container(height: 400, child: Center(child: Text(t.notificationsNone, style: Theme.of(context).textTheme.headline6)));
+          return Container(
+              height: 400,
+              child: Center(child: Text(t.notificationsNone, style: Theme.of(context).textTheme.headline6)));
         }),
       ),
     );
