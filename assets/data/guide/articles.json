@@ -2,7 +2,7 @@
     "articles": [
         {
 
-            "image": "Foset halsar dig valkommen.png",
+            "image": "",
             "title": {
                 "sv": "Allt du behöver veta",
                 "en": "Everything you need to know"
@@ -18,7 +18,7 @@
         },
         {
 
-            "image": "viktigakontakter.jpg",
+            "image": "",
             "title": {
                 "sv": "Viktiga kontakter",
                 "en": "Important contacts"
@@ -33,7 +33,7 @@
             }
         },
         {
-            "image": "",
+            "image": "hej",
             "title":{
                 "sv": "Studentvett",
                 "en": "Good to know"
@@ -48,7 +48,7 @@
             }
         },
         {
-            "image": "akademisk kvart.jpeg",
+            "image": "",
             "title": {
                 "sv": "Allt du behöver veta om den akademiska kvarten",
                 "en": "How to read time"
@@ -62,7 +62,8 @@
                "en": "<i>This may sound easy but if you want to be on time in Lund there are a few things you should know. There is a system that at first will mess things up for you but don't worry you will learn to love it. The system is called the academic quarter. This ancient habit derives from times when watches were scarce among students.Students trusted the cathedral's bells and began their walk to their lectures as the bells chimed at each hour. After 15 minutes everyone had arrived and the lecture could start.</i> <br><br><strong>⏳ Simple and Double Quarter ⌛</strong> <br>The academic quarter can be found in two varieties: simple quarter and double quarter. Simple quarter is applied every weekday from 7 AM to 5 PM. Double quarter is applied every weekday from 6 PM to 6 AM, also during weekends and holidays at all hours. <br>The simple quarter means that when given the time 8 the event will begin at 8:15. All your lectures will be given this way. This means that they all normally begin 15 minutes past the hour. Double quarter on the other hand means that when given the time 19 the event begins at 19:30. This is how the time is given for a sittning for example. In the old days this was because students needed the extra time after the bells had chimed, that is two quarters instead of one, to change into their finest armour. <br><br> <strong>• The “prick”s •</strong> <br>Occasionally you could want an event to begin on the hour. This is called the “prick” system. Prick is the Swedish word for a dot and we say prick because you use a period after the given time. This is how you use it in a sentence “We'll meet outside the store at three prick to buy some pigs feet and mulled wine”. <br>The prick is applied in the following manner: one subtracts 15 minutes from the given time. However you cannot override the simple quarter with two pricks. Writing 15(..) on a weekday is like trying to take the cross product of a vector and a scalar, it doesn't work.<br><br><strong>Take note on the following examples: </strong><ul><li>During weekdays 8 means 8:15</li><li>During weekdays 15(.) means 15:00 </li><li>During the weekend 15(.) means 15:15 </li><li>During the weekend 15(..) means 15:00 </li></ul>If you, in spite of the academic spirit, don't want to use pricks to cancel out the academic quarter you can also choose to state minutes. That is if you write 13:00 or 19:00 you emphasise that the event begins on the hour. Lastly you should know that exams, tests and laborations almost always start at the given time. That is without the academic quarter."            }
         },
         {
-            "image": "sektioner.jpg",
+            "image": "",
+            
             "title": {
                 "sv": "Sektioner",
                 "en": "Guilds"
@@ -78,7 +79,7 @@
         },
 
         {
-            "image": "nationer.jpg",
+            "image": "",
             "title": {
                 "sv": "Nationer",
                 "en": "Nations"
@@ -94,7 +95,7 @@
         },
     
         {
-            "image": "kladsel.png",
+            "image": "",
             "title": {
                 "sv": "Klädsel",
                 "en": "Clothing"
@@ -109,7 +110,7 @@
             }
         },
         {
-            "image": "sittning.png",
+            "image": "",
             "title": {
                 "sv": "Sittningsformalia",
                 "en": "Sittning"
@@ -125,7 +126,7 @@
            
         },
         {
-            "image": "",
+            "image": "hwj",
             "title": {
                 "sv": "Att se fram emot efter nollningen",
                 "en": "To look forward to after the introduction"
@@ -140,7 +141,7 @@
             }
         },
         {
-            "image": "Stortorgsmiddag 2022.png",
+            "image": "",
             "title": {
                 "sv": "Stortorgssittningen",
                 "en": "Stortorgssittningen"
@@ -155,7 +156,7 @@
             }
         },
         {
-            "image": "S-phest.JPG",
+            "image": "",
             "title": {
                 "sv": "S-phesten",
                 "en": "S-phesten"
@@ -170,7 +171,7 @@
             }
         },
         {
-            "image": "algresan.png",
+            "image": "",
             "title": {
                 "sv": "Älgresan",
                 "en": "The Elk Trip"
