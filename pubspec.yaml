@@ -58,8 +58,6 @@ dependencies:
   flutter_pdfview: ^1.2.2 # For PDF viewer
   permission_handler: ^10.2.0
   flutter_cached_pdfview: ^0.4.1 # For PDF viewer
-  page_transition: ^2.0.9 # For page transitions
-
 
 
 
