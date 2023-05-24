@@ -78,14 +78,6 @@ class _MyGroupTabState extends State<MyGroupTab> {
                 children: [
                   Column(
                     children: [
-                      //Kod som ska visa en bar med hur många poång av totalen man har klarat, dock va detta ej tydligt så borttaget
-                      // LinearProgressIndicator(
-                      //   value: (totalPoints ?? 0) /
-                      //       (((maxTotalPoints ?? 1) > 0)
-                      //           ? (maxTotalPoints ?? 1)
-                      //           : 1),
-                      //   minHeight: 10,
-                      // ),
                       Padding(
                         padding:
                             const EdgeInsets.only(top: 8, right: 10, left: 10),
@@ -100,14 +92,15 @@ class _MyGroupTabState extends State<MyGroupTab> {
                         ),
                       ),
                       Padding(
-                          padding: const EdgeInsets.only(bottom: 30.0),
-                          child: Text(
-                            "$totalPoints ${t.introductionPoints2}",
-                            style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 35,
-                              color: Colors.white,
-                            ),
-                          )),
+                        padding: const EdgeInsets.only(bottom: 30.0),
+                        child: Text(
+                          "$totalPoints ${t.introductionPoints2}",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 35,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   Row(
@@ -212,28 +205,6 @@ class _MyGroupTabState extends State<MyGroupTab> {
           width: size,
           height: size,
         ),
-        // OBSERVE: How to give text border, as recomended by official docs
-        // Stroked text as border.
-        //Koden nedan fixar en procentsats i mitten av cirkeln för att visa hur
-        //många uppdrag som klarats, lämnar för framtida bruk:)
-        // Text(
-        //   "${(progress * 100).round()}%",
-        //   style: TextStyle(
-        //     fontSize: 30,
-        //     foreground: Paint()
-        //       ..style = PaintingStyle.stroke
-        //       ..strokeWidth = 6
-        //       ..color = Colors.black,
-        //   ),
-        // ),
-        // // Solid text as fill.
-        // Text(
-        //   "${(progress * 100).round()}%",
-        //   style: TextStyle(
-        //     fontSize: 30,
-        //     color: Colors.grey[300],
-        //   ),
-        // ),
       ]),
       textBox
     ]);

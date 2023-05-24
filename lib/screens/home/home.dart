@@ -59,19 +59,30 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     button("Här kan schemat ligga", MotionsPage()),
-                    button("Här kan SOS ligga", PropositionsPage()),
                   ],
                 ),
-                // Spacer(),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     SizedBox(
-                //         width: MediaQuery.of(context).size.width /
-                //             48), // space so that the fifth button matches up with the grid above
-                //     button(t.guildMeetingButtonOther, OtherDocumentsPage()),
-                //   ],
-                // ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/emergency_contacts");
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Image.asset(
+                              "assets/img/nollning-23/homescreen-button-help.png",
+                              height: 60,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 Spacer(flex: 5),
               ],
             ),

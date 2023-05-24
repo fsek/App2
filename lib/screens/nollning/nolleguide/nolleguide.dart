@@ -17,7 +17,7 @@ class _GuidePageState extends State<GuidePage> {
             padding: EdgeInsets.all(10),
             child: Image.asset(
               assetPath,
-              height: 75,
+              height: 70,
             ),
           ),
         ]));
@@ -53,20 +53,24 @@ class _GuidePageState extends State<GuidePage> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(flex: 13),
+                  Spacer(flex: 7),
                   _navigationButton(
                       '/manners',
-                      "assets/img/nollning-23/nolleguide/resurs3.png",
+                      "assets/img/nollning-23/nolleguide/studentlivet.png",
                       t.nolleguideEtiquette),
                   _navigationButton(
                       '/people',
-                      "assets/img/nollning-23/nolleguide/resurs4.png",
+                      "assets/img/nollning-23/nolleguide/personer.png",
                       t.nolleguideWeAtFsek),
                   _navigationButton(
                       '/wordlist',
-                      "assets/img/nollning-23/nolleguide/resurs5.png",
+                      "assets/img/nollning-23/nolleguide/ordlista.png",
                       t.nolleguideWordlist),
-                  Spacer(flex: 5),
+                  _navigationButton(
+                      '/messages',
+                      "assets/img/nollning-23/nolleguide/meddelanden.png",
+                      t.nolleguideWordlist),
+                  Spacer(flex: 1),
                 ],
               ),
               Spacer(flex: 1),
