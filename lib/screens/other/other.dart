@@ -145,7 +145,8 @@ class OtherContent extends StatelessWidget {
   void goToTilePage(String title, BuildContext context) {
     var t = AppLocalizations.of(context)!;
     if (title == t.otherAnon) {
-      launch("http://contact.fsektionen.se");
+      launch(
+          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform");
       return;
     }
     Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
