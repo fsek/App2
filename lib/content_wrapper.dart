@@ -150,7 +150,6 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             )
           ],
         ));
-    if (_faders[widget.navbarDestinations.length - 1].value > 0.2) _header = Container();
 
     return Stack(children: [
       Container(
