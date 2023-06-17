@@ -43,8 +43,7 @@ class _MannersPageState extends State<MannersPage> {
 
   Widget _createArticleCard(Article a) {
     String locale = Localizations.localeOf(context).toString();
-    //detta bör ändras till något annat rimligare:))
-    return (a.image == "")
+    return !(a.intro ?? false)
         ? Container(
             //child: InkWell(
             child: Stack(
@@ -77,26 +76,29 @@ class _MannersPageState extends State<MannersPage> {
         : Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Card(
-              child: ListTile(
-                title: Text(
-                  a.title![locale]!,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Html(
-                      data: a.content![locale]!,
-                      style: {
-                        "body": Style(
-                          fontSize: FontSize(14.0),
-                        ),
-                      },
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                  ],
+              child: Padding(
+                padding: EdgeInsets.only(top: 3),
+                child: ListTile(
+                  title: Text(
+                    a.title![locale]!,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Html(
+                        data: a.content![locale]!,
+                        style: {
+                          "body": Style(
+                            fontSize: FontSize(15.0),
+                          ),
+                        },
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -111,26 +113,29 @@ class _MannersPageState extends State<MannersPage> {
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: Card(
-        child: ListTile(
-          title: Text(
-            a.title![locale]!,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Html(
-                data: a.content![locale]!,
-                style: {
-                  "body": Style(
-                    fontSize: FontSize(16.0),
-                  ),
-                },
-              ),
-              SizedBox(
-                height: 6,
-              ),
-            ],
+        child: Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: ListTile(
+            title: Text(
+              a.title![locale]!,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Html(
+                  data: a.content![locale]!,
+                  style: {
+                    "body": Style(
+                      fontSize: FontSize(16.0),
+                    ),
+                  },
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+              ],
+            ),
           ),
         ),
       ),
