@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/guildMeeting/candidacy_poster.dart';
+import 'package:fsek_mobile/screens/guildMeeting/motions.dart';
 import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
 import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
@@ -23,9 +24,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double tempsize = 100;
     var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
-    String backgroundPath = "assets/img/vt_bakgrund_ny.png";
+    String backgroundPath =
+        "assets/img/nollning-23/hemsidan/homescreen-background-v0.png"; // TODO insert local method to determine what image to use
     return Stack(children: [
       Image.asset(
         backgroundPath,
@@ -36,56 +39,98 @@ class _HomePageState extends State<HomePage> {
       ),
       Scaffold(
         backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(
-              edgePadding,
-              MediaQuery.of(context).size.height / 2.69420 /* lemao */,
-              edgePadding,
-              0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Spacer(flex: 3),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    button("Nolleguide", GuidePage()),
-                    button("Uppdrag", AdventureMissionsPage()),
-                  ],
-                ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    button("Här kan schemat ligga", MotionsPage()),
-                  ],
-                ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+        body: // Padding(
+            //   padding: EdgeInsets.fromLTRB(
+            //       edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+            // child:
+            Center(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //Spacer(flex: 80),
+              SizedBox(height: 435),
+              //height: MediaQuery.of(context).size.height / 7),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(3),
+                          child: Image.asset(
+                            "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v0.png",
+                            height: 120,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, "/emergency_contacts");
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
                       },
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(3),
                             child: Image.asset(
-                              "assets/img/nollning-23/homescreen-button-help.png",
-                              height: 60,
+                              "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v0.png",
+                              height: 120,
                             ),
                           ),
+                          SizedBox(height: 30)
                         ],
                       ),
                     ),
-                  ],
-                ),
-                Spacer(flex: 5),
-              ],
-            ),
+                  ]),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(3),
+                          child: Image.asset(
+                            "assets/img/nollning-23/hemsidan/homescreen-button-schema-v0.png",
+                            height: 120,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    customBorder: CircleBorder(),
+                    onTap: () {
+                      Navigator.pushNamed(context, "/emergency_contacts");
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(7),
+                          child: Image.asset(
+                            "assets/img/nollning-23/homescreen-button-help.png",
+                            height: 60,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -95,8 +140,7 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(text),
       style: TextButton.styleFrom(
