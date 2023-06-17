@@ -212,14 +212,6 @@ class _ContentWrapperState extends State<ContentWrapper>
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
-                if (_currentIndex == 2) {
-                  locator<ThemeService>().theme = nollning2023themeV0;
-                  locator<ThemeService>().backgroundColors =
-                      nollning2023BackgroundV0;
-                } else {
-                  locator<ThemeService>().theme = fsekTheme;
-                  locator<ThemeService>().backgroundColors = fsekBackground;
-                }
 
                 widget.onNavigation!.add(widget
                     .navbarDestinations[_currentIndex].widget.runtimeType);
