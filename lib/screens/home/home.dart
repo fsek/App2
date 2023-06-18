@@ -24,11 +24,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double tempsize = 100;
+    double tempsize = 110;
     var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
     String backgroundPath =
-        "assets/img/nollning-23/hemsidan/homescreen-background-v0.png"; // TODO insert local method to determine what image to use
+        "assets/img/nollning-23/hemsidan/homescreen-background-v4.png"; // TODO insert local method to determine what image to use
     return Stack(children: [
       Image.asset(
         backgroundPath,
@@ -45,27 +45,29 @@ class _HomePageState extends State<HomePage> {
             // child:
             Center(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //Spacer(flex: 80),
               SizedBox(height: 435),
               //height: MediaQuery.of(context).size.height / 7),
-
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35),
+                    ),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
                     },
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(3),
+                          padding: EdgeInsets.only(left: 3, right: 3),
                           child: Image.asset(
-                            "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v0.png",
-                            height: 120,
+                            "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v4.png",
+                            height: tempsize,
                           ),
                         ),
                       ],
@@ -73,34 +75,40 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Column(children: [
                     InkWell(
+                      customBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35),
+                      ),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
                       },
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(3),
+                            padding: EdgeInsets.only(left: 3, right: 3),
                             child: Image.asset(
-                              "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v0.png",
-                              height: 120,
+                              "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v4.png",
+                              height: tempsize,
                             ),
                           ),
-                          SizedBox(height: 30)
                         ],
                       ),
                     ),
+                    SizedBox(height: 30)
                   ]),
                   InkWell(
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(45),
+                    ),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
                     },
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(3),
+                          padding: EdgeInsets.only(left: 3, right: 3),
                           child: Image.asset(
-                            "assets/img/nollning-23/hemsidan/homescreen-button-schema-v0.png",
-                            height: 120,
+                            "assets/img/nollning-23/hemsidan/homescreen-button-schema-v4.png",
+                            height: tempsize,
                           ),
                         ),
                       ],
@@ -117,9 +125,10 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pushNamed(context, "/emergency_contacts");
                     },
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: EdgeInsets.only(bottom: 3, right: 3),
                           child: Image.asset(
                             "assets/img/nollning-23/homescreen-button-help.png",
                             height: 60,
