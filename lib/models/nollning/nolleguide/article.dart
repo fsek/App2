@@ -4,9 +4,8 @@ part 'article.g.dart'; //generated JSON file
 
 @JsonSerializable()
 class Article {
-  String? image;
+  bool? intro;
   Map<String, String>? title;
-  Map<String, String>? preamble;
   Map<String, String>? content;
   Article();
 
