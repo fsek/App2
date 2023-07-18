@@ -24,11 +24,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double tempsize = 110;
+    double circle_size = MediaQuery.of(context).size.height / 7;
     var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
-    String backgroundPath =
-        "assets/img/nollning-23/hemsidan/homescreen-background-v4.png"; // TODO insert local method to determine what image to use
+
+    String week = _determineWeek();
+    String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
+    String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
+    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
+    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week.png";
+
     return Stack(children: [
       Image.asset(
         backgroundPath,
@@ -48,7 +53,6 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //Spacer(flex: 80),
-              SizedBox(height: 435),
               //height: MediaQuery.of(context).size.height / 7),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -66,8 +70,8 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.only(left: 3, right: 3),
                           child: Image.asset(
-                            "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v4.png",
-                            height: tempsize,
+                            nolleguidePath,
+                            height: circle_size,
                           ),
                         ),
                       ],
@@ -86,14 +90,16 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.only(left: 3, right: 3),
                             child: Image.asset(
-                              "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v4.png",
-                              height: tempsize,
+                              uppdragPath,
+                              height: circle_size,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 30)
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height /
+                            28) // Box to make middle button float higher then right and left
                   ]),
                   InkWell(
                     customBorder: RoundedRectangleBorder(
@@ -107,8 +113,8 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.only(left: 3, right: 3),
                           child: Image.asset(
-                            "assets/img/nollning-23/hemsidan/homescreen-button-schema-v4.png",
-                            height: tempsize,
+                            schedulePath,
+                            height: circle_size,
                           ),
                         ),
                       ],
@@ -116,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              SizedBox(height: MediaQuery.of(context).size.height / 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -128,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 3, right: 3),
+                          padding: EdgeInsets.only(bottom: 5, right: 5),
                           child: Image.asset(
                             "assets/img/nollning-23/homescreen-button-help.png",
-                            height: 60,
+                            height: MediaQuery.of(context).size.height / 14,
                           ),
                         ),
                       ],
@@ -160,5 +167,32 @@ class _HomePageState extends State<HomePage> {
           ),
           minimumSize: Size(MediaQuery.of(context).size.width / 2.4, 80)),
     );
+  }
+
+  String _determineWeek() {
+    DateTime now = DateTime.now();
+    DateTime v0 = DateTime(2023, 8, 21, 0, 0);
+    DateTime v1 = DateTime(2023, 8, 28, 0, 0);
+    DateTime v2 = DateTime(2023, 9, 4, 0, 0);
+    DateTime v3 = DateTime(2023, 9, 11, 0, 0);
+    DateTime v4 = DateTime(2023, 9, 18, 0, 0);
+
+    List<DateTime> weeks = [v0, v1, v2, v3, v4];
+
+    for (int i = 0; i < weeks.length; i++) {
+      String week = "v$i";
+      // If we have gotten to week 4 then end of list so edge-case
+      if (week == "v4") {
+        // if its week 4 and current time is after start time of week 4
+        if (now.compareTo(weeks[i]) > 0) {
+          return "$i";
+        }
+      } else if (now.compareTo(weeks[i]) > 0 && now.compareTo(weeks[i + 1]) < 0) {
+        return "$i";
+      }
+    }
+
+    // If it for some reason doesnt find one I guess default to week 0 for no spoilers?
+    return "0";
   }
 }
