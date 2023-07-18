@@ -97,6 +97,31 @@ class _ContentWrapperState extends State<ContentWrapper>
 
   @override
   Widget build(BuildContext context) {
+    ThemeData currentTheme = fsekTheme;
+    List<Color> currentBackgroundTheme = fsekBackground;
+    DateTime now = DateTime.now();
+    DateTime v0start = DateTime(2023, 8, 20, 23, 59);
+    DateTime v1start = DateTime(2023, 8, 27, 23, 59);
+    DateTime v2start = DateTime(2023, 9, 3, 23, 59);
+    DateTime v3start = DateTime(2023, 9, 10, 23, 59);
+    DateTime v4start = DateTime(2023, 9, 17, 23, 59);
+    // CURSED
+    if (v0start.compareTo(now) < 0 && v1start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV0;
+      currentBackgroundTheme = nollning2023BackgroundV0;
+    } else if (v1start.compareTo(now) < 0 && v2start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV1;
+      currentBackgroundTheme = nollning2023BackgroundV1;
+    } else if (v2start.compareTo(now) < 0 && v3start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV2;
+      currentBackgroundTheme = nollning2023BackgroundV2;
+    } else if (v3start.compareTo(now) < 0 && v4start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV3;
+      currentBackgroundTheme = nollning2023BackgroundV3;
+    } else if (v4start.compareTo(now) < 0) {
+      currentTheme = nollning2023themeV4;
+      currentBackgroundTheme = nollning2023BackgroundV4;
+    }
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
@@ -212,7 +237,14 @@ class _ContentWrapperState extends State<ContentWrapper>
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
-
+                if (_currentIndex == 2) {
+                  locator<ThemeService>().theme = currentTheme;
+                  locator<ThemeService>().backgroundColors =
+                      currentBackgroundTheme;
+                } else {
+                  locator<ThemeService>().theme = fsekTheme;
+                  locator<ThemeService>().backgroundColors = fsekBackground;
+                }
                 widget.onNavigation!.add(widget
                     .navbarDestinations[_currentIndex].widget.runtimeType);
               },
