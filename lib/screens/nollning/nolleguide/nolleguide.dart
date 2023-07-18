@@ -14,7 +14,7 @@ class _GuidePageState extends State<GuidePage> {
         },
         child: Column(children: [
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(1),
             child: Image.asset(
               assetPath,
               height: 70,
@@ -26,57 +26,56 @@ class _GuidePageState extends State<GuidePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath =
-        "assets/img/nollning-23/nolleguide/nolleguide-background.png";
+    String backgroundPath = "assets/img/nollning-23/nolleguide/nolleguide-background.png";
 
     return Stack(
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 9),
-          child: Image.asset(
-            backgroundPath,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.only(top: 0), //MediaQuery.of(context).size.height / 9),
+        //   child: Image.asset(
+        //     backgroundPath,
+        //     height: MediaQuery.of(context).size.height,
+        //     width: MediaQuery.of(context).size.width,
+        //     fit: BoxFit.cover,
+        //     alignment: Alignment.topCenter,
+        //   ),
+        // ),
         Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: const Text('Nolleguide'),
-          ),
-          body: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(flex: 2),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(flex: 7),
-                  _navigationButton(
-                      '/manners',
-                      "assets/img/nollning-23/nolleguide/studentlivet.png",
-                      t.nolleguideEtiquette),
-                  _navigationButton(
-                      '/people',
-                      "assets/img/nollning-23/nolleguide/personer.png",
-                      t.nolleguideWeAtFsek),
-                  _navigationButton(
-                      '/wordlist',
-                      "assets/img/nollning-23/nolleguide/ordlista.png",
-                      t.nolleguideWordlist),
-                  _navigationButton(
-                      '/messages',
-                      "assets/img/nollning-23/nolleguide/meddelanden.png",
-                      t.nolleguideWordlist),
-                  Spacer(flex: 1),
-                ],
-              ),
-              Spacer(flex: 1),
-            ],
-          ),
-        ),
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(),
+            body: Stack(
+              children: [
+                Image.asset(
+                  backgroundPath,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(flex: 4),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(flex: 4),
+                        _navigationButton('/manners', "assets/img/nollning-23/nolleguide/button-studentlivet.png",
+                            t.nolleguideEtiquette),
+                        _navigationButton(
+                            '/people', "assets/img/nollning-23/nolleguide/button-fsektionen.png", t.nolleguideWeAtFsek),
+                        _navigationButton(
+                            '/wordlist', "assets/img/nollning-23/nolleguide/button-ordlista.png", t.nolleguideWordlist),
+                        _navigationButton('/messages', "assets/img/nollning-23/nolleguide/button-meddelanden.png",
+                            t.nolleguideWordlist),
+                        Spacer(flex: 2),
+                      ],
+                    ),
+                    Spacer(flex: 2),
+                  ],
+                )
+              ],
+            )),
       ],
     );
   }

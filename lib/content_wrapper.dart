@@ -245,7 +245,6 @@ class _ContentWrapperState extends State<ContentWrapper>
                   locator<ThemeService>().theme = fsekTheme;
                   locator<ThemeService>().backgroundColors = fsekBackground;
                 }
-
                 widget.onNavigation!.add(widget
                     .navbarDestinations[_currentIndex].widget.runtimeType);
               },

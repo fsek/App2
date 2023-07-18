@@ -19,10 +19,19 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
   AdventureData? _adventureData;
 
   void initState() {
-    locator<NollningService>().getAdventures().then((value) => setState(() {
+    locator<NollningService>().getAdventures().then((value) {
+      if (mounted) {
+        setState(() {
           this._adventureData = value;
-        }));
+        });
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
