@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/notiser/notis.dart';
@@ -9,14 +8,22 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NotiserPage extends StatefulWidget {
   _NotiserPageState createState() => _NotiserPageState();
 }
 
 class _NotiserPageState extends State<NotiserPage> {
-  final Map<String, Style> _htmlStyle = {"body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero), "p": Style(padding: EdgeInsets.zero, margin: EdgeInsets.zero, fontSize: FontSize(17))};
+  final Map<String, Style> _htmlStyle = {
+    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
+    "p": Style(
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        fontSize: FontSize(17))
+  };
 
-  final PagingController<int, Notis> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, Notis> _pagingController =
+      PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -33,7 +40,8 @@ class _NotiserPageState extends State<NotiserPage> {
       child: PagedListView<int, Notis>(
         pagingController: _pagingController,
         shrinkWrap: true,
-        builderDelegate: PagedChildBuilderDelegate<Notis>(itemBuilder: (context, notis, index) {
+        builderDelegate: PagedChildBuilderDelegate<Notis>(
+            itemBuilder: (context, notis, index) {
           if (notis.data == null) return Container();
 
           return Card(
@@ -42,19 +50,29 @@ class _NotiserPageState extends State<NotiserPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () => seeNotis(notis),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Html(
-                      data: notis.data?["body"],
-                      style: _htmlStyle,
-                    ),
-                    SizedBox(height: 4),
-                    notis.data?["extra"] != null ? Text(notis.data!["extra"]!) : Container(),
-                    Text(t.notificationsSent + (DateFormat('EEE d LLL y kk:mm').format(notis.created_at!))),
-                  ]),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Html(
+                          data: notis.data?["body"],
+                          style: _htmlStyle,
+                        ),
+                        SizedBox(height: 4),
+                        notis.data?["extra"] != null
+                            ? Text(notis.data!["extra"]!)
+                            : Container(),
+                        Text(t.notificationsSent +
+                            (DateFormat('EEE d LLL y kk:mm')
+                                .format(notis.created_at!))),
+                      ]),
                 ),
               ));
         }, noItemsFoundIndicatorBuilder: (context) {
-          return Container(height: 400, child: Center(child: Text(t.notificationsNone, style: Theme.of(context).textTheme.headline6)));
+          return Container(
+              height: 400,
+              child: Center(
+                  child: Text(t.notificationsNone,
+                      style: Theme.of(context).textTheme.headline6)));
         }),
       ),
     );
@@ -79,8 +97,13 @@ class _NotiserPageState extends State<NotiserPage> {
   void seeNotis(Notis notis) {
     locator<NotiserService>().visitNotis(notis.id!);
     setState(() {
-      _pagingController.itemList!.singleWhere((element) => element.id == notis.id).visited = true;
+      _pagingController.itemList!
+          .singleWhere((element) => element.id == notis.id)
+          .visited = true;
     });
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: notis.event_id!)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EventPage(eventId: notis.event_id!)));
   }
 }

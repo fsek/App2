@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:linkable/linkable.dart';
 
@@ -183,10 +182,9 @@ class _HeaderText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        margin: const EdgeInsets.all(10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          children: [
+          margin: const EdgeInsets.all(10),
+          alignment: Alignment.centerLeft,
+          child: Row(children: [
             Flexible(child: Linkable(text: text, style: headerStyle))
           ])),
       color: color,
@@ -208,8 +206,8 @@ class _BodyText extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Container(
-        alignment: Alignment.centerLeft,
-        child: Linkable(text: text, style: bodyStyle)),
+          alignment: Alignment.centerLeft,
+          child: Linkable(text: text, style: bodyStyle)),
     );
   }
 }

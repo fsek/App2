@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
