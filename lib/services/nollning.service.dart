@@ -8,14 +8,19 @@ class NollningService extends AbstractService {
 
   Future<List<NollningGroup>> getNollningGroups() async {
     Map json = await AbstractService.get("/adventure_mission_groups");
-    List<NollningGroup> result = (json['groups'] as List).map((data) => NollningGroup.fromJson(data)).toList();
+    List<NollningGroup> result = (json['groups'] as List)
+        .map((data) => NollningGroup.fromJson(data))
+        .toList();
     return result;
   }
 
   Future<List<AdventureMissionWeek>> getAdventureWeeks() async {
     Map json = await AbstractService.get("/adventures");
     is_mentor = json['is_mentor'] ?? false; // ugly hack don't judge
-    List<AdventureMissionWeek> result = (json['adventures']['adventures'] as List).map((data) => AdventureMissionWeek.fromJson(data)).toList();
+    List<AdventureMissionWeek> result =
+        (json['adventures']['adventures'] as List)
+            .map((data) => AdventureMissionWeek.fromJson(data))
+            .toList();
     return result;
   }
 

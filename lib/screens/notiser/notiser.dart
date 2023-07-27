@@ -9,11 +9,11 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NotiserPage extends StatefulWidget {
-  _NotiserPageState createState() => _NotiserPageState();
+class NotificationsPage extends StatefulWidget {
+  _NotificationsPageState createState() => _NotificationsPageState();
 }
 
-class _NotiserPageState extends State<NotiserPage> {
+class _NotificationsPageState extends State<NotificationsPage> {
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
     "p": Style(

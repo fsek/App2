@@ -11,6 +11,8 @@ import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
+import 'package:fsek_mobile/widgets/animations/animation_test.dart';
+import 'package:fsek_mobile/widgets/animations/size_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
@@ -27,7 +29,12 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [
+      t.otherSongbook,
+      t.otherGallery,
+      t.otherCafe,
+      "AnimationsTest"
+    ];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -49,7 +56,8 @@ class OtherContent extends StatelessWidget {
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container()
+      "Anonym kontaktsida": Container(),
+      "AnimationsTest": AnimationPage()
     };
 
     return ListView(
@@ -146,7 +154,8 @@ class OtherContent extends StatelessWidget {
   void goToTilePage(String title, BuildContext context) {
     var t = AppLocalizations.of(context)!;
     if (title == t.otherAnon) {
-      launchUrl(Uri.parse("http://contact.fsektionen.se"));
+      launchUrl(Uri.parse(
+          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"));
       return;
     }
     Navigator.push(

@@ -12,8 +12,7 @@ class SongbookPage extends StatefulWidget {
   _SongbookPageState createState() => _SongbookPageState();
 }
 
-class _SongbookPageState extends State<SongbookPage>
-    with TickerProviderStateMixin {
+class _SongbookPageState extends State<SongbookPage> with TickerProviderStateMixin {
   List<SongbookEntry> songs = [];
   List<SongbookEntry> allSongs = [];
 
@@ -28,8 +27,7 @@ class _SongbookPageState extends State<SongbookPage>
 
   @override
   void initState() {
-    animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1400));
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 1400));
     locator<SongbookService>().getSongbook().then((value) => setState(() {
           this.songs = value;
           songs.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
@@ -50,8 +48,7 @@ class _SongbookPageState extends State<SongbookPage>
   void setRotation(int degrees) {
     final angle = degrees * 3.1415 / 180;
 
-    animation =
-        Tween<double>(begin: 0, end: angle).animate(animationController);
+    animation = Tween<double>(begin: 0, end: angle).animate(animationController);
   }
 
   Widget build(BuildContext context) {
@@ -59,8 +56,7 @@ class _SongbookPageState extends State<SongbookPage>
     return allSongs == []
         ? Scaffold(
             appBar: AppBar(title: Text(t.songbookSongbook)),
-            body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+            body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: AnimatedBuilder(
@@ -86,8 +82,7 @@ class _SongbookPageState extends State<SongbookPage>
                                         Icons.arrow_back,
                                         color: Colors.grey[800],
                                       ),
-                                      onPressed: () =>
-                                          FocusScope.of(context).unfocus())
+                                      onPressed: () => FocusScope.of(context).unfocus())
                                   : Icon(
                                       Icons.search,
                                       color: Colors.grey[800],
@@ -106,23 +101,16 @@ class _SongbookPageState extends State<SongbookPage>
                           onChanged: (search) {
                             //Easteregg:
                             if (search == "hmm") {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HmmPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HmmPage()));
                             } else if (search == "do a barrel roll") {
                               FocusScope.of(context).unfocus();
                               animationController.forward(from: 0);
                             }
-                            List<String> searchTerms = search
-                                .toLowerCase()
-                                .trim()
-                                .split(new RegExp(r"\s+"));
+                            List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                             setState(() {
                               initChar = "";
                               songs = allSongs.where((song) {
-                                return searchTerms.every((term) =>
-                                    song.title!.toLowerCase().contains(term));
+                                return searchTerms.every((term) => song.title!.toLowerCase().contains(term));
                               }).toList();
                             });
                           },
@@ -131,9 +119,7 @@ class _SongbookPageState extends State<SongbookPage>
                       Expanded(
                         child: songs.isNotEmpty
                             ? ListView(
-                                children: songs
-                                    .map((song) => _generateSongTile(song))
-                                    .toList(),
+                                children: songs.map((song) => _generateSongTile(song)).toList(),
                               )
                             : Padding(
                                 padding: EdgeInsets.all(16),
@@ -144,8 +130,7 @@ class _SongbookPageState extends State<SongbookPage>
                   ),
                 ),
                 //Part of doing a barrel roll
-                builder: (context, child) =>
-                    Transform.rotate(angle: animation.value, child: child)));
+                builder: (context, child) => Transform.rotate(angle: animation.value, child: child)));
   }
 
   Widget _generateSongTile(SongbookEntry song) {
@@ -173,8 +158,7 @@ class _SongbookPageState extends State<SongbookPage>
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),
-                  child: ListTile(
-                      title: Text(song.title == null ? "" : song.title!)),
+                  child: ListTile(title: Text(song.title == null ? "" : song.title!)),
                 ))
           ],
     );
@@ -182,8 +166,7 @@ class _SongbookPageState extends State<SongbookPage>
 
   void openSong(int id) {
     locator<SongService>().getSong(id).then((song) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SongPage(song: song)));
     });
   }
 }

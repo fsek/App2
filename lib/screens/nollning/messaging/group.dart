@@ -204,22 +204,30 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
           LayoutBuilder(builder: (context, constraint) {
             return Container(
               width: constraint.maxWidth - 60,
-              child: TextFormField(
-                  enabled: widget.group.group_type != "info",
-                  controller: _controller,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(),
-                  )),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width / 60,
+                    5,
+                    MediaQuery.of(context).size.width / 30,
+                    5),
+                child: TextFormField(
+                    enabled: widget.group.group_type != "info",
+                    controller: _controller,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(),
+                    )),
+              ),
             );
           }),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                padding: EdgeInsets.fromLTRB(
+                    0, 5, MediaQuery.of(context).size.width / 80, 0),
                 child: TextButton(
                     onPressed: widget.group.group_type != "info"
                         ? () => sendMessage()

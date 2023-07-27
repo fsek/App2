@@ -13,7 +13,7 @@ class ArticlePage extends StatelessWidget {
     String locale = Localizations.localeOf(context).toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.articleEtiquette),
+        title: Text(AppLocalizations.of(context)!.mannersEtiquette),
       ),
       body: SingleChildScrollView(
         child: Column(
