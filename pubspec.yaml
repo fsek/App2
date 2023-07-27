@@ -30,7 +30,7 @@ dependencies:
   json_annotation: ^4.0.1 # For json serializing
   flutter_secure_storage: ^6.0.0 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
-  firebase_messaging: ^12.0.0 # For Push notifications
+  firebase_messaging: ^13.0.0 # For Push notifications
   firebase_core: ^1.0.0
   equatable: ^2.0.3 # For State
   bloc: ^7.0.0 # For State

@@ -93,7 +93,7 @@ class _FapPageState extends State<FapPage> {
             ),
             ...(inspiration
                 .map((e) => TextButton(
-                    onPressed: () => launch(e),
+                    onPressed: () => launchUrl(Uri.parse(e)),
                     child: Text("Link " + inspiration.indexOf(e).toString())))
                 .toList()),
             Spacer(),
