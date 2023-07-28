@@ -1069,6 +1069,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  turn_page_transition:
+    dependency: "direct main"
+    description:
+      name: turn_page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   typed_data:
     dependency: transitive
     description:

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/guildMeeting/candidacy_poster.dart';
-import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
-import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
-import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
+import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+import 'package:turn_page_transition/turn_page_transition.dart';
 
 import '../nollning/adventure_missions.dart';
 
@@ -17,6 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const List<Color> weekColors = [
+    Color(0xFF202C57), // v0
+    Color(0xFF4B6357), // v1
+    Color(0xFF9B4C52), // v2
+    Color(0xFF260F3F), // v3
+    Color(0xFF165C7F), // v4
+  ];
+
   void initState() {
     super.initState();
   }
@@ -37,11 +43,7 @@ class _HomePageState extends State<HomePage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(
-              edgePadding,
-              MediaQuery.of(context).size.height / 2.69420 /* lemao */,
-              edgePadding,
-              0),
+          padding: EdgeInsets.fromLTRB(edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    button("Här kan schemat ligga", MotionsPage()),
+                    button("Nollningsschema", IntroductionSchedule(currentWeek: 4, firstTime: true), currentWeek: 4),
                   ],
                 ),
                 Spacer(),
@@ -73,10 +75,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.all(10),
-                            child: Image.asset(
-                              "assets/img/nollning-23/homescreen-button-help.png",
-                              height: 60,
-                            ),
+                            child: Image.asset("assets/img/nollning-23/homescreen-button-help.png", height: 60),
                           ),
                         ],
                       ),
@@ -92,11 +91,11 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  Widget button(String text, Widget destination) {
+  Widget button(String text, Widget destination, {int currentWeek = 0}) {
     return TextButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => destination));
+        // TurnPageRoute creates the page flipping effect on pushes and pops, change it to MaterialPageRoute to have regular transitions
+        Navigator.push(context, TurnPageRoute(overleafColor: weekColors[currentWeek], builder: (context) => destination));
       },
       child: Text(text),
       style: TextButton.styleFrom(

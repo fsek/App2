@@ -59,6 +59,7 @@ dependencies:
   permission_handler: ^10.2.0
   flutter_cached_pdfview: ^0.4.1 # For PDF viewer
   page_transition: ^2.0.9 # For page transitions
+  turn_page_transition: ^0.2.0
 
 
 
@@ -82,7 +83,7 @@ flutter:
   generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
-  # the material Icons class. 
+  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
@@ -94,6 +95,7 @@ flutter:
    - assets/img/nollning-23/
    - assets/img/nollning-23/uppdrag/
    - assets/img/nollning-23/nolleguide/
+   - assets/img/nollning-23/schema/
    - assets/data/guide/
 
 
