@@ -5,7 +5,6 @@ class IntroductionSchedule extends StatefulWidget {
   final int currentWeek; // the current introduction week, and thus the final allowed week to swipe to
   final int week; // the week we are showing on this schedule-page
   final bool firstTime; // if we are entering this week for the first time from the schedule, and thus should automatically continue flipping in initState
-  // final List<Color> overleafColors; // colors for the different weeks, used for the overleafs colors
   const IntroductionSchedule({key, required this.currentWeek, this.week = 0, this.firstTime = false}) : super(key: key);
   @override
   _IntroductionScheduleState createState() => _IntroductionScheduleState();
@@ -69,7 +68,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
               }),
             ),
             Center(
-              child: Text(widget.week.toString(), style: TextStyle(fontSize: 42)),
+              child: Text(widget.week.toString(), style: TextStyle(color: Colors.white, fontSize: 42)),
             ),
             // a back button so you can leave the calendar without having to swipe all the way to the left
             Align(
@@ -80,7 +79,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
                       onPressed: _goBack,
                       icon: Text(
                         String.fromCharCode(Icons.arrow_back_rounded.codePoint),
-                        style: TextStyle(color: Colors.black, inherit: false, fontSize: 40.0, fontWeight: FontWeight.w900, fontFamily: Icons.arrow_back_rounded.fontFamily, package: Icons.arrow_back_rounded.fontPackage),
+                        style: TextStyle(color: Colors.white, inherit: false, fontSize: 40.0, fontWeight: FontWeight.w900, fontFamily: Icons.arrow_back_rounded.fontFamily, package: Icons.arrow_back_rounded.fontPackage),
                       ))),
             )
           ]),
