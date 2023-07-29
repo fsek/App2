@@ -28,10 +28,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    double circle_size = MediaQuery.of(context).size.height / 7;
+    double circleSize = MediaQuery.of(context).size.height / 7;
     double edgePadding = MediaQuery.of(context).size.width / 25;
 
-    String week = _determineWeek();
+    // String week = _determineWeek();
+    int week = _determineWeek();
     String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
     String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
     String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
@@ -47,80 +48,20 @@ class _HomePageState extends State<HomePage> {
       ),
       Scaffold(
         backgroundColor: Colors.transparent,
-        body: // Padding(
-            //   padding: EdgeInsets.fromLTRB(
-            //       edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
-            // child:
-            Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              //Spacer(flex: 80),
-              //height: MediaQuery.of(context).size.height / 7),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 3, right: 3),
-                          child: Image.asset(
-                            nolleguidePath,
-                            height: circle_size,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _pageFlipButton(GuidePage(), nolleguidePath, week, circleSize, 35, 3),
                   Column(children: [
-                    InkWell(
-                      customBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
-                      },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 3, right: 3),
-                            child: Image.asset(
-                              uppdragPath,
-                              height: circle_size,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    _pageFlipButton(AdventureMissionsPage(), uppdragPath, week, circleSize, 35, 3),
                     SizedBox(height: MediaQuery.of(context).size.height / 28) // Box to make middle button float higher then right and left
                   ]),
-                  InkWell(
-                    customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(45),
-                    ),
-                    onTap: () {
-                      Navigator.push(context, TurnPageRoute(builder: (context) => IntroductionSchedule(currentWeek: int.parse(week)), overleafColor: weekColors[int.parse(week)]));
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 3, right: 3),
-                          child: Image.asset(
-                            schedulePath,
-                            height: circle_size,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _pageFlipButton(IntroductionSchedule(currentWeek: week), schedulePath, week, circleSize, 45, 3),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 40),
@@ -154,24 +95,7 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  Widget button(String text, Widget destination, {int currentWeek = 0}) {
-    return TextButton(
-      onPressed: () {
-        // TurnPageRoute creates the page flipping effect on pushes and pops, change it to MaterialPageRoute to have regular transitions
-        Navigator.push(context, TurnPageRoute(overleafColor: weekColors[currentWeek], builder: (context) => destination));
-      },
-      child: Text(text),
-      style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          backgroundColor: Color.fromARGB(255, 0, 93, 119).withOpacity(0.25),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          minimumSize: Size(MediaQuery.of(context).size.width / 2.4, 80)),
-    );
-  }
-
-  String _determineWeek() {
+  int _determineWeek() {
     DateTime now = DateTime.now();
     DateTime v0 = DateTime(2023, 8, 21, 0, 0);
     DateTime v1 = DateTime(2023, 8, 28, 0, 0);
@@ -182,19 +106,29 @@ class _HomePageState extends State<HomePage> {
     List<DateTime> weeks = [v0, v1, v2, v3, v4];
 
     for (int i = 0; i < weeks.length; i++) {
-      String week = "v$i";
       // If we have gotten to week 4 then end of list so edge-case
-      if (week == "v4") {
+      if (i == 4) {
         // if its week 4 and current time is after start time of week 4
         if (now.compareTo(weeks[i]) > 0) {
-          return "$i";
+          return i;
         }
       } else if (now.compareTo(weeks[i]) > 0 && now.compareTo(weeks[i + 1]) < 0) {
-        return "$i";
+        return i;
       }
     }
 
     // If it for some reason doesnt find one I guess default to week 0 for no spoilers?
-    return "0";
+    return 0;
+  }
+
+  Widget _pageFlipButton(Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
+    return InkWell(
+      customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
+      onTap: () => Navigator.push(context, TurnPageRoute(builder: (context) => destination, overleafColor: weekColors[week])),
+      child: Padding(
+        padding: EdgeInsets.only(left: padding, right: padding),
+        child: Image.asset(assetPath, height: circleSize),
+      ),
+    );
   }
 }
