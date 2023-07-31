@@ -76,6 +76,17 @@
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Mjölkallergi",
+    "gluten": "Gluten",
+
+    "physics": "Teknisk Fysik",
+    "mathematics": "Teknisk Matematik",
+    "nano": "Teknisk Nanovetenskap",
+    "unknown": "Oklart",
+
     "songbookSearch": "Sök",
     "songbookSongbook": "Sångbok",
     "songbookNoMatches": "Finns inga matchningar :^(",
@@ -182,9 +193,10 @@
 
     "mannersEtiquette": "Studentlivet",
 
+    "aboutGuildTitle": "Om F-sektionen",
     "aboutGuildGuild": "F-sektionen",
     "aboutGuildOne": "F-sektionen inom TLTH är en ideell förening för studenter som läser något av civilingenjörsprogrammen ",
-    "aboutGuildTwo": "about Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
+    "aboutGuildTwo": "Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
     "aboutGuildThree": "bland medlemmarna och tillvarata medlemmarnas gemensamma intressen.",
 
     "aboutGuildFour": "Sektionen är belägen i Mattehuset och här hittar du bland annat uppehållsrum, mikrovågsugnar och gött häng. ",
@@ -202,7 +214,7 @@
     "fapSuper": "su-perman",
     "fapSpider": "Spindelman",
     "fapSpiderMaster": "Spindelförman",
-    "fapAbout": "om F-appen",
+    "fapAbout": "Om F-appen",
     "fapFap": "F-appen",
     "fapVersion": "Version: ja",
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",

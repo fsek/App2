@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';

@@ -13,7 +13,6 @@ class MannersPage extends StatefulWidget {
 }
 
 class _MannersPageState extends State<MannersPage> {
-  @override
   List<Article> articles = [];
   Article? welcomeArticle;
 

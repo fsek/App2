@@ -154,7 +154,8 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                                                                       String>
                                                                   attributes,
                                                               element) {
-                                                            launch(url!);
+                                                            launchUrl(Uri.parse(
+                                                                url!));
                                                           })),
                                                   Row(
                                                     children: [

@@ -76,6 +76,17 @@
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
     "settingsDiscard": "Discard",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Milk Allergy",
+    "gluten": "Gluten",
+
+    "physics": "Engineering Physics",
+    "mathematics": "Engineering Mathematics ",
+    "nano": "Engineering Nanoscience",
+    "unknown": "Unknown",
+
     "songbookSearch": "Search",
     "songbookSongbook": "Songbook",
     "songbookNoMatches": "No matchese found :^(",
@@ -83,7 +94,7 @@
     "songbookAuthor": "Author",
 
     "otherSongbook": "Songbook",
-    "otherGallery": "Picture Gallery",
+    "otherGallery": "Photo Gallery",
     "otherCafe": "Hilbert Café",
     "otherAboutGuild": "The F guild",
     "otherFap": "The F-app",
@@ -115,7 +126,7 @@
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
 
-    "galleryTitle": "Image gallery",
+    "galleryTitle": "Photo Gallery",
     "galleryOf": "of",
     "galleryImageDownloaded": "Image downloaded",
     "galleryImageDownloadError": "An error occurred while downloading",
@@ -180,9 +191,10 @@
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
 
-    "mannersEtiquette": "Student life",
-
-    "aboutGuildGuild": "The F-guild",
+    "mannersEtiquette": "Student life", 
+    
+    "aboutGuildTitle": "About The F-guild",
+    "aboutGuildGuild": "The F-guild", 
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
     "aboutGuildThree": "among members and look after their common interests.",

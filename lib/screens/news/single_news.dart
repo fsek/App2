@@ -24,7 +24,8 @@ class SingleNewsPage extends StatelessWidget {
                 Container(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                    child: Text(news.title!, style: Theme.of(context).textTheme.headline6),
+                    child: Text(news.title!,
+                        style: Theme.of(context).textTheme.headline6),
                   ),
                 ),
                 Divider(
@@ -36,8 +37,9 @@ class SingleNewsPage extends StatelessWidget {
                     child: Html(
                         data: news.content!,
                         style: {"p": Style(lineHeight: LineHeight(1.2))},
-                        onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, element) {
-                          launch(url!);
+                        onLinkTap: (String? url, RenderContext context,
+                            Map<String, String> attributes, element) {
+                          launchUrl(Uri.parse(url!));
                         }),
                   ),
                 ),
@@ -53,7 +55,9 @@ class SingleNewsPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.all(8),
-                  child: news.image == null ? SizedBox.shrink() : Image.network(news.image!),
+                  child: news.image == null
+                      ? SizedBox.shrink()
+                      : Image.network(news.image!),
                 )
               ],
             ),
@@ -69,7 +73,11 @@ class SingleNewsPage extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                  child: Text(news.title == "" || news.title == null ? t.homeTitleUntranslated : news.title!, style: Theme.of(context).textTheme.headline6),
+                  child: Text(
+                      news.title == "" || news.title == null
+                          ? t.homeTitleUntranslated
+                          : news.title!,
+                      style: Theme.of(context).textTheme.headline6),
                 ),
               ),
               Divider(
@@ -78,7 +86,9 @@ class SingleNewsPage extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Text("${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}", style: Theme.of(context).textTheme.bodyText1),
+                  child: Text(
+                      "${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}",
+                      style: Theme.of(context).textTheme.bodyText1),
                 ),
               ),
             ],

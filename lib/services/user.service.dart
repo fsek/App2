@@ -31,7 +31,7 @@ class UserService extends AbstractService {
         return DeviseToken.getFromHeaders(response.headers);
       } else {
         var err = json["errors"] ?? json["error"];
-        String? msg = null;
+        String? msg;
 
         if (err != null) {
           msg = err[0];
@@ -96,6 +96,12 @@ class UserService extends AbstractService {
         return User();
     }
     return _user!;
+  }
+
+  void syncUser() async {
+    //Force a sync of the user object check getUser for why
+    _user = null;
+    await getUser();
   }
 
   Future<Map> updateUser(User updatedUser) async {
