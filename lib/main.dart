@@ -69,7 +69,11 @@ void main() async {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
+    Text("F-sektionen",
+        style: TextStyle(
+            fontFamily: 'Helvetica Neue',
+            fontSize: 28.0,
+            color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
