@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
+import 'package:fsek_mobile/screens/guild_meeting/pdf.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
@@ -28,16 +28,24 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
     return Scaffold(
         appBar: AppBar(title: Text(t.otherDocuments)),
         body: otherList == null
-            ? Center(child: CircularProgressIndicator(color: Colors.orange[600]))
-            : !listEquals([], otherList) //listEquals är mycket viktigt, annars jämför den pointers
+            ? Center(
+                child: CircularProgressIndicator(color: Colors.orange[600]))
+            : !listEquals([],
+                    otherList) //listEquals är mycket viktigt, annars jämför den pointers
                 ? Column(//Det finns övriga dokument
                     children: [
                     Expanded(
                         child: ListView(
-                      children: otherList!.map((document) => _generateDocumentWidget(document)).toList(),
+                      children: otherList!
+                          .map((document) => _generateDocumentWidget(document))
+                          .toList(),
                     ))
                   ])
-                : Center(child: Text(t.noOtherDocuments, style: TextStyle(fontStyle: FontStyle.italic))) //Inga övriga dokument
+                : Center(
+                    child: Text(t.noOtherDocuments,
+                        style: TextStyle(
+                            fontStyle:
+                                FontStyle.italic))) //Inga övriga dokument
         );
   }
 
@@ -50,11 +58,18 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
         )),
         child: InkWell(
           onTap: () => openDocument(document),
-          child: ListTile(title: Text(document.document_name == null ? t.otherTitleMissing : document.document_name!)),
+          child: ListTile(
+              title: Text(document.document_name == null
+                  ? t.otherTitleMissing
+                  : document.document_name!)),
         ));
   }
 
   void openDocument(ElectionDocument document) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(url: document.url!, title: document.document_name!)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                PdfPage(url: document.url!, title: document.document_name!)));
   }
 }

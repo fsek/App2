@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/guildmeeting/pdf.dart';
+import 'package:fsek_mobile/screens/guild_meeting/pdf.dart';
 
 class MotionCard extends StatefulWidget {
   final ElectionDocument? motion;

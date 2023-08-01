@@ -12,7 +12,6 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:fsek_mobile/widgets/animations/animation_test.dart';
-import 'package:fsek_mobile/widgets/animations/size_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
