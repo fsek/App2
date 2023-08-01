@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/guildmeeting/proposition_card.dart';
+import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PropositionsPage extends StatefulWidget {
   @override
   _PropositionsPageState createState() => _PropositionsPageState();
 }
 
-class _PropositionsPageState extends State<PropositionsPage> with TickerProviderStateMixin {
+class _PropositionsPageState extends State<PropositionsPage>
+    with TickerProviderStateMixin {
   List<ElectionDocument>? documents = [];
   List<ElectionDocument>? allDocuments = [];
 
@@ -24,16 +24,19 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
 
   @override
   void initState() {
-    locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
-          if (!listEquals(value, [])) {
-            this.documents = value!;
-            documents!.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
-            allDocuments = List.from(documents!);
-          } else {
-            this.documents = null;
-            allDocuments = null;
-          }
-        }));
+    locator<DocumentService>()
+        .getPropositions("Val")
+        .then((value) => setState(() {
+              if (!listEquals(value, [])) {
+                this.documents = value!;
+                documents!.sort((a, b) => a.document_name!
+                    .compareTo(b.document_name!)); // handle null?
+                allDocuments = List.from(documents!);
+              } else {
+                this.documents = null;
+                allDocuments = null;
+              }
+            }));
     super.initState();
   }
 
@@ -46,7 +49,10 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return listEquals(allDocuments, [])
-        ? Scaffold(appBar: AppBar(title: Text(t.propositionsPageTitle)), body: Center(child: CircularProgressIndicator(color: Colors.orange[600])))
+        ? Scaffold(
+            appBar: AppBar(title: Text(t.propositionsPageTitle)),
+            body: Center(
+                child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -71,7 +77,8 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
                                     Icons.arrow_back,
                                     color: Colors.grey[800],
                                   ),
-                                  onPressed: () => FocusScope.of(context).unfocus())
+                                  onPressed: () =>
+                                      FocusScope.of(context).unfocus())
                               : Icon(
                                   Icons.search,
                                   color: Colors.grey[800],
@@ -88,12 +95,18 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
                                       }))
                               : SizedBox.shrink()),
                       onChanged: (search) {
-                        List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
+                        List<String> searchTerms = search
+                            .toLowerCase()
+                            .trim()
+                            .split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
                           if (allDocuments != null) {
                             documents = allDocuments!.where((document) {
-                              return searchTerms.every((term) => document.document_name!.toLowerCase().contains(term));
+                              return searchTerms.every((term) => document
+                                  .document_name!
+                                  .toLowerCase()
+                                  .contains(term));
                             }).toList();
                           }
                         });
@@ -103,7 +116,10 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
                   Expanded(
                     child: documents != null
                         ? ListView(
-                            children: documents!.map((document) => _generateDocumentTile(document)).toList(),
+                            children: documents!
+                                .map((document) =>
+                                    _generateDocumentTile(document))
+                                .toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),

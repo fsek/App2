@@ -23,9 +23,9 @@ class _ErrorPageState extends State<ErrorPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Stack(
-        children: [
-          Padding(
+        child: Stack(
+      children: [
+        Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,10 +39,10 @@ class _ErrorPageState extends State<ErrorPage> {
                 SizedBox(
                   height: 20,
                 ),
-                FlatButton(
+                TextButton(
                   child:
                       Text("Try again", style: TextStyle(color: Colors.white)),
-                  color: Colors.purple,
+                  style: TextButton.styleFrom(primary: Colors.purple),
                   onPressed: () {
                     locator<NavigationService>().pop();
                     widget.authenticationBloc!.add(AppStarted());

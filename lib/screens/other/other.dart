@@ -4,7 +4,6 @@ import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
-import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
@@ -13,7 +12,6 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:fsek_mobile/widgets/animations/animation_test.dart';
-import 'package:fsek_mobile/widgets/animations/size_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
@@ -30,14 +28,19 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "AnimationsTest"];
+    categories = [
+      t.otherSongbook,
+      t.otherGallery,
+      t.otherCafe,
+      "AnimationsTest"
+    ];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
     /* I am so sorry for this Teo */
     routeMap = {
       "Songbook": SongbookPage(),
-      "Picture Gallery": GalleryPage(),
+      "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
@@ -89,8 +92,11 @@ class OtherContent extends StatelessWidget {
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
                     if (logout ?? false) {
-                      locator<NotificationsService>().logOutDevice().then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+                      locator<NotificationsService>()
+                          .logOutDevice()
+                          .then((value) {
+                        BlocProvider.of<AuthenticationBloc>(context)
+                            .add(LoggedOut());
                       });
                     }
                   },
@@ -124,7 +130,8 @@ class OtherContent extends StatelessWidget {
         });
   }
 
-  List<Widget> _generateListTiles(List<String> tileTexts, BuildContext context) {
+  List<Widget> _generateListTiles(
+      List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
@@ -134,7 +141,9 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
+          trailing: tileText != t.otherAnon
+              ? SizedBox.shrink()
+              : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -144,11 +153,12 @@ class OtherContent extends StatelessWidget {
   void goToTilePage(String title, BuildContext context) {
     var t = AppLocalizations.of(context)!;
     if (title == t.otherAnon) {
-      launch(
-          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform");
+      launchUrl(Uri.parse(
+          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"));
       return;
     }
-    Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {

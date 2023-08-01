@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
@@ -92,7 +91,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 30.0),
+                        padding: EdgeInsets.only(bottom: circleSize / 2),
                         child: Text(
                           "$totalPoints ${t.introductionPoints2}",
                           style: TextStyle(
@@ -124,6 +123,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       ),
                     ],
                   ),
+                  Padding(padding: EdgeInsets.only(bottom: circleSize / 4)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -137,6 +137,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
                       ),
                     ],
                   ),
+                  Padding(padding: EdgeInsets.only(bottom: circleSize / 4)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/fredmansky/fredmansky.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -94,7 +93,7 @@ class _FapPageState extends State<FapPage> {
             ),
             ...(inspiration
                 .map((e) => TextButton(
-                    onPressed: () => launch(e),
+                    onPressed: () => launchUrl(Uri.parse(e)),
                     child: Text("Link " + inspiration.indexOf(e).toString())))
                 .toList()),
             Spacer(),

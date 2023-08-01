@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/word.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';

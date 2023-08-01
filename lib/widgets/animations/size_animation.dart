@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/other/fap.dart';
-import 'package:fsek_mobile/widgets/animations/fade_animation.dart';
-import 'package:fsek_mobile/widgets/animations/rotation_animation.dart';
-import 'package:fsek_mobile/widgets/animations/scale_animation.dart';
-import 'package:fsek_mobile/widgets/animations/slide_animation.dart';
 
 class SizeAnimation extends StatelessWidget {
   static const routeName = 'Size_Animation';
@@ -72,8 +68,10 @@ class SizeAnimation extends StatelessWidget {
                         return FapPage();
                       },
                       transitionDuration: Duration(milliseconds: 2000),
-                      transitionsBuilder: (context, animation, anotherAnimation, child) {
-                        animation = CurvedAnimation(curve: curveList[index], parent: animation);
+                      transitionsBuilder:
+                          (context, animation, anotherAnimation, child) {
+                        animation = CurvedAnimation(
+                            curve: curveList[index], parent: animation);
                         return Align(
                           child: SizeTransition(
                             sizeFactor: animation,

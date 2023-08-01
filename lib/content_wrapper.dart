@@ -100,11 +100,11 @@ class _ContentWrapperState extends State<ContentWrapper>
     ThemeData currentTheme = fsekTheme;
     List<Color> currentBackgroundTheme = fsekBackground;
     DateTime now = DateTime.now();
-    DateTime v0start = DateTime(2023, 8, 20, 23, 59);
-    DateTime v1start = DateTime(2023, 8, 27, 23, 59);
-    DateTime v2start = DateTime(2023, 9, 3, 23, 59);
-    DateTime v3start = DateTime(2023, 9, 10, 23, 59);
-    DateTime v4start = DateTime(2023, 9, 17, 23, 59);
+    DateTime v0start = DateTime(2023, 8, 21, 0, 0);
+    DateTime v1start = DateTime(2023, 8, 28, 0, 0);
+    DateTime v2start = DateTime(2023, 9, 4, 0, 0);
+    DateTime v3start = DateTime(2023, 9, 11, 0, 0);
+    DateTime v4start = DateTime(2023, 9, 18, 0, 0);
     // CURSED
     if (v0start.compareTo(now) < 0 && v1start.compareTo(now) > 0) {
       currentTheme = nollning2023themeV0;
@@ -256,7 +256,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                 }).toList()
               ],
               selectedColor: Colors.white,
-              color: Colors.black,
+              color: _currentIndex == 2 ? Colors.white : Colors.black,
             ),
           ),
         ),
