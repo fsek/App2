@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,14 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const List<Color> weekColors = [
-    Color(0xFF202C57), // v0
-    Color(0xFF4B6357), // v1
-    Color(0xFF9B4C52), // v2
-    Color(0xFF260F3F), // v3
-    Color(0xFF165C7F), // v4
-  ];
-
   void initState() {
     super.initState();
   }
@@ -31,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     double circleSize = MediaQuery.of(context).size.height / 7;
     double edgePadding = MediaQuery.of(context).size.width / 25;
 
-    int week = _determineWeek();
+    int week = WeekTracker.determineWeek();
     String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
     String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
     String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
@@ -94,36 +87,10 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  int _determineWeek() {
-    DateTime now = DateTime.now();
-    DateTime v0 = DateTime(2023, 8, 21, 0, 0);
-    DateTime v1 = DateTime(2023, 8, 28, 0, 0);
-    DateTime v2 = DateTime(2023, 9, 4, 0, 0);
-    DateTime v3 = DateTime(2023, 9, 11, 0, 0);
-    DateTime v4 = DateTime(2023, 9, 18, 0, 0);
-
-    List<DateTime> weeks = [v0, v1, v2, v3, v4];
-
-    for (int i = 0; i < weeks.length; i++) {
-      // If we have gotten to week 4 then end of list so edge-case
-      if (i == 4) {
-        // if its week 4 and current time is after start time of week 4
-        if (now.compareTo(weeks[i]) > 0) {
-          return i;
-        }
-      } else if (now.compareTo(weeks[i]) > 0 && now.compareTo(weeks[i + 1]) < 0) {
-        return i;
-      }
-    }
-
-    // If it for some reason doesnt find one I guess default to week 0 for no spoilers?
-    return 0;
-  }
-
   Widget _pageFlipButton(Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
     return InkWell(
       customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
-      onTap: () => Navigator.push(context, TurnPageRoute(builder: (context) => destination, overleafColor: weekColors[week])),
+      onTap: () => Navigator.push(context, TurnPageRoute(builder: (context) => destination, overleafColor: WeekTracker.weekColors[week])),
       child: Padding(
         padding: EdgeInsets.only(left: padding, right: padding),
         child: Image.asset(assetPath, height: circleSize),

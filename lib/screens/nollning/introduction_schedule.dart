@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
 
 class IntroductionSchedule extends StatefulWidget {
@@ -11,14 +12,6 @@ class IntroductionSchedule extends StatefulWidget {
 }
 
 class _IntroductionScheduleState extends State<IntroductionSchedule> {
-  static const List<Color> overleafColors = [
-    Color(0xFF202C57), // v0
-    Color(0xFF4B6357), // v1
-    Color(0xFF9B4C52), // v2
-    Color(0xFF260F3F), // v3
-    Color(0xFF165C7F), // v4
-  ];
-
   void initState() {
     super.initState();
 
@@ -26,7 +19,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
     if (widget.firstTime && widget.week < widget.currentWeek) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.of(context).push(TurnPageRoute(
-          overleafColor: overleafColors[widget.week],
+          overleafColor: WeekTracker.weekColors[widget.week],
           builder: (context) => IntroductionSchedule(
             week: widget.week + 1,
             currentWeek: widget.currentWeek,
@@ -44,7 +37,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
     String backArrowPath = "assets/img/nollning-23/schema/backArrow.png";
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: overleafColors[widget.week],
+        backgroundColor: WeekTracker.weekColors[widget.week],
         actions: [Padding(padding: const EdgeInsets.only(right: 30.0), child: InkWell(onTap: () => _goBack(), child: Image.asset(backArrowPath)))],
         automaticallyImplyLeading: false,
       ),
@@ -75,7 +68,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
       // push to go right (increase page numbering)
       Navigator.of(context).push(
         TurnPageRoute(
-          overleafColor: overleafColors[widget.week],
+          overleafColor: WeekTracker.weekColors[widget.week],
           builder: (context) => IntroductionSchedule(week: widget.week + 1, currentWeek: widget.currentWeek),
         ),
       );
