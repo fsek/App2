@@ -20,7 +20,7 @@ class FsekAppBar extends StatefulWidget {
       this.notchedShape,
       required this.onTabSelected,
       required this.currentIndex}) {
-    assert(this.items!.length == 2 || this.items!.length == 5);
+    assert(this.items!.length == 2 || this.items!.length == 4);
   }
   final List<FsekAppBarItem>? items;
   final String? centerItemText;
@@ -92,7 +92,7 @@ class FsekAppBarState extends State<FsekAppBar> {
       );
     });
     // Creates a middle space for the FloatingActionButton (usually nollning-button)
-    // items.insert(items.length >> 1, _buildMiddleTabItem());
+    items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
         shape: widget.notchedShape,
