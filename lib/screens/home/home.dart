@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
     int week = WeekTracker.determineWeek();
     String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
     String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
-    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
-    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week.png";
+    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week-$locale.png";
+    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week-$locale.png";
 
     return Stack(children: [
       Image.asset(
