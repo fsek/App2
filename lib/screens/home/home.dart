@@ -23,16 +23,18 @@ class _HomePageState extends State<HomePage> {
     var t = AppLocalizations.of(context)!;
     double circleSize = MediaQuery.of(context).size.height / 7;
     double edgePadding = MediaQuery.of(context).size.width / 25;
+    String locale = Localizations.localeOf(context).toString();
+
+    // if it for some reason is something different dont break everything
+    if (locale != "sv" && locale != "en") {
+      locale = "sv";
+    }
 
     int week = WeekTracker.determineWeek();
-    String backgroundPath =
-        "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
-    String nolleguidePath =
-        "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
-    String uppdragPath =
-        "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
-    String schedulePath =
-        "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week.png";
+    String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
+    String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
+    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week.png";
+    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week.png";
 
     return Stack(children: [
       Image.asset(
@@ -52,22 +54,15 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _pageFlipButton(
-                      GuidePage(), nolleguidePath, week, circleSize, 35, 3),
+                  _pageFlipButton(GuidePage(), nolleguidePath, week, circleSize, 35, 3),
                   Column(children: [
-                    _pageFlipButton(AdventureMissionsPage(), uppdragPath, week,
-                        circleSize, 35, 3),
+                    _pageFlipButton(AdventureMissionsPage(), uppdragPath, week, circleSize, 35, 3),
                     SizedBox(
                         height: MediaQuery.of(context).size.height /
-                            28) // Box to make middle button float higher then right and left
+                            28) // Box to make middle button float higher than right and left
                   ]),
                   _pageFlipButton(
-                      IntroductionSchedule(currentWeek: week, firstTime: true),
-                      schedulePath,
-                      week,
-                      circleSize,
-                      45,
-                      3),
+                      IntroductionSchedule(currentWeek: week, firstTime: true), schedulePath, week, circleSize, 45, 3),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 40),
@@ -101,16 +96,12 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  Widget _pageFlipButton(Widget destination, String assetPath, int week,
-      double circleSize, double inkwellCurvature, double padding) {
+  Widget _pageFlipButton(
+      Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
     return InkWell(
-      customBorder: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(inkwellCurvature)),
+      customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
       onTap: () => Navigator.push(
-          context,
-          TurnPageRoute(
-              builder: (context) => destination,
-              overleafColor: WeekTracker.weekColors[week])),
+          context, TurnPageRoute(builder: (context) => destination, overleafColor: WeekTracker.weekColors[week])),
       child: Padding(
         padding: EdgeInsets.only(left: padding, right: padding),
         child: Image.asset(assetPath, height: circleSize),

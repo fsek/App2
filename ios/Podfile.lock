@@ -9,7 +9,7 @@ PODS:
   - firebase_core (1.23.0):
     - Firebase/CoreOnly (= 9.5.0)
     - Flutter
-  - firebase_messaging (12.0.3):
+  - firebase_messaging (13.0.3):
     - Firebase/Messaging (= 9.5.0)
     - firebase_core
     - Flutter
@@ -211,7 +211,7 @@ SPEC CHECKSUMS:
   audioplayers_darwin: 387322cb364026a1782298c982693b1b6aa9fa1b
   Firebase: 800f16f07af493d98d017446a315c27af0552f41
   firebase_core: c266297725f66cacd7eac30745cd1a629d3b048b
-  firebase_messaging: 481127341dc6e4e437e08ff4f2451c1c59d61c4d
+  firebase_messaging: c3e6b5f8ef9ea31b67365ec017802e32d165447c
   FirebaseCore: 25c0400b670fd1e2f2104349cd3b5dcce8d9418f
   FirebaseCoreDiagnostics: 99a495094b10a57eeb3ae8efa1665700ad0bdaa6
   FirebaseCoreInternal: bca76517fe1ed381e989f5e7d8abb0da8d85bed3
