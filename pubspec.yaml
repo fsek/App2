@@ -61,7 +61,8 @@ dependencies:
   page_transition: ^2.0.9 # For page transitions
   turn_page_transition: ^0.2.0
 
-
+dependency_overrides:
+    firebase_core_platform_interface: 4.5.1
 
 
 dev_dependencies:

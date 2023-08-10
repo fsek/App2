@@ -33,27 +33,46 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
   @override
   Widget build(BuildContext context) {
     int sensitivity = 8; // swipe sensitivity - higher number means more movement is needed to register a swipe
-    String backgroundPath = "assets/img/nollning-23/schema/Schema_v${widget.week}.png";
-    String backArrowPath = "assets/img/nollning-23/schema/backArrow.png";
+    String basePath = "assets/img/nollning-23/schema/";
+    String backgroundPath = basePath + "Schema_v${widget.week}.png";
+    String upperBackgroundPath = basePath + "Schema_fill_top.png";
+    String lowerBackgroundPath = basePath + "Schema_fill_bottom.png";
+    String backArrowPath = basePath + "backArrow_white.png";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: WeekTracker.weekColors[widget.week],
-        actions: [Padding(padding: const EdgeInsets.only(right: 30.0), child: InkWell(onTap: () => _goBack(), child: Image.asset(backArrowPath)))],
+        leading: InkWell(onTap: () => _goBack(), child: Image.asset(backArrowPath)),
+        leadingWidth: MediaQuery.of(context).size.width / 4,
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.transparent,
-      body: Container(
-        decoration: BoxDecoration(image: DecorationImage(image: AssetImage(backgroundPath), fit: BoxFit.cover)),
-        child: Center(
-          child: GestureDetector(onHorizontalDragEnd: (DragEndDetails details) {
-            if (details.primaryVelocity! > sensitivity) {
-              _swipe("right");
-            } else if (details.primaryVelocity! < -sensitivity) {
-              _swipe("left");
-            }
-          }),
-        ),
-      ),
+      body: Stack(
+          // decoration: BoxDecoration(image: DecorationImage(image: AssetImage(backgroundPath), fit: BoxFit.cover)),
+          children: [
+            Stack(children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(upperBackgroundPath),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(lowerBackgroundPath),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset(backgroundPath),
+              ),
+            ]),
+            Center(
+              child: GestureDetector(onHorizontalDragEnd: (DragEndDetails details) {
+                if (details.primaryVelocity! > sensitivity) {
+                  _swipe("right");
+                } else if (details.primaryVelocity! < -sensitivity) {
+                  _swipe("left");
+                }
+              }),
+            ),
+          ]),
     );
   }
 
@@ -64,7 +83,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
     // if we aren't on week 0 and swiping left, or week 4 and swiping right, we may change page
     if (widget.week > 0 && direction == "right") {
       Navigator.of(context).pop(); // pop to go left (decrease page numbering). This is to ensure that the animations go reverse when they are supposed to
-    } else if (widget.week < widget.currentWeek && direction == "left") {
+    } else if (widget.week < 4 && direction == "left") {
       // push to go right (increase page numbering)
       Navigator.of(context).push(
         TurnPageRoute(
