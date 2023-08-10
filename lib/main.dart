@@ -41,10 +41,11 @@ void main() async {
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
-    Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.notifications, NotificationsPage()),
-    Destination(4, Icons.list, OtherContent()),
+    Destination(2, Icons.notifications, NotificationsPage()),
+    Destination(3, Icons.list, OtherContent()),
+    Destination(4, Icons.home, HomePage()),
   ];
+
   route.navbarDestinations = navbarDestinations;
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
