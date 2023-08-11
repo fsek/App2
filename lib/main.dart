@@ -15,17 +15,16 @@ import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
-import 'app.dart';
-import 'models/destination.dart';
-import 'screens/nollning/adventure_missions.dart';
-import 'screens/nollning/emergency_contacts.dart';
-import 'screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/models/destination.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
-import 'screens/home/home.dart';
-import 'services/navigation.service.dart';
-import 'services/service_locator.dart';
-import 'services/theme.service.dart';
+import 'package:fsek_mobile/screens/home/home.dart';
+import 'package:fsek_mobile/services/navigation.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
 class SimpleBlocObserver extends BlocObserver {
@@ -70,11 +69,7 @@ void main() async {
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
