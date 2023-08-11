@@ -144,7 +144,7 @@
 
     "messagesMessages": "Meddelanden",
 
-    "nolleguideWeAtFsek": "Vi på F-sek",
+    "nolleguideWeAtFsek": "F-sektionen",
     "nolleguideEtiquette": "Allt du behöver veta",
     "nolleguideWordlist": "Ordlista",
 
@@ -291,5 +291,21 @@
     "motionsPageTitle": "Motioner",
     "readMotion": "Läs motion",
     "readMotionAnswer": "Läs motionssvar",
-    "readProposition": "Läs proposition"
+    "readProposition": "Läs proposition",
+
+    "emergencyContacts": "Nödkontaktnummer",
+    "emergencyTitleOne": "112 - SOS alarm",
+    "emergencyContentOne": "I nödsituationer, kontakta alltid 112. Med detta nummer når du polis, ambulans, brandkår etc.",
+    "emergencyTitleTwo": "046 17 41 00 - Psykiatrisk akutmottagning (Lund)",
+    "emergencyContentTwo": "Ring detta nummer vid behov av akut psykiatrisk vård i Lund. Mottagningen har öppet dygnet runt.",
+    "emergencyTitleThree": "90101 - Mind Självmordslinjen",
+    "emergencyContentThree": "Självmordslinjen är till för dig som har tankar på att ta ditt liv eller har en närstående med sådana tankar. De har öppet dygnet runt, varje dag. Vid akut självmordsrisk bör du ringa 112.",
+    "emergencyTitleFour": "20 700 - Universitetets nödnummer",
+    "emergencyContentFour": "Om du behöver komma i kontakt med en säkerhetsvakt eller universitetets räddningstjänst. Detta är ett 24-timmars servicenummer där du kan få hjälp i situationer och rapportera händelser som observationer, inbrott, förlorat passerkort, hot eller våld.",
+    "emergencyTitleFive": "08-702 16 80 - Jourhavande medmänniska",
+    "emergencyContentFive": "Om du behöver någon att prata med, ring Jourhavande medmänniskor för mänsklig support under natten mellan kl 21-06.",
+    "emergencyTitleSix": "1177 - Sjukvårdsrådgivning",
+    "emergencyContentSix": "Ifall du har frågor eller behöver rådgivning inom sjukdom, skador och hälsa.", 
+    "emergencyTitleSeven": "113 13 - Krisinformation",
+    "emergencyContentSeven": "Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället."
 }
