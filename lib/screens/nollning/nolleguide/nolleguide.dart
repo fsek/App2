@@ -26,10 +26,12 @@ class _GuidePageState extends State<GuidePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/nollning-23/nolleguide/nolleguide-background.png";
+    String backgroundPath =
+        "assets/img/nollning-23/nolleguide/nolleguide-background.png";
     String locale = Localizations.localeOf(context).toString();
 
     // if it for some reason is something different dont break everything
+    //detta behövs väl ej?
     if (locale != "sv" && locale != "en") {
       locale = "sv";
     }
@@ -66,14 +68,22 @@ class _GuidePageState extends State<GuidePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Spacer(flex: 4),
-                        _navigationButton('/manners',
-                            "assets/img/nollning-23/nolleguide/button-studentlivet-$locale.png", t.nolleguideEtiquette),
-                        _navigationButton('/people', "assets/img/nollning-23/nolleguide/button-fsektionen-$locale.png",
+                        _navigationButton(
+                            '/manners',
+                            "assets/img/nollning-23/nolleguide/button-studentlivet-$locale.png",
+                            t.nolleguideEtiquette),
+                        _navigationButton(
+                            '/people',
+                            "assets/img/nollning-23/nolleguide/button-fsektionen-$locale.png",
                             t.nolleguideWeAtFsek),
-                        _navigationButton('/wordlist', "assets/img/nollning-23/nolleguide/button-ordlista-$locale.png",
+                        _navigationButton(
+                            '/wordlist',
+                            "assets/img/nollning-23/nolleguide/button-ordlista-$locale.png",
                             t.nolleguideWordlist),
-                        _navigationButton('/messages',
-                            "assets/img/nollning-23/nolleguide/button-meddelanden-$locale.png", t.nolleguideWordlist),
+                        _navigationButton(
+                            '/messages',
+                            "assets/img/nollning-23/nolleguide/button-meddelanden-$locale.png",
+                            t.nolleguideWordlist),
                         Spacer(flex: 2),
                       ],
                     ),
