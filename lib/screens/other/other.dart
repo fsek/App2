@@ -28,12 +28,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [
-      t.otherSongbook,
-      t.otherGallery,
-      t.otherCafe,
-      "AnimationsTest"
-    ];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -56,7 +51,6 @@ class OtherContent extends StatelessWidget {
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
       "Anonym kontaktsida": Container(),
-      "AnimationsTest": AnimationPage()
     };
 
     return ListView(
@@ -92,11 +86,8 @@ class OtherContent extends StatelessWidget {
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
                     if (logout ?? false) {
-                      locator<NotificationsService>()
-                          .logOutDevice()
-                          .then((value) {
-                        BlocProvider.of<AuthenticationBloc>(context)
-                            .add(LoggedOut());
+                      locator<NotificationsService>().logOutDevice().then((value) {
+                        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                       });
                     }
                   },
@@ -130,8 +121,7 @@ class OtherContent extends StatelessWidget {
         });
   }
 
-  List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
+  List<Widget> _generateListTiles(List<String> tileTexts, BuildContext context) {
     List<Widget> tiles = [];
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
@@ -141,9 +131,7 @@ class OtherContent extends StatelessWidget {
             child: ListTile(
           title: Text(tileText),
           onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon
-              ? SizedBox.shrink()
-              : Icon(Icons.open_in_new_rounded),
+          trailing: tileText != t.otherAnon ? SizedBox.shrink() : Icon(Icons.open_in_new_rounded),
         )),
       ));
     }
@@ -157,8 +145,7 @@ class OtherContent extends StatelessWidget {
           "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"));
       return;
     }
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
   }
 
   TextStyle _style() {
