@@ -65,15 +65,21 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
                 child: Image.asset(backgroundPath),
               ),
             ]),
-            Center(
-              child: GestureDetector(onHorizontalDragEnd: (DragEndDetails details) {
-                if (details.primaryVelocity! > sensitivity) {
-                  _swipe("right");
-                } else if (details.primaryVelocity! < -sensitivity) {
-                  _swipe("left");
-                }
-              }),
-            ),
+            Center(child: GestureDetector(onHorizontalDragUpdate: (DragUpdateDetails details) {
+              if (details.delta.dx > sensitivity) {
+                _swipe("right");
+              } else if (details.delta.dx < -sensitivity) {
+                _swipe("left");
+              }
+            })
+                // GestureDetector(onHorizontalDragEnd: (DragEndDetails details) {
+                //   if (details.primaryVelocity! > sensitivity) {
+                //     _swipe("right");
+                //   } else if (details.primaryVelocity! < -sensitivity) {
+                //     _swipe("left");
+                //   }
+                // }),
+                ),
           ]),
     );
   }
