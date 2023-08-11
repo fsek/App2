@@ -5,7 +5,8 @@ import 'package:turn_page_transition/turn_page_transition.dart';
 class IntroductionSchedule extends StatefulWidget {
   final int currentWeek; // the current introduction week, and thus the final allowed week to swipe to
   final int week; // the week we are showing on this schedule-page
-  final bool firstTime; // if we are entering this week for the first time from the schedule, and thus should automatically continue flipping in initState
+  final bool
+      firstTime; // if we are entering this week for the first time from the schedule, and thus should automatically continue flipping in initState
   const IntroductionSchedule({key, required this.currentWeek, this.week = 0, this.firstTime = false}) : super(key: key);
   @override
   _IntroductionScheduleState createState() => _IntroductionScheduleState();
@@ -33,11 +34,12 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
   @override
   Widget build(BuildContext context) {
     int sensitivity = 8; // swipe sensitivity - higher number means more movement is needed to register a swipe
+    String locale = Localizations.localeOf(context).toString();
     String basePath = "assets/img/nollning-23/schema/";
-    String backgroundPath = basePath + "Schema_v${widget.week}.png";
+    String backgroundPath = basePath + "Schema_v${widget.week}_$locale.png";
     String upperBackgroundPath = basePath + "Schema_fill_top.png";
     String lowerBackgroundPath = basePath + "Schema_fill_bottom.png";
-    String backArrowPath = basePath + "backArrow_white.png";
+    String backArrowPath = basePath + "backArrow.png";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: WeekTracker.weekColors[widget.week],
@@ -82,7 +84,8 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
     }
     // if we aren't on week 0 and swiping left, or week 4 and swiping right, we may change page
     if (widget.week > 0 && direction == "right") {
-      Navigator.of(context).pop(); // pop to go left (decrease page numbering). This is to ensure that the animations go reverse when they are supposed to
+      Navigator.of(context)
+          .pop(); // pop to go left (decrease page numbering). This is to ensure that the animations go reverse when they are supposed to
     } else if (widget.week < 4 && direction == "left") {
       // push to go right (increase page numbering)
       Navigator.of(context).push(
