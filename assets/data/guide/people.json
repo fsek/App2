@@ -31,10 +31,10 @@
             }
         },
         {
+            "image": "board.jpg",
             "name": {
-                "image": "The board.jpg",
                 "sv": "",
-                "en": "The board"
+                "en": ""
             },
             "position": {
                 "sv": "Styrelsen",

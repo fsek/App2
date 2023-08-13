@@ -27,7 +27,7 @@ class _GuidePageState extends State<GuidePage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     String backgroundPath =
-        "assets/img/nollning-23/nolleguide/nolleguide-background.png";
+        "assets/img/nollning-23/nolleguide/nolleguide_background.png";
     String locale = Localizations.localeOf(context).toString();
 
     // if it for some reason is something different dont break everything
@@ -38,16 +38,6 @@ class _GuidePageState extends State<GuidePage> {
 
     return Stack(
       children: [
-        // Padding(
-        //   padding: EdgeInsets.only(top: 0), //MediaQuery.of(context).size.height / 9),
-        //   child: Image.asset(
-        //     backgroundPath,
-        //     height: MediaQuery.of(context).size.height,
-        //     width: MediaQuery.of(context).size.width,
-        //     fit: BoxFit.cover,
-        //     alignment: Alignment.topCenter,
-        //   ),
-        // ),
         Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(),
