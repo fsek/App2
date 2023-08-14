@@ -30,7 +30,7 @@ dependencies:
   json_annotation: ^4.0.1 # For json serializing
   flutter_secure_storage: ^6.0.0 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
-  firebase_messaging: ^12.0.0 # For Push notifications
+  firebase_messaging: ^13.0.0 # For Push notifications
   firebase_core: ^1.0.0
   equatable: ^2.0.3 # For State
   bloc: ^7.0.0 # For State
@@ -50,17 +50,19 @@ dependencies:
   flutter_math_fork: ^0.5.0
   flutter_localizations:
     sdk: flutter
-  image_save: ^5.0.0 # For image saving
-  audioplayers: 1.0.0 # For audioplayer
-  flutter_image_compress: ^1.0.0 # For image compression
-  pdf_render: ^1.3.0 # For PDF render
+  image_save: ^5.0.0
+  flutter_image_compress: ^1.0.0
+  pdf_render: ^1.3.0
   path_provider: any
   flutter_pdfview: ^1.2.2 # For PDF viewer
   permission_handler: ^10.2.0
   flutter_cached_pdfview: ^0.4.1 # For PDF viewer
   page_transition: ^2.0.9 # For page transitions
+  turn_page_transition: ^0.2.0
+  audioplayers: ^1.1.1
 
-
+dependency_overrides:
+    firebase_core_platform_interface: 4.5.1
 
 
 dev_dependencies:
@@ -82,7 +84,7 @@ flutter:
   generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
-  # the material Icons class. 
+  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
@@ -91,6 +93,11 @@ flutter:
    - assets/audio/
    - assets/img/
    - assets/img/memes/
+   - assets/img/nollning-23/
+   - assets/img/nollning-23/uppdrag/
+   - assets/img/nollning-23/nolleguide/
+   - assets/img/nollning-23/schema/
+   - assets/img/nollning-23/hemsidan/
    - assets/data/guide/
 
 

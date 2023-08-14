@@ -3,7 +3,6 @@ import 'package:fsek_mobile/models/nollning/nolleguide/person.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PeoplePage extends StatefulWidget {
@@ -53,7 +52,7 @@ class _PeoplePageState extends State<PeoplePage> {
   Widget _createPersonCard(Person p) {
     String imageBasePath = "assets/img/";
     String locale = Localizations.localeOf(context).toString();
-    Border? border = null;
+    Border? border;
     double borderWidth = 5;
     double width = 60;
     double height = 60;

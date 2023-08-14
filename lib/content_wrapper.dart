@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
@@ -86,25 +87,51 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
     var random = new Random();
     int index = random.nextInt(2);
     String toPlay = files[index];
-    AudioPlayer().play(AssetSource('audio/' + toPlay));
+    // its broke for now, no time to fix xdd FIXME
+    //AudioPlayer().play(AssetSource('audio/' + toPlay));
   }
 
   @override
   Widget build(BuildContext context) {
+    ThemeData currentTheme = fsekTheme;
+    List<Color> currentBackgroundTheme = fsekBackground;
+    DateTime now = DateTime.now();
+    DateTime v0start = DateTime(2023, 8, 21, 0, 0);
+    DateTime v1start = DateTime(2023, 8, 28, 0, 0);
+    DateTime v2start = DateTime(2023, 9, 4, 0, 0);
+    DateTime v3start = DateTime(2023, 9, 11, 0, 0);
+    DateTime v4start = DateTime(2023, 9, 18, 0, 0);
+    // CURSED
+    if (v0start.compareTo(now) < 0 && v1start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV0;
+      currentBackgroundTheme = nollning2023BackgroundV0;
+    } else if (v1start.compareTo(now) < 0 && v2start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV1;
+      currentBackgroundTheme = nollning2023BackgroundV1;
+    } else if (v2start.compareTo(now) < 0 && v3start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV2;
+      currentBackgroundTheme = nollning2023BackgroundV2;
+    } else if (v3start.compareTo(now) < 0 && v4start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV3;
+      currentBackgroundTheme = nollning2023BackgroundV3;
+    } else if (v4start.compareTo(now) < 0) {
+      currentTheme = nollning2023themeV4;
+      currentBackgroundTheme = nollning2023BackgroundV4;
+    }
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
       0: t.news,
       1: t.calendar,
-      2: t.home,
-      3: t.notifications,
-      4: t.other,
+      2: t.notifications,
+      3: t.other,
+      4: t.home, //these maybe needs to change
     };
     // Shows state messages
     for (String message in widget.messages) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
-        backgroundColor: Color(0xFFFFC38D),
+        // backgroundColor: Color(0xFFFFC38D),
       ));
     }
     widget.messages.clear(); // clears all showed messages
@@ -150,6 +177,9 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             )
           ],
         ));
+    //removes top appbar if current page is home page, remove after nollning!!!!!!!
+
+    if (_currentIndex == 4) _header = Container();
 
     return Stack(children: [
       Container(
@@ -167,7 +197,8 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 child: Stack(
                     children: widget.navbarDestinations.map((Destination destination) {
               final Widget view = FadeTransition(
-                opacity: _faders[destination.index].drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
+                opacity: _faders[destination.index]
+                    .drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
                 child: KeyedSubtree(
                   //set a global key to a widget so we preserve its state and subtree on a tree rebuild
                   key: _destinationKeys[destination.index],
@@ -185,10 +216,31 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   //ignore pointer so the destinations aren't interactable when animating
                   return IgnorePointer(child: view);
                 }
-                return Offstage(child: view); //move offstag e to ensure they aren't painted when not visible
+                return Offstage(child: view); //move offstage to ensure they aren't painted when not visible
               }
             }).toList())),
           ])),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Container(
+            height: 90,
+            width: 90,
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = widget.navbarDestinations.length - 1;
+                });
+                locator<ThemeService>().theme = currentTheme;
+                locator<ThemeService>().backgroundColors = currentBackgroundTheme;
+                widget.onNavigation!.add(HomePage);
+              },
+              child: Image(
+                image: AssetImage("assets/img/nollning-23/nollning-home-button.png"),
+                fit: BoxFit.cover,
+              ),
+              tooltip: 'F-sektionen',
+              backgroundColor: Colors.transparent,
+            ),
+          ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: FsekAppBar(
@@ -203,12 +255,12 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.map((Destination destination) {
+                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
                   return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],
               selectedColor: Colors.white,
-              color: Colors.black,
+              color: _currentIndex == 4 ? Colors.white : Colors.black,
             ),
           ),
         ),

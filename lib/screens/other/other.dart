@@ -4,7 +4,6 @@ import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
-import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
@@ -13,8 +12,6 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:fsek_mobile/widgets/animations/animation_test.dart';
-import 'package:fsek_mobile/widgets/animations/size_animation.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
@@ -31,7 +28,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "AnimationsTest"];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -54,7 +51,6 @@ class OtherContent extends StatelessWidget {
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
       "Anonym kontaktsida": Container(),
-      "AnimationsTest": AnimationPage()
     };
 
     return ListView(
@@ -145,7 +141,8 @@ class OtherContent extends StatelessWidget {
   void goToTilePage(String title, BuildContext context) {
     var t = AppLocalizations.of(context)!;
     if (title == t.otherAnon) {
-      launch("http://contact.fsektionen.se");
+      launchUrl(Uri.parse(
+          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"));
       return;
     }
     Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[title]!));
