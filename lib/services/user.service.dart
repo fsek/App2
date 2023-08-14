@@ -31,7 +31,7 @@ class UserService extends AbstractService {
         return DeviseToken.getFromHeaders(response.headers);
       } else {
         var err = json["errors"] ?? json["error"];
-        String? msg = null;
+        String? msg;
 
         if (err != null) {
           msg = err[0];

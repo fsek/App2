@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<String?> easterEggCodeDialog(BuildContext context) {
   TextEditingController _textFieldController = TextEditingController();
-  var t = AppLocalizations.of(context)!;
+  var t = AppLocalizations.of(context)!; //what are u translatng????????
   return showDialog(
     context: context,
     builder: (context) {

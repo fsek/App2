@@ -13,9 +13,12 @@ class _GuidePageState extends State<GuidePage> {
           Navigator.pushNamed(context, path);
         },
         child: Column(children: [
-          Image.asset(
-            assetPath,
-            height: 100,
+          Padding(
+            padding: EdgeInsets.all(1),
+            child: Image.asset(
+              assetPath,
+              height: 70,
+            ),
           ),
         ]));
   }
@@ -23,45 +26,62 @@ class _GuidePageState extends State<GuidePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String backgroundPath = "assets/img/jubel_background_nolleguide.png";
+    String backgroundPath =
+        "assets/img/nollning-23/nolleguide/nolleguide_background.png";
+    String locale = Localizations.localeOf(context).toString();
+
+    // if it for some reason is something different dont break everything
+    //detta behövs väl ej?
+    if (locale != "sv" && locale != "en") {
+      locale = "sv";
+    }
 
     return Stack(
       children: [
-        Image.asset(
-          backgroundPath,
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-          alignment: Alignment.topCenter,
-        ),
         Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: const Text('Nolleguide'),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Spacer(
-                flex: 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _navigationButton(
-                      '/manners', "assets/img/info.png", t.nolleguideEtiquette),
-                  _navigationButton('/people', "assets/img/Personer.png",
-                      t.nolleguideWeAtFsek),
-                  _navigationButton('/wordlist', "assets/img/Ordlista.png",
-                      t.nolleguideWordlist),
-                ],
-              ),
-              Spacer(
-                flex: 1,
-              ),
-            ],
-          ),
-        ),
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(),
+            body: Stack(
+              children: [
+                Image.asset(
+                  backgroundPath,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(flex: 4),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(flex: 4),
+                        _navigationButton(
+                            '/manners',
+                            "assets/img/nollning-23/nolleguide/button-studentlivet-$locale.png",
+                            t.nolleguideEtiquette),
+                        _navigationButton(
+                            '/people',
+                            "assets/img/nollning-23/nolleguide/button-fsektionen-$locale.png",
+                            t.nolleguideWeAtFsek),
+                        _navigationButton(
+                            '/wordlist',
+                            "assets/img/nollning-23/nolleguide/button-ordlista-$locale.png",
+                            t.nolleguideWordlist),
+                        _navigationButton(
+                            '/messages',
+                            "assets/img/nollning-23/nolleguide/button-meddelanden-$locale.png",
+                            t.nolleguideWordlist),
+                        Spacer(flex: 2),
+                      ],
+                    ),
+                    Spacer(flex: 2),
+                  ],
+                )
+              ],
+            )),
       ],
     );
   }
