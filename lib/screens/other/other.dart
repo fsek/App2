@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/exjob_catalog/exjob_catalog.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
@@ -28,7 +29,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Ex-job Catalog"];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -37,6 +38,7 @@ class OtherContent extends StatelessWidget {
       "Songbook": SongbookPage(),
       "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
+      "Ex-job Catalog": ExjobCatalogPage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
       "Account": SettingsPage(),
