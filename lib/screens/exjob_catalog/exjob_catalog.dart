@@ -14,19 +14,25 @@ class ExjobCatalogPage extends StatefulWidget {
 
 class _ExjobCatalogPageState extends State<ExjobCatalogPage>
     with TickerProviderStateMixin {
-  List<ExjobInfo>? exjobInfos = [];
-  List<ExjobInfo>? allExjobInfos = [];
+  List<ExjobInfo> exjobInfos = [];
+  List<ExjobInfo> allExjobInfos = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
   String initChar = "";
 
+  // Filter variables
+  String companyFilter = "All";
+  String programmeFilter = "All";
+
   TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
-    allExjobInfos!.add(new ExjobInfo("axis", "programmer"));
-    allExjobInfos!.add(new ExjobInfo("cellavision", "cancer"));
+    exjobInfos!.add(new ExjobInfo("axis", "programmer", "F"));
+    exjobInfos!.add(new ExjobInfo("cellavision", "cancer", "Pi"));
+    allExjobInfos = List.from(exjobInfos!);
+
     /*
     locator<DocumentService>()
         .getPropositions("Val")
@@ -55,16 +61,29 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
     var t = AppLocalizations.of(context)!;
     return listEquals(allExjobInfos, [])
         ? Scaffold(
-            appBar: AppBar(title: Text(t.propositionsPageTitle)),
+            appBar: AppBar(title: Text("Ex-jobbskatalogen")),
             body: Center(
                 child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              appBar: AppBar(title: Text(t.propositionsPageTitle)),
+              appBar: AppBar(title: Text("Ex-jobbskatalogen")),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(15),
+                      child: Column(children: [
+                        Text("Ex-jobbskatalogen",
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold)),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                        ),
+                        Text(
+                            "Denna katalog innehåller endast jobb från sponsorföretag, bla bla bla")
+                      ])),
                   FocusScope(
                       child: Focus(
                     onFocusChange: (focus) {
@@ -96,7 +115,7 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                                   onPressed: () => setState(() {
                                         _controller.clear();
                                         FocusScope.of(context).unfocus();
-                                        exjobInfos= allExjobInfos;
+                                        exjobInfos = allExjobInfos;
                                       }))
                               : SizedBox.shrink()),
                       onChanged: (search) {
@@ -118,8 +137,58 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                       },
                     ),
                   )),
+                  Row(children: [
+                    DropdownButton<String>(
+                      value: companyFilter,
+                      items: allExjobInfos!
+                          .map<DropdownMenuItem<String>>((ExjobInfo info) {
+                        return DropdownMenuItem<String>(
+                          value: info.company,
+                          child: Text(info.company!),
+                        );
+                      }).toList()
+                        ..add(DropdownMenuItem<String>(
+                          value: "All",
+                          child: Text("All"),
+                        )),
+                      onChanged: (String? selectedCompany) {
+                        setState(() {
+                          companyFilter = selectedCompany!;
+                          if (companyFilter != "All") {
+                            exjobInfos = allExjobInfos!.where((jobInfo) {
+                              return jobInfo.company == companyFilter;
+                            }).toList();
+                          } else {
+                            exjobInfos = allExjobInfos;
+                          }
+                        });
+                      },
+                    ),
+                    DropdownButton<String>(
+                      value: programmeFilter,
+                      items: List<String>.from(["F", "Pi", "n", "All"])
+                          .map<DropdownMenuItem<String>>((String p) {
+                        return DropdownMenuItem<String>(
+                          value: p,
+                          child: Text(p),
+                        );
+                      }).toList(),
+                      onChanged: (String? selectedProgramme) {
+                        setState(() {
+                          programmeFilter = selectedProgramme!;
+                          if (programmeFilter != "All") {
+                            exjobInfos = allExjobInfos!.where((jobInfo) {
+                              return jobInfo.programme == programmeFilter;
+                            }).toList();
+                          } else {
+                            exjobInfos = allExjobInfos;
+                          }
+                        });
+                      },
+                    ),
+                  ]),
                   Expanded(
-                    child: exjobInfos != null
+                    child: exjobInfos.length > 0
                         ? ListView(
                             children: exjobInfos!
                                 .map((exjobInfos) =>
@@ -127,10 +196,18 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                                 .toList(),
                           )
                         : Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Text(t.noProposition),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 80, horizontal: 45),
+                            child: Text(
+                              "Tyvärr finns det inga jobb ute just nu som passar dina specifikationer :(",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ),
-                  )
+                  ),
+                  Container(
+                      alignment: Alignment.bottomCenter,
+                      padding: EdgeInsets.all(10),
+                      child: Text("Visar " + exjobInfos.length.toString() + " av " + allExjobInfos.length.toString() + " jobb"))
                 ],
               ),
             ));

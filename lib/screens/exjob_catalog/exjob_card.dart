@@ -7,16 +7,16 @@ import 'package:fsek_mobile/screens/guild_meeting/pdf.dart';
 class ExjobInfo {
   String? company;
   String? jobTitle;
+  String? programme;
 
-  ExjobInfo(this.company, this.jobTitle);
+  ExjobInfo(this.company, this.jobTitle, this.programme);
 }
 
 class ExjobCard extends StatefulWidget {
   //final ElectionDocument? proposition;
   final ExjobInfo? exjobInfo;
 
-  const ExjobCard({Key? key, required this.exjobInfo})
-      : super(key: key);
+  const ExjobCard({Key? key, required this.exjobInfo}) : super(key: key);
 
   @override
   _ExjobCardState createState() => _ExjobCardState();
@@ -44,8 +44,19 @@ class _ExjobCardState extends State<ExjobCard> {
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: Column(children: [
               Center(
+                child: Text(
+                  widget.exjobInfo!.company!,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ),
+              Center(
                   child: Text(
                 widget.exjobInfo!.jobTitle!,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+              Center(
+                  child: Text(
+                widget.exjobInfo!.programme!,
                 style: TextStyle(fontWeight: FontWeight.bold),
               )),
               SizedBox(height: 10),
@@ -71,10 +82,12 @@ class _ExjobCardState extends State<ExjobCard> {
   }
 
   void openFile(ElectionDocument document) {
+    /*
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
                 PdfPage(url: document.url!, title: document.document_name!)));
+                */
   }
 }
