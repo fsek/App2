@@ -60,6 +60,7 @@ dependencies:
   page_transition: ^2.0.9 # For page transitions
   turn_page_transition: ^0.2.0
   audioplayers: ^1.1.1
+  multi_select_flutter: 4.1.3
 
 dependency_overrides:
     firebase_core_platform_interface: 4.5.1

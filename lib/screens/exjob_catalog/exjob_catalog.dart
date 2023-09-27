@@ -6,6 +6,7 @@ import 'package:fsek_mobile/screens/exjob_catalog/exjob_card.dart';
 import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class ExjobCatalogPage extends StatefulWidget {
   @override
@@ -138,6 +139,17 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                     ),
                   )),
                   Row(children: [
+                    /*Expanded(
+                        child: MultiSelectDialogField(
+                      items: allExjobInfos!
+                          .map(
+                              (exJob) => MultiSelectItem(exJob, exJob.company!))
+                          .toList(),
+                      listType: MultiSelectListType.CHIP,
+                      onConfirm: (values) {
+                        //companyFilter = values;
+                      },
+                    )),*/
                     DropdownButton<String>(
                       value: companyFilter,
                       items: allExjobInfos!
@@ -153,7 +165,7 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                         )),
                       onChanged: (String? selectedCompany) {
                         setState(() {
-                          companyFilter = selectedCompany!;
+                          /*companyFilter = selectedCompany!;
                           if (companyFilter != "All") {
                             exjobInfos = allExjobInfos!.where((jobInfo) {
                               return jobInfo.company == companyFilter;
@@ -161,6 +173,7 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                           } else {
                             exjobInfos = allExjobInfos;
                           }
+                          */
                         });
                       },
                     ),
@@ -175,6 +188,7 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                       }).toList(),
                       onChanged: (String? selectedProgramme) {
                         setState(() {
+                          /*
                           programmeFilter = selectedProgramme!;
                           if (programmeFilter != "All") {
                             exjobInfos = allExjobInfos!.where((jobInfo) {
@@ -183,6 +197,7 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                           } else {
                             exjobInfos = allExjobInfos;
                           }
+                          */
                         });
                       },
                     ),
@@ -207,7 +222,11 @@ class _ExjobCatalogPageState extends State<ExjobCatalogPage>
                   Container(
                       alignment: Alignment.bottomCenter,
                       padding: EdgeInsets.all(10),
-                      child: Text("Visar " + exjobInfos.length.toString() + " av " + allExjobInfos.length.toString() + " jobb"))
+                      child: Text("Visar " +
+                          exjobInfos.length.toString() +
+                          " av " +
+                          allExjobInfos.length.toString() +
+                          " jobb"))
                 ],
               ),
             ));
