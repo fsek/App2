@@ -87,12 +87,19 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                   try {
                     http.Response image = await http.get(Uri.parse(
                         "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    ImageSave.saveImage(image.bodyBytes,
+                    bool? success = await ImageSave.saveImage(image.bodyBytes, 
                         "${widget.album.images![index].filename!}",
                         albumName: "F-sektionen");
+                  if(success == true){
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: Text(t.galleryImageDownloaded),
                     ));
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+                      content: Text(t.galleryImageDownloadError),
+                    ));
+                  }
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: Text(t.galleryImageDownloadError),
