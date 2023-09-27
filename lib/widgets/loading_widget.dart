@@ -37,7 +37,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
             children: [
               Text(
                 "Loading...",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               SizedBox(
                 width: 16,

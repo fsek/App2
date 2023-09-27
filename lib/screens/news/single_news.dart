@@ -25,7 +25,7 @@ class SingleNewsPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
                     child: Text(news.title!,
-                        style: Theme.of(context).textTheme.headline6),
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                 ),
                 Divider(
@@ -77,7 +77,7 @@ class SingleNewsPage extends StatelessWidget {
                       news.title == "" || news.title == null
                           ? t.homeTitleUntranslated
                           : news.title!,
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                 ),
               ),
               Divider(
@@ -88,7 +88,7 @@ class SingleNewsPage extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
                   child: Text(
                       "${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}",
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                 ),
               ),
             ],

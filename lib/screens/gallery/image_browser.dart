@@ -226,7 +226,7 @@ class _ImageContainerState extends State<ImageContainer> {
             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
             Text(
               "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.album.images!.length}",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ]),
           onInteractionEnd: (scaleEndDetails) {

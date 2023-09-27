@@ -35,7 +35,7 @@ dependencies:
   equatable: ^2.0.3 # For State
   bloc: ^7.0.0 # For State
   flutter_bloc: ^7.0.1 # For State
-  intl: ^0.17.0 # For Internationalization (not used yet)
+  intl: ^0.18.0 # For Internationalization (not used yet)
   package_info: ^2.0.2 # For getting version number
   get_it: ^7.1.4 # For singleton service instances
   location_permissions: ^4.0.0 # For requesting location permissions

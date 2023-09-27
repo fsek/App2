@@ -14,7 +14,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class ContentWrapper extends StatefulWidget {
-  ContentWrapper(this.navbarDestinations, this.user, this.onNavigation, this.messages) : super();
+  ContentWrapper(
+      this.navbarDestinations, this.user, this.onNavigation, this.messages)
+      : super();
 
   final List<Destination> navbarDestinations;
   final User? user;
@@ -25,7 +27,8 @@ class ContentWrapper extends StatefulWidget {
   _ContentWrapperState createState() => _ContentWrapperState();
 }
 
-class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStateMixin<ContentWrapper> {
+class _ContentWrapperState extends State<ContentWrapper>
+    with TickerProviderStateMixin<ContentWrapper> {
   late List<Key> _destinationKeys;
   late List<AnimationController> _faders;
   int _currentIndex = 0;
@@ -60,14 +63,17 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
   @override
   void initState() {
     //generate animation controllers for all destinations so we can fade them in and out
-    _faders = widget.navbarDestinations.map<AnimationController>((Destination destination) {
-      return AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _faders = widget.navbarDestinations
+        .map<AnimationController>((Destination destination) {
+      return AnimationController(
+          vsync: this, duration: Duration(milliseconds: 200));
     }).toList();
     //set the fader of the starting page to 1 so it's visible
     _faders[_currentIndex].value = 1.0;
     //generate a list of globalkeys which we shall assign to our destinations
     //Each destination shall have its own key
-    _destinationKeys = List<Key>.generate(widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
+    _destinationKeys = List<Key>.generate(
+        widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
 
     // For customizing sound behaviours
     AudioPlayer.global.setGlobalAudioContext(audioContext);
@@ -152,7 +158,8 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                     _logoFirstPress = DateTime.now(),
                     _logoPressed = true,
                   }
-                else if (DateTime.now().difference(_logoFirstPress!).inSeconds > 20)
+                else if (DateTime.now().difference(_logoFirstPress!).inSeconds >
+                    20)
                   {
                     _soundCounter = 1,
                     _logoFirstPress = DateTime.now(),
@@ -173,7 +180,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             ),
             Text(
               AppLocalizations.of(context)!.fGuildName,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             )
           ],
         ));
@@ -195,10 +202,12 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
             _header,
             Expanded(
                 child: Stack(
-                    children: widget.navbarDestinations.map((Destination destination) {
+                    children: widget.navbarDestinations
+                        .map((Destination destination) {
               final Widget view = FadeTransition(
-                opacity: _faders[destination.index]
-                    .drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
+                opacity: _faders[destination.index].drive(CurveTween(
+                    curve: Curves
+                        .fastOutSlowIn)), //set opacity according to animation
                 child: KeyedSubtree(
                   //set a global key to a widget so we preserve its state and subtree on a tree rebuild
                   key: _destinationKeys[destination.index],
@@ -216,11 +225,14 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   //ignore pointer so the destinations aren't interactable when animating
                   return IgnorePointer(child: view);
                 }
-                return Offstage(child: view); //move offstage to ensure they aren't painted when not visible
+                return Offstage(
+                    child:
+                        view); //move offstage to ensure they aren't painted when not visible
               }
             }).toList())),
           ])),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Container(
             height: 90,
             width: 90,
@@ -230,11 +242,13 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   _currentIndex = widget.navbarDestinations.length - 1;
                 });
                 locator<ThemeService>().theme = currentTheme;
-                locator<ThemeService>().backgroundColors = currentBackgroundTheme;
+                locator<ThemeService>().backgroundColors =
+                    currentBackgroundTheme;
                 widget.onNavigation!.add(HomePage);
               },
               child: Image(
-                image: AssetImage("assets/img/nollning-23/nollning-home-button.png"),
+                image: AssetImage(
+                    "assets/img/nollning-23/nollning-home-button.png"),
                 fit: BoxFit.cover,
               ),
               tooltip: 'F-sektionen',
@@ -252,11 +266,16 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 });
                 locator<ThemeService>().theme = fsekTheme;
                 locator<ThemeService>().backgroundColors = fsekBackground;
-                widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
+                widget.onNavigation!.add(widget
+                    .navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
-                ...widget.navbarDestinations.sublist(0, 4).map((Destination destination) {
-                  return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
+                ...widget.navbarDestinations
+                    .sublist(0, 4)
+                    .map((Destination destination) {
+                  return FsekAppBarItem(
+                      iconData: destination.icon,
+                      text: indexToTitle[destination.index]);
                 }).toList()
               ],
               selectedColor: Colors.white,

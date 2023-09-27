@@ -44,7 +44,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     locator<UserService>().getUser().then((value) => thisUser = value);
     connectToActionCable();
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -189,7 +189,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     cable!.disconnect();
     _pagingController.dispose();
     _controller.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

@@ -12,7 +12,8 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  final PagingController<int, News> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, News> _pagingController =
+      PagingController(firstPageKey: 1);
 
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
@@ -38,24 +39,36 @@ class _NewsPageState extends State<NewsPage> {
           child: PagedListView<int, News>(
             pagingController: _pagingController,
             shrinkWrap: true,
-            builderDelegate: PagedChildBuilderDelegate<News>(itemBuilder: (context, news, index) {
+            builderDelegate: PagedChildBuilderDelegate<News>(
+                itemBuilder: (context, news, index) {
               return Card(
                   child: InkWell(
                       onTap: () => openNews(news),
                       child: ListTile(
-                          title: Text((news.title == "" || news.title == null) ? t.homeTitleUntranslated : news.title!),
-                          subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Text(news.user!.name!),
-                            SizedBox(height: 6),
-                            Text(
-                              news.created_at.toString().substring(0, 16),
-                              style: TextStyle(fontSize: 12),
-                            )
-                          ]),
+                          title: Text((news.title == "" || news.title == null)
+                              ? t.homeTitleUntranslated
+                              : news.title!),
+                          subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(news.user!.name!),
+                                SizedBox(height: 6),
+                                Text(
+                                  news.created_at.toString().substring(0, 16),
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ]),
                           isThreeLine: true,
-                          trailing: (news.is_pinned ?? false) ? Icon(Icons.push_pin_outlined, color: Colors.orange[600]) : SizedBox.shrink())));
+                          trailing: (news.is_pinned ?? false)
+                              ? Icon(Icons.push_pin_outlined,
+                                  color: Colors.orange[600])
+                              : SizedBox.shrink())));
             }, noItemsFoundIndicatorBuilder: (context) {
-              return Container(height: 400, child: Center(child: Text(t.homeNoNews, style: Theme.of(context).textTheme.headline6)));
+              return Container(
+                  height: 400,
+                  child: Center(
+                      child: Text(t.homeNoNews,
+                          style: Theme.of(context).textTheme.titleLarge)));
             }),
           ),
         ));
@@ -63,7 +76,8 @@ class _NewsPageState extends State<NewsPage> {
 
   void openNews(News news) {
     //redirect to other page and shit
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
   }
 
   void loadMoreNews(int page) {
@@ -72,7 +86,8 @@ class _NewsPageState extends State<NewsPage> {
         _pagingController.appendLastPage(value.news ?? []);
       } else if (page == 1) {
         locator<HomeService>().getPinnedNews().then((pinned) {
-          _pagingController.appendPage((pinned.news ?? []) + (value.news ?? []), page + 1);
+          _pagingController.appendPage(
+              (pinned.news ?? []) + (value.news ?? []), page + 1);
         });
       } else {
         _pagingController.appendPage(value.news ?? [], page + 1);

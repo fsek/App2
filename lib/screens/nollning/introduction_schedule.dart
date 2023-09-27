@@ -21,7 +21,7 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
 
     // this here is to flip to the current introduction week when you are first entering the calendar, but not to do it whilst flipping around in the calendar.
     if (widget.firstTime && widget.week < widget.currentWeek) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).push(TurnPageRoute(
           overleafColor: WeekTracker.weekColors[widget.week],
           builder: (context) => IntroductionSchedule(

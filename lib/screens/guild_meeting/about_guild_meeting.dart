@@ -19,28 +19,36 @@ class AboutGuildMeetingPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 8),
-                  Text(t.guildMeetingCurr, style: Theme.of(context).textTheme.headline6),
+                  Text(t.guildMeetingCurr,
+                      style: Theme.of(context).textTheme.titleLarge),
                   SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
-                        TextSpan(text: t.guildMeetingNominateOne, style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text: t.guildMeetingNominateOne,
+                            style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: " ${t.guildMeetingNominateTwo} ",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('https://fsektionen.se/val'));
                             },
                         ),
-                        TextSpan(text: t.guildMeetingSendMotionOne, style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text: t.guildMeetingSendMotionOne,
+                            style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: t.guildMeetingSendMotionTwo,
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
-                              launchUrl(Uri.parse('mailto:sekreterare@fsektionen.se'));
+                              launchUrl(Uri.parse(
+                                  'mailto:sekreterare@fsektionen.se'));
                             },
                         ),
                         TextSpan(
@@ -56,10 +64,12 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingBoard}",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
-                              launchUrl(Uri.parse('mailto:styrelsen@fsektionen.se'));
+                              launchUrl(
+                                  Uri.parse('mailto:styrelsen@fsektionen.se'));
                             },
                         ),
                         TextSpan(
@@ -70,9 +80,11 @@ class AboutGuildMeetingPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 24),
-                  Text("${t.guildMeetingAboutTitle}", style: Theme.of(context).textTheme.headline6),
+                  Text("${t.guildMeetingAboutTitle}",
+                      style: Theme.of(context).textTheme.titleLarge),
                   SizedBox(height: 8),
-                  Text("${t.guildMeetingAboutOne}", style: Theme.of(context).textTheme.subtitle1),
+                  Text("${t.guildMeetingAboutOne}",
+                      style: Theme.of(context).textTheme.titleMedium),
                   SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
@@ -84,62 +96,88 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: " ${t.guildMeetingBoard} ",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
-                              launchUrl(Uri.parse('mailto:styrelsen@fsektionen.se'));
+                              launchUrl(
+                                  Uri.parse('mailto:styrelsen@fsektionen.se'));
                             },
                         ),
-                        TextSpan(text: "${t.guildMeetingAboutFive}", style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text: "${t.guildMeetingAboutFive}",
+                            style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingAboutSix}",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
-                              launchUrl(Uri.parse('https://fsektionen.se/kontakter'));
+                              launchUrl(
+                                  Uri.parse('https://fsektionen.se/kontakter'));
                             },
                         ),
-                        TextSpan(text: "${t.guildMeetingAboutSeven} ${t.guildMeetingAboutEight}", style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text:
+                                "${t.guildMeetingAboutSeven} ${t.guildMeetingAboutEight}",
+                            style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingAboutNine} ",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
-                              launchUrl(Uri.parse('mailto:sekreterare@fsektionen.se'));
+                              launchUrl(Uri.parse(
+                                  'mailto:sekreterare@fsektionen.se'));
                             },
                         ),
-                        TextSpan(text: "${t.guildMeetingAboutTen}", style: TextStyle(height: 1.5))
+                        TextSpan(
+                            text: "${t.guildMeetingAboutTen}",
+                            style: TextStyle(height: 1.5))
                       ],
                     ),
                   ),
                   SizedBox(height: 24),
-                  Text("${t.guildMeetingElectionInfoOne}", style: Theme.of(context).textTheme.headline6),
+                  Text("${t.guildMeetingElectionInfoOne}",
+                      style: Theme.of(context).textTheme.titleLarge),
                   SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(color: Colors.black),
                       children: <TextSpan>[
-                        TextSpan(text: "${t.guildMeetingElectionInfoTwo}", style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text: "${t.guildMeetingElectionInfoTwo}",
+                            style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingElectionInfoThree} ",
-                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
+                          style:
+                              TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('https://fsektionen.se/val'));
                             },
                         ),
-                        TextSpan(text: "${t.guildMeetingElectionInfoFour} ${t.guildMeetingElectionInfoFive}", style: TextStyle(height: 1.5)),
+                        TextSpan(
+                            text:
+                                "${t.guildMeetingElectionInfoFour} ${t.guildMeetingElectionInfoFive}",
+                            style: TextStyle(height: 1.5)),
                       ],
                     ),
                   ),
                   SizedBox(height: 24),
-                  Text("${t.guildMeetingElectionInfoSix}", style: Theme.of(context).textTheme.subtitle1),
+                  Text("${t.guildMeetingElectionInfoSix}",
+                      style: Theme.of(context).textTheme.titleMedium),
                   SizedBox(height: 8),
-                  Text("${t.guildMeetingElectionInfoSeven}${t.guildMeetingElectionInfoEight}${t.guildMeetingElectionInfoNine}", style: TextStyle(height: 1.5)),
+                  Text(
+                      "${t.guildMeetingElectionInfoSeven}${t.guildMeetingElectionInfoEight}${t.guildMeetingElectionInfoNine}",
+                      style: TextStyle(height: 1.5)),
                   SizedBox(height: 24),
-                  Text("${t.guildMeetingBoardElectionOne}", style: Theme.of(context).textTheme.subtitle1),
+                  Text("${t.guildMeetingBoardElectionOne}",
+                      style: Theme.of(context).textTheme.titleMedium),
                   SizedBox(height: 8),
-                  Text("${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionThree}${t.guildMeetingBoardElectionFour}", style: TextStyle(height: 1.5)),
+                  Text(
+                      "${t.guildMeetingBoardElectionTwo}${t.guildMeetingBoardElectionThree}${t.guildMeetingBoardElectionFour}",
+                      style: TextStyle(height: 1.5)),
                   SizedBox(height: 24),
                 ],
               ),
