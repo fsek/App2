@@ -15,10 +15,10 @@ class NotificationsPage extends StatefulWidget {
 
 class _NotificationsPageState extends State<NotificationsPage> {
   final Map<String, Style> _htmlStyle = {
-    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
+    "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
     "p": Style(
-        padding: EdgeInsets.zero,
-        margin: EdgeInsets.zero,
+        padding: HtmlPaddings.zero,
+        margin: Margins.zero,
         fontSize: FontSize(17))
   };
 

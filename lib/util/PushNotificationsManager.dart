@@ -21,7 +21,6 @@ class PushNotificationsManager {
 
   Future<void> init() async {
     if (!_initialized) {
-      
       // For iOS request permission first.
       await _firebaseMessaging.requestPermission(
         alert: true,
@@ -41,15 +40,18 @@ class PushNotificationsManager {
       const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'high_importance_channel', // id
         'High Importance Notifications', // title
-        'This channel is used for important notifications.', // description
+        description:
+            'This channel is used for important notifications.', // description
         importance: Importance.max,
       );
 
-      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+          FlutterLocalNotificationsPlugin();
 
       await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         RemoteNotification? notification = message.notification;
@@ -66,7 +68,7 @@ class PushNotificationsManager {
                 android: AndroidNotificationDetails(
                   channel.id,
                   channel.name,
-                  channel.description,
+                  channelDescription: channel.description,
                   icon: android.smallIcon,
                   // other properties...
                 ),

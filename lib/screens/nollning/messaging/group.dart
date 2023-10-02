@@ -132,24 +132,20 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                                                           data: message.text,
                                                           style: {
                                                             "body": Style(
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .zero,
+                                                                margin: Margins
+                                                                    .zero,
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    HtmlPaddings
                                                                         .zero),
                                                             "p": Style(
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    HtmlPaddings
                                                                         .zero,
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .zero)
+                                                                margin: Margins
+                                                                    .zero)
                                                           },
                                                           onLinkTap: (String?
                                                                   url,
-                                                              RenderContext
-                                                                  context,
                                                               Map<String,
                                                                       String>
                                                                   attributes,

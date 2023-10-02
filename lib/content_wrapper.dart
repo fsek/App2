@@ -44,7 +44,7 @@ class _ContentWrapperState extends State<ContentWrapper>
   // Sound behaviours on ios and android, mainly to make iphone use speakers properly
   final AudioContext audioContext = AudioContext(
     iOS: AudioContextIOS(
-      defaultToSpeaker: true,
+      //defaultToSpeaker: true,
       category: AVAudioSessionCategory.playback,
       options: [
         AVAudioSessionOptions.defaultToSpeaker,
@@ -76,7 +76,7 @@ class _ContentWrapperState extends State<ContentWrapper>
         widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
 
     // For customizing sound behaviours
-    AudioPlayer.global.setGlobalAudioContext(audioContext);
+    AudioPlayer.global.setAudioContext(audioContext);
 
     super.initState();
   }

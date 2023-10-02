@@ -37,8 +37,8 @@ class SingleNewsPage extends StatelessWidget {
                     child: Html(
                         data: news.content!,
                         style: {"p": Style(lineHeight: LineHeight(1.2))},
-                        onLinkTap: (String? url, RenderContext context,
-                            Map<String, String> attributes, element) {
+                        onLinkTap: (String? url, Map<String, String> attributes,
+                            element) {
                           launchUrl(Uri.parse(url!));
                         }),
                   ),

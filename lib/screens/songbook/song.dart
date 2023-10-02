@@ -66,9 +66,7 @@ class SongPage extends StatelessWidget {
             child: Html(
               data: song.content!,
               style: {
-                "p": Style(
-                    fontSize: FontSize(16, units: "pt"),
-                    lineHeight: LineHeight(1.5))
+                "p": Style(fontSize: FontSize(16), lineHeight: LineHeight(1.5))
               },
             ),
           )
