@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
-    String backgroundPath = "assets/img/vt_bakgrund_ny.png";
+    String backgroundPath = "assets/img/ht_23_background.png";
     return Stack(children: [
       Image.asset(
         backgroundPath,
