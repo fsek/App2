@@ -6,8 +6,7 @@ import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_save/image_save.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class ImageBrowserPage extends StatefulWidget {
   const ImageBrowserPage({Key? key, required this.album, required this.initial})
@@ -60,12 +59,8 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                       try {
                         http.Response image = await http.get(Uri.parse(
                             "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                        var test = await FlutterImageCompress.compressWithList(
-                            image.bodyBytes,
-                            quality: 1);
-                        ImageSave.saveImage(
-                            test, "${widget.album.images![index].filename!}",
-                            albumName: "F-sektionen");
+                        ImageGallerySaver.saveImage(
+                            image.bodyBytes, name: "${widget.album.images![index].filename!}", quality: 1);
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
                         ));
@@ -85,9 +80,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                   try {
                     http.Response image = await http.get(Uri.parse(
                         "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    ImageSave.saveImage(image.bodyBytes,
-                        "${widget.album.images![index].filename!}",
-                        albumName: "F-sektionen");
+                    ImageGallerySaver.saveImage(image.bodyBytes,
+                        name: "${widget.album.images![index].filename!}",
+                        quality: 100);
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: Text(t.galleryImageDownloaded),
                     ));
