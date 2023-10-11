@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+
 import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -18,7 +20,23 @@ class TokenCallback {
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserService userService;
   final List<TokenCallback> onTokenRefreshCallbacks = [];
-  AuthenticationBloc({required this.userService}) : super(AuthenticationUninitialized()) {on<AppStarted>((AuthenticationEvent event,emit) async* {
+
+  AuthenticationBloc({required this.userService}) : super(AuthenticationUninitialized()) {
+    on<AuthenticationEvent>(_onEvent, transformer: sequential());
+  }
+
+  void addTokenRefreshCallback(TokenCallback callback) {
+    onTokenRefreshCallbacks.add(callback);
+  }
+
+  void executeCallbacks() {
+    for(TokenCallback f in onTokenRefreshCallbacks) {
+      f.callback();
+    }
+    onTokenRefreshCallbacks.clear();
+  }
+
+  FutureOr<void> _onEvent(AuthenticationEvent event, Emitter<AuthenticationState> emit) async {
     // On app start check if we have a token already, if not we have to login
     if (event is AppStarted) {
       final bool hasToken = await userService.isAuthenticated();
@@ -26,14 +44,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
       if (hasToken && tokenValid) {
         final DeviseToken token = await userService.validateToken();
-        if(token.error != null && token.error!.isNotEmpty) {
+        if (token.error != null && token.error!.isNotEmpty) {
           emit(AuthenticationUnauthenticated());
         }
         else {
           emit(AuthenticationAuthenticated());
           this.add(Authenticated());
         }
-      } else if(hasToken && !tokenValid) {
+      } else if (hasToken && !tokenValid) {
         this.add(TokenRevoked());
       }
       else {
@@ -44,7 +62,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     // When a user has LoggedIn we store the token and tell the App that hes authenticated
     if (event is LoggedIn) {
       emit(AuthenticationLoading());
-      if(event.token is! DeviseToken) {
+      if (event.token is! DeviseToken) {
         this.add(LoggedOut());
         return;
       }
@@ -58,13 +76,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     // We need the User-info from the API on authentication so we fetch that
     if (event is Authenticated) {
       try {
-        emit(AuthenticationUserFetched(messages: onTokenRefreshCallbacks.map((e) => e.message).toList()));
+        emit(AuthenticationUserFetched(
+            messages: onTokenRefreshCallbacks.map((e) => e.message).toList()));
         executeCallbacks();
       }
-      catch(ex) {
-        if(ex is UnauthorisedException)
+      catch (ex) {
+        if (ex is UnauthorisedException)
           emit(AuthenticationUnauthenticated());
-        else if(ex is SocketException) {
+        else if (ex is SocketException) {
           emit(AuthenticationDisconnected());
         }
         else {
@@ -80,26 +99,15 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       emit(AuthenticationUnauthenticated());
     }
 
-    if(event is TokenRevoked) {
+    if (event is TokenRevoked) {
       userService.clearToken();
       emit(AuthenticationUnauthenticated());
     }
 
-    if(event is AppError) {
+    if (event is AppError) {
       emit(AuthenticationError(error: event.error));
-    }});
-  }
-
-  void addTokenRefreshCallback(TokenCallback callback) {
-    onTokenRefreshCallbacks.add(callback);
-  }
-
-  void executeCallbacks() {
-    for(TokenCallback f in onTokenRefreshCallbacks) {
-      f.callback();
     }
-    onTokenRefreshCallbacks.clear();
   }
-
 }
+
 
