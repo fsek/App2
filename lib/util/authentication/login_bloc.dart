@@ -16,9 +16,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required this.authenticationBloc,
     required this.userService,
-  }) : super(LoginInitial()) {on<LoginEvent>(_onEvent, transformer: sequential());}
+  }) : super(LoginInitial()) {
+    on<LoginEvent>(_onEvent, transformer: sequential());
+  }
 
-  @override
   FutureOr<void> _onEvent(LoginEvent event, Emitter<LoginState> emit) async {
     if (event is LoginButtonPressed) {
       emit(LoginLoading());

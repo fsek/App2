@@ -99,14 +99,39 @@ class _ContentWrapperState extends State<ContentWrapper>
 
   @override
   Widget build(BuildContext context) {
+    ThemeData currentTheme = fsekTheme;
+    List<Color> currentBackgroundTheme = fsekBackground;
+    DateTime now = DateTime.now();
+    DateTime v0start = DateTime(2023, 8, 21, 0, 0);
+    DateTime v1start = DateTime(2023, 8, 28, 0, 0);
+    DateTime v2start = DateTime(2023, 9, 4, 0, 0);
+    DateTime v3start = DateTime(2023, 9, 11, 0, 0);
+    DateTime v4start = DateTime(2023, 9, 18, 0, 0);
+    // CURSED
+    if (v0start.compareTo(now) < 0 && v1start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV0;
+      currentBackgroundTheme = nollning2023BackgroundV0;
+    } else if (v1start.compareTo(now) < 0 && v2start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV1;
+      currentBackgroundTheme = nollning2023BackgroundV1;
+    } else if (v2start.compareTo(now) < 0 && v3start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV2;
+      currentBackgroundTheme = nollning2023BackgroundV2;
+    } else if (v3start.compareTo(now) < 0 && v4start.compareTo(now) > 0) {
+      currentTheme = nollning2023themeV3;
+      currentBackgroundTheme = nollning2023BackgroundV3;
+    } else if (v4start.compareTo(now) < 0) {
+      currentTheme = nollning2023themeV4;
+      currentBackgroundTheme = nollning2023BackgroundV4;
+    }
     //index to string
     var t = AppLocalizations.of(context)!;
     Map<int, String> indexToTitle = {
       0: t.news,
       1: t.calendar,
-      2: t.home,
-      3: t.other,
-      4: t.notifications, //these maybe needs to change
+      2: t.home, //these maybe needs to change
+      3: t.notifications,
+      4: t.other,
     };
     // Shows state messages
     for (String message in widget.messages) {

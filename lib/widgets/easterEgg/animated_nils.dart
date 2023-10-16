@@ -19,7 +19,7 @@ class _AnimatedNilsState extends State<AnimatedNils>
   void initState() {
     super.initState();
     // is broke no time to fix now FIXME
-    //AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
+    AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
     animation =
         AnimationController(vsync: this, duration: new Duration(seconds: 1))
           ..repeat();

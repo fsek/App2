@@ -94,7 +94,13 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  runApp(FsekMobileApp());
+  runZonedGuarded<void>(() {
+    runApp(FsekMobileApp());
+  }, (Object error, StackTrace stackTrace) {
+    // Whenever an error occurs, call the `_reportError` function. This sends
+    // Dart errors to the dev console or Sentry depending on the environment.
+    _reportError(error, stackTrace);
+  });
 }
 
 bool get isInDebugMode {

@@ -17,13 +17,10 @@ class UserService extends AbstractService {
   /*
    * HTTP Requests
    */
-  Future<DeviseToken> sendLogin(
-      {required String email, required String pass}) async {
+  Future<DeviseToken> sendLogin({required String email, required String pass}) async {
     try {
-      var response = await http.post(
-          Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
-          headers: AbstractService.headers,
-          body: jsonEncode({"email": email, "password": pass}));
+      var response = await http.post(Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
+          headers: AbstractService.headers, body: jsonEncode({"email": email, "password": pass}));
 
       var json = jsonDecode(response.body);
       if (json["data"] != null) {
@@ -52,9 +49,8 @@ class UserService extends AbstractService {
     try {
       AbstractService.mapAuthHeaders();
 
-      var response = await http.get(
-          Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
-          headers: AbstractService.headers);
+      var response =
+          await http.get(Uri.parse(Environment.API_URL + "/api/auth/validate_token"), headers: AbstractService.headers);
 
       var json = jsonDecode(response.body);
       if (json["data"] != null) {
@@ -106,9 +102,7 @@ class UserService extends AbstractService {
 
   Future<Map> updateUser(User updatedUser) async {
     try {
-      var response = await AbstractService.put(
-          "/users/" + updatedUser.id!.toString(),
-          mapBody: updatedUser.toJson());
+      var response = await AbstractService.put("/users/" + updatedUser.id!.toString(), mapBody: updatedUser.toJson());
       setCurrentUser(updatedUser);
       return response;
     } catch (error) {
@@ -153,8 +147,7 @@ class UserService extends AbstractService {
     if (AbstractService.token == null) return false;
 
     DateTime? value = AbstractService.token!.expires;
-    if (value != null && value.compareTo(DateTime.now().toUtc()) > 0)
-      return true;
+    if (value != null && value.compareTo(DateTime.now().toUtc()) > 0) return true;
     return false;
   }
 }
