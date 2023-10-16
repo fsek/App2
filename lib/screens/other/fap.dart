@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/fredmansky/fredmansky.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,7 +28,10 @@ class _FapPageState extends State<FapPage> {
       "William Lundgren, ${t.fapSpider} 2022",
       "Max Bäckström, ${t.fapSpider} 2022",
       "Cajsa Thulin, ${t.fapSpiderMaster} 22/23",
-      "Oskar Watsfeldt, ${t.fapSpider} 2022"
+      "Oskar Watsfeldt, ${t.fapSpider} 2022",
+      "Louise Drenth, ${t.fapSuper} 2023",
+      "Emma Engdahl, ${t.fapSpider} 2023",
+      "Hjalmar Mårtensson ${t.fapSpider} 2023"
     ];
     List<String> inspiration = ["https://www.youtube.com/watch?v=k238XpMMn38"];
     TapGestureRecognizer fredmansTap = TapGestureRecognizer()
@@ -91,7 +93,7 @@ class _FapPageState extends State<FapPage> {
             ),
             ...(inspiration
                 .map((e) => TextButton(
-                    onPressed: () => launch(e),
+                    onPressed: () => launchUrl(Uri.parse(e)),
                     child: Text("Link " + inspiration.indexOf(e).toString())))
                 .toList()),
             Spacer(),

@@ -5,6 +5,10 @@ import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
+import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';

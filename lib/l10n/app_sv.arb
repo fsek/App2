@@ -76,6 +76,17 @@
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Mjölkallergi",
+    "gluten": "Gluten",
+
+    "physics": "Teknisk Fysik",
+    "mathematics": "Teknisk Matematik",
+    "nano": "Teknisk Nanovetenskap",
+    "unknown": "Oklart",
+
     "songbookSearch": "Sök",
     "songbookSongbook": "Sångbok",
     "songbookNoMatches": "Finns inga matchningar :^(",
@@ -133,7 +144,7 @@
 
     "messagesMessages": "Meddelanden",
 
-    "nolleguideWeAtFsek": "Vi på F-sek",
+    "nolleguideWeAtFsek": "F-sektionen",
     "nolleguideEtiquette": "Allt du behöver veta",
     "nolleguideWordlist": "Ordlista",
 
@@ -180,12 +191,12 @@
     "cafeShiftClock": " kl ",
     "cafeShiftShift": " Ledigt pass",
 
-    "articleEtiquette": "Allt du behöver veta",
-    "mannersEtiquette": "Allt du behöver veta",
+    "mannersEtiquette": "Studentlivet",
 
+    "aboutGuildTitle": "Om F-sektionen",
     "aboutGuildGuild": "F-sektionen",
     "aboutGuildOne": "F-sektionen inom TLTH är en ideell förening för studenter som läser något av civilingenjörsprogrammen ",
-    "aboutGuildTwo": "about Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
+    "aboutGuildTwo": "Teknisk Fysik, Teknisk Matematik eller Teknisk Nanovetenskap och har till ändamål att främja kamratskap ",
     "aboutGuildThree": "bland medlemmarna och tillvarata medlemmarnas gemensamma intressen.",
 
     "aboutGuildFour": "Sektionen är belägen i Mattehuset och här hittar du bland annat uppehållsrum, mikrovågsugnar och gött häng. ",
@@ -203,7 +214,7 @@
     "fapSuper": "su-perman",
     "fapSpider": "Spindelman",
     "fapSpiderMaster": "Spindelförman",
-    "fapAbout": "om F-appen",
+    "fapAbout": "Om F-appen",
     "fapFap": "F-appen",
     "fapVersion": "Version: ja",
     "fapPower": "Powered by kaffe, su-permanstårar och Flutter",
@@ -280,5 +291,23 @@
     "motionsPageTitle": "Motioner",
     "readMotion": "Läs motion",
     "readMotionAnswer": "Läs motionssvar",
-    "readProposition": "Läs proposition"
+    "readProposition": "Läs proposition",
+
+    "emergencyContacts": "Nödkontaktnummer",
+    "emergencyTitleOne": "112 - SOS alarm",
+    "emergencyContentOne": "I nödsituationer, kontakta alltid 112. Med detta nummer når du polis, ambulans, brandkår etc.",
+    "emergencyTitleTwo": "046 17 41 00 - Psykiatrisk akutmottagning (Lund)",
+    "emergencyContentTwo": "Ring detta nummer vid behov av akut psykiatrisk vård i Lund. Mottagningen har öppet dygnet runt.",
+    "emergencyTitleThree": "90101 - Mind Självmordslinjen",
+    "emergencyContentThree": "Självmordslinjen är till för dig som har tankar på att ta ditt liv eller har en närstående med sådana tankar. De har öppet dygnet runt, varje dag. Vid akut självmordsrisk bör du ringa 112.",
+    "emergencyTitleFour": "20 700 - Universitetets nödnummer",
+    "emergencyContentFour": "Om du behöver komma i kontakt med en säkerhetsvakt eller universitetets räddningstjänst. Detta är ett 24-timmars servicenummer där du kan få hjälp i situationer och rapportera händelser som observationer, inbrott, förlorat passerkort, hot eller våld.",
+    "emergencyTitleFive": "08-702 16 80 - Jourhavande medmänniska",
+    "emergencyContentFive": "Om du behöver någon att prata med, ring Jourhavande medmänniskor för mänsklig support under natten mellan kl 21-06.",
+    "emergencyTitleSix": "1177 - Sjukvårdsrådgivning",
+    "emergencyContentSix": "Ifall du har frågor eller behöver rådgivning inom sjukdom, skador och hälsa.", 
+    "emergencyTitleSeven": "113 13 - Krisinformation",
+    "emergencyContentSeven": "Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.",
+    "emergencyTitleEight": "Föset",
+    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\n Ytterligare kontaktinformation finns att hitta i Nolleguiden"
 }

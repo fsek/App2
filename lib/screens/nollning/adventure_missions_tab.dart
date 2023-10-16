@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
@@ -43,6 +41,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               new TabBar(
+                indicatorColor: Colors.white,
                 tabs: List.generate(
                   weekCount,
                   (index) => Tab(
@@ -82,6 +81,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   }
 
   Widget _adventureMissionTile(AdventureMission mission) {
+    var t = AppLocalizations.of(context)!;
     return InkWell(
       // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MissionPage(mission: mission))),
       child: StatefulBuilder(
@@ -90,8 +90,10 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
             title: Text(mission.title!),
             // subtitle has to change wether or not we have variable amount of points
             subtitle: mission.variable_points!
-                ? Text("1-${mission.max_points} poäng")
-                : Text("${mission.max_points} poäng"),
+                ? Text("1-${mission.max_points} " +
+                    t.introductionPoints2.toLowerCase())
+                : Text("${mission.max_points} " +
+                    t.introductionPoints2.toLowerCase()),
             trailing: locator<NollningService>().is_mentor
                 ? Row(
                     mainAxisSize: MainAxisSize.min,

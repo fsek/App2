@@ -37,7 +37,7 @@ class SingleNewsPage extends StatelessWidget {
                         data: news.content!,
                         style: {"p": Style(lineHeight: LineHeight(1.2))},
                         onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, element) {
-                          launch(url!);
+                          launchUrl(Uri.parse(url!));
                         }),
                   ),
                 ),
@@ -69,7 +69,8 @@ class SingleNewsPage extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                  child: Text(news.title == "" || news.title == null ? t.homeTitleUntranslated : news.title!, style: Theme.of(context).textTheme.headline6),
+                  child: Text(news.title == "" || news.title == null ? t.homeTitleUntranslated : news.title!,
+                      style: Theme.of(context).textTheme.headline6),
                 ),
               ),
               Divider(
@@ -78,7 +79,8 @@ class SingleNewsPage extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Text("${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}", style: Theme.of(context).textTheme.bodyText1),
+                  child: Text("${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}",
+                      style: Theme.of(context).textTheme.bodyText1),
                 ),
               ),
             ],

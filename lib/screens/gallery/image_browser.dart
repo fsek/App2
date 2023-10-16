@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/gallery/album.dart';
-import 'package:fsek_mobile/services/navigation.service.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;

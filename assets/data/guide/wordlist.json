@@ -1,239 +1,594 @@
-{"words": [
-    {
-        "key": "0,999...",
-        "value": "=1."
-    },
-    {
-        "key": "6122 Å",
-        "value": "Våglängd för den perfekta orangea färgen."
-    },
-    {
-        "key": "Adjök",
-        "value": "Avskedsdryck."
-    },
-    {
-        "key": "AF Bostäder",
-        "value": "Lunds största bostadsförmedlare för studenter, skriv in dig här direkt för att inte hamna efter i kön!"
-    },
-    {
-        "key": "Analfabetstrålning",
-        "value": "Dålig belysning för fysikstudier."
-    },
-    {
-        "key": "Ansvarsfull",
-        "value": "Kontrollerat berusad."
-    },
-    {
-        "key": "Barsebäck",
-        "value": "Vackra byggnader strax norr om Lund vars hjärta ej längre slår."
-    },
-    {
-        "key": "Bättre",
-        "value": "Se Förr."
-    },
-    {
-        "key": "Delfi",
-        "value": "Den korrekta stavningen av studentghettot i norra Lund som av AFB benäms Delphi. Se även AF Bostäder."
-    },
-    {
-        "key": "Enhörning",
-        "value": "Ovanlig geometrisk figur."
-    },
-    {
-        "key": "Eslöv",
-        "value": "Världens ände, hem åt Oljeborrarsektionen, även kallad O-sektionen."
-    },
-    {
-        "key": "ET-Slasque",
-        "value": "Efter-Tenta-Slasque, festlighet efter tentaperiod."
-    },
-    {
-        "key": "F",
-        "value": "Den korrekta stavningen av pH/Ph/ph."
-    },
-    {
-        "key": "F",
-        "value": "Symbolen för den äldsta sektionen på LTH. F-sektionen omfattar Teknisk Fysik, Teknisk Matematik och Teknisk Nanovetenskap. Grundades 1961."
-    },
-    {
-        "key": "Fantom",
-        "value": "Mystisk och maskerad elementarpartikel."
-    },
-    {
-        "key": "FETSM",
-        "value": "Före-Efter-Tenta-Slasque-Mat, mat som förtärs före en ET-Slasque."
-    },
-    {
-        "key": "Fjulafton",
-        "value": "Traditionsenligt firande av Fjulafton som tvingats flytta på grund av en tentaperiod och nu infaller på vårterminen."
-    },
-    {
-        "key": "Flucia",
-        "value": "Gemytligt uppträdande med sång och pepparkakor."
-    },
-    {
-        "key": "Förr",
-        "value": "Se Bättre."
-    },
-    {
-        "key": "Fös",
-        "value": "Arrangerar Nollningen. Springer runt och fixar under dina första veckor för att se till att du får en fantastisk start på dina studier."
-    },
-    {
-        "key": "Gasque",
-        "value": "Uppklädd sittning, vanligt förekommande under nollningen"
-    },
-    {
-        "key": "Gasquesalen",
-        "value": "Sal som involverar studentlivets höjd- och lågpunkter, Slasque/gasque och tentamen."
-    },
-    {
-        "key": "Gyckel",
-        "value": "Mindre uppträdande i form av sång eller annan underhållande förteelse under sittning eller dylikt spektakel."
-    },
-    {
-        "key": "Gymnasiet",
-        "value": "Är något som de flesta F:are tog sig igenom för att få börja på LTH. I efterhand kan väldigt få nämna något som de faktiskt lärde sig under gymnasiet trots de alldeles för många schemalagda timmarna."
-    },
-    {
-        "key": "Hilbert Älg",
-        "value": "F-sektionens skyddshelgon, numera levande igenom Hella älg (den sanna Hilbert Älgs dotter), som lever och frodas i Skånes Djurpark i Höör tillsammans med sina fyra barn, Higgs, Heisenberg, Hertz och Hubble. Besöks årligen av F-sektionen, se Älgresa."
-    },
-    {
-        "key": "Hilbert Café",
-        "value": "F-sektionens café som förser dig med fantastiska mackor, sallader, frukt och kaffe varje dag. Cafét drivs av sektionen, och alla är välkomna att jobba i några timmar för att få äta gratis resten av dagen. Fråga din fadder hur du anmäler dig för att jobba. Har du jobbat tre gånger är du inbjuden till den årliga och mycket mycket trevliga Caféfesten någon gång i maj."
-    },
-    {
-        "key": "Hilbertrum",
-        "value": "En generaliserad form av vektorrum, med oändligt många dimensioner. Här kan du hänga, äta chips, leka, festa och mycket mer!"
-    },
-    {
-        "key": "LKG",
-        "value": "Lära-Känna-Gasque."
-    },
-    {
-        "key": "Lov",
-        "value": "Den tid under året man inte får CSN."
-    },
-    {
-        "key": "Lund",
-        "value": "Medelstor sluttning belägen i södra Sverige, också kallat Skåne, med en eminent teknisk högskola."
-    },
-    {
-        "key": "Lundagård",
-        "value": "Stor yta utanför AF-borgen där Nollelördagen äger rum. Även den äldsta studenttidningen i Sverige."
-    },
-    {
-        "key": "Mångla",
-        "value": "Kyssa flertalet personer samtidigt."
-    },
-    {
-        "key": "n",
-        "value": "10-9, Teknisk Nanovetenskap, tillhör F-sektionen."
-    },
-    {
-        "key": "Nolla",
-        "value": "Person som önskar inträde vid teknisk utbildning och som ännu ej fullföljt sin nollningsperiod och därmed inte officiellt påbörjat sitt första år på LTH."
-    },
-    {
-        "key": "Nollebussresa",
-        "value": "Resa med buss då U-båtar är ganska sällsynta i Lund. Här lär sig nollan att åka buss!"
-    },
-    {
-        "key": "Nollegeneral",
-        "value": "Person utvald av Teknologkåren att ansvara för nollningen på LTH."
-    },
-    {
-        "key": "Nollning",
-        "value": "Den roligaste månaden i ditt liv!"
-    },
-    {
-        "key": "Norrland",
-        "value": "Allt norr om Hallandsåsen (se Norrlandsåsen). Termen omfattar enligt vissa definitioner allt norr om Eslöv, eller enligt mer patriotiska tolkningar allt norr om Norra Fäladen. Riktigt radikala geografer använder termen för allt norr om Kårhuset."
-    },
-    {
-        "key": "Norrlandsåsen",
-        "value": "Ås där tunnling utövas, belägen mellan Helsingborg och Båstad. Kallas ibland för Hallandsåsen"
-    },
-    {
-        "key": "One-Night-Stand",
-        "value": "Vanligt förekommande i Lund. Studiemetod som bygger på att man står upp hela natten för att inte somna."
-    },
-    {
-        "key": "Orange",
-        "value": "Den vackraste av alla färger, se 6122 Å."
-    },
-    {
-        "key": "π",
-        "value": "≈ 3,141592653589... Programmet för Teknisk Matematik som tillhör F-sektionen. Hyllas traditionsenligt den 14 mars."
-    },
-    {
-        "key": "pH/Ph/ph",
-        "value": "Se F."
-    },
-    {
-        "key": "Posttentamiskt stressyndrom",
-        "value": "Traumatiskt tillstånd hos teknolog efter en skriven tenta. Kan inefatta symptom som, uppställning av differentialekvationer i sömnen eller endast kunna kommunicera skriftligt i programmeringskod."
-    },
-    {
-        "key": "Rekursion",
-        "value": "Se Rekursion."
-    },
-    {
-        "key": "Reiseleiter",
-        "value": "F-sektionens egna reseledare. Känns igen på fracken, pilotbrillorna, den blå teknologmössan och den något överväldigande förkärleken till att leka med nollor."
-    },
-    {
-        "key": "Sexmästeri",
-        "value": "Ett underbart gäng som fixar alla sittningar. Sexmästeri har egentligen ingenting med sex att göra, utan härstammar från ett gammalt svenskt ord för fest, jmfr Svensexa."
-    },
-    {
-        "key": "Sittning",
-        "value": "Måltid vid bord under festligare former."
-    },
-    {
-        "key": "sjön Sjön",
-        "value": "Vacker sjö utanför Mattehuset, i vilken ön Ön ligger. Också kallad Lunds skärgård."
-    },
-    {
-        "key": "Slasque",
-        "value": "Sittning med klädkod overall. Jmfr. Gasque."
-    },
-    {
-        "key": "Sparta",
-        "value": "Studentghetto nära LTH. Inspirerat av efterkrigsarkitektur från forna Sovjetunionen. Har undvikts att renoveras för att möjliggöra större vinst för AFB."
-    },
-    {
-        "key": "Spex",
-        "value": "Som en musikal fast studentikos och rolig."
-    },
-    {
-        "key": "telefonkiosken Telefonkiosken",
-        "value": "Orange telefonkiosk på ön Ön som alltid ska vara orange."
-    },
-    {
-        "key": "Tenta",
-        "value": "Chockbehandling av tentaångest."
-    },
-    {
-        "key": "Tentavrål",
-        "value": "23:00 varje kväll i tentaveckan lindras tentaångesten i ett kollektivt vrål. Kan ofta höras på delphi."
-    },
-    {
-        "key": "Tentaångest",
-        "value": "Vag känsla av oro som ökar exponentiellt då läsperioden lider mot sitt slut."
-    },
-    {
-        "key": "Vildanden",
-        "value": "Studentghetto inte alls nära LTH."
-    },
-    {
-        "key": "Älgebra",
-        "value": "Matematisk metod främst nyttjad vid räkning av storvilt."
-    },
-    {
-        "key": "ön Ön",
-        "value": "Ö i sjön Sjön med telefonkiosken Telefonkiosken på. Ockuperas traditionsenligt av F-sektionen innan sjöslaget på Regattadagen."
-    }
-]
+{
+    "words": [
+        {
+            "key":  {
+               "sv": "0,999...",
+               "en": "0,999..."
+            },
+            "value": { 
+                "sv": "=1.",
+                "en": "=1."
+            }
+        },
+        {
+            "key": {
+                "sv": "6122 Å",
+                "en": "6122 Å"
+            },
+            "value": {
+                "sv": "Våglängd för den perfekta orangea färgen.",
+                "en": "Wavelength for the perfect orange color."
+            }
+        },
+        {
+            "key": {
+                "sv": "Adjök",
+                "en": "Adjök"
+            },
+            "value": {
+                "sv": "Avskedsdryck.",
+                "en": "A goodbye drink."
+            }
+        },
+        {
+            "key": {
+                "sv": "AF Bostäder",
+                "en": "AF Bostäder"
+            },
+            "value": {
+                "sv": "Lunds största bostadsförmedlare för studenter, skriv in dig här direkt för att inte hamna efter i kön!",
+                "en": "Lund's largest student housing, register immediately to avoid falling behind in the housing queue!"
+            }
+        },
+        {
+            "key": {
+                "sv": "Analfabetstrålning",
+                "en": "Analfabetstrålning"
+            },
+            "value": {
+                "sv": "Dålig belysning för fysikstudier.",
+                "en": "Poor lighting for physics studies."
+            }
+        },
+        {
+            "key": {
+                "sv": "Ansvarsfull",
+                "en": "Responsible"
+            },
+            "value": {
+                "sv": "Kontrollerat berusad.",
+                "en": "Controlled intoxication."
+            }
+        },
+        {
+            "key": {
+                "sv": "Barsebäck",
+                "en": "Barsebäck"
+            },
+            "value": {
+                "sv": "Vackra byggnader strax norr om Lund vars hjärta ej längre slår.",
+                "en": "Beautiful buildings just north of Lund whose heart no longer beats."
+            }
+        },
+        {
+            "key": {
+                "sv": "Bättre",
+                "en": "Better"
+            },
+            "value": {
+                "sv": "Se Förr.",
+                "en": "See The past."
+            }
+        },
+        {
+            "key": {
+                "sv": "Delfi",
+                "en": "Delfi"
+            },
+            "value": {
+                "sv": "Den korrekta stavningen av studentghettot i norra Lund som av AFB benäms Delphi. Se även AF Bostäder.",
+                "en": "The correct spelling of the student ghetto in northern Lund, referred to by AFB as Delphi. See also AF Bostäder."
+            }
+        },
+        {
+            "key": {
+                "sv": "Enhörning",
+                "en": "Enhörning"
+            },
+            "value": {
+                "sv": "Ovanlig geometrisk figur.",
+                "en": "Unusual geometric figure. Also unicorn in swedish."
+            }
+        },
+        {
+            "key": {
+                "sv": "Eslöv",
+                "en": "Eslöv"
+            },
+            "value": {
+                "sv": "Världens ände, hem åt Oljeborrarsektionen, även kallad O-sektionen.",
+                "en": "The end of the world, home to the oil drilling guild, also called the O-guild."
+            }
+        },
+        {
+            "key": {
+                "sv": "ET-Slasque",
+                "en": "ET-Slasque"
+            },
+            "value": {
+                "sv": "Efter-Tenta-Slasque, festlighet efter tentaperiod.",
+                "en": "Efter-Tenta-Slasque (After-exam-slasque), celebration after an exam period."
+            }
+        },
+        {
+            "key": {
+                "sv": "F",
+                "en": "F"
+            },
+            "value": {
+                "sv": "Den korrekta stavningen av pH/Ph/ph.",
+                "en": "The right way of spelling pH/Ph/ph."
+            }
+        },
+        {
+            "key": {
+                "sv": "F",
+                "en": "F"
+            },
+            "value": {
+                "sv": "Symbolen för den äldsta sektionen på LTH. F-sektionen omfattar Teknisk Fysik, Teknisk Matematik och Teknisk Nanovetenskap. Grundades 1961.",
+                "en": "The symbol for the oldest section at LTH. The F-section includes Engineering Physics, Engineering Mathematics and Engineering Nanoscience. Founded in 1961."
+            }
+        },
+        {
+            "key": {
+                "sv": "Fantom",
+                "en": "Phantom"
+            },
+            "value": {
+                "sv": "Mystisk och maskerad elementarpartikel.",
+                "en": "Mysterious and masked elementary particle."
+            }
+        },
+        {
+            "key": {
+                "sv": "FETSM",
+                "en": "FETSM"
+            },
+            "value": {
+                "sv": "Före-Efter-Tenta-Slasque-Mat, mat som förtärs före en ET-Slasque.",
+                "en": "Före-Efter-Tenta-Slasque-Mat (Before-After-Exam-Slasque-Food), food consumed before an ET-Slasque."
+            }
+        },
+        {
+            "key": {
+                "sv": "Fjulsittning",
+                "en": "F(x)-mas/Fjul sitting"
+            },
+            "value": {
+                "sv": "Traditionsenligt firande av Fjulafton",
+                "en": "The traditional celebration of F(x)-mas (Fjul)"
+            }
+        },
+        {
+            "key": {
+                "sv": "Flucia",
+                "en": "Flucia"
+            },
+            "value": {
+                "sv": "Gemytligt uppträdande med sång och pepparkakor.",
+                "en": "Pleasant performance with singing and gingerbread."
+            }
+        },
+        {
+            "key": {
+                "sv": "Förr",
+                "en": "The past"
+            },
+            "value": {
+                "sv": "Se Bättre.",
+                "en": "See Better."
+            }
+        },
+        {
+            "key": {
+                "sv": "Fös",
+                "en": "Fös"
+            },
+            "value": {
+                "sv": "Grupp som arrangerar Nollningen. Springer runt och fixar under dina första veckor för att se till att du får en fantastisk start på dina studier.",
+                "en": "Group that organizes The Introduction. Running around and fixing things during your first weeks to make sure you have a great start to your studies."
+            }
+        },
+        {
+            "key": {
+                "sv": "Gasque",
+                "en": "Gasque"
+            },
+            "value": {
+                "sv": "Uppklädd sittning, vanligt förekommande under nollningen",
+                "en": "Sophisticated sitting, much common during the introduction."
+            }
+        },
+        {
+            "key": {
+                "sv": "Gasquesalen",
+                "en": "Gasquesalen"
+            },
+            "value": {
+                "sv": "Sal som involverar studentlivets höjd- och lågpunkter, slasque/gasque och tentamen.",
+                "en": "Hall involving all the highs and lows of student life, slasque/gasque and exams."
+            }
+        },
+        {
+            "key": {
+                "sv": "Gyckel",
+                "en": "Gyckel"
+            },
+            "value": {
+                "sv": "Mindre uppträdande i form av sång eller annan underhållande förteelse under sittning eller dylikt spektakel.",
+                "en": "Performance in the form of singing or other entertainment during a sitting or similar spectacle."
+            }
+        },
+        {
+            "key": {
+                "sv": "Gymnasiet",
+                "en": "High school"
+            },
+            "value": {
+                "sv": "Något som de flesta F:are tog sig igenom för att få börja på LTH. I efterhand kan väldigt få nämna något som de faktiskt lärde sig under gymnasiet trots de alldeles för många schemalagda timmarna.",
+                "en": "Something that most people at the F-guild went through to start at LTH. In retrospect, very few can mention anything they actually learned during high school despite the far too many scheduled hours."
+            }
+        },
+        {
+            "key": {
+                "sv": "Hilbert Älg",
+                "en": "Hilbert Moose"
+            },
+            "value": {
+                "sv": "F-sektionens skyddshelgon, numera levande igenom Hörmander Älg, som lever och frodas i de svenska skogarna. Hyllas årligen av F-sektionen, se Älgresa.",
+                "en": "The patron saint of the F-guild, now living through Hörmander Moose, who lives and thrives in the the Swedish forrests. Celebrated annually by the F-section, see Älgresa."
+            }
+        },
+        {
+            "key": {
+                "sv": "Hilbert Café",
+                "en": "Hilbert Café"
+            },
+            "value": {
+                "sv": "F-sektionens café som förser dig med fantastiska mackor, sallader, frukt och kaffe varje dag. Cafét drivs av sektionen, och alla är välkomna att jobba i några timmar för att få äta gratis resten av dagen. Fråga din fadder hur du anmäler dig för att jobba. Har du jobbat tre gånger är du inbjuden till den årliga och mycket mycket trevliga Caféfesten.",
+                "en": "The F-guild's café provides you with fantastic sandwiches, salads, fruit and coffee every day. The café is run by the section, and everyone is welcome to work for a few hours and eat for free for the rest of the day. Ask your sponsor how to sign up to work. If you have worked three times, you are invited to the annual and very, very nice Caféfest."
+            }
+        },
+        {
+            "key": {
+                "sv": "Hilbertrum",
+                "en": "Hilbert space"
+            },
+            "value": {
+                "sv": "En generaliserad form av vektorrum med oändligt många dimensioner. Här kan du hänga, äta chips, leka, festa och mycket mer!",
+                "en": "A generalized form of vector space with infinite dimensions. Here, you can hang out, eat chips, play, party and much more!"
+            }
+        },
+        {
+            "key": { 
+                "sv": "LKG",
+                "en": "LKG"
+            },
+            "value": {
+                "sv": "Lära-Känna-Gasque.",
+                "en": "Get-To-Know-Gasque"
+            }
+        },
+        {
+            "key": {
+                "sv": "Lov",
+                "en": "Break"
+            },
+            "value": {
+                "sv": "Den tid under året man inte får CSN.",
+                "en": "The time during the year when you do not receive CSN."
+            }
+        },
+        {
+            "key": {
+                "sv": "Lund",
+                "en": "Lund"
+            },
+            "value": {
+                "sv": "Medelstor sluttning belägen i södra Sverige, också kallat Skåne, med en eminent teknisk högskola.",
+                "en": "Medium-sized hillside located in southern Sweden, also called Skåne, with an eminent faculty of engineering."
+            }
+        },
+        {
+            "key": {
+                "sv": "Lundagård",
+                "en": "Lundagård"
+            },
+            "value": {
+                "sv": "Stor yta utanför AF-borgen där Nollelördagen äger rum. Även den äldsta studenttidningen i Sverige.",
+                "en": "Large area outside AF-borgen where the Nolle Saturday takes place. Also the oldest student newspaper in Sweden."
+            }
+        },
+        {
+            "key": {
+                "sv": "Mångla",
+                "en": "Mångla"
+            },
+            "value": {
+                "sv": "Kyssa flertalet personer samtidigt.",
+                "en": "Kiss several people at the same time."
+            }
+        },
+        {
+            "key": {
+                "sv": "n",
+                "en": "n"
+            },
+            "value": {
+                "sv": "10^(-9), Teknisk Nanovetenskap, tillhör F-sektionen.",
+                "en": "10^(-9), Engineering Nanoscience, belongs to the F-guild."
+            }
+        },
+        {
+            "key": {
+                "sv": "Nolla",
+                "en": "Nolla"
+            },
+            "value": {
+                "sv": "Person som önskar inträde vid teknisk utbildning och som ännu ej fullföljt sin nollningsperiod och därmed inte officiellt påbörjat sitt första år på LTH.",
+                "en": "A person who wishes to enter an education of engineering and who has not yet completed their introduction period and thus has not officially started their first year at LTH."
+            }
+        },
+        {
+            "key": {
+                "sv": "Nollebussresa",
+                "en": "Nolle bus ride"
+            },
+            "value": {
+                "sv": "Resa med buss då U-båtar är ganska sällsynta i Lund. Här lär sig nollan att åka buss!",
+                "en": "Ride by bus as submarines are quite rare in Lund. Here the nolla learns to ride the bus!"
+            }
+        },
+        {
+            "key": {
+                "sv": "Nollegeneral",
+                "en": "Nolle general"
+            },
+            "value": {
+                "sv": "Person utvald av Teknologkåren att ansvara för nollningen på LTH.",
+                "en":"Person chosen by the student union to be responsible for the introduction at LTH."
+            }
+        },
+        {
+            "key": {
+                "sv": "Nollning",
+                "en": "Introduction"
+            },
+            "value": {
+                "sv": "Den roligaste månaden i ditt liv!",
+                "en": "The most fun month of your life!"
+            }
+        },
+        {
+            "key": {
+                "sv": "Norrland",
+                "en": "Norrland"
+            },
+            "value": {
+                "sv": "Allt norr om Hallandsåsen (se Norrlandsåsen). Termen omfattar enligt vissa definitioner allt norr om Eslöv, eller enligt mer patriotiska tolkningar, allt norr om Norra Fäladen. Riktigt radikala geografer använder termen för allt norr om Kårhuset.",
+                "en": "Everything north of Hallandsåsen (see Norrlandsåsen). According to some definitions the term includes everything north of Eslöv, or according to more patriotic interpretations everything north of Norra Fäladen. Really radical geographers use the term for everything north of Kårhuset."
+            }
+        },
+        {
+            "key": {
+                "sv": "Norrlandsåsen",
+                "en": "Norrlandsåsen"
+            },
+            "value": {
+                "sv": "Ås där tunnling utövas, belägen mellan Helsingborg och Båstad. Kallas ibland för Hallandsåsen",
+                "en": "Ridge where tunnelling is practiced, located between Helsingborg and Båstad. Sometimes called Hallandsåsen"
+            }
+        },
+        {
+            "key": {
+                "sv": "One-Night-Stand",
+                "en": "One-Night-Stand"
+            },
+            "value": {
+                "sv": "Vanligt förekommande i Lund. Studiemetod som bygger på att man står upp hela natten för att inte somna.",
+                "en": "Common occurrence in Lund. Study method where you stay up all night to avoid falling asleep."
+            }
+        },
+        {
+            "key": {
+                "sv": "Orange",
+                "en": "Orenge"
+            },
+            "value": {
+                "sv": "Den vackraste av alla färger, se 6122 Å.",
+                "en": "The most beautiful of all colours, see 6122 Å."
+            }
+        },
+        {
+            "key": {
+                "sv": "π",
+                "en": "π"
+            },
+            "value": {
+                "sv": "≈ 3,141592653589... Programmet för Teknisk Matematik som tillhör F-sektionen. Hyllas traditionsenligt den 14 mars.",
+                "en": "≈ 3,141592653589... Engineering Mathematics program belonging to the F-guild. Traditionally celebrated on March 14th."
+            }
+        },
+        {
+            "key": {
+                "sv": "pH/Ph/ph",
+                "en": "pH/Ph/ph"
+            },
+            "value": {
+                "sv": "Se F.",
+                "en": "See F."
+            }
+        },
+        {
+            "key": {
+                "sv": "Posttentamiskt stressyndrom",
+                "en": "Post-exam stress syndrome"
+            },
+            "value": {
+                "sv": "Traumatiskt tillstånd hos teknolog efter en skriven tenta. Kan inefatta symptom som, uppställning av differentialekvationer i sömnen eller endast kunna kommunicera skriftligt i programmeringskod.",
+                "en": "Traumatic state of a student after a written exam. May include symptoms such as, setting up differential equations in their sleep or only being able to communicate in writing in programming code."
+            }
+        },
+        {
+            "key": {
+                "sv": "Rekursion",
+                "en": "Recursion"
+            },
+            "value": {
+                "sv": "Se Rekursion.",
+                "en": "See Recursion."
+            }
+        },
+        {
+            "key": {
+                "sv": "Reiseleiter",
+                "en": "Reiseleiter"
+            },
+            "value": {
+                "sv": "F-sektionens egna reseledare. Känns igen på fracken, pilotbrillorna, den blå teknologmössan och den något överväldigande förkärleken till att leka.",
+                "en": "The F-guild's own tour guides. Recognisable by the tail coat, the pilot glasses, the blue technology hat and the somewhat overwhelming fondness of playing games."
+            }
+        },
+        {
+            "key": {
+                "sv": "Sexmästeri",
+                "en": "Sexmästeri (The Festivities Committee)"
+            },
+            "value": {
+                "sv": "Ett underbart gäng som fixar alla sittningar. Sexmästeri har egentligen ingenting med sex att göra, utan härstammar från ett gammalt svenskt ord för fest, jmf Svensexa.",
+                "en": "A fantastic group that organises all the sittings. Sexmästeri really has nothing to do with sex, but comes from an old Swedish word for party, cf. Svensexa."
+            }
+        },
+        {
+            "key": {
+                "sv": "Sittning",
+                "en": "Sitting"
+            },
+            "value": {
+                "sv": "Måltid vid bord under festligare former.",
+                "en": "Meal at a table in a more festive setting."
+            }
+        },
+        {
+            "key": {
+                "sv": "sjön Sjön",
+                "en": "sjön Sjön"
+            },
+            "value": {
+                "sv": "Vacker sjö utanför Mattehuset, i vilken ön Ön ligger. Också kallad Lunds skärgård.",
+                "en": "Beautiful lake outside MH, in which the ön Ön is located. Also called the archipelago of Lund."
+            }
+        },
+        {
+            "key": {
+                "sv": "Slasque",
+                "en": "Slasque"
+            },
+            "value": {
+                "sv": "Sittning med klädkod overall. Jmf Gasque.",
+                "en": "Sitting with dress code overalls. cf. Gasque."
+            }
+        },
+        {
+            "key": {
+                "sv": "Sparta",
+                "en": "Sparta"
+            },
+            "value": {
+                "sv": "Studentghetto nära LTH. Inspirerat av efterkrigsarkitektur från forna Sovjetunionen. Har undvikts att renoveras för att möjliggöra större vinst för AFB.",
+                "en": "Student ghetto near LTH, inspired by post-war architecture from the former Soviet Union. Has been avoided to be renovated to enable greater profit for AFB."
+            }
+        },
+        {
+            "key": {
+                "sv": "Spex",
+                "en": "Spex"
+            },
+            "value": {
+                "sv": "Som en musikal fast studentikos och rolig.",
+                "en": "Like a musical, but student-centred and fun."
+            }
+        },
+        {
+            "key": {
+                "sv": "telefonkiosken Telefonkiosken",
+                "en": "telefonkiosken Telefonkiosken"
+            },
+            "value": {
+                "sv": "Orange telefonkiosk på ön Ön som alltid ska vara orange.",
+                "en": "Orange phone booth on sjön Sjön that should always be orange."
+            }
+        },
+        {
+            "key": {
+                "sv": "Tenta",
+                "en": "Exam"
+            },
+            "value": {
+                "sv": "Chockbehandling av tentaångest.",
+                "en": "Shock treatment for exam anxiety."
+            }
+        },
+        {
+            "key": {
+                "sv": "Tentavrål",
+                "en": "Tent howl"
+            },
+            "value": {
+                "sv": "23:00 varje kväll i tentaveckan lindras tentaångesten i ett kollektivt vrål. Kan ofta höras på Delphi.",
+                "en": "At 23:00 every night during exam week, exam anxiety is relieved in a collective howl. Can often be heard at Delphi."
+            }
+        },
+        {
+            "key": {
+                "sv": "Tentaångest",
+                "en": "Exam anxiety"
+            },
+            "value": {
+                "sv": "Vag känsla av oro som ökar exponentiellt då läsperioden lider mot sitt slut.",
+                "en": "A vague sense of anxiety that increases exponentially as the semester comes to an end."
+            }
+        },
+        {
+            "key": {
+                "sv": "Vildanden",
+                "en": "Vildanden"
+            },
+            "value": {
+                "sv": "Studentghetto inte alls nära LTH.",
+                "en": "Student ghetto not at all close to LTH."
+            }
+        },
+        {
+            "key": {
+                "sv": "Älgebra",
+                "en": "Älgebra"
+            },
+            "value": {
+                "sv": "Matematisk metod främst nyttjad vid räkning av storvilt.",
+                "en": "Mathematical method mainly used for counting of The big game."
+            }
+        },
+        {
+            "key": {
+                "sv": "ön Ön",
+                "en": "ön Ön"
+            },
+            "value": {
+                "sv": "Ö i sjön Sjön med telefonkiosken Telefonkiosken på. Ockuperas traditionsenligt av F-sektionen innan sjöslaget på Regattadagen.",
+                "en": "Island in sjön Sjön with telefonkiosken Telefonkiosken on it. Traditionally occupied by the F-guild before the sea battle on Regatta Day."
+            }
+        }
+    ]
 }

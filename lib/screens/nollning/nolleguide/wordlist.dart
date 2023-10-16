@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/word.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WordListPage extends StatefulWidget {
   @override
@@ -32,6 +32,7 @@ class _WordListState extends State<WordListPage> {
   }
 
   Widget _createWordCard(Word w) {
+    String locale = Localizations.localeOf(context).toString();
     return Column(
       children: [
         SizedBox(
@@ -42,10 +43,10 @@ class _WordListState extends State<WordListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  w.key!,
+                  w.key![locale]!,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                Text(w.value!, style: TextStyle(fontSize: 18))
+                Text(w.value![locale]!, style: TextStyle(fontSize: 18))
               ],
             ),
           ),
@@ -57,9 +58,10 @@ class _WordListState extends State<WordListPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ordlista"),
+        title: Text(t.nolleguideWordlist),
       ),
       body: Container(
         margin: EdgeInsets.all(20),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
@@ -19,10 +18,19 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
   AdventureData? _adventureData;
 
   void initState() {
-    locator<NollningService>().getAdventures().then((value) => setState(() {
+    locator<NollningService>().getAdventures().then((value) {
+      if (mounted) {
+        setState(() {
           this._adventureData = value;
-        }));
+        });
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -33,6 +41,7 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                 text: t.introductionMissions,

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
@@ -24,7 +25,6 @@ import 'util/authentication/authentication_event.dart';
 import 'util/authentication/authentication_state.dart';
 import 'util/errors/error_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -108,6 +108,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return BlocProvider<AuthenticationBloc>(
         create: (context) => _authenticationBloc!,
         child: MaterialApp(

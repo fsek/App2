@@ -76,6 +76,17 @@
     "settingsUnsavedText": "You have unsaved changes.\nDo you want to save or discard these?",
     "settingsDiscard": "Discard",
 
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescetarian": "Pescetarian",
+    "milk": "Milk Allergy",
+    "gluten": "Gluten",
+
+    "physics": "Engineering Physics",
+    "mathematics": "Engineering Mathematics ",
+    "nano": "Engineering Nanoscience",
+    "unknown": "Unknown",
+
     "songbookSearch": "Search",
     "songbookSongbook": "Songbook",
     "songbookNoMatches": "No matchese found :^(",
@@ -83,7 +94,7 @@
     "songbookAuthor": "Author",
 
     "otherSongbook": "Songbook",
-    "otherGallery": "Picture Gallery",
+    "otherGallery": "Photo Gallery",
     "otherCafe": "Hilbert Café",
     "otherAboutGuild": "The F guild",
     "otherFap": "The F-app",
@@ -115,7 +126,7 @@
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
 
-    "galleryTitle": "Image gallery",
+    "galleryTitle": "Photo Gallery",
     "galleryOf": "of",
     "galleryImageDownloaded": "Image downloaded",
     "galleryImageDownloadError": "An error occurred while downloading",
@@ -133,9 +144,9 @@
 
     "messagesMessages": "Messages",
 
-    "nolleguideWeAtFsek": "We at F-sek",
+    "nolleguideWeAtFsek": "The F-guild",
     "nolleguideEtiquette": "All you need to know",
-    "nolleguideWordlist": "Wordlist",
+    "nolleguideWordlist": "Glossary",
 
     "introductionLocked": "Locked",
     "introductionInterrupt": "Cancel/\nRemove",
@@ -180,10 +191,10 @@
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
 
-    "articleEtiquette": "All you need to know",
-    "mannersEtiquette": "All you need to know",
-
-    "aboutGuildGuild": "The F-guild",
+    "mannersEtiquette": "Student life", 
+    
+    "aboutGuildTitle": "About The F-guild",
+    "aboutGuildGuild": "The F-guild", 
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
     "aboutGuildThree": "among members and look after their common interests.",
@@ -280,5 +291,23 @@
     "motionsPageTitle": "Motions",
     "readMotion": "Read motion",
     "readMotionAnswer": "Read motion answer",
-    "readProposition": "Read motion from the board"
+    "readProposition": "Read motion from the board",
+
+    "emergencyContacts": "Emergency contact numbers",
+    "emergencyTitleOne": "112 - Emergency",
+    "emergencyContentOne": "In case of emergency, always call 112. This number allows you to reach the police, ambulance, fire brigade etc.",
+    "emergencyTitleTwo": "+46 46 17 41 00 - Emergency psychiatric care (Lund)",
+    "emergencyContentTwo": "Call this number if you need emergency psychiatric care in Lund. The clinic is open 24 hours a day.",
+    "emergencyTitleThree": "+46 81 288 32 20 - Mind suicide hotline",
+    "emergencyContentThree": "The suicide hotline is for those who are thinking about taking their own life or have a loved one with such thoughts. They are open 24 hours a day, every day. In case of acute suicide risk, you should call 112.",
+    "emergencyTitleFour": "+46 46 222 07 00 - University security control center",
+    "emergencyContentFour": "Call this number if you need to get in touch with the security guard or the university's emergency services. This is a 24-hour service number where you can get assistance and report events like observations, burglary, lost access card, threat or violence.",
+    "emergencyTitleFive": "08-702 16 80 - On-call attendee (Jourhavande medmänniska)",
+    "emergencyContentFive": "If you need someone to talk to, call Jourhavande medmänniskor for human support at night between 21 pm and 06 am.",
+    "emergencyTitleSix": "+46 77 11 177 00 - Medical Advice Number",
+    "emergencyContentSix": "If you have questions or need advice on illness, injury and health.",
+    "emergencyTitleSeven": "+46 77 33 113 13 - Information in case of accidents and crises",
+    "emergencyContentSeven": "Sweden's national information number. You can call this number to get information in the event of serious accidents and crises in society.",
+    "emergencyTitleEight": "Föset",
+    "emergencyContentEight": "If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\nFind additional contact information in the Nolleguide"
 }

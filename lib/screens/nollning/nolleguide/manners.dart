@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/article.dart';
 import 'package:flutter/services.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'dart:convert';
 
 import '../article_page.dart';
@@ -13,7 +14,6 @@ class MannersPage extends StatefulWidget {
 }
 
 class _MannersPageState extends State<MannersPage> {
-  @override
   List<Article> articles = [];
   Article? welcomeArticle;
 
@@ -32,45 +32,72 @@ class _MannersPageState extends State<MannersPage> {
   }
 
   Future<List<Article>> _loadArticles() async {
-    final String raw =
-        await rootBundle.loadString('assets/data/guide/articles.json');
+    final String raw = await rootBundle.loadString('assets/data/guide/articles.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
-    List<Article> out = (jsonRaw['articles'] as List)
-        .map((data) => Article.fromJson(data))
-        .toList();
+    List<Article> out = (jsonRaw['articles'] as List).map((data) => Article.fromJson(data)).toList();
     return out;
   }
 
   Widget _createArticleCard(Article a) {
     String locale = Localizations.localeOf(context).toString();
-    Widget mightBeImage = SizedBox(height: 10);
-    if (a.image != "") {
-      mightBeImage = Image.asset("assets/img/${a.image!}");
-      const SizedBox(height: 10);
-    }
-    return Card(
-      child: InkWell(
-        onTap: () => openArticle(a),
-        child: ListTile(
-          title: Text(
-            a.title![locale]!,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                a.preamble![locale]!,
+    return !(a.intro ?? false)
+        ? Container(
+            //child: InkWell(
+            child: Stack(
+              children: [
+                ListTile(
+                  leading: Icon(
+                    Icons.subdirectory_arrow_right_rounded,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(45, 2, 3, 2),
+                  child: InkWell(
+                    onTap: () => openArticle(a),
+                    child: ListTile(
+                      tileColor: WeekTracker.weekColors[WeekTracker.determineWeek(/*differentPreIntroduction: true*/)].withOpacity(0.3),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      title: Text(
+                        a.title![locale]!,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      trailing: Icon(Icons.keyboard_arrow_right_rounded),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        : Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.only(top: 3),
+                child: ListTile(
+                  title: Text(
+                    a.title![locale]!,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Html(
+                        data: a.content![locale]!,
+                        style: {
+                          "body": Style(
+                            fontSize: FontSize(15.0),
+                          ),
+                        },
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(
-                height: 6,
-              ),
-              mightBeImage,
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   Widget welcomeArticleCard(Article? a) {
@@ -78,27 +105,33 @@ class _MannersPageState extends State<MannersPage> {
     if (a == null) {
       return Container();
     }
-    return Card(
-      child: ListTile(
-        title: Text(
-          a.title![locale]!,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Html(
-              data: a.content![locale]!,
-              style: {
-                "body": Style(
-                  fontSize: FontSize(16.0),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: ListTile(
+            title: Text(
+              a.title![locale]!,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Html(
+                  data: a.content![locale]!,
+                  style: {
+                    "body": Style(
+                      fontSize: FontSize(16.0),
+                    ),
+                  },
                 ),
-              },
+                SizedBox(
+                  height: 6,
+                ),
+              ],
             ),
-            SizedBox(
-              height: 6,
-            ),
-          ],
+          ),
         ),
       ),
     );

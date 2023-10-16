@@ -4,8 +4,8 @@ part 'word.g.dart'; //generated JSON file
 
 @JsonSerializable()
 class Word {
-  String? key;
-  String? value;
+  Map<String, String>? key;
+  Map<String, String>? value;
   Word();
 
   factory Word.fromJson(Map<String, dynamic> json) => _$WordFromJson(json);

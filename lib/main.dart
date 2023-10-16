@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/services.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +15,16 @@ import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
-import 'app.dart';
-import 'models/destination.dart';
-import 'screens/nollning/adventure_missions.dart';
-import 'screens/nollning/emergency_contacts.dart';
-import 'screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/models/destination.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
-import 'screens/home/home.dart';
-import 'services/navigation.service.dart';
-import 'services/service_locator.dart';
-import 'services/theme.service.dart';
+import 'package:fsek_mobile/screens/home/home.dart';
+import 'package:fsek_mobile/services/navigation.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
 class SimpleBlocObserver extends BlocObserver {
@@ -44,9 +42,10 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.notifications, NotiserPage()),
+    Destination(3, Icons.notifications, NotificationsPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
+
   route.navbarDestinations = navbarDestinations;
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
@@ -92,7 +91,6 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
   runZonedGuarded<void>(() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(FsekMobileApp());
   }, (Object error, StackTrace stackTrace) {
     // Whenever an error occurs, call the `_reportError` function. This sends

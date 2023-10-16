@@ -27,7 +27,13 @@ class UserService extends AbstractService {
         setCurrentUser(User.fromJson(json["data"]));
         return DeviseToken.getFromHeaders(response.headers);
       } else {
-        return DeviseToken(error: json["errors"][0]);
+        var err = json["errors"] ?? json["error"];
+        String? msg;
+
+        if (err != null) {
+          msg = err[0];
+        }
+        return DeviseToken(error: msg);
       }
     } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
@@ -86,6 +92,12 @@ class UserService extends AbstractService {
         return User();
     }
     return _user!;
+  }
+
+  void syncUser() async {
+    //Force a sync of the user object check getUser for why
+    _user = null;
+    await getUser();
   }
 
   Future<Map> updateUser(User updatedUser) async {
