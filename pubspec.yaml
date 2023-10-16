@@ -56,7 +56,7 @@ dependencies:
   path_provider: any
   flutter_pdfview: ^1.2.2 # For PDF viewer
   permission_handler: ^11.0.0
-  flutter_cached_pdfview: ^0.4.1 # For PDF viewer
+  flutter_cached_pdfview: ^0.4.2 # For PDF viewer
   page_transition: ^2.0.9 # For page transitions
   turn_page_transition: ^0.3.0
   audioplayers: ^5.1.0

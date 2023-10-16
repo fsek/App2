@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/guildMeeting/candidacy_poster.dart';
-import 'package:fsek_mobile/screens/guildmeeting/other_documents.dart';
-import 'package:fsek_mobile/screens/guildMeeting/about_guild_meeting.dart';
-import 'package:fsek_mobile/screens/guildmeeting/propositions.dart';
-import 'package:fsek_mobile/screens/guildmeeting/motions.dart';
-import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
-import 'package:fsek_mobile/util/nollning/week_tracker.dart';
-import 'package:turn_page_transition/turn_page_transition.dart';
+import 'package:fsek_mobile/screens/guild_meeting/candidacy_poster.dart';
+import 'package:fsek_mobile/screens/guild_meeting/other_documents.dart';
+import 'package:fsek_mobile/screens/guild_meeting/about_guild_meeting.dart';
+import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
+import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -92,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       child: Text(text),
       style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
-          backgroundColor: Color.fromARGB(255, 0, 93, 119).withOpacity(0.25),
+          backgroundColor: Color(0xFF667760).withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

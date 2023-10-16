@@ -51,7 +51,6 @@ class _PeoplePageState extends State<PeoplePage> {
 
   Widget _createPersonCard(Person p) {
     String imageBasePath = "assets/img/";
-    String locale = Localizations.localeOf(context).toString();
     Border? border;
     double borderWidth = 5;
     double width = 60;
