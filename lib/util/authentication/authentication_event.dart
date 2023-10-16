@@ -4,7 +4,7 @@ import 'package:fsek_mobile/models/user/user.dart';
 
 abstract class AuthenticationEvent extends Equatable {
   AuthenticationEvent({List props = const []});
-  
+
   @override
   List<Object> get props => [];
 }

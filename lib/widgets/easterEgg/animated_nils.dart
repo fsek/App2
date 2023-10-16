@@ -18,7 +18,6 @@ class _AnimatedNilsState extends State<AnimatedNils>
   @override
   void initState() {
     super.initState();
-    // is broke no time to fix now FIXME
     AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
     animation =
         AnimationController(vsync: this, duration: new Duration(seconds: 1))

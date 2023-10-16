@@ -17,11 +17,13 @@ class TokenCallback {
   TokenCallback(this.message, this.callback);
 }
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserService userService;
   final List<TokenCallback> onTokenRefreshCallbacks = [];
 
-  AuthenticationBloc({required this.userService}) : super(AuthenticationUninitialized()) {
+  AuthenticationBloc({required this.userService})
+      : super(AuthenticationUninitialized()) {
     on<AuthenticationEvent>(_onEvent, transformer: sequential());
   }
 
@@ -30,13 +32,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   void executeCallbacks() {
-    for(TokenCallback f in onTokenRefreshCallbacks) {
+    for (TokenCallback f in onTokenRefreshCallbacks) {
       f.callback();
     }
     onTokenRefreshCallbacks.clear();
   }
 
-  FutureOr<void> _onEvent(AuthenticationEvent event, Emitter<AuthenticationState> emit) async {
+  FutureOr<void> _onEvent(
+      AuthenticationEvent event, Emitter<AuthenticationState> emit) async {
     // On app start check if we have a token already, if not we have to login
     if (event is AppStarted) {
       final bool hasToken = await userService.isAuthenticated();
@@ -46,15 +49,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         final DeviseToken token = await userService.validateToken();
         if (token.error != null && token.error!.isNotEmpty) {
           emit(AuthenticationUnauthenticated());
-        }
-        else {
+        } else {
           emit(AuthenticationAuthenticated());
           this.add(Authenticated());
         }
       } else if (hasToken && !tokenValid) {
         this.add(TokenRevoked());
-      }
-      else {
+      } else {
         emit(AuthenticationUnauthenticated());
       }
     }
@@ -79,14 +80,12 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         emit(AuthenticationUserFetched(
             messages: onTokenRefreshCallbacks.map((e) => e.message).toList()));
         executeCallbacks();
-      }
-      catch (ex) {
+      } catch (ex) {
         if (ex is UnauthorisedException)
           emit(AuthenticationUnauthenticated());
         else if (ex is SocketException) {
           emit(AuthenticationDisconnected());
-        }
-        else {
+        } else {
           print(ex);
           emit(AuthenticationError(error: ex.toString()));
         }
@@ -109,5 +108,3 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
   }
 }
-
-

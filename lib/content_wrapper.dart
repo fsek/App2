@@ -92,7 +92,6 @@ class _ContentWrapperState extends State<ContentWrapper>
     var random = new Random();
     int index = random.nextInt(2);
     String toPlay = files[index];
-    // its broke for now, no time to fix xdd FIXME
     AudioPlayer().play(AssetSource('audio/' + toPlay));
   }
 
