@@ -31,7 +31,8 @@ class _ErrorPageState extends State<ErrorPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Error", style: Theme.of(context).textTheme.headline4),
+                Text("Error",
+                    style: Theme.of(context).textTheme.headlineMedium),
                 SizedBox(
                   height: 6,
                 ),
@@ -42,7 +43,7 @@ class _ErrorPageState extends State<ErrorPage> {
                 TextButton(
                   child:
                       Text("Try again", style: TextStyle(color: Colors.white)),
-                  style: TextButton.styleFrom(primary: Colors.purple),
+                  style: TextButton.styleFrom(foregroundColor: Colors.purple),
                   onPressed: () {
                     locator<NavigationService>().pop();
                     widget.authenticationBloc!.add(AppStarted());

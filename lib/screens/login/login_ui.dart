@@ -166,7 +166,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           "Forgot my password",
           style: Theme.of(context)
               .textTheme
-              .bodyText2!
+              .bodyMedium!
               .apply(color: Colors.grey[300]),
         ));
 
@@ -235,7 +235,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           _animationController.reverse();
         }
         if (state is LoginFailure) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${state.error}'),

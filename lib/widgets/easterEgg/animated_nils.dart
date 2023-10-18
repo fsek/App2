@@ -9,7 +9,8 @@ class AnimatedNils extends StatefulWidget {
   _AnimatedNilsState createState() => _AnimatedNilsState();
 }
 
-class _AnimatedNilsState extends State<AnimatedNils> with SingleTickerProviderStateMixin {
+class _AnimatedNilsState extends State<AnimatedNils>
+    with SingleTickerProviderStateMixin {
   double xPos = 0;
   double yPos = 0;
   AnimationController? animation;
@@ -17,9 +18,10 @@ class _AnimatedNilsState extends State<AnimatedNils> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    // is broke no time to fix now FIXME
-    //AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
-    animation = AnimationController(vsync: this, duration: new Duration(seconds: 1))..repeat();
+    AudioPlayer().play(AssetSource('audio/semenMusic.mp3'));
+    animation =
+        AnimationController(vsync: this, duration: new Duration(seconds: 1))
+          ..repeat();
   }
 
   @override
@@ -36,12 +38,14 @@ class _AnimatedNilsState extends State<AnimatedNils> with SingleTickerProviderSt
               left: 50 + 50 * cos(animation!.value * 2 * pi),
               top: -400 + 100 * sin(animation!.value * 2 * pi),
               child: Column(children: [
-                Text("YOU HAVE BEEN BLEESED", style: Theme.of(context).textTheme.headline5),
+                Text("YOU HAVE BEEN BLEESED",
+                    style: Theme.of(context).textTheme.headlineSmall),
                 Image(
                   image: AssetImage("assets/img/memes/wideNils.jpg"),
                   width: 300,
                 ),
-                Text("BY WIDE NILS", style: Theme.of(context).textTheme.headline4)
+                Text("BY WIDE NILS",
+                    style: Theme.of(context).textTheme.headlineMedium)
               ]));
         },
         animation: animation!);

@@ -6,8 +6,8 @@ import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_save/image_save.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class ImageBrowserPage extends StatefulWidget {
   const ImageBrowserPage({Key? key, required this.album, required this.initial})
@@ -60,12 +60,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                       try {
                         http.Response image = await http.get(Uri.parse(
                             "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                        var test = await FlutterImageCompress.compressWithList(
-                            image.bodyBytes,
+                        ImageGallerySaver.saveImage(image.bodyBytes,
+                            name: "${widget.album.images![index].filename!}",
                             quality: 1);
-                        ImageSave.saveImage(
-                            test, "${widget.album.images![index].filename!}",
-                            albumName: "F-sektionen");
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
                         ));
@@ -85,12 +82,18 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                   try {
                     http.Response image = await http.get(Uri.parse(
                         "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    ImageSave.saveImage(image.bodyBytes,
+                    bool? success = await ImageSave.saveImage(image.bodyBytes,
                         "${widget.album.images![index].filename!}",
                         albumName: "F-sektionen");
-                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloaded),
-                    ));
+                    if (success == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+                        content: Text(t.galleryImageDownloaded),
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+                        content: Text(t.galleryImageDownloadError),
+                      ));
+                    }
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: Text(t.galleryImageDownloadError),
@@ -226,7 +229,7 @@ class _ImageContainerState extends State<ImageContainer> {
             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
             Text(
               "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.album.images!.length}",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ]),
           onInteractionEnd: (scaleEndDetails) {

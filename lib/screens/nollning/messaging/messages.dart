@@ -56,7 +56,7 @@ class _MessagesPageState extends State<MessagesPage> {
                                     text: e!.user!["name"],
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText2!
+                                        .bodyMedium!
                                         .apply(
                                             color: Colors.grey,
                                             fontStyle: FontStyle.italic),
@@ -67,7 +67,7 @@ class _MessagesPageState extends State<MessagesPage> {
                                             30, e.content!.trim()),
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText2!
+                                        .bodyMedium!
                                         .apply(
                                             color: Colors.grey,
                                             fontStyle: FontStyle.normal),

@@ -13,11 +13,13 @@ class AlbumPage extends StatelessWidget {
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return Scaffold(
-        appBar: AppBar(title: Text(album.title!), actions: [],),
+        appBar: AppBar(
+          title: Text(album.title!),
+          actions: [],
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -28,7 +30,8 @@ class AlbumPage extends StatelessWidget {
                   children: generateImages(context),
                 ),
               ),
-            ),Container(
+            ),
+            Container(
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.grey[50]),
               child: ExpansionTile(
@@ -50,12 +53,21 @@ class AlbumPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(album.description!), SizedBox(height:10),
+                  Text(album.description!),
+                  SizedBox(height: 10),
                   RichText(
                       text: TextSpan(
                           text: t.albumPhotographers,
-                          style: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.orange[800]),
-                          children: [TextSpan(text: album.photographers?.join(", ") ?? t.albumNoPhotographers, style: Theme.of(context).textTheme.bodyText2)])),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.apply(color: Colors.orange[800]),
+                          children: [
+                        TextSpan(
+                            text: album.photographers?.join(", ") ??
+                                t.albumNoPhotographers,
+                            style: Theme.of(context).textTheme.bodyMedium)
+                      ])),
                   SizedBox(
                     height: 10,
                   ),
@@ -82,7 +94,8 @@ class AlbumPage extends StatelessWidget {
 
       if (album.images![i].file!.thumb!["url"] != null) {
         ink = Ink.image(
-            image: NetworkImage("${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
+            image: NetworkImage(
+                "${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
             fit: BoxFit.cover,
             child: InkWell(
               onTap: () => openImageBrowser(context, i),

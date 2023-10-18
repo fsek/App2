@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   UserService? _userService;
   //ignore: close_sinks
   AuthenticationBloc? _authenticationBloc;
-  
+
   String buildName = "x.x.x";
 
   @override
@@ -29,11 +29,9 @@ class _LoginPageState extends State<LoginPage> {
     _userService = widget.userService;
     _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     _loginBloc = LoginBloc(
-      authenticationBloc: _authenticationBloc!,
-      userService: _userService!
-    );
-    
-    if(!kIsWeb) {
+        authenticationBloc: _authenticationBloc!, userService: _userService!);
+
+    if (!kIsWeb) {
       PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
         setState(() {
           buildName = packageInfo.version;
@@ -45,32 +43,38 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _versionText = Text("F-appen Version: " + buildName, style: 
-      Theme.of(context).textTheme.bodyText1);
+    var _versionText = Text("F-appen Version: " + buildName,
+        style: Theme.of(context).textTheme.bodyLarge);
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [_versionText]),
-            SizedBox(height: 12,)
-          ],
-        ),
-        SingleChildScrollView(
-          child: Container(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  LoginUI(
-                    authenticationBloc: _authenticationBloc,
-                    loginBloc: _loginBloc,
-                    userService: _userService,
-                  )]))),
-    ]));
+        backgroundColor: Colors.transparent,
+        body: Stack(children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [_versionText]),
+              SizedBox(
+                height: 12,
+              )
+            ],
+          ),
+          SingleChildScrollView(
+              child: Container(
+                  constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height -
+                          MediaQuery.of(context).viewInsets.bottom),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        LoginUI(
+                          authenticationBloc: _authenticationBloc,
+                          loginBloc: _loginBloc,
+                          userService: _userService,
+                        )
+                      ]))),
+        ]));
   }
 
   @override

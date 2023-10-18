@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+
 import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -15,26 +17,29 @@ class TokenCallback {
   TokenCallback(this.message, this.callback);
 }
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserService userService;
   final List<TokenCallback> onTokenRefreshCallbacks = [];
-  AuthenticationBloc({required this.userService}) : super(AuthenticationUninitialized());
+
+  AuthenticationBloc({required this.userService})
+      : super(AuthenticationUninitialized()) {
+    on<AuthenticationEvent>(_onEvent, transformer: sequential());
+  }
 
   void addTokenRefreshCallback(TokenCallback callback) {
     onTokenRefreshCallbacks.add(callback);
   }
 
   void executeCallbacks() {
-    for(TokenCallback f in onTokenRefreshCallbacks) {
+    for (TokenCallback f in onTokenRefreshCallbacks) {
       f.callback();
     }
     onTokenRefreshCallbacks.clear();
   }
 
-  @override
-  Stream<AuthenticationState> mapEventToState(
-    AuthenticationEvent event,
-  ) async* {
+  FutureOr<void> _onEvent(
+      AuthenticationEvent event, Emitter<AuthenticationState> emit) async {
     // On app start check if we have a token already, if not we have to login
     if (event is AppStarted) {
       final bool hasToken = await userService.isAuthenticated();
@@ -42,67 +47,64 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
       if (hasToken && tokenValid) {
         final DeviseToken token = await userService.validateToken();
-        if(token.error != null && token.error!.isNotEmpty) {
-          yield AuthenticationUnauthenticated();
-        }
-        else {
-          yield AuthenticationAuthenticated();
+        if (token.error != null && token.error!.isNotEmpty) {
+          emit(AuthenticationUnauthenticated());
+        } else {
+          emit(AuthenticationAuthenticated());
           this.add(Authenticated());
         }
-      } else if(hasToken && !tokenValid) {
+      } else if (hasToken && !tokenValid) {
         this.add(TokenRevoked());
-      }
-      else {
-        yield AuthenticationUnauthenticated();
+      } else {
+        emit(AuthenticationUnauthenticated());
       }
     }
 
     // When a user has LoggedIn we store the token and tell the App that hes authenticated
     if (event is LoggedIn) {
-      yield AuthenticationLoading();
-      if(event.token is! DeviseToken) {
+      emit(AuthenticationLoading());
+      if (event.token is! DeviseToken) {
         this.add(LoggedOut());
-        return; 
+        return;
       }
 
       userService.storeToken(event.token!);
-      yield AuthenticationAuthenticated();
+      emit(AuthenticationAuthenticated());
       this.add(Authenticated());
-      yield AuthenticationLoading();
+      emit(AuthenticationLoading());
     }
 
     // We need the User-info from the API on authentication so we fetch that
     if (event is Authenticated) {
       try {
-        yield AuthenticationUserFetched(messages: onTokenRefreshCallbacks.map((e) => e.message).toList());
+        emit(AuthenticationUserFetched(
+            messages: onTokenRefreshCallbacks.map((e) => e.message).toList()));
         executeCallbacks();
-      }
-      catch(ex) {
-        if(ex is UnauthorisedException)
-          yield AuthenticationUnauthenticated();
-        else if(ex is SocketException) {
-          yield AuthenticationDisconnected();
-        }
-        else {
+      } catch (ex) {
+        if (ex is UnauthorisedException)
+          emit(AuthenticationUnauthenticated());
+        else if (ex is SocketException) {
+          emit(AuthenticationDisconnected());
+        } else {
           print(ex);
-          yield AuthenticationError(error: ex.toString());
+          emit(AuthenticationError(error: ex.toString()));
         }
       }
     }
 
     if (event is LoggedOut) {
-      yield AuthenticationLoading();
+      emit(AuthenticationLoading());
       userService.signOut();
-      yield AuthenticationUnauthenticated();
+      emit(AuthenticationUnauthenticated());
     }
 
-    if(event is TokenRevoked) {
+    if (event is TokenRevoked) {
       userService.clearToken();
-      yield AuthenticationUnauthenticated();
+      emit(AuthenticationUnauthenticated());
     }
 
-    if(event is AppError) {
-      yield AuthenticationError(error: event.error);
+    if (event is AppError) {
+      emit(AuthenticationError(error: event.error));
     }
   }
 }

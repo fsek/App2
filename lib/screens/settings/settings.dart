@@ -295,7 +295,7 @@ class _SettingsPageState extends State<SettingsPage> {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
           title: Text(t.settingsSaving,
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headlineSmall),
           children: [
             Column(
               children: [
@@ -312,7 +312,7 @@ class _SettingsPageState extends State<SettingsPage> {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
           title: Text(t.settingsWarning,
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headlineSmall),
           children: [
             Center(
               child: Padding(
@@ -335,7 +335,7 @@ class _SettingsPageState extends State<SettingsPage> {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
           title: Text(t.settingsUnsaved,
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headlineSmall),
           children: [
             Center(
               child: Padding(

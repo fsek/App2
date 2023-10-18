@@ -30,10 +30,10 @@ class _EventPageState extends State<EventPage> {
   bool displayGroupInput = true;
   bool? drinkPackageAnswer;
   final Map<String, Style> _htmlStyle = {
-    "body": Style(margin: EdgeInsets.zero, padding: EdgeInsets.zero),
+    "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
     "p": Style(
-        padding: EdgeInsets.zero,
-        margin: EdgeInsets.zero,
+        padding: HtmlPaddings.zero,
+        margin: Margins.zero,
         lineHeight: LineHeight(1.2))
   };
 
@@ -810,8 +810,8 @@ class _EventPageState extends State<EventPage> {
                   child: Html(
                       data: event?.description ?? t.eventNoDescription,
                       style: _htmlStyle,
-                      onLinkTap: (String? url, RenderContext context,
-                          Map<String, String> attributes, element) {
+                      onLinkTap: (String? url, Map<String, String> attributes,
+                          element) {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),

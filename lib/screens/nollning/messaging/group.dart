@@ -44,7 +44,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     locator<UserService>().getUser().then((value) => thisUser = value);
     connectToActionCable();
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -132,24 +132,20 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                                                           data: message.text,
                                                           style: {
                                                             "body": Style(
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .zero,
+                                                                margin: Margins
+                                                                    .zero,
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    HtmlPaddings
                                                                         .zero),
                                                             "p": Style(
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    HtmlPaddings
                                                                         .zero,
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .zero)
+                                                                margin: Margins
+                                                                    .zero)
                                                           },
                                                           onLinkTap: (String?
                                                                   url,
-                                                              RenderContext
-                                                                  context,
                                                               Map<String,
                                                                       String>
                                                                   attributes,
@@ -189,7 +185,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     cable!.disconnect();
     _pagingController.dispose();
     _controller.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

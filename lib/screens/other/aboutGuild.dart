@@ -16,7 +16,7 @@ class AboutGuildPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(t.aboutGuildGuild,
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   SizedBox(
                     height: 8,
                   ),
