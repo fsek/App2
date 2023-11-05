@@ -154,7 +154,3 @@ class AboutGuildMeetingPage extends StatelessWidget {
             )));
   }
 }
-
-String getGuildMeetingName() {
-  return "HT23";
-}
