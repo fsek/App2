@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="se.fsektionen.fapp">
+    package="se.fsektionen.fapp"
+    xmlns:tools="http://schemas.android.com/tools"
+>
    <application
         android:label="F-sek-stage"
         android:icon="@mipmap/launcher_icon">
@@ -44,5 +46,5 @@
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
         </receiver>
     </application>
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
 </manifest>
