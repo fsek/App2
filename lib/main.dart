@@ -6,7 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fsek_mobile/screens/exjob_catalog/exjob_catalog.dart';
+import 'package:fsek_mobile/screens/job_catalog/job_catalog.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
@@ -43,7 +43,7 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.work, ExJobCatalogPage()),
+    Destination(3, Icons.work, JobCatalogPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 

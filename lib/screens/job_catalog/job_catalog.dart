@@ -2,21 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/exjob_catalog/exjob_card.dart';
+import 'package:fsek_mobile/screens/job_catalog/job_card.dart';
 import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class ExJobCatalogPage extends StatefulWidget {
+class JobCatalogPage extends StatefulWidget {
   @override
-  _ExJobCatalogPageState createState() => _ExJobCatalogPageState();
+  _JobCatalogPageState createState() => _JobCatalogPageState();
 }
 
-class _ExJobCatalogPageState extends State<ExJobCatalogPage>
+class _JobCatalogPageState extends State<JobCatalogPage>
     with TickerProviderStateMixin {
-  List<ExJobInfo> exJobInfos = [];
-  List<ExJobInfo> allExJobInfos = [];
+  List<JobInfo> jobInfos = [];
+  List<JobInfo> allJobInfos = [];
 
   // Filter variables
   List<String> programmeFilter = List.empty();
@@ -31,10 +31,10 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
 
   @override
   void initState() {
-    exJobInfos.add(new ExJobInfo("axis", "programmer", "Lund", "F", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    exJobInfos.add(new ExJobInfo("cellavision", "cancer", "Jönköping", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    exJobInfos.add(new ExJobInfo("cellavision", "programmer", "Kalmar", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    allExJobInfos = List.from(exJobInfos);
+    jobInfos.add(new JobInfo("axis", "programmer", "Lund", "F", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    jobInfos.add(new JobInfo("cellavision", "cancer", "Jönköping", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    jobInfos.add(new JobInfo("cellavision", "programmer", "Kalmar", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    allJobInfos = List.from(jobInfos);
 
     /*
     locator<DocumentService>()
@@ -62,7 +62,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    return listEquals(allExJobInfos, [])
+    return listEquals(allJobInfos, [])
         ? Scaffold(
             body: Center(
                 child: CircularProgressIndicator(color: Colors.orange[600])))
@@ -111,7 +111,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                                   onPressed: () => setState(() {
                                         _controller.clear();
                                         FocusScope.of(context).unfocus();
-                                        exJobInfos = allExJobInfos;
+                                        jobInfos = allJobInfos;
                                       }))
                               : SizedBox.shrink()),
                       onChanged: (search) {
@@ -121,7 +121,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                             .split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
-                          exJobInfos = allExJobInfos.where((document) {
+                          jobInfos = allJobInfos.where((document) {
                               return searchTerms.every((term) => document
                                   .jobTitle
                                   .toLowerCase()
@@ -142,7 +142,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                         setState(() {
                           print("HELLO!filter" + programmeFilter.toString());
                           programmeFilter = values;
-                          exJobInfos = filterExJobs(allExJobInfos);
+                          jobInfos = filterJobs(allJobInfos);
                         });
                       },
                       confirmText: Text("Bekräfta"),
@@ -154,7 +154,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                         child: MultiSelectDialogField(
                         title: Text("Företag"),
                         buttonText: Text("Företag"),
-                      items: allExJobInfos.map( (exJob) => exJob.company).toSet()
+                      items: allJobInfos.map( (job) => job.company).toSet()
                           .map(
                               (company) => MultiSelectItem(company, company))
                           .toList(),
@@ -162,7 +162,7 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                       onConfirm: (List<String> values) {
                         setState(() {
                           companyFilter = values;
-                          exJobInfos = filterExJobs(allExJobInfos);
+                          jobInfos = filterJobs(allJobInfos);
                         });
                       },
                       confirmText: Text("Bekräfta"),
@@ -173,11 +173,11 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                     )),
                   ]),
                   Expanded(
-                    child: exJobInfos.length > 0
+                    child: jobInfos.length > 0
                         ? ListView(
-                            children: exJobInfos!
-                                .map((exJobInfos) =>
-                                    _generateDocumentTile(exJobInfos))
+                            children: jobInfos!
+                                .map((jobInfos) =>
+                                    _generateDocumentTile(jobInfos))
                                 .toList(),
                           )
                         : Padding(
@@ -193,22 +193,21 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
                       alignment: Alignment.bottomCenter,
                       padding: EdgeInsets.all(10),
                       child: Text("Visar " +
-                          exJobInfos.length.toString() +
+                          jobInfos.length.toString() +
                           " av " +
-                          allExJobInfos.length.toString() +
+                          allJobInfos.length.toString() +
                           " jobb"))
                 ],
               ),
             ));
   }
 
-  List<ExJobInfo> filterExJobs(List<ExJobInfo> allExJobs) {
-    print(allExJobs);
-    List<ExJobInfo> jobs = [];
+  List<JobInfo> filterJobs(List<JobInfo> allJobs) {
+    List<JobInfo> jobs = [];
     print(programmeFilter);
     print(List.from(["F"]));
     
-    for (ExJobInfo job in allExJobs) {
+    for (JobInfo job in allJobs) {
       print(job.programme);
       print("filtering");
         if ((programmeFilter.isEmpty || programmeFilter.contains(job.programme))
@@ -222,9 +221,9 @@ class _ExJobCatalogPageState extends State<ExJobCatalogPage>
     return jobs;
   }
 
-  Widget _generateDocumentTile(ExJobInfo exJobInfo) {
+  Widget _generateDocumentTile(JobInfo jobInfo) {
     return Column(
-      children: [ExJobCard(exJobInfo: exJobInfo)],
+      children: [JobCard(jobInfo: jobInfo)],
     );
   }
 }
