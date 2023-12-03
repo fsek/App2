@@ -24,7 +24,6 @@ class JobInfo {
 }
 
 class JobCard extends StatefulWidget {
-  //final ElectionDocument? proposition;
   final JobInfo jobInfo;
 
   const JobCard({Key? key, required this.jobInfo}) : super(key: key);
@@ -34,8 +33,15 @@ class JobCard extends StatefulWidget {
 }
 
 class _JobCardState extends State<JobCard> {
-  Color buttonColor = Colors.orange[700]!.withOpacity(0.3);
-  Color backgroundColor = Colors.orange[700]!.withOpacity(0.2);
+  Map<JobType, Color> jobTypeColor = {
+      JobType.internship : Colors.purple,
+  JobType.part_time : Colors.yellow,
+  JobType.full_time : Colors.orange,
+  JobType.summer : Colors.green,
+  JobType.ex_job : Colors.blue,
+
+    };
+
   Color bottomColor = Colors.grey[400]!;
 
   @override
@@ -48,28 +54,27 @@ class _JobCardState extends State<JobCard> {
     var t = AppLocalizations.of(context)!;
     return Container(
         decoration: BoxDecoration(
-            color: backgroundColor,
+            color: jobTypeColor[widget.jobInfo.jobType]!.withOpacity(0.2),
             border: Border(bottom: BorderSide(color: bottomColor))),
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
           Text(
               widget.jobInfo.company,
               style: TextStyle(fontWeight: FontWeight.normal),
+              textAlign: TextAlign.center,
             ),
           Text(
             widget.jobInfo.jobTitle,
             style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
             ),
-          Text(
+          Center(child: Text(
             widget.jobInfo.programmes.toString().substring(1, widget.jobInfo.programmes.toString().length - 1),
-            ),
+            textAlign: TextAlign.center,
+            )),
           SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
+          Container(
                   child: InkWell(
                       onTap: () async {
                         Uri url = Uri.parse(widget.jobInfo.url);
@@ -78,17 +83,14 @@ class _JobCardState extends State<JobCard> {
                         }
                       },
                       child: ListTile(
-                        tileColor: buttonColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
+                        tileColor: jobTypeColor[widget.jobInfo.jobType]!.withOpacity(0.3),
                         title: Center(
                             child: Text(
                           "Till ansökansportalen",
                         )),
-                        visualDensity: VisualDensity(vertical: -3),
+                        //visualDensity: VisualDensity(vertical: -3),
                       ))),
-            ],
-          )
+          Text("Deadline: " + widget.jobInfo.deadline.toString().split(' ')[0])
         ]));
   }
 

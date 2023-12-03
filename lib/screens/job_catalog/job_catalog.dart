@@ -33,6 +33,7 @@ class _JobCatalogPageState extends State<JobCatalogPage>
   @override
   void initState() {
     locator<DocumentService>().getOthers("Job").then((value) => setState(() {
+          DateTime currentTime = DateTime.now();
           print("start reading");
           if (!listEquals(value, [])) {
             print("jobs exist");
@@ -46,8 +47,11 @@ class _JobCatalogPageState extends State<JobCatalogPage>
               // Fulsnabbhack för att göra om pi till π.
               List<String> programmes = jobData[3].split(',').toList().map((p) => p == "pi" ? "π" : p).toList();
               DateTime deadline = DateTime.parse(jobData[4]);
-              allJobInfos.add(JobInfo(jobTitle, company, jobType, programmes, deadline, doc.url!));
-              print("added job");
+              deadline = deadline.add(const Duration(hours: 23, minutes: 59, seconds: 59));
+              if (currentTime.isBefore(deadline))
+                allJobInfos.add(JobInfo(jobTitle, company, jobType, programmes, deadline, doc.url!));
+              else
+                print("after deadline");
             }
             print("all reading done");
             jobInfos = allJobInfos;
@@ -198,13 +202,19 @@ class _JobCatalogPageState extends State<JobCatalogPage>
                       searchHint: "Axis, Ericsson...",
                     )),
                   ]),
-                  Expanded(
+                  Container(
+                    height: 200,
+                    child: Expanded(
                     child: jobInfos.length > 0
-                        ? ListView(
-                            children: jobInfos!
-                                .map((jobInfos) =>
-                                    _generateDocumentTile(jobInfos))
-                                .toList(),
+                        ? ListView.builder(
+                          itemCount: jobInfos.length,
+                          itemBuilder: (context, index) {
+                            return _generateDocumentTile(jobInfos[index]);
+                          }
+                            //children: jobInfos
+                            //    .map((jobInfos) =>
+                            //        _generateDocumentTile(jobInfos))
+                            //    .toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.symmetric(
@@ -215,8 +225,10 @@ class _JobCatalogPageState extends State<JobCatalogPage>
                             ),
                           ),
                   ),
+                  ),
                   Container(
                       alignment: Alignment.bottomCenter,
+                      color: Colors.white,
                       padding: EdgeInsets.all(10),
                       child: Text("Visar " +
                           jobInfos.length.toString() +
@@ -232,6 +244,7 @@ class _JobCatalogPageState extends State<JobCatalogPage>
     List<JobInfo> jobs = [];
 
     for (JobInfo job in allJobs) {
+      print(job.jobTitle);
       if ((programmeFilter.isEmpty ||
               job.programmes.where((p) => programmeFilter.contains(p)).length >
                   0) &&
