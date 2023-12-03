@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/themes.dart';
 
 import 'models/destination.dart';
@@ -13,9 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class ContentWrapper extends StatefulWidget {
-  ContentWrapper(
-      this.navbarDestinations, this.user, this.onNavigation, this.messages)
-      : super();
+  ContentWrapper(this.navbarDestinations, this.user, this.onNavigation, this.messages) : super();
 
   final List<Destination> navbarDestinations;
   final User? user;
@@ -26,8 +25,7 @@ class ContentWrapper extends StatefulWidget {
   _ContentWrapperState createState() => _ContentWrapperState();
 }
 
-class _ContentWrapperState extends State<ContentWrapper>
-    with TickerProviderStateMixin<ContentWrapper> {
+class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStateMixin<ContentWrapper> {
   late List<Key> _destinationKeys;
   late List<AnimationController> _faders;
   int _currentIndex = 0;
@@ -62,17 +60,14 @@ class _ContentWrapperState extends State<ContentWrapper>
   @override
   void initState() {
     //generate animation controllers for all destinations so we can fade them in and out
-    _faders = widget.navbarDestinations
-        .map<AnimationController>((Destination destination) {
-      return AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200));
+    _faders = widget.navbarDestinations.map<AnimationController>((Destination destination) {
+      return AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     }).toList();
     //set the fader of the starting page to 1 so it's visible
     _faders[_currentIndex].value = 1.0;
     //generate a list of globalkeys which we shall assign to our destinations
     //Each destination shall have its own key
-    _destinationKeys = List<Key>.generate(
-        widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
+    _destinationKeys = List<Key>.generate(widget.navbarDestinations.length, (int index) => GlobalKey()).toList();
 
     // For customizing sound behaviours
     AudioPlayer.global.setAudioContext(audioContext);
@@ -90,7 +85,7 @@ class _ContentWrapperState extends State<ContentWrapper>
     List<String> files = ["moose.mp4", "moose2.mp4"];
     // Get a random index between 0 and 1 and play matching sound
     var random = new Random();
-    int index = random.nextInt(2);
+    int index = random.nextInt(files.length);
     String toPlay = files[index];
     AudioPlayer().play(AssetSource('audio/' + toPlay));
   }
@@ -131,8 +126,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                     _logoFirstPress = DateTime.now(),
                     _logoPressed = true,
                   }
-                else if (DateTime.now().difference(_logoFirstPress!).inSeconds >
-                    20)
+                else if (DateTime.now().difference(_logoFirstPress!).inSeconds > 20)
                   {
                     _soundCounter = 1,
                     _logoFirstPress = DateTime.now(),
@@ -154,7 +148,16 @@ class _ContentWrapperState extends State<ContentWrapper>
             Text(
               AppLocalizations.of(context)!.fGuildName,
               style: Theme.of(context).textTheme.headlineSmall,
-            )
+            ),
+            SizedBox(width: 8),
+            IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => NotificationsPage()),
+                      )
+                    })
           ],
         ));
 
@@ -175,12 +178,10 @@ class _ContentWrapperState extends State<ContentWrapper>
             _header,
             Expanded(
                 child: Stack(
-                    children: widget.navbarDestinations
-                        .map((Destination destination) {
+                    children: widget.navbarDestinations.map((Destination destination) {
               final Widget view = FadeTransition(
-                opacity: _faders[destination.index].drive(CurveTween(
-                    curve: Curves
-                        .fastOutSlowIn)), //set opacity according to animation
+                opacity: _faders[destination.index]
+                    .drive(CurveTween(curve: Curves.fastOutSlowIn)), //set opacity according to animation
                 child: KeyedSubtree(
                   //set a global key to a widget so we preserve its state and subtree on a tree rebuild
                   key: _destinationKeys[destination.index],
@@ -198,9 +199,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                   //ignore pointer so the destinations aren't interactable when animating
                   return IgnorePointer(child: view);
                 }
-                return Offstage(
-                    child:
-                        view); //move offstage to ensure they aren't painted when not visible
+                return Offstage(child: view); //move offstage to ensure they aren't painted when not visible
               }
             }).toList())),
           ])),
@@ -215,14 +214,11 @@ class _ContentWrapperState extends State<ContentWrapper>
                 });
                 locator<ThemeService>().theme = fsekTheme;
                 locator<ThemeService>().backgroundColors = fsekBackground;
-                widget.onNavigation!.add(widget
-                    .navbarDestinations[_currentIndex].widget.runtimeType);
+                widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
                 ...widget.navbarDestinations.map((Destination destination) {
-                  return FsekAppBarItem(
-                      iconData: destination.icon,
-                      text: indexToTitle[destination.index]);
+                  return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],
               selectedColor: Colors.white,

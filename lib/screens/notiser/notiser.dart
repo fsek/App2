@@ -16,14 +16,10 @@ class NotificationsPage extends StatefulWidget {
 class _NotificationsPageState extends State<NotificationsPage> {
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
-    "p": Style(
-        padding: HtmlPaddings.zero,
-        margin: Margins.zero,
-        fontSize: FontSize(17))
+    "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, fontSize: FontSize(17))
   };
 
-  final PagingController<int, Notis> _pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Notis> _pagingController = PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -36,46 +32,39 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    return Container(
-      child: PagedListView<int, Notis>(
-        pagingController: _pagingController,
-        shrinkWrap: true,
-        builderDelegate: PagedChildBuilderDelegate<Notis>(
-            itemBuilder: (context, notis, index) {
-          if (notis.data == null) return Container();
+    return Scaffold(
+        appBar: AppBar(),
+        body: Container(
+          child: PagedListView<int, Notis>(
+            pagingController: _pagingController,
+            shrinkWrap: true,
+            builderDelegate: PagedChildBuilderDelegate<Notis>(itemBuilder: (context, notis, index) {
+              if (notis.data == null) return Container();
 
-          return Card(
-              color: notis.visited ?? false ? Colors.white : Colors.orange[200],
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () => seeNotis(notis),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+              return Card(
+                  color: notis.visited ?? false ? Colors.white : Colors.orange[200],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () => seeNotis(notis),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Html(
                           data: notis.data?["body"],
                           style: _htmlStyle,
                         ),
                         SizedBox(height: 4),
-                        notis.data?["extra"] != null
-                            ? Text(notis.data!["extra"]!)
-                            : Container(),
-                        Text(t.notificationsSent +
-                            (DateFormat('EEE d LLL y kk:mm')
-                                .format(notis.created_at!))),
+                        notis.data?["extra"] != null ? Text(notis.data!["extra"]!) : Container(),
+                        Text(t.notificationsSent + (DateFormat('EEE d LLL y kk:mm').format(notis.created_at!))),
                       ]),
-                ),
-              ));
-        }, noItemsFoundIndicatorBuilder: (context) {
-          return Container(
-              height: 400,
-              child: Center(
-                  child: Text(t.notificationsNone,
-                      style: Theme.of(context).textTheme.titleLarge)));
-        }),
-      ),
-    );
+                    ),
+                  ));
+            }, noItemsFoundIndicatorBuilder: (context) {
+              return Container(
+                  height: 400,
+                  child: Center(child: Text(t.notificationsNone, style: Theme.of(context).textTheme.titleLarge)));
+            }),
+          ),
+        ));
   }
 
   @override
@@ -97,13 +86,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
   void seeNotis(Notis notis) {
     locator<NotiserService>().visitNotis(notis.id!);
     setState(() {
-      _pagingController.itemList!
-          .singleWhere((element) => element.id == notis.id)
-          .visited = true;
+      _pagingController.itemList!.singleWhere((element) => element.id == notis.id).visited = true;
     });
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => EventPage(eventId: notis.event_id!)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: notis.event_id!)));
   }
 }

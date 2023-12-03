@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum JobType{
+enum JobType {
   internship,
   part_time,
   full_time,
@@ -21,6 +21,14 @@ class JobInfo {
   String url;
 
   JobInfo(this.jobTitle, this.company, this.jobType, this.programmes, this.deadline, this.url);
+
+  static Map<JobType, String> jobTypeString = {
+    JobType.internship: "Internship",
+    JobType.part_time: "Part-time",
+    JobType.full_time: "Full-time",
+    JobType.summer: "Summer",
+    JobType.ex_job: "Ex-job",
+  };
 }
 
 class JobCard extends StatefulWidget {
@@ -34,13 +42,12 @@ class JobCard extends StatefulWidget {
 
 class _JobCardState extends State<JobCard> {
   Map<JobType, Color> jobTypeColor = {
-      JobType.internship : Colors.purple,
-  JobType.part_time : Colors.yellow,
-  JobType.full_time : Colors.orange,
-  JobType.summer : Colors.green,
-  JobType.ex_job : Colors.blue,
-
-    };
+    JobType.internship: Colors.purple,
+    JobType.part_time: Colors.yellow,
+    JobType.full_time: Colors.orange,
+    JobType.summer: Colors.green,
+    JobType.ex_job: Colors.blue,
+  };
 
   Color bottomColor = Colors.grey[400]!;
 
@@ -57,40 +64,50 @@ class _JobCardState extends State<JobCard> {
             color: jobTypeColor[widget.jobInfo.jobType]!.withOpacity(0.2),
             border: Border(bottom: BorderSide(color: bottomColor))),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Column(
-          children: [
+        child: Column(children: [
           Text(
-              widget.jobInfo.company,
-              style: TextStyle(fontWeight: FontWeight.normal),
-              textAlign: TextAlign.center,
-            ),
+            widget.jobInfo.company,
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19),
+            textAlign: TextAlign.center,
+          ),
           Text(
             widget.jobInfo.jobTitle,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             textAlign: TextAlign.center,
-            ),
-          Center(child: Text(
+          ),
+          Text(
+            JobInfo.jobTypeString[widget.jobInfo.jobType]!,
+            textAlign: TextAlign.center,
+          ),
+          Center(
+              child: Text(
             widget.jobInfo.programmes.toString().substring(1, widget.jobInfo.programmes.toString().length - 1),
             textAlign: TextAlign.center,
-            )),
+          )),
           SizedBox(height: 10),
           Container(
-                  child: InkWell(
-                      onTap: () async {
-                        Uri url = Uri.parse(widget.jobInfo.url);
-                        if (await launchUrl(url)) {
-                          //launchUrl(url, mode: LaunchMode.inAppWebView);
-                        }
-                      },
-                      child: ListTile(
-                        tileColor: jobTypeColor[widget.jobInfo.jobType]!.withOpacity(0.3),
-                        title: Center(
-                            child: Text(
-                          "Till ansökansportalen",
-                        )),
-                        //visualDensity: VisualDensity(vertical: -3),
-                      ))),
-          Text("Deadline: " + widget.jobInfo.deadline.toString().split(' ')[0])
+              child: InkWell(
+                  onTap: () async {
+                    Uri url = Uri.parse(widget.jobInfo.url);
+                    if (await launchUrl(url)) {
+                      //launchUrl(url, mode: LaunchMode.inAppWebView);
+                    }
+                  },
+                  child: ListTile(
+                    tileColor: jobTypeColor[widget.jobInfo.jobType]!.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    title: Center(
+                        child: Text(
+                      "Till ansökan",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+                    visualDensity: VisualDensity(vertical: -3),
+                  ))),
+          Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Text(
+                "Deadline: " + widget.jobInfo.deadline.toString().split(' ')[0],
+              ))
         ]));
   }
 
