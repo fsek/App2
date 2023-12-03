@@ -15,13 +15,14 @@ class JobCatalogPage extends StatefulWidget {
 
 class _JobCatalogPageState extends State<JobCatalogPage>
     with TickerProviderStateMixin {
+  bool allJobsAreRead = false;
   List<JobInfo> jobInfos = [];
   List<JobInfo> allJobInfos = [];
 
   // Filter variables
-  List<String> programmeFilter = List.empty();
   List<String> companyFilter = List.empty();
-  List<String> locationFilter = List.empty();
+  List<JobType> jobTypeFilter = List.empty();
+  List<String> programmeFilter = List.empty();
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
@@ -31,26 +32,45 @@ class _JobCatalogPageState extends State<JobCatalogPage>
 
   @override
   void initState() {
-    jobInfos.add(new JobInfo("axis", "programmer", "Lund", "F", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    jobInfos.add(new JobInfo("cellavision", "cancer", "Jönköping", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    jobInfos.add(new JobInfo("cellavision", "programmer", "Kalmar", "Pi", "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    allJobInfos = List.from(jobInfos);
+    locator<DocumentService>().getOthers("Job").then((value) => setState(() {
+          print("start reading");
+          if (!listEquals(value, [])) {
+            print("jobs exist");
+            for (ElectionDocument? doc in value!) {
+              bool somethingWrong;
+              List<String> jobData = doc!.document_name!.split('|');
+              String jobTitle = jobData[0];
+              String company = jobData[1];
+              JobType jobType =
+                  JobType.values.firstWhere((e) => e.name == jobData[2]);
+              // Fulsnabbhack för att göra om pi till π.
+              List<String> programmes = jobData[3].split(',').toList().map((p) => p == "pi" ? "π" : p).toList();
+              DateTime deadline = DateTime.parse(jobData[4]);
+              allJobInfos.add(JobInfo(jobTitle, company, jobType, programmes, deadline, doc.url!));
+              print("added job");
+            }
+            print("all reading done");
+            jobInfos = allJobInfos;
+            allJobsAreRead = true;
 
-    /*
-    locator<DocumentService>()
-        .getPropositions("Val")
-        .then((value) => setState(() {
-              if (!listEquals(value, [])) {
-                this.documents = value!;
-                documents!.sort((a, b) => a.document_name!
-                    .compareTo(b.document_name!)); // handle null?
-                allDocuments = List.from(documents!);
-              } else {
-                this.documents = null;
-                allDocuments = null;
-              }
-            }));
-            */
+          } else {
+            allJobInfos = List.empty();
+            print("no jobs read");
+          }
+        }));
+
+    // DateTime currentTime = DateTime.now();
+    // allJobInfos =
+    //     allJobInfos.where((job) => job.deadline.isBefore(currentTime)).toList();
+
+    // jobInfos.add(new JobInfo("axis", "programmer", "Lund", "F",
+    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    // jobInfos.add(new JobInfo("cellavision", "cancer", "Jönköping", "Pi",
+    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    // jobInfos.add(new JobInfo("cellavision", "programmer", "Kalmar", "Pi",
+    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
+    // allJobInfos = List.from(jobInfos);
+
     super.initState();
   }
 
@@ -62,10 +82,15 @@ class _JobCatalogPageState extends State<JobCatalogPage>
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    return listEquals(allJobInfos, [])
+    return allJobsAreRead == false
         ? Scaffold(
             body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+            CircularProgressIndicator(color: Colors.orange[600]),
+            Text("Läser in jobb..."),
+          ])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -122,11 +147,9 @@ class _JobCatalogPageState extends State<JobCatalogPage>
                         setState(() {
                           initChar = "";
                           jobInfos = allJobInfos.where((document) {
-                              return searchTerms.every((term) => document
-                                  .jobTitle
-                                  .toLowerCase()
-                                  .contains(term));
-                            }).toList();
+                            return searchTerms.every((term) =>
+                                document.jobTitle.toLowerCase().contains(term));
+                          }).toList();
                         });
                       },
                     ),
@@ -134,9 +157,11 @@ class _JobCatalogPageState extends State<JobCatalogPage>
                   Row(children: [
                     Expanded(
                         child: MultiSelectDialogField(
-                        title: Text("Program"),
-                        buttonText: Text("Program"),
-                      items: [ "F", "pi", "n"].map((p) => MultiSelectItem(p, p)).toList(),
+                      title: Text("Program"),
+                      buttonText: Text("Program"),
+                      items: ["F", "π", "n"]
+                          .map((p) => MultiSelectItem(p, p))
+                          .toList(),
                       listType: MultiSelectListType.CHIP,
                       onConfirm: (List<String> values) {
                         setState(() {
@@ -152,11 +177,12 @@ class _JobCatalogPageState extends State<JobCatalogPage>
                     )),
                     Expanded(
                         child: MultiSelectDialogField(
-                        title: Text("Företag"),
-                        buttonText: Text("Företag"),
-                      items: allJobInfos.map( (job) => job.company).toSet()
-                          .map(
-                              (company) => MultiSelectItem(company, company))
+                      title: Text("Företag"),
+                      buttonText: Text("Företag"),
+                      items: allJobInfos
+                          .map((job) => job.company)
+                          .toSet()
+                          .map((company) => MultiSelectItem(company, company))
                           .toList(),
                       listType: MultiSelectListType.CHIP,
                       onConfirm: (List<String> values) {
@@ -204,18 +230,15 @@ class _JobCatalogPageState extends State<JobCatalogPage>
 
   List<JobInfo> filterJobs(List<JobInfo> allJobs) {
     List<JobInfo> jobs = [];
-    print(programmeFilter);
-    print(List.from(["F"]));
-    
+
     for (JobInfo job in allJobs) {
-      print(job.programme);
-      print("filtering");
-        if ((programmeFilter.isEmpty || programmeFilter.contains(job.programme))
-            && (companyFilter.isEmpty || companyFilter.contains(job.company)) 
-            && (locationFilter.isEmpty || locationFilter.contains(job.location))) {
-          jobs.add(job);
-          print("filtering2");
-        }
+      if ((programmeFilter.isEmpty ||
+              job.programmes.where((p) => programmeFilter.contains(p)).length >
+                  0) &&
+          (companyFilter.isEmpty || companyFilter.contains(job.company)) &&
+          (jobTypeFilter.isEmpty || jobTypeFilter.contains(job.jobType))) {
+        jobs.add(job);
+      }
     }
     print(jobs);
     return jobs;

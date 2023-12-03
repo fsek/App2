@@ -3,16 +3,24 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+enum JobType{
+  internship,
+  part_time,
+  full_time,
+  summer,
+  ex_job,
+}
+
 //temporary
 class JobInfo {
-  String company;
   String jobTitle;
-  String location;
-  String programme;
+  String company;
+  JobType jobType;
+  List<String> programmes;
+  DateTime deadline;
   String url;
 
-  JobInfo(
-      this.company, this.jobTitle, this.location, this.programme, this.url);
+  JobInfo(this.jobTitle, this.company, this.jobType, this.programmes, this.deadline, this.url);
 }
 
 class JobCard extends StatefulWidget {
@@ -43,23 +51,20 @@ class _JobCardState extends State<JobCard> {
             color: backgroundColor,
             border: Border(bottom: BorderSide(color: bottomColor))),
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-        child: Column(children: [
-          Center(
-            child: Text(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Text(
               widget.jobInfo.company,
               style: TextStyle(fontWeight: FontWeight.normal),
             ),
-          ),
-          Center(
-              child: Text(
+          Text(
             widget.jobInfo.jobTitle,
             style: TextStyle(fontWeight: FontWeight.bold),
-          )),
-          Center(
-              child: Text(
-            widget.jobInfo.programme,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
+            ),
+          Text(
+            widget.jobInfo.programmes.toString().substring(1, widget.jobInfo.programmes.toString().length - 1),
+            ),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +83,7 @@ class _JobCardState extends State<JobCard> {
                             borderRadius: BorderRadius.circular(15)),
                         title: Center(
                             child: Text(
-                          t.readProposition,
+                          "Till ansökansportalen",
                         )),
                         visualDensity: VisualDensity(vertical: -3),
                       ))),
