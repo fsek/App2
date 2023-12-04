@@ -21,6 +21,14 @@ class JobInfo {
   String url;
 
   JobInfo(this.jobTitle, this.company, this.jobType, this.programmes, this.deadline, this.url);
+
+  static Map<JobType, String> jobTypeString = {
+    JobType.internship: "Internship",
+    JobType.part_time: "Part-time",
+    JobType.full_time: "Full-time",
+    JobType.summer: "Summer",
+    JobType.ex_job: "Ex-job",
+  };
 }
 
 class JobCard extends StatefulWidget {
@@ -59,12 +67,16 @@ class _JobCardState extends State<JobCard> {
         child: Column(children: [
           Text(
             widget.jobInfo.company,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19),
             textAlign: TextAlign.center,
           ),
           Text(
             widget.jobInfo.jobTitle,
-            style: TextStyle(fontSize: 15),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            JobInfo.jobTypeString[widget.jobInfo.jobType]!,
             textAlign: TextAlign.center,
           ),
           Center(
@@ -86,7 +98,7 @@ class _JobCardState extends State<JobCard> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     title: Center(
                         child: Text(
-                      "Till ansökansportalen",
+                      "Till ansökan",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                     visualDensity: VisualDensity(vertical: -3),

@@ -17,6 +17,7 @@ class _JobCatalogPageState extends State<JobCatalogPage> with TickerProviderStat
   bool allJobsAreRead = false;
   List<JobInfo> jobInfos = [];
   List<JobInfo> allJobInfos = [];
+  List<String> companies = [];
 
   // Filter variables
   List<String> companyFilter = List.empty();
@@ -53,24 +54,13 @@ class _JobCatalogPageState extends State<JobCatalogPage> with TickerProviderStat
             }
             print("all reading done");
             jobInfos = allJobInfos;
+            companies = allJobInfos.map((job) => job.company).toSet().toList();
             allJobsAreRead = true;
           } else {
             allJobInfos = List.empty();
             print("no jobs read");
           }
         }));
-
-    // DateTime currentTime = DateTime.now();
-    // allJobInfos =
-    //     allJobInfos.where((job) => job.deadline.isBefore(currentTime)).toList();
-
-    // jobInfos.add(new JobInfo("axis", "programmer", "Lund", "F",
-    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    // jobInfos.add(new JobInfo("cellavision", "cancer", "Jönköping", "Pi",
-    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    // jobInfos.add(new JobInfo("cellavision", "programmer", "Kalmar", "Pi",
-    //     "https://foi.easycruit.com/intranet/exjobb/vacancy/3266643/12388"));
-    // allJobInfos = List.from(jobInfos);
 
     super.initState();
   }
@@ -133,8 +123,8 @@ class _JobCatalogPageState extends State<JobCatalogPage> with TickerProviderStat
                         List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
-                          jobInfos = allJobInfos.where((document) {
-                            return searchTerms.every((term) => document.jobTitle.toLowerCase().contains(term));
+                          jobInfos = filterJobs(allJobInfos).where((job) {
+                            return searchTerms.every((term) => job.jobTitle.toLowerCase().contains(term));
                           }).toList();
                         });
                       },
@@ -163,9 +153,7 @@ class _JobCatalogPageState extends State<JobCatalogPage> with TickerProviderStat
                         child: MultiSelectDialogField(
                       title: Text("Företag"),
                       buttonText: Text("Företag"),
-                      items: allJobInfos
-                          .map((job) => job.company)
-                          .toSet()
+                      items: companies
                           .map((company) => MultiSelectItem(company, company))
                           .toList(),
                       listType: MultiSelectListType.CHIP,
@@ -178,6 +166,26 @@ class _JobCatalogPageState extends State<JobCatalogPage> with TickerProviderStat
                       confirmText: Text("Bekräfta"),
                       cancelText: Text("Avbryt"),
                       chipDisplay: MultiSelectChipDisplay<String>.none(),
+                      searchable: true,
+                      searchHint: "Axis, Ericsson...",
+                    )),
+                    Expanded(
+                        child: MultiSelectDialogField<JobType>(
+                      title: Text("Typ"),
+                      buttonText: Text("Typ"),
+                      items: JobType.values
+                          .map((jobType) => MultiSelectItem(jobType, JobInfo.jobTypeString[jobType]!))
+                          .toList(),
+                      listType: MultiSelectListType.CHIP,
+                      onConfirm: (List<JobType> values) {
+                        setState(() {
+                          jobTypeFilter = values;
+                          jobInfos = filterJobs(allJobInfos);
+                        });
+                      },
+                      confirmText: Text("Bekräfta"),
+                      cancelText: Text("Avbryt"),
+                      chipDisplay: MultiSelectChipDisplay<JobType>.none(),
                       searchable: true,
                       searchHint: "Axis, Ericsson...",
                     )),
