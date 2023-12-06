@@ -29,14 +29,15 @@ class _AppBackgroundState extends State<AppBackground> {
       ClipPath(
         clipper: TopWaveClipper(),
         child: Container(
-            decoration: BoxDecoration(
-          color: Colors.orange[700],
-        )
-            //   gradient: LinearGradient(
-            //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),
-            // ),
-            // height: MediaQuery.of(context).size.height / 2,
-            ),
+          decoration: BoxDecoration(
+            color: Colors.orange[700],
+          )
+          //   gradient: LinearGradient(
+          //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),
+          // ),
+          ,
+          height: MediaQuery.of(context).size.height / 2,
+        ),
       ),
     ]);
   }
