@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppBackground extends StatefulWidget {
-  AppBackground({Key? key,
-    required this.backgroundColors})
-    : super(key: key);
+  AppBackground({Key? key, required this.backgroundColors}) : super(key: key);
 
   final List<Color> backgroundColors;
 
@@ -20,6 +18,7 @@ class _AppBackgroundState extends State<AppBackground> {
     TopWaveClipper.tweens = AppBackground.backgroundPoints[0];
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -31,11 +30,12 @@ class _AppBackgroundState extends State<AppBackground> {
         clipper: TopWaveClipper(),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: widget.backgroundColors,
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight),
-          ),
+            color: Colors.orange[700],
+          )
+          //   gradient: LinearGradient(
+          //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),
+          // ),
+          ,
           height: MediaQuery.of(context).size.height / 2,
         ),
       ),
@@ -53,13 +53,10 @@ class TopWaveClipper extends CustomClipper<Path> {
     var path = Path();
     path.moveTo(size.width, size.height * tweens[0]);
 
-    var firstControlPoint =
-        new Offset(size.width * tweens[1], size.height * tweens[2]);
-    var firstEndPoint =
-        new Offset(tweens[3], size.height * tweens[4]);
+    var firstControlPoint = new Offset(size.width * tweens[1], size.height * tweens[2]);
+    var firstEndPoint = new Offset(tweens[3], size.height * tweens[4]);
 
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy, firstEndPoint.dx, firstEndPoint.dy);
 
     ///move from bottom right to top
     path.lineTo(0, 0.0);
