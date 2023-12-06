@@ -16,7 +16,7 @@ description: Mobile application for the F-guild
 version: 1.8.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -66,6 +66,7 @@ dependencies:
   firebase_core_platform_interface: ^4.5.1
   bloc_concurrency: ^0.2.2
   image_gallery_saver: ^2.0.3
+  cached_network_image: ^3.3.0
 
 
 dev_dependencies:
