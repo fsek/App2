@@ -17,9 +17,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
     "p": Style(
-        padding: HtmlPaddings.zero,
-        margin: Margins.zero,
-        fontSize: FontSize(17))
+      padding: HtmlPaddings.zero,
+      margin: Margins.zero,
+      fontSize: FontSize(17),
+    ),
   };
 
   final PagingController<int, Notis> _pagingController =
@@ -41,39 +42,49 @@ class _NotificationsPageState extends State<NotificationsPage> {
         pagingController: _pagingController,
         shrinkWrap: true,
         builderDelegate: PagedChildBuilderDelegate<Notis>(
-            itemBuilder: (context, notis, index) {
-          if (notis.data == null) return Container();
+          itemBuilder: (context, notis, index) {
+            if (notis.data == null) return Container();
 
-          return Card(
+            return Card(
               color: notis.visited ?? false ? Colors.white : Colors.orange[200],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () => seeNotis(notis),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Html(
-                          data: notis.data?["body"],
-                          style: _htmlStyle,
-                        ),
-                        SizedBox(height: 4),
-                        notis.data?["extra"] != null
-                            ? Text(notis.data!["extra"]!)
-                            : Container(),
-                        Text(t.notificationsSent +
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Html(
+                        data: notis.data?["body"],
+                        style: _htmlStyle,
+                      ),
+                      SizedBox(height: 4),
+                      notis.data?["extra"] != null
+                          ? Text(notis.data!["extra"]!)
+                          : Container(),
+                      Text(
+                        t.notificationsSent +
                             (DateFormat('EEE d LLL y kk:mm')
-                                .format(notis.created_at!))),
-                      ]),
+                                .format(notis.created_at!)),
+                      ),
+                    ],
+                  ),
                 ),
-              ));
-        }, noItemsFoundIndicatorBuilder: (context) {
-          return Container(
+              ),
+            );
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return Container(
               height: 400,
               child: Center(
-                  child: Text(t.notificationsNone,
-                      style: Theme.of(context).textTheme.titleLarge)));
-        }),
+                child: Text(
+                  t.notificationsNone,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -102,8 +113,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
           .visited = true;
     });
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => EventPage(eventId: notis.event_id!)));
+      context,
+      MaterialPageRoute(
+        builder: (context) => EventPage(eventId: notis.event_id!),
+      ),
+    );
   }
 }

@@ -23,7 +23,8 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(() => TokenStorageWrapper());
-  locator.registerLazySingleton(() => UserService(storage: locator<TokenStorageWrapper>()));
+  locator.registerLazySingleton(
+      () => UserService(storage: locator<TokenStorageWrapper>()),);
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());

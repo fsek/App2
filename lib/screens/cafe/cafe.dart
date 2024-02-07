@@ -21,10 +21,12 @@ class _CafePageState extends State<CafePage> {
 
   void initState() {
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
-    locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
-          this._events = value;
-          _selectedEvents = _getEventsForDay(_selectedDay);
-        }));
+    locator<CafeService>().getShiftsForCalendar().then(
+          (value) => setState(() {
+            this._events = value;
+            _selectedEvents = _getEventsForDay(_selectedDay);
+          }),
+        );
     super.initState();
   }
 
@@ -60,10 +62,10 @@ class _CafePageState extends State<CafePage> {
                       style: TextStyle(
                         fontSize: 18,
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -82,12 +84,12 @@ class _CafePageState extends State<CafePage> {
       ),
     ).then(
       // after returning from cafe_shift page, update the calendar
-      (value) => locator<CafeService>()
-          .getShiftsForCalendar()
-          .then((value) => setState(() {
-                this._events = value;
-                _selectedEvents = _getEventsForDay(_selectedDay);
-              })),
+      (value) => locator<CafeService>().getShiftsForCalendar().then(
+            (value) => setState(() {
+              this._events = value;
+              _selectedEvents = _getEventsForDay(_selectedDay);
+            }),
+          ),
     );
   }
 
@@ -166,8 +168,10 @@ class _CafePageState extends State<CafePage> {
   }
 
   Future<void> _onRefresh() async {
-    locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
-          this._events = value;
-        }));
+    locator<CafeService>().getShiftsForCalendar().then(
+          (value) => setState(() {
+            this._events = value;
+          }),
+        );
   }
 }

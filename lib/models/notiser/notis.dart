@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'notis.g.dart'; 
+part 'notis.g.dart';
 
 @JsonSerializable()
 class Notis {
-  int? id; 
-  DateTime? created_at; 
+  int? id;
+  DateTime? created_at;
   bool? seen; //Seems to be legacy field from backend. Use 'visited'
   bool? visited;
   Map<String, String?>? data;
@@ -13,7 +13,7 @@ class Notis {
 
   Notis();
 
-  factory Notis.fromJson(Map<String, dynamic> json) => _$NotisFromJson(json); 
+  factory Notis.fromJson(Map<String, dynamic> json) => _$NotisFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotisToJson(this);  
+  Map<String, dynamic> toJson() => _$NotisToJson(this);
 }

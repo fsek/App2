@@ -34,50 +34,67 @@ class _NewsPageState extends State<NewsPage> {
   Widget createNewsCard() {
     var t = AppLocalizations.of(context)!;
     return RefreshIndicator(
-        onRefresh: () => _onRefresh(),
-        child: Container(
-          child: PagedListView<int, News>(
-            pagingController: _pagingController,
-            shrinkWrap: true,
-            builderDelegate: PagedChildBuilderDelegate<News>(
-                itemBuilder: (context, news, index) {
+      onRefresh: () => _onRefresh(),
+      child: Container(
+        child: PagedListView<int, News>(
+          pagingController: _pagingController,
+          shrinkWrap: true,
+          builderDelegate: PagedChildBuilderDelegate<News>(
+            itemBuilder: (context, news, index) {
               return Card(
-                  child: InkWell(
-                      onTap: () => openNews(news),
-                      child: ListTile(
-                          title: Text((news.title == "" || news.title == null)
-                              ? t.homeTitleUntranslated
-                              : news.title!),
-                          subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(news.user!.name!),
-                                SizedBox(height: 6),
-                                Text(
-                                  news.created_at.toString().substring(0, 16),
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ]),
-                          isThreeLine: true,
-                          trailing: (news.is_pinned ?? false)
-                              ? Icon(Icons.push_pin_outlined,
-                                  color: Colors.orange[600])
-                              : SizedBox.shrink())));
-            }, noItemsFoundIndicatorBuilder: (context) {
+                child: InkWell(
+                  onTap: () => openNews(news),
+                  child: ListTile(
+                    title: Text(
+                      (news.title == "" || news.title == null)
+                          ? t.homeTitleUntranslated
+                          : news.title!,
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(news.user!.name!),
+                        SizedBox(height: 6),
+                        Text(
+                          news.created_at.toString().substring(0, 16),
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    isThreeLine: true,
+                    trailing: (news.is_pinned ?? false)
+                        ? Icon(
+                            Icons.push_pin_outlined,
+                            color: Colors.orange[600],
+                          )
+                        : SizedBox.shrink(),
+                  ),
+                ),
+              );
+            },
+            noItemsFoundIndicatorBuilder: (context) {
               return Container(
-                  height: 400,
-                  child: Center(
-                      child: Text(t.homeNoNews,
-                          style: Theme.of(context).textTheme.titleLarge)));
-            }),
+                height: 400,
+                child: Center(
+                  child: Text(
+                    t.homeNoNews,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+              );
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void openNews(News news) {
     //redirect to other page and shit
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)),
+    );
   }
 
   void loadMoreNews(int page) {
@@ -87,7 +104,9 @@ class _NewsPageState extends State<NewsPage> {
       } else if (page == 1) {
         locator<HomeService>().getPinnedNews().then((pinned) {
           _pagingController.appendPage(
-              (pinned.news ?? []) + (value.news ?? []), page + 1);
+            (pinned.news ?? []) + (value.news ?? []),
+            page + 1,
+          );
         });
       } else {
         _pagingController.appendPage(value.news ?? [], page + 1);

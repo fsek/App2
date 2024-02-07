@@ -47,9 +47,11 @@ class _SettingsPageState extends State<SettingsPage> {
     };
     if (user == null) {
       return Scaffold(
-          appBar: AppBar(title: Text(t.otherAccount)),
-          body: Center(
-              child: CircularProgressIndicator(color: Colors.orange[600])));
+        appBar: AppBar(title: Text(t.otherAccount)),
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.orange[600]),
+        ),
+      );
     }
     return WillPopScope(
       onWillPop: () async {
@@ -111,9 +113,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   user!.student_id,
                   (input) => user!.student_id = input,
                 ),
-                _makeTextField(t.settingsPhoneNumber, user!.phone,
-                    (input) => user!.phone = input,
-                    num: true),
+                _makeTextField(
+                  t.settingsPhoneNumber,
+                  user!.phone,
+                  (input) => user!.phone = input,
+                  num: true,
+                ),
                 _makeCheckBox(
                   t.settingsShowPhoneNumber,
                   user!.display_phone,
@@ -128,57 +133,71 @@ class _SettingsPageState extends State<SettingsPage> {
                     "vegan": t.vegan,
                     "pescetarian": t.pescetarian,
                     "milk": t.milk,
-                    "gluten": t.gluten
+                    "gluten": t.gluten,
                   }
                       .entries
-                      .map((foodPref) => DropdownMenuItem(
-                            value: foodPref.value,
-                            child: _makeCheckBox(
-                              foodPref.value,
-                              user!.food_preferences!.contains(foodPref.key),
-                              (bool? change) {
-                                if (change!)
-                                  user!.food_preferences!.add(foodPref.key);
-                                else
-                                  user!.food_preferences!.remove(foodPref.key);
-                              },
-                            ),
-                          ))
+                      .map(
+                        (foodPref) => DropdownMenuItem(
+                          value: foodPref.value,
+                          child: _makeCheckBox(
+                            foodPref.value,
+                            user!.food_preferences!.contains(foodPref.key),
+                            (bool? change) {
+                              if (change!)
+                                user!.food_preferences!.add(foodPref.key);
+                              else
+                                user!.food_preferences!.remove(foodPref.key);
+                            },
+                          ),
+                        ),
+                      )
                       .toList()
-                    ..add(DropdownMenuItem(
-                      value: t.settingsOther,
-                      child: _makeCheckBox(t.settingsOther, extraPref,
-                          (bool? change) => extraPref = change ?? false),
-                    )),
+                    ..add(
+                      DropdownMenuItem(
+                        value: t.settingsOther,
+                        child: _makeCheckBox(
+                          t.settingsOther,
+                          extraPref,
+                          (bool? change) => extraPref = change ?? false,
+                        ),
+                      ),
+                    ),
                 ),
                 if (extraPref)
-                  _makeTextField(t.settingsOtherFoodPrefs, user!.food_custom,
-                      (input) => user!.food_custom = input),
+                  _makeTextField(
+                    t.settingsOtherFoodPrefs,
+                    user!.food_custom,
+                    (input) => user!.food_custom = input,
+                  ),
                 Text(
                   t.settingsFoodPrefsPrivacy,
                   style: TextStyle(color: Colors.grey[600]),
-                )
+                ),
               ]),
               _makeGrayTextbox(t.notifications),
               _makePadding([
                 _makeCheckBox(
-                    t.settingsNotificationsSignUp,
-                    user!.notify_event_users,
-                    (bool? change) => user!.notify_event_users = change),
+                  t.settingsNotificationsSignUp,
+                  user!.notify_event_users,
+                  (bool? change) => user!.notify_event_users = change,
+                ),
                 _makeCheckBox(
-                    t.settingsNotificationsMessage,
-                    user!.notify_messages,
-                    (bool? change) => user!.notify_messages = change),
+                  t.settingsNotificationsMessage,
+                  user!.notify_messages,
+                  (bool? change) => user!.notify_messages = change,
+                ),
                 _makeCheckBox(
-                    t.settingsNotificationsSignUpClosing,
-                    user!.notify_event_closing,
-                    (bool? change) => user!.notify_event_closing = change),
+                  t.settingsNotificationsSignUpClosing,
+                  user!.notify_event_closing,
+                  (bool? change) => user!.notify_event_closing = change,
+                ),
                 _makeCheckBox(
-                    t.settingsNotificationsSignUpOpening,
-                    user!.notify_event_open,
-                    (bool? change) => user!.notify_event_open = change)
+                  t.settingsNotificationsSignUpOpening,
+                  user!.notify_event_open,
+                  (bool? change) => user!.notify_event_open = change,
+                ),
               ]),
-              _makeGrayTextbox(t.settingsMemberSince + _makeTimestamp())
+              _makeGrayTextbox(t.settingsMemberSince + _makeTimestamp()),
             ],
           ),
         ),
@@ -187,8 +206,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _makeTextField(
-      String displayText, String? fieldText, void Function(String?) modUser,
-      {bool num = false}) {
+    String displayText,
+    String? fieldText,
+    void Function(String?) modUser, {
+    bool num = false,
+  }) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Column(
@@ -203,14 +225,18 @@ class _SettingsPageState extends State<SettingsPage> {
               modUser(change);
               changedSetting = true;
             },
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget _makeDropDown<T>(String displayText, List<T> dropDownItems, T? value,
-      void Function(T?) modUser) {
+  Widget _makeDropDown<T>(
+    String displayText,
+    List<T> dropDownItems,
+    T? value,
+    void Function(T?) modUser,
+  ) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Column(
@@ -222,8 +248,10 @@ class _SettingsPageState extends State<SettingsPage> {
             isExpanded: true,
             value: value,
             items: dropDownItems
-                .map((item) =>
-                    DropdownMenuItem(child: Text(item.toString()), value: item))
+                .map(
+                  (item) => DropdownMenuItem(
+                      child: Text(item.toString()), value: item,),
+                )
                 .toList(),
             onChanged: (T? change) => setState(
               () {
@@ -238,29 +266,35 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _makeCheckBox(
-      String displayText, bool? value, void Function(bool?) modUser) {
-    return Row(children: [
-      Text(displayText),
-      Spacer(),
-      //Need for checkboxes in the foodprefs dropdown menu to change when pressed
-      StatefulBuilder(
+    String displayText,
+    bool? value,
+    void Function(bool?) modUser,
+  ) {
+    return Row(
+      children: [
+        Text(displayText),
+        Spacer(),
+        //Need for checkboxes in the foodprefs dropdown menu to change when pressed
+        StatefulBuilder(
           builder: (BuildContext context, StateSetter setChildState) {
-        return Checkbox(
-          checkColor: Colors.white,
-          fillColor:
-              MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
-          value: value,
-          onChanged: (bool? change) {
-            setChildState(() {
-              modUser(change);
-              value = change;
-              changedSetting = true;
-            });
-            setState(() {});
+            return Checkbox(
+              checkColor: Colors.white,
+              fillColor: MaterialStateProperty.resolveWith(
+                  (states) => Colors.orange[600],),
+              value: value,
+              onChanged: (bool? change) {
+                setChildState(() {
+                  modUser(change);
+                  value = change;
+                  changedSetting = true;
+                });
+                setState(() {});
+              },
+            );
           },
-        );
-      })
-    ]);
+        ),
+      ],
+    );
   }
 
   Widget _makeGrayTextbox(String displayText) {
@@ -294,8 +328,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget Function(BuildContext) _savingPopup() {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
-          title: Text(t.settingsSaving,
-              style: Theme.of(context).textTheme.headlineSmall),
+          title: Text(
+            t.settingsSaving,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           children: [
             Column(
               children: [
@@ -311,8 +347,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget Function(BuildContext) _failedPopup() {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
-          title: Text(t.settingsWarning,
-              style: Theme.of(context).textTheme.headlineSmall),
+          title: Text(
+            t.settingsWarning,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           children: [
             Center(
               child: Padding(
@@ -326,7 +364,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 icon: Icon(Icons.check, color: Colors.grey[800]),
                 onPressed: () => Navigator.pop(context),
               ),
-            )
+            ),
           ],
         );
   }
@@ -334,8 +372,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget Function(BuildContext) _saveOnClosePopup() {
     var t = AppLocalizations.of(context)!;
     return (BuildContext context) => SimpleDialog(
-          title: Text(t.settingsUnsaved,
-              style: Theme.of(context).textTheme.headlineSmall),
+          title: Text(
+            t.settingsUnsaved,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           children: [
             Center(
               child: Padding(
@@ -349,8 +389,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   Spacer(),
                   TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text(t.settingsDiscard)),
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(t.settingsDiscard),
+                  ),
                   Spacer(),
                   TextButton(
                     onPressed: () async {
@@ -362,7 +403,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   Spacer(),
                 ],
               ),
-            )
+            ),
           ],
         );
   }

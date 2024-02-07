@@ -73,7 +73,8 @@ class _PeoplePageState extends State<PeoplePage> {
             border: border,
             image: DecorationImage(
               image: AssetImage(
-                  imageBasePath + (p.image ?? "underConstruction.png")),
+                imageBasePath + (p.image ?? "underConstruction.png"),
+              ),
               fit: BoxFit.fill,
             ),
             shape: BoxShape.circle,
@@ -142,8 +143,10 @@ class _MainPersonCard extends StatelessWidget {
     String imageBasePath = "assets/img/";
     Widget position = Container();
     if (person.position != null) {
-      position = Text(person.position![locale]!,
-          style: TextStyle(fontSize: 18, color: Colors.white));
+      position = Text(
+        person.position![locale]!,
+        style: TextStyle(fontSize: 18, color: Colors.white),
+      );
     }
     return Container(
       margin: EdgeInsets.all(20),
@@ -170,7 +173,8 @@ class _MainPersonCard extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                    imageBasePath + (person.image ?? "underConstruction.png")),
+                  imageBasePath + (person.image ?? "underConstruction.png"),
+                ),
               ),
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),

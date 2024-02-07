@@ -5,7 +5,6 @@ import 'newsuser.dart';
 part 'news.g.dart'; //generated JSON file
 
 @JsonSerializable()
-
 class News {
   int? id;
   String? title;

@@ -75,15 +75,21 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
     loginBtnAnimation = new Tween<double>(
       begin: 1,
       end: 0,
-    ).animate(new CurvedAnimation(
+    ).animate(
+      new CurvedAnimation(
         parent: _animationController,
-        curve: new Interval(0.0, 0.5, curve: Curves.bounceInOut)));
+        curve: new Interval(0.0, 0.5, curve: Curves.bounceInOut),
+      ),
+    );
     loadingAnimation = new Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(new CurvedAnimation(
+    ).animate(
+      new CurvedAnimation(
         parent: _animationController,
-        curve: new Interval(0.5, 1, curve: Curves.bounceInOut)));
+        curve: new Interval(0.5, 1, curve: Curves.bounceInOut),
+      ),
+    );
 
     // Set Portrait mode only
     SystemChrome.setPreferredOrientations([
@@ -115,10 +121,12 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       _animationController.forward();
       _emailFocusNode.unfocus();
       _passFocusNode.unfocus();
-      _loginBloc!.add(LoginButtonPressed(
-        username: _emailController.text.trim(),
-        password: _passwordController.text,
-      ));
+      _loginBloc!.add(
+        LoginButtonPressed(
+          username: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
     }
   }
 
@@ -129,58 +137,64 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final _emailField = Focus(
-        key: Key("login_email_field"),
-        child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-              labelText: 'Email',
-              prefixIcon: Icon(Icons.account_circle, color: _emailLabelColor),
-              labelStyle: TextStyle(color: _emailLabelColor)),
-          focusNode: _emailFocusNode,
-          controller: _emailController,
-          validator: (String? value) {
-            return value!.trim().isEmpty ? 'Required field' : null;
-          },
-        ));
+      key: Key("login_email_field"),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          labelText: 'Email',
+          prefixIcon: Icon(Icons.account_circle, color: _emailLabelColor),
+          labelStyle: TextStyle(color: _emailLabelColor),
+        ),
+        focusNode: _emailFocusNode,
+        controller: _emailController,
+        validator: (String? value) {
+          return value!.trim().isEmpty ? 'Required field' : null;
+        },
+      ),
+    );
     final _passwordField = Focus(
-        key: Key("login_password_field"),
-        child: TextFormField(
-          obscureText: true,
-          decoration: InputDecoration(
-              labelText: 'Password',
-              prefixIcon: Icon(
-                Icons.lock,
-                color: _passLabelColor,
-              ),
-              labelStyle: TextStyle(color: _passLabelColor)),
-          focusNode: _passFocusNode,
-          controller: _passwordController,
-          validator: (String? value) {
-            return value!.isEmpty ? 'Required field' : null;
-          },
-        ));
+      key: Key("login_password_field"),
+      child: TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          labelText: 'Password',
+          prefixIcon: Icon(
+            Icons.lock,
+            color: _passLabelColor,
+          ),
+          labelStyle: TextStyle(color: _passLabelColor),
+        ),
+        focusNode: _passFocusNode,
+        controller: _passwordController,
+        validator: (String? value) {
+          return value!.isEmpty ? 'Required field' : null;
+        },
+      ),
+    );
     final _forgotPasswordButton = TextButton(
-        key: Key("login_forgot_btn"),
-        onPressed: () => onForgottenPassword(),
-        child: Text(
-          "Forgot my password",
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .apply(color: Colors.grey[300]),
-        ));
+      key: Key("login_forgot_btn"),
+      onPressed: () => onForgottenPassword(),
+      child: Text(
+        "Forgot my password",
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .apply(color: Colors.grey[300]),
+      ),
+    );
 
     final form = Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            SizedBox(height: 32.0),
-            _emailField,
-            SizedBox(height: 32.0),
-            _passwordField,
-            SizedBox(height: 20.0),
-          ],
-        ));
+      key: _formKey,
+      child: Column(
+        children: [
+          SizedBox(height: 32.0),
+          _emailField,
+          SizedBox(height: 32.0),
+          _passwordField,
+          SizedBox(height: 20.0),
+        ],
+      ),
+    );
 
     return BlocConsumer<LoginBloc, LoginState>(
       bloc: _loginBloc,
@@ -189,45 +203,55 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         LoginState state,
       ) {
         final _loginButton = ScaleTransition(
-            scale: loginBtnAnimation as Animation<double>,
-            child: ElevatedButton(
-                key: Key("login_btn"),
-                onPressed:
-                    state is! LoginLoading ? _onLoginButtonPressed : null,
-                child: Text(
-                  "Log in",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                )));
+          scale: loginBtnAnimation as Animation<double>,
+          child: ElevatedButton(
+            key: Key("login_btn"),
+            onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
+            child: Text(
+              "Log in",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+        );
         final _loadingIcon = ScaleTransition(
-            scale: loadingAnimation as Animation<double>,
-            child: CircularProgressIndicator());
+          scale: loadingAnimation as Animation<double>,
+          child: CircularProgressIndicator(),
+        );
 
         return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Card(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.white70, width: 0),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                elevation: 5,
-                child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: locator<ThemeService>().loginIcon),
-                          form,
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [_forgotPasswordButton]),
-                          Stack(children: [
-                            Center(child: _loginButton),
-                            Center(child: _loadingIcon)
-                          ])
-                        ]))));
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.white70, width: 0),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: locator<ThemeService>().loginIcon,
+                  ),
+                  form,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [_forgotPasswordButton],
+                  ),
+                  Stack(
+                    children: [
+                      Center(child: _loginButton),
+                      Center(child: _loadingIcon),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       },
       listener: (context, state) {
         // Show Errors in snackbar

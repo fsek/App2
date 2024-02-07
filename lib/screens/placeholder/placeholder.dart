@@ -19,11 +19,13 @@ class PlaceholderPage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                  "DENNA SIDAN ÄR INTE TILLGÄNGLIG ÄN MEN SPINDELMÄNNEN "
-                  "HÅLLER PÅ ATT KNAPPRA PÅ FÖR FULLT!\n\n $disc",
-                  style: TextStyle(fontSize: 18, color: Colors.orange[600]))),
+            padding: EdgeInsets.all(16),
+            child: Text(
+              "DENNA SIDAN ÄR INTE TILLGÄNGLIG ÄN MEN SPINDELMÄNNEN "
+              "HÅLLER PÅ ATT KNAPPRA PÅ FÖR FULLT!\n\n $disc",
+              style: TextStyle(fontSize: 18, color: Colors.orange[600]),
+            ),
+          ),
           Image.asset("assets/img/underConstruction.png"),
         ],
       ),

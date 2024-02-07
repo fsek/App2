@@ -26,11 +26,11 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
   }
 
   Future<void> _update() async {
-    locator<CafeService>()
-        .getShift(widget.shiftId)
-        .then((value) => setState(() {
-              this.shift = value;
-            }));
+    locator<CafeService>().getShift(widget.shiftId).then(
+          (value) => setState(() {
+            this.shift = value;
+          }),
+        );
   }
 
   void signup(CafeShift shift) async {
@@ -50,21 +50,22 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
 
   Future<void> generalPopup(String title, String body) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(body),
-            actions: [
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(body),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> successSignup() {

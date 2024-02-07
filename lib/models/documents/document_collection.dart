@@ -11,6 +11,7 @@ class DocumentCollection {
 
   DocumentCollection();
 
-  factory DocumentCollection.fromJson(Map<String, dynamic> json) => _$DocumentCollectionFromJson(json);
+  factory DocumentCollection.fromJson(Map<String, dynamic> json) =>
+      _$DocumentCollectionFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentCollectionToJson(this);
 }

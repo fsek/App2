@@ -17,13 +17,16 @@ class UserService extends AbstractService {
   /*
    * HTTP Requests
    */
-  Future<DeviseToken> sendLogin(
-      {required String email, required String pass}) async {
+  Future<DeviseToken> sendLogin({
+    required String email,
+    required String pass,
+  }) async {
     try {
       var response = await http.post(
-          Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
-          headers: AbstractService.headers,
-          body: jsonEncode({"email": email, "password": pass}));
+        Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
+        headers: AbstractService.headers,
+        body: jsonEncode({"email": email, "password": pass}),
+      );
 
       var json = jsonDecode(response.body);
       if (json["data"] != null) {
@@ -53,8 +56,9 @@ class UserService extends AbstractService {
       AbstractService.mapAuthHeaders();
 
       var response = await http.get(
-          Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
-          headers: AbstractService.headers);
+        Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+        headers: AbstractService.headers,
+      );
 
       var json = jsonDecode(response.body);
       if (json["data"] != null) {
@@ -74,11 +78,12 @@ class UserService extends AbstractService {
 
   Future<bool> resetPasswordRequest(String email) async {
     dynamic ret = await http.post(
-        Uri.parse(
-          Environment.API_URL + "/api/auth/password",
-        ),
-        body: '{"email": "' + email + '", "redirect_url": "/home"}',
-        headers: AbstractService.headers);
+      Uri.parse(
+        Environment.API_URL + "/api/auth/password",
+      ),
+      body: '{"email": "' + email + '", "redirect_url": "/home"}',
+      headers: AbstractService.headers,
+    );
     return true;
   }
 
@@ -107,8 +112,9 @@ class UserService extends AbstractService {
   Future<Map> updateUser(User updatedUser) async {
     try {
       var response = await AbstractService.put(
-          "/users/" + updatedUser.id!.toString(),
-          mapBody: updatedUser.toJson());
+        "/users/" + updatedUser.id!.toString(),
+        mapBody: updatedUser.toJson(),
+      );
       setCurrentUser(updatedUser);
       return response;
     } catch (error) {

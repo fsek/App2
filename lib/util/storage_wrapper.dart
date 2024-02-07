@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
  a wrapper around SharedPreferences and FlutterSecureStorage
  so we can ignore that in the code.
 
-*/ 
+*/
 class TokenStorageWrapper {
   static late FlutterSecureStorage secureStorage;
   static SharedPreferences? prefs;
@@ -17,25 +17,23 @@ class TokenStorageWrapper {
   }
 
   void write({String? key, dynamic value}) {
-    if(key == null || value == null) {
+    if (key == null || value == null) {
       print("Cannot store null tokens");
       return;
     }
-    if(!kIsWeb) {
+    if (!kIsWeb) {
       secureStorage.write(key: key, value: value.toString());
-    }
-    else {
-      SharedPreferences.getInstance().then((prefs) => prefs.setString(key, value.toString()));
+    } else {
+      SharedPreferences.getInstance()
+          .then((prefs) => prefs.setString(key, value.toString()));
     }
   }
-  
+
   Future<Map<String, String?>> readAll() async {
-    if(!kIsWeb) {
+    if (!kIsWeb) {
       return secureStorage.readAll();
-    }
-    else {
-      if(prefs == null)
-        prefs = await SharedPreferences.getInstance();
+    } else {
+      if (prefs == null) prefs = await SharedPreferences.getInstance();
 
       var map = {
         "access_token": prefs!.getString("access_token"),
@@ -47,24 +45,20 @@ class TokenStorageWrapper {
   }
 
   Future<String?> read(String key) async {
-    if(!kIsWeb) {
+    if (!kIsWeb) {
       return secureStorage.read(key: key);
-    }
-    else {
-      if(prefs == null)
-        prefs = await SharedPreferences.getInstance();
+    } else {
+      if (prefs == null) prefs = await SharedPreferences.getInstance();
 
       return prefs!.getString(key);
     }
   }
 
   Future<void> delete({String key = ""}) async {
-    if(!kIsWeb) {
+    if (!kIsWeb) {
       secureStorage.delete(key: key);
-    }
-    else {
-      if(prefs == null)
-        prefs = await SharedPreferences.getInstance();
+    } else {
+      if (prefs == null) prefs = await SharedPreferences.getInstance();
 
       prefs!.remove(key);
     }

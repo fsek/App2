@@ -20,18 +20,22 @@ class _MyGroupTabState extends State<MyGroupTab> {
   AdventureData? adventureData;
 
   void initState() {
-    locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
-          this._adventureWeeks = value;
-          this.totalMissionsList = totalMissions(_adventureWeeks!);
-          this.acceptedMissionsList = acceptedMissions(_adventureWeeks!);
-          this.progressList = List.empty(growable: true);
-        }));
+    locator<NollningService>().getAdventureWeeks().then(
+          (value) => setState(() {
+            this._adventureWeeks = value;
+            this.totalMissionsList = totalMissions(_adventureWeeks!);
+            this.acceptedMissionsList = acceptedMissions(_adventureWeeks!);
+            this.progressList = List.empty(growable: true);
+          }),
+        );
 
-    locator<NollningService>().getAdventures().then((value) => setState(() {
-          this.adventureData = value;
-          totalPoints = value.total_group_points ?? 0;
-          maxTotalPoints = _getMaxTotal();
-        }));
+    locator<NollningService>().getAdventures().then(
+          (value) => setState(() {
+            this.adventureData = value;
+            totalPoints = value.total_group_points ?? 0;
+            maxTotalPoints = _getMaxTotal();
+          }),
+        );
     super.initState();
   }
 
@@ -51,8 +55,9 @@ class _MyGroupTabState extends State<MyGroupTab> {
       if (totalMissionsList!.elementAt(i) == 0) {
         progressList!.add(0);
       } else {
-        progressList!.add(acceptedMissionsList!.elementAt(i) /
-            totalMissionsList!.elementAt(i));
+        progressList!.add(
+          acceptedMissionsList!.elementAt(i) / totalMissionsList!.elementAt(i),
+        );
       }
     }
     double circleSize = MediaQuery.of(context).size.height / 7;
@@ -70,7 +75,8 @@ class _MyGroupTabState extends State<MyGroupTab> {
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height / 35),
+              bottom: MediaQuery.of(context).size.height / 35,
+            ),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,18 +169,19 @@ class _MyGroupTabState extends State<MyGroupTab> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _weekProgressCircle(
-      {required String imgPath,
-      required double progress,
-      Color borderColor = Colors.black,
-      bool active = true,
-      double size = 150,
-      String? text}) {
+  Widget _weekProgressCircle({
+    required String imgPath,
+    required double progress,
+    Color borderColor = Colors.black,
+    bool active = true,
+    double size = 150,
+    String? text,
+  }) {
     Widget textBox = Container();
     if (text != null) {
       textBox = Text(
@@ -183,32 +190,37 @@ class _MyGroupTabState extends State<MyGroupTab> {
       );
     }
 
-    return Column(children: [
-      Stack(alignment: Alignment.center, children: [
-        Container(
-          foregroundDecoration: BoxDecoration(
-            // Only grey out img if not active
-            color: active ? Colors.transparent : Colors.grey,
-            backgroundBlendMode: BlendMode.saturation,
-            borderRadius: BorderRadius.circular(150),
-          ),
-          child: Image.asset(
-            imgPath,
-            height: size,
-          ),
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              foregroundDecoration: BoxDecoration(
+                // Only grey out img if not active
+                color: active ? Colors.transparent : Colors.grey,
+                backgroundBlendMode: BlendMode.saturation,
+                borderRadius: BorderRadius.circular(150),
+              ),
+              child: Image.asset(
+                imgPath,
+                height: size,
+              ),
+            ),
+            SizedBox(
+              child: CircularProgressIndicator(
+                value: progress,
+                color: borderColor,
+                strokeWidth: 6.0,
+              ),
+              width: size,
+              height: size,
+            ),
+          ],
         ),
-        SizedBox(
-          child: CircularProgressIndicator(
-            value: progress,
-            color: borderColor,
-            strokeWidth: 6.0,
-          ),
-          width: size,
-          height: size,
-        ),
-      ]),
-      textBox
-    ]);
+        textBox,
+      ],
+    );
   }
 
   List<int> totalMissions(List<AdventureMissionWeek> adventureMissionWeeks) {

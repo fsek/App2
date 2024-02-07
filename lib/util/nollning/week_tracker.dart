@@ -27,7 +27,8 @@ class WeekTracker {
         if (now.compareTo(weeks[i]) > 0) {
           return i;
         }
-      } else if (now.compareTo(weeks[i]) > 0 && now.compareTo(weeks[i + 1]) < 0) {
+      } else if (now.compareTo(weeks[i]) > 0 &&
+          now.compareTo(weeks[i + 1]) < 0) {
         return i;
       }
     }

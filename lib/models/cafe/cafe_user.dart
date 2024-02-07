@@ -10,6 +10,7 @@ class CafeUser {
 
   CafeUser();
 
-  factory CafeUser.fromJson(Map<String, dynamic> json) => _$CafeUserFromJson(json);
+  factory CafeUser.fromJson(Map<String, dynamic> json) =>
+      _$CafeUserFromJson(json);
   Map<String, dynamic> toJson() => _$CafeUserToJson(this);
 }

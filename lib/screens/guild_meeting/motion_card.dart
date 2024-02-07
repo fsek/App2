@@ -31,59 +31,75 @@ class _MotionCardState extends State<MotionCard> {
         ? Container()
         : Container(
             decoration: BoxDecoration(
-                color: background_color,
-                border: Border(bottom: BorderSide(color: bottom_color))),
+              color: background_color,
+              border: Border(bottom: BorderSide(color: bottom_color)),
+            ),
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-            child: Column(children: [
-              Center(
+            child: Column(
+              children: [
+                Center(
                   child: Text(
-                widget.motion!.document_name!,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
+                    widget.motion!.document_name!,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
                       child: InkWell(
-                          onTap: () => {openFile(widget.motion!)},
-                          child: ListTile(
-                            tileColor: button_color,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            title: Center(
-                                child: Text(
+                        onTap: () => {openFile(widget.motion!)},
+                        child: ListTile(
+                          tileColor: button_color,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          title: Center(
+                            child: Text(
                               t.readMotion,
-                            )),
-                            visualDensity: VisualDensity(vertical: -3),
-                          ))),
-                  SizedBox(
+                            ),
+                          ),
+                          visualDensity: VisualDensity(vertical: -3),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
                       width: widget.motionResponse != null
                           ? MediaQuery.of(context).size.width / 100
-                          : 0),
-                  if (widget.motionResponse != null)
-                    (Flexible(
+                          : 0,
+                    ),
+                    if (widget.motionResponse != null)
+                      (Flexible(
                         child: Container(
-                      child: InkWell(
-                          onTap: () => {openFile(widget.motionResponse!)},
-                          child: ListTile(
+                          child: InkWell(
+                            onTap: () => {openFile(widget.motionResponse!)},
+                            child: ListTile(
                               tileColor: button_color,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               visualDensity: VisualDensity(vertical: -3),
-                              title: Center(child: Text(t.readMotionAnswer)))),
-                      padding: EdgeInsets.only(top: 3),
-                    ))),
-                ],
-              )
-            ]));
+                              title: Center(child: Text(t.readMotionAnswer)),
+                            ),
+                          ),
+                          padding: EdgeInsets.only(top: 3),
+                        ),
+                      )),
+                  ],
+                ),
+              ],
+            ),
+          );
   }
 
   void openFile(ElectionDocument document) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                PdfPage(url: document.url!, title: document.document_name!)));
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PdfPage(url: document.url!, title: document.document_name!),
+      ),
+    );
   }
 }

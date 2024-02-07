@@ -7,10 +7,9 @@ part 'album.g.dart';
 class Album {
   int? id;
   List<AlbumImage>? images;
-  List<String>? photographers; 
-  String? title; 
-  String? description; 
-
+  List<String>? photographers;
+  String? title;
+  String? description;
 
   Album();
 

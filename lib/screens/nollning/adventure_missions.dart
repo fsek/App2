@@ -54,16 +54,18 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
               Tab(
                 text: 'HIGHSCORE',
                 icon: Icon(Icons.emoji_events_rounded),
-              )
+              ),
             ],
           ),
           title: Text(t.introductionAdventureMissions),
         ),
-        body: TabBarView(children: [
-          AdventureMissionsTab(),
-          MyGroupTab(),
-          HighscoreTab(),
-        ]),
+        body: TabBarView(
+          children: [
+            AdventureMissionsTab(),
+            MyGroupTab(),
+            HighscoreTab(),
+          ],
+        ),
       ),
     );
   }

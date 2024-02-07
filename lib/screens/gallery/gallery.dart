@@ -29,54 +29,60 @@ class _GalleryPageState extends State<GalleryPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            t.galleryTitle,
-          ),
+      appBar: AppBar(
+        title: Text(
+          t.galleryTitle,
         ),
-        body: Column(
-            //Make dropdown prettier mayb :
-            children: [
-              Container(
-                  decoration: BoxDecoration(color: Colors.grey[50]),
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: DropdownButton(
-                    elevation: 2,
-                    isExpanded: true,
-                    value: selectedYear,
-                    items: galleries?[0]
-                        .years!
-                        .map((int year) => DropdownMenuItem(
-                            child: Text(year.toString()), value: year))
-                        .toList(),
-                    onChanged: (int? newYear) {
+      ),
+      body: Column(
+        //Make dropdown prettier mayb :
+        children: [
+          Container(
+            decoration: BoxDecoration(color: Colors.grey[50]),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: DropdownButton(
+              elevation: 2,
+              isExpanded: true,
+              value: selectedYear,
+              items: galleries?[0]
+                  .years!
+                  .map(
+                    (int year) => DropdownMenuItem(
+                      child: Text(year.toString()),
+                      value: year,
+                    ),
+                  )
+                  .toList(),
+              onChanged: (int? newYear) {
+                setState(() {
+                  if (selectedYear != newYear) {
+                    selectedYear = newYear!;
+                    locator<GalleryService>()
+                        .getGalleries(year: selectedYear.toString())
+                        .then((value) {
                       setState(() {
-                        if (selectedYear != newYear) {
-                          selectedYear = newYear!;
-                          locator<GalleryService>()
-                              .getGalleries(year: selectedYear.toString())
-                              .then((value) {
-                            setState(() {
-                              this.galleries = value;
-                            });
-                          });
-                        }
+                        this.galleries = value;
                       });
-                    },
-                  )),
-              Expanded(
-                child: GridView.count(
-                  padding: EdgeInsets.all(12),
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  crossAxisCount: 2,
-                  children: generateAlbumThumbnails(),
-                  shrinkWrap: true,
-                ),
-              ),
-            ])
-        //Text(selectedYear.toString())
-        );
+                    });
+                  }
+                });
+              },
+            ),
+          ),
+          Expanded(
+            child: GridView.count(
+              padding: EdgeInsets.all(12),
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              crossAxisCount: 2,
+              children: generateAlbumThumbnails(),
+              shrinkWrap: true,
+            ),
+          ),
+        ],
+      ),
+      //Text(selectedYear.toString())
+    );
   }
 
   List<Widget> generateAlbumThumbnails() {
@@ -85,96 +91,119 @@ class _GalleryPageState extends State<GalleryPage> {
     }
     List<Widget> result = [];
     for (Gallery elem in galleries!) {
-      result.add(Stack(children: [
-        Padding(
-          padding: EdgeInsets.only(top: 16),
-          child: Column(children: [
-            Text(
-              elem.title.toString(),
-              style: Theme.of(context).textTheme.titleLarge?.apply(
-                    color: Colors.white,
-                    fontSizeDelta: -4,
-                  ),
-              softWrap: true,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Center(
+      result.add(
+        Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 16),
               child: Column(
                 children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.date_range,
-                        color: Theme.of(context).primaryColor),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text(
-                      DateFormat('d MMM yyyy').format(elem.start_date!),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.apply(color: Colors.white),
-                    )
-                  ]),
-                  SizedBox(
-                    height: 3,
+                  Text(
+                    elem.title.toString(),
+                    style: Theme.of(context).textTheme.titleLarge?.apply(
+                          color: Colors.white,
+                          fontSizeDelta: -4,
+                        ),
+                    softWrap: true,
+                    textAlign: TextAlign.center,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.location_pin,
-                        color: Theme.of(context).primaryColor),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Flexible(
-                      child: Text(
-                        elem.location.toString(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.apply(color: Colors.white),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ]),
                   SizedBox(
-                    height: 3,
+                    height: 16,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.image, color: Theme.of(context).primaryColor),
-                    SizedBox(
-                      width: 2,
+                  Center(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.date_range,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              DateFormat('d MMM yyyy').format(elem.start_date!),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.apply(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.location_pin,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Flexible(
+                              child: Text(
+                                elem.location.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.apply(color: Colors.white),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.image,
+                                color: Theme.of(context).primaryColor,),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              elem.image_count.toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.apply(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Text(
-                      elem.image_count.toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.apply(color: Colors.white),
-                    ),
-                  ]),
+                  ),
                 ],
               ),
-            )
-          ]),
+            ),
+            Ink.image(
+              colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+              image: getPicture(elem),
+              fit: BoxFit.cover,
+              child: InkWell(
+                onTap: () => goToAlbum(elem.id!),
+              ),
+            ),
+          ],
         ),
-        Ink.image(
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-            image: getPicture(elem),
-            fit: BoxFit.cover,
-            child: InkWell(
-              onTap: () => goToAlbum(elem.id!),
-            ))
-      ]));
+      );
     }
     return result;
   }
 
   void goToAlbum(int id) {
     locator<AlbumService>().getAlbum(id).then((album) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => AlbumPage(album: album)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AlbumPage(album: album)),
+      );
     });
 
     //Send to correct page and then fetch complete album on other page :^)

@@ -53,30 +53,32 @@ class OtherContent extends StatelessWidget {
     };
 
     return ListView(
-        children: _generateListTiles(categories, context) +
-            [
-              ListTile(
-                  title: Text(
+      children: _generateListTiles(categories, context) +
+          [
+            ListTile(
+              title: Text(
                 t.otherAbout,
                 style: _style(),
-              ))
-            ] +
-            _generateListTiles(about, context) +
-            [
-              ListTile(
-                  title: Text(
+              ),
+            ),
+          ] +
+          _generateListTiles(about, context) +
+          [
+            ListTile(
+              title: Text(
                 t.otherSettings,
                 style: _style(),
-              ))
-            ] +
-            _generateListTiles(settings, context) +
-            [ListTile(title: Text("Support", style: _style()))] +
-            _generateListTiles(support, context) +
-            [
-              Card(
-                margin: EdgeInsets.all(2),
-                child: InkWell(
-                    child: ListTile(
+              ),
+            ),
+          ] +
+          _generateListTiles(settings, context) +
+          [ListTile(title: Text("Support", style: _style()))] +
+          _generateListTiles(support, context) +
+          [
+            Card(
+              margin: EdgeInsets.all(2),
+              child: InkWell(
+                child: ListTile(
                   tileColor: Colors.red[600],
                   title: Text(
                     t.otherLogOut,
@@ -93,52 +95,60 @@ class OtherContent extends StatelessWidget {
                       });
                     }
                   },
-                )),
-              )
-            ]);
+                ),
+              ),
+            ),
+          ],
+    );
   }
 
   Future<bool?> _confirmLogout(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(t.otherLogOutConfirm),
-            actions: [
-              TextButton(
-                child: Text(t.otherCancel.toUpperCase()),
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-              ),
-              TextButton(
-                child: Text(t.otherLogOut.toUpperCase()),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(t.otherLogOutConfirm),
+          actions: [
+            TextButton(
+              child: Text(t.otherCancel.toUpperCase()),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+            TextButton(
+              child: Text(t.otherLogOut.toUpperCase()),
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   List<Widget> _generateListTiles(
-      List<String> tileTexts, BuildContext context) {
+    List<String> tileTexts,
+    BuildContext context,
+  ) {
     List<Widget> tiles = [];
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
-      tiles.add(Card(
-        margin: EdgeInsets.all(2),
-        child: InkWell(
+      tiles.add(
+        Card(
+          margin: EdgeInsets.all(2),
+          child: InkWell(
             child: ListTile(
-          title: Text(tileText),
-          onTap: () => goToTilePage(tileText, context),
-          trailing: tileText != t.otherAnon
-              ? SizedBox.shrink()
-              : Icon(Icons.open_in_new_rounded),
-        )),
-      ));
+              title: Text(tileText),
+              onTap: () => goToTilePage(tileText, context),
+              trailing: tileText != t.otherAnon
+                  ? SizedBox.shrink()
+                  : Icon(Icons.open_in_new_rounded),
+            ),
+          ),
+        ),
+      );
     }
     return tiles;
   }
@@ -146,12 +156,17 @@ class OtherContent extends StatelessWidget {
   void goToTilePage(String title, BuildContext context) {
     var t = AppLocalizations.of(context)!;
     if (title == t.otherAnon) {
-      launchUrl(Uri.parse(
-          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"));
+      launchUrl(
+        Uri.parse(
+          "https://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform",
+        ),
+      );
       return;
     }
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => routeMap[title]!));
+      context,
+      MaterialPageRoute(builder: (context) => routeMap[title]!),
+    );
   }
 
   TextStyle _style() {

@@ -43,7 +43,7 @@ class SlideAnimation extends StatelessWidget {
     Curves.fastOutSlowIn,
     Curves.linear,
     Curves.linearToEaseOut,
-    Curves.slowMiddle
+    Curves.slowMiddle,
   ];
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,33 +51,41 @@ class SlideAnimation extends StatelessWidget {
         title: Text("Slide Animation"),
       ),
       body: ListView.builder(
-          itemCount: curveList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text("${curveList[index]}"),
-                leading: CircleAvatar(
-                  child: Text("${index + 1}"),
-                  backgroundColor: Colors.white,
-                ),
-                onTap: () {
-                  print(curveList.length);
-                  Navigator.of(context).push(PageRouteBuilder(
-                      pageBuilder: (context, animation, anotherAnimation) {
-                        return FapPage();
-                      },
-                      transitionDuration: Duration(milliseconds: 2000),
-                      transitionsBuilder: (context, animation, anotherAnimation, child) {
-                        animation = CurvedAnimation(curve: curveList[index], parent: animation);
-                        return SlideTransition(
-                          position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
-                          child: child,
-                        );
-                      }));
-                },
+        itemCount: curveList.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text("${curveList[index]}"),
+              leading: CircleAvatar(
+                child: Text("${index + 1}"),
+                backgroundColor: Colors.white,
               ),
-            );
-          }),
+              onTap: () {
+                print(curveList.length);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, anotherAnimation) {
+                      return FapPage();
+                    },
+                    transitionDuration: Duration(milliseconds: 2000),
+                    transitionsBuilder:
+                        (context, animation, anotherAnimation, child) {
+                      animation = CurvedAnimation(
+                          curve: curveList[index], parent: animation,);
+                      return SlideTransition(
+                        position: Tween(
+                                begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0),)
+                            .animate(animation),
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

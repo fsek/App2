@@ -31,9 +31,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           pass: event.password,
         );
       } catch (ex) {
-        authenticationBloc.add(AppError(
-            error: ex
-                .toString())); // Make sure we show an error that we cant connect
+        authenticationBloc.add(
+          AppError(
+            error: ex.toString(),
+          ),
+        ); // Make sure we show an error that we cant connect
         emit(LoginInitial());
         return;
       }

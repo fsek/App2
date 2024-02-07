@@ -13,9 +13,11 @@ class _HighscoreTabState extends State<HighscoreTab> {
   List<NollningGroup>? _groups;
 
   void initState() {
-    locator<NollningService>().getNollningGroups().then((value) => setState(() {
-          this._groups = value;
-        }));
+    locator<NollningService>().getNollningGroups().then(
+          (value) => setState(() {
+            this._groups = value;
+          }),
+        );
     super.initState();
   }
 
@@ -36,14 +38,16 @@ class _HighscoreTabState extends State<HighscoreTab> {
       children: [
         Container(
           child: IgnorePointer(
-              // This is incredibly bad code but it just won't scale correctly across devices otherwise
-              child: TabBar(
-                  indicatorColor: Theme.of(context).bottomAppBarTheme.color,
-                  tabs: [
+            // This is incredibly bad code but it just won't scale correctly across devices otherwise
+            child: TabBar(
+              indicatorColor: Theme.of(context).bottomAppBarTheme.color,
+              tabs: [
                 Tab(text: t.introductionPlacement),
                 Tab(text: t.introductionGroupName),
-                Tab(text: t.introductionPoints2)
-              ])),
+                Tab(text: t.introductionPoints2),
+              ],
+            ),
+          ),
           color: Theme.of(context).bottomAppBarTheme.color,
         ),
         Expanded(
@@ -61,7 +65,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
               physics: const AlwaysScrollableScrollPhysics(),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -87,7 +91,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             style: TextStyle(fontSize: 25),
           ),
           subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+            "${_groups![index].finished_missions} ${t.introductionCompletedMissions}",
+          ),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -98,20 +103,22 @@ class _HighscoreTabState extends State<HighscoreTab> {
         return ListTile(
           contentPadding: EdgeInsets.fromLTRB(15, 10, 15, 10),
           leading: Container(
-              child: Center(
-                child: Icon(
-                  Icons.emoji_events,
-                  color: Colors.grey.shade400,
-                  size: MediaQuery.of(context).size.width / 9,
-                ),
+            child: Center(
+              child: Icon(
+                Icons.emoji_events,
+                color: Colors.grey.shade400,
+                size: MediaQuery.of(context).size.width / 9,
               ),
-              width: 50),
+            ),
+            width: 50,
+          ),
           title: Text(
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
           subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+            "${_groups![index].finished_missions} ${t.introductionCompletedMissions}",
+          ),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -122,20 +129,22 @@ class _HighscoreTabState extends State<HighscoreTab> {
         return ListTile(
           contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
           leading: Container(
-              child: Center(
-                child: Icon(
-                  Icons.emoji_events,
-                  color: Colors.brown.shade300,
-                  size: MediaQuery.of(context).size.width / 10,
-                ),
+            child: Center(
+              child: Icon(
+                Icons.emoji_events,
+                color: Colors.brown.shade300,
+                size: MediaQuery.of(context).size.width / 10,
               ),
-              width: 50),
+            ),
+            width: 50,
+          ),
           title: Text(
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
           subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+            "${_groups![index].finished_missions} ${t.introductionCompletedMissions}",
+          ),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -147,10 +156,11 @@ class _HighscoreTabState extends State<HighscoreTab> {
           contentPadding: EdgeInsets.fromLTRB(15, 0, 15, 0),
           leading: Container(
             child: Center(
-                child: Text(
-              "${index + 1}",
-              style: TextStyle(fontSize: 22),
-            )),
+              child: Text(
+                "${index + 1}",
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
             width: 50,
           ),
           title: Text(
@@ -158,7 +168,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
             style: TextStyle(fontSize: 18),
           ),
           subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+            "${_groups![index].finished_missions} ${t.introductionCompletedMissions}",
+          ),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),

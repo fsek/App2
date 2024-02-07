@@ -8,6 +8,7 @@ class Fredmansky {
 
   Fredmansky();
 
-  factory Fredmansky.fromJson(Map<String, dynamic> json) => _$FredmanskyFromJson(json);
+  factory Fredmansky.fromJson(Map<String, dynamic> json) =>
+      _$FredmanskyFromJson(json);
   Map<String, dynamic> toJson() => _$FredmanskyToJson(this);
 }

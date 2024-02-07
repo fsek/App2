@@ -8,7 +8,8 @@ class MessagingGroupUser {
 
   MessagingGroupUser();
 
-  factory MessagingGroupUser.fromJson(Map<String, dynamic> json) => _$MessagingGroupUserFromJson(json);
+  factory MessagingGroupUser.fromJson(Map<String, dynamic> json) =>
+      _$MessagingGroupUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessagingGroupUserToJson(this);
 }

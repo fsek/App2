@@ -61,18 +61,19 @@ class PushNotificationsManager {
         // local notification to show to users using the created channel.
         if (notification != null && android != null) {
           flutterLocalNotificationsPlugin.show(
-              notification.hashCode,
-              notification.title,
-              notification.body,
-              NotificationDetails(
-                android: AndroidNotificationDetails(
-                  channel.id,
-                  channel.name,
-                  channelDescription: channel.description,
-                  icon: android.smallIcon,
-                  // other properties...
-                ),
-              ));
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                icon: android.smallIcon,
+                // other properties...
+              ),
+            ),
+          );
         }
       });
 

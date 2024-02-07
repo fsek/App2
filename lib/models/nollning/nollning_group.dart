@@ -10,6 +10,7 @@ class NollningGroup {
   //List<String>? messages; // ska vara List<Message> !!
   NollningGroup();
 
-  factory NollningGroup.fromJson(Map<String, dynamic> json) => _$NollningGroupFromJson(json);
+  factory NollningGroup.fromJson(Map<String, dynamic> json) =>
+      _$NollningGroupFromJson(json);
   Map<String, dynamic> toJson() => _$NollningGroupToJson(this);
 }

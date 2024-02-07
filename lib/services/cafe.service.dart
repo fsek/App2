@@ -26,17 +26,20 @@ class CafeService extends AbstractService {
   ///     {days: {Fredag - 1/10: [{id: 747, start: 2021-10-01T13:59:00.000+02:00, duration: 13:59-14:59, user: null}, {id: 748, start: 2021-10-01T13:59:00.000+02:00, duration: 13:59-14:59, user: null}, {id: 749, start: 2021-10-01T15:59:00.000+02:00, duration: 15:59-17:59, user: null}, {id: 750, start: 2021-10-01T15:59:00.000+02:00, duration: 15:59-17:59, user: null}],
   ///             Måndag - 4/10: []}}}}}}
 
-  Future<Map<DateTime, List<CafeShift>>> getCafeShiftBetweenDates(DateTime startTime, DateTime endTime) async {
+  Future<Map<DateTime, List<CafeShift>>> getCafeShiftBetweenDates(
+      DateTime startTime, DateTime endTime,) async {
     String start = "${startTime.year}-${startTime.month}-${startTime.day}";
     String end = "${endTime.year}-${endTime.month}-${endTime.day}";
-    Map json = await AbstractService.get("/cafe?start=" + start + "&end=" + end);
+    Map json =
+        await AbstractService.get("/cafe?start=" + start + "&end=" + end);
     //let's get parsing boiz
     Map<DateTime, List<CafeShift>> shiftMap = {};
     (json['years'] as Map).forEach((keyYear, year) {
       (year['months'] as Map).forEach((keyMonth, month) {
         (month['days'] as Map).forEach((keyDay, day) {
           String date = (keyDay as String).split(" - ")[1];
-          shiftMap[_parseDate(keyYear, date)] = (day as List).map((data) => CafeShift.fromJson(data)).toList();
+          shiftMap[_parseDate(keyYear, date)] =
+              (day as List).map((data) => CafeShift.fromJson(data)).toList();
         });
       });
     });
@@ -52,7 +55,8 @@ class CafeService extends AbstractService {
 
   Future<Map<DateTime, List<CafeShift>>> getShiftsForCalendar() async {
     DateTime now = DateTime.now();
-    return getCafeShiftBetweenDates(now.subtract(Duration(days: 7)), now.add(Duration(days: 49)));
+    return getCafeShiftBetweenDates(
+        now.subtract(Duration(days: 7)), now.add(Duration(days: 49)),);
   }
 
   Future<CafeShift> getShift(int id) async {
@@ -61,15 +65,19 @@ class CafeService extends AbstractService {
   }
 
   Future<Map> cafeShiftSignup(CafeShift shift) async {
-    return AbstractService.post('/cafe', mapBody: {
-      "cafe_shift_id": shift.id,
-      "cafe_worker": {
-        "user_id": await locator<UserService>().getUser().then((user) => user.id),
-        "councils_ids": [], //empty list for now, fix later!!
-        "group": shift.group,
-        "competition": true, //always true for now, fix later!!
-      }
-    });
+    return AbstractService.post(
+      '/cafe',
+      mapBody: {
+        "cafe_shift_id": shift.id,
+        "cafe_worker": {
+          "user_id":
+              await locator<UserService>().getUser().then((user) => user.id),
+          "councils_ids": [], //empty list for now, fix later!!
+          "group": shift.group,
+          "competition": true, //always true for now, fix later!!
+        },
+      },
+    );
   }
 
   Future<Map> cafeShiftUnsign(CafeShift shift) {

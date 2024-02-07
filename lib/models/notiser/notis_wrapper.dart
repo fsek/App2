@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'notis.dart';
 import 'notis_meta.dart';
 
-part 'notis_wrapper.g.dart'; 
+part 'notis_wrapper.g.dart';
 
 @JsonSerializable()
 class NotisWrapper {
@@ -12,7 +12,8 @@ class NotisWrapper {
 
   NotisWrapper();
 
-  factory NotisWrapper.fromJson(Map<String, dynamic> json) => _$NotisWrapperFromJson(json); 
+  factory NotisWrapper.fromJson(Map<String, dynamic> json) =>
+      _$NotisWrapperFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotisWrapperToJson(this);  
+  Map<String, dynamic> toJson() => _$NotisWrapperToJson(this);
 }

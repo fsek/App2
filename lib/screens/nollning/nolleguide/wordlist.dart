@@ -46,7 +46,7 @@ class _WordListState extends State<WordListPage> {
                   w.key![locale]!,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                Text(w.value![locale]!, style: TextStyle(fontSize: 18))
+                Text(w.value![locale]!, style: TextStyle(fontSize: 18)),
               ],
             ),
           ),

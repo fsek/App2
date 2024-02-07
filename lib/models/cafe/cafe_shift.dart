@@ -16,6 +16,7 @@ class CafeShift {
 
   CafeShift();
 
-  factory CafeShift.fromJson(Map<String, dynamic> json) => _$CafeShiftFromJson(json);
+  factory CafeShift.fromJson(Map<String, dynamic> json) =>
+      _$CafeShiftFromJson(json);
   Map<String, dynamic> toJson() => _$CafeShiftToJson(this);
 }

@@ -16,55 +16,6 @@ class SingleNewsPage extends StatelessWidget {
     var t = AppLocalizations.of(context)!;
     if (translated) {
       return Scaffold(
-          appBar: AppBar(),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
-                    child: Text(news.title!,
-                        style: Theme.of(context).textTheme.titleLarge),
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Container(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                    child: Html(
-                        data: news.content!,
-                        style: {"p": Style(lineHeight: LineHeight(1.2))},
-                        onLinkTap: (String? url, Map<String, String> attributes,
-                            element) {
-                          launchUrl(Uri.parse(url!));
-                        }),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  child: Row(children: [
-                    Text(
-                      news.user!.name!,
-                    ),
-                    Spacer(),
-                    Text(Time.format(news.created_at!, "%d %M %Y %h:%m"))
-                  ]),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: news.image == null
-                      ? SizedBox.shrink()
-                      : Image.network(news.image!),
-                )
-              ],
-            ),
-          ));
-    }
-
-    return Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -74,10 +25,9 @@ class SingleNewsPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
                   child: Text(
-                      news.title == "" || news.title == null
-                          ? t.homeTitleUntranslated
-                          : news.title!,
-                      style: Theme.of(context).textTheme.titleLarge),
+                    news.title!,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
               ),
               Divider(
@@ -86,13 +36,75 @@ class SingleNewsPage extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Text(
-                      "${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}",
-                      style: Theme.of(context).textTheme.bodyLarge),
+                  child: Html(
+                    data: news.content!,
+                    style: {"p": Style(lineHeight: LineHeight(1.2))},
+                    onLinkTap: (
+                      String? url,
+                      Map<String, String> attributes,
+                      element,
+                    ) {
+                      launchUrl(Uri.parse(url!));
+                    },
+                  ),
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Row(
+                  children: [
+                    Text(
+                      news.user!.name!,
+                    ),
+                    Spacer(),
+                    Text(Time.format(news.created_at!, "%d %M %Y %h:%m")),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: news.image == null
+                    ? SizedBox.shrink()
+                    : Image.network(news.image!),
               ),
             ],
           ),
-        ));
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+                child: Text(
+                  news.title == "" || news.title == null
+                      ? t.homeTitleUntranslated
+                      : news.title!,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ),
+            Divider(
+              thickness: 1,
+            ),
+            Container(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
+                child: Text(
+                  "${t.newsNotAvailableOne}${news.user!.name}${t.newsNotAvailableTwo}",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -16,6 +16,7 @@ class AdventureMission {
 
   AdventureMission();
 
-  factory AdventureMission.fromJson(Map<String, dynamic> json) => _$AdventureMissionFromJson(json);
+  factory AdventureMission.fromJson(Map<String, dynamic> json) =>
+      _$AdventureMissionFromJson(json);
   Map<String, dynamic> toJson() => _$AdventureMissionToJson(this);
 }

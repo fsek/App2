@@ -21,7 +21,7 @@ class MissionPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: _getStatus(mission, context),
-          )
+          ),
         ],
       ),
     );

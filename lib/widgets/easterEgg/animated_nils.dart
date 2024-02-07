@@ -33,21 +33,29 @@ class _AnimatedNilsState extends State<AnimatedNils>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        builder: (_, __) {
-          return Positioned(
-              left: 50 + 50 * cos(animation!.value * 2 * pi),
-              top: -400 + 100 * sin(animation!.value * 2 * pi),
-              child: Column(children: [
-                Text("YOU HAVE BEEN BLEESED",
-                    style: Theme.of(context).textTheme.headlineSmall),
-                Image(
-                  image: AssetImage("assets/img/memes/wideNils.jpg"),
-                  width: 300,
-                ),
-                Text("BY WIDE NILS",
-                    style: Theme.of(context).textTheme.headlineMedium)
-              ]));
-        },
-        animation: animation!);
+      builder: (_, __) {
+        return Positioned(
+          left: 50 + 50 * cos(animation!.value * 2 * pi),
+          top: -400 + 100 * sin(animation!.value * 2 * pi),
+          child: Column(
+            children: [
+              Text(
+                "YOU HAVE BEEN BLEESED",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              Image(
+                image: AssetImage("assets/img/memes/wideNils.jpg"),
+                width: 300,
+              ),
+              Text(
+                "BY WIDE NILS",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
+        );
+      },
+      animation: animation!,
+    );
   }
 }

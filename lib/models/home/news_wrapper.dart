@@ -6,7 +6,6 @@ import 'news.dart';
 part 'news_wrapper.g.dart'; //generated JSON file
 
 @JsonSerializable()
-
 class NewsWrapper {
   List<News>? news;
   // ignore: non_constant_identifier_names
@@ -14,7 +13,8 @@ class NewsWrapper {
 
   NewsWrapper();
 
-  factory NewsWrapper.fromJson(Map<String, dynamic> json) => _$NewsWrapperFromJson(json);
+  factory NewsWrapper.fromJson(Map<String, dynamic> json) =>
+      _$NewsWrapperFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewsWrapperToJson(this);
 }

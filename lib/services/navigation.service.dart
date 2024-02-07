@@ -14,15 +14,15 @@ class NavigationService {
   void dispose() {
     onNavigation.close();
   }
-  
+
   Future<dynamic> navigateTo(String routeName) {
     return navigatorKey.currentState!.pushNamed(routeName);
   }
+
   void pop() {
-    if(navigatorKey.currentState!.canPop()) {
+    if (navigatorKey.currentState!.canPop()) {
       navigatorKey.currentState!.pop();
-    }
-    else {
+    } else {
       throw new AppException("Fatal error in Navigator Service");
     }
   }
