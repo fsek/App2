@@ -15,6 +15,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
@@ -59,17 +60,23 @@ void main() async {
     '/people': (context) => PeoplePage(),
     '/wordlist': (context) => WordListPage(),
   };
-
-  locator<ThemeService>().theme = fsekTheme;
-  locator<ThemeService>().backgroundColors = fsekBackground;
+  if (isAprilFools) {
+    locator<ThemeService>().theme = dsekTheme;
+    locator<ThemeService>().backgroundColors = dsekBackground;
+  } else {
+    locator<ThemeService>().theme = fsekTheme;
+    locator<ThemeService>().backgroundColors = fsekBackground;
+  }
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,
-      backgroundImage: AssetImage("assets/img/f_logo.png"),
+      backgroundImage: (isAprilFools
+          ? AssetImage("assets/img/d_logo.png")
+          : AssetImage("assets/img/f_logo.png")),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text("F-sektionen",
+    Text(isAprilFools ? "D-sektionen" : "F-sektionen",
         style: TextStyle(
             fontFamily: 'Helvetica Neue',
             fontSize: 28.0,

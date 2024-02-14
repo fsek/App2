@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/nollning_group.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
@@ -25,7 +26,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Colors.orange[600],
+            color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
           ),
         ),
       );

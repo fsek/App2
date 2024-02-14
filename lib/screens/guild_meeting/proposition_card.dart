@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/guild_meeting/pdf.dart';
 
@@ -14,8 +15,10 @@ class PropositionCard extends StatefulWidget {
 }
 
 class _PropositionCardState extends State<PropositionCard> {
-  Color buttonColor = Colors.orange[700]!.withOpacity(0.3);
-  Color backgroundColor = Colors.orange[700]!.withOpacity(0.2);
+  Color buttonColor =
+      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.3);
+  Color backgroundColor =
+      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.2);
   Color bottomColor = Colors.grey[400]!;
 
   @override

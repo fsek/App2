@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/songbook/song.dart';
@@ -26,7 +27,11 @@ class SongPage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0, 2, 0, 16),
                 child: Text(
                   song.title!,
-                  style: TextStyle(color: Colors.orange[600], fontSize: 24),
+                  style: TextStyle(
+                      color: (isAprilFools
+                          ? Color(0xFFF17F9F)
+                          : Colors.orange[600]),
+                      fontSize: 24),
                 ),
               ),
               song.melody != null && song.melody != ""
@@ -36,7 +41,10 @@ class SongPage extends StatelessWidget {
                         text: TextSpan(children: [
                           TextSpan(
                               text: "${t.songbookMelody}: ",
-                              style: TextStyle(color: Colors.orange[600])),
+                              style: TextStyle(
+                                  color: (isAprilFools
+                                      ? Color(0xFFF17F9F)
+                                      : Colors.orange[600]))),
                           TextSpan(
                               text: song.melody!,
                               style: TextStyle(color: Colors.black))
@@ -51,7 +59,10 @@ class SongPage extends StatelessWidget {
                         text: TextSpan(children: [
                           TextSpan(
                               text: "${t.songbookAuthor}: ",
-                              style: TextStyle(color: Colors.orange[600])),
+                              style: TextStyle(
+                                  color: (isAprilFools
+                                      ? Color(0xFFF17F9F)
+                                      : Colors.orange[600]))),
                           TextSpan(
                               text: song.author!,
                               style: TextStyle(color: Colors.black))

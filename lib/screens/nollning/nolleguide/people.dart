@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/person.dart';
 import 'package:flutter/services.dart';
@@ -57,7 +58,9 @@ class _PeoplePageState extends State<PeoplePage> {
     double height = 60;
     double margin = 10;
     if (_selectedPerson == p) {
-      border = Border.all(color: Colors.orange[600]!, width: borderWidth);
+      border = Border.all(
+          color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])!,
+          width: borderWidth);
       width += borderWidth;
       height += borderWidth;
       margin -= borderWidth;

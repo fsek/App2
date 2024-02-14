@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,7 +30,10 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
         appBar: AppBar(title: Text(t.otherDocuments)),
         body: otherList == null
             ? Center(
-                child: CircularProgressIndicator(color: Colors.orange[600]))
+                child: CircularProgressIndicator(
+                    color: (isAprilFools
+                        ? Color(0xFFF17F9F)
+                        : Colors.orange[600])))
             : !listEquals([],
                     otherList) //listEquals är mycket viktigt, annars jämför den pointers
                 ? Column(//Det finns övriga dokument

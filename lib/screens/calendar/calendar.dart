@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -29,7 +30,10 @@ class _CalendarState extends State<Calendar> {
   }
 
   void openEventPage(CalendarEvent event) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id ?? -1)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -53,7 +57,9 @@ class _CalendarState extends State<Calendar> {
                     event.title ?? "no title",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.orange[600],
+                      color: (isAprilFools
+                          ? Color(0xFFF17F9F)
+                          : Colors.orange[600]),
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -67,11 +73,14 @@ class _CalendarState extends State<Calendar> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(
+                              event.start?.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm")
+                              .format(event.end?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale)
+                              .format(event.start?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -142,7 +151,8 @@ class _CalendarState extends State<Calendar> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay = focusedDay; // update `_focusedDay` here as well
+                      _focusedDay =
+                          focusedDay; // update `_focusedDay` here as well
                       _selectedEvents = _getEventsForDay(selectedDay);
                     });
                   },
@@ -157,7 +167,8 @@ class _CalendarState extends State<Calendar> {
                   alignment: Alignment.centerLeft,
                   width: double.infinity,
                   height: 20,
-                  color: Colors.orange[600],
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                   child: Text(
                     /* It's too late to write pretty code, take this formatting space*/
                     "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),

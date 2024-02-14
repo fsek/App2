@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
@@ -58,10 +59,10 @@ class AlbumPage extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                           text: t.albumPhotographers,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.apply(color: Colors.orange[800]),
+                          style: Theme.of(context).textTheme.bodyMedium?.apply(
+                              color: (isAprilFools
+                                  ? Color(0xFFCF6D89)
+                                  : Colors.orange[800])),
                           children: [
                         TextSpan(
                             text: album.photographers?.join(", ") ??

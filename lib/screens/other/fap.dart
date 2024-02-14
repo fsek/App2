@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -51,10 +52,9 @@ class _FapPageState extends State<FapPage> {
           children: [
             Text(
               t.fapFap,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.apply(color: Colors.orange[600]),
+              style: Theme.of(context).textTheme.headlineMedium?.apply(
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
             ),
             SizedBox(
               height: 10,
@@ -69,10 +69,9 @@ class _FapPageState extends State<FapPage> {
             ),
             Text(
               t.fapConstructed,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.apply(color: Colors.orange[700]),
+              style: Theme.of(context).textTheme.bodyLarge?.apply(
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])),
             ),
             ...(knackare.map((e) => Text(e)).toList()),
             SizedBox(

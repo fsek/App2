@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/screens/cafe/cafe_shift.dart';
@@ -35,7 +36,11 @@ class _CafePageState extends State<CafePage> {
   Widget createCafeShiftCard(CafeShift shift) {
     var t = AppLocalizations.of(context)!;
     return Card(
-      color: (shift.user != null) ? Colors.orange[100] : null,
+      color: (shift.user != null)
+          ? (isAprilFools
+              ? Color.fromARGB(255, 240, 184, 200)
+              : Colors.orange[100])
+          : null,
       child: InkWell(
         onTap: () => openCafeShiftPage(shift),
         child: Container(
@@ -51,7 +56,9 @@ class _CafePageState extends State<CafePage> {
                       shift.duration ?? "för alltid",
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.orange[600],
+                        color: (isAprilFools
+                            ? Color(0xFFF17F9F)
+                            : Colors.orange[600]),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -148,7 +155,7 @@ class _CafePageState extends State<CafePage> {
               alignment: Alignment.centerLeft,
               width: double.infinity,
               height: 20,
-              color: Colors.orange[600],
+              color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
               child: Text(
                 /* It's too late to write pretty code, take this formatting space*/
                 "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),

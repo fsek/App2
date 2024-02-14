@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
@@ -336,12 +337,16 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Icon(
                         Icons.info_outline_rounded,
-                        color: Colors.orange[600],
+                        color: (isAprilFools
+                            ? Color(0xFFF17F9F)
+                            : Colors.orange[600]),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
-                          color: Colors.orange[600],
+                          color: (isAprilFools
+                              ? Color(0xFFF17F9F)
+                              : Colors.orange[600]),
                         ),
                       ),
                     ],
@@ -367,7 +372,9 @@ class _EventPageState extends State<EventPage> {
         children: [
           Text(
             t.eventSignUp,
-            style: TextStyle(fontSize: 25, color: Colors.orange[600]),
+            style: TextStyle(
+                fontSize: 25,
+                color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
           ),
           const Divider(),
           Padding(
@@ -510,7 +517,9 @@ class _EventPageState extends State<EventPage> {
                   child: Text(t.eventLinkToFoodPrefs,
                       style: TextStyle(
                           decoration: TextDecoration.underline,
-                          color: Colors.orange[600])),
+                          color: (isAprilFools
+                              ? Color(0xFFF17F9F)
+                              : Colors.orange[600]))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -525,7 +534,9 @@ class _EventPageState extends State<EventPage> {
                   child: InkWell(
                     onTap: () => sendSignup(),
                     child: Card(
-                      color: Colors.orange[400],
+                      color: (isAprilFools
+                          ? Color(0xFFF17F9F)
+                          : Colors.orange[400]),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -709,7 +720,8 @@ class _EventPageState extends State<EventPage> {
           child: Text(t.eventLinkToFoodPrefs,
               style: TextStyle(
                   decoration: TextDecoration.underline,
-                  color: Colors.orange[600])),
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
           onTap: () => goToSettings(),
         ),
       ]),
@@ -763,7 +775,8 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color: Colors.orange[600],
+                    color:
+                        (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                   ),
                 ),
                 const Divider(),

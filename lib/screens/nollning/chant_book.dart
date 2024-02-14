@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
@@ -44,7 +45,10 @@ class _ChantBookPageState extends State<ChantBookPage> {
         ? Scaffold(
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+                child: CircularProgressIndicator(
+                    color: (isAprilFools
+                        ? Color(0xFFF17F9F)
+                        : Colors.orange[600]))))
         : Scaffold(
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Column(

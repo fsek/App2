@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 
 class ThemeService {
   ThemeData theme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.orange[600],
+    primaryColor: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
   );
   List<Color> backgroundColors = [
     Color(0xFFf77e14),
@@ -12,8 +13,7 @@ class ThemeService {
   List<Widget> loginIcon = [
     CircleAvatar(
       radius: 36.0,
-      backgroundImage:
-          AssetImage("assets/img/fsektionen.png"),
+      backgroundImage: AssetImage("assets/img/fsektionen.png"),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),

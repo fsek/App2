@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
-final ThemeData fsekTheme = ThemeData(
+final ThemeData dsekTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: Colors.orange,
-  colorScheme: ThemeData()
-      .colorScheme
-      .copyWith(primary: Colors.orange[800], secondary: Colors.orangeAccent),
+  primaryColor: Color(0xFFF17F9F),
+  colorScheme: ThemeData().colorScheme.copyWith(
+      primary: Color(0xFFF17F9F),
+      secondary: Color.fromARGB(255, 236, 148, 173)),
   textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFF17F9F)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white))),
-  bottomAppBarTheme: BottomAppBarTheme(color: (Colors.orange[700])),
+  bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFFCF6D89)),
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder:
-        UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-    labelStyle: TextStyle(color: Colors.orange),
+        UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFF17F9F))),
+    labelStyle: TextStyle(color: Color(0xFFF17F9F)),
     hintStyle: TextStyle(color: Colors.grey[600]),
   ),
 );
 
-final List<Color> fsekBackground = [
-  Color(0xFFf77e14),
-  Color(0xFFe6660b),
+final List<Color> dsekBackground = [
+  Color(0xFFF17F9F),
+  Color(0xFFCF6D89),
 ];
 
+final bool isAprilFools =
+    (DateTime(2024, 4, 1, 0, 0).compareTo(DateTime.now()) < 0 &&
+        DateTime(2024, 4, 2, 0, 0).compareTo(DateTime.now()) > 0);
+
+/*final bool isNotAprilFools =
+    (DateTime(2024, 2, 14, 0, 0).compareTo(DateTime.now()) < 0 &&
+        DateTime(2024, 2, 16, 0, 0).compareTo(DateTime.now()) > 0);
+
+final bool isAprilFools = isNotAprilFools;*/
+/*
 final ThemeData nollning2023themeV0 = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xFF202C57),
@@ -143,3 +153,4 @@ final List<Color> nollning2023BackgroundV4 = [
   Color(0xFF165C7F),
   Color(0xFF165C7F),
 ];
+*/
