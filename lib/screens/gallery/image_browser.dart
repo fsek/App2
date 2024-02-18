@@ -34,90 +34,113 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
     var t = AppLocalizations.of(context)!;
     index = widget.initial;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("${widget.album.title!}"),
-          actions: [
-            Visibility(
-              child: ShaderMask(
-                  shaderCallback: (Rect bounds) {
-                    return LinearGradient(
-                      colors: <Color>[
-                        const Color(0xFFFF0064),
-                        const Color(0xFFFF7600),
-                        const Color(0xFFFFD500),
-                        const Color(0xFF8CFE00),
-                        const Color(0xFF00E86C),
-                        const Color(0xFF00F4F2),
-                        const Color(0xFF00CCFF),
-                        const Color(0xFF70A2FF),
-                        const Color(0xFFA96CFF),
-                      ],
-                    ).createShader(bounds);
-                  },
-                  child: IconButton(
-                    icon: Icon(Icons.all_inclusive, size: 40),
-                    onPressed: () async {
-                      try {
-                        http.Response image = await http.get(Uri.parse(
-                            "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                        ImageGallerySaver.saveImage(image.bodyBytes,
-                            name: "${widget.album.images![index].filename!}",
-                            quality: 1);
-                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                          content: Text("The JPEG god smiles upon you"),
-                        ));
-                      } on Exception catch (_) {
-                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                          content: Text("JPEG broke :o"),
-                        ));
-                      }
-                    },
-                  )),
-              visible: smallDownload,
-            ),
-            GestureDetector(
+      appBar: AppBar(
+        title: Text("${widget.album.title!}"),
+        actions: [
+          Visibility(
+            child: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
+                  colors: <Color>[
+                    const Color(0xFFFF0064),
+                    const Color(0xFFFF7600),
+                    const Color(0xFFFFD500),
+                    const Color(0xFF8CFE00),
+                    const Color(0xFF00E86C),
+                    const Color(0xFF00F4F2),
+                    const Color(0xFF00CCFF),
+                    const Color(0xFF70A2FF),
+                    const Color(0xFFA96CFF),
+                  ],
+                ).createShader(bounds);
+              },
               child: IconButton(
-                icon: Icon(Icons.download),
+                icon: Icon(Icons.all_inclusive, size: 40),
                 onPressed: () async {
                   try {
-                    http.Response image = await http.get(Uri.parse(
-                        "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    bool? success = await ImageSave.saveImage(image.bodyBytes,
-                        "${widget.album.images![index].filename!}",
-                        albumName: "F-sektionen");
-                    if (success == true) {
-                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(t.galleryImageDownloaded),
-                      ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(t.galleryImageDownloadError),
-                      ));
-                    }
+                    http.Response image = await http.get(
+                      Uri.parse(
+                        "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}",
+                      ),
+                    );
+                    ImageGallerySaver.saveImage(
+                      image.bodyBytes,
+                      name: "${widget.album.images![index].filename!}",
+                      quality: 1,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      new SnackBar(
+                        content: Text("The JPEG god smiles upon you"),
+                      ),
+                    );
                   } on Exception catch (_) {
-                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloadError),
-                    ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      new SnackBar(
+                        content: Text("JPEG broke :o"),
+                      ),
+                    );
                   }
                 },
               ),
-              onPanCancel: () => _timer.cancel(),
-              onPanDown: (_) => {
-                _timer = Timer(Duration(seconds: 4), () {
-                  smallDownload = true;
-                  setState(() {});
-                })
+            ),
+            visible: smallDownload,
+          ),
+          GestureDetector(
+            child: IconButton(
+              icon: Icon(Icons.download),
+              onPressed: () async {
+                try {
+                  http.Response image = await http.get(
+                    Uri.parse(
+                      "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}",
+                    ),
+                  );
+                  bool? success = await ImageSave.saveImage(
+                    image.bodyBytes,
+                    "${widget.album.images![index].filename!}",
+                    albumName: "F-sektionen",
+                  );
+                  if (success == true) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      new SnackBar(
+                        content: Text(t.galleryImageDownloaded),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      new SnackBar(
+                        content: Text(t.galleryImageDownloadError),
+                      ),
+                    );
+                  }
+                } on Exception catch (_) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    new SnackBar(
+                      content: Text(t.galleryImageDownloadError),
+                    ),
+                  );
+                }
               },
-            )
-          ],
-        ),
-        body: Center(
-            child: PageViewBuilder(
+            ),
+            onPanCancel: () => _timer.cancel(),
+            onPanDown: (_) => {
+              _timer = Timer(Duration(seconds: 4), () {
+                smallDownload = true;
+                setState(() {});
+              }),
+            },
+          ),
+        ],
+      ),
+      body: Center(
+        child: PageViewBuilder(
           initial: widget.initial,
           album: widget.album,
           callback: indexUpdate,
           pageController: new PageController(initialPage: widget.initial),
-        )));
+        ),
+      ),
+    );
   }
 }
 
@@ -134,13 +157,13 @@ class PageViewBuilder extends StatefulWidget {
   final Function(int) callback;
   final PageController pageController;
 
-  const PageViewBuilder(
-      {Key? key,
-      required this.album,
-      required this.initial,
-      required this.callback,
-      required this.pageController})
-      : super(key: key);
+  const PageViewBuilder({
+    Key? key,
+    required this.album,
+    required this.initial,
+    required this.callback,
+    required this.pageController,
+  }) : super(key: key);
 
   @override
   _PageViewBuilderState createState() => _PageViewBuilderState();
@@ -216,14 +239,15 @@ class _ImageContainerState extends State<ImageContainer> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: InteractiveViewer(
-          clipBehavior: Clip.none,
-          transformationController: _transformationController,
-          minScale: widget.minScale,
-          maxScale: widget.maxScale,
-          child: Column(children: [
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: InteractiveViewer(
+        clipBehavior: Clip.none,
+        transformationController: _transformationController,
+        minScale: widget.minScale,
+        maxScale: widget.maxScale,
+        child: Column(
+          children: [
             Padding(padding: EdgeInsets.fromLTRB(0, 45, 0, 45)),
             widget.image,
             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
@@ -231,13 +255,15 @@ class _ImageContainerState extends State<ImageContainer> {
               "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.album.images!.length}",
               style: Theme.of(context).textTheme.titleLarge,
             ),
-          ]),
-          onInteractionEnd: (scaleEndDetails) {
-            double scale = _transformationController.value.getMaxScaleOnAxis();
-            if (widget.onScaleChanged != null) {
-              widget.onScaleChanged!(scale);
-            }
-          },
-        ));
+          ],
+        ),
+        onInteractionEnd: (scaleEndDetails) {
+          double scale = _transformationController.value.getMaxScaleOnAxis();
+          if (widget.onScaleChanged != null) {
+            widget.onScaleChanged!(scale);
+          }
+        },
+      ),
+    );
   }
 }

@@ -53,15 +53,17 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     // Set the controller in build-method as we have access to BuildContext here
     setState(() {
       _controller = TextEditingController(
-          text: widget.group.group_type == "info" ? t.groupWriteProtected : "");
+        text: widget.group.group_type == "info" ? t.groupWriteProtected : "",
+      );
     });
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.group.name!),
-        ),
-        body: Stack(
-          children: [
-            LayoutBuilder(builder: (context, constraints) {
+      appBar: AppBar(
+        title: Text(widget.group.name!),
+      ),
+      body: Stack(
+        children: [
+          LayoutBuilder(
+            builder: (context, constraints) {
               return Container(
                 height: constraints.maxHeight - 60,
                 child: PagedListView<int, Message>(
@@ -69,22 +71,24 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                   reverse: true,
                   shrinkWrap: true,
                   builderDelegate: PagedChildBuilderDelegate<Message>(
-                      itemBuilder: (context, message, index) {
-                    if (message.name == null || message.text == null)
-                      return Container();
-                    Widget _date = Container(); //Container is basically null :D
-                    if (messages.length > 0 &&
-                        messages.length > index + 1 &&
-                        messages[index + 1].day != message.day) {
-                      _date = Padding(
+                    itemBuilder: (context, message, index) {
+                      if (message.name == null || message.text == null)
+                        return Container();
+                      Widget _date =
+                          Container(); //Container is basically null :D
+                      if (messages.length > 0 &&
+                          messages.length > index + 1 &&
+                          messages[index + 1].day != message.day) {
+                        _date = Padding(
                           child: Text(message.day!),
-                          padding: EdgeInsets.fromLTRB(0, 16, 0, 5));
-                    }
+                          padding: EdgeInsets.fromLTRB(0, 16, 0, 5),
+                        );
+                      }
 
-                    return Column(
-                      children: [
-                        _date,
-                        Row(
+                      return Column(
+                        children: [
+                          _date,
+                          Row(
                             mainAxisAlignment: isThisUser(message.name!)
                                 ? MainAxisAlignment.end
                                 : MainAxisAlignment.start,
@@ -98,85 +102,98 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                                     )
                                   : Container(),
                               Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 2 / 3,
-                                  child: GestureDetector(
-                                    onLongPress: isThisUser(message.name!)
-                                        ? () => showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  holdPopup(context, message),
-                                            )
-                                        : null,
-                                    child: Card(
-                                        child: InkWell(
-                                            onTap: () => null,
-                                            child: ListTile(
-                                              tileColor:
-                                                  isThisUser(message.name!)
-                                                      ? Colors.green[100]
-                                                      : Colors.blue[100],
-                                              contentPadding:
-                                                  EdgeInsets.fromLTRB(
-                                                      10, 1, 10, 1),
-                                              title: Text(message.name!),
-                                              subtitle: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              0, 3, 0, 0),
-                                                      child: Html(
-                                                          data: message.text,
-                                                          style: {
-                                                            "body": Style(
-                                                                margin: Margins
-                                                                    .zero,
-                                                                padding:
-                                                                    HtmlPaddings
-                                                                        .zero),
-                                                            "p": Style(
-                                                                padding:
-                                                                    HtmlPaddings
-                                                                        .zero,
-                                                                margin: Margins
-                                                                    .zero)
-                                                          },
-                                                          onLinkTap: (String?
-                                                                  url,
-                                                              Map<String,
-                                                                      String>
-                                                                  attributes,
-                                                              element) {
-                                                            launchUrl(Uri.parse(
-                                                                url!));
-                                                          })),
-                                                  Row(
-                                                    children: [
-                                                      Text(message.time!)
-                                                    ],
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                  )
-                                                ],
+                                width:
+                                    MediaQuery.of(context).size.width * 2 / 3,
+                                child: GestureDetector(
+                                  onLongPress: isThisUser(message.name!)
+                                      ? () => showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                holdPopup(context, message),
+                                          )
+                                      : null,
+                                  child: Card(
+                                    child: InkWell(
+                                      onTap: () => null,
+                                      child: ListTile(
+                                        tileColor: isThisUser(message.name!)
+                                            ? Colors.green[100]
+                                            : Colors.blue[100],
+                                        contentPadding: EdgeInsets.fromLTRB(
+                                          10,
+                                          1,
+                                          10,
+                                          1,
+                                        ),
+                                        title: Text(message.name!),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                0,
+                                                3,
+                                                0,
+                                                0,
                                               ),
-                                            ))),
-                                  )),
-                            ]),
-                      ],
-                    );
-                  }),
+                                              child: Html(
+                                                data: message.text,
+                                                style: {
+                                                  "body": Style(
+                                                    margin: Margins.zero,
+                                                    padding: HtmlPaddings.zero,
+                                                  ),
+                                                  "p": Style(
+                                                    padding: HtmlPaddings.zero,
+                                                    margin: Margins.zero,
+                                                  ),
+                                                },
+                                                onLinkTap: (
+                                                  String? url,
+                                                  Map<String, String>
+                                                      attributes,
+                                                  element,
+                                                ) {
+                                                  launchUrl(
+                                                    Uri.parse(
+                                                      url!,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(message.time!),
+                                              ],
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               );
-            }),
-            Column(
-              children: [_getTextField()],
-              mainAxisAlignment: MainAxisAlignment.end,
-            )
-          ],
-        ));
+            },
+          ),
+          Column(
+            children: [_getTextField()],
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -195,18 +212,21 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
   Widget _getTextField() {
     return Container(
-        color: Colors.grey[200],
-        child: Stack(children: [
-          LayoutBuilder(builder: (context, constraint) {
-            return Container(
-              width: constraint.maxWidth - 60,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
+      color: Colors.grey[200],
+      child: Stack(
+        children: [
+          LayoutBuilder(
+            builder: (context, constraint) {
+              return Container(
+                width: constraint.maxWidth - 60,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(
                     MediaQuery.of(context).size.width / 60,
                     5,
                     MediaQuery.of(context).size.width / 30,
-                    5),
-                child: TextFormField(
+                    5,
+                  ),
+                  child: TextFormField(
                     enabled: widget.group.group_type != "info",
                     controller: _controller,
                     keyboardType: TextInputType.multiline,
@@ -214,25 +234,34 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(),
-                    )),
-              ),
-            );
-          }),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
                 padding: EdgeInsets.fromLTRB(
-                    0, 5, MediaQuery.of(context).size.width / 80, 0),
+                  0,
+                  5,
+                  MediaQuery.of(context).size.width / 80,
+                  0,
+                ),
                 child: TextButton(
-                    onPressed: widget.group.group_type != "info"
-                        ? () => sendMessage()
-                        : null,
-                    child: Text("Send")),
-              )
+                  onPressed: widget.group.group_type != "info"
+                      ? () => sendMessage()
+                      : null,
+                  child: Text("Send"),
+                ),
+              ),
             ],
-          )
-        ]));
+          ),
+        ],
+      ),
+    );
   }
 
   // i wrote this in 5 minutes, shut up
@@ -241,45 +270,51 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
     _updateMessageController =
         TextEditingController(text: getTextWithoutHtml(message.text!.trim()));
     bool _update = false;
-    return StatefulBuilder(builder: (context, setState) {
-      return AlertDialog(
-        title: Text(t.groupWhatToDo),
-        actions: [
-          _update
-              ? TextFormField(
-                  controller: _updateMessageController,
-                )
-              : Container(),
-          !_update
-              ? TextButton(
-                  onPressed: () => setState(() {
-                    _update = true;
-                  }),
-                  child: Text(t.groupEdit),
-                )
-              : TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    sendUpdateMessage(
-                        message.id!, _updateMessageController.text);
-                  },
-                  style: ButtonStyle(
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return AlertDialog(
+          title: Text(t.groupWhatToDo),
+          actions: [
+            _update
+                ? TextFormField(
+                    controller: _updateMessageController,
+                  )
+                : Container(),
+            !_update
+                ? TextButton(
+                    onPressed: () => setState(() {
+                      _update = true;
+                    }),
+                    child: Text(t.groupEdit),
+                  )
+                : TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      sendUpdateMessage(
+                        message.id!,
+                        _updateMessageController.text,
+                      );
+                    },
+                    style: ButtonStyle(
                       foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green[600]!)),
-                  child: Text(t.groupSave),
-                ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              sendDestroyMessage(message.id!);
-            },
-            style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.red)),
-            child: Text(t.groupRemove),
-          ),
-        ],
-      );
-    });
+                          MaterialStateProperty.all<Color>(Colors.green[600]!),
+                    ),
+                    child: Text(t.groupSave),
+                  ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                sendDestroyMessage(message.id!);
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+              child: Text(t.groupRemove),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   bool isThisUser(String messageUser) {
@@ -293,32 +328,40 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
       // NOTE: ActionCable dosent work on stage, why? i dunno, ask förberg or smth
       // Connects to websocket with the token and sets origin because ActionCable respects CORS
-      cable = ActionCable.Connect("${Environment.CABLE_URL}?token=$token",
-          headers: {"Origin": Environment.API_URL}, onConnected: () {
-        print("connected");
+      cable = ActionCable.Connect(
+        "${Environment.CABLE_URL}?token=$token",
+        headers: {"Origin": Environment.API_URL},
+        onConnected: () {
+          print("connected");
 
-        // Connects to the channel with the group id
-        subscribeToChannel();
-      }, onConnectionLost: () {
-        print("connection lost");
-      }, onCannotConnect: () {
-        print("cannot connect");
-      });
+          // Connects to the channel with the group id
+          subscribeToChannel();
+        },
+        onConnectionLost: () {
+          print("connection lost");
+        },
+        onCannotConnect: () {
+          print("cannot connect");
+        },
+      );
     });
   }
 
   void subscribeToChannel() {
-    cable!.subscribe(_channelName, channelParams: _channelParams,
-        onMessage: (data) {
-      print(data);
-      if (data["action"] == "create") {
-        receivedMessage(Message.fromJson(data["message"]["message"]));
-      } else if (data["action"] == "destroy") {
-        destroyMessage(data["message_id"]);
-      } else if (data["action"] == "update") {
-        updateMessage(Message.fromJson(data["message"]["message"]));
-      }
-    });
+    cable!.subscribe(
+      _channelName,
+      channelParams: _channelParams,
+      onMessage: (data) {
+        print(data);
+        if (data["action"] == "create") {
+          receivedMessage(Message.fromJson(data["message"]["message"]));
+        } else if (data["action"] == "destroy") {
+          destroyMessage(data["message_id"]);
+        } else if (data["action"] == "update") {
+          updateMessage(Message.fromJson(data["message"]["message"]));
+        }
+      },
+    );
   }
 
   void unsubscribeToChannel() {
@@ -336,28 +379,34 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
   }
 
   void sendMessage() {
-    cable!.performAction(_channelName,
-        action: "send_message",
-        actionParams: {
-          "content": _controller.text,
-          "group_id": widget.group.id
-        },
-        channelParams: _channelParams);
+    cable!.performAction(
+      _channelName,
+      action: "send_message",
+      actionParams: {
+        "content": _controller.text,
+        "group_id": widget.group.id,
+      },
+      channelParams: _channelParams,
+    );
     _controller.clear();
   }
 
   void sendUpdateMessage(int messageId, String text) {
-    cable!.performAction(_channelName,
-        action: "update_message",
-        actionParams: {"message_id": messageId, "content": text},
-        channelParams: _channelParams);
+    cable!.performAction(
+      _channelName,
+      action: "update_message",
+      actionParams: {"message_id": messageId, "content": text},
+      channelParams: _channelParams,
+    );
   }
 
   void sendDestroyMessage(int messageId) {
-    cable!.performAction(_channelName,
-        action: "destroy_message",
-        actionParams: {"message_id": messageId},
-        channelParams: _channelParams);
+    cable!.performAction(
+      _channelName,
+      action: "destroy_message",
+      actionParams: {"message_id": messageId},
+      channelParams: _channelParams,
+    );
   }
 
   void receivedMessage(Message message) {

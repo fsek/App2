@@ -19,16 +19,18 @@ class _ChantBookPageState extends State<ChantBookPage> {
   String chantAuthor = "";
 
   void initState() {
-    locator<SongbookService>().getChantbook().then((value) => setState(() {
-          this.chants = value;
-          chants.sort((a, b) {
-            if (a.author!.compareTo(b.author!) != 0)
-              return a.author!.compareTo(b.author!);
-            else
-              return a.title!.compareTo(b.title!);
-          }); // handle null?
-          allChants = List.from(chants);
-        }));
+    locator<SongbookService>().getChantbook().then(
+          (value) => setState(() {
+            this.chants = value;
+            chants.sort((a, b) {
+              if (a.author!.compareTo(b.author!) != 0)
+                return a.author!.compareTo(b.author!);
+              else
+                return a.title!.compareTo(b.title!);
+            }); // handle null?
+            allChants = List.from(chants);
+          }),
+        );
     super.initState();
   }
 
@@ -44,23 +46,25 @@ class _ChantBookPageState extends State<ChantBookPage> {
         ? Scaffold(
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+              child: CircularProgressIndicator(color: Colors.orange[600]),
+            ),
+          )
         : Scaffold(
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FocusScope(
-                    //Unfocusing from the searchbar from any tap would be nice but it is minor
-                    child: Focus(
-                  onFocusChange: (focus) {
-                    setState(() {
-                      searchFocus = focus;
-                    });
-                  },
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
+                  //Unfocusing from the searchbar from any tap would be nice but it is minor
+                  child: Focus(
+                    onFocusChange: (focus) {
+                      setState(() {
+                        searchFocus = focus;
+                      });
+                    },
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
                         prefixIcon: searchFocus
                             ? IconButton(
                                 icon: Icon(
@@ -68,7 +72,8 @@ class _ChantBookPageState extends State<ChantBookPage> {
                                   color: Colors.grey[800],
                                 ),
                                 onPressed: () =>
-                                    FocusScope.of(context).unfocus())
+                                    FocusScope.of(context).unfocus(),
+                              )
                             : Icon(
                                 Icons.search,
                                 color: Colors.grey[800],
@@ -79,24 +84,31 @@ class _ChantBookPageState extends State<ChantBookPage> {
                                 icon: Icon(Icons.clear),
                                 color: Colors.grey[800],
                                 onPressed: () => setState(() {
-                                      _controller.clear();
-                                      FocusScope.of(context).unfocus();
-                                      chants = allChants;
-                                    }))
-                            : SizedBox.shrink()),
-                    onChanged: (search) {
-                      List<String> searchTerms =
-                          search.toLowerCase().trim().split(new RegExp(r"\s+"));
-                      setState(() {
-                        chantAuthor = "";
-                        chants = allChants.where((song) {
-                          return searchTerms.every((term) =>
-                              song.title!.toLowerCase().contains(term));
-                        }).toList();
-                      });
-                    },
+                                  _controller.clear();
+                                  FocusScope.of(context).unfocus();
+                                  chants = allChants;
+                                }),
+                              )
+                            : SizedBox.shrink(),
+                      ),
+                      onChanged: (search) {
+                        List<String> searchTerms = search
+                            .toLowerCase()
+                            .trim()
+                            .split(new RegExp(r"\s+"));
+                        setState(() {
+                          chantAuthor = "";
+                          chants = allChants.where((song) {
+                            return searchTerms.every(
+                              (term) =>
+                                  song.title!.toLowerCase().contains(term),
+                            );
+                          }).toList();
+                        });
+                      },
+                    ),
                   ),
-                )),
+                ),
                 Expanded(
                   child: chants.isNotEmpty
                       ? ListView(
@@ -108,7 +120,7 @@ class _ChantBookPageState extends State<ChantBookPage> {
                           padding: EdgeInsets.all(16),
                           child: Text(t.introductionNoMatches),
                         ),
-                )
+                ),
               ],
             ),
             floatingActionButton: FloatingActionButton.extended(
@@ -127,37 +139,44 @@ class _ChantBookPageState extends State<ChantBookPage> {
     List<Widget> index = [];
     if (song.author != chantAuthor) {
       chantAuthor = song.author!;
-      index.add(Container(
-        decoration: BoxDecoration(color: Colors.grey[300]),
-        child: ListTile(
-          title: Text(
-            chantAuthor,
-            style: TextStyle(fontWeight: FontWeight.bold),
+      index.add(
+        Container(
+          decoration: BoxDecoration(color: Colors.grey[300]),
+          child: ListTile(
+            title: Text(
+              chantAuthor,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ),
-      ));
+      );
     }
     return Column(
       children: index +
           [
             Container(
-                decoration: BoxDecoration(
-                    border: Border(
+              decoration: BoxDecoration(
+                border: Border(
                   bottom: BorderSide(color: Colors.grey[400]!),
-                )),
-                child: InkWell(
-                  onTap: () => openSong(song.id!),
-                  child: ListTile(
-                      title: Text(song.title == null ? "" : song.title!)),
-                ))
+                ),
+              ),
+              child: InkWell(
+                onTap: () => openSong(song.id!),
+                child: ListTile(
+                  title: Text(song.title == null ? "" : song.title!),
+                ),
+              ),
+            ),
           ],
     );
   }
 
   void openSong(int id) {
     locator<SongService>().getSong(id).then((song) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SongPage(song: song)),
+      );
     });
   }
 }

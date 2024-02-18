@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'devise_token.g.dart'; //generated JSON file
 
 @JsonSerializable()
-
 class DeviseToken {
   String? accessToken;
   String? uid;
@@ -17,7 +16,7 @@ class DeviseToken {
     this.uid,
     this.client,
     this.expires,
-    this.error
+    this.error,
   });
 
   // Static helper functions
@@ -38,15 +37,13 @@ class DeviseToken {
   static Future<DeviseToken> getFromStorage(TokenStorageWrapper storage) async {
     DeviseToken token = DeviseToken();
     token.accessToken = await storage.read("access-token");
-    if(token.accessToken == null)
-      return DeviseToken();
+    if (token.accessToken == null) return DeviseToken();
 
     token.uid = await storage.read("uid");
     token.client = await storage.read("client");
     String? expires = await storage.read("expires");
-    if(expires == null)
-      return DeviseToken();
-      
+    if (expires == null) return DeviseToken();
+
     token.expires = DateTime.tryParse(expires);
     return token;
   }
@@ -56,23 +53,22 @@ class DeviseToken {
       accessToken: headers['access-token'],
       uid: headers['uid'],
       client: headers['client'],
-      expires: timeConvert(headers["expiry"])
+      expires: timeConvert(headers["expiry"]),
     );
   }
 
   static DateTime timeConvert(String? rubytimestring) {
-    if(rubytimestring == null)
-      return DateTime.now();
+    if (rubytimestring == null) return DateTime.now();
 
     int? time = int.tryParse(rubytimestring);
-    if(time == null)
-      return DateTime.now();
+    if (time == null) return DateTime.now();
 
     int rubytime = int.parse(rubytimestring);
-    return DateTime.fromMillisecondsSinceEpoch(rubytime*1000);
+    return DateTime.fromMillisecondsSinceEpoch(rubytime * 1000);
   }
 
-  factory DeviseToken.fromJson(Map<String, dynamic> json) => _$DeviseTokenFromJson(json);
+  factory DeviseToken.fromJson(Map<String, dynamic> json) =>
+      _$DeviseTokenFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeviseTokenToJson(this);
 }

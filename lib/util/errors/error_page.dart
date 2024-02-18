@@ -23,16 +23,18 @@ class _ErrorPageState extends State<ErrorPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Stack(
-      children: [
-        Padding(
+      child: Stack(
+        children: [
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Error",
-                    style: Theme.of(context).textTheme.headlineMedium),
+                Text(
+                  "Error",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
                 SizedBox(
                   height: 6,
                 ),
@@ -48,10 +50,12 @@ class _ErrorPageState extends State<ErrorPage> {
                     locator<NavigationService>().pop();
                     widget.authenticationBloc!.add(AppStarted());
                   },
-                )
+                ),
               ],
-            ))
-      ],
-    ));
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

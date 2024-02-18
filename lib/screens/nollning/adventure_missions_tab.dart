@@ -14,9 +14,11 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   List<AdventureMissionWeek>? _adventureWeeks;
 
   void initState() {
-    locator<NollningService>().getAdventureWeeks().then((value) => setState(() {
-          this._adventureWeeks = value;
-        }));
+    locator<NollningService>().getAdventureWeeks().then(
+          (value) => setState(() {
+            this._adventureWeeks = value;
+          }),
+        );
     super.initState();
   }
 
@@ -53,8 +55,10 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
           ),
         ),
         body: TabBarView(
-          children: List.generate(weekCount,
-              (index) => _showAdventureWeek(_adventureWeeks![index])),
+          children: List.generate(
+            weekCount,
+            (index) => _showAdventureWeek(_adventureWeeks![index]),
+          ),
         ),
       ),
       initialIndex:
@@ -90,10 +94,14 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
             title: Text(mission.title!),
             // subtitle has to change wether or not we have variable amount of points
             subtitle: mission.variable_points!
-                ? Text("1-${mission.max_points} " +
-                    t.introductionPoints2.toLowerCase())
-                : Text("${mission.max_points} " +
-                    t.introductionPoints2.toLowerCase()),
+                ? Text(
+                    "1-${mission.max_points} " +
+                        t.introductionPoints2.toLowerCase(),
+                  )
+                : Text(
+                    "${mission.max_points} " +
+                        t.introductionPoints2.toLowerCase(),
+                  ),
             trailing: locator<NollningService>().is_mentor
                 ? Row(
                     mainAxisSize: MainAxisSize.min,
@@ -104,7 +112,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
                             ? null
                             : () => {
                                   _setCompletedState(mission)
-                                      .then((value) => setState(() {}))
+                                      .then((value) => setState(() {})),
                                 },
                         icon: _getIcon(mission),
                       ),
@@ -221,22 +229,25 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   }
 
   Future<void> _failedToUpdateDialog(
-      BuildContext context, String errorMessage) {
+    BuildContext context,
+    String errorMessage,
+  ) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(errorMessage),
-            actions: [
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(errorMessage),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
@@ -280,27 +291,28 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
 
   Future<bool?> _resetMissionDialog(BuildContext context) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          var t = AppLocalizations.of(context)!;
-          return AlertDialog(
-            title: Text(t.introductionDestroyMission),
-            actions: [
-              TextButton(
-                child: Text(t.introductionInterrupt3),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton(
-                child: Text(t.introductionDestroy),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        var t = AppLocalizations.of(context)!;
+        return AlertDialog(
+          title: Text(t.introductionDestroyMission),
+          actions: [
+            TextButton(
+              child: Text(t.introductionInterrupt3),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text(t.introductionDestroy),
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   bool _isValidInput(String value, int max_points) {

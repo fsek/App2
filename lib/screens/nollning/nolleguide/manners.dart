@@ -32,9 +32,12 @@ class _MannersPageState extends State<MannersPage> {
   }
 
   Future<List<Article>> _loadArticles() async {
-    final String raw = await rootBundle.loadString('assets/data/guide/articles.json');
+    final String raw =
+        await rootBundle.loadString('assets/data/guide/articles.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
-    List<Article> out = (jsonRaw['articles'] as List).map((data) => Article.fromJson(data)).toList();
+    List<Article> out = (jsonRaw['articles'] as List)
+        .map((data) => Article.fromJson(data))
+        .toList();
     return out;
   }
 
@@ -55,11 +58,16 @@ class _MannersPageState extends State<MannersPage> {
                   child: InkWell(
                     onTap: () => openArticle(a),
                     child: ListTile(
-                      tileColor: WeekTracker.weekColors[WeekTracker.determineWeek(/*differentPreIntroduction: true*/)].withOpacity(0.3),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      tileColor: WeekTracker.weekColors[
+                              WeekTracker.determineWeek(
+                                  /*differentPreIntroduction: true*/)]
+                          .withOpacity(0.3),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),),
                       title: Text(
                         a.title![locale]!,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20,),
                       ),
                       trailing: Icon(Icons.keyboard_arrow_right_rounded),
                     ),
@@ -139,11 +147,13 @@ class _MannersPageState extends State<MannersPage> {
 
   void openArticle(Article a) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ArticlePage(
-                  a: a,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ArticlePage(
+          a: a,
+        ),
+      ),
+    );
   }
 
   Widget build(BuildContext context) {

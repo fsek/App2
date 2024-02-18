@@ -5,7 +5,9 @@ class ContactService extends AbstractService {
   String uri = "/contacts";
   Future<List<Contact>> getContacts() async {
     Map json = await AbstractService.get(uri);
-    List<Contact> result = (json['contacts'] as List).map((data) => Contact.fromJson(data)).toList();
+    List<Contact> result = (json['contacts'] as List)
+        .map((data) => Contact.fromJson(data))
+        .toList();
     result = [...result.map((data) => setDefaults(data))];
     return result;
   }
@@ -25,7 +27,8 @@ class ContactService extends AbstractService {
       respContact.name = "Translation missing :(";
     }
     if (respContact.text == null) {
-      respContact.text = "There are no translations written for this contact's info :/";
+      respContact.text =
+          "There are no translations written for this contact's info :/";
     }
     return respContact;
   }

@@ -20,7 +20,8 @@ class AuthenticationUserFetched extends AuthenticationState {
   List<Object> get props => [messages];
 
   @override
-  String toString() => 'AuthenticationUserFetched { messages: ${messages.length} }';
+  String toString() =>
+      'AuthenticationUserFetched { messages: ${messages.length} }';
 }
 
 class AuthenticationTokenRefreshed extends AuthenticationState {}

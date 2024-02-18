@@ -9,7 +9,8 @@ class GroupMessage {
 
   GroupMessage();
 
-  factory GroupMessage.fromJson(Map<String, dynamic> json) => _$GroupMessageFromJson(json);
+  factory GroupMessage.fromJson(Map<String, dynamic> json) =>
+      _$GroupMessageFromJson(json);
 
   Map<String, dynamic> toJson() => _$GroupMessageToJson(this);
 }

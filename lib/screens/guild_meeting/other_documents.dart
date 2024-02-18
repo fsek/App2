@@ -16,9 +16,11 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
 
   @override
   void initState() {
-    locator<DocumentService>().getOthers("Val").then((value) => setState(() {
-          this.otherList = value;
-        }));
+    locator<DocumentService>().getOthers("Val").then(
+          (value) => setState(() {
+            this.otherList = value;
+          }),
+        );
     super.initState();
   }
 
@@ -26,50 +28,67 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return Scaffold(
-        appBar: AppBar(title: Text(t.otherDocuments)),
-        body: otherList == null
-            ? Center(
-                child: CircularProgressIndicator(color: Colors.orange[600]))
-            : !listEquals([],
-                    otherList) //listEquals är mycket viktigt, annars jämför den pointers
-                ? Column(//Det finns övriga dokument
-                    children: [
+      appBar: AppBar(title: Text(t.otherDocuments)),
+      body: otherList == null
+          ? Center(
+              child: CircularProgressIndicator(color: Colors.orange[600]),
+            )
+          : !listEquals(
+              [],
+              otherList,
+            ) //listEquals är mycket viktigt, annars jämför den pointers
+              ? Column(
+                  //Det finns övriga dokument
+                  children: [
                     Expanded(
-                        child: ListView(
-                      children: otherList!
-                          .map((document) => _generateDocumentWidget(document))
-                          .toList(),
-                    ))
-                  ])
-                : Center(
-                    child: Text(t.noOtherDocuments,
-                        style: TextStyle(
-                            fontStyle:
-                                FontStyle.italic))) //Inga övriga dokument
-        );
+                      child: ListView(
+                        children: otherList!
+                            .map(
+                                (document) => _generateDocumentWidget(document),)
+                            .toList(),
+                      ),
+                    ),
+                  ],
+                )
+              : Center(
+                  child: Text(
+                    t.noOtherDocuments,
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ), //Inga övriga dokument
+    );
   }
 
   Widget _generateDocumentWidget(ElectionDocument document) {
     var t = AppLocalizations.of(context)!;
     return Container(
-        decoration: BoxDecoration(
-            border: Border(
+      decoration: BoxDecoration(
+        border: Border(
           bottom: BorderSide(color: Colors.grey[400]!),
-        )),
-        child: InkWell(
-          onTap: () => openDocument(document),
-          child: ListTile(
-              title: Text(document.document_name == null
-                  ? t.otherTitleMissing
-                  : document.document_name!)),
-        ));
+        ),
+      ),
+      child: InkWell(
+        onTap: () => openDocument(document),
+        child: ListTile(
+          title: Text(
+            document.document_name == null
+                ? t.otherTitleMissing
+                : document.document_name!,
+          ),
+        ),
+      ),
+    );
   }
 
   void openDocument(ElectionDocument document) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                PdfPage(url: document.url!, title: document.document_name!)));
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PdfPage(url: document.url!, title: document.document_name!),
+      ),
+    );
   }
 }

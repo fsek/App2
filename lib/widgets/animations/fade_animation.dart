@@ -43,7 +43,7 @@ class FadeAnimation extends StatelessWidget {
     Curves.fastOutSlowIn,
     Curves.linear,
     Curves.linearToEaseOut,
-    Curves.slowMiddle
+    Curves.slowMiddle,
   ];
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,33 +51,39 @@ class FadeAnimation extends StatelessWidget {
         title: Text("Fade Animation"),
       ),
       body: ListView.builder(
-          itemCount: curveList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text("${curveList[index]}"),
-                leading: CircleAvatar(
-                  child: Text("${index + 1}"),
-                  backgroundColor: Colors.white,
-                ),
-                onTap: () {
-                  print(curveList.length);
-                  Navigator.of(context).push(PageRouteBuilder(
-                      pageBuilder: (context, animation, anotherAnimation) {
-                        return FapPage();
-                      },
-                      transitionDuration: Duration(milliseconds: 2000),
-                      transitionsBuilder: (context, animation, anotherAnimation, child) {
-                        animation = CurvedAnimation(curve: curveList[index], parent: animation);
-                        return FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        );
-                      }));
-                },
+        itemCount: curveList.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text("${curveList[index]}"),
+              leading: CircleAvatar(
+                child: Text("${index + 1}"),
+                backgroundColor: Colors.white,
               ),
-            );
-          }),
+              onTap: () {
+                print(curveList.length);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, anotherAnimation) {
+                      return FapPage();
+                    },
+                    transitionDuration: Duration(milliseconds: 2000),
+                    transitionsBuilder:
+                        (context, animation, anotherAnimation, child) {
+                      animation = CurvedAnimation(
+                          curve: curveList[index], parent: animation,);
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

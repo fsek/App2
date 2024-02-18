@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class PdfPage extends StatelessWidget {
-  const PdfPage({Key? key, required this.url, required this.title}) : super(key: key);
+  const PdfPage({Key? key, required this.url, required this.title})
+      : super(key: key);
   final String title;
   final String url;
 

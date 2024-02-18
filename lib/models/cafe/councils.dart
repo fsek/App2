@@ -9,6 +9,7 @@ class Councils {
 
   Councils();
 
-  factory Councils.fromJson(Map<String, dynamic> json) => _$CouncilsFromJson(json);
+  factory Councils.fromJson(Map<String, dynamic> json) =>
+      _$CouncilsFromJson(json);
   Map<String, dynamic> toJson() => _$CouncilsToJson(this);
 }

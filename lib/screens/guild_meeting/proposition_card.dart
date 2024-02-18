@@ -30,42 +30,53 @@ class _PropositionCardState extends State<PropositionCard> {
         ? Container()
         : Container(
             decoration: BoxDecoration(
-                color: backgroundColor,
-                border: Border(bottom: BorderSide(color: bottomColor))),
+              color: backgroundColor,
+              border: Border(bottom: BorderSide(color: bottomColor)),
+            ),
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-            child: Column(children: [
-              Center(
+            child: Column(
+              children: [
+                Center(
                   child: Text(
-                widget.proposition!.document_name!,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
+                    widget.proposition!.document_name!,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
                       child: InkWell(
-                          onTap: () => {openFile(widget.proposition!)},
-                          child: ListTile(
-                            tileColor: buttonColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            title: Center(
-                                child: Text(
+                        onTap: () => {openFile(widget.proposition!)},
+                        child: ListTile(
+                          tileColor: buttonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          title: Center(
+                            child: Text(
                               t.readProposition,
-                            )),
-                            visualDensity: VisualDensity(vertical: -3),
-                          ))),
-                ],
-              )
-            ]));
+                            ),
+                          ),
+                          visualDensity: VisualDensity(vertical: -3),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
   }
 
   void openFile(ElectionDocument document) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                PdfPage(url: document.url!, title: document.document_name!)));
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PdfPage(url: document.url!, title: document.document_name!),
+      ),
+    );
   }
 }

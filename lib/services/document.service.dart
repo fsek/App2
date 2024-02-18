@@ -5,7 +5,9 @@ import 'package:fsek_mobile/services/abstract.service.dart';
 class DocumentService extends AbstractService {
   Future<List<DocumentCollection>> getDocumentCollections() async {
     Map json = await AbstractService.get("/document_collections");
-    return (json['document_collections'] as List).map((data) => DocumentCollection.fromJson(data)).toList();
+    return (json['document_collections'] as List)
+        .map((data) => DocumentCollection.fromJson(data))
+        .toList();
   }
 
   Future<DocumentCollection?> getDocumentCollection(String name) async {
@@ -15,7 +17,8 @@ class DocumentService extends AbstractService {
       return null;
     }
     Map json = await AbstractService.get("/document_collections/$id");
-    return DocumentCollection.fromJson(json["document_collection"] as Map<String, dynamic>);
+    return DocumentCollection.fromJson(
+        json["document_collection"] as Map<String, dynamic>,);
   }
 
   int? idFromCollectionName(List<DocumentCollection> collections, String name) {
@@ -28,25 +31,34 @@ class DocumentService extends AbstractService {
   }
 
   Future<List<ElectionDocument>?> getPropositions(String collectionName) async {
-    DocumentCollection? docCollection = await getDocumentCollection(collectionName);
+    DocumentCollection? docCollection =
+        await getDocumentCollection(collectionName);
     if (docCollection == null) {
       return null;
     } else if (docCollection.election_documents == null) {
       return [];
     }
-    return docCollection.election_documents!.where((document) => document.document_type == "proposition").toList();
+    return docCollection.election_documents!
+        .where((document) => document.document_type == "proposition")
+        .toList();
   }
 
-  Future<List<List<ElectionDocument?>>?> getMotionsAndAnswers(String collectionName) async {
+  Future<List<List<ElectionDocument?>>?> getMotionsAndAnswers(
+      String collectionName,) async {
     // returns a list of motion and motion-answer pairs (where motion-answers might not exist)
-    DocumentCollection? docCollection = await getDocumentCollection(collectionName);
+    DocumentCollection? docCollection =
+        await getDocumentCollection(collectionName);
     if (docCollection == null) {
       return null;
     } else if (docCollection.election_documents == null) {
       return [];
     }
-    List<ElectionDocument> motions = docCollection.election_documents!.where((document) => document.document_type == "motion").toList();
-    List<ElectionDocument> answers = docCollection.election_documents!.where((document) => document.document_type == "motionssvar").toList();
+    List<ElectionDocument> motions = docCollection.election_documents!
+        .where((document) => document.document_type == "motion")
+        .toList();
+    List<ElectionDocument> answers = docCollection.election_documents!
+        .where((document) => document.document_type == "motionssvar")
+        .toList();
     List<List<ElectionDocument?>> motionsAndAnswers = [];
     for (ElectionDocument motion in motions) {
       ElectionDocument? ans;
@@ -62,12 +74,15 @@ class DocumentService extends AbstractService {
   }
 
   Future<List<ElectionDocument>?> getOthers(String collectionName) async {
-    DocumentCollection? docCollection = await getDocumentCollection(collectionName);
+    DocumentCollection? docCollection =
+        await getDocumentCollection(collectionName);
     if (docCollection == null) {
       return null;
     } else if (docCollection.election_documents == null) {
       return [];
     }
-    return docCollection.election_documents!.where((document) => document.document_type == "övrig").toList();
+    return docCollection.election_documents!
+        .where((document) => document.document_type == "övrig")
+        .toList();
   }
 }

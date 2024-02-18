@@ -1,8 +1,8 @@
 //this is well made and cool
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'imageFile.g.dart';
+
 @JsonSerializable()
 class ImageFile {
   String? url;
@@ -10,7 +10,7 @@ class ImageFile {
   // String? thumb;
   Map<String, String>? large;
   Map<String, String>? thumb;
-  
+
   ImageFile();
 
   factory ImageFile.fromJson(Map<String, dynamic> json) =>

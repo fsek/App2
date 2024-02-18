@@ -24,19 +24,20 @@ class _PropositionsPageState extends State<PropositionsPage>
 
   @override
   void initState() {
-    locator<DocumentService>()
-        .getPropositions("Val")
-        .then((value) => setState(() {
-              if (!listEquals(value, [])) {
-                this.documents = value!;
-                documents!.sort((a, b) => a.document_name!
-                    .compareTo(b.document_name!)); // handle null?
-                allDocuments = List.from(documents!);
-              } else {
-                this.documents = null;
-                allDocuments = null;
-              }
-            }));
+    locator<DocumentService>().getPropositions("Val").then(
+          (value) => setState(() {
+            if (!listEquals(value, [])) {
+              this.documents = value!;
+              documents!.sort(
+                (a, b) => a.document_name!.compareTo(b.document_name!),
+              ); // handle null?
+              allDocuments = List.from(documents!);
+            } else {
+              this.documents = null;
+              allDocuments = null;
+            }
+          }),
+        );
     super.initState();
   }
 
@@ -52,7 +53,9 @@ class _PropositionsPageState extends State<PropositionsPage>
         ? Scaffold(
             appBar: AppBar(title: Text(t.propositionsPageTitle)),
             body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+              child: CircularProgressIndicator(color: Colors.orange[600]),
+            ),
+          )
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -61,16 +64,16 @@ class _PropositionsPageState extends State<PropositionsPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FocusScope(
-                      child: Focus(
-                    onFocusChange: (focus) {
-                      print(focus);
-                      setState(() {
-                        searchFocus = focus;
-                      });
-                    },
-                    child: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
+                    child: Focus(
+                      onFocusChange: (focus) {
+                        print(focus);
+                        setState(() {
+                          searchFocus = focus;
+                        });
+                      },
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
                           prefixIcon: searchFocus
                               ? IconButton(
                                   icon: Icon(
@@ -78,7 +81,8 @@ class _PropositionsPageState extends State<PropositionsPage>
                                     color: Colors.grey[800],
                                   ),
                                   onPressed: () =>
-                                      FocusScope.of(context).unfocus())
+                                      FocusScope.of(context).unfocus(),
+                                )
                               : Icon(
                                   Icons.search,
                                   color: Colors.grey[800],
@@ -89,46 +93,52 @@ class _PropositionsPageState extends State<PropositionsPage>
                                   icon: Icon(Icons.clear),
                                   color: Colors.grey[800],
                                   onPressed: () => setState(() {
-                                        _controller.clear();
-                                        FocusScope.of(context).unfocus();
-                                        documents = allDocuments;
-                                      }))
-                              : SizedBox.shrink()),
-                      onChanged: (search) {
-                        List<String> searchTerms = search
-                            .toLowerCase()
-                            .trim()
-                            .split(new RegExp(r"\s+"));
-                        setState(() {
-                          initChar = "";
-                          if (allDocuments != null) {
-                            documents = allDocuments!.where((document) {
-                              return searchTerms.every((term) => document
-                                  .document_name!
-                                  .toLowerCase()
-                                  .contains(term));
-                            }).toList();
-                          }
-                        });
-                      },
+                                    _controller.clear();
+                                    FocusScope.of(context).unfocus();
+                                    documents = allDocuments;
+                                  }),
+                                )
+                              : SizedBox.shrink(),
+                        ),
+                        onChanged: (search) {
+                          List<String> searchTerms = search
+                              .toLowerCase()
+                              .trim()
+                              .split(new RegExp(r"\s+"));
+                          setState(() {
+                            initChar = "";
+                            if (allDocuments != null) {
+                              documents = allDocuments!.where((document) {
+                                return searchTerms.every(
+                                  (term) => document.document_name!
+                                      .toLowerCase()
+                                      .contains(term),
+                                );
+                              }).toList();
+                            }
+                          });
+                        },
+                      ),
                     ),
-                  )),
+                  ),
                   Expanded(
                     child: documents != null
                         ? ListView(
                             children: documents!
-                                .map((document) =>
-                                    _generateDocumentTile(document))
+                                .map(
+                                  (document) => _generateDocumentTile(document),
+                                )
                                 .toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
                             child: Text(t.noProposition),
                           ),
-                  )
+                  ),
                 ],
               ),
-            ));
+            ),
+          );
   }
 
   Widget _generateDocumentTile(ElectionDocument document) {

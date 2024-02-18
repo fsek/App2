@@ -6,7 +6,13 @@ import 'package:fsek_mobile/widgets/animations/size_animation.dart';
 import 'package:fsek_mobile/widgets/animations/slide_animation.dart';
 
 class AnimationPage extends StatelessWidget {
-  List<Widget> routes = [SlideAnimation(), FadeAnimation(), ScaleAnimation(), SizeAnimation(), RotationAnimation()];
+  List<Widget> routes = [
+    SlideAnimation(),
+    FadeAnimation(),
+    ScaleAnimation(),
+    SizeAnimation(),
+    RotationAnimation(),
+  ];
   var animationTypeList = ["slide", "fade", "scale", "size", "rotation"];
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +24,8 @@ class AnimationPage extends StatelessWidget {
             child: Card(
               child: ListTile(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => routes[index]));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => routes[index]),);
                 },
                 leading: CircleAvatar(
                   backgroundColor: Colors.white,

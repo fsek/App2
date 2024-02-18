@@ -8,9 +8,12 @@ class IntroductionSchedule extends StatefulWidget {
   final int week; // the week we are showing on this schedule-page
   final bool
       firstTime; // if we are entering this week for the first time from the schedule, and thus should automatically continue flipping in initState
-  const IntroductionSchedule(
-      {key, required this.currentWeek, this.week = 0, this.firstTime = false})
-      : super(key: key);
+  const IntroductionSchedule({
+    key,
+    required this.currentWeek,
+    this.week = 0,
+    this.firstTime = false,
+  }) : super(key: key);
   @override
   _IntroductionScheduleState createState() => _IntroductionScheduleState();
 }
@@ -22,15 +25,17 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
     // this here is to flip to the current introduction week when you are first entering the calendar, but not to do it whilst flipping around in the calendar.
     if (widget.firstTime && widget.week < widget.currentWeek) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).push(TurnPageRoute(
-          overleafColor: WeekTracker.weekColors[widget.week],
-          builder: (context) => IntroductionSchedule(
-            week: widget.week + 1,
-            currentWeek: widget.currentWeek,
-            firstTime:
-                (widget.firstTime && widget.week + 1 < widget.currentWeek),
+        Navigator.of(context).push(
+          TurnPageRoute(
+            overleafColor: WeekTracker.weekColors[widget.week],
+            builder: (context) => IntroductionSchedule(
+              week: widget.week + 1,
+              currentWeek: widget.currentWeek,
+              firstTime:
+                  (widget.firstTime && widget.week + 1 < widget.currentWeek),
+            ),
           ),
-        ));
+        );
       });
     }
   }
@@ -55,9 +60,10 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
       ),
       backgroundColor: Colors.transparent,
       body: Stack(
-          // decoration: BoxDecoration(image: DecorationImage(image: AssetImage(backgroundPath), fit: BoxFit.cover)),
-          children: [
-            Stack(children: [
+        // decoration: BoxDecoration(image: DecorationImage(image: AssetImage(backgroundPath), fit: BoxFit.cover)),
+        children: [
+          Stack(
+            children: [
               Align(
                 alignment: Alignment.topCenter,
                 child: Image.asset(upperBackgroundPath),
@@ -70,15 +76,19 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
                 alignment: Alignment.center,
                 child: Image.asset(backgroundPath),
               ),
-            ]),
-            GestureDetector(onHorizontalDragEnd: (DragEndDetails details) {
+            ],
+          ),
+          GestureDetector(
+            onHorizontalDragEnd: (DragEndDetails details) {
               if (details.primaryVelocity! > sensitivity) {
                 _swipe("right");
               } else if (details.primaryVelocity! < -sensitivity) {
                 _swipe("left");
               }
-            }),
-          ]),
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -96,7 +106,9 @@ class _IntroductionScheduleState extends State<IntroductionSchedule> {
         TurnPageRoute(
           overleafColor: WeekTracker.weekColors[widget.week],
           builder: (context) => IntroductionSchedule(
-              week: widget.week + 1, currentWeek: widget.currentWeek),
+            week: widget.week + 1,
+            currentWeek: widget.currentWeek,
+          ),
         ),
       );
     }

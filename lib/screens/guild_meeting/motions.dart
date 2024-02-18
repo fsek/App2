@@ -28,20 +28,21 @@ class _MotionsPageState extends State<MotionsPage>
 
   @override
   void initState() {
-    locator<DocumentService>()
-        .getMotionsAndAnswers("Val")
-        .then((value) => setState(() {
-              if (!listEquals(value, [])) {
-                this.documents = value;
-                // 0th value is the motion, which should always exist if we get a non null response
-                documents!.sort((a, b) =>
-                    a[0]!.document_name!.compareTo(b[0]!.document_name!));
-                allDocuments = List.from(documents!);
-              } else {
-                this.documents = null;
-                allDocuments = null;
-              }
-            }));
+    locator<DocumentService>().getMotionsAndAnswers("Val").then(
+          (value) => setState(() {
+            if (!listEquals(value, [])) {
+              this.documents = value;
+              // 0th value is the motion, which should always exist if we get a non null response
+              documents!.sort(
+                (a, b) => a[0]!.document_name!.compareTo(b[0]!.document_name!),
+              );
+              allDocuments = List.from(documents!);
+            } else {
+              this.documents = null;
+              allDocuments = null;
+            }
+          }),
+        );
     super.initState();
   }
 
@@ -57,7 +58,9 @@ class _MotionsPageState extends State<MotionsPage>
         ? Scaffold(
             appBar: AppBar(title: Text(t.motionsPageTitle)),
             body: Center(
-                child: CircularProgressIndicator(color: Colors.orange[600])))
+              child: CircularProgressIndicator(color: Colors.orange[600]),
+            ),
+          )
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -66,16 +69,16 @@ class _MotionsPageState extends State<MotionsPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FocusScope(
-                      child: Focus(
-                    onFocusChange: (focus) {
-                      //print(focus);
-                      setState(() {
-                        searchFocus = focus;
-                      });
-                    },
-                    child: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
+                    child: Focus(
+                      onFocusChange: (focus) {
+                        //print(focus);
+                        setState(() {
+                          searchFocus = focus;
+                        });
+                      },
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
                           prefixIcon: searchFocus
                               ? IconButton(
                                   icon: Icon(
@@ -83,7 +86,8 @@ class _MotionsPageState extends State<MotionsPage>
                                     color: Colors.grey[800],
                                   ),
                                   onPressed: () =>
-                                      FocusScope.of(context).unfocus())
+                                      FocusScope.of(context).unfocus(),
+                                )
                               : Icon(
                                   Icons.search,
                                   color: Colors.grey[800],
@@ -94,53 +98,66 @@ class _MotionsPageState extends State<MotionsPage>
                                   icon: Icon(Icons.clear),
                                   color: Colors.grey[800],
                                   onPressed: () => setState(() {
-                                        _controller.clear();
-                                        FocusScope.of(context).unfocus();
-                                        documents = allDocuments;
-                                      }))
-                              : SizedBox.shrink()),
-                      onChanged: (search) {
-                        List<String> searchTerms = search
-                            .toLowerCase()
-                            .trim()
-                            .split(new RegExp(r"\s+"));
-                        setState(() {
-                          initChar = "";
-                          if (documents != null) {
-                            documents = allDocuments!.where((document) {
-                              return searchTerms.every((term) => document[0]!
-                                  .document_name!
-                                  .toLowerCase()
-                                  .contains(term));
-                            }).toList();
-                          }
-                        });
-                      },
+                                    _controller.clear();
+                                    FocusScope.of(context).unfocus();
+                                    documents = allDocuments;
+                                  }),
+                                )
+                              : SizedBox.shrink(),
+                        ),
+                        onChanged: (search) {
+                          List<String> searchTerms = search
+                              .toLowerCase()
+                              .trim()
+                              .split(new RegExp(r"\s+"));
+                          setState(() {
+                            initChar = "";
+                            if (documents != null) {
+                              documents = allDocuments!.where((document) {
+                                return searchTerms.every(
+                                  (term) => document[0]!
+                                      .document_name!
+                                      .toLowerCase()
+                                      .contains(term),
+                                );
+                              }).toList();
+                            }
+                          });
+                        },
+                      ),
                     ),
-                  )),
+                  ),
                   Expanded(
                     child: documents != null
                         ? ListView(
                             children: documents!
-                                .map((document) => _generateDocumentTile(
+                                .map(
+                                  (document) => _generateDocumentTile(
                                     document[0]!,
-                                    document.length > 1 ? document[1] : null))
+                                    document.length > 1 ? document[1] : null,
+                                  ),
+                                )
                                 .toList(),
                           )
                         : Padding(
                             padding: EdgeInsets.all(16),
                             child: Text(t.noMotions),
                           ),
-                  )
+                  ),
                 ],
               ),
-            ));
+            ),
+          );
   }
 
   Widget _generateDocumentTile(
-      ElectionDocument motion, ElectionDocument? motion_answer) {
-    return Column(children: [
-      MotionCard(motion: motion, motionResponse: motion_answer),
-    ]);
+    ElectionDocument motion,
+    ElectionDocument? motion_answer,
+  ) {
+    return Column(
+      children: [
+        MotionCard(motion: motion, motionResponse: motion_answer),
+      ],
+    );
   }
 }

@@ -31,7 +31,7 @@ class _FapPageState extends State<FapPage> {
       "Oskar Watsfeldt, ${t.fapSpider} 2022",
       "Louise Drenth, ${t.fapSuper} 2023",
       "Emma Engdahl, ${t.fapSpider} 2023",
-      "Hjalmar Mårtensson ${t.fapSpider} 2023"
+      "Hjalmar Mårtensson ${t.fapSpider} 2023",
     ];
     List<String> inspiration = ["https://www.youtube.com/watch?v=k238XpMMn38"];
     TapGestureRecognizer fredmansTap = TapGestureRecognizer()
@@ -92,9 +92,12 @@ class _FapPageState extends State<FapPage> {
               ),
             ),
             ...(inspiration
-                .map((e) => TextButton(
+                .map(
+                  (e) => TextButton(
                     onPressed: () => launchUrl(Uri.parse(e)),
-                    child: Text("Link " + inspiration.indexOf(e).toString())))
+                    child: Text("Link " + inspiration.indexOf(e).toString()),
+                  ),
+                )
                 .toList()),
             Spacer(),
             Row(
@@ -132,41 +135,45 @@ class _FapPageState extends State<FapPage> {
 
   void _leavePopup(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Your Beer Life has Ended"),
-            content: Text(
-                "You are a disgrace to spoders everywhere across the world, no more beer for you"),
-            actions: [
-              TextButton(
-                child: Text("Unlit fam"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Your Beer Life has Ended"),
+          content: Text(
+            "You are a disgrace to spoders everywhere across the world, no more beer for you",
+          ),
+          actions: [
+            TextButton(
+              child: Text("Unlit fam"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _joinPopup(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("A New Life with Beer"),
-            content: Text(
-                "Congratulations fren, a new life will start on friday 15.00"),
-            actions: [
-              TextButton(
-                child: Text("Lit fam"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("A New Life with Beer"),
+          content: Text(
+            "Congratulations fren, a new life will start on friday 15.00",
+          ),
+          actions: [
+            TextButton(
+              child: Text("Lit fam"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

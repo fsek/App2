@@ -12,6 +12,7 @@ class ElectionDocument {
 
   ElectionDocument();
 
-  factory ElectionDocument.fromJson(Map<String, dynamic> json) => _$ElectionDocumentFromJson(json);
+  factory ElectionDocument.fromJson(Map<String, dynamic> json) =>
+      _$ElectionDocumentFromJson(json);
   Map<String, dynamic> toJson() => _$ElectionDocumentToJson(this);
 }

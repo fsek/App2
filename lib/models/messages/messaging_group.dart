@@ -15,7 +15,8 @@ class MessagingGroup {
 
   MessagingGroup();
 
-  factory MessagingGroup.fromJson(Map<String, dynamic> json) => _$MessagingGroupFromJson(json);
+  factory MessagingGroup.fromJson(Map<String, dynamic> json) =>
+      _$MessagingGroupFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessagingGroupToJson(this);
 }

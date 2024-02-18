@@ -13,6 +13,7 @@ class AdventureMissionWeek {
 
   AdventureMissionWeek();
 
-  factory AdventureMissionWeek.fromJson(Map<String, dynamic> json) => _$AdventureMissionWeekFromJson(json);
+  factory AdventureMissionWeek.fromJson(Map<String, dynamic> json) =>
+      _$AdventureMissionWeekFromJson(json);
   Map<String, dynamic> toJson() => _$AdventureMissionWeekToJson(this);
 }

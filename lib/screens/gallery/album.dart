@@ -13,69 +13,73 @@ class AlbumPage extends StatelessWidget {
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(album.title!),
-          actions: [],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: GridView.count(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: generateImages(context),
-                ),
+      appBar: AppBar(
+        title: Text(album.title!),
+        actions: [],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: GridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                children: generateImages(context),
               ),
             ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(color: Colors.grey[50]),
-              child: ExpansionTile(
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                title: Text(
-                  "Mer info",
-                ),
-                children: [
-                  SizedBox(
-                    height: 8,
-                    width: double.infinity,
-                  ),
-                  Text(
-                    album.title ?? "-",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(album.description!),
-                  SizedBox(height: 10),
-                  RichText(
-                      text: TextSpan(
-                          text: t.albumPhotographers,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.apply(color: Colors.orange[800]),
-                          children: [
-                        TextSpan(
-                            text: album.photographers?.join(", ") ??
-                                t.albumNoPhotographers,
-                            style: Theme.of(context).textTheme.bodyMedium)
-                      ])),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
+          ),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(color: Colors.grey[50]),
+            child: ExpansionTile(
+              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+              childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+              title: Text(
+                "Mer info",
               ),
+              children: [
+                SizedBox(
+                  height: 8,
+                  width: double.infinity,
+                ),
+                Text(
+                  album.title ?? "-",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(album.description!),
+                SizedBox(height: 10),
+                RichText(
+                  text: TextSpan(
+                    text: t.albumPhotographers,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.apply(color: Colors.orange[800]),
+                    children: [
+                      TextSpan(
+                        text: album.photographers?.join(", ") ??
+                            t.albumNoPhotographers,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 
   Widget generateDiscripton() {
@@ -86,20 +90,23 @@ class AlbumPage extends StatelessWidget {
     List<Widget> result = [];
     for (int i = 0; i < album.images!.length; i++) {
       Ink ink = Ink.image(
-          image: AssetImage("assets/img/f_logo.png"),
-          fit: BoxFit.cover,
-          child: InkWell(
-            onTap: () => openImageBrowser(context, i),
-          )); //default pic
+        image: AssetImage("assets/img/f_logo.png"),
+        fit: BoxFit.cover,
+        child: InkWell(
+          onTap: () => openImageBrowser(context, i),
+        ),
+      ); //default pic
 
       if (album.images![i].file!.thumb!["url"] != null) {
         ink = Ink.image(
-            image: NetworkImage(
-                "${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
-            fit: BoxFit.cover,
-            child: InkWell(
-              onTap: () => openImageBrowser(context, i),
-            ));
+          image: NetworkImage(
+            "${Environment.API_URL}${album.images![i].file!.thumb!["url"]}",
+          ),
+          fit: BoxFit.cover,
+          child: InkWell(
+            onTap: () => openImageBrowser(context, i),
+          ),
+        );
       }
       result.add(ink);
     }
@@ -109,11 +116,13 @@ class AlbumPage extends StatelessWidget {
 
   void openImageBrowser(BuildContext context, int imageIndex) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ImageBrowserPage(
-                  album: album,
-                  initial: imageIndex,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImageBrowserPage(
+          album: album,
+          initial: imageIndex,
+        ),
+      ),
+    );
   }
 }

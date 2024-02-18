@@ -39,7 +39,9 @@ class AuthenticationBloc
   }
 
   FutureOr<void> _onEvent(
-      AuthenticationEvent event, Emitter<AuthenticationState> emit) async {
+    AuthenticationEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
     // On app start check if we have a token already, if not we have to login
     if (event is AppStarted) {
       final bool hasToken = await userService.isAuthenticated();
@@ -77,8 +79,11 @@ class AuthenticationBloc
     // We need the User-info from the API on authentication so we fetch that
     if (event is Authenticated) {
       try {
-        emit(AuthenticationUserFetched(
-            messages: onTokenRefreshCallbacks.map((e) => e.message).toList()));
+        emit(
+          AuthenticationUserFetched(
+            messages: onTokenRefreshCallbacks.map((e) => e.message).toList(),
+          ),
+        );
         executeCallbacks();
       } catch (ex) {
         if (ex is UnauthorisedException)
