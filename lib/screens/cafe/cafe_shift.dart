@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/models/cafe/cafe_user.dart';
 import 'package:fsek_mobile/services/cafe.service.dart';
@@ -144,7 +145,9 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
-                decorationColor: Colors.orange,
+                decorationColor: (isAprilFools
+                    ? Color.fromARGB(255, 247, 179, 198)
+                    : Colors.orange[600]),
                 decorationThickness: 1.3,
               ),
             ),

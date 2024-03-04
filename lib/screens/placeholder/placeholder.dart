@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 
 class PlaceholderPage extends StatelessWidget {
   const PlaceholderPage({Key? key, required this.title, required this.disc})
@@ -23,7 +24,11 @@ class PlaceholderPage extends StatelessWidget {
               child: Text(
                   "DENNA SIDAN ÄR INTE TILLGÄNGLIG ÄN MEN SPINDELMÄNNEN "
                   "HÅLLER PÅ ATT KNAPPRA PÅ FÖR FULLT!\n\n $disc",
-                  style: TextStyle(fontSize: 18, color: Colors.orange[600]))),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: (isAprilFools
+                          ? Color(0xFFF17F9F)
+                          : Colors.orange[600])))),
           Image.asset("assets/img/underConstruction.png"),
         ],
       ),

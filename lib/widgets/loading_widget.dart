@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/april_fools.dart';
 
 class LoadingWidget extends StatefulWidget {
   @override
@@ -26,7 +27,9 @@ class _LoadingWidgetState extends State<LoadingWidget> {
             children: [
           CircleAvatar(
             radius: 36.0,
-            backgroundImage: AssetImage("assets/img/f_logo.png"),
+            backgroundImage: (isAprilFools
+                ? AssetImage("assets/img/d_logo.png")
+                : AssetImage("assets/img/f_logo.png")),
             backgroundColor: Colors.transparent,
           ),
           SizedBox(

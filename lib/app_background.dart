@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'april_fools.dart';
 
 class AppBackground extends StatefulWidget {
   AppBackground({Key? key, required this.backgroundColors}) : super(key: key);
@@ -30,7 +31,7 @@ class _AppBackgroundState extends State<AppBackground> {
         clipper: TopWaveClipper(),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.orange[700],
+            color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700]),
           )
           //   gradient: LinearGradient(
           //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),

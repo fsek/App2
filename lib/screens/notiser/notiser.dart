@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/models/notiser/notis.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
 import 'package:fsek_mobile/services/notiser.service.dart';
@@ -45,7 +46,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
           if (notis.data == null) return Container();
 
           return Card(
-              color: notis.visited ?? false ? Colors.white : Colors.orange[200],
+              color: notis.visited ?? false
+                  ? Colors.white
+                  : (isAprilFools
+                      ? Color.fromARGB(255, 248, 203, 215)
+                      : Colors.orange[100]),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(

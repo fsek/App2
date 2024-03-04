@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/news.dart';
 import 'package:fsek_mobile/screens/news/single_news.dart';
@@ -61,7 +62,9 @@ class _NewsPageState extends State<NewsPage> {
                           isThreeLine: true,
                           trailing: (news.is_pinned ?? false)
                               ? Icon(Icons.push_pin_outlined,
-                                  color: Colors.orange[600])
+                                  color: (isAprilFools
+                                      ? Color(0xFFF17F9F)
+                                      : Colors.orange[600]))
                               : SizedBox.shrink())));
             }, noItemsFoundIndicatorBuilder: (context) {
               return Container(

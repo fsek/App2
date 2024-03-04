@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -49,7 +50,10 @@ class _SettingsPageState extends State<SettingsPage> {
       return Scaffold(
           appBar: AppBar(title: Text(t.otherAccount)),
           body: Center(
-              child: CircularProgressIndicator(color: Colors.orange[600])));
+              child: CircularProgressIndicator(
+                  color: (isAprilFools
+                      ? Color(0xFFF17F9F)
+                      : Colors.orange[600]))));
     }
     return WillPopScope(
       onWillPop: () async {
@@ -247,8 +251,8 @@ class _SettingsPageState extends State<SettingsPage> {
           builder: (BuildContext context, StateSetter setChildState) {
         return Checkbox(
           checkColor: Colors.white,
-          fillColor:
-              MaterialStateProperty.resolveWith((states) => Colors.orange[600]),
+          fillColor: MaterialStateProperty.resolveWith((states) =>
+              (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
           value: value,
           onChanged: (bool? change) {
             setChildState(() {
@@ -300,7 +304,8 @@ class _SettingsPageState extends State<SettingsPage> {
             Column(
               children: [
                 CircularProgressIndicator(
-                  color: Colors.orange[600],
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                 ),
               ],
             ),

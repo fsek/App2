@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/models/contact/contact.dart';
@@ -46,7 +47,10 @@ class _ContactPageState extends State<ContactPage> {
               title: Text(t.contactContact,
                   style: Theme.of(context).textTheme.headlineSmall)),
           body: Center(
-              child: CircularProgressIndicator(color: Colors.orange[600])));
+              child: CircularProgressIndicator(
+                  color: (isAprilFools
+                      ? Color(0xFFF17F9F)
+                      : Colors.orange[600]))));
     }
 
     //We only want to attempt to fetch a network image if it it's url is not null. Hence map accessing weirdness with nullcheck
@@ -72,7 +76,10 @@ class _ContactPageState extends State<ContactPage> {
                 width: double.infinity,
                 height: 200,
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.orange[600]),
+                  decoration: BoxDecoration(
+                      color: (isAprilFools
+                          ? Color(0xFFF17F9F)
+                          : Colors.orange[600])),
                   child: Stack(children: <Widget>[
                     Center(
                       child: SizedBox(
@@ -197,7 +204,10 @@ class _ContactPageState extends State<ContactPage> {
                   width: double.infinity,
                   height: 50,
                   child: Ink(
-                    decoration: BoxDecoration(color: Colors.orange[600]),
+                    decoration: BoxDecoration(
+                        color: (isAprilFools
+                            ? Color(0xFFF17F9F)
+                            : Colors.orange[600])),
                     child: InkWell(
                         child: Center(
                             child: Text(

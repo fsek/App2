@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/themes.dart';
-
+import 'package:fsek_mobile/april_fools.dart';
 import 'models/destination.dart';
 import 'models/user/user.dart';
 import 'services/service_locator.dart';
@@ -121,7 +121,9 @@ class _ContentWrapperState extends State<ContentWrapper>
           children: [
             IconButton(
               icon: Image(
-                image: AssetImage("assets/img/f_logo_black.png"),
+                image: (isAprilFools
+                    ? AssetImage("assets/img/d_logo.png")
+                    : AssetImage("assets/img/f_logo_black.png")),
                 width: 64,
               ),
               onPressed: () => {
@@ -152,7 +154,9 @@ class _ContentWrapperState extends State<ContentWrapper>
               width: 8,
             ),
             Text(
-              AppLocalizations.of(context)!.fGuildName,
+              isAprilFools
+                  ? AppLocalizations.of(context)!.dGuildName
+                  : AppLocalizations.of(context)!.fGuildName,
               style: Theme.of(context).textTheme.headlineSmall,
             )
           ],
@@ -213,8 +217,13 @@ class _ContentWrapperState extends State<ContentWrapper>
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
-                locator<ThemeService>().theme = fsekTheme;
-                locator<ThemeService>().backgroundColors = fsekBackground;
+                if (isAprilFools) {
+                  locator<ThemeService>().theme = dsekTheme;
+                  locator<ThemeService>().backgroundColors = dsekBackground;
+                } else {
+                  locator<ThemeService>().theme = fsekTheme;
+                  locator<ThemeService>().backgroundColors = fsekBackground;
+                }
                 widget.onNavigation!.add(widget
                     .navbarDestinations[_currentIndex].widget.runtimeType);
               },
