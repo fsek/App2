@@ -15,7 +15,6 @@ import 'package:fsek_mobile/screens/nollning/nolleguide/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';
-import 'package:fsek_mobile/april_fools.dart';
 import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
@@ -60,27 +59,17 @@ void main() async {
     '/people': (context) => PeoplePage(),
     '/wordlist': (context) => WordListPage(),
   };
-  if (isAprilFools) {
-    locator<ThemeService>().theme = dsekTheme;
-    locator<ThemeService>().backgroundColors = dsekBackground;
-  } else {
-    locator<ThemeService>().theme = fsekTheme;
-    locator<ThemeService>().backgroundColors = fsekBackground;
-  }
+
+  locator<ThemeService>().theme = fsekTheme;
+  locator<ThemeService>().backgroundColors = fsekBackground;
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,
-      backgroundImage: (isAprilFools
-          ? AssetImage("assets/img/d_logo.png")
-          : AssetImage("assets/img/f_logo.png")),
+      backgroundImage: AssetImage("assets/img/f_logo.png"),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
-    Text(isAprilFools ? "D-sektionen" : "F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+    Text("F-sektionen", style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -101,13 +90,11 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  runZonedGuarded<void>(() {
-    runApp(FsekMobileApp());
-  }, (Object error, StackTrace stackTrace) {
-    // Whenever an error occurs, call the `_reportError` function. This sends
-    // Dart errors to the dev console or Sentry depending on the environment.
-    _reportError(error, stackTrace);
-  });
+  runApp(FsekMobileApp());
+
+  // Whenever an error occurs, call the `_reportError` function. This sends
+  // Dart errors to the dev console or Sentry depending on the environment.
+  // we removed this stuff now, it should be fine without.
 }
 
 bool get isInDebugMode {

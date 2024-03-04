@@ -7,11 +7,9 @@ import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:image_save/image_save.dart';
 
 class ImageBrowserPage extends StatefulWidget {
-  const ImageBrowserPage({Key? key, required this.album, required this.initial})
-      : super(key: key);
+  const ImageBrowserPage({Key? key, required this.album, required this.initial}) : super(key: key);
 
   final Album album;
   final int initial;
@@ -58,11 +56,10 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     icon: Icon(Icons.all_inclusive, size: 40),
                     onPressed: () async {
                       try {
-                        http.Response image = await http.get(Uri.parse(
-                            "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
+                        http.Response image = await http.get(
+                            Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
                         ImageGallerySaver.saveImage(image.bodyBytes,
-                            name: "${widget.album.images![index].filename!}",
-                            quality: 1);
+                            name: "${widget.album.images![index].filename!}", quality: 1);
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
                         ));
@@ -80,20 +77,11 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                 icon: Icon(Icons.download),
                 onPressed: () async {
                   try {
-                    http.Response image = await http.get(Uri.parse(
-                        "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    bool? success = await ImageSave.saveImage(image.bodyBytes,
-                        "${widget.album.images![index].filename!}",
-                        albumName: "F-sektionen");
-                    if (success == true) {
-                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(t.galleryImageDownloaded),
-                      ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(t.galleryImageDownloadError),
-                      ));
-                    }
+                    http.Response image = await http
+                        .get(Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
+                    ImageGallerySaver.saveImage(image.bodyBytes,
+                        name: "${widget.album.images![index].filename!}", quality: 100);
+                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: Text(t.galleryImageDownloaded)));
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: Text(t.galleryImageDownloadError),
@@ -135,11 +123,7 @@ class PageViewBuilder extends StatefulWidget {
   final PageController pageController;
 
   const PageViewBuilder(
-      {Key? key,
-      required this.album,
-      required this.initial,
-      required this.callback,
-      required this.pageController})
+      {Key? key, required this.album, required this.initial, required this.callback, required this.pageController})
       : super(key: key);
 
   @override
@@ -153,9 +137,7 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: _pagingEnabled
-          ? const PageScrollPhysics()
-          : const NeverScrollableScrollPhysics(),
+      physics: _pagingEnabled ? const PageScrollPhysics() : const NeverScrollableScrollPhysics(),
       itemCount: widget.album.images!.length,
       controller: widget.pageController,
       itemBuilder: (context, index) {
@@ -209,8 +191,7 @@ class ImageContainer extends StatefulWidget {
 }
 
 class _ImageContainerState extends State<ImageContainer> {
-  final TransformationController _transformationController =
-      TransformationController();
+  final TransformationController _transformationController = TransformationController();
 
   @override
   Widget build(BuildContext context) {
