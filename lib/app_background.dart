@@ -31,9 +31,7 @@ class _AppBackgroundState extends State<AppBackground> {
         clipper: TopWaveClipper(),
         child: Container(
           decoration: BoxDecoration(
-            color: (isAprilFools
-                ? Color(0xFFF17F9F)
-                : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])),
+            color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700]),
           )
           //   gradient: LinearGradient(
           //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),
@@ -56,12 +54,10 @@ class TopWaveClipper extends CustomClipper<Path> {
     var path = Path();
     path.moveTo(size.width, size.height * tweens[0]);
 
-    var firstControlPoint =
-        new Offset(size.width * tweens[1], size.height * tweens[2]);
+    var firstControlPoint = new Offset(size.width * tweens[1], size.height * tweens[2]);
     var firstEndPoint = new Offset(tweens[3], size.height * tweens[4]);
 
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy, firstEndPoint.dx, firstEndPoint.dy);
 
     ///move from bottom right to top
     path.lineTo(0, 0.0);
