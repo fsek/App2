@@ -12,8 +12,7 @@ class PropositionsPage extends StatefulWidget {
   _PropositionsPageState createState() => _PropositionsPageState();
 }
 
-class _PropositionsPageState extends State<PropositionsPage>
-    with TickerProviderStateMixin {
+class _PropositionsPageState extends State<PropositionsPage> with TickerProviderStateMixin {
   List<ElectionDocument>? documents = [];
   List<ElectionDocument>? allDocuments = [];
 
@@ -25,19 +24,16 @@ class _PropositionsPageState extends State<PropositionsPage>
 
   @override
   void initState() {
-    locator<DocumentService>()
-        .getPropositions("Val")
-        .then((value) => setState(() {
-              if (!listEquals(value, [])) {
-                this.documents = value!;
-                documents!.sort((a, b) => a.document_name!
-                    .compareTo(b.document_name!)); // handle null?
-                allDocuments = List.from(documents!);
-              } else {
-                this.documents = null;
-                allDocuments = null;
-              }
-            }));
+    locator<DocumentService>().getPropositions("Val").then((value) => setState(() {
+          if (!listEquals(value, [])) {
+            this.documents = value!;
+            documents!.sort((a, b) => a.document_name!.compareTo(b.document_name!)); // handle null?
+            allDocuments = List.from(documents!);
+          } else {
+            this.documents = null;
+            allDocuments = null;
+          }
+        }));
     super.initState();
   }
 
@@ -53,10 +49,7 @@ class _PropositionsPageState extends State<PropositionsPage>
         ? Scaffold(
             appBar: AppBar(title: Text(t.propositionsPageTitle)),
             body: Center(
-                child: CircularProgressIndicator(
-                    color: (isAprilFools
-                        ? Color(0xFFF17F9F)
-                        : Colors.orange[600]))))
+                child: CircularProgressIndicator(color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -81,8 +74,7 @@ class _PropositionsPageState extends State<PropositionsPage>
                                     Icons.arrow_back,
                                     color: Colors.grey[800],
                                   ),
-                                  onPressed: () =>
-                                      FocusScope.of(context).unfocus())
+                                  onPressed: () => FocusScope.of(context).unfocus())
                               : Icon(
                                   Icons.search,
                                   color: Colors.grey[800],
@@ -99,18 +91,12 @@ class _PropositionsPageState extends State<PropositionsPage>
                                       }))
                               : SizedBox.shrink()),
                       onChanged: (search) {
-                        List<String> searchTerms = search
-                            .toLowerCase()
-                            .trim()
-                            .split(new RegExp(r"\s+"));
+                        List<String> searchTerms = search.toLowerCase().trim().split(new RegExp(r"\s+"));
                         setState(() {
                           initChar = "";
                           if (allDocuments != null) {
                             documents = allDocuments!.where((document) {
-                              return searchTerms.every((term) => document
-                                  .document_name!
-                                  .toLowerCase()
-                                  .contains(term));
+                              return searchTerms.every((term) => document.document_name!.toLowerCase().contains(term));
                             }).toList();
                           }
                         });
@@ -119,12 +105,10 @@ class _PropositionsPageState extends State<PropositionsPage>
                   )),
                   Expanded(
                     child: documents != null
-                        ? ListView(
-                            children: documents!
-                                .map((document) =>
-                                    _generateDocumentTile(document))
-                                .toList(),
-                          )
+                        ? Material(
+                            child: ListView(
+                            children: documents!.map((document) => _generateDocumentTile(document)).toList(),
+                          ))
                         : Padding(
                             padding: EdgeInsets.all(16),
                             child: Text(t.noProposition),
