@@ -13,7 +13,7 @@ class CandidacyPosterPage extends StatefulWidget {
 
 class _CandidacyPosterPageState extends State<CandidacyPosterPage> {
   List<ElectionDocument>? otherList;
-  final String posterName = "Kandidaturplansch HT23";
+  final String posterName = "Kandidaturplansch";
 
   @override
   void initState() {
@@ -35,23 +35,18 @@ class _CandidacyPosterPageState extends State<CandidacyPosterPage> {
         ),
       );
     }
-    ElectionDocument? candidacyPoster =
-        findCandidacyPoster(posterName, otherList!);
+    ElectionDocument? candidacyPoster = findCandidacyPoster(posterName, otherList!);
     if (candidacyPoster == null) {
       // exists no poster with the given name
       return Scaffold(
           appBar: AppBar(),
-          body: Center(
-              child: Text(t.noCandidacyPoster,
-                  style: TextStyle(fontStyle: FontStyle.italic))));
+          body: Center(child: Text(t.noCandidacyPoster, style: TextStyle(fontStyle: FontStyle.italic))));
     } else {
-      return PdfPage(
-          url: candidacyPoster.url!, title: candidacyPoster.document_name!);
+      return PdfPage(url: candidacyPoster.url!, title: candidacyPoster.document_name!);
     }
   }
 
-  ElectionDocument? findCandidacyPoster(
-      String name, List<ElectionDocument> documentList) {
+  ElectionDocument? findCandidacyPoster(String name, List<ElectionDocument> documentList) {
     for (ElectionDocument doc in documentList) {
       if (doc.document_name == name) {
         return doc;
