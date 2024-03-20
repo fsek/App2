@@ -13,10 +13,10 @@ description: Mobile application for the F-guild
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 #
 
-version: 1.8.6122+1 #buildnumber incremented automatically in codemagic
+version: 1.9.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: '>=2.15.0 <3.0.0'
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -68,7 +68,6 @@ dependencies:
   image_gallery_saver: ^2.0.3
   cached_network_image: ^3.3.0
 
-
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object
@@ -93,22 +92,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/
-   - assets/audio/
-   - assets/img/
-   - assets/img/memes/
-   - assets/img/nollning-23/
-   - assets/img/nollning-23/uppdrag/
-   - assets/img/nollning-23/nolleguide/
-   - assets/img/nollning-23/schema/
-   - assets/img/nollning-23/hemsidan/
-   - assets/data/guide/
-
+    - assets/
+    - assets/audio/
+    - assets/img/
+    - assets/img/memes/
+    - assets/img/nollning-23/
+    - assets/img/nollning-23/uppdrag/
+    - assets/img/nollning-23/nolleguide/
+    - assets/img/nollning-23/schema/
+    - assets/img/nollning-23/hemsidan/
+    - assets/data/guide/
 
   fonts:
-   - family: Brandon Grotesque
-     fonts:
-      - asset: assets/BrandonGrotesque-Regular.ttf
+    - family: Brandon Grotesque
+      fonts:
+        - asset: assets/BrandonGrotesque-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
