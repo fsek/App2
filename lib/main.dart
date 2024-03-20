@@ -70,17 +70,12 @@ void main() async {
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,
-      backgroundImage: (isAprilFools
-          ? AssetImage("assets/img/d_logo.png")
-          : AssetImage("assets/img/f_logo.png")),
+      backgroundImage: (isAprilFools ? AssetImage("assets/img/d_logo.png") : AssetImage("assets/img/f_logo.png")),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
     Text(isAprilFools ? "D-sektionen" : "F-sektionen",
-        style: TextStyle(
-            fontFamily: 'Helvetica Neue',
-            fontSize: 28.0,
-            color: Colors.grey[700]))
+        style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -101,13 +96,11 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  runZonedGuarded<void>(() {
-    runApp(FsekMobileApp());
-  }, (Object error, StackTrace stackTrace) {
-    // Whenever an error occurs, call the `_reportError` function. This sends
-    // Dart errors to the dev console or Sentry depending on the environment.
-    _reportError(error, stackTrace);
-  });
+  runApp(FsekMobileApp());
+
+  // Whenever an error occurs, call the `_reportError` function. This sends
+  // Dart errors to the dev console or Sentry depending on the environment.
+  // we removed this stuff now, it should be fine without.
 }
 
 bool get isInDebugMode {
