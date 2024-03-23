@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/book%20_exchange/book_exchange.dart';
+import 'package:fsek_mobile/screens/book_exchange/book_exchange.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

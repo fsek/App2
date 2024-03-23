@@ -1,10 +1,10 @@
 import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
-import 'package:fsek_mobile/screens/songbook/song.dart';
+import 'package:fsek_mobile/screens/book_exchange/book.dart';
 import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/song.service.dart';
+import 'package:fsek_mobile/services/book.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,10 +31,10 @@ class _BookExchangePageState extends State<BookExchangePage>
   void initState() {
     animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1400));
-    locator<SongbookService>().getSongbook().then((value) => setState(() {
-          this.songs = value;
-          songs.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
-          allSongs = List.from(songs);
+    locator<BookService>().getBooks().then((value) => setState(() {
+          this.books = value;
+          books.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
+          allSongs = List.from(books);
         }));
 
     setRotation(360);
@@ -124,9 +124,9 @@ class _BookExchangePageState extends State<BookExchangePage>
                                 .split(new RegExp(r"\s+"));
                             setState(() {
                               initChar = "";
-                              songs = allSongs.where((song) {
+                              songs = allSongs.where((book) {
                                 return searchTerms.every((term) =>
-                                    song.title!.toLowerCase().contains(term));
+                                    book.title!.toLowerCase().contains(term));
                               }).toList();
                             });
                           },
@@ -136,7 +136,7 @@ class _BookExchangePageState extends State<BookExchangePage>
                         child: songs.isNotEmpty
                             ? ListView(
                                 children: songs
-                                    .map((song) => _generateSongTile(song))
+                                    .map((book) => _generateBookTile(book))
                                     .toList(),
                               )
                             : Padding(
@@ -152,21 +152,9 @@ class _BookExchangePageState extends State<BookExchangePage>
                     Transform.rotate(angle: animation.value, child: child)));
   }
 
-  Widget _generateSongTile(SongbookEntry song) {
+  Widget _generateBookTile(SongbookEntry book) {
     //This way of doing it is probably really stupid. but so be it
     List<Widget> index = [];
-    if (song.title![0] != initChar) {
-      initChar = song.title![0];
-      index.add(Container(
-        decoration: BoxDecoration(color: Colors.grey[300]),
-        child: ListTile(
-          title: Text(
-            initChar,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      ));
-    }
     return Column(
       children: index +
           [
@@ -176,18 +164,26 @@ class _BookExchangePageState extends State<BookExchangePage>
                   bottom: BorderSide(color: Colors.grey[400]!),
                 )),
                 child: InkWell(
-                  onTap: () => openSong(song.id!),
+                  onTap: () => openSong(book.id!),
                   child: ListTile(
-                      title: Text(song.title == null ? "" : song.title!)),
+                    title: Text(book.title == null ? "" : book.title!),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Price: '),
+                        Text('Skick: '),
+                      ],
+                    ),
+                  ),
                 ))
           ],
     );
   }
 
-  void openSong(int id) {
-    locator<SongService>().getSong(id).then((song) {
+  void openBook(int id) {
+    locator<BookService>().getBook(id).then((book) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+          MaterialPageRoute(builder: (context) => BookPage(book: book)));
     });
   }
 }
