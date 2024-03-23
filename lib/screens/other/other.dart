@@ -13,6 +13,7 @@ import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
 import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../book_seller/book_seller.dart';
 import 'fap.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,7 +28,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [t.otherSongbook, t.otherGallery, t.otherBook, t.otherCafe];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -35,6 +36,7 @@ class OtherContent extends StatelessWidget {
     routeMap = {
       "Songbook": SongbookPage(),
       "Photo Gallery": GalleryPage(),
+      "Book Selling": BookSellerPage(),
       "Hilbert Café": CafePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
@@ -44,6 +46,7 @@ class OtherContent extends StatelessWidget {
       "Anonymous contact page": Container(),
       "Sångbok": SongbookPage(),
       "Bildgalleri": GalleryPage(),
+      "Bokförsäljning": BookSellerPage(),
       "F-sektionen": AboutGuildPage(),
       "F-appen": FapPage(),
       "Konto": SettingsPage(),

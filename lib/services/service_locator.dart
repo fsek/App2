@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/services/book_seller.service.dart';
 import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:fsek_mobile/services/document.service.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
@@ -23,7 +24,8 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(() => TokenStorageWrapper());
-  locator.registerLazySingleton(() => UserService(storage: locator<TokenStorageWrapper>()));
+  locator.registerLazySingleton(
+      () => UserService(storage: locator<TokenStorageWrapper>()));
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => NotificationsService());
   locator.registerLazySingleton(() => NavigationService());
@@ -40,4 +42,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => CafeService());
   locator.registerLazySingleton(() => FredmanskyService());
   locator.registerLazySingleton(() => DocumentService());
+  locator.registerLazySingleton(() => BookSellerService());
 }
