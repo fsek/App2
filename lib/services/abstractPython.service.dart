@@ -18,7 +18,7 @@ class AbstractServicePython {
     'Accept': 'application/json',
   };
 
-  static Future<Map> get(String endpoint) async {
+  static Future<dynamic> get(String endpoint) async {
     var responseJson;
     mapAuthHeaders();
 
@@ -36,7 +36,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Future<Map> post(
+  static Future<dynamic> post(
     String endpoint, {
     String body = "",
     Map<String, dynamic>? mapBody,
@@ -59,7 +59,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Future<Map> put(
+  static Future<dynamic> put(
     String endpoint, {
     String body = "",
     Map<String, dynamic>? mapBody,
@@ -81,7 +81,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Future<Map> patch(
+  static Future<dynamic> patch(
     String endpoint, {
     String body = "",
     Map<String, dynamic>? mapBody,
@@ -103,7 +103,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Future<Map> delete(
+  static Future<dynamic> delete(
     String endpoint, {
     String body = "",
     Map<String, dynamic>? mapBody,
@@ -126,7 +126,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Map _returnResponse(http.Response response) {
+  static dynamic _returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
