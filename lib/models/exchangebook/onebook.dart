@@ -5,10 +5,10 @@ part 'onebook.g.dart';
 @JsonSerializable()
 class OneBook {
   int? id;
+  int? price;
   String? title;
-  String? author;
-  String? melody;
-  String? content;
+  String? user;
+  String? transaction;
 
   OneBook();
 

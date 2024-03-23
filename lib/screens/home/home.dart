@@ -33,21 +33,23 @@ class _HomePageState extends State<HomePage> {
   bool? election;
 
   void initState() {
-    locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
-          // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
-          if (!listEquals(value, []) && value != null) {
-            this.backgroundDocuments = value;
-            // title cant be empty so it is always a string
-            if (value.last.document_name!.toLowerCase().startsWith("ht") ||
-                value.last.document_name!.toLowerCase().startsWith("vt")) {
-              // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
-              this.election = true;
-            } else {
-              this.election = false;
-            }
-            this.backgroundUrl = value.last.url;
-          }
-        }));
+    locator<DocumentService>()
+        .getOthers("Bakgrund")
+        .then((value) => setState(() {
+              // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
+              if (!listEquals(value, []) && value != null) {
+                this.backgroundDocuments = value;
+                // title cant be empty so it is always a string
+                if (value.last.document_name!.toLowerCase().startsWith("ht") ||
+                    value.last.document_name!.toLowerCase().startsWith("vt")) {
+                  // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
+                  this.election = true;
+                } else {
+                  this.election = false;
+                }
+                this.backgroundUrl = value.last.url;
+              }
+            }));
     super.initState();
   }
 
@@ -65,7 +67,8 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Color(0xFFFB8C00))),
+              placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(color: Color(0xFFFB8C00))),
               imageUrl: backgroundUrl!,
             )
           : Image.asset(
@@ -79,14 +82,19 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: EdgeInsets.fromLTRB(
-              edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+              edgePadding,
+              MediaQuery.of(context).size.height / 2.69420 /* lemao */,
+              edgePadding,
+              0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               // check thar election bool isnt null and if it is true make the home design according to electionbuttons.
               // if null or false just use standard buttons, null means that there wasnt any picture on website
               children: this.election != null
-                  ? (this.election! ? _getElectionButtons() : _getStandardButtons())
+                  ? (this.election!
+                      ? _getElectionButtons()
+                      : _getStandardButtons())
                   : _getStandardButtons(),
             ),
           ),
@@ -98,7 +106,8 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(
         text,
@@ -133,7 +142,8 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           button(t.otherCafe, CafePage()),
-          button(t.game, PlaceholderPage(title: t.game, disc: t.gameDescription)),
+          button(
+              t.game, PlaceholderPage(title: t.game, disc: t.gameDescription)),
         ],
       ),
       Spacer(flex: 4)
