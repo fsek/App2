@@ -1,13 +1,13 @@
 import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/models/songbook/song.dart';
+import 'package:fsek_mobile/models/exchangebook/onebook.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SongPage extends StatelessWidget {
-  const SongPage({Key? key, required this.song}) : super(key: key);
+class BookPage extends StatelessWidget {
+  const BookPage({Key? key, required this.book}) : super(key: key);
 
-  final Song song;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SongPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 2, 0, 16),
                 child: Text(
-                  song.title!,
+                  book.title!,
                   style: TextStyle(
                       color: (isAprilFools
                           ? Color(0xFFF17F9F)
@@ -34,7 +34,7 @@ class SongPage extends StatelessWidget {
                       fontSize: 24),
                 ),
               ),
-              song.melody != null && song.melody != ""
+              book.melody != null && book.melody != ""
                   ? Padding(
                       padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
                       child: RichText(
@@ -46,13 +46,13 @@ class SongPage extends StatelessWidget {
                                       ? Color(0xFFF17F9F)
                                       : Colors.orange[600]))),
                           TextSpan(
-                              text: song.melody!,
+                              text: book.melody!,
                               style: TextStyle(color: Colors.black))
                         ]),
                       ),
                     )
                   : SizedBox.shrink(),
-              song.author != null && song.author != ""
+              book.author != null && book.author != ""
                   ? Padding(
                       padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
                       child: RichText(
@@ -64,7 +64,7 @@ class SongPage extends StatelessWidget {
                                       ? Color(0xFFF17F9F)
                                       : Colors.orange[600]))),
                           TextSpan(
-                              text: song.author!,
+                              text: book.author!,
                               style: TextStyle(color: Colors.black))
                         ]),
                       ),
@@ -75,7 +75,7 @@ class SongPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(14, 6, 14, 14),
             child: Html(
-              data: song.content!,
+              data: book.content!,
               style: {
                 "p": Style(fontSize: FontSize(16), lineHeight: LineHeight(1.5))
               },

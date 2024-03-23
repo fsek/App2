@@ -171,8 +171,8 @@ class _BookExchangePageState extends State<BookExchangePage>
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Price: '),
-                        Text('Buy/sell: '),
+                        Text('Price: ${book.price} kr'),
+                        Text('Buy/sell: ${book.transaction}'),
                       ],
                     ),
                   ),
@@ -182,7 +182,7 @@ class _BookExchangePageState extends State<BookExchangePage>
   }
 
   void openBook(int id) {
-    locator<BookService>().getBooks(id).then((book) {
+    locator<OneBookService>().getOneBook(id).then((book) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => BookPage(book: book)));
     });
