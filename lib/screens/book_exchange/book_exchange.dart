@@ -1,11 +1,11 @@
 import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
+import 'package:fsek_mobile/models/exchangebook/exchangebookEntry.dart';
 import 'package:fsek_mobile/screens/book_exchange/book.dart';
 import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/book.service.dart';
-import 'package:fsek_mobile/services/songbook.service.dart';
+import 'package:fsek_mobile/services/book.exchange.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookExchangePage extends StatefulWidget {
@@ -15,8 +15,8 @@ class BookExchangePage extends StatefulWidget {
 
 class _BookExchangePageState extends State<BookExchangePage>
     with TickerProviderStateMixin {
-  List<SongbookEntry> songs = [];
-  List<SongbookEntry> allSongs = [];
+  List<BookEntry> books = [];
+  List<BookEntry> allBooks = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
