@@ -8,6 +8,7 @@ class BookEntry {
   int? price;
   String? title;
   String? user;
+  String? transaction;
 
   BookEntry();
 
