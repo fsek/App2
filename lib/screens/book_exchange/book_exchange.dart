@@ -5,7 +5,7 @@ import 'package:fsek_mobile/screens/book_exchange/book.dart';
 import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/book.service.dart';
-import 'package:fsek_mobile/services/book.exchange.service.dart';
+import 'package:fsek_mobile/services/bookexchange.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookExchangePage extends StatefulWidget {
@@ -123,7 +123,6 @@ class _BookExchangePageState extends State<BookExchangePage>
                                 .trim()
                                 .split(new RegExp(r"\s+"));
                             setState(() {
-                              initChar = "";
                               books = allBooks.where((book) {
                                 return searchTerms.every((term) =>
                                     book.title!.toLowerCase().contains(term));
@@ -170,8 +169,8 @@ class _BookExchangePageState extends State<BookExchangePage>
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Price: '),
-                        Text('Buy/sell: '),
+                        Text('Price: ${book.price.toString()} kr'),
+                        Text('Buy/sell: ${book.transaction}'),
                       ],
                     ),
                   ),
@@ -181,7 +180,7 @@ class _BookExchangePageState extends State<BookExchangePage>
   }
 
   void openBook(int id) {
-    locator<BookService>().getBook(id).then((book) {
+    locator<OneBookService>().getOneBook(id).then((book) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => BookPage(book: book)));
     });
