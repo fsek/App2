@@ -12,6 +12,7 @@ class BookExchangePage extends StatefulWidget {
   @override
   _BookExchangePageState createState() => _BookExchangePageState();
 }
+// test
 
 class _BookExchangePageState extends State<BookExchangePage>
     with TickerProviderStateMixin {
@@ -34,7 +35,7 @@ class _BookExchangePageState extends State<BookExchangePage>
     locator<BookService>().getBooks().then((value) => setState(() {
           this.books = value;
           books.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
-          allSongs = List.from(books);
+          allBooks = List.from(books);
         }));
 
     setRotation(360);
@@ -57,7 +58,7 @@ class _BookExchangePageState extends State<BookExchangePage>
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    return allSongs == []
+    return allBooks == []
         ? Scaffold(
             appBar: AppBar(title: Text(t.songbookSongbook)),
             body: Center(
@@ -104,7 +105,7 @@ class _BookExchangePageState extends State<BookExchangePage>
                                       onPressed: () => setState(() {
                                             _controller.clear();
                                             FocusScope.of(context).unfocus();
-                                            songs = allSongs;
+                                            books = allBooks;
                                           }))
                                   : SizedBox.shrink()),
                           onChanged: (search) {
@@ -124,7 +125,7 @@ class _BookExchangePageState extends State<BookExchangePage>
                                 .split(new RegExp(r"\s+"));
                             setState(() {
                               initChar = "";
-                              songs = allSongs.where((book) {
+                              books = allBooks.where((book) {
                                 return searchTerms.every((term) =>
                                     book.title!.toLowerCase().contains(term));
                               }).toList();
@@ -133,9 +134,9 @@ class _BookExchangePageState extends State<BookExchangePage>
                         ),
                       )),
                       Expanded(
-                        child: songs.isNotEmpty
+                        child: books.isNotEmpty
                             ? ListView(
-                                children: songs
+                                children: books
                                     .map((book) => _generateBookTile(book))
                                     .toList(),
                               )
@@ -152,7 +153,7 @@ class _BookExchangePageState extends State<BookExchangePage>
                     Transform.rotate(angle: animation.value, child: child)));
   }
 
-  Widget _generateBookTile(SongbookEntry book) {
+  Widget _generateBookTile(BookEntry book) {
     //This way of doing it is probably really stupid. but so be it
     List<Widget> index = [];
     return Column(
@@ -164,14 +165,14 @@ class _BookExchangePageState extends State<BookExchangePage>
                   bottom: BorderSide(color: Colors.grey[400]!),
                 )),
                 child: InkWell(
-                  onTap: () => openSong(book.id!),
+                  onTap: () => openBook(book.id!),
                   child: ListTile(
                     title: Text(book.title == null ? "" : book.title!),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text('Price: '),
-                        Text('Skick: '),
+                        Text('Buy/sell: '),
                       ],
                     ),
                   ),
