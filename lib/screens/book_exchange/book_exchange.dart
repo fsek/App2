@@ -12,7 +12,6 @@ class BookExchangePage extends StatefulWidget {
   @override
   _BookExchangePageState createState() => _BookExchangePageState();
 }
-// test
 
 class _BookExchangePageState extends State<BookExchangePage>
     with TickerProviderStateMixin {
