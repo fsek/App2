@@ -28,14 +28,19 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe];
+    categories = [
+      t.otherSongbook,
+      t.otherBook_exchange,
+      t.otherGallery,
+      t.otherCafe
+    ];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
     /* I am so sorry for this Teo */
     routeMap = {
-      "Songbook": BookExchangePage(),
-      "Book_exchange": SongbookPage(),
+      "Book_exchange": BookExchangePage(),
+      "Songbook": SongbookPage(),
       "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
       "The F guild": AboutGuildPage(),
