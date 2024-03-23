@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'BookEntry.g.dart';
+part 'exchangebookEntry.g.dart';
 
 @JsonSerializable()
 class BookEntry {
