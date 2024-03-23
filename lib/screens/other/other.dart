@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/book%20_exchange/book_exchange.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,8 @@ class OtherContent extends StatelessWidget {
     support = [t.otherContact, t.otherAnon];
     /* I am so sorry for this Teo */
     routeMap = {
-      "Songbook": SongbookPage(),
+      "Songbook": BookExchangePage(),
+      "Book_exchange": SongbookPage(),
       "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
       "The F guild": AboutGuildPage(),
