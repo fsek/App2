@@ -12,6 +12,7 @@ class BookExchangePage extends StatefulWidget {
   @override
   _BookExchangePageState createState() => _BookExchangePageState();
 }
+// test
 
 class _BookExchangePageState extends State<BookExchangePage>
     with TickerProviderStateMixin {
@@ -123,6 +124,7 @@ class _BookExchangePageState extends State<BookExchangePage>
                                 .trim()
                                 .split(new RegExp(r"\s+"));
                             setState(() {
+                              initChar = "";
                               books = allBooks.where((book) {
                                 return searchTerms.every((term) =>
                                     book.title!.toLowerCase().contains(term));
@@ -169,8 +171,8 @@ class _BookExchangePageState extends State<BookExchangePage>
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Price: ${book.price.toString()} kr'),
-                        Text('Buy/sell: ${book.transaction}'),
+                        Text('Price: '),
+                        Text('Buy/sell: '),
                       ],
                     ),
                   ),
@@ -180,7 +182,7 @@ class _BookExchangePageState extends State<BookExchangePage>
   }
 
   void openBook(int id) {
-    locator<OneBookService>().getOneBook(id).then((book) {
+    locator<BookService>().getBooks(id).then((book) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => BookPage(book: book)));
     });

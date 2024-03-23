@@ -1,11 +1,11 @@
-import 'package:fsek_mobile/models/songbook/song.dart';
+import 'package:fsek_mobile/models/exchangebook/onebook.dart';
 
 import 'abstract.service.dart';
 
-class SongService extends AbstractService {
-  Future<Song> getSong(int id) async {
-    Map json = await AbstractService.get('/songs/$id');
-    Song result = Song.fromJson(json['song']);
+class OneBookService extends AbstractService {
+  Future<OneBook> getOneBook(int id) async {
+    Map json = await AbstractService.get('/books/$id');
+    OneBook result = OneBook.fromJson(json['book']);
     return result;
   }
 }
