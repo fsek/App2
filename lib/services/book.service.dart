@@ -1,10 +1,10 @@
 import 'package:fsek_mobile/models/exchangebook/onebook.dart';
 
-import 'abstract.service.dart';
+import 'abstractPython.service.dart';
 
-class OneBookService extends AbstractService {
+class OneBookService extends AbstractServicePython {
   Future<OneBook> getOneBook(int id) async {
-    Map json = await AbstractService.get('/books/$id');
+    Map json = await AbstractServicePython.get('/books/$id');
     OneBook result = OneBook.fromJson(json['book']);
     return result;
   }

@@ -18,7 +18,7 @@ class AbstractServicePython {
     'Accept': 'application/json',
   };
 
-  static Future<Map> get(String endpoint) async {
+  static Future<dynamic> get(String endpoint) async {
     var responseJson;
     mapAuthHeaders();
 
@@ -126,7 +126,7 @@ class AbstractServicePython {
     return responseJson;
   }
 
-  static Map _returnResponse(http.Response response) {
+  static dynamic _returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
