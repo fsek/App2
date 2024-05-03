@@ -37,44 +37,44 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
       body: ListView(
         children: <Widget>[
           _EmergencyText(
-            headerText: t.emergencyTitleOne,
             headerPhoneNumber: t.emergencyNumOne,
+            headerText: t.emergencyTitleOne,
             bodyText: t.emergencyContentOne,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleTwo,
             headerPhoneNumber: t.emergencyNumTwo,
+            headerText: t.emergencyTitleTwo,
             bodyText: t.emergencyContentTwo,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleThree,
             headerPhoneNumber: t.emergencyNumThree,
+            headerText: t.emergencyTitleThree,
             bodyText: t.emergencyContentThree,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleFour,
             headerPhoneNumber: t.emergencyNumFour,
+            headerText: t.emergencyTitleFour,
             bodyText: t.emergencyContentFour,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleFive,
             headerPhoneNumber: t.emergencyNumFive,
+            headerText: t.emergencyTitleFive,
             bodyText: t.emergencyContentFive,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleSix,
             headerPhoneNumber: t.emergencyNumSix,
+            headerText: t.emergencyTitleSix,
             bodyText: t.emergencyContentSix,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleSeven,
             headerPhoneNumber: t.emergencyNumSeven,
+            headerText: t.emergencyTitleSeven,
             bodyText: t.emergencyContentSeven,
           ),
           _EmergencyText(
-            headerText: t.emergencyTitleEight,
             // Dummy number because this title is different
             headerPhoneNumber: "",
+            headerText: t.emergencyTitleEight,
             bodyText: t.emergencyContentEight,
           )
         ],
@@ -89,8 +89,8 @@ class _EmergencyText extends StatelessWidget {
   final String bodyText;
 
   _EmergencyText(
-      {required this.headerText,
-      required this.headerPhoneNumber,
+      {required this.headerPhoneNumber,
+      required this.headerText,
       required this.bodyText});
 
   @override
@@ -98,7 +98,7 @@ class _EmergencyText extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          _HeaderText(headerText, headerPhoneNumber),
+          _HeaderText(headerPhoneNumber, headerText),
           _BodyText(bodyText),
         ],
       ),
@@ -128,7 +128,7 @@ class _HeaderText extends StatelessWidget {
     await launchUrl(launchUri);
   }
 
-  _HeaderText(this.text, this.phoneNumber);
+  _HeaderText(this.phoneNumber, this.text);
 
   @override
   Widget build(BuildContext context) {
