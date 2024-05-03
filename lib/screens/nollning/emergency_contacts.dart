@@ -120,7 +120,7 @@ class _HeaderText extends StatelessWidget {
   final Color? color = Colors.grey[200];
 
   Future<void> _launchPhoneNumber(String phoneNumber) async {
-    // phoneNumber can contain "-" and " ", launchUri removes these
+    // phoneNumber can safely contain "-", "+" and " "
     final Uri launchUri = Uri(
       scheme: 'tel',
       path: phoneNumber,
