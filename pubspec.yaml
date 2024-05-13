@@ -68,6 +68,15 @@ dependencies:
   image_gallery_saver: ^2.0.3
   cached_network_image: ^3.3.0
 
+  # flutter_gen: any
+  audioplayers_web: any
+  firebase_core_web: any
+  firebase_messaging_web: any
+  flutter_secure_storage_web: any
+  shared_preferences_web: any
+  url_launcher_web: any
+  # flutter_web_plugins: any
+  html: any
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object

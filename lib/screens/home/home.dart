@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
@@ -11,10 +10,8 @@ import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
+import 'package:fsek_mobile/screens/nollning/map_page.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -38,8 +35,7 @@ class _HomePageState extends State<HomePage> {
           if (!listEquals(value, []) && value != null) {
             this.backgroundDocuments = value;
             // title cant be empty so it is always a string
-            if (value.last.document_name!.toLowerCase().startsWith("ht") ||
-                value.last.document_name!.toLowerCase().startsWith("vt")) {
+            if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
               // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
               this.election = true;
             } else {
@@ -53,7 +49,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var t = AppLocalizations.of(context)!;
     double edgePadding = MediaQuery.of(context).size.width / 25;
     String defaultBackground = "assets/img/default_background.png";
 
@@ -78,16 +73,13 @@ class _HomePageState extends State<HomePage> {
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(
-              edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+          padding: EdgeInsets.fromLTRB(edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               // check thar election bool isnt null and if it is true make the home design according to electionbuttons.
               // if null or false just use standard buttons, null means that there wasnt any picture on website
-              children: this.election != null
-                  ? (this.election! ? _getElectionButtons() : _getStandardButtons())
-                  : _getStandardButtons(),
+              children: this.election != null ? (this.election! ? _getElectionButtons() : _getStandardButtons()) : _getStandardButtons(),
             ),
           ),
         ),
@@ -124,7 +116,8 @@ class _HomePageState extends State<HomePage> {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          button(t.songbookSongbook, SongbookPage()),
+          // button(t.songbookSongbook, SongbookPage()),
+          button("Map test", MapPage()),
           button(t.otherGallery, GalleryPage()),
         ],
       ),
@@ -164,9 +157,7 @@ class _HomePageState extends State<HomePage> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-              width: MediaQuery.of(context).size.width /
-                  48), // space so that the fifth button matches up with the grid above
+          SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button matches up with the grid above
           button(t.guildMeetingButtonOther, OtherDocumentsPage()),
         ],
       ),
