@@ -76,10 +76,13 @@ class _HomePageState extends State<HomePage> {
     }
 
     int week = WeekTracker.determineWeek();
-    String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
-    String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
-    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week-$locale.png";
-    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week-$locale.png";
+    String backgroundPath = "assets/img/nollning-24/homescreen/background-v$week.png";
+    String nolleguidePath = "assets/img/nollning-24/homescreen/button-nolleguide.png";
+    String uppdragPath = "assets/img/nollning-24/homescreen/button-adventure-missions.png";
+    String schedulePath = "assets/img/nollning-24/homescreen/button-schedule.png";
+    String mapPath = "assets/img/nollning-24/homescreen/button-map.png";
+    String emergencyPath = "assets/img/nollning-24/homescreen/button-emergency.png";
+    
 
     return Stack(children: [
       Image.asset(
@@ -125,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.only(bottom: 5, right: 5),
                           child: Image.asset(
-                            "assets/img/nollning-23/homescreen-button-help.png",
+                            emergencyPath,
                             height: MediaQuery.of(context).size.height / 14,
                           ),
                         ),
