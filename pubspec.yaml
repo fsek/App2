@@ -101,6 +101,7 @@ flutter:
     - assets/img/nollning-23/nolleguide/
     - assets/img/nollning-23/schema/
     - assets/img/nollning-23/hemsidan/
+    - assets/img/moose_game/
     - assets/data/guide/
 
   fonts:
