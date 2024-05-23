@@ -11,6 +11,8 @@ import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fsek_mobile/services/moose.service.dart';
 //import 'package:audioplayers/audioplayers.dart';
 
 import 'package:vector_math/vector_math.dart';
@@ -40,7 +42,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
   final double gameViewportWidth = 10;          // How many mooses should fit-
   late double worldScale;
   double score = 0.0;
-  double highscore = 0.0;
+  late double highscore;
   double gameSpeed = 0;
   bool newHighscore = false;
 
@@ -58,6 +60,9 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
+
+    highscore = 0;
+    loadHighscore();
 
     cameraPos = Vector2.zero();
 
@@ -140,6 +145,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     setState(() {
       if (score > highscore) {
         highscore = score;
+        saveHighscore();
         newHighscore = true;
       }
       isDead = true;
@@ -167,6 +173,20 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       newHighscore = false;
       gameAnimController.forward();
     });
+  }
+
+  void loadHighscore() {
+    MooseService.loadDouble("highscore").then((value) {
+      if (value != null) {
+        highscore = value;
+      } else {
+        highscore = 0;
+      }
+    });
+  }
+
+  void saveHighscore() {
+    MooseService.saveDouble("highscore", highscore);
   }
 
   Widget getGameObjectWidget(GameObject gameObject, Size screenSize) {
@@ -199,7 +219,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     // Score counter
     children.add(
       Positioned.fill(
-        top: -400,
+        top: -370,
         child: Align(
           alignment: Alignment.center,
           child: Text(
@@ -213,7 +233,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     // Highscore counter
     children.add(
       Positioned.fill(
-        top: -480,
+        top: -460,
         child: Align(
           alignment: Alignment.center,
           child: Text(
@@ -242,7 +262,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       if (newHighscore) {
         children.add(
           Positioned.fill(
-            top: -550,
+            top: -570,
             child: Align(
               alignment: Alignment.center,
               child: Text(
@@ -268,12 +288,11 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => {
+        onPanDown: (_) {
           if (isDead) {
-            restart()
-          }
-          else {
-            moose.jump()
+            restart();
+          } else {
+            moose.jump();
             //AudioPlayer().play()
           }
         },
