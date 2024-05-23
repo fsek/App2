@@ -39,6 +39,8 @@ class _HighscoreTabState extends State<HighscoreTab> {
           child: IgnorePointer(
               // This is incredibly bad code but it just won't scale correctly across devices otherwise
               child: TabBar(
+                  labelColor: Color.fromARGB(255, 73, 67, 78), // this is also very disgusting but i couldnt find
+                  // what theme variable decide the other text colors on this page so i just found the argb color
                   indicatorColor: Theme.of(context).bottomAppBarTheme.color,
                   tabs: [
                 Tab(text: t.introductionPlacement),
@@ -50,8 +52,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
         Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              this._groups =
-                  await locator<NollningService>().getNollningGroups();
+              this._groups = await locator<NollningService>().getNollningGroups();
               setState(() {});
             },
             child: ListView.builder(
@@ -87,8 +88,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 25),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -111,8 +111,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -135,8 +134,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -158,8 +156,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 18),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),

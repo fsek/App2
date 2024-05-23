@@ -41,6 +41,7 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
+            labelColor: Colors.white,
             indicatorColor: Colors.white,
             tabs: [
               Tab(
