@@ -62,7 +62,7 @@ dependencies:
   wakelock_web: ^0.4.0
   firebase_core_platform_interface: ^5.0.0
   bloc_concurrency: ^0.2.2
-  #image_gallery_saver: ^2.0.3
+  image_gallery_saver: ^2.0.3
   cached_network_image: ^3.3.0
   package_info_plus: ^8.0.0
 
