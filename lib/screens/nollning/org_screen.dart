@@ -15,22 +15,31 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
   Widget build(BuildContext context) {
     String backgroundPath = "assets/img/nollning-24/organization_tree/orgscreen_paper.png";
 
-
-
-
     return Stack(children: [
-      Image.asset(
+      Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text(
+          "Organisationsträd",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
+    ),
+    SingleChildScrollView(child: Column(children: [
+    Image.asset(
         backgroundPath,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
         alignment: Alignment.topCenter,
-      ),
+    ), 
+    Container(width: 1000, height: 1000, color: Colors.red.withOpacity(0.5)),  
+    ])),
       Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(
-          "",
+          "Organisationsträd",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
