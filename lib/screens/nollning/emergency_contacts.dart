@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkable/linkable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //TODO: fixa länkar i texten.
 
@@ -36,34 +37,43 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
       body: ListView(
         children: <Widget>[
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumOne,
             headerText: t.emergencyTitleOne,
             bodyText: t.emergencyContentOne,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumTwo,
             headerText: t.emergencyTitleTwo,
             bodyText: t.emergencyContentTwo,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumThree,
             headerText: t.emergencyTitleThree,
             bodyText: t.emergencyContentThree,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumFour,
             headerText: t.emergencyTitleFour,
             bodyText: t.emergencyContentFour,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumFive,
             headerText: t.emergencyTitleFive,
             bodyText: t.emergencyContentFive,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumSix,
             headerText: t.emergencyTitleSix,
             bodyText: t.emergencyContentSix,
           ),
           _EmergencyText(
+            headerPhoneNumber: t.emergencyNumSeven,
             headerText: t.emergencyTitleSeven,
             bodyText: t.emergencyContentSeven,
           ),
           _EmergencyText(
+            // Dummy number because this title is different
+            headerPhoneNumber: "",
             headerText: t.emergencyTitleEight,
             bodyText: t.emergencyContentEight,
           )
@@ -75,16 +85,20 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
 
 class _EmergencyText extends StatelessWidget {
   final String headerText;
+  final String headerPhoneNumber;
   final String bodyText;
 
-  _EmergencyText({required this.headerText, required this.bodyText});
+  _EmergencyText(
+      {required this.headerPhoneNumber,
+      required this.headerText,
+      required this.bodyText});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          _HeaderText(headerText),
+          _HeaderText(headerPhoneNumber, headerText),
           _BodyText(bodyText),
         ],
       ),
@@ -93,24 +107,49 @@ class _EmergencyText extends StatelessWidget {
 }
 
 class _HeaderText extends StatelessWidget {
+  final String phoneNumber;
   final String text;
+  final TextStyle headerNumStyle = TextStyle(
+    fontSize: 25.0,
+    color: Colors.blue,
+  );
   final TextStyle headerStyle = TextStyle(
     fontSize: 25.0,
     color: Colors.black,
   );
   final Color? color = Colors.grey[200];
 
-  _HeaderText(this.text);
+  Future<void> _launchPhoneNumber(String phoneNumber) async {
+    // phoneNumber can safely contain "-", "+" and " "
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  _HeaderText(this.phoneNumber, this.text);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.centerLeft,
-          child: Row(children: [
-            Flexible(child: Linkable(text: text, style: headerStyle))
-          ])),
+        margin: const EdgeInsets.all(10),
+        alignment: Alignment.centerLeft,
+        child: InkWell(
+          onTap: () {
+            _launchPhoneNumber(phoneNumber);
+          },
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(text: phoneNumber, style: headerNumStyle),
+                TextSpan(text: text, style: headerStyle),
+              ],
+            ),
+          ),
+        ),
+      ),
       color: color,
     );
   }
