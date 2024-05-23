@@ -9,7 +9,7 @@
 .history
 .svn/
 *.g.dart
-/local.properties
+local.properties
 
 # IntelliJ related
 *.iml
