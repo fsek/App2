@@ -1,7 +1,9 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
@@ -37,12 +39,7 @@ class FsekAppBar extends StatefulWidget {
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
-  List<int> appBarItemsClickedAmounts = [
-    0,
-    0,
-    0,
-    0
-  ]; //For activating easter egg codes
+  List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
   bool bababoeActive = false;
 
@@ -67,15 +64,24 @@ class FsekAppBarState extends State<FsekAppBar> {
     String? easterEggCode = await easterEggCodeDialog(context);
     if (easterEggCode == null) return; // User cancels dialog i think
     //For more than one code, please don't stack else if's
-    if (easterEggCode == 'bababoe') {
-      setState(() {
-        bababoeActive = true;
-        Future.delayed(const Duration(seconds: 9), () {
-          setState(() {
-            bababoeActive = false;
+    switch (easterEggCode) {
+      case "bababoe":
+        setState(() {
+          bababoeActive = true;
+          Future.delayed(const Duration(seconds: 9), () {
+            setState(() {
+              bababoeActive = false;
+            });
           });
         });
-      });
+        break;
+
+      case "wow":
+        AudioPlayer().play(AssetSource('audio/wow.mp3'));
+        break;
+
+      default:
+        break;
     }
   }
 
@@ -129,8 +135,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     int? index,
     ValueChanged<int?>? onPressed,
   }) {
-    Color? color =
-        widget.currentIndex == index ? widget.selectedColor : widget.color;
+    Color? color = widget.currentIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       key: Key(item.text!.toLowerCase() + "_btn"),
       child: SizedBox(
