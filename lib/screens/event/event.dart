@@ -250,119 +250,110 @@ class _EventPageState extends State<EventPage> {
       return Container();
     }
 
-    if (event!.can_signup!) {
-      if (event!.event_signup!.open!)
-        signup = signupWidget(t);
-      else {
-        if (event!.event_signup!.closed!) {
-          if (event!.event_user == null) {
-            signup = Row(
-              children: [
-                Icon(
-                  Icons.info_outline_rounded,
+    // If y ou can't signup to an event with a event signup. I haven't ever seen it happen
+    // but who knows
+    if (!event!.can_signup!) {
+      signup = Text("hej");
+
+      // If the signup is open
+    } else if (event!.event_signup!.open!) {
+      signup = signupWidget(t);
+    }
+
+    // This is if the signup is not closed but it also isn't open, also unlikely
+    else if (!event!.event_signup!.closed!) {
+      signup = SizedBox.shrink();
+
+      // This is for closed events, it checks and shows if you were signed up to begin with
+    } else if (event!.event_user == null) {
+      signup = Row(
+        children: [
+          Icon(
+            Icons.info_outline_rounded,
+            color: Colors.red[300],
+          ),
+          Text(
+            t.eventNotSignedUp,
+            style: TextStyle(
+              color: Colors.red[300],
+            ),
+          ),
+        ],
+      );
+      // This is if you were signed up and it shows the stauts of your application
+
+      // If you are signed up but it hasn't been decided if you get a spot or not, probably
+    } else if (event!.event_signup!.lottery ?? false) {
+      signup = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.info_outline_rounded,
+                color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+              ),
+              Text(
+                t.eventLotterySpot,
+                style: TextStyle(
+                  color:
+                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          ..._signupDetails(),
+        ],
+      );
+
+      // This is if you didn't get a spot
+    } else if (event!.event_user?.reserve ?? false) {
+      signup = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.cancel,
+                color: Colors.red[300],
+              ),
+              Text(
+                t.eventNoSpot,
+                style: TextStyle(
                   color: Colors.red[300],
                 ),
-                Text(
-                  t.eventNotSignedUp,
-                  style: TextStyle(
-                    color: Colors.red[300],
-                  ),
-                ),
-              ],
-            );
-          } else {
-            String groupName = "";
-            if (event!.event_user!.group_id != null) {
-              for (int i = 0; i < event!.groups!.length; i++) {
-                if (event!.groups![i].id == event!.event_user!.group_id) {
-                  groupName = event!.groups![i].name!;
-                  break;
-                }
-              }
-            } else {
-              groupName = event!.event_user!.group_custom ?? "";
-            }
-            String userType = event!.event_user!.user_type ?? t.eventOther;
-            if (!(event!.event_signup!.lottery ?? false)) {
-              if (event!.event_user?.reserve ?? false) {
-                signup = Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.cancel,
-                          color: Colors.red[300],
-                        ),
-                        Text(
-                          t.eventNoSpot,
-                          style: TextStyle(
-                            color: Colors.red[300],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    ..._signupDetails(groupName, userType),
-                  ],
-                );
-              } else {
-                signup = Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.check_circle,
-                          color: Colors.green[300],
-                        ),
-                        Text(
-                          t.eventGotSpot,
-                          style: TextStyle(
-                            color: Colors.green[300],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    ..._signupDetails(groupName, userType),
-                  ],
-                );
-              }
-            } else {
-              signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info_outline_rounded,
-                        color: (isAprilFools
-                            ? Color(0xFFF17F9F)
-                            : Colors.orange[600]),
-                      ),
-                      Text(
-                        t.eventLotterySpot,
-                        style: TextStyle(
-                          color: (isAprilFools
-                              ? Color(0xFFF17F9F)
-                              : Colors.orange[600]),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
-            }
-          }
-        } else {
-          signup = SizedBox.shrink();
-        }
-      }
+              ),
+            ],
+          ),
+          const Divider(),
+          ..._signupDetails(),
+        ],
+      );
+
+      // This is if you got a spot
     } else {
-      signup = Text("hej");
+      signup = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green[300],
+              ),
+              Text(
+                t.eventGotSpot,
+                style: TextStyle(
+                  color: Colors.green[300],
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          ..._signupDetails(),
+        ],
+      );
     }
 
     return Container(
@@ -464,13 +455,7 @@ class _EventPageState extends State<EventPage> {
 
   Widget signupWidget(AppLocalizations t) {
     String locale = Localizations.localeOf(context).toString();
-    /* Failsafe */
-    if (locale != "sv" && locale != "en") {
-      locale = "en";
-    }
-    if (event == null) {
-      if (event?.can_signup ?? false) return Container();
-    }
+
     Widget drinkPackageInput = Container();
     if (event!.drink_package ?? false) {
       drinkPackageInput = Row(
@@ -551,22 +536,10 @@ class _EventPageState extends State<EventPage> {
             ],
           ));
     } else {
-      String groupName = "";
-      if (event!.event_user!.group_id != null) {
-        for (int i = 0; i < event!.groups!.length; i++) {
-          if (event!.groups![i].id == event!.event_user!.group_id) {
-            groupName = event!.groups![i].name!;
-            break;
-          }
-        }
-      } else {
-        groupName = event!.event_user!.group_custom ?? "";
-      }
-      String userType = event!.event_user!.user_type ?? t.eventOther;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ..._signupDetails(groupName, userType),
+          ..._signupDetails(),
           SizedBox(
             height: 16,
           ),
@@ -623,13 +596,27 @@ class _EventPageState extends State<EventPage> {
         });
   }
 
-  List<Widget> _signupDetails(String? groupName, String? userType) {
+  List<Widget> _signupDetails() {
     var t = AppLocalizations.of(context)!;
     String locale = Localizations.localeOf(context).toString();
     /* Failsafe */
     if (locale != "sv" && locale != "en") {
       locale = "en";
     }
+
+    String groupName = "";
+    if (event!.event_user!.group_id != null) {
+      for (int i = 0; i < event!.groups!.length; i++) {
+        if (event!.groups![i].id == event!.event_user!.group_id) {
+          groupName = event!.groups![i].name!;
+          break;
+        }
+      }
+    } else {
+      groupName = event!.event_user!.group_custom ?? "";
+    }
+    String userType = event!.event_user!.user_type ?? t.eventOther;
+
     Widget drinkPackage = Container();
     if (event!.drink_package ?? false) {
       if (event!.event_user!.drink_package_answer ?? false) {
@@ -840,10 +827,11 @@ class _EventPageState extends State<EventPage> {
                             ?.map((dressCode) => Text(dressCode + " "))
                       ]),
                       Visibility(
-                          visible: event!.cash ?? false,
-                          child: Text(t.eventPrice +
-                              (event?.price?.toString() ?? "") +
-                              " kr")),
+                        visible: event!.cash ?? false,
+                        child: Text(t.eventPrice +
+                            (event?.price?.toString() ?? "") +
+                            " kr"),
+                      ),
                     ],
                   ),
                 ),
@@ -853,7 +841,7 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     children: [
                       Visibility(
-                        visible: event!.cash ?? false,
+                        visible: event?.cash ?? false,
                         child: Row(
                           children: [
                             Icon(Icons.attach_money_rounded),
@@ -898,15 +886,12 @@ class _EventPageState extends State<EventPage> {
                   ),
                 ),
                 Visibility(
-                  visible: event!.can_signup ?? false,
-                  child: const Divider(),
-                ),
-                Visibility(
-                  visible: (!(event!.contact == null)),
+                  visible: event!.contact != null,
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Divider(),
                         Text(
                           t.eventInCaseOfQuestions,
                         ),
@@ -922,10 +907,13 @@ class _EventPageState extends State<EventPage> {
                                 (event!.contact?.id ?? 0).toString(),
                           )),
                         ),
-                        const Divider(),
                       ],
                     ),
                   ),
+                ),
+                Visibility(
+                  visible: event!.can_signup ?? false,
+                  child: const Divider(),
                 ),
                 signupInfoWidget(),
               ],
