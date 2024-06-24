@@ -66,6 +66,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     // 6 1 2 2 clicked: Easter egg codes activated
     String? easterEggCode = await easterEggCodeDialog(context);
     if (easterEggCode == null) return; // User cancels dialog i think
+    // EDIT: yes it is, without it it goes on forever
     //For more than one code, please don't stack else if's
     if (easterEggCode == 'bababoe') {
       setState(() {

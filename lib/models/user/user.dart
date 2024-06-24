@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/models/moose_game/game_score_entry.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart'; //generated JSON file
@@ -29,6 +30,8 @@ class User {
   bool? notify_event_closing;
   int? terms_version;
   bool? notify_event_open;
+  GameScoreEntry? game_score;
+  String? game_nickname;
 
   User();
 
