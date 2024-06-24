@@ -42,7 +42,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
   final double gameViewportWidth = 10;          // How many mooses should fit-
   late double worldScale;
   double score = 0.0;
-  late double highscore;
+  double highscore = 0.0;
   double gameSpeed = 0;
   bool newHighscore = false;
 
@@ -60,9 +60,6 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-
-    highscore = 0;
-    loadHighscore();
 
     cameraPos = Vector2.zero();
 
@@ -145,7 +142,6 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     setState(() {
       if (score > highscore) {
         highscore = score;
-        saveHighscore();
         newHighscore = true;
       }
       isDead = true;
@@ -173,20 +169,6 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       newHighscore = false;
       gameAnimController.forward();
     });
-  }
-
-  void loadHighscore() {
-    MooseService.loadDouble("highscore").then((value) {
-      if (value != null) {
-        highscore = value;
-      } else {
-        highscore = 0;
-      }
-    });
-  }
-
-  void saveHighscore() {
-    MooseService.saveDouble("highscore", highscore);
   }
 
   Widget getGameObjectWidget(GameObject gameObject, Size screenSize) {
