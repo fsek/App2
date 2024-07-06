@@ -764,6 +764,13 @@ class _EventPageState extends State<EventPage> {
         title: Text(t.eventTitle),
       ),
       body: Container(
+        // Introduction events have a different background
+        decoration: event?.is_introduction == true ? BoxDecoration(
+          image: DecorationImage(
+          image: AssetImage("assets/img/TLTH logo 1.png"),
+          fit: BoxFit.fill,
+          ),
+        ) : null,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
