@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fsek_mobile/april_fools.dart';
-import 'package:photo_view/photo_view.dart';
 
 class OrganizationScreenPage extends StatefulWidget {
   @override
