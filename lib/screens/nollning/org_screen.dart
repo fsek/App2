@@ -41,7 +41,14 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
 return Scaffold(
   appBar: AppBar(
         backgroundColor: Color(0xFF7E5127),
-      ),
+        title: Text(
+          "Organisationsträd",
+          style: TextStyle(
+            fontFamily: "Testament",
+            fontSize: 30,
+            color: Color(0xFFE9CA97),
+        ),
+      )),
   body: SingleChildScrollView(
     child: Stack(
       children: [
