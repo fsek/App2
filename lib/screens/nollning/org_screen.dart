@@ -36,11 +36,9 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-
-
 return Scaffold(
   appBar: AppBar(
-        backgroundColor: Color(0xFF7E5127),
+        backgroundColor: Color(0xFF7E5127), //#540909 för den röda färgen
         title: Text(
           "Organisationsträd",
           style: TextStyle(
@@ -71,14 +69,18 @@ return Scaffold(
               Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 40, right: 40),
+                    margin: EdgeInsets.only(left: 60, right: 60),
                     child:
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.only(),
+                        shape: BeveledRectangleBorder(
+                          borderRadius: BorderRadius.horizontal()
+                        ),
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent
                       ),
-                      onPressed: () {},
+                      onPressed: () {launchUrl(Uri.parse('https://www.tlth.se/'));},
                       child: Image.asset(
                         tlthButtonPath,
                   ))),
@@ -87,63 +89,91 @@ return Scaffold(
                     child:
                     Row(
                       children: [
+                        Expanded(child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 5 , left: 40, right: 5), 
+                              child:
+                              Center(   
+                                child: 
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                          fit: BoxFit.cover
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "organisation",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),
+                                        )))),
+                          ]))))),
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
+                              margin: EdgeInsets.only(top: 5, left: 5, right: 40), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "organisation",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                          fit: BoxFit.cover
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 2),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "sektioner",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/22,
+                                                  color: Color(0xFFE9CA97),   
                                     )))),
-                      ])))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 2),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "sektioner",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/22,
-                                              color: Color(0xFFE9CA97),   
-                                    )))),
-                      ])))),
+                      ]))))),
                     ],
                     )),
                   Container(
-                    margin: EdgeInsets.only(top: 25, left: 40, right: 40),
+                    margin: EdgeInsets.only(top: 15, left: 60, right: 60),
                     child:
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.only(),
+                        shape: BeveledRectangleBorder(
+                          borderRadius: BorderRadius.horizontal()
+                        ),
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent
                       ),
-                      onPressed: () {},
+                      onPressed: () {launchUrl(Uri.parse('https://fsektionen.se/'));},
                       child: Image.asset(
                         fsekButtonPath,
                   ))),
@@ -155,49 +185,71 @@ return Scaffold(
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
+                              margin: EdgeInsets.only(top: 5, left: 40, right: 5), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "Ledningen",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 4),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "Ledningen",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),
                                     )))),
-                      ])))),
+                      ]))))),
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
+                              margin: EdgeInsets.only(top: 5, left: 5, right: 40), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      child: Center(
-                                        child: 
-                                          Text(
-                                            "Föset",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),                                   
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child: 
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          child: Center(
+                                            child: 
+                                              Text(
+                                                "Föset",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),                                   
                                     )))),
-                      ])))),
+                      ]))))),
                     ],
                     )),
                   SizedBox(
@@ -208,206 +260,71 @@ return Scaffold(
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
+                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "kulturministeriet",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/30,
-                                              color: Color(0xFFE9CA97),                                     
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child: 
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "kulturministeriet",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/30,
+                                                  color: Color(0xFFE9CA97),                                     
                                     )))),
-                      ])))),
+                      ]))))),
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
+                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "sexmästeriet",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child: 
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 4),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "sexmästeriet",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),
                                     )))),
-                      ])))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                          "studierådet",
-                                          style: TextStyle(
-                                            fontFamily: "Testament",
-                                            fontSize: screenWidth/24,
-                                            color: Color(0xFFE9CA97),                                     
-                                    )))),
-                      ])))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "bokförlaget",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),
-                                    )))),
-                      ])))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "cafémästeriet",
-                                            style: TextStyle(
-                                            fontFamily: "Testament",
-                                            fontSize: screenWidth/24,
-                                            color: Color(0xFFE9CA97),                                     
-                                    )))),
-                        ])))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "FNU",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),                                   
-                                    )))),
-                      ])))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6),
-                                      child: Center(
-                                        child:
-                                          Text(
-                                            "prylmästeriet",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/24,
-                                              color: Color(0xFFE9CA97),
-                                    )))),
-                        ])))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
-                              child: Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4),
-                                      child: Center( 
-                                        child:
-                                          Text(
-                                            "samvetet",
-                                            style: TextStyle(
-                                              fontFamily: "Testament",
-                                              fontSize: screenWidth/22,
-                                              color: Color(0xFFE9CA97),
-                                    )))),
-                      ])))),
+                      ]))))),
                     ])),
                   SizedBox(
                     width: screenWidth,
@@ -417,80 +334,333 @@ return Scaffold(
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 40, right: 5), 
+                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      child: 
-                                        Center(
-                                          child:
-                                            Text(
-                                              "sanningsministeriet",
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                              "studierådet",
                                               style: TextStyle(
                                                 fontFamily: "Testament",
-                                                fontSize: screenWidth/34,
-                                                color: Color(0xFFE9CA97),
-                                      )
-                                    ))),
-                        ])))),
+                                                fontSize: screenWidth/24,
+                                                color: Color(0xFFE9CA97),                                     
+                                    )))),
+                      ]))))),
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10, left: 5, right: 40), 
+                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6),
-                                      child: 
-                                        Center(
-                                          child:
-                                            Text(
-                                              "medaljkommittén",
-                                              style: TextStyle(
-                                                fontFamily: "Testament",
-                                                fontSize: screenWidth/30,
-                                                color: Color(0xFFE9CA97),
-                                      )
-                                    ))),
-                      ])))),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 4),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "bokförlaget",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),
+                                    )))),
+                      ]))))),
                     ],
                     )),
+                  SizedBox(
+                    width: screenWidth,
+                    child:
+                    Row(
+                      children: [
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
+                              child: 
+                              Center(   
+                                child: 
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child: 
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "cafémästeriet",
+                                                style: TextStyle(
+                                                fontFamily: "Testament",
+                                                fontSize: screenWidth/24,
+                                                color: Color(0xFFE9CA97),                                     
+                                    )))),
+                            ]))))),
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
+                              child: 
+                              Center(   
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "FNU",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/22,
+                                                  color: Color(0xFFE9CA97),                                   
+                                    )))),
+                      ]))))),
+                    ],
+                    )),
+                  SizedBox(
+                    width: screenWidth,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
+                              child: 
+                              Center(   
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "prylmästeriet",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/24,
+                                                  color: Color(0xFFE9CA97),
+                                    )))),
+                        ]))))),
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
+                              child: Center(   
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 4),
+                                          child: Center( 
+                                            child:
+                                              Text(
+                                                "samvetet",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/22,
+                                                  color: Color(0xFFE9CA97),
+                                    )))),
+                      ]))))),
+                    ])),
+                  SizedBox(
+                    width: screenWidth,
+                    child:
+                    Row(
+                      children: [
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
+                              child: 
+                              Center(   
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 7),
+                                          child: 
+                                            Center(
+                                              child:
+                                                Text(
+                                                  "sanningsministeriet",
+                                                  style: TextStyle(
+                                                    fontFamily: "Testament",
+                                                    fontSize: screenWidth/34,
+                                                    color: Color(0xFFE9CA97),                               
+                                    )))),
+                        ]))))),
+                        Expanded(
+                          child:
+                            Container(    
+                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
+                              child: 
+                              Center(   
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child: 
+                                            Center(
+                                              child:
+                                                Text(
+                                                  "medaljkommittén",
+                                                  style: TextStyle(
+                                                    fontFamily: "Testament",
+                                                    fontSize: screenWidth/30,
+                                                    color: Color(0xFFE9CA97),
+                                      
+                                    )))),
+                      ]))))),
+                    ])),
                   SizedBox(
                     width: screenWidth,
                     child:
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 120, right: 120), 
-                              child: 
-                                Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                              margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      child: Center(
-                                        child:
-                                    Text(
-                                      "övrigt",
-                                      style: TextStyle(
-                                        fontFamily: "Testament",
-                                        fontSize: screenWidth/22,
-                                        color: Color(0xFFE9CA97),                 
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child: 
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          child: Center(
+                                            child:
+                                              Text(
+                                                "övrigt",
+                                                style: TextStyle(
+                                                  fontFamily: "Testament",
+                                                  fontSize: screenWidth/22,
+                                                  color: Color(0xFFE9CA97),                 
                                     )))),
-                      ]))),
+                      ])))),
                     ),
                   SizedBox(
                     width: screenWidth,
@@ -500,36 +670,57 @@ return Scaffold(
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 70 , left: 40, right: 5), 
-                              child:           
-                                Image.asset(
-                                  frejaButtonPath,
-                        ))),
+                              margin: EdgeInsets.only(top: 40, left: 40, right: 5), 
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:           
+                                    Image.asset(
+                                      frejaButtonPath,
+                        )))),
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 70, left: 5, right: 40), 
+                              margin: EdgeInsets.only(top: 40, left: 5, right: 40), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 2),
-                                      child: 
-                                        Center(
-                                          child:
-                                            Text(
-                                              "nationer",
-                                              style: TextStyle(
-                                                fontFamily: "Testament",
-                                                fontSize: screenWidth/21,
-                                                color: Color(0xFFE9CA97),
-                                      )
-                                    ))),
-                      ])))),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 2),
+                                          child: 
+                                            Center(
+                                              child:
+                                                Text(
+                                                  "nationer",
+                                                  style: TextStyle(
+                                                    fontFamily: "Testament",
+                                                    fontSize: screenWidth/21,
+                                                    color: Color(0xFFE9CA97),
+                                      
+                                    )))),
+                      ]))))),
                     ],
                     )),
                   SizedBox(
@@ -538,28 +729,38 @@ return Scaffold(
                         Expanded(
                           child:
                             Container(    
-                              margin: EdgeInsets.only(top: 10 , left: 120, right: 120), 
+                              margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
                               child: 
                               Center(   
-                                child: Stack(
-                                  children: [        
-                                    Image.asset(
-                                      orgTextButtonPath,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(),
+                                    shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.horizontal()
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      child: 
-                                        Center(
-                                          child:
-                                            Text(
-                                              "spex",
-                                              style: TextStyle(
-                                                fontFamily: "Testament",
-                                                fontSize: screenWidth/22,
-                                                color: Color(0xFFE9CA97),
-                                      )
-                                    ))),
-                      ]))))),
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent
+                                  ),
+                                  onPressed: () {},
+                                  child:  
+                                    Stack(
+                                      children: [        
+                                        Image.asset(
+                                          orgTextButtonPath,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          child: 
+                                            Center(
+                                              child:
+                                                Text(
+                                                  "spex",
+                                                  style: TextStyle(
+                                                    fontFamily: "Testament",
+                                                    fontSize: screenWidth/22,
+                                                    color: Color(0xFFE9CA97),                            
+                                    )))),
+                      ])))))),
       ])) 
     )]
     )
