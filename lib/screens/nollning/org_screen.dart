@@ -45,7 +45,7 @@ return Scaffold(
           "Organisationsträd",
           style: TextStyle(
             fontFamily: "Testament",
-            fontSize: 30,
+            fontSize: screenWidth/15,
             color: Color(0xFFE9CA97),
         ),
       )),
