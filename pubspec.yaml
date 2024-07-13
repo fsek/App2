@@ -112,6 +112,9 @@ flutter:
     - family: Brandon Grotesque
       fonts:
         - asset: assets/BrandonGrotesque-Regular.ttf
+    - family: Testament
+      fonts: 
+        - asset: assets/TestamentIMediumW00Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
