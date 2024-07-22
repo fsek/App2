@@ -3,21 +3,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/april_fools.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/screens/nollning/orgscreen/guilds.dart';
 
 class OrganizationScreenPage extends StatefulWidget {
   @override
   _OrganizationScreenState createState() => _OrganizationScreenState();
 }
 
-// Funkar ej, varför??????
-_launchUrl() async{
-  var url = Uri.parse("https://fsektionen.se/");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 class _OrganizationScreenState extends State<OrganizationScreenPage> {
   void initState(){
@@ -139,10 +131,10 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SektionScreenPage()));},
                                   child:
                                     Stack(
-                                      children: [        
+                                      children: [ 
                                         Image.asset(
                                           orgTextButtonPath,
                                           fit: BoxFit.cover

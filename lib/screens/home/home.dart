@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
-import 'package:fsek_mobile/screens/nollning/org_screen.dart';
+import 'package:fsek_mobile/screens/nollning/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';

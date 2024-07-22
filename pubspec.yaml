@@ -106,6 +106,7 @@ flutter:
     - assets/img/nollning-24/organization_tree/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/uppdrag/
+    - assets/data/nollning-24/sektioner.json
 
 
   fonts:
