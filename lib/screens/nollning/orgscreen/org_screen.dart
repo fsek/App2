@@ -72,7 +72,7 @@ return Scaffold(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent
                       ),
-                      onPressed: () {launchUrl(Uri.parse('https://www.tlth.se/'));},
+                      onPressed: () {launchUrl(Uri.parse('https://www.tlth.se/nollning/'));},
                       child: Image.asset(
                         tlthButtonPath,
                   ))),
