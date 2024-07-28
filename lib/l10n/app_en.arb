@@ -338,7 +338,8 @@
     "suit": "Suit",
     "suitContent": "The dress code formal consist of a jacket, trousers and possibly a vest in the same fabric and color. Black is an excellent choice.\n• Shirt: A light-colored shirt, preferably white.\n• Shoes and belt: Shoes should be black. If you wear a belt, it should also be black.\n• Accessories: A tie or bow tie is mandatory with the jacket.",
     "smartCasual": "Smart casual",
-    "smartCasualContent": "The dress code smart casual mainly implies that the suit should not match with the bottom.\n• Style: Keep the outfit dressed up but not as formal as the dress code “Formal”. Choose nicer pieces than casual wear, such as a dressier trouser/skirt and a top of your choice, or a simpler dress. Avoid jeans.\n• Jacket: The jacket can be a blazer or a suit jacket, but it should not match the pants or skirt.\n• Bodice: Shirt or top can be in any color and style.\n• Pants or skirt: Should be in a different fabric and color than the jacket.\n• Accessories: Tie or bow tie is optional.",
+    "smartCasualIntro": "The dress code smart casual mainly implies that the suit should not match with the bottom.\n\n• Style: Keep the outfit dressed up but not as formal as the dress code “Formal”. Choose nicer pieces than casual wear, such as a dressier trouser/skirt and a top of your choice, or a simpler dress. Avoid jeans.",
+    "smartCasualContent": "• Jacket: The jacket can be a blazer or a suit jacket, but it should not match the pants or skirt.\n• Bodice: Shirt or top can be in any color and style.\n• Pants or skirt: Should be in a different fabric and color than the jacket.\n• Accessories: Tie or bow tie is optional.",
     "ovveThematically": "Ovve+Thematically",
     "ovveContent": "A dress code you won't find outside the Technologist world! In the F-section it is very common to wear the technologist cap in the right color for Ovve.",
     "ovveThematicallyContent": "Another dress code within the technologist world. This is commonly used at Slasque sittings and differs from Ovve by inviting to theme! Here you can go from anywhere between 0 to 10000% on a themed outfit.",
@@ -351,9 +352,30 @@
     "medalsAndBadges": "Medals and badges",
     "medalsAndBadgesIntro": "Medals are worn differently on a coat/suit and a dress. On a coat or suit, the medals can be placed under the breast pocket, preferably in neat rows. If you wear a dress, you usually attach your medals to the ribbon.",
     "medalsAndBadgesEnd": "At balls or special events where medals are awarded, the medal in question may be worn on the lapel or on the left side of the dress. The ribbon is worn over the right shoulder, and for tailcoat wearers the ribbon should be worn UNDER the tailcoat vest.",
-    "kladguideModels": "Models: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nPhotographer: Blendona Ibrahimi"
+    "kladguideModels": "Models: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nPhotographer: Blendona Ibrahimi",
 
+    "festivitiesCommittee": "festivities committee",
+    "guilds": "guilds",
+    "ministryOfCulture": "ministry of culture",
+    "organization": "organization",
+    "theManagement": "the management",
+    "others": "others",
+    "nations": "nations",
+    "educationalCouncil": "educational Council",
+    "organizationTree": "organization tree",
+    "theAccountingDepartment": "accounting department",
+    "hilbertCafe": "hilbert café",
+    "corporateRelations": "corporate relations",
+    "facilitiesCommittee": "facilities committee",
+    "theConscience": "the conscience",
+    "ministryOfTruth": "ministry of truth",
+    "theProcession": "the procession",
+    "introductionCommittee": "introduction comittee",
 
+    "spexInLund": "spex in Lund",
+    "spexContent": "In Lund there are about ten different student spex, and each spex puts on performances between one and three times a year. Many of these spex are located in the AF-borgen, while smaller nation spex often use the nation's own premises.\n\nBeing involved in a spex means you can take part in many different activities, such as building sets, making costumes, applying make-up, playing instruments or singing. Only a small part of the spex ensemble is on stage, which means there is plenty to do even for those who don't want to be in the spotlight. Rehearsals usually last 3-5 weeks during the semester, and depending on the size of the spex, a number of performances are then put on for both Lund students and the public.\n\nThe four largest spexes in Lund, all of which hold their performances in the main hall of the AF-borgen, are Jesper, Toddy, Boel and Lundaspexarna. Jesper is the technologist spex and is mainly aimed at technologist students, Toddy is mainly for medical students, Boel has only women on stage, and Lundaspexarna has only men on stage.",
+    "spexImageText": "Images from Jesperspexet's acclaimed show \"Marie Curie\", which was performed in spring 2024.",
+    "spexCredits": "Text: Johan Furuhjelm, Image: Per Lindström"
 
 
 

@@ -338,7 +338,8 @@
     "suit": "Kostym",
     "suitContent": "En mörk kostym är formell och ska bestå av kavaj, byxor och eventuell väst i samma tyg och färg. Svart är ett utmärkt val.\n• Skjorta: En ljus skjorta, gärna vit, är att föredra.\n• Skor och Skärp: Skorna ska vara svarta. Om du använder skärp, ska det också vara svart.\n• Accessoarer: Slips eller fluga är obligatoriskt till kavajen.",
     "smartCasual": "Udda Kavaj",
-    "smartCasualContent": "Klädkoden \"udda kavaj\" innebär främst att kavajen inte ska matcha med underdelen.\n• Stil: Håll klädseln uppklädd men inte lika formell som mörk kostym. Välj finare plagg än vardagskläder, exempelvis en snyggare byxa/kjol och en valfri överdel, eller varför inte en enklare klänning. Undvik jeans.\n• Kavaj: Kavajen kan vara en blazer eller en kavaj från en kostym, men den ska inte matcha byxorna eller kjolen.\n• Överdel: Skjorta eller topp kan vara i valfri färg och stil.\n• Underdelen: Bör vara i ett annat tyg och färg än en eventuell kavaj.\n• Accessoarer: Slips eller fluga är valfritt.",
+    "smartCasualIntro": "Klädkoden \"udda kavaj\" innebär främst att kavajen inte ska matcha med underdelen.\n\n• Stil: Håll klädseln uppklädd men inte lika formell som mörk kostym. Välj finare plagg än vardagskläder, exempelvis en snyggare byxa/kjol och en valfri överdel, eller varför inte en enklare klänning. Undvik jeans.",
+    "smartCasualContent": "• Kavaj: Kavajen kan vara en blazer eller en kavaj från en kostym, men den ska inte matcha byxorna eller kjolen.\n• Överdel: Skjorta eller topp kan vara i valfri färg och stil.\n• Underdelen: Bör vara i ett annat tyg och färg än en eventuell kavaj.\n• Accessoarer: Slips eller fluga är valfritt.",
     "ovveThematically": "Ovve+Temaenligt",
     "ovveContent": "En klädkod man inte finner utanför Teknologvärlden! På F-sektionen är det högst vanligt förekommande med teknologmössan i rätt färg till Ovve.",
     "ovveThematicallyContent": "Ytterligare en klädkod inom teknologvärlden. Denna är vanligt förekommande på slasquer/fulsittningar och urskiljer sig från Ovve genom att bjuda in till tema! Här kan man gå på från allt mellan 0 till 10000% på en temaenlig outfit.",
@@ -351,7 +352,35 @@
     "medalsAndBadges": "Medaljer och ordenstecken",
     "medalsAndBadgesIntro": "Medaljer bärs olika på frack/kostym respektive klänning. På frack eller kostym kan medaljerna placeras under bröstfickan, gärna i prydliga rader. Bär man klänning fäster man oftast sina medaljer på ordensbandet.",
     "medalsAndBadgesEnd": "Vid bal eller särskilda tillställningar där medaljer delas ut, kan den aktuella medaljen bäras på frackslaget alternativt på klänningens vänstra sida. Ordensband bärs över höger axel, och för frackbärare skall bandet bäras UNDER frackvästen.",
-    "kladguideModels": "Medverkande: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nFotograf: Blendona Ibrahimi"
+    "kladguideModels": "Medverkande: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nFotograf: Blendona Ibrahimi",
+
+
+
+    "festivitiesCommittee": "sexmästeriet",
+    "guilds": "sektioner",
+    "ministryOfCulture": "kulturministeriet",
+    "organization": "organisation",
+    "theManagement": "ledningen",
+    "others": "övrigt",
+    "nations": "nationer",
+    "educationalCouncil": "studierådet",
+    "organizationTree": "organisationsträd",
+    "theAccountingDepartment": "bokförlaget",
+    "hilbertCafe": "cafémästeriet",
+    "corporateRelations": "näringslivsutskottet",
+    "facilitiesCommittee": "prylmästeriet",
+    "theConscience": "samvetet",
+    "ministryOfTruth": "sanningsministeriet",
+    "theProcession": "medaljkommittén",
+    "introductionCommittee": "föset",
+
+
+    "spexInLund": "spex i Lund",
+    "spexContent": "I Lund finns ungefär tio olika studentspex, och varje spex sätter upp föreställningar mellan en till tre gånger per år. Många av dessa spex håller till i AF-borgen, medan mindre nationsspex ofta använder nationens egna lokaler.\n\nAtt vara engagerad i ett spex innebär att du kan delta i många olika aktiviteter, såsom att bygga scenografi, sy kostymer, sminka, spela instrument eller sjunga. Endast en liten del av spex-ensemblen står på scenen, vilket innebär att det finns mycket att göra även för dig som inte vill vara i rampljuset. Repetitioner pågår vanligtvis i 3-5 veckor under terminen, och beroende på spexets storlek framförs sedan ett antal föreställningar för både Lunds studenter och allmänheten.\n\nDe fyra största spexen i Lund, som alla håller sina föreställningar i stora salen i AF-borgen, är Jesper, Toddy, Boel och Lundaspexarna. Jesper är teknologspexet och riktar sig främst till teknologstudenter, Toddy är motsvarande för läkarstudenter, Boel har enbart kvinnor på scen, och Lundaspexarna har enbart män på scen.",
+    "spexImageText": "Bilder från Jesperspexets hyllade föreställning \"Marie Curie\", som spelades under våren 2024.",
+    "spexCredits": "Text: Johan Furuhjelm, Bild: Per Lindström"
+
+
 
 
 

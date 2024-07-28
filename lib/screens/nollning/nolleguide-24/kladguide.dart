@@ -33,7 +33,6 @@ class _KladguideScreenState extends State<KladguidePage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     var t =  AppLocalizations.of(context)!;
-    //Locale currentLocale = Localizations.localeOf(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,7 +41,10 @@ class _KladguideScreenState extends State<KladguidePage> {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
-      body: SingleChildScrollView(
+      body: InteractiveViewer(
+        panEnabled: true,
+      child: 
+      SingleChildScrollView(
         child: Stack(children: [
           Column(
           children: [
@@ -225,30 +227,40 @@ class _KladguideScreenState extends State<KladguidePage> {
                         ],
                       ),
                       SizedBox(height: 50),
+                      Text(
+                        t.smartCasual,
+                        style: TextStyle(
+                            fontFamily: "Testament",
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF540909),
+                            fontSize: screenWidth/25,
+                            )
+                          ),
+                      SizedBox(height: 10),
+                      Text(
+                        t.smartCasualIntro,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: screenWidth/34,
+                          )
+                      ),
+                      SizedBox(height: 10),
                       Row(
                         children: [
                           Expanded(child: Image.asset(i3)),
                           SizedBox(width: 10),
                           Expanded(child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                t.smartCasual,
-                                style: TextStyle(
-                                  fontFamily: "Testament",
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF540909),
-                                  fontSize: screenWidth/25,
-                                )
-                              ),
-                              SizedBox(height: 10),
                               Text(
                                 t.smartCasualContent,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: screenWidth/34,
                                 )
-                              )
+                              ),
+                              SizedBox(height: 100)
                             ],
                           ))
                         ],
@@ -469,6 +481,6 @@ class _KladguideScreenState extends State<KladguidePage> {
           ],
         )
       ]))
-    );
+    ));
   }
 }
