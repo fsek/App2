@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/april_fools.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/kladguide.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 
 class NolleGuideScreenPage extends StatefulWidget {
@@ -125,7 +127,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      onPressed: () {}, 
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => KladguidePage()));}, 
                       child: Image.asset(
                         kladguidePath,
                         fit: BoxFit.cover

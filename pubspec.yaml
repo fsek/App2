@@ -90,6 +90,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - lib/l10n/
     - assets/
     - assets/audio/
     - assets/img/
@@ -103,6 +104,7 @@ flutter:
     - assets/img/nollning-24/hemsidan/
     - assets/img/nollning-24/karta/
     - assets/img/nollning-24/nolleguide/
+    - assets/img/nollning-24/nolleguide/kladguide/
     - assets/img/nollning-24/organization_tree/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/uppdrag/

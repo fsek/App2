@@ -320,5 +320,39 @@
     "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\n Ytterligare kontaktinformation finns att hitta i Nolleguiden",
 
     "game": "Moose game",
-    "gameDescription":"Kommer snart!"
+    "gameDescription":"Kommer snart!",
+
+    "kladguideTopTitle": "En guide till klädkoder inom studentlivet",
+    "kladGuideProcessionFeature": "I samarbete med medaljkommittén",
+    "kladGuideIntro": "I studentlivet kan du komma att stöta på olika klädkoder. Det är frivilligt att följa dem, men för den nyfikne är här en guide med tips från medaljkommittén om hur de olika koderna kan tolkas.",
+    "kladGuideWhiteTieFullDress": "\nHögtidsdräkt",
+    "tailcoat": "Frack",
+    "tailcoatContent": "Fracken är en traditionell festklädsel med följande delar:\n• Byxor: Svarta med sidenrevärer, i samma tyg som fracken. De ska bäras med hängslen för att sitta korrekt.\n• Frackskjorta: En vit skjorta speciellt utformad för frack, med plats för manschettknappar och löstagbara bröstknappar, som köps separat.\n• Frackväst: Vit och designad specifikt för frack.\n• Fluga: Vit.\n• Skor: Svarta lackskor.",
+    "fulldress": "Långklänning",
+    "fulldressContent": "Långklänningen/balklänningen är en elegant klädsel för festliga tillfällen.\n• Längd: Klänningen ska nå ner till golvet.\n• Material och Stil: Bör vara av ett fint tyg och ha en festlig modell.\n• Ärmar: Kan vara ärmlös. Om handskar bärs, ska de helst vara långa nog att täcka armbågarna.",
+    "accessories": "Accessoarer",
+    "accessoriesContent": "Det är kutym att bära medaljer och ordensband vid dessa tillfällen. Till högtidsdräkt bärs studentmössans vita modell.",
+    "formal": "Mörk Kostym",
+    "dressSkirt": "Klänning/Kjol",
+    "dressSkirtContent": "För den som bär klänning eller kjol, bör plagget vara av ett finare tyg, såsom siden eller sammet, och nå ner till eller täcka knäna. Mörka toner rekommenderas för att matcha den formella stilen.",
+    "suit": "Kostym",
+    "suitContent": "En mörk kostym är formell och ska bestå av kavaj, byxor och eventuell väst i samma tyg och färg. Svart är ett utmärkt val.\n• Skjorta: En ljus skjorta, gärna vit, är att föredra.\n• Skor och Skärp: Skorna ska vara svarta. Om du använder skärp, ska det också vara svart.\n• Accessoarer: Slips eller fluga är obligatoriskt till kavajen.",
+    "smartCasual": "Udda Kavaj",
+    "smartCasualContent": "Klädkoden \"udda kavaj\" innebär främst att kavajen inte ska matcha med underdelen.\n• Stil: Håll klädseln uppklädd men inte lika formell som mörk kostym. Välj finare plagg än vardagskläder, exempelvis en snyggare byxa/kjol och en valfri överdel, eller varför inte en enklare klänning. Undvik jeans.\n• Kavaj: Kavajen kan vara en blazer eller en kavaj från en kostym, men den ska inte matcha byxorna eller kjolen.\n• Överdel: Skjorta eller topp kan vara i valfri färg och stil.\n• Underdelen: Bör vara i ett annat tyg och färg än en eventuell kavaj.\n• Accessoarer: Slips eller fluga är valfritt.",
+    "ovveThematically": "Ovve+Temaenligt",
+    "ovveContent": "En klädkod man inte finner utanför Teknologvärlden! På F-sektionen är det högst vanligt förekommande med teknologmössan i rätt färg till Ovve.",
+    "ovveThematicallyContent": "Ytterligare en klädkod inom teknologvärlden. Denna är vanligt förekommande på slasquer/fulsittningar och urskiljer sig från Ovve genom att bjuda in till tema! Här kan man gå på från allt mellan 0 till 10000% på en temaenlig outfit.",
+    "technologistCap": "Teknologmössan",
+    "whiteAndBlue": "Vit och blå",
+    "technologistCapContent": "Teknologmössan finns i två varianter, den vita sommarmodellen samt den blåa vintermodellen. \n\nVinterskyddet bärs från 4 oktober till och med mösspåtagningen den 30 april. Ett undantag till detta är att vintermodellen aldrig bärs till högtidsdräkt, då bärs istället den vita sommarmodellen oavsett tid på året.",
+    "tassel": "Tofsen",
+    "tasselIntro": "I tofsen kan det hänga olika saker som samlats på under ens år som teknolog, men de mest betydelsefulla är spegaten. Spegaten matchar de år inom ett program man läst eller läser.",
+    "tasselColors": "Spegaten för teknisk fysik är orange, för teknisk matematik orange/silver och för teknisk nanovetenskap orange/grön.",
+    "medalsAndBadges": "Medaljer och ordenstecken",
+    "medalsAndBadgesIntro": "Medaljer bärs olika på frack/kostym respektive klänning. På frack eller kostym kan medaljerna placeras under bröstfickan, gärna i prydliga rader. Bär man klänning fäster man oftast sina medaljer på ordensbandet.",
+    "medalsAndBadgesEnd": "Vid bal eller särskilda tillställningar där medaljer delas ut, kan den aktuella medaljen bäras på frackslaget alternativt på klänningens vänstra sida. Ordensband bärs över höger axel, och för frackbärare skall bandet bäras UNDER frackvästen.",
+    "kladguideModels": "Medverkande: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nFotograf: Blendona Ibrahimi"
+
+
+
 }

@@ -320,5 +320,42 @@
     "emergencyContentEight": "If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\nFind additional contact information in the Nolleguide",
 
     "game": "Moose game",
-    "gameDescription":"Coming soon!"
+    "gameDescription":"Coming soon!",
+
+    "kladguideTopTitle": "The Student’s Guide to Dress Codes",
+    "kladGuideProcessionFeature": "Featuring the Procession",
+    "kladGuideIntro": "In student life, you may come across different dress codes. Following them is voluntary, but for the curious, here is a guide with tips from the Procession on how to interpret the different codes.",
+    "kladGuideWhiteTieFullDress": "\nWhite tie/Full dress",
+    "tailcoat": "Tailcoat",
+    "tailcoatContent": "The tailcoat is a traditional festive outfit with the following elements:\n• Trousers: Black with silk stripes, in the same fabric as the coat. They should be worn with suspenders to fit correctly.\n• Tailcoat shirt: A white shirt specially designed for tails, with space for cufflinks and detachable breast buttons, purchased separately.\n• Waistcoat: White and designed specifically for tails.\n• Bow tie: White.\n• Shoes: Black patent leather shoes.",
+    "fulldress": "Full dress",
+    "fulldressContent": "The full dress is an elegant outfit for festive occasions.\n• Length: The dress should reach down to the floor.\n• Material and Style: Should be of a fine fabric and have a festive style.\n• Sleeves: May be sleeveless. If gloves are worn, they should ideally be long enough to cover the elbows.",
+    "accessories": "Accessories",
+    "accessoriesContent": "It is customary to wear medals and ribbons on these occasions. The white model of the student cap is worn for formal dress.",
+    "formal": "Formal",
+    "dressSkirt": "Dress/Skirt",
+    "dressSkirtContent": "For those wearing a dress or skirt, the garment should be of a finer fabric, such as silk or velvet, and reach down to or cover the knees. Dark tones are recommended to match the formal style.",
+    "suit": "Suit",
+    "suitContent": "The dress code formal consist of a jacket, trousers and possibly a vest in the same fabric and color. Black is an excellent choice.\n• Shirt: A light-colored shirt, preferably white.\n• Shoes and belt: Shoes should be black. If you wear a belt, it should also be black.\n• Accessories: A tie or bow tie is mandatory with the jacket.",
+    "smartCasual": "Smart casual",
+    "smartCasualContent": "The dress code smart casual mainly implies that the suit should not match with the bottom.\n• Style: Keep the outfit dressed up but not as formal as the dress code “Formal”. Choose nicer pieces than casual wear, such as a dressier trouser/skirt and a top of your choice, or a simpler dress. Avoid jeans.\n• Jacket: The jacket can be a blazer or a suit jacket, but it should not match the pants or skirt.\n• Bodice: Shirt or top can be in any color and style.\n• Pants or skirt: Should be in a different fabric and color than the jacket.\n• Accessories: Tie or bow tie is optional.",
+    "ovveThematically": "Ovve+Thematically",
+    "ovveContent": "A dress code you won't find outside the Technologist world! In the F-section it is very common to wear the technologist cap in the right color for Ovve.",
+    "ovveThematicallyContent": "Another dress code within the technologist world. This is commonly used at Slasque sittings and differs from Ovve by inviting to theme! Here you can go from anywhere between 0 to 10000% on a themed outfit.",
+    "technologistCap": "Technologist cap",
+    "whiteAndBlue": "White and blue",
+    "technologistCapContent": "The technologist's cap has in two options, the white summer cap and the blue winter cap. \n\nThe winter protection is worn from October 4th up to and including the “Cap fitting” on April 30th. An exception to this is that the winter model is never worn with “white tie/full dress”. Then the white summer model is worn instead, regardless of the time of year.",
+    "tassel": "The tassel",
+    "tasselIntro": "The tassel can hold a collection of things accumulated during your years as a technologist, but the most significant is the spegat. Which matches the years within a program you have studied or are studying.",
+    "tasselColors": "The spegat for Engineering Physics is orange, orange/silver for Engineering Mathematics and orange/green for Engineering Nanoscience.",
+    "medalsAndBadges": "Medals and badges",
+    "medalsAndBadgesIntro": "Medals are worn differently on a coat/suit and a dress. On a coat or suit, the medals can be placed under the breast pocket, preferably in neat rows. If you wear a dress, you usually attach your medals to the ribbon.",
+    "medalsAndBadgesEnd": "At balls or special events where medals are awarded, the medal in question may be worn on the lapel or on the left side of the dress. The ribbon is worn over the right shoulder, and for tailcoat wearers the ribbon should be worn UNDER the tailcoat vest.",
+    "kladguideModels": "Models: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson.\nPhotographer: Blendona Ibrahimi"
+
+
+
+
+
+
 }
