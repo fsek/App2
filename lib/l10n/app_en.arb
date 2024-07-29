@@ -375,8 +375,28 @@
     "spexInLund": "spex in Lund",
     "spexContent": "In Lund there are about ten different student spex, and each spex puts on performances between one and three times a year. Many of these spex are located in the AF-borgen, while smaller nation spex often use the nation's own premises.\n\nBeing involved in a spex means you can take part in many different activities, such as building sets, making costumes, applying make-up, playing instruments or singing. Only a small part of the spex ensemble is on stage, which means there is plenty to do even for those who don't want to be in the spotlight. Rehearsals usually last 3-5 weeks during the semester, and depending on the size of the spex, a number of performances are then put on for both Lund students and the public.\n\nThe four largest spexes in Lund, all of which hold their performances in the main hall of the AF-borgen, are Jesper, Toddy, Boel and Lundaspexarna. Jesper is the technologist spex and is mainly aimed at technologist students, Toddy is mainly for medical students, Boel has only women on stage, and Lundaspexarna has only men on stage.",
     "spexImageText": "Images from Jesperspexet's acclaimed show \"Marie Curie\", which was performed in spring 2024.",
-    "spexCredits": "Text: Johan Furuhjelm, Image: Per Lindström"
+    "spexCredits": "Text: Johan Furuhjelm, Image: Per Lindström",
 
+
+    "supportFunctions": "support functions",
+    "supportIntro": "Hello mentee!\n\nAs a new student at LTH it’s easy to get confused. Luckily there are plenty of people who have answers to all of your questions and are there for you if you want to talk. At the F-guild we are dedicated to create an inclusive and supportive environment for all students. We prioritise the psychosocial wellbeing of our members and have a zero-tolerance policy against any forms of discrimination or harassment. If you ever feel threatened, uneasy, or poorly treated, please remember that you have access to various resources within and outside our organisation.",
+    "supportImportantContacts": "Help and Important Contacts",
+    "supportImportantContactsContent": "Via the phone icon in the app, you can find a list of important emergency numbers, including medical care, police, fire brigade, the university emergency number, psychiatric emergency room, suicide hotline, and numbers to the Introduction committee.",
+    "supportEmergency": " In case of danger to life, violence or threat of violence, always call 112!",
+    "schoolCareerCousellor": "School career counsellor",
+    "schoolCareerCousellorContent": "If you have questions regarding your education this is who to talk to. You can find them on the fifth floor of the E-house or in Hilbert café at 9-11 on Thursdays!",
+    "careerCounsellorOne": "Engineering Physics\nJoakim Cao",
+    "counsellorOneNumber": "046 222 72 89",
+    "counsellorOneEmail": "joakim.cao@lth.lu.se",
+    "careerCounsellorTwo": "Engineering Nanoscience\nMaria Sörensson",
+    "counsellorTwoNumber": "046 222 08 54",
+    "counsellorTwoEmail": "maria.sorensson@lth.lu.se",
+    "careerCounsellorThree": "Engineering Mathematics\nKarin Cherfils-Karlsson",
+    "counsellorThreeNumber": "046 222 37 36",
+    "counsellorThreeEmail": "karin.cherfils-karlsson@lth.lu.se",
+    "internationalCoordinators": "International coordinators",
+    "internationalCoordinatorsContent": "Contacts for exchange/international students can be found on the Student Website LTH:",
+    "internationalCoordinatorsWebsite": "https://www.student.lth.se/english/contact/international-coordinators/"
 
 
 

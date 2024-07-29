@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class SektionScreenPage extends StatefulWidget {
+class GuildScreenPage extends StatefulWidget {
   @override
-  _SektionScreenState createState() => _SektionScreenState();
+  _GuildScreenState createState() => _GuildScreenState();
 }
 
 
 
-class _SektionScreenState extends State<SektionScreenPage> {
+class _GuildScreenState extends State<GuildScreenPage> {
 
   void initState(){
     super.initState();

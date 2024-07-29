@@ -378,7 +378,27 @@
     "spexInLund": "spex i Lund",
     "spexContent": "I Lund finns ungefär tio olika studentspex, och varje spex sätter upp föreställningar mellan en till tre gånger per år. Många av dessa spex håller till i AF-borgen, medan mindre nationsspex ofta använder nationens egna lokaler.\n\nAtt vara engagerad i ett spex innebär att du kan delta i många olika aktiviteter, såsom att bygga scenografi, sy kostymer, sminka, spela instrument eller sjunga. Endast en liten del av spex-ensemblen står på scenen, vilket innebär att det finns mycket att göra även för dig som inte vill vara i rampljuset. Repetitioner pågår vanligtvis i 3-5 veckor under terminen, och beroende på spexets storlek framförs sedan ett antal föreställningar för både Lunds studenter och allmänheten.\n\nDe fyra största spexen i Lund, som alla håller sina föreställningar i stora salen i AF-borgen, är Jesper, Toddy, Boel och Lundaspexarna. Jesper är teknologspexet och riktar sig främst till teknologstudenter, Toddy är motsvarande för läkarstudenter, Boel har enbart kvinnor på scen, och Lundaspexarna har enbart män på scen.",
     "spexImageText": "Bilder från Jesperspexets hyllade föreställning \"Marie Curie\", som spelades under våren 2024.",
-    "spexCredits": "Text: Johan Furuhjelm, Bild: Per Lindström"
+    "spexCredits": "Text: Johan Furuhjelm, Bild: Per Lindström",
+
+    "supportFunctions": "Stödfunktioner",
+    "supportIntro": "Hejsan nollan!\n\nSom ny student på LTH är det lätt att känna sig förvirrad eller bara frågvis. Som tur är finns det gott om folk som har stenkoll på precis det du behöver veta, eller som är där för dig om du behöver prata. På F-sektionen är vi dedikerade till att främja en inkluderande och stödjande miljö för alla studenter.\n\nVi prioriterar våra medlemmars psykosociala välbefinnande och har en nolltoleranspolicy mot alla former av diskriminering eller trakasserier. Om du någonsin känner dig hotad, illa till mods eller illa behandlad, kom ihåg att du har tillgång till olika resurser inom och utanför vår organisation.",
+    "supportImportantContacts": "Hjälp och viktiga kontakter",
+    "supportImportantContactsContent": "Via telefon-ikonen i appen hittar du en lista på viktiga nödnummer för akuta situationer; bland annat till sjukvård, polis, brandkår, universitetet, psykiatrisk akutmottagning, självmordslinjen, och nummer till Föset.",
+    "supportEmergency": "Vid livsfara, våld eller hot om våld, ring alltid 112!",
+    "schoolCareerCousellor": "Studie och karriärvägledning",
+    "schoolCareerCousellorContent": "Om du har frågor som gäller din utbildning kan du vända dig till din studievägledare. De sitter mitt i E-huset högst upp på våning 5. Du hittar dem även i Hilbert café varje torsdag kl 9-11 under läsveckorna. Ta tillfället i akt att säga hej eller ställa frågor!",
+    "careerCounsellorOne": "Teknisk Fysik\nJoakim Cao",
+    "counsellorOneNumber": "046 222 72 89",
+    "counsellorOneEmail": "joakim.cao@lth.lu.se",
+    "careerCounsellorTwo": "Teknisk Nanovetenskap\nMaria Sörensson",
+    "counsellorTwoNumber": "046 222 08 54",
+    "counsellorTwoEmail": "maria.sorensson@lth.lu.se",
+    "careerCounsellorThree": "Teknisk Matematik\nKarin Cherfils-Karlsson",
+    "counsellorThreeNumber": "046 222 37 36",
+    "counsellorThreeEmail": "karin.cherfils-karlsson@lth.lu.se",
+    "internationalCoordinators": "Internationell koordinator",
+    "internationalCoordinatorsContent": "Kontakter för internationella studenter kan hittas på Studentwebben LTH:",
+    "internationalCoordinatorsWebsite": "https://www.student.lth.se/english/contact/international-coordinators/"
 
 
 

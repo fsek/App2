@@ -137,7 +137,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SektionScreenPage()));},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => GuildScreenPage()));},
                                   child:
                                     Stack(
                                       children: [ 
