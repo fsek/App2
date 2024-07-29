@@ -17,7 +17,7 @@ class _SpexScreenState extends State<SpexPage> {
   Widget build(BuildContext context){
   
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
-    String backgroundWoodPath = "assets/img/nollning-24/organization_tree/orgscreen_wood_background.png";
+    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
     String i1 = "assets/img/nollning-24/nolleguide/spex/image1.jpg";
     String i2 = "assets/img/nollning-24/nolleguide/spex/image2.jpg";
 

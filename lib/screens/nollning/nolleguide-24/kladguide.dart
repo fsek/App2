@@ -16,7 +16,7 @@ class _KladguideScreenState extends State<KladguidePage> {
   Widget build(BuildContext context){
 
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
-    String backgroundWoodPath = "assets/img/nollning-24/organization_tree/orgscreen_wood_background.png";
+    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
     String i1 = "assets/img/nollning-24/nolleguide/kladguide/IMG_0105.jpg";
     String i2 = "assets/img/nollning-24/nolleguide/kladguide/IMG_0159.jpg";
     String i3 = "assets/img/nollning-24/nolleguide/kladguide/IMG_0165.jpg";

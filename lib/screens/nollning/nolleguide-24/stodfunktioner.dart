@@ -37,7 +37,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
   Widget build(BuildContext context){
 
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
-    String backgroundWoodPath = "assets/img/nollning-24/organization_tree/orgscreen_wood_background.png";
+    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
