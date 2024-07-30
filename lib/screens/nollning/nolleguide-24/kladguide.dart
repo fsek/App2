@@ -15,6 +15,8 @@ class _KladguideScreenState extends State<KladguidePage> {
   @override
   Widget build(BuildContext context){
 
+    var t =  AppLocalizations.of(context)!;
+
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
     String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
     String i1 = "assets/img/nollning-24/nolleguide/kladguide/IMG_0105.jpg";
@@ -32,7 +34,6 @@ class _KladguideScreenState extends State<KladguidePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    var t =  AppLocalizations.of(context)!;
 
     return Scaffold(
       extendBodyBehindAppBar: true,

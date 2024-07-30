@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/april_fools.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/nations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -104,7 +105,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (PeoplePage())));},
                                   child:
                                     Stack(
                                       children: [        
@@ -700,7 +701,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (NationScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
