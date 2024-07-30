@@ -1,0 +1,19 @@
+{
+"people": [
+      {
+        "image": "Cafe.jpg",
+        "name": {
+            "sv": "Karolina Krüger och Sixten Georgsson",
+            "en": "Karolina Krüger and Sixten Georgsson"
+        },
+        "position": {
+            "sv": "Cafémästare & Vice cafémästare",
+            "en": "Head of the Café & Deputy head of the Café"
+        },
+        "text": {
+            "sv": "Halloj! Vi heter Nina och Sixten, och det är vi som är cafémästarna i F-sektionens helt egna Hilbert Café. Hilbert ligger i Mattehusets hjärta och här är alla välkomna att plugga, köpa sig en kopp kaffe eller byta ett par timmars arbete mot hilbertmackor™ och gött häng. Här säljs bland annat frukost, lunchmackor, sallader, fika och det billigaste kaffet på hela campus! (Om du har egen kopp, ta med en och häng upp på krokarna i caféet!) Vem som helst kan jobba i Hilbert utan några förkunskaper, anmälan görs under fliken Hilbert Café i F-appen eller på hemsidan. Om du ser oss får du gärna komma fram och prata, eller bara ge oss en kram!",
+            "en": "Hello there! We are Nina and Sixten, and we are the Café masters at the F-guild’s own Hilbert Café. Hilbert is at the heart of the math building and here everyone is welcome to buy a cup of coffee or trade a few hours of work for Hilbert sandwiches™ and good good vibes. Here we sell among other things, breakfast, lunch sandwiches, lunch salads, fika (pastries) and the cheapest coffee at the entire LTH campus (If you have your own mug, bring one and hang it on one of the hooks in the café!). Anyone can work in Hilbert Café without any previous experience and you don’t need to speak Swedish to work here, applications can be made under the Hilbert Café tab in the F-app or on the website. If you see us feel free to come and talk or ask questions or just give us a hug."
+        }
+    }
+  ]
+}

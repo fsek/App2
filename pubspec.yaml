@@ -107,8 +107,10 @@ flutter:
     - assets/img/nollning-24/nolleguide/kladguide/
     - assets/img/nollning-24/nolleguide/spex/
     - assets/img/nollning-24/nolleguide/organization_tree/
+    - assets/img/nollning-24/nolleguide/people/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/uppdrag/
+    - assets/data/nolleguide_2024/
 
 
   fonts:

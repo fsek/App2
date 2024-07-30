@@ -12,9 +12,6 @@ class NationScreenPage extends StatefulWidget {
 
 class _NationScreenState extends State<NationScreenPage> {
 
-  
-
-
   void initState(){
     super.initState();
   }

@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/april_fools.dart';
+import 'package:fsek_mobile/screens/cafe/cafe.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/accountingDepartment.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/cafe.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/conscience.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/corporateRelations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/educationalCouncil.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/facilitiesCommittee.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/festivitiesCommittee.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/foset.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/freja.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/management.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/ministryOfCulture.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/ministryOfTruth.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/nations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/procession.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/teknologkaren.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
@@ -105,7 +120,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (PeoplePage())));},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (TeknologkarenScreenPage())));},
                                   child:
                                     Stack(
                                       children: [        
@@ -198,7 +213,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ManagementScreenPage())));},
                                   child:
                                     Stack(
                                       children: [        
@@ -232,7 +247,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FosetScreenPage())));},
                                   child: 
                                     Stack(
                                       children: [        
@@ -273,7 +288,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfCultureScreenPage())));},
                                   child: 
                                     Stack(
                                       children: [        
@@ -307,7 +322,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FestivitiesCommitteeScreenPage())));},
                                   child: 
                                     Stack(
                                       children: [        
@@ -347,7 +362,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (EducationalCouncilScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -381,7 +396,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (AccountingDepartmentScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -423,7 +438,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (CafeScreenPage())));},
                                   child: 
                                     Stack(
                                       children: [        
@@ -457,7 +472,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (CorporateRelationsScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -497,7 +512,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FacilitiesCommitteeScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -530,7 +545,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ConscienceScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -570,7 +585,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfTruthScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -605,7 +620,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ProcessionScreenPage())));},
                                   child:  
                                     Stack(
                                       children: [        
@@ -681,7 +696,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FrejaScreenPage())));},
                                   child:           
                                     Image.asset(
                                       frejaButtonPath,
