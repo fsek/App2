@@ -20,24 +20,18 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t =  AppLocalizations.of(context)!;
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_paper.png";
     String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
     String tlthButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_tlth.png";
     String orgTextButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_textbutton.png";
     String frejaButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_freja.png";
     String orgFortPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fortdesign.png";
+
+    String fsekButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fsek_${t.localeName}.png";
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    var t =  AppLocalizations.of(context)!;
-
-
-
-    String fsekButtonPath = "";
-    if (t.localeName == "en"){
-      fsekButtonPath ="assets/img/nollning-24/nolleguide/organization_tree/orgscreen_titlebox_english.png";
-    } else {
-      fsekButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fsek.png";
-    }
+    
 
 return Scaffold(
   appBar: AppBar(
