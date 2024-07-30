@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
+import 'package:fsek_mobile/widgets/easterEgg/familyGuyFoset.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FsekAppBarItem {
@@ -42,6 +43,7 @@ class FsekAppBarState extends State<FsekAppBar> {
   List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
   bool bababoeActive = false;
+  bool fosetActive = false;
 
   void _processEasterEggClick(int? index) async {
     // takes index of which nav bar item was clicked
@@ -80,6 +82,17 @@ class FsekAppBarState extends State<FsekAppBar> {
         AudioPlayer().play(AssetSource('audio/wow.mp3'));
         break;
 
+      case "foset":
+      setState(() {
+          fosetActive = true;
+          Future.delayed(const Duration(seconds: 21), () {
+            setState(() {
+              fosetActive = false;
+            });
+          });
+        });
+        break;
+
       default:
         break;
     }
@@ -106,6 +119,7 @@ class FsekAppBarState extends State<FsekAppBar> {
           clipBehavior: Clip.none,
           children: [
             Visibility(child: AnimatedNils(), visible: bababoeActive),
+            Visibility(child: familyGuyFoset(), visible: fosetActive),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
