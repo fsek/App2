@@ -372,14 +372,14 @@ return Scaffold(
                                         Container(
                                           margin: EdgeInsets.only(top: 6),
                                           child: Center(
-                                            child: Expanded(child:
+                                            child: 
                                               Text(
                                               t.educationalCouncil,
                                               style: TextStyle(
                                                 fontFamily: "Testament",
                                                 //fontSize: screenWidth/24,
                                                 color: Color(0xFFE9CA97),                                     
-                                    ))))),
+                                    )))),
                       ]))))),
                         Expanded(
                           child:
@@ -644,10 +644,7 @@ return Scaffold(
                     ])),
                   SizedBox(
                     width: screenWidth,
-                    child:
-                        Expanded(
-                          child:
-                            Container(    
+                    child: Container(    
                               margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -676,7 +673,7 @@ return Scaffold(
                                                   fontSize: screenWidth/22,
                                                   color: Color(0xFFE9CA97),                 
                                     )))),
-                      ])))),
+                      ]))),
                     ),
                   SizedBox(
                     width: screenWidth,
@@ -741,10 +738,7 @@ return Scaffold(
                     )),
                   SizedBox(
                     width: screenWidth,
-                    child:
-                        Expanded(
-                          child:
-                            Container(    
+                    child: Container(    
                               margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
                               child: 
                               Center(   
@@ -776,7 +770,7 @@ return Scaffold(
                                                     fontSize: screenWidth/22,
                                                     color: Color(0xFFE9CA97),                            
                                     )))),
-                      ])))))),
+                      ]))))),
       ])) 
     )]
     )

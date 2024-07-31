@@ -2,7 +2,7 @@
 {
       "people": [
         {
-          "image": "Överfös.jpg",
+          "image": "overfos.jpg",
           "name": {
               "sv": "Överfös Mattis",
               "en": "Head of the Introduction Committee Mattis"
@@ -17,7 +17,7 @@
           }
       },
       {
-      "image": "Cofös thea.jpg",
+      "image": "cofosThea.jpg",
       "name": {
               "sv": "Cofös Thea",
               "en": "Introduction Committee Commissioner Thea"
@@ -32,7 +32,7 @@
           }
       },
       {
-          "image": "Cofös lovisa.jpg",
+          "image": "cofosLovisa.jpg",
           "name": {
                   "sv": "Cofös Lovisa",
                   "en": "Introduction Committee Commissioner Lovisa"
@@ -47,7 +47,7 @@
               }
           },
           {
-              "image": "Cofös hanne.jpg",
+              "image": "cofosHanne.jpg",
               "name": {
                       "sv": "Cofös Hanne",
                       "en": "Introduction Committee Commissioner Hanne"
@@ -62,7 +62,7 @@
                   }
               },
               {
-                  "image": "Cofös albin.jpg",
+                  "image": "cofosAlbin.jpg",
                   "name": {
                           "sv": "Cofös Albin",
                           "en": "Introduction Committee Commissioner Albin"
@@ -77,7 +77,7 @@
                       }
                   },
                   {
-                      "image": "Cofös Linnea.jpg",
+                      "image": "cofosLinnea.jpg",
                       "name": {
                               "sv": "Cofös Linnea",
                               "en": "Introduction Committee Commissioner Linnea"
@@ -92,7 +92,7 @@
                           }
                       },
                       {
-                          "image": "Cofös Lian.jpg",
+                          "image": "cofosLian.jpg",
                           "name": {
                                   "sv": "Cofös Lian",
                                   "en": "Introduction Committee Commissioner Linnea"
@@ -110,7 +110,7 @@
                           
 
                           {
-                              "image": "Mentors.jpg",
+                              "image": "mentors.jpg",
                               "name": {
                                       "sv": "Faddrar",
                                       "en": "Mentors"
@@ -125,7 +125,7 @@
                                   }
                               },    
                               {
-                                  "image": "Extrafös.jpg",
+                                  "image": "extrafos.jpg",
                                   "name": {
                                           "sv": "Extrafös",
                                           "en": "Extrafös"
@@ -140,7 +140,7 @@
                                       }
                                   },    
                                   {
-                                      "image": "Peppare.jpg",
+                                      "image": "peppare.jpg",
                                       "name": {
                                               "sv": "Peppare",
                                               "en": "Peppare"

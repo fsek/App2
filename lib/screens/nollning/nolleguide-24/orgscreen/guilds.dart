@@ -35,12 +35,14 @@ class _GuildScreenState extends State<GuildScreenPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(
-        child: SingleChildScrollView(
+        child: Container(
+          height: screenHeight,
+          width: screenWidth,
           child:
             Stack(
               children: [
-                Image.asset(backgroundWoodPath),
-                Image.asset(backgroundPaperPath),
+                Positioned.fill(child: Image.asset(backgroundWoodPath, fit: BoxFit.fill)),
+                Positioned.fill(child: Image.asset(backgroundPaperPath, fit: BoxFit.fill,)),
                 Container(
                   margin: EdgeInsets.only(top: 100, left: 50, right: 50),
                   child:
@@ -64,7 +66,7 @@ class _GuildScreenState extends State<GuildScreenPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.italic,
-                        fontSize: screenWidth/24,
+                        fontSize: screenWidth/26,
                         ),
                     ),
                   ],

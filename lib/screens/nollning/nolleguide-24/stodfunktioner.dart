@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
+// TODO fix refactor, dont do this... mvh Samuel
+
 class StodFunktionerScreenPage extends StatefulWidget {
   @override
   _StodFunktionerScreenState createState() => _StodFunktionerScreenState();
@@ -193,14 +196,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.careerCounsellorOneEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               )
                           ],
                       ))
@@ -270,14 +273,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.careerCounsellorTwoEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 20),
                             Text(
@@ -334,14 +337,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.careerCounsellorThreeEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 60),
                             Text(
@@ -372,14 +375,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.internationalCoordinatorsWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 60),
                             Text(
@@ -428,14 +431,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                                  child: Expanded(child: Text(
+                                  child: Text(
                                     t.counsellorOneNumber,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black,
                                       fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -452,14 +455,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.counsellorOneEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 60),
                             Text(
@@ -501,14 +504,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                  child: Expanded(child: Text(
+                                  child: Text(
                                     t.studentHealthCenterNumber,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black,
                                       fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -525,14 +528,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.studentHealthCenterAdress,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ElevatedButton(
                               onPressed: () {launchUrl(Uri.parse(t.studentHealthCenterWebsite));}, 
@@ -547,14 +550,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.studentHealthCenterWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ), 
                       ],
                     ))
@@ -608,14 +611,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.presidentOfStudentEqualityComitteeEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/28
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -641,14 +644,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.masterOfConscienceEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/28
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -674,14 +677,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.libuEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/28
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -706,14 +709,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.guildAnonContactPage,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/28
                                 )
-                              ))
+                              )
                               ),
                           ]
                       )
@@ -758,14 +761,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.complainPage,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/28
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 20),
                             Text(
@@ -799,14 +802,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.supportThereIsHelpNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -823,14 +826,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.supportThereIsHelpEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 50),
                             Text(
@@ -882,14 +885,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.umoNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -933,14 +936,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.psychotherapyClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -957,14 +960,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.psychotherapyClinicEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),     
                           ]
                         )
@@ -1036,14 +1039,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.youngAdultsInLundNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1087,14 +1090,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.studentPriestsNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1111,14 +1114,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.studentPriestsEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               SizedBox(height: 60),
                             Text(
@@ -1150,14 +1153,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.girlAndTransgenderHotlineLundWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                           ],
                         )
@@ -1213,14 +1216,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.kvinnojourenLundNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1237,14 +1240,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.kvinnojourenLundEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ElevatedButton(
                                 onPressed: () {(launchUrl(Uri.parse(t.kvinnojourenlundWebsite)));}, 
@@ -1259,14 +1262,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.kvinnojourenlundWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 30),
                             Text(
@@ -1308,14 +1311,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.mansjourenNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1332,14 +1335,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.mansjourenWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 30),
                             Text(
@@ -1381,14 +1384,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.adultPsychEmergencyClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1432,14 +1435,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.mindSuicidehotliteNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1483,14 +1486,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.onCallPersonNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1564,14 +1567,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.mariaClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1588,14 +1591,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.skaneVardWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 100),
                             Text(
@@ -1637,14 +1640,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.triangleAddictionClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ],
                             ),
@@ -1661,14 +1664,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.skaneVardWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 100),
                             Text(
@@ -1710,14 +1713,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 " 114 14 ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               Text(
                                   t.forUrgentHelp,
@@ -1790,14 +1793,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.overfosEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                               ElevatedButton(
                                 onPressed: () {(_launchMail(t.fosetEmail));}, 
@@ -1812,14 +1815,14 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                     ),
-                                child: Expanded(child: Text(
+                                child: Text(
                                 t.fosetEmail,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
-                              ))
+                              )
                               ),
                             SizedBox(height: 20),
                             Text(

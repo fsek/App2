@@ -22,11 +22,10 @@ class _familyGuyFosetState extends State<familyGuyFoset>
     super.initState();
 
   
-  AudioPlayer().play(AssetSource('audio/brianRickRoll.mp3'));
-  //AudioPlayer().play(AssetSource('audio/glock.mp3'));
+  AudioPlayer().play(AssetSource('audio/brianRickRollLouder.mp3'));
 
   _controller = AnimationController(
-    duration: new Duration(seconds: 1),
+    duration: new Duration(seconds: 2),
     vsync: this,
   )..repeat(reverse: false);
 
@@ -44,8 +43,8 @@ class _familyGuyFosetState extends State<familyGuyFoset>
     return AnimatedBuilder(
         builder: (_, __) {
           return Positioned(
-              left: 30 + 30 * cos(_controller!.value * 2 * pi),
-              top: -500 + 60 * sin(_controller!.value * 2 * pi),
+              left: 30 + 60 * cos(_controller!.value * 2 * pi),
+              top: -500 + 150 * sin(_controller!.value * 4 * pi),
               child: Column(children: [
                 Image(
                   image: AssetImage("assets/img/memes/fos24.jpg"),

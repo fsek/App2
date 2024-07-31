@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,12 +36,14 @@ class _NationScreenState extends State<NationScreenPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(
-        child: SingleChildScrollView(
+        child: Container(
+          height: screenHeight,
+          width: screenWidth,
           child:
             Stack(
               children: [
-                Image.asset(backgroundWoodPath),
-                Image.asset(backgroundPaperPath),
+                Positioned.fill(child: Image.asset(backgroundWoodPath, fit: BoxFit.fill)),
+                Positioned.fill(child: Image.asset(backgroundPaperPath, fit: BoxFit.fill,)),
                 Container(
                   margin: EdgeInsets.only(top: 100, left: 50, right: 50),
                   child:
@@ -81,7 +84,7 @@ class _NationScreenState extends State<NationScreenPage> {
                                     minimumSize: Size(0,0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap
                                     ),
-                              child: Expanded(child: Text(
+                              child: Text(
                                 t.nationsWebsite,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -89,7 +92,6 @@ class _NationScreenState extends State<NationScreenPage> {
                                   fontSize: screenWidth/22
                                 )
                               )
-                            )
                         )
                   ],
                 )

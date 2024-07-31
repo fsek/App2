@@ -59,22 +59,49 @@ class _WordListState extends State<WordListPage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
+    String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
+    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(t.nolleguideWordlist),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        scrolledUnderElevation: 0.0,
       ),
-      body: Container(
-        margin: EdgeInsets.all(20),
-        child: ListView(
-          children: [
-            Column(
+      body: InteractiveViewer(
+        child: 
+        SingleChildScrollView(
+          child: 
+            Stack(
               children: [
-                ...wordlist.map(
-                  (Word w) => _createWordCard(w),
-                ),
-              ],
-            ),
-          ],
+                Positioned.fill(child: Image.asset(backgroundWoodPath, fit: BoxFit.fill)),
+                Positioned.fill(child: Image.asset(backgroundPaperPath, fit: BoxFit.fill,)),
+                Container(
+                  margin: EdgeInsets.only(top: 100, left: 30, right: 30, bottom: 100),
+                  child: Column(
+                    children: [
+                      Text(
+                        t.nolleguideWordlist,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Testament",
+                            fontSize: screenWidth/11,
+                            color: Color(0xFF540909)
+                        )
+                      ),
+                      ...wordlist.map(
+                      (Word w) => _createWordCard(w),
+                    ),
+                  ]
+                  )
+              ),
+              ]
+              ),
         ),
       ),
     );

@@ -82,10 +82,10 @@ class FsekAppBarState extends State<FsekAppBar> {
         AudioPlayer().play(AssetSource('audio/wow.mp3'));
         break;
 
-      case "foset":
+      case "föset":
       setState(() {
           fosetActive = true;
-          Future.delayed(const Duration(seconds: 13), () {
+          Future.delayed(const Duration(seconds: 14), () {
             setState(() {
               fosetActive = false;
             });
