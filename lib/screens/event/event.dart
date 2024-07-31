@@ -767,7 +767,7 @@ class _EventPageState extends State<EventPage> {
         // Introduction events have a different background
         decoration: event?.is_introduction == true ? BoxDecoration(
           image: DecorationImage(
-          image: AssetImage("assets/img/TLTH logo 1.png"),
+          image: AssetImage("assets/img/nollning-24/schedule/event_background.png"),
           fit: BoxFit.fill,
           ),
         ) : null,
@@ -782,11 +782,13 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color:
-                        (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                    color: (event?.is_introduction == true ? Color(0xFF630B0B) :
+                        (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Row(
                   children: [
                     Icon(
@@ -823,7 +825,9 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ],
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Container(
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
@@ -835,7 +839,9 @@ class _EventPageState extends State<EventPage> {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -854,7 +860,9 @@ class _EventPageState extends State<EventPage> {
                     ],
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -906,7 +914,7 @@ class _EventPageState extends State<EventPage> {
                 ),
                 Visibility(
                   visible: event!.can_signup ?? false,
-                  child: const Divider(),
+                  child: Divider(color: (event?.is_introduction == true ? Color(0xFF565656) : null)),
                 ),
                 Visibility(
                   visible: (!(event!.contact == null)),
@@ -929,7 +937,9 @@ class _EventPageState extends State<EventPage> {
                                 (event!.contact?.id ?? 0).toString(),
                           )),
                         ),
-                        const Divider(),
+                        Divider(
+                          color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                        ),
                       ],
                     ),
                   ),

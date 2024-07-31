@@ -100,6 +100,7 @@ flutter:
     - assets/img/nollning-23/schema/
     - assets/img/nollning-23/hemsidan/
     - assets/data/guide/
+    - assets/img/nollning-24/schedule/
 
   fonts:
     - family: Brandon Grotesque
