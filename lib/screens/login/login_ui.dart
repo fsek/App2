@@ -50,8 +50,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
     super.initState();
 
     // workaround for this bug: https://github.com/flutter/flutter/issues/21385
-    _emailLabelColor =
-        locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
+    _emailLabelColor = locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
     _emailFocusNode.addListener(() {
       setState(() {
         _emailLabelColor = _emailFocusNode.hasFocus
@@ -59,8 +58,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
             : Theme.of(context).inputDecorationTheme.hintStyle!.color;
       });
     });
-    _passLabelColor =
-        locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
+    _passLabelColor = locator<ThemeService>().theme.inputDecorationTheme.hintStyle!.color;
     _passFocusNode.addListener(() {
       setState(() {
         _passLabelColor = _passFocusNode.hasFocus
@@ -69,21 +67,18 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       });
     });
 
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
     loginBtnAnimation = new Tween<double>(
       begin: 1,
       end: 0,
-    ).animate(new CurvedAnimation(
-        parent: _animationController,
-        curve: new Interval(0.0, 0.5, curve: Curves.bounceInOut)));
+    ).animate(
+        new CurvedAnimation(parent: _animationController, curve: new Interval(0.0, 0.5, curve: Curves.bounceInOut)));
     loadingAnimation = new Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(new CurvedAnimation(
-        parent: _animationController,
-        curve: new Interval(0.5, 1, curve: Curves.bounceInOut)));
+    ).animate(
+        new CurvedAnimation(parent: _animationController, curve: new Interval(0.5, 1, curve: Curves.bounceInOut)));
 
     // Set Portrait mode only
     SystemChrome.setPreferredOrientations([
@@ -164,10 +159,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         onPressed: () => onForgottenPassword(),
         child: Text(
           "Forgot my password",
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .apply(color: Colors.grey[300]),
+          style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.grey[300]),
         ));
 
     final form = Form(
@@ -191,16 +183,15 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         final _loginButton = ScaleTransition(
             scale: loginBtnAnimation as Animation<double>,
             child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange[700]),
                 key: Key("login_btn"),
-                onPressed:
-                    state is! LoginLoading ? _onLoginButtonPressed : null,
+                onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
                 child: Text(
                   "Log in",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 )));
-        final _loadingIcon = ScaleTransition(
-            scale: loadingAnimation as Animation<double>,
-            child: CircularProgressIndicator());
+        final _loadingIcon =
+            ScaleTransition(scale: loadingAnimation as Animation<double>, child: CircularProgressIndicator());
 
         return Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -216,17 +207,10 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: locator<ThemeService>().loginIcon),
+                          Row(mainAxisAlignment: MainAxisAlignment.center, children: locator<ThemeService>().loginIcon),
                           form,
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [_forgotPasswordButton]),
-                          Stack(children: [
-                            Center(child: _loginButton),
-                            Center(child: _loadingIcon)
-                          ])
+                          Row(mainAxisAlignment: MainAxisAlignment.end, children: [_forgotPasswordButton]),
+                          Stack(children: [Center(child: _loginButton), Center(child: _loadingIcon)])
                         ]))));
       },
       listener: (context, state) {

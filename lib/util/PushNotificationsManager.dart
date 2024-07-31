@@ -40,17 +40,14 @@ class PushNotificationsManager {
       const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'high_importance_channel', // id
         'High Importance Notifications', // title
-        description:
-            'This channel is used for important notifications.', // description
+        description: 'This channel is used for important notifications.', // description
         importance: Importance.max,
       );
 
-      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-          FlutterLocalNotificationsPlugin();
+      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
       await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel);
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {

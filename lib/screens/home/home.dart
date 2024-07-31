@@ -12,10 +12,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/nollning/map_page_photo_view.dart';
+import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
+import 'package:fsek_mobile/screens/nollning/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
+import 'package:turn_page_transition/turn_page_transition.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -49,27 +60,33 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    double circleSize = MediaQuery.of(context).size.height / 7;
+
     double edgePadding = MediaQuery.of(context).size.width / 25;
     String defaultBackground = "assets/img/default_background.png";
 
+    String locale = Localizations.localeOf(context).toString();
+
+    // if it for some reason is something different dont break everything
+    if (locale != "sv" && locale != "en") {
+      locale = "sv";
+    }
+
+    int week = WeekTracker.determineWeek();
+    String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
+    String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
+    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week-$locale.png";
+    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week-$locale.png";
+
     return Stack(children: [
-      // If we couldnt get a background image for whatever reason make it the default
-      backgroundUrl != null
-          ? CachedNetworkImage(
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Color(0xFFFB8C00))),
-              imageUrl: backgroundUrl!,
-            )
-          : Image.asset(
-              defaultBackground,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-            ),
+      Image.asset(
+        backgroundPath,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+      ),
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
