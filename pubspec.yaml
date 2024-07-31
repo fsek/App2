@@ -77,6 +77,7 @@ dependencies:
   url_launcher_web: any
   # flutter_web_plugins: any
   html: any
+  photo_view: ^0.15.0
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object
@@ -116,6 +117,9 @@ flutter:
     - family: Brandon Grotesque
       fonts:
         - asset: assets/BrandonGrotesque-Regular.ttf
+    - family: Testament
+      fonts:
+        - asset: assets/Testament-Medium.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

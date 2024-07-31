@@ -11,7 +11,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
-import 'package:fsek_mobile/screens/nollning/map_page.dart';
+import 'package:fsek_mobile/screens/nollning/map_page_photo_view.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // button(t.songbookSongbook, SongbookPage()),
-          button("Map test", MapPage()),
+          button("Map test", MapView()),
           button(t.otherGallery, GalleryPage()),
         ],
       ),
