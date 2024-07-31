@@ -85,7 +85,7 @@ class FsekAppBarState extends State<FsekAppBar> {
       case "foset":
       setState(() {
           fosetActive = true;
-          Future.delayed(const Duration(seconds: 21), () {
+          Future.delayed(const Duration(seconds: 13), () {
             setState(() {
               fosetActive = false;
             });

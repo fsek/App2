@@ -13,8 +13,7 @@ class _familyGuyFosetState extends State<familyGuyFoset>
     with SingleTickerProviderStateMixin {
   double xPos = 0;
   double yPos = 0;
-  late AnimationController _controller;
-  late Animation<double> _animation;
+  AnimationController? _controller;
   
 
 
@@ -22,6 +21,7 @@ class _familyGuyFosetState extends State<familyGuyFoset>
   void initState() {
     super.initState();
 
+  
   AudioPlayer().play(AssetSource('audio/brianRickRoll.mp3'));
   //AudioPlayer().play(AssetSource('audio/glock.mp3'));
 
@@ -30,15 +30,39 @@ class _familyGuyFosetState extends State<familyGuyFoset>
     vsync: this,
   )..repeat(reverse: false);
 
-
-  _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
-
-  _controller.forward();
   }
 
+  @override
+  void dispose() {
+    if (_controller != null) _controller!.dispose();
+    super.dispose();
+  }
+
+
+@override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+        builder: (_, __) {
+          return Positioned(
+              left: 30 + 30 * cos(_controller!.value * 2 * pi),
+              top: -500 + 60 * sin(_controller!.value * 2 * pi),
+              child: Column(children: [
+                Image(
+                  image: AssetImage("assets/img/memes/fos24.jpg"),
+                  width: 350,
+                ),
+              ]));
+        },
+        animation: _controller!);
+  }
+}
+
+
+
+
+
+
+/*
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -66,29 +90,9 @@ class _familyGuyFosetState extends State<familyGuyFoset>
     );
   }
 }
+      */
       
       
-      
-      
-      
-      /*
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return Opacity(
-              opacity: 1.0 - _animation.value,
-              child: Transform.scale(
-                scale: _animation.value,
-                child: child,
-              ),
-            );
-          },
-          child: Image.asset("assets/img/memes/fos24.jpg"),
-        ),
-      ),
-    );
-  }
-}*/
+  
 
     
