@@ -177,7 +177,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: screenWidth/29,
-                                      color: Colors.black
+                                      color: Color(0xFF5269D1),
                                 )
                               )
                               ),            
@@ -254,7 +254,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: screenWidth/29,
-                                      color: Colors.black
+                                      color: Color(0xFF5269D1),
                                 )
                               )
                               ),
@@ -318,7 +318,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: screenWidth/29,
-                                      color: Colors.black
+                                      color: Color(0xFF5269D1),
                                 )
                               )
                               ),
@@ -435,7 +435,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     t.counsellorOneNumber,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                      color: Color(0xFF5269D1),
                                       fontSize: screenWidth/29
                                 )
                               )
@@ -508,7 +508,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                     t.studentHealthCenterNumber,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                      color: Color(0xFF5269D1),
                                       fontSize: screenWidth/29
                                 )
                               )
@@ -532,7 +532,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.studentHealthCenterAdress,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -806,7 +806,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.supportThereIsHelpNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -889,7 +889,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.umoNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -940,7 +940,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.psychotherapyClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1043,7 +1043,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.youngAdultsInLundNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1094,7 +1094,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.studentPriestsNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1220,7 +1220,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.kvinnojourenLundNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1315,7 +1315,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.mansjourenNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1388,7 +1388,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.adultPsychEmergencyClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1439,7 +1439,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.mindSuicidehotliteNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1490,7 +1490,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.onCallPersonNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1571,7 +1571,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.mariaClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1644,7 +1644,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 t.triangleAddictionClinicNumber,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
@@ -1717,7 +1717,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 " 114 14 ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Color(0xFF5269D1),
                                   fontSize: screenWidth/29
                                 )
                               )
