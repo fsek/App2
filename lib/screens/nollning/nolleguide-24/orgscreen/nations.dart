@@ -37,15 +37,13 @@ class _NationScreenState extends State<NationScreenPage> {
       ),
       body: InteractiveViewer(
         child: Container(
-          height: screenHeight,
-          width: screenWidth,
           child:
             Stack(
               children: [
                 Positioned.fill(child: Image.asset(backgroundWoodPath, fit: BoxFit.fill)),
                 Positioned.fill(child: Image.asset(backgroundPaperPath, fit: BoxFit.fill,)),
                 Container(
-                  margin: EdgeInsets.only(top: 100, left: 50, right: 50),
+                  margin: EdgeInsets.only(top: 70, left: 50, right: 50),
                   child:
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,13 +59,13 @@ class _NationScreenState extends State<NationScreenPage> {
                         )
                       )
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 10),
                     Text(
                       t.nationsInfo,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.italic,
-                        fontSize: screenWidth/22,
+                        fontSize: screenWidth/25,
                         ),
                     ),
                     SizedBox(height: 10),
@@ -89,7 +87,7 @@ class _NationScreenState extends State<NationScreenPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF5269D1),
-                                  fontSize: screenWidth/22
+                                  fontSize: screenWidth/25
                                 )
                               )
                         )

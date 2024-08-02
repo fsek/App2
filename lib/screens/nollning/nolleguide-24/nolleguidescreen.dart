@@ -3,7 +3,9 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/kladguide.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/stodfunktioner.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/wordlist.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
-import 'package:fsek_mobile/screens/nollning/schedule_24.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
+import 'package:fsek_mobile/screens/nollning/schedule.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 
@@ -22,12 +24,16 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
 
   @override
   Widget build(BuildContext context) {
+    var t =  AppLocalizations.of(context)!;
+
     String backgroundNolleGuidePath = "assets/img/nollning-24/nolleguide/nolleguidescreen_background.png";
-    String stodfunktionerPath = "assets/img/nollning-24/nolleguide/nolleguidescreen_stodfunktioner.png";
-    String ordlistaPath = "assets/img/nollning-24/nolleguide/nolleguidescreen_ordlista.png";
-    String studentvettPath = "assets/img/nollning-24/nolleguide/nolleguidescreen_studentvett.png";
+    String supportfunctionsPath = "assets/img/nollning-24/nolleguide/supportfunctions_${t.localeName}.png";
+    String wordlistPath = "assets/img/nollning-24/nolleguide/wordlist_${t.localeName}.png";
+    String studentvettPath = "assets/img/nollning-24/nolleguide/studentvett_${t.localeName}.png";
     String organisationPath = "assets/img/nollning-24/nolleguide/nolleguidescreen_organisation.png";
-    String kladguidePath = "assets/img/nollning-24/nolleguide/nolleguidescreen_kladguide.png";
+    String dresscodePath = "assets/img/nollning-24/nolleguide/dresscodes_${t.localeName}.png";
+
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -61,7 +67,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                       ),
                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (StodFunktionerScreenPage())));}, 
                       child: Image.asset(
-                        stodfunktionerPath,
+                        supportfunctionsPath,
                         fit: BoxFit.cover
                       ))
                   ),
@@ -78,7 +84,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                       ),
                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (WordListPage())));}, 
                       child: Image.asset(
-                        ordlistaPath,
+                        wordlistPath,
                         fit: BoxFit.cover
                       ))
                   ),
@@ -93,7 +99,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      onPressed: () {}, 
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (StudentvettScreenPage())));}, 
                       child: Image.asset(
                         studentvettPath,
                         fit: BoxFit.cover
@@ -129,7 +135,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                       ),
                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => KladguidePage()));}, 
                       child: Image.asset(
-                        kladguidePath,
+                        dresscodePath,
                         fit: BoxFit.cover
                       ))
                   ),

@@ -16,8 +16,8 @@
             }
         },
         {
+            "image": "the_board.jpg",
             "name": {
-                "image": "The Board.jpg",
                 "sv": "",
                 "en": "The Board"
             },
@@ -31,8 +31,8 @@
             }
         },
         {
+            "image": "the_council_of_executives.jpg",
             "name": {
-                "image": "The Council of Executives.jpg",
                 "sv": "",
                 "en": "The Council of Executives"
             },
