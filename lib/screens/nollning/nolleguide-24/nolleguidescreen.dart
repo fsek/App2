@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/kladguide.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/stodfunktioner.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/wordlist.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
 import 'package:fsek_mobile/screens/nollning/schedule.dart';

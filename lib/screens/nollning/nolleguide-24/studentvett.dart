@@ -42,8 +42,8 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
   Widget build(BuildContext context){
     var t = AppLocalizations.of(context)!;
 
-    String backgroundPaperPath = "assets/img/nollning-24/nolleguide/nolleguide_paper.png";
-    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
+    String superBackgroundPaperPath = "assets/img/nollning-24/nolleguide/superlong_paper_background.png";
+    String superBackgroundWoodPath = "assets/img/nollning-24/nolleguide/superlong_wood_background.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -61,10 +61,10 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
         child:
             Stack(
               children: [
-                Positioned.fill(child: Image.asset(backgroundWoodPath, fit: BoxFit.fill)),
-                Positioned.fill(child: Image.asset(backgroundPaperPath, fit: BoxFit.fill,)),
+                Positioned.fill(child: Image.asset(superBackgroundWoodPath, fit: BoxFit.fill)),
+                Positioned.fill(child: Image.asset(superBackgroundPaperPath, fit: BoxFit.fill,)),
                 Container(
-                  margin: EdgeInsets.only(top: 100, left: 50, right: 50),
+                  margin: EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 60),
                   child:
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         //fontStyle: FontStyle.italic,
-                        fontSize: screenWidth/32,
+                        fontSize: screenWidth/29,
                         ),
                     ),
                     SizedBox(height: 50),
@@ -108,10 +108,9 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         //fontStyle: FontStyle.italic,
-                        fontSize: screenWidth/32,
+                        fontSize: screenWidth/29,
                         ),
                     ),
-                    SizedBox(height: 180),
                   ],
                 )
                 )

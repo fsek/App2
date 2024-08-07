@@ -38,18 +38,32 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
   Widget build(BuildContext context) {
     var t =  AppLocalizations.of(context)!;
     
-    
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_paper.png";
     String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
-    
-    
-    
+
     String tlthButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_tlth.png";
-    String orgTextButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_textbutton.png";
     String frejaButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_freja.png";
     String orgFortPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fortdesign.png";
 
     String fsekButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fsek_${t.localeName}.png";
+    String introductionCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/introduction_${t.localeName}.png";
+    String cafePath = "assets/img/nollning-24/nolleguide/organization_tree/cafe_${t.localeName}.png";
+    String spexPath = "assets/img/nollning-24/nolleguide/organization_tree/spex.png";
+    String accountingDepartmentPath = "assets/img/nollning-24/nolleguide/organization_tree/accounting_${t.localeName}.png";
+    String ministryOfTruthPath = "assets/img/nollning-24/nolleguide/organization_tree/truth_${t.localeName}.png";
+    String consciencePath = "assets/img/nollning-24/nolleguide/organization_tree/conscience_${t.localeName}.png";
+    String guildsPath = "assets/img/nollning-24/nolleguide/organization_tree/guilds_${t.localeName}.png";
+    String managementPath = "assets/img/nollning-24/nolleguide/organization_tree/management_${t.localeName}.png";
+    String nationsPath = "assets/img/nollning-24/nolleguide/organization_tree/nations_${t.localeName}.png";
+    String organizationPath = "assets/img/nollning-24/nolleguide/organization_tree/organisation.png";
+    String othersPath = "assets/img/nollning-24/nolleguide/organization_tree/others_${t.localeName}.png";
+    String processionPath = "assets/img/nollning-24/nolleguide/organization_tree/procession_${t.localeName}.png";
+    String ministryOfCulturePath = "assets/img/nollning-24/nolleguide/organization_tree/culture_${t.localeName}.png";
+    String festivitiesCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/festivities_${t.localeName}.png";
+    String educationalCouncilPath = "assets/img/nollning-24/nolleguide/organization_tree/education_${t.localeName}.png";
+    String corporateRelationsPath = "assets/img/nollning-24/nolleguide/organization_tree/corporate_sv.png";
+    String facilitiesCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/facilities_${t.localeName}.png";
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     
@@ -130,20 +144,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
-                                          fit: BoxFit.cover
+                                          organizationPath
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 3),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.organization,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/24,
-                                                  color: Color(0xFFE9CA97),
-                                        )))),
                           ]))))),
                         Expanded(
                           child:
@@ -165,20 +167,8 @@ return Scaffold(
                                     Stack(
                                       children: [ 
                                         Image.asset(
-                                          orgTextButtonPath,
-                                          fit: BoxFit.cover
+                                          guildsPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 2),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.guilds,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/22,
-                                                  color: Color(0xFFE9CA97),   
-                                    )))),
                       ]))))),
                     ],
                     )),
@@ -223,19 +213,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.theManagement,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/30,
-                                                  color: Color(0xFFE9CA97),
-                                    )))),
+                                          managementPath,
+                                        ), 
                       ]))))),
                         Expanded(
                           child:
@@ -257,19 +236,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          introductionCommitteePath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child: 
-                                              Text(
-                                                t.introductionCommittee,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/35,
-                                                  color: Color(0xFFE9CA97),                                   
-                                    )))),
                       ]))))),
                     ],
                     )),
@@ -298,19 +266,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.ministryOfCulture,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/30,
-                                                  color: Color(0xFFE9CA97),                                     
-                                    )))),
+                                          ministryOfCulturePath,
+                                        ),                 
                       ]))))),
                         Expanded(
                           child:
@@ -332,19 +289,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 7),
-                                          child: Center(
-                                            child: 
-                                              Text(
-                                                t.festivitiesCommittee,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/33,
-                                                  color: Color(0xFFE9CA97),
-                                    )))),
+                                          festivitiesCommitteePath,
+                                        ),    
                       ]))))),
                     ])),
                   SizedBox(
@@ -372,19 +318,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          educationalCouncilPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child: 
-                                              Text(
-                                              t.educationalCouncil,
-                                              style: TextStyle(
-                                                fontFamily: "Testament",
-                                                //fontSize: screenWidth/24,
-                                                color: Color(0xFFE9CA97),                                     
-                                    )))),
                       ]))))),
                         Expanded(
                           child:
@@ -406,19 +341,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          accountingDepartmentPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 8),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.theAccountingDepartment,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/37,
-                                                  color: Color(0xFFE9CA97),
-                                    )))),
                       ]))))),
                     ],
                     )),
@@ -448,19 +372,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          cafePath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.hilbertCafe,
-                                                style: TextStyle(
-                                                fontFamily: "Testament",
-                                                fontSize: screenWidth/30,
-                                                color: Color(0xFFE9CA97),                                     
-                                    )))),
                             ]))))),
                         Expanded(
                           child:
@@ -482,19 +395,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          corporateRelationsPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.corporateRelations,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/32,
-                                                  color: Color(0xFFE9CA97),                                   
-                                    )))),
                       ]))))),
                     ],
                     )),
@@ -522,19 +424,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          facilitiesCommitteePath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.facilitiesCommittee,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/31,
-                                                  color: Color(0xFFE9CA97),
-                                    )))),
                         ]))))),
                         Expanded(
                           child:
@@ -555,19 +446,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          consciencePath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: Center( 
-                                            child:
-                                              Text(
-                                                t.theConscience,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/28,
-                                                  color: Color(0xFFE9CA97),
-                                    )))),
                       ]))))),
                     ])),
                   SizedBox(
@@ -595,20 +475,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          ministryOfTruthPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 7),
-                                          child: 
-                                            Center(
-                                              child:
-                                                Text(
-                                                  t.ministryOfTruth,
-                                                  style: TextStyle(
-                                                    fontFamily: "Testament",
-                                                    fontSize: screenWidth/34,
-                                                    color: Color(0xFFE9CA97),                               
-                                    )))),
                         ]))))),
                         Expanded(
                           child:
@@ -630,21 +498,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          processionPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child: 
-                                            Center(
-                                              child:
-                                                Text(
-                                                  t.theProcession,
-                                                  style: TextStyle(
-                                                    fontFamily: "Testament",
-                                                    fontSize: screenWidth/30,
-                                                    color: Color(0xFFE9CA97),
-                                      
-                                    )))),
                       ]))))),
                     ])),
                   SizedBox(
@@ -665,19 +520,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          othersPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 3),
-                                          child: Center(
-                                            child:
-                                              Text(
-                                                t.others,
-                                                style: TextStyle(
-                                                  fontFamily: "Testament",
-                                                  fontSize: screenWidth/22,
-                                                  color: Color(0xFFE9CA97),                 
-                                    )))),
                       ]))),
                     ),
                   SizedBox(
@@ -723,21 +567,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          nationsPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 2),
-                                          child: 
-                                            Center(
-                                              child:
-                                                Text(
-                                                  t.nations,
-                                                  style: TextStyle(
-                                                    fontFamily: "Testament",
-                                                    fontSize: screenWidth/21,
-                                                    color: Color(0xFFE9CA97),
-                                      
-                                    )))),
                       ]))))),
                     ],
                     )),
@@ -761,20 +592,8 @@ return Scaffold(
                                     Stack(
                                       children: [        
                                         Image.asset(
-                                          orgTextButtonPath,
+                                          spexPath,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 3),
-                                          child: 
-                                            Center(
-                                              child:
-                                                Text(
-                                                  "spex",
-                                                  style: TextStyle(
-                                                    fontFamily: "Testament",
-                                                    fontSize: screenWidth/22,
-                                                    color: Color(0xFFE9CA97),                            
-                                    )))),
                       ]))))),
       ])) 
     )]

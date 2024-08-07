@@ -11,7 +11,7 @@ import 'package:fsek_mobile/screens/calendar/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/wordlist.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/themes.dart';

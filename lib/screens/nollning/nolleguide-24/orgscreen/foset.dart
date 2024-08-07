@@ -110,11 +110,16 @@ class _FosetScreenState extends State<FosetScreenPage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
+    String backgroundPaperPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_paper.png";
+    String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
+
     return Scaffold(
       appBar: AppBar(
         title: Text(t.introductionCommittee),
       ),
-      body: Container(
+      body: Stack(children: [
+        Container(
         child: Column(
           children: [
             SizedBox(
@@ -134,7 +139,7 @@ class _FosetScreenState extends State<FosetScreenPage> {
             Expanded(child: _createMainPersonCard()),
           ],
         ),
-      ),
+      )]),
     );
   }
 }
