@@ -8,16 +8,16 @@ import 'package:flutter/services.dart';
 import 'package:fsek_mobile/models/nollning/nolleguide/article.dart';
 
 
-class StudentvettScreenPage extends StatefulWidget {
+class OthersScreenPage extends StatefulWidget {
   @override
-  _StudentvettScreenState createState() => _StudentvettScreenState();
+  _OthersScreenState createState() => _OthersScreenState();
 }
 
 
-class _StudentvettScreenState extends State<StudentvettScreenPage> {
+class _OthersScreenState extends State<OthersScreenPage> {
   List<Article> articles = [];
 
-  _StudentvettScreenState() {
+  _OthersScreenState() {
     _loadArticles().then(
       (value) => setState(
         () {
@@ -29,7 +29,7 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
 
   Future<List<Article>> _loadArticles() async {
     final String raw =
-        await rootBundle.loadString('assets/data/nolleguide_2024/studentvett.json');
+        await rootBundle.loadString('assets/data/nolleguide_2024/ovriga.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
     List<Article> out = (jsonRaw['articles'] as List)
         .map((data) => Article.fromJson(data))
@@ -57,14 +57,14 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
       ),
       body:  articles.isEmpty
           ? Center(child: CircularProgressIndicator()) :
-      InteractiveViewer(child: SingleChildScrollView(
-        child:
-            Stack(
-              children: [
-                Positioned.fill(child: Image.asset(superBackgroundWoodPath, fit: BoxFit.fill)),
-                Positioned.fill(child: Image.asset(superBackgroundPaperPath, fit: BoxFit.fill,)),
-                Container(
-                  margin: EdgeInsets.only(top: 100, left: 50, right: 50, bottom: 60),
+      InteractiveViewer(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Positioned.fill(child: Image.asset(superBackgroundWoodPath, fit: BoxFit.fill)),
+              Positioned.fill(child: Image.asset(superBackgroundPaperPath, fit: BoxFit.fill)),
+              Container(
+                  margin: EdgeInsets.only(top: 80, left: 50, right: 50, bottom: 60),
                   child:
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,10 +75,18 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: "Testament",
-                            fontSize: screenWidth/18,
+                            fontSize: screenWidth/12,
                             color: Color(0xFF540909)
                         )
-                      )
+                      ),  
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      articles[0].content![t.localeName]!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: screenWidth/29,
+                        ),
                     ),
                     SizedBox(height: 20),
                     Text(
@@ -117,9 +125,7 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
                       articles[3].title![t.localeName]!,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontFamily: "Testament",
-                        fontSize: screenWidth/18,
-                        color: Color(0xFF540909)
+                        fontSize: screenWidth/25,
                         ),
                     ),
                     SizedBox(height: 10),
@@ -146,75 +152,33 @@ class _StudentvettScreenState extends State<StudentvettScreenPage> {
                         fontSize: screenWidth/29,
                         ),
                     ),
-                    SizedBox(height: 30),
-                    Text(
-                      articles[5].title![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth/25,
+                    ElevatedButton(
+                      onPressed: () {launchUrl(Uri.parse(t.utskottWebsite));}, 
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.only(),
+                        shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.horizontal()
                         ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      articles[5].content![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: screenWidth/29,
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        surfaceTintColor: Colors.transparent,
+                        minimumSize: Size(0,0),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap
                         ),
-                    ),
-                    SizedBox(height: 30),
-                    Text(
-                      articles[6].title![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth/25,
-                        ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      articles[6].content![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: screenWidth/29,
-                        ),
-                    ),
-                    SizedBox(height: 30),
-                    Text(
-                      articles[7].title![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth/25,
-                        ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      articles[7].content![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: screenWidth/29,
-                        ),
-                    ),
-                    SizedBox(height: 30),
-                    Text(
-                      articles[8].title![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth/25,
-                        ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      articles[8].content![t.localeName]!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: screenWidth/29,
-                        ),
-                    ),
-                  ],
-                )
-                )
-              ],
-            ),
+                      child: Text(
+                        t.utskottWebsite,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF5269D1),
+                          fontSize: screenWidth/29
+                          )
+                        )
+                        )
+                    ]
+                  )
+              )
+            ],
+          )
         )
       )
     );

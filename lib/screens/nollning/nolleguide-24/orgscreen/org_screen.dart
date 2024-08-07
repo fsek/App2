@@ -18,6 +18,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/nations.dar
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/procession.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/teknologkaren.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/others.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
@@ -515,7 +516,7 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (OthersScreenPage())));},
                                   child: 
                                     Stack(
                                       children: [        
