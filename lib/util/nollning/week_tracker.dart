@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class WeekTracker {
   static const List<Color> weekColors = [
-    Color(0xFF202C57), // v0
-    Color(0xFF4B6357), // v1
-    Color(0xFF9B4C52), // v2
-    Color(0xFF260F3F), // v3
-    Color(0xFF165C7F), // v4
+    Color(0xFFf77e14), // v0
+    Color(0xFFf77e14), // v1
+    Color(0xFFf77e14), // v2
+    Color(0xFFf77e14), // v3
+    Color(0xFFf77e14), // v4
     Color(0xFFf77e14), // for other times and purposes
   ];
 
