@@ -37,7 +37,8 @@
     },
     "top": 366,
     "left": 1454,
-    "asset": "kc.png"
+    "asset": "kc.png",
+    "extraAsset": "kc.gif"
    },
    {
     "title": "IKDC",
@@ -47,7 +48,8 @@
     },
     "top": 720,
     "left": 1904,
-    "asset": "ikdc.png"
+    "asset": "ikdc.png",
+    "extraAsset": "ikdc.gif"
    },
    {
     "title": "A-gropen",
@@ -77,7 +79,8 @@
     },
     "top": 1003,
     "left": 1947,
-    "asset": "A.png"
+    "asset": "A.png",
+    "extraAsset": "A.gif"
    },
    {
     "title": "V-huset",
@@ -87,7 +90,8 @@
     },
     "top": 1340,
     "left": 1752,
-    "asset": "V.png"
+    "asset": "V.png",
+    "extraAsset": "V.gif"
    },
    {
     "title": "BMC",
@@ -107,7 +111,8 @@
     },
     "top": 1936,
     "left": 436,
-    "asset": "fysicum.png"
+    "asset": "fysicum.png",
+    "extraAsset": "fysicum.gif"
    },
    {
     "title": "Lund Nano Lab",
@@ -127,7 +132,8 @@
     },
     "top": 1383,
     "left": 1295,
-    "asset": "kårhuset.png"
+    "asset": "kårhuset.png",
+    "extraAsset": "kårhuset.gif"
    },
    {
     "title": "Gasque",
@@ -157,7 +163,8 @@
     },
     "top": 1656,
     "left": 1349,
-    "asset": "studiecentrum.png"
+    "asset": "studiecentrum.png",
+    "extraAsset": "studiecentrum.gif"
    },
    {
     "title": "Matteannexet",
@@ -167,7 +174,8 @@
     },
     "top": 1766,
     "left": 1062,
-    "asset": "MA.png"
+    "asset": "MA.png",
+    "extraAsset": "MA.gif"
    },
    {
     "title": "Mattehuset",
@@ -177,7 +185,8 @@
     },
     "top": 1845,
     "left": 891,
-    "asset": "mh.png"
+    "asset": "mh.png",
+    "extraAsset": "MH.gif"
    },
    {
     "title": "sjön Sjøn + ön øn",
@@ -187,8 +196,7 @@
     },
     "top": 1982,
     "left": 1145,
-    "asset": "random.png",
-    "extraAsset": "dab.gif"
+    "asset": "random.png"
    },
    {
     "title": "Märkesbacken",
@@ -228,7 +236,8 @@
     },
     "top": 1793,
     "left": 1587,
-    "asset": "E.png"
+    "asset": "E.png",
+    "extraAsset": "E.gif"
    },
    {
     "title": "Grön-gräset",
@@ -258,7 +267,8 @@
     },
     "top": 2187,
     "left": 1531,
-    "asset": "M.png"
+    "asset": "M.png",
+    "extraAsset": "M.gif"
    },
    {
     "title": "Marathon",

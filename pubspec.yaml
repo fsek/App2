@@ -112,6 +112,7 @@ flutter:
     - assets/data/guide/
     - assets/img/nollning-24/hemsidan/
     - assets/img/nollning-24/karta/
+    - assets/img/nollning-24/karta/extraAssets/
     - assets/img/nollning-24/nolleguide/
     - assets/img/nollning-24/organization_tree/
     - assets/img/nollning-24/schema/
