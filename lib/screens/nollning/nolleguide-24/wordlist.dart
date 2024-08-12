@@ -33,6 +33,7 @@ class _WordListState extends State<WordListPage> {
 
   Widget _createWordCard(Word w) {
     String locale = Localizations.localeOf(context).toString();
+    double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
         SizedBox(
@@ -44,9 +45,9 @@ class _WordListState extends State<WordListPage> {
               children: [
                 Text(
                   w.key![locale]!,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenWidth/24),
                 ),
-                Text(w.value![locale]!, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400))
+                Text(w.value![locale]!, style: TextStyle(fontSize: screenWidth/28, fontWeight: FontWeight.w500))
               ],
             ),
           ),

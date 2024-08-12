@@ -1768,7 +1768,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                             SizedBox(height: 50),
                             Row(
                               children: [
-                                Expanded(child: Image.asset("assets/img/underConstruction.png"))
+                                Expanded(child: Image.asset("assets/img/nollning-24/nolleguide/supp.jpg"))
                               ],
                             ),
                             SizedBox(height: 20),
