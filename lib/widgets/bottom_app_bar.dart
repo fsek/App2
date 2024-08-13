@@ -10,16 +10,17 @@ class FsekAppBarItem {
 }
 
 class FsekAppBar extends StatefulWidget {
-  FsekAppBar(
-      {this.items,
-      this.centerItemText,
-      this.height = 60.0,
-      this.iconSize = 24.0,
-      this.color,
-      this.selectedColor,
-      this.notchedShape,
-      required this.onTabSelected,
-      required this.currentIndex}) {
+  FsekAppBar({
+    this.items,
+    this.centerItemText,
+    this.height = 60.0,
+    this.iconSize = 24.0,
+    this.color,
+    this.selectedColor,
+    this.notchedShape,
+    required this.onTabSelected,
+    required this.currentIndex,
+  }) {
     assert(this.items!.length == 2 || this.items!.length == 5);
   }
   final List<FsekAppBarItem>? items;
@@ -37,12 +38,7 @@ class FsekAppBar extends StatefulWidget {
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
-  List<int> appBarItemsClickedAmounts = [
-    0,
-    0,
-    0,
-    0
-  ]; //For activating easter egg codes
+  List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
   bool bababoeActive = false;
 
@@ -96,6 +92,7 @@ class FsekAppBarState extends State<FsekAppBar> {
 
     return BottomAppBar(
         shape: widget.notchedShape,
+        padding: EdgeInsets.zero,
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -129,28 +126,24 @@ class FsekAppBarState extends State<FsekAppBar> {
     int? index,
     ValueChanged<int?>? onPressed,
   }) {
-    Color? color =
-        widget.currentIndex == index ? widget.selectedColor : widget.color;
-    return Expanded(
-      key: Key(item.text!.toLowerCase() + "_btn"),
-      child: SizedBox(
-        height: widget.height,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => onPressed!(index),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
-                Text(
-                  item.text!,
-                  style: TextStyle(color: color),
-                  softWrap: false,
-                )
-              ],
-            ),
+    Color? color = widget.currentIndex == index ? widget.selectedColor : widget.color;
+    return SizedBox(
+      height: widget.height,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          onTap: () => onPressed!(index),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(item.iconData, color: color, size: widget.iconSize),
+              Text(
+                item.text!,
+                style: TextStyle(color: color),
+                softWrap: false,
+              )
+            ],
           ),
         ),
       ),
