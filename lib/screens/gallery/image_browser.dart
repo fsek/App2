@@ -53,7 +53,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     ).createShader(bounds);
                   },
                   child: IconButton(
-                    icon: Icon(Icons.all_inclusive, size: 40),
+                    icon: Icon(Icons.download_for_offline_rounded, size: 40),
                     onPressed: () async {
                       try {
                         http.Response image = await http.get(
