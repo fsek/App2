@@ -27,6 +27,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
+import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
+import 'package:fsek_mobile/screens/nollning/map_page.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
 
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    double circleSize = MediaQuery.of(context).size.height / 7;
+    double circleSize = MediaQuery.of(context).size.height / 8;
 
     double edgePadding = MediaQuery.of(context).size.width / 25;
     String defaultBackground = "assets/img/default_background.png";
@@ -77,10 +79,13 @@ class _HomePageState extends State<HomePage> {
     }
 
     int week = WeekTracker.determineWeek();
-    String backgroundPath = "assets/img/nollning-23/hemsidan/homescreen-background-v$week.png";
-    String nolleguidePath = "assets/img/nollning-23/hemsidan/homescreen-button-nolleguide-v$week.png";
-    String uppdragPath = "assets/img/nollning-23/hemsidan/homescreen-button-uppdrag-v$week-$locale.png";
-    String schedulePath = "assets/img/nollning-23/hemsidan/homescreen-button-schema-v$week-$locale.png";
+    String backgroundPath = "assets/img/nollning-24/homescreen/background-v$week.png";
+    String nolleguidePath = "assets/img/nollning-24/homescreen/button-nolleguide.png";
+    String uppdragPath = "assets/img/nollning-24/homescreen/button-adventure-missions.png";
+    String schedulePath = "assets/img/nollning-24/homescreen/button-schedule.png";
+    String mapPath = "assets/img/nollning-24/homescreen/button-map.png";
+    String emergencyPath = "assets/img/nollning-24/homescreen/button-emergency.png";
+    String messagesPath = "assets/img/nollning-24/homescreen/button-messages.png";
 
     return Stack(children: [
       Image.asset(
@@ -88,60 +93,121 @@ class _HomePageState extends State<HomePage> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
       ),
       Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _pageFlipButton(OrganizationScreenPage(), nolleguidePath, week, circleSize, 35, 3),
-                  Column(children: [
-                    _pageFlipButton(AdventureMissionsPage(), uppdragPath, week, circleSize, 35, 3),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height /
-                            28) // Box to make middle button float higher than right and left
-                  ]),
-                  _pageFlipButton(
-                      IntroductionSchedule(currentWeek: week, firstTime: true), schedulePath, week, circleSize, 45, 3),
-                ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:[
+              //testtext
+              InkWell(
+                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize*1.6)),
+                onTap: () {
+                  // TODO: Replace this with the actual page route if different
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MapPage(title: "map", disc: "Wow")));
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 25),
+                  child: Image.asset(mapPath, height: circleSize*1.5),
+                ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height / 40),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InkWell(
-                    customBorder: CircleBorder(),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/emergency_contacts");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 5, right: 5),
-                          child: Image.asset(
-                            "assets/img/nollning-23/homescreen-button-help.png",
-                            height: MediaQuery.of(context).size.height / 14,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.zero,
+                          child: Image.asset(uppdragPath, height: circleSize),
+                        ),
+                      ),
+                      Column(children: [
+                        InkWell(
+                          customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.zero,
+                            child: Image.asset(nolleguidePath, height: circleSize),
                           ),
                         ),
-                      ],
-                    ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height /
+                                28) // Box to make middle button float higher than right and left
+                      ]),
+                      InkWell(
+                        customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
+                        onTap: () {
+                          Navigator.pushNamed(context, "/messages");
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.zero,
+                          child: Image.asset(messagesPath, height: circleSize),
+                        ),
+                      ),
+                    ],
                   ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(padding: EdgeInsets.only(left: 10, right: 10)),
+                      InkWell(
+                        customBorder: CircleBorder(),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule(currentWeek: week, firstTime: true)));
+
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset(
+                              schedulePath,
+                              height: circleSize/1.5,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+                      InkWell(
+                        customBorder: CircleBorder(),
+                        onTap: () {
+                          Navigator.pushNamed(context, "/emergency_contacts");
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset(
+                              emergencyPath,
+                              height: circleSize/1.5,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 10, right: 10)),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 60),
                 ],
               ),
-            ],
+            ]
           ),
         ),
       ),
     ]);
   }
 
+  // Currently unused, used in nollning 2023
   Widget _pageFlipButton(
       Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
     return InkWell(
