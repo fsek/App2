@@ -3,6 +3,7 @@ import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
+import 'package:fsek_mobile/screens/nollning/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
@@ -49,7 +50,7 @@ class OtherContent extends StatelessWidget {
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container(),
+      "Anonym kontaktsida": Container()
     };
 
     return ListView(
