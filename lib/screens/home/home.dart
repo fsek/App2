@@ -16,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
+import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                             28) // Box to make middle button float higher than right and left
                   ]),
                   _pageFlipButton(
-                      IntroductionSchedule(currentWeek: week, firstTime: true), schedulePath, week, circleSize, 45, 3),
+                      ScheduleScreenPage(), schedulePath, week, circleSize, 45, 3),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 40),
