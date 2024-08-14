@@ -148,10 +148,31 @@ class _MainPersonCard extends StatelessWidget {
   build(BuildContext context) {
     String locale = Localizations.localeOf(context).toString();
     String imageBasePath = "assets/img/nollning-24/nolleguide/people/";
+
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     Widget position = Container();
     if (person.position != null) {
       position = Text(person.position![locale]!,
-          style: TextStyle(fontSize: 18, color: Colors.white));
+          style: TextStyle(shadows: [
+                Shadow(
+                  offset: Offset(-1.5, -1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(1.5, -1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(1.5, 1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(-1.5, 1.5),
+                  color: Colors.black,
+                ),
+              ],fontSize: screenWidth/26, color: Colors.white));
     }
     return Container(
       margin: EdgeInsets.all(20),
@@ -168,7 +189,24 @@ class _MainPersonCard extends StatelessWidget {
                 children: [
                   Text(
                     person.name![locale]!,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(shadows: [
+                Shadow(
+                  offset: Offset(-1.5, -1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(1.5, -1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(1.5, 1.5),
+                  color: Colors.black,
+                ),
+                Shadow(
+                  offset: Offset(-1.5, 1.5),
+                  color: Colors.black,
+                ),
+              ],  fontSize: screenWidth/22, color: Colors.white),
                   ),
                   position,
                 ],
