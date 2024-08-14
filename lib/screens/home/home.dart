@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideScreenPage()));
                           },
                           child: Padding(
                             padding: EdgeInsets.zero,
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         customBorder: CircleBorder(),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule(currentWeek: week, firstTime: true)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleScreenPage()));
 
                         },
                         child: Column(
