@@ -116,7 +116,20 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (OrganizationScreenPage())));}, 
+                      onPressed: () async {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(), 
+                              );
+                            },
+                          );
+                          await Future.delayed(Duration(milliseconds: 1000)); 
+                          Navigator.pop(context); 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => OrganizationScreenPage()));
+                      },
                       child: Image.asset(
                         organisationPath,
                         fit: BoxFit.cover
