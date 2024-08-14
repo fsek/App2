@@ -320,5 +320,7 @@
     "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\n Ytterligare kontaktinformation finns att hitta i Nolleguiden",
 
     "game": "Moose game",
-    "gameDescription":"Kommer snart!"
+    "gameDescription":"Kommer snart!",
+
+    "weekQuests": "Vecka"
 }

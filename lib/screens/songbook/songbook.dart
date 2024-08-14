@@ -76,7 +76,9 @@ class _SongbookPageState extends State<SongbookPage>
     var t = AppLocalizations.of(context)!;
     return allSongs.isEmpty
         ? Scaffold(
-            appBar: AppBar(title: Text(t.songbookSongbook)),
+            appBar: AppBar(
+              title: Text(t.songbookSongbook),
+            ),
             body: Center(
               child: CircularProgressIndicator(
                 color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
@@ -90,6 +92,19 @@ class _SongbookPageState extends State<SongbookPage>
               child: Scaffold(
                 appBar: AppBar(
                   title: Text(t.songbookSongbook),
+                  actions: [
+                    // Add actions here
+                    IconButton(
+                      icon: Icon(Icons.emoji_events), // Trophy icon
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TopSongsPage()),
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,39 +176,39 @@ class _SongbookPageState extends State<SongbookPage>
                     ),
                     // End of search bar
 
-                    // Top Songs button with expansion
-                    if (topSongs.isNotEmpty) // Ensure topSongs is not empty
-                      //create a button which goes to the top_songsPage when pressed
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: SizedBox(
-                          width:
-                              double.infinity, // Make the button fill the width
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TopSongsPage()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(
-                                  16.0), // Adjust padding inside the button
-                              backgroundColor:
-                                  Colors.grey[300], // Button background color
-                              elevation: 0, // Remove shadow
-                            ),
-                            child: Text(
-                              "Vanligaste sångerna",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold, // Bold text
-                                color: Colors.black, // Black text color
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                    // // Top Songs button with expansion
+                    // if (topSongs.isNotEmpty) // Ensure topSongs is not empty
+                    //   //create a button which goes to the top_songsPage when pressed
+                    //   Padding(
+                    //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    //     child: SizedBox(
+                    //       width:
+                    //           double.infinity, // Make the button fill the width
+                    //       child: ElevatedButton(
+                    //         onPressed: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => TopSongsPage()),
+                    //           );
+                    //         },
+                    //         style: ElevatedButton.styleFrom(
+                    //           padding: EdgeInsets.all(
+                    //               16.0), // Adjust padding inside the button
+                    //           backgroundColor:
+                    //               Colors.grey[300], // Button background color
+                    //           elevation: 0, // Remove shadow
+                    //         ),
+                    //         child: Text(
+                    //           "Vanligaste sångerna",
+                    //           style: TextStyle(
+                    //             fontWeight: FontWeight.bold, // Bold text
+                    //             color: Colors.black, // Black text color
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
 
                     Expanded(
                       child: songs.isNotEmpty
