@@ -95,11 +95,11 @@ flutter:
     - assets/audio/
     - assets/img/
     - assets/img/memes/
-    - assets/img/nollning-23/
-    - assets/img/nollning-23/uppdrag/
-    - assets/img/nollning-23/nolleguide/
-    - assets/img/nollning-23/schema/
-    - assets/img/nollning-23/hemsidan/
+    - assets/img/nollning-24/
+    - assets/img/nollning-24/adventure-missions/
+    - assets/img/nollning-24/nolleguide/
+    - assets/img/nollning-24/schedule/
+    - assets/img/nollning-24/homescreen/
     - assets/data/guide/
     - assets/img/nollning-24/hemsidan/
     - assets/img/nollning-24/schema/
@@ -113,6 +113,7 @@ flutter:
     - assets/img/nollning-24/uppdrag/
     - assets/data/nolleguide_2024/
 
+    - assets/img/nollning-24/schedule/
 
   fonts:
     - family: Brandon Grotesque
