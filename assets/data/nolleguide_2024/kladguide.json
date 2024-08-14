@@ -1,0 +1,166 @@
+{
+  "articles": [
+    {
+      "title": {
+        "sv": "En guide till klädkoder inom studentlivet",
+        "en": "The Student’s Guide to Dress Codes"
+      },
+      "content": {
+        "sv": "I samarbete med medaljkommittén\n\nI studentlivet kan du komma att stöta på olika klädkoder. Det är frivilligt att följa dem, men för den nyfikne är här en guide med tips från medaljkommittén om hur de olika koderna kan tolkas.",
+        "en": "Featuring the Procession\n\nIn student life, you may come across different dress codes. Following them is voluntary, but for the curious, here is a guide with tips from the Procession on how to interpret the different codes."
+      },
+      "sections": [
+        {
+          "title": {
+            "sv": "Frack",
+            "en": "White tie/Full dress"
+          },
+          "subsections": [
+            {
+              "title": {
+                "sv": "Frack",
+                "en": "Tailcoat"
+              },
+              "content": {
+                "sv": "Fracken är en traditionell festklädsel med följande delar:\n• Byxor: Svarta med sidenrevärer, i samma tyg som fracken. De ska bäras med hängslen för att sitta korrekt.\n• Frackskjorta: En vit skjorta speciellt utformad för frack, med plats för manschettknappar och löstagbara bröstknappar, som köps separat.\n• Frackväst: Vit och designad specifikt för frack.\n• Fluga: Vit.\n• Skor: Svarta lackskor.",
+                "en": "The tailcoat is a traditional festive outfit with the following elements:\n• Trousers: Black with silk stripes, in the same fabric as the coat. They should be worn with suspenders to fit correctly.\n• Tailcoat shirt: A white shirt specially designed for tails, with space for cufflinks and detachable breast buttons, purchased separately.\n• Waistcoat: White and designed specifically for tails.\n• Bow tie: White.\n• Shoes: Black patent leather shoes."
+              },
+              "image": {
+                "url": "url_till_bilden_för_White_tie_Full_dress_section"
+              }
+            
+            },
+            {
+              "title": {
+                "sv": "Långklänning",
+                "en": "Full dress"
+              },
+              "content": {
+                "sv": "Långklänningen/balklänningen är en elegant klädsel för festliga tillfällen.\n• Längd: Klänningen ska nå ner till golvet.\n• Material och Stil: Bör vara av ett fint tyg och ha en festlig modell.\n• Ärmar: Kan vara ärmlös. Om handskar bärs, ska de helst vara långa nog att täcka armbågarna.",
+                "en": "The full dress is an elegant outfit for festive occasions.\n• Length: The dress should reach down to the floor.\n• Material and Style: Should be of a fine fabric and have a festive style.\n• Sleeves: May be sleeveless. If gloves are worn, they should ideally be long enough to cover the elbows."
+              }
+            },
+            {
+              "title": {
+                "sv": "Accessoarer",
+                "en": "Accessories"
+              },
+              "content": {
+                "sv": "Det är kutym att bära medaljer och ordensband vid dessa tillfällen. Till högtidsdräkt bärs studentmössans vita modell.",
+                "en": "It is customary to wear medals and ribbons on these occasions. The white model of the student cap is worn for formal dress."
+              }
+            }
+          ]
+        },
+        {
+          "title": {
+            "sv": "Mörk kostym",
+            "en": "Formal"
+          },
+          "content": {
+            "sv": "Klänning/Kjol\nFör den som bär klänning eller kjol, bör plagget vara av ett finare tyg, såsom siden eller sammet, och nå ner till eller täcka knäna. Mörka toner rekommenderas för att matcha den formella stilen.\n\nKostym\nEn mörk kostym är formell och ska bestå av kavaj, byxor och eventuell väst i samma tyg och färg. Svart är ett utmärkt val.\n• Skjorta: En ljus skjorta, gärna vit, är att föredra.\n• Skor och Skärp: Skorna ska vara svarta. Om du använder skärp, ska det också vara svart.\n• Accessoarer: Slips eller fluga är obligatoriskt till kavajen.",
+            "en": "Dress/Skirt\nFor those wearing a dress or skirt, the garment should be of a finer fabric, such as silk or velvet, and reach down to or cover the knees. Dark tones are recommended to match the formal style.\n\nSuit\nThe dress code formal consist of a jacket, trousers and possibly a vest in the same fabric and color. Black is an excellent choice.\n• Shirt: A light-colored shirt, preferably white.\n• Shoes and belt: Shoes should be black. If you wear a belt, it should also be black.\n• Accessories: A tie or bow tie is mandatory with the jacket."
+          },
+          "image": {
+            "url": "url_till_bilden_för_Mork_kostym_section"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Udda Kavaj",
+            "en": "Smart casual"
+          },
+          "content": {
+            "sv": "Klädkoden \"udda kavaj\" innebär främst att kavajen inte ska matcha med underdelen.\n• Stil: Håll klädseln uppklädd men inte lika formell som mörk kostym. Välj finare plagg än vardagskläder, exempelvis en snyggare byxa/kjol och en valfri överdel, eller varför inte en enklare klänning. Undvik jeans.\n• Kavaj: Kavajen kan vara en blazer eller en kavaj från en kostym, men den ska inte matcha byxorna eller kjolen.\n• Överdel: Skjorta eller topp kan vara i valfri färg och stil.\n• Underdelen: Bör vara i ett annat tyg och färg än en eventuell kavaj.\n• Accessoarer: Slips eller fluga är valfritt.",
+            "en": "The dress code smart casual mainly implies that the suit should not match with the bottom.\n• Style: Keep the outfit dressed up but not as formal as the dress code “Formal”. Choose nicer pieces than casual wear, such as a dressier trouser/skirt and a top of your choice, or a simpler dress. Avoid jeans.\n• Jacket: The jacket can be a blazer or a suit jacket, but it should not match the pants or skirt.\n• Bodice: Shirt or top can be in any color and style.\n• Pants or skirt: Should be in a different fabric and color than the jacket.\n• Accessories: Tie or bow tie is optional."
+          },
+          "image": {
+            "url": "url_till_bilden_för_udda_kavaj_section"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Ovve",
+            "en": "Ovve"
+          },
+          "content": {
+            "sv": "En klädkod man inte finner utanför Teknologvärlden! På F-sektionen är det högst vanligt förekommande med teknologmössan i rätt färg till Ovve.",
+            "en": "A dress code you won't find outside the Technologist world! In the F-section it is very common to wear the technologist cap in the right color for Ovve."
+          },
+          "image": {
+            "url": "url_till_bilden_för_ovve_section"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Ovve+Temaenligt",
+            "en": "Ovve+Thematically"
+          },
+          "content": {
+            "sv": "Ytterligare en klädkod inom teknologvärlden. Denna är vanligt förekommande på slasquer/fulsittningar och urskiljer sig från Ovve genom att bjuda in till tema! Här kan man gå på från allt mellan 0 till 10000% på en temaenlig outfit.",
+            "en": "Another dress code within the technologist world. This is commonly used at Slasque sittings and differs from Ovve by inviting to theme! Here you can go from anywhere between 0 to 10000% on a themed outfit."
+          },
+          "image": {
+            "url": "url_till_bilden_för_ovve+_section"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Teknologmössan",
+            "en": "Technologist cap"
+          },
+          "content": {
+            "sv": "Teknologmössan finns i två varianter, den vita sommarmodellen samt den blåa vintermodellen. Vinterskyddet bärs från 4 oktober till och med mösspåtagningen den 30 april. Ett undantag till detta är att vintermodellen aldrig bärs till högtidsdräkt, då bärs istället den vita sommarmodellen oavsett tid på året.",
+            "en": "The technologist's cap has in two options, the white summer cap and the blue winter cap. The winter protection is worn from October 4th up to and including the “Cap fitting” on April 30th. An exception to this is that the winter model is never worn with “white tie/full dress”. Then the white summer model is worn instead, regardless of the time of year."
+          },
+          "image": {
+            "url": "url_till_bilden_för_hatt"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Tofsen",
+            "en": "The tassel"
+          },
+          "content": {
+            "sv": "I tofsen kan det hänga olika saker som samlats på under ens år som teknolog, men de mest betydelsefulla är spegaten. Spegaten matchar de år inom ett program man läst eller läser. Spegaten för teknisk fysik är orange, för teknisk matematik orange/silver och för teknisk nanovetenskap orange/grön.",
+            "en": "The tassel can hold a collection of things accumulated during your years as a technologist, but the most significant is the spegat. Which matches the years within a program you have studied or are studying. The spegat for Engineering Physics is orange, orange/silver for Engineering Mathematics and orange/green for Engineering Nanoscience."
+          },
+          "image": {
+            "url": "url_till_bilden_för_tofs"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "Medaljer och ordenstecken",
+            "en": "Medals and badges"
+          },
+          "content": {
+            "sv": "Vid bal eller särskilda tillställningar där medaljer delas ut, kan den aktuella medaljen bäras på frackslaget alternativt på klänningens vänstra sida. Ordensband bärs över höger axel, och för frackbärare skall bandet bäras UNDER frackvästen. Medaljer bärs olika på frack/kostym respektive klänning. På frack eller kostym kan medaljerna placeras under bröstfickan, gärna i prydliga rader. Bär man klänning fäster man oftast sina medaljer på ordensbandet.",
+            "en": "At balls or special events where medals are awarded, the medal in question may be worn on the lapel or on the left side of the dress. The ribbon is worn over the right shoulder, and for tailcoat wearers the ribbon should be worn UNDER the tailcoat vest. Medals are worn differently on a coat/suit and a dress. On a coat or suit, the medals can be placed under the breast pocket, preferably in neat rows. If you wear a dress, you usually attach your medals to the ribbon."
+          },
+          "image": {
+            "url": "url_till_bilden_för_medaljer"
+          }
+        
+        },
+        {
+          "title": {
+            "sv": "The end",
+            "en": "The end"
+          },
+          "content": {
+            "sv": "Medverkande: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson. Fotograf: Blendona Ibrahimi",
+            "en": "Models: Christopher Doggett, Agnes Göransson, Tova Franvin, Emilia Nilsson. Photographer: Blendona Ibrahimi"
+          }
+        }
+      ]
+    }
+  ]
+}
