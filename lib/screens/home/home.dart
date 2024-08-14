@@ -29,6 +29,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -106,11 +107,11 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _pageFlipButton(
-                      GuidePage(), nolleguidePath, week, circleSize, 35, 3),
+                  _pageFlipButton(OrganizationScreenPage(), nolleguidePath,
+                      week, circleSize, 35, 3),
                   Column(children: [
-                    _pageFlipButton(AdventureMissionsPage(), uppdragPath, week,
-                        circleSize, 35, 3),
+                    _pageFlipButton(AdventureMissionsPageNew(), uppdragPath,
+                        week, circleSize, 35, 3),
                     SizedBox(
                         height: MediaQuery.of(context).size.height /
                             28) // Box to make middle button float higher than right and left
