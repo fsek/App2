@@ -108,6 +108,7 @@ flutter:
     - assets/img/nollning-24/uppdrag/
     - assets/data/nollning-24/sektioner.json
 
+    - assets/img/nollning-24/schedule/
 
   fonts:
     - family: Brandon Grotesque
