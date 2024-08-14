@@ -37,22 +37,22 @@ class _HighscoreTabState extends State<HighscoreTab> {
       backgroundColor: Color(0xFFE9CA97),
       body: Column(
         children: [
-          Container(
-            child: IgnorePointer(
-                // This is incredibly bad code but it just won't scale correctly across devices otherwise
-                child: TabBar(
-                    indicatorColor: Color.fromARGB(255, 70, 43, 17),
-                    //Theme.of(context).bottomAppBarTheme.color,
-                    labelColor: Color(0xFFE9CA97),
-                    unselectedLabelColor: Color.fromARGB(255, 126, 97, 62),
-                    tabs: [
-                  Tab(text: t.introductionPlacement),
-                  Tab(text: t.introductionGroupName),
-                  Tab(text: t.introductionPoints2)
-                ])),
-            //color: Theme.of(context).bottomAppBarTheme.color,
-            color: Color(0xFF540909),
-          ),
+          // Container(
+          //   child: IgnorePointer(
+          //       // This is incredibly bad code but it just won't scale correctly across devices otherwise
+          //       child: TabBar(
+          //           indicatorColor: Color.fromARGB(255, 70, 43, 17),
+          //           //Theme.of(context).bottomAppBarTheme.color,
+          //           labelColor: Color(0xFFE9CA97),
+          //           unselectedLabelColor: Color.fromARGB(255, 126, 97, 62),
+          //           tabs: [
+          //         Tab(text: t.introductionPlacement),
+          //         Tab(text: t.introductionGroupName),
+          //         Tab(text: t.introductionPoints2)
+          //       ])),
+          //   //color: Theme.of(context).bottomAppBarTheme.color,
+          //   color: Color(0xFF540909),
+          // ),
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
