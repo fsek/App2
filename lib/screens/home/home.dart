@@ -15,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
-import 'package:fsek_mobile/screens/nollning/orgscreen/org_screen.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
+import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => GuidePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideScreenPage()));
                           },
                           child: Padding(
                             padding: EdgeInsets.zero,
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         customBorder: CircleBorder(),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => IntroductionSchedule(currentWeek: week, firstTime: true)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleScreenPage()));
 
                         },
                         child: Column(
