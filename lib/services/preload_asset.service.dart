@@ -36,7 +36,7 @@ import 'dart:convert';
 
 
     List<String> nolleGuideScreenPaths = [
-      "assets/img/nollning-24/nolleguide/nolleguidescreen_background.png"
+      "assets/img/nollning-24/nolleguide/nolleguidescreen_background.png",
       "assets/img/nollning-24/nolleguide/supportfunctions_${t.localeName}.png",
       "assets/img/nollning-24/nolleguide/wordlist_${t.localeName}.png",
       "assets/img/nollning-24/nolleguide/studentvett_${t.localeName}.png",
@@ -195,6 +195,10 @@ import 'dart:convert';
 
       case "schedulePaths":
       imagePaths = ["assets/img/nollning-24/schema/schedulescreen_${t.localeName}.png"];
+      break;
+
+      case "supportPaths": 
+      imagePaths = backgroundPaths + ["assets/img/nollning-24/nolleguide/supp.jpg"];
     }
 
     for (String path in imagePaths) {
