@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen/quests.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AdventureMissionsPage extends StatefulWidget {
+class AdventureMissionsPageNew extends StatefulWidget {
   static const routeName = '/adventure_missions';
 
   @override
-  _AdventureMissionsPageState createState() => _AdventureMissionsPageState();
+  _AdventureMissionsPageNewState createState() =>
+      _AdventureMissionsPageNewState();
 }
 
-class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
+class _AdventureMissionsPageNewState extends State<AdventureMissionsPageNew> {
   AdventureData? _adventureData;
 
   void initState() {
@@ -40,8 +42,14 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF7E5127),
+          // Color.fromARGB(255, 118, 110, 99),
           bottom: TabBar(
-            indicatorColor: Colors.white,
+            indicatorColor: Color.fromARGB(255, 70, 43, 17),
+            labelColor: Color(0xFFE9CA97),
+            unselectedLabelColor: Color(0xFF39342E),
+
+            //Colors.white,
             tabs: [
               Tab(
                 text: t.introductionMissions,
@@ -57,11 +65,20 @@ class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
               )
             ],
           ),
-          title: Text(t.introductionAdventureMissions),
+          title: Text(
+            t.introductionAdventureMissions,
+            style: TextStyle(
+              fontFamily: 'Testament',
+              fontSize: 30.0,
+              fontWeight: FontWeight.normal,
+              color: Color(0xFFE9CA97),
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
         body: TabBarView(children: [
-          AdventureMissionsTab(),
-          MyGroupTab(),
+          AdventureMissionsTabNew(),
+          QuestPage(),
           HighscoreTab(),
         ]),
       ),
