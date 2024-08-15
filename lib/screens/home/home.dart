@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPageNew()));
                         },
                         child: Padding(
                           padding: EdgeInsets.zero,
