@@ -28,8 +28,10 @@ class _EventPageState extends State<EventPage> {
   String? customGroup;
   Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
-  bool displayGroupInput = true;
+  bool displayGroupInput = false;
   String? drinkPackageAnswer;
+  Group? defaultGroup;
+
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
     "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2))
@@ -45,6 +47,14 @@ class _EventPageState extends State<EventPage> {
   void initState() {
     locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
           this.event = value;
+          if (this.event != null) {
+            this.drinkPackageAnswer = "Alkohol";
+            this.defaultGroup = event!.groups![0];
+            this.group = defaultGroup;
+            if (this.group == null) {
+              this.displayGroupInput = true;
+            }
+          }
         }));
     locator<UserService>().getUser().then((value) => setState(() {
           this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
@@ -54,15 +64,24 @@ class _EventPageState extends State<EventPage> {
             this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
-
     super.initState();
   }
 
   void update() {
     locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
           this.event = value;
-          this.userType = null;
-          this.group = null;
+          if (event != null) {
+            if (event!.user_types != null) {
+              this.userType = event!.user_types![0][0];
+            } else {
+              this.userType = null;
+            }
+            // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
+            this.group = event!.groups![0];
+          } else {
+            this.group = null;
+            this.userType = null;
+          }
           this.answer = null;
         }));
     locator<UserService>().getUser().then((value) => setState(() {
@@ -80,6 +99,11 @@ class _EventPageState extends State<EventPage> {
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
+    }
+    if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
+      setState(() {
+        drinkPackageAnswer = "Inget";
+      });
     }
     int eventId = event?.id ?? -1;
     Map json =
@@ -126,12 +150,17 @@ class _EventPageState extends State<EventPage> {
               });
             },
             items: [
+              // DropdownMenuItem<String?>(
+              //   value: ,
+              //   child: Text(t.eventOther),
+              // ),
               ...?event!.user_types?.map(((List<String> ut) {
                 return DropdownMenuItem<String?>(
                   value: ut[1],
                   child: Text(ut[0]),
                 );
               })),
+
               DropdownMenuItem<String?>(
                 value: null,
                 child: Text(t.eventOther),
@@ -177,7 +206,7 @@ class _EventPageState extends State<EventPage> {
               DropdownMenuItem<Group?>(
                 value: null,
                 child: Text(t.eventOtherDifferent),
-              )
+              ),
             ],
           ),
           Visibility(
@@ -451,13 +480,34 @@ class _EventPageState extends State<EventPage> {
       drinkPackageInput = Row(
         children: [
           Text(" ${t.eventDrinkPackage}"),
-          // Checkbox(
-          //     value: drinkPackageAnswer ?? false,
-          //     onChanged: (value) {
-          //       setState(() {
-          //         this.drinkPackageAnswer = value;
-          //       });
-          //     }),
+          Container(
+              height: 50,
+              child: DropdownButton<String?>(
+                isExpanded: false,
+                value: drinkPackageAnswer,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    drinkPackageAnswer = newValue;
+                  });
+                },
+                items: [
+                  DropdownMenuItem<String?>(
+                    value: "Alkohol",
+                    child: Text(t.eventAlcohol),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: "Alkoholfritt",
+                    child: Text(t.eventAlcoholFree),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: "Inget",
+                    child: Text(t.eventNoAlcohol),
+                  )
+                ],
+              )),
         ],
       );
     }
@@ -602,24 +652,50 @@ class _EventPageState extends State<EventPage> {
     }
     Widget drinkPackage = Container();
     if (event!.drink_package ?? false) {
-      if (event!.event_user!.drink_package_answer != null) {
-        drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(text: t.eventYes, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
-        );
-      } else {
-        drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(text: t.eventNo, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
-        );
+      print(event!.event_user!.drink_package_answer);
+      switch (event!.event_user!.drink_package_answer) {
+        case "Alkohol":
+          drinkPackage = RichText(
+            text: TextSpan(
+                text: t.eventDrinkPackage,
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                children: [
+                  TextSpan(text: t.eventAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                ]),
+          );
+          break;
+        case "Alkoholfritt":
+          drinkPackage = RichText(
+            text: TextSpan(
+                text: t.eventDrinkPackage,
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                children: [
+                  TextSpan(
+                      text: t.eventAlcoholFree, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                ]),
+          );
+          break;
+        case "Inget":
+          drinkPackage = RichText(
+            text: TextSpan(
+                text: t.eventDrinkPackage,
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                children: [
+                  TextSpan(text: t.eventNoAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                ]),
+          );
+          break;
+        default:
+          this.drinkPackageAnswer = "Inget";
+          drinkPackage = RichText(
+            text: TextSpan(
+                text: t.eventDrinkPackage,
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                children: [
+                  TextSpan(text: t.eventNoAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                ]),
+          );
+          break;
       }
     }
     return [
@@ -714,15 +790,6 @@ class _EventPageState extends State<EventPage> {
         title: Text(t.eventTitle),
       ),
       body: Container(
-        // Introduction events have a different background
-        decoration: event?.is_introduction == true
-            ? BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/img/nollning-24/schedule/event_background.png"),
-                  fit: BoxFit.fill,
-                ),
-              )
-            : null,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -734,14 +801,10 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color: (event?.is_introduction == true
-                        ? Color(0xFF630B0B)
-                        : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                    color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                   ),
                 ),
-                Divider(
-                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
-                ),
+                const Divider(),
                 Row(
                   children: [
                     Icon(
@@ -775,9 +838,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ],
                 ),
-                Divider(
-                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
-                ),
+                const Divider(),
                 Container(
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
@@ -788,9 +849,7 @@ class _EventPageState extends State<EventPage> {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
-                Divider(
-                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
-                ),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -806,9 +865,7 @@ class _EventPageState extends State<EventPage> {
                     ],
                   ),
                 ),
-                Divider(
-                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
-                ),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -857,7 +914,7 @@ class _EventPageState extends State<EventPage> {
                 ),
                 Visibility(
                   visible: event!.can_signup ?? false,
-                  child: Divider(color: (event?.is_introduction == true ? Color(0xFF565656) : null)),
+                  child: const Divider(),
                 ),
                 Visibility(
                   visible: (!(event!.contact == null)),
@@ -879,9 +936,7 @@ class _EventPageState extends State<EventPage> {
                             "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
                           )),
                         ),
-                        Divider(
-                          color: (event?.is_introduction == true ? Color(0xFF565656) : null),
-                        ),
+                        const Divider(),
                       ],
                     ),
                   ),

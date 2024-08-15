@@ -51,6 +51,9 @@
     "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
+    "eventAlcohol" : "Alkohol",
+    "eventAlcoholFree" : "Alkoholfritt",
+    "eventNoAlcohol" : "Inget",
 
     "settingsSettings": "Inställningar",
     "settingsSave": "Spara",
