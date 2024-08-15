@@ -16,6 +16,8 @@ class CalendarEvent {
   bool? has_signup;
   bool? signup_not_opened_yet;
   bool? recurring;
+  bool? is_introduction;
+  bool? drink;
 
   String? url;
   String? textColor;

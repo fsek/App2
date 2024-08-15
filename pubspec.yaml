@@ -90,24 +90,29 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - lib/l10n/
     - assets/
     - assets/audio/
     - assets/img/
     - assets/img/memes/
-    - assets/img/nollning-23/
-    - assets/img/nollning-23/uppdrag/
-    - assets/img/nollning-23/nolleguide/
-    - assets/img/nollning-23/schema/
-    - assets/img/nollning-23/hemsidan/
+    - assets/img/nollning-24/
+    - assets/img/nollning-24/nolleguide/
+    - assets/img/nollning-24/schedule/
+    - assets/img/nollning-24/homescreen/
     - assets/data/guide/
     - assets/img/nollning-24/hemsidan/
+    - assets/img/nollning-24/schema/
     - assets/img/nollning-24/karta/
     - assets/img/nollning-24/nolleguide/
-    - assets/img/nollning-24/organization_tree/
+    - assets/img/nollning-24/nolleguide/kladguide/
+    - assets/img/nollning-24/nolleguide/spex/
+    - assets/img/nollning-24/nolleguide/organization_tree/
+    - assets/img/nollning-24/nolleguide/people/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/uppdrag/
-    - assets/data/nollning-24/sektioner.json
+    - assets/data/nolleguide_2024/
 
+    - assets/img/nollning-24/schedule/
 
   fonts:
     - family: Brandon Grotesque
