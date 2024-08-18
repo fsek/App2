@@ -33,6 +33,7 @@ import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/map_page.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -47,21 +48,23 @@ class _HomePageState extends State<HomePage> {
   bool? election;
 
   void initState() {
-    locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
-          // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
-          if (!listEquals(value, []) && value != null) {
-            this.backgroundDocuments = value;
-            // title cant be empty so it is always a string
-            if (value.last.document_name!.toLowerCase().startsWith("ht") ||
-                value.last.document_name!.toLowerCase().startsWith("vt")) {
-              // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
-              this.election = true;
-            } else {
-              this.election = false;
-            }
-            this.backgroundUrl = value.last.url;
-          }
-        }));
+    locator<DocumentService>()
+        .getOthers("Bakgrund")
+        .then((value) => setState(() {
+              // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
+              if (!listEquals(value, []) && value != null) {
+                this.backgroundDocuments = value;
+                // title cant be empty so it is always a string
+                if (value.last.document_name!.toLowerCase().startsWith("ht") ||
+                    value.last.document_name!.toLowerCase().startsWith("vt")) {
+                  // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
+                  this.election = true;
+                } else {
+                  this.election = false;
+                }
+                this.backgroundUrl = value.last.url;
+              }
+            }));
     super.initState();
   }
   
@@ -126,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPageNew()));
                         },
                         child: Padding(
                           padding: EdgeInsets.zero,
@@ -235,9 +238,13 @@ class _HomePageState extends State<HomePage> {
   Widget _pageFlipButton(
       Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
     return InkWell(
-      customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
+      customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(inkwellCurvature)),
       onTap: () => Navigator.push(
-          context, TurnPageRoute(builder: (context) => destination, overleafColor: WeekTracker.weekColors[week])),
+          context,
+          TurnPageRoute(
+              builder: (context) => destination,
+              overleafColor: WeekTracker.weekColors[week])),
       child: Padding(
         padding: EdgeInsets.only(left: padding, right: padding),
         child: Image.asset(assetPath, height: circleSize),
@@ -248,7 +255,8 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(
         text,
@@ -283,7 +291,8 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           button(t.otherCafe, CafePage()),
-          button(t.game, PlaceholderPage(title: t.game, disc: t.gameDescription)),
+          button(
+              t.game, PlaceholderPage(title: t.game, disc: t.gameDescription)),
         ],
       ),
       Spacer(flex: 4)
