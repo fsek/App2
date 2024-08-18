@@ -121,7 +121,7 @@ class _KladguideScreenState extends State<KladguidePage> {
                                       ),
                                       Expanded(child: Image.asset(i1))
                                     ])),
-                                SizedBox(height: 50),
+                                SizedBox(height: 30),
                                 Text(t.accessories,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
