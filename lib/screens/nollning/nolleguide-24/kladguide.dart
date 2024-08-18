@@ -261,7 +261,6 @@ class _KladguideScreenState extends State<KladguidePage> {
                                   fontSize: screenWidth/34,
                                 )
                               ),
-                              SizedBox(height: 100)
                             ],
                           ))
                         ],
