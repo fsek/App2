@@ -11,10 +11,12 @@ import "package:flutter_gen/gen_l10n/app_localizations.dart";
 class goodbyePaperPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).toString();
     String woodBoardPath =
         "assets/img/nollning-24/uppdrag/questscreen_woodboard_background.png";
-    String goodbyePaperPath =
-        "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png";
+    String goodbyePaperPath = locale == "sv"
+        ? "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png"
+        : "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_english.png";
 
     return Scaffold(
         appBar: AppBar(

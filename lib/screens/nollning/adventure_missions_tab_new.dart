@@ -135,7 +135,7 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
     } else if (mission.locked ?? false) {
       return Color.fromARGB(255, 109, 12, 12);
     } else {
-      return Color.fromARGB(255, 9, 70, 94);
+      return Color.fromARGB(255, 111, 107, 106);
     }
 
     //     if (mission.is_accepted!) {

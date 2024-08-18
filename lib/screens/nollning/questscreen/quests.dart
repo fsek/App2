@@ -48,9 +48,6 @@ class _QuestPageState extends State<QuestPage> {
   Widget build(BuildContext context) {
     String locale = Localizations.localeOf(context).toString();
 
-    //get week
-    int week = WeekTracker.determineWeek();
-
     //assets
     String backgroundPath =
         "assets/img/nollning-24/uppdrag/questscreen_background.png";
@@ -95,51 +92,58 @@ class _QuestPageState extends State<QuestPage> {
         Align(
           alignment: Alignment.topCenter, // Align to the top center
           child: SizedBox(
-            width: MediaQuery.of(context).size.width *
-                0.85, // Adjust width as needed
-            // height: MediaQuery.of(context).size.height *
-            //     0.8, // Adjust height as needed
-            child: AspectRatio(
-              aspectRatio: 0.352, // Your woodboard's aspect ratio
-              child: Container(
-                padding: EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(woodBoardPath),
-                    fit: BoxFit.contain, // Keeps the aspect ratio
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment:
-                          Alignment.center, // Center the title horizontally
-                      child: SizedBox(
-                        height:
-                            //100, // Set a fixed height for the title
-                            MediaQuery.of(context).size.height / 12,
-                        // child: Image.asset(
-                        //   currentTitlePath,
-                        //   width: MediaQuery.of(context).size.width * 0.7,
-                        //   alignment: Alignment(0, 0.6),
-                        // ),
+              width: MediaQuery.of(context).size.width * 0.85,
+              // height: MediaQuery.of(context).size.width *
+              //     0.55, // Adjust width as needed
+              // height: MediaQuery.of(context).size.height *
+              //     0.8, // Adjust height as needed
+              // child: AspectRatio(
+              //   aspectRatio: 0.352, // Your woodboard's aspect ratio
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(woodBoardPath),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Align(
+                      //   alignment:
+                      //       Alignment.center, // Center the title horizontally
+                      //   child: SizedBox(
+                      //       // height:
+                      //       //     //100, // Set a fixed height for the title
+                      //       //     MediaQuery.of(context).size.height / 12,
+                      //       // child: Image.asset(
+                      //       //   currentTitlePath,
+                      //       //   width: MediaQuery.of(context).size.width * 0.7,
+                      //       //   alignment: Alignment(0, 0.6),
+                      //       // ),
+                      //       ),
+                      // ),
+                      getPaperRow(0, 1),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    getPaperRow(0, 1),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    getPaperRow(2, 3),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    getPaperRow(4, 5),
-                  ],
-                ),
+                      getPaperRow(2, 3),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      getPaperRow(4, 5),
+                    ],
+                  ),
+                ],
+              )
+              // Container(
+              //   padding: EdgeInsets.all(40.0),
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //       image: AssetImage(woodBoardPath),
+              //       fit: BoxFit.contain, // Keeps the aspect ratio
+              //     ),
+              //   ),
+              //   child:
+              // ),
               ),
-            ),
-          ),
         ),
       ],
     );
@@ -158,12 +162,10 @@ class _QuestPageState extends State<QuestPage> {
     } else {
       content = ''; // Default text if data is not available
     }
+    int week_tracker =
+        WeekTracker.determineWeek(differentPreIntroduction: true);
 
-    bool finalWeek = (week == 5 &&
-            totalMissionsList != null &&
-            totalMissionsList!.length == 6)
-        ? true
-        : false;
+    bool finalWeek = (week_tracker == 5 && week == 5);
 
     return PaperWidget(week: week, content: content, finalWeek: finalWeek);
   }
