@@ -464,7 +464,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                                 )
                               )
                               ),
-                            SizedBox(height: 60),
+                            SizedBox(height: 30),
                             Text(
                               t.studentHealthCenter,
                               style: TextStyle(

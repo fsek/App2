@@ -64,8 +64,18 @@ dependencies:
   bloc_concurrency: ^0.2.2
   #image_gallery_saver: ^2.0.3
   cached_network_image: ^3.3.0
-  package_info_plus: ^8.0.0
 
+  # flutter_gen: any
+  audioplayers_web: any
+  firebase_core_web: any
+  firebase_messaging_web: any
+  flutter_secure_storage_web: any
+  shared_preferences_web: any
+  url_launcher_web: any
+  # flutter_web_plugins: any
+  html: any
+  photo_view: ^0.15.0
+  package_info_plus: ^8.0.1
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object
@@ -103,6 +113,7 @@ flutter:
     - assets/img/nollning-24/hemsidan/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/karta/
+    - assets/img/nollning-24/karta/extraAssets/
     - assets/img/nollning-24/nolleguide/
     - assets/img/nollning-24/nolleguide/kladguide/
     - assets/img/nollning-24/nolleguide/spex/
@@ -110,6 +121,7 @@ flutter:
     - assets/img/nollning-24/nolleguide/people/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/uppdrag/
+    - assets/data/nollning-24/
     - assets/data/nolleguide_2024/
 
     - assets/img/nollning-24/schedule/
@@ -119,8 +131,8 @@ flutter:
       fonts:
         - asset: assets/BrandonGrotesque-Regular.ttf
     - family: Testament
-      fonts: 
-        - asset: assets/TestamentIMediumW00Regular.ttf
+      fonts:
+        - asset: assets/Testament-Medium.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
