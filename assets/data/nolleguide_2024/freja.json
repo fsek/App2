@@ -1,0 +1,19 @@
+{
+"people": [
+    {
+      "image": "FREJA.jpeg",
+      "name": {
+          "sv": "Kajsa Engvall",
+          "en": "Kajsa Engvall"
+      },
+      "position": {
+          "sv": "Ordförande i FREJA",
+          "en": "President of FREJA"
+      },
+      "text": {
+          "sv": "Hej på dig och kul att du har hittat hit! Jag heter Kajsa Engvall och är ordförande i FREJA. FREJA är en fristående samarbetsförening till F-sektionen. Föreningens syfte är att främja kvinnor och icke-binära som studerar eller har studerat på sektionen. Genom en mängd olika event och aktiviteter hoppas vi kunna bidra till en mer jämställd teknikbransch. \nSå om du definierar dig som något av det ovannämnda, hoppas vi i FREJA att du vill ta del av våran gemenskap. Och om du definierar dig som något annat, oroa inte! Vi håller även en del event där alla är välkomna. Hoppas att du kommer trivas i Lund och på sektionen, så ses vi! ",
+          "en": "Hello and glad you found your way here! My name is Kajsa Engvall and I am president of FREJA. FREJA is an independent cooperative organization for the F guild where the purpose of the organization is to promote women and non-binary people who study or have studied at the guild. Through a variety of events and activities, we hope to contribute to a more equal tech-industry.\nSo if you define yourself as any of the above, we at FREJA hope that you want to take part in our community. And if you define yourself as something else, don't worry! We also hold a number of events where everyone is welcome. Hope you will have a good time in Lund and at the guild, see you soon!"
+      }
+  }
+]
+} 

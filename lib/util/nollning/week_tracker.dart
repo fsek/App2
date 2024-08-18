@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 class WeekTracker {
   static const List<Color> weekColors = [
-    Color(0xFF202C57), // v0
-    Color(0xFF4B6357), // v1
-    Color(0xFF9B4C52), // v2
-    Color(0xFF260F3F), // v3
-    Color(0xFF165C7F), // v4
+    Color(0xFFf77e14), // v0
+    Color(0xFFf77e14), // v1
+    Color(0xFFf77e14), // v2
+    Color(0xFFf77e14), // v3
+    Color(0xFFf77e14), // v4
     Color(0xFFf77e14), // for other times and purposes
   ];
 
   static int determineWeek({bool differentPreIntroduction = false}) {
     DateTime now = DateTime.now();
-    DateTime v0 = DateTime(2023, 8, 21, 0, 0);
-    DateTime v1 = DateTime(2023, 8, 28, 0, 0);
-    DateTime v2 = DateTime(2023, 9, 4, 0, 0);
-    DateTime v3 = DateTime(2023, 9, 11, 0, 0);
-    DateTime v4 = DateTime(2023, 9, 18, 0, 0);
+    DateTime v0 = DateTime(2024, 8, 26, 0, 0);
+    DateTime v1 = DateTime(2024, 9, 2, 0, 0);
+    DateTime v2 = DateTime(2024, 9, 9, 0, 0);
+    DateTime v3 = DateTime(2024, 9, 16, 0, 0);
+    DateTime v4 = DateTime(2024, 9, 23, 0, 0);
 
     List<DateTime> weeks = [v0, v1, v2, v3, v4];
 

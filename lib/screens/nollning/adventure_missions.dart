@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
-import 'package:fsek_mobile/screens/nollning/highscore_tab.dart';
+import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
 import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
