@@ -1,4 +1,6 @@
 {
+    "@@locale": "en",
+
     "fGuildName": "F-Guild at TLTH",
     "dGuildName": "D-Guild at TLTH",
     "language": "Language",
@@ -174,6 +176,8 @@
     "introductionPendingApproval": "Pending aproval",
     "introductionNotCompleted": "Not completed",
     "introductionWeek": "Week",
+    "introductionMap": "Map over LTH",
+    "introductionMapClose": "Close",
 
     "cafeShiftSignup": "You have signed up for the shift",
     "cafeShiftSignupText": "Thank you for wanting to work in the café! Remember to remove your sing-up if you can't make it.",
@@ -192,10 +196,10 @@
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
 
-    "mannersEtiquette": "Student life", 
-    
+    "mannersEtiquette": "Student life",
+
     "aboutGuildTitle": "About The F-guild",
-    "aboutGuildGuild": "The F-guild", 
+    "aboutGuildGuild": "The F-guild",
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
     "aboutGuildThree": "among members and look after their common interests.",
