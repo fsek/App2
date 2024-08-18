@@ -12,16 +12,7 @@ class FsekAppBarItem {
 }
 
 class FsekAppBar extends StatefulWidget {
-  FsekAppBar(
-      {this.items,
-      this.centerItemText,
-      this.height = 60.0,
-      this.iconSize = 24.0,
-      this.color,
-      this.selectedColor,
-      this.notchedShape,
-      required this.onTabSelected,
-      required this.currentIndex}) {
+  FsekAppBar({this.items, this.centerItemText, this.height = 60.0, this.iconSize = 24.0, this.color, this.selectedColor, this.notchedShape, required this.onTabSelected, required this.currentIndex}) {
     assert(this.items!.length == 2 || this.items!.length == 5);
   }
   final List<FsekAppBarItem>? items;
@@ -102,6 +93,7 @@ class FsekAppBarState extends State<FsekAppBar> {
 
     return BottomAppBar(
         shape: widget.notchedShape,
+        padding: EdgeInsets.zero,
         child: Stack(
           clipBehavior: Clip.none,
           children: [

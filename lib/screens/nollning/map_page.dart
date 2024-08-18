@@ -51,7 +51,6 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
   String baseAssetPath = "assets/img/nollning-24/karta/";
   final String imagePath = "assets/img/nollning-24/karta/mapscreen.png";
-  final String backgroundPath = "assets/img/nollning-24/hemsidan/homescreen_week_2.png";
   final double pinWidth = 17.0;
   final double pinHeight = 17.0;
   final int imageWidth = 2900;
@@ -79,7 +78,7 @@ class _MapViewState extends State<MapView> {
       body: Container(
         child: PhotoView.customChild(
           initialScale: 2.0,
-          backgroundDecoration: BoxDecoration(image: DecorationImage(image: AssetImage(backgroundPath))),
+          backgroundDecoration: BoxDecoration(color: Color(0xff2c2724)),
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -87,7 +86,7 @@ class _MapViewState extends State<MapView> {
               ...?pins,
             ],
           ),
-          minScale: 0.5,
+          minScale: 1.0,
           maxScale: 6.0,
         ),
       ),
