@@ -217,6 +217,9 @@ List<int> totalMissions(List<AdventureMissionWeek> adventureMissionWeeks) {
   List<int> missionsPerWeek = List.empty(growable: true);
   adventureMissionWeeks.forEach((week) {
     missionsPerWeek.add(week.adventure_missions!.length);
+    if (week == 5) {
+      missionsPerWeek.add(week.adventure_missions!.length);
+    }
   });
   //fuck it! While loop
   // while (missionsPerWeek.length <= 5) {

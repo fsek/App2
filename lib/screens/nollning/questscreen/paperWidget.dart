@@ -38,6 +38,7 @@ class _PaperWidgetState extends State<PaperWidget> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
 
     //accessing week from widget
     int week = widget.week;
@@ -47,12 +48,12 @@ class _PaperWidgetState extends State<PaperWidget> {
     //assets
     String paperPath =
         "assets/img/nollning-24/uppdrag/questscreen_paper_cropped.png";
-    String goodbyePaperPath =
-        "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png";
+    String goodbyePaperPath = locale == "sv"
+        ? "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png"
+        : "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_english.png";
 
     // Determine which path to use based on the length of _adventureWeeks
-    String currentPaperPath =
-        (finalWeek == true) ? goodbyePaperPath : paperPath;
+    String currentPaperPath = finalWeek ? goodbyePaperPath : paperPath;
 
     //make it clickable if its the goodbyepaper
 
@@ -78,7 +79,9 @@ class _PaperWidgetState extends State<PaperWidget> {
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Text(
-                          t.weekQuests + " " + week.toString(),
+                          (week != 5)
+                              ? t.weekQuests + " " + week.toString()
+                              : "",
                           // totalMissionsList!.length.toString() +
                           //     acceptedMissionsList!.length.toString(),
                           style: TextStyle(
@@ -111,7 +114,7 @@ class _PaperWidgetState extends State<PaperWidget> {
     );
 
     // Only wrap the paperContent with GestureDetector if it's the goodbye paper
-    return (currentPaperPath == goodbyePaperPath)
+    return (finalWeek == true)
         ? GestureDetector(
             onTap: () {
               Navigator.push(

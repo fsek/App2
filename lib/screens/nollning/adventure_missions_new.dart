@@ -38,6 +38,7 @@ class _AdventureMissionsPageNewState extends State<AdventureMissionsPageNew> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -69,7 +70,9 @@ class _AdventureMissionsPageNewState extends State<AdventureMissionsPageNew> {
             t.introductionAdventureMissions,
             style: TextStyle(
               fontFamily: 'Testament',
-              fontSize: 30.0,
+              fontSize:
+                  //MediaQuery.of(context).size.width / 20,
+                  (locale == "sv" ? 28.0 : 26),
               fontWeight: FontWeight.normal,
               color: Color(0xFFE9CA97),
             ),
