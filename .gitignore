@@ -56,4 +56,4 @@ app.*.map.json
 build
 
 # Ignore missings translations file from I10n.yaml
-missingTransations.txt
+missingTranslations.txt
