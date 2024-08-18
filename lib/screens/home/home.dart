@@ -103,8 +103,7 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize * 1.6)),
               onTap: () {
-                // TODO: Replace this with the actual page route if different
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MapPage(title: "map", disc: "Wow")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MapView()));
               },
               child: Padding(
                 padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 25),
