@@ -45,8 +45,8 @@
     "eventPrice": "Price: ",
     "eventCostsMoney": "  Costs money",
     "eventFoodServed": "  Food served",
-    "eventAlcoholServed": "  Alocohol served",
-    "eventDrinkPackage": "Drink package (non binding): ",
+    "eventAlcoholServed": "  Alcohol served",
+    "eventDrinkPackage": "What kind of alcohol package do you want?",
     "eventYes": "Yes",
     "eventNo": "No",
     "eventHasSignup": "  Sign-up required",
@@ -54,7 +54,7 @@
     "eventAlcohol" : "Alcohol",
     "eventAlcoholFree" : "Alcoholfree",
     "eventNoAlcohol" : "None",
-    
+
     "settingsSettings": "Settings",
     "settingsSave": "Save",
     "settingsProgramme": "Programme",
@@ -195,10 +195,10 @@
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
 
-    "mannersEtiquette": "Student life", 
-    
+    "mannersEtiquette": "Student life",
+
     "aboutGuildTitle": "About The F-guild",
-    "aboutGuildGuild": "The F-guild", 
+    "aboutGuildGuild": "The F-guild",
     "aboutGuildOne": "The F-guild at TLTH is a non-profit student association for students at the engineering programs ",
     "aboutGuildTwo": "Engineering physics, Engineering mathematics or Engineering nanoscience and its purpose is to promote fellowship ",
     "aboutGuildThree": "among members and look after their common interests.",
@@ -389,7 +389,7 @@
     "schoolCareerCousellor": "School career counsellor",
     "schoolCareerCousellorContent": "If you have questions regarding your education this is who to talk to. You can find them on the fifth floor of the E-house or in Hilbert café at 9-11 on Thursdays!",
     "careerCounsellorOne": "Engineering Physics\nJoakim Cao",
-    "ccareerCounsellorOneNumber": "046 222 72 89",
+    "careerCounsellorOneNumber": "046 222 72 89",
     "careerCounsellorOneEmail": "joakim.cao@lth.lu.se",
     "careerCounsellorTwo": "Engineering Nanoscience\nMaria Sörensson",
     "careerCounsellorTwoNumber": "046 222 08 54",

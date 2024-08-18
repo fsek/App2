@@ -34,7 +34,7 @@ class _EventPageState extends State<EventPage> {
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
-    "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2))
+    "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2)),
   };
 
   static const foodPrefsDisplay = {
@@ -42,8 +42,12 @@ class _EventPageState extends State<EventPage> {
     "vegan": "Vegan",
     "pescetarian": "Pescetarian",
     "milk": "Mjölkallergi",
-    "gluten": "Gluten"
+    "gluten": "Gluten",
   };
+  static const String drinkPackageNone = "Inget";
+  static const String drinkPackageAlcohol = "Alkohol";
+  static const String drinkPackageAlcoholFree = "Alkoholfritt";
+
   void initState() {
     locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
           this.event = value;
@@ -102,12 +106,11 @@ class _EventPageState extends State<EventPage> {
     }
     if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
       setState(() {
-        drinkPackageAnswer = "Inget";
+        drinkPackageAnswer = drinkPackageNone;
       });
     }
     int eventId = event?.id ?? -1;
-    Map json =
-        await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
+    Map json = await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -416,10 +419,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_available_rounded,
                     ),
                     Text(
-                      t.eventSignUpOpens +
-                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
-                          " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
+                      t.eventSignUpOpens + DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
@@ -429,10 +429,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_busy_rounded,
                     ),
                     Text(
-                      t.eventSignUpCloses +
-                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
-                          " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
+                      t.eventSignUpCloses + DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
                 ),
@@ -477,7 +474,8 @@ class _EventPageState extends State<EventPage> {
     }
     Widget drinkPackageInput = Container();
     if (event!.drink_package ?? false) {
-      drinkPackageInput = Row(
+      drinkPackageInput = Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(" ${t.eventDrinkPackage}"),
           Container(
@@ -495,15 +493,15 @@ class _EventPageState extends State<EventPage> {
                 },
                 items: [
                   DropdownMenuItem<String?>(
-                    value: "Alkohol",
+                    value: drinkPackageAlcohol,
                     child: Text(t.eventAlcohol),
                   ),
                   DropdownMenuItem<String?>(
-                    value: "Alkoholfritt",
+                    value: drinkPackageAlcoholFree,
                     child: Text(t.eventAlcoholFree),
                   ),
                   DropdownMenuItem<String?>(
-                    value: "Inget",
+                    value: drinkPackageNone,
                     child: Text(t.eventNoAlcohol),
                   )
                 ],
@@ -524,11 +522,8 @@ class _EventPageState extends State<EventPage> {
               drinkPackageInput,
               Wrap(
                 children: [
-                  Text(t.eventFoodPreferences + " ",
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-                  ...?foodPreferences[locale]
-                      ?.where((element) => element.isNotEmpty)
-                      .map((foodPreference) => Text(foodPreference + " ")),
+                  Text(t.eventFoodPreferences + " ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  ...?foodPreferences[locale]?.where((element) => element.isNotEmpty).map((foodPreference) => Text(foodPreference + " ")),
                   Text("  " + (foodCustom ?? "")),
                 ],
               ),
@@ -538,10 +533,7 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
                 GestureDetector(
-                  child: Text(t.eventLinkToFoodPrefs,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+                  child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -652,89 +644,47 @@ class _EventPageState extends State<EventPage> {
     }
     Widget drinkPackage = Container();
     if (event!.drink_package ?? false) {
-      print(event!.event_user!.drink_package_answer);
       switch (event!.event_user!.drink_package_answer) {
-        case "Alkohol":
-          drinkPackage = RichText(
-            text: TextSpan(
-                text: t.eventDrinkPackage,
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                children: [
-                  TextSpan(text: t.eventAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-                ]),
-          );
+        case drinkPackageAlcohol:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
           break;
-        case "Alkoholfritt":
-          drinkPackage = RichText(
-            text: TextSpan(
-                text: t.eventDrinkPackage,
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                children: [
-                  TextSpan(
-                      text: t.eventAlcoholFree, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-                ]),
-          );
+        case drinkPackageAlcoholFree:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
           break;
-        case "Inget":
-          drinkPackage = RichText(
-            text: TextSpan(
-                text: t.eventDrinkPackage,
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                children: [
-                  TextSpan(text: t.eventNoAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-                ]),
-          );
+        case drinkPackageNone:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
           break;
         default:
-          this.drinkPackageAnswer = "Inget";
-          drinkPackage = RichText(
-            text: TextSpan(
-                text: t.eventDrinkPackage,
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                children: [
-                  TextSpan(text: t.eventNoAlcohol, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-                ]),
-          );
+          this.drinkPackageAnswer = drinkPackageNone;
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
           break;
       }
     }
     return [
       RichText(
           text: TextSpan(
-              text: t.eventGroup,
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
+        text: t.eventGroup,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      )),
       RichText(
           text: TextSpan(
-              text: t.eventPriority2,
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
+        text: t.eventPriority2,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      )),
       event!.event_signup!.question != ""
           ? RichText(
               text: TextSpan(
                   text: event!.event_signup!.question!,
-                  children: [
-                    TextSpan(text: " "),
-                    TextSpan(
-                        text: event!.event_user!.answer,
-                        style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
-                  ],
+                  children: [TextSpan(text: " "), TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
       drinkPackage,
       Wrap(
         children: [
-          RichText(
-              text: TextSpan(
-                  text: t.eventFoodPreferences + " ",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences[locale]
-              ?.where((element) => element.isNotEmpty)
-              .map((foodPreferences) => Text(foodPreferences + " ")),
+          RichText(text: TextSpan(text: t.eventFoodPreferences + " ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+          ...?foodPreferences[locale]?.where((element) => element.isNotEmpty).map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
         ],
       ),
@@ -744,14 +694,21 @@ class _EventPageState extends State<EventPage> {
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
         GestureDetector(
-          child: Text(t.eventLinkToFoodPrefs,
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+          child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
           onTap: () => goToSettings(),
         ),
       ]),
     ];
+  }
+
+  Widget _drinkPackageWidget(String drinkPackageText, String choice) {
+    return RichText(
+      text: TextSpan(
+        text: drinkPackageText,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      ),
+    );
   }
 
   String getDots() {
@@ -855,13 +812,8 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [
-                        Text(t.eventDressCode),
-                        ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
-                      ]),
-                      Visibility(
-                          visible: event!.cash ?? false,
-                          child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
+                      Row(children: [Text(t.eventDressCode), ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))]),
+                      Visibility(visible: event!.cash ?? false, child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
                     ],
                   ),
                 ),

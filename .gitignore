@@ -54,3 +54,6 @@ app.*.map.json
 
 # Ignore Gradle build output directory
 build
+
+# Ignore missings translations file from I10n.yaml
+missingTransations.txt
