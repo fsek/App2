@@ -1,4 +1,6 @@
 {
+    "@@locale": "sv",
+
     "fGuildName": "F-sektionen inom TLTH",
     "dGuildName": "D-sektionen inom TLTH",
     "language": "Språk",
@@ -177,6 +179,8 @@
     "introductionPendingApproval": "Väntar på godkännande",
     "introductionNotCompleted": "Ej avklarat",
     "introductionWeek": "Vecka",
+    "introductionMap": "Karta över LTH",
+    "introductionMapClose": "Stäng",
 
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
@@ -320,10 +324,12 @@
     "emergencyTitleSeven": " - Krisinformation",
     "emergencyContentSeven": "Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.",
     "emergencyTitleEight": "Föset",
-    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nNiamh McMullin, Överfös\n0760791612\n\nElin Hellström, Cofös \n0725170277 \n\nErica Fritz, Cofös \n0760163156 \n\nLilly Berg, Cofös \n0767786087 \n\nNils Brasar, Cofös \n0761916342 \n\nRebecka Eldh, Cofös \n0793414434 \n\n Ytterligare kontaktinformation finns att hitta i Nolleguiden",
+    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Mattis\n0735171631\n\nCofös Thea\n0727444727 \n\nCofös Lovisa\n0727086597 \n\nCofös Hanne \n0723893333 \n\nCofös Lian\n0766477878 \n\nCofös Albin\n0705190468 \n\nCofös Linnea\n0707431239 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden",
 
     "game": "Moose game",
     "gameDescription":"Kommer snart!",
+
+    "weekQuests": "Vecka",
 
     "kladguideTopTitle": "En guide till klädkoder inom studentlivet",
     "kladGuideProcessionFeature": "I samarbete med medaljkommittén",

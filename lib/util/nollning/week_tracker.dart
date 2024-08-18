@@ -12,11 +12,11 @@ class WeekTracker {
 
   static int determineWeek({bool differentPreIntroduction = false}) {
     DateTime now = DateTime.now();
-    DateTime v0 = DateTime(2024, 8, 19, 0, 0);
-    DateTime v1 = DateTime(2024, 8, 26, 0, 0);
-    DateTime v2 = DateTime(2024, 9, 2, 0, 0);
-    DateTime v3 = DateTime(2024, 9, 9, 0, 0);
-    DateTime v4 = DateTime(2024, 9, 16, 0, 0);
+    DateTime v0 = DateTime(2024, 8, 26, 0, 0);
+    DateTime v1 = DateTime(2024, 9, 2, 0, 0);
+    DateTime v2 = DateTime(2024, 9, 9, 0, 0);
+    DateTime v3 = DateTime(2024, 9, 16, 0, 0);
+    DateTime v4 = DateTime(2024, 9, 23, 0, 0);
 
     List<DateTime> weeks = [v0, v1, v2, v3, v4];
 
@@ -27,7 +27,8 @@ class WeekTracker {
         if (now.compareTo(weeks[i]) > 0) {
           return i;
         }
-      } else if (now.compareTo(weeks[i]) > 0 && now.compareTo(weeks[i + 1]) < 0) {
+      } else if (now.compareTo(weeks[i]) > 0 &&
+          now.compareTo(weeks[i + 1]) < 0) {
         return i;
       }
     }
