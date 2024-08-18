@@ -160,19 +160,19 @@ class _MainPersonCard extends StatelessWidget {
       position = Text(person.position![locale]!,
           style: TextStyle(shadows: [
                 Shadow(
-                  offset: Offset(-1.5, -1.5),
+                  offset: Offset(-1, -1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(1.5, -1.5),
+                  offset: Offset(1, -1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(1.5, 1.5),
+                  offset: Offset(1, 1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(-1.5, 1.5),
+                  offset: Offset(-1, 1),
                   color: Colors.black,
                 ),
               ],fontSize: screenWidth/26, color: Colors.white));
@@ -194,19 +194,19 @@ class _MainPersonCard extends StatelessWidget {
                     person.name![locale]!,
                     style: TextStyle(shadows: [
                 Shadow(
-                  offset: Offset(-1.5, -1.5),
+                  offset: Offset(-1, -1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(1.5, -1.5),
+                  offset: Offset(1, -1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(1.5, 1.5),
+                  offset: Offset(1, 1),
                   color: Colors.black,
                 ),
                 Shadow(
-                  offset: Offset(-1.5, 1.5),
+                  offset: Offset(-1, 1),
                   color: Colors.black,
                 ),
               ],  fontSize: screenWidth/22, color: Colors.white),

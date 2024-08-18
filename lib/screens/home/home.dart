@@ -19,6 +19,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart
 import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
@@ -66,6 +67,7 @@ class _HomePageState extends State<HomePage> {
             }));
     super.initState();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -137,8 +139,19 @@ class _HomePageState extends State<HomePage> {
                       Column(children: [
                         InkWell(
                           customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideScreenPage()));
+                          onTap: () async {
+                            showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(), 
+                              );
+                            },
+                          );
+                          await preloadAssets(context, "nolleGuideScreenPaths");
+                          Navigator.pop(context); 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideScreenPage()));
                           },
                           child: Padding(
                             padding: EdgeInsets.zero,
@@ -168,9 +181,19 @@ class _HomePageState extends State<HomePage> {
                       Padding(padding: EdgeInsets.only(left: 10, right: 10)),
                       InkWell(
                         customBorder: CircleBorder(),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleScreenPage()));
-
+                        onTap: () async {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(), 
+                              );
+                            },
+                            );
+                            await preloadAssets(context, "schedulePaths");
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleScreenPage()));
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,

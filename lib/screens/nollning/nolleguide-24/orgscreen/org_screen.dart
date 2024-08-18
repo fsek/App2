@@ -20,6 +20,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/teknologkaren.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/others.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
+import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -140,7 +141,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (TeknologkarenScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "teknologkarenPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (TeknologkarenScreenPage())));
+                                    },
                                   child:
                                     Stack(
                                       children: [        
@@ -163,7 +177,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => GuildScreenPage()));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "backgroundPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => GuildScreenPage()));
+                                    },
                                   child:
                                     Stack(
                                       children: [ 
@@ -209,7 +236,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ManagementScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "managementPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ManagementScreenPage())));
+                                    },
                                   child:
                                     Stack(
                                       children: [        
@@ -232,7 +272,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FosetScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "fosetPaths");
+                                    Navigator.pop(context); 
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FosetScreenPage())));
+                                    },
                                   child: 
                                     Stack(
                                       children: [        
@@ -262,7 +315,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfCultureScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "culturePaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfCultureScreenPage())));
+                                    },
                                   child: 
                                     Stack(
                                       children: [        
@@ -285,7 +351,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FestivitiesCommitteeScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "festivitiesPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FestivitiesCommitteeScreenPage())));
+                                    },
                                   child: 
                                     Stack(
                                       children: [        
@@ -314,7 +393,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (EducationalCouncilScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "educationPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (EducationalCouncilScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -337,7 +429,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (AccountingDepartmentScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "accountingPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (AccountingDepartmentScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -368,7 +473,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (CafeScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "cafePaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (CafeScreenPage())));
+                                    },
                                   child: 
                                     Stack(
                                       children: [        
@@ -391,7 +509,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (CorporateRelationsScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "corporatePaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (CorporateRelationsScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -420,7 +551,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FacilitiesCommitteeScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "facilitiesPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FacilitiesCommitteeScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -442,7 +586,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ConscienceScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "consciencePaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ConscienceScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -471,7 +628,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfTruthScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "truthPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfTruthScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -494,7 +664,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (ProcessionScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "processionPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ProcessionScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -516,7 +699,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (OthersScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "backgroundPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (OthersScreenPage())));
+                                    },
                                   child: 
                                     Stack(
                                       children: [        
@@ -543,7 +739,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (FrejaScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "frejaPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FrejaScreenPage())));
+                                    },
                                   child:           
                                     Image.asset(
                                       frejaButtonPath,
@@ -563,7 +772,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => (NationScreenPage())));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "backgroundPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (NationScreenPage())));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
@@ -588,7 +810,20 @@ return Scaffold(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent
                                   ),
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SpexPage()));},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(), 
+                                        );
+                                      },
+                                    );
+                                    await preloadAssets(context, "backgroundPaths");
+                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SpexPage()));
+                                    },
                                   child:  
                                     Stack(
                                       children: [        
