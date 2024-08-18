@@ -214,7 +214,7 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
                     Image.asset(backgroundWoodPath),
                     Image.asset(backgroundPaperPath),
                     Container(
-                      margin: EdgeInsets.only(top: 100, left: 50, right: 50),
+                      margin: EdgeInsets.only(top: 100, left: 50, right: 50, bottom: 100),
                       child:
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
