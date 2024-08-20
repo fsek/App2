@@ -52,7 +52,7 @@ class _EventPageState extends State<EventPage> {
     locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
           this.event = value;
           if (this.event != null) {
-            this.drinkPackageAnswer = "Alkohol";
+            this.drinkPackageAnswer = drinkPackageAlcohol;
             this.defaultGroup = event!.groups![0];
             this.group = defaultGroup;
             if (this.group == null) {
@@ -320,7 +320,9 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ],
                     ),
-                    const Divider(),
+                    Divider(
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                    ),
                     ..._signupDetails(groupName, userType),
                   ],
                 );
@@ -342,7 +344,9 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ],
                     ),
-                    const Divider(),
+                    Divider(
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                    ),
                     ..._signupDetails(groupName, userType),
                   ],
                 );
@@ -365,7 +369,9 @@ class _EventPageState extends State<EventPage> {
                       ),
                     ],
                   ),
-                  const Divider(),
+                  Divider(
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                  ),
                   ..._signupDetails(groupName, userType),
                 ],
               );
@@ -388,7 +394,9 @@ class _EventPageState extends State<EventPage> {
             t.eventSignUp,
             style: TextStyle(fontSize: 25, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
           ),
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             child: Column(
@@ -436,9 +444,13 @@ class _EventPageState extends State<EventPage> {
               ],
             ),
           ),
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           signup,
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           Container(
             margin: EdgeInsets.all(10),
             child: Column(
@@ -454,7 +466,9 @@ class _EventPageState extends State<EventPage> {
                   ),
                   onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
               ],
             ),
           ),
@@ -747,6 +761,15 @@ class _EventPageState extends State<EventPage> {
         title: Text(t.eventTitle),
       ),
       body: Container(
+        // Introduction events have a different background
+        decoration: event?.is_introduction == true
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/img/nollning-24/schedule/event_background.png"),
+                  fit: BoxFit.fill,
+                ),
+              )
+            : null,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -761,7 +784,9 @@ class _EventPageState extends State<EventPage> {
                     color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Row(
                   children: [
                     Icon(
@@ -795,7 +820,9 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ],
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Container(
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
@@ -806,7 +833,9 @@ class _EventPageState extends State<EventPage> {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -817,7 +846,9 @@ class _EventPageState extends State<EventPage> {
                     ],
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -866,7 +897,9 @@ class _EventPageState extends State<EventPage> {
                 ),
                 Visibility(
                   visible: event!.can_signup ?? false,
-                  child: const Divider(),
+                  child: Divider(
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                  ),
                 ),
                 Visibility(
                   visible: (!(event!.contact == null)),
@@ -888,7 +921,9 @@ class _EventPageState extends State<EventPage> {
                             "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
                           )),
                         ),
-                        const Divider(),
+                        Divider(
+                          color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                        ),
                       ],
                     ),
                   ),
