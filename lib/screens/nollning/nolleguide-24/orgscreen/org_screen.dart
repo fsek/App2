@@ -36,10 +36,12 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
     String orgFortPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fortdesign.png";
 
     String fsekButtonPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_fsek_${t.localeName}.png";
-    String introductionCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/introduction_${t.localeName}.png";
+    String introductionCommitteePath =
+        "assets/img/nollning-24/nolleguide/organization_tree/introduction_${t.localeName}.png";
     String cafePath = "assets/img/nollning-24/nolleguide/organization_tree/cafe_${t.localeName}.png";
     String spexPath = "assets/img/nollning-24/nolleguide/organization_tree/spex.png";
-    String accountingDepartmentPath = "assets/img/nollning-24/nolleguide/organization_tree/accounting_${t.localeName}.png";
+    String accountingDepartmentPath =
+        "assets/img/nollning-24/nolleguide/organization_tree/accounting_${t.localeName}.png";
     String ministryOfTruthPath = "assets/img/nollning-24/nolleguide/organization_tree/truth_${t.localeName}.png";
     String consciencePath = "assets/img/nollning-24/nolleguide/organization_tree/conscience_${t.localeName}.png";
     String guildsPath = "assets/img/nollning-24/nolleguide/organization_tree/guilds_${t.localeName}.png";
@@ -49,10 +51,12 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
     String othersPath = "assets/img/nollning-24/nolleguide/organization_tree/others_${t.localeName}.png";
     String processionPath = "assets/img/nollning-24/nolleguide/organization_tree/procession_${t.localeName}.png";
     String ministryOfCulturePath = "assets/img/nollning-24/nolleguide/organization_tree/culture_${t.localeName}.png";
-    String festivitiesCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/festivities_${t.localeName}.png";
+    String festivitiesCommitteePath =
+        "assets/img/nollning-24/nolleguide/organization_tree/festivities_${t.localeName}.png";
     String educationalCouncilPath = "assets/img/nollning-24/nolleguide/organization_tree/education_${t.localeName}.png";
     String corporateRelationsPath = "assets/img/nollning-24/nolleguide/organization_tree/corporate_sv.png";
-    String facilitiesCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/facilities_${t.localeName}.png";
+    String facilitiesCommitteePath =
+        "assets/img/nollning-24/nolleguide/organization_tree/facilities_${t.localeName}.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -77,52 +81,79 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
                 padding: EdgeInsets.only(top: 70),
                 child: Column(children: [
                   Row(children: [
-                    _otherButton(tlthButtonPath, onTap: () => launchUrl(Uri.parse('https://www.tlth.se/nollning/')), padding: EdgeInsets.only(left: 60, right: 60, bottom: 5)),
+                    _otherButton(tlthButtonPath,
+                        onTap: () => launchUrl(Uri.parse('https://www.tlth.se/nollning/')),
+                        padding: EdgeInsets.only(left: 60, right: 60, bottom: 5)),
                   ]),
                   Row(
                     children: [
-                      _committeeButton("Teknologkåren", "teknologkarenPaths", "teknologkaren.json", organizationPath, leftmost: true),
-                      _otherButton(guildsPath, onTap: _pushAndPreload(GuildScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
+                      _committeeButton("Teknologkåren", "teknologkarenPaths", "teknologkaren.json", organizationPath,
+                          leftmost: true),
+                      _otherButton(guildsPath,
+                          onTap: _pushAndPreload(GuildScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
                     ],
                   ),
                   Row(children: [
-                    _otherButton(fsekButtonPath, onTap: () => launchUrl(Uri.parse('https://fsektionen.se/')), padding: EdgeInsets.only(top: 15, left: 60, right: 60, bottom: 5)),
+                    _otherButton(fsekButtonPath,
+                        onTap: () => launchUrl(Uri.parse('https://fsektionen.se/')),
+                        padding: EdgeInsets.only(top: 15, left: 60, right: 60, bottom: 5)),
                   ]),
                   Row(children: [
-                    _committeeButton(t.theManagement, "managementPaths", "management.json", managementPath, leftmost: true),
-                    _committeeButton(t.introductionCommittee, "fosetPaths", "foset.json", introductionCommitteePath, leftmost: false),
+                    _committeeButton(t.theManagement, "managementPaths", "management.json", managementPath,
+                        leftmost: true),
+                    _committeeButton(t.introductionCommittee, "fosetPaths", "foset.json", introductionCommitteePath,
+                        leftmost: false),
                   ]),
                   Row(children: [
-                    _committeeButton(t.ministryOfCulture, "culturePaths", "ministryOfCulture.json", ministryOfCulturePath, leftmost: true),
-                    _committeeButton(t.festivitiesCommittee, "festivitiesPath", "festivitiesCommittee.json", festivitiesCommitteePath, leftmost: false),
+                    _committeeButton(
+                        t.ministryOfCulture, "culturePaths", "ministryOfCulture.json", ministryOfCulturePath,
+                        leftmost: true),
+                    _committeeButton(t.festivitiesCommittee, "festivitiesPath", "festivitiesCommittee.json",
+                        festivitiesCommitteePath,
+                        leftmost: false),
                   ]),
                   Row(children: [
-                    _committeeButton(t.educationalCouncil, "educationPaths", "educationalCouncil.json", educationalCouncilPath, leftmost: true),
-                    _committeeButton(t.theAccountingDepartment, "accountingPaths", "accountingDepartment.json", accountingDepartmentPath, leftmost: false),
+                    _committeeButton(
+                        t.educationalCouncil, "educationPaths", "educationalCouncil.json", educationalCouncilPath,
+                        leftmost: true),
+                    _committeeButton(t.theAccountingDepartment, "accountingPaths", "accountingDepartment.json",
+                        accountingDepartmentPath,
+                        leftmost: false),
                   ]),
                   Row(children: [
                     _committeeButton(t.hilbertCafe, "cafePaths", "cafe.json", cafePath, leftmost: true),
-                    _committeeButton(t.corporateRelations, "corporatePaths", "corporateRelations.json", corporateRelationsPath, leftmost: false),
+                    _committeeButton(
+                        t.corporateRelations, "corporatePaths", "corporateRelations.json", corporateRelationsPath,
+                        leftmost: false),
                   ]),
                   Row(children: [
-                    _committeeButton(t.facilitiesCommittee, "facilitiesPaths", "facilitiesCommittee.json", facilitiesCommitteePath, leftmost: true),
-                    _committeeButton(t.theConscience, "consciencePaths", "conscience.json", consciencePath, leftmost: false),
+                    _committeeButton(
+                        t.facilitiesCommittee, "facilitiesPaths", "facilitiesCommittee.json", facilitiesCommitteePath,
+                        leftmost: true),
+                    _committeeButton(t.theConscience, "consciencePaths", "conscience.json", consciencePath,
+                        leftmost: false),
                   ]),
                   Row(children: [
-                    _committeeButton(t.ministryOfTruth, "truthPaths", "minstryOfTruth.json", ministryOfTruthPath, leftmost: true),
-                    _committeeButton(t.theProcession, "processtionPaths", "procession.json", processionPath, leftmost: false),
+                    _committeeButton(t.ministryOfTruth, "truthPaths", "ministryOfTruth.json", ministryOfTruthPath,
+                        leftmost: true),
+                    _committeeButton(t.theProcession, "processtionPaths", "procession.json", processionPath,
+                        leftmost: false),
                   ]),
                   Row(children: [
-                    _otherButton(othersPath, onTap: _pushAndPreload(OthersScreenPage()), padding: EdgeInsets.only(left: 115, right: 115, bottom: 40)),
+                    _otherButton(othersPath,
+                        onTap: _pushAndPreload(OthersScreenPage()),
+                        padding: EdgeInsets.only(left: 115, right: 115, bottom: 40)),
                   ]),
                   Row(
                     children: [
                       _committeeButton("FREJA", "frejaPaths", "freja.json", frejaButtonPath, leftmost: true),
-                      _otherButton(nationsPath, onTap: _pushAndPreload(NationScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
+                      _otherButton(nationsPath,
+                          onTap: _pushAndPreload(NationScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
                     ],
                   ),
                   Row(children: [
-                    _otherButton(spexPath, onTap: _pushAndPreload(SpexPage()), padding: EdgeInsets.only(left: 115, right: 115)),
+                    _otherButton(spexPath,
+                        onTap: _pushAndPreload(SpexPage()), padding: EdgeInsets.only(left: 115, right: 115)),
                   ]),
                 ]))
           ],
@@ -131,7 +162,8 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
     );
   }
 
-  Widget _committeeButton(String committeeName, String assetNames, String dataPath, String buttonPath, {bool leftmost = true}) {
+  Widget _committeeButton(String committeeName, String assetNames, String dataPath, String buttonPath,
+      {bool leftmost = true}) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: leftmost ? 40 : 5, right: leftmost ? 5 : 40),
