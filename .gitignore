@@ -9,6 +9,8 @@
 .history
 .svn/
 *.g.dart
+local.properties
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -52,3 +54,6 @@ app.*.map.json
 
 # Ignore Gradle build output directory
 build
+
+# Ignore missings translations file from I10n.yaml
+missingTranslations.txt

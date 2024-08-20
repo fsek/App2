@@ -22,6 +22,7 @@ class Event {
   bool? closed;
   bool? can_signup;
   bool? drink_package;
+  bool? is_introduction;
   int? price;
   List<String>? dress_code;
   int? event_user_count;

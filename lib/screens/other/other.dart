@@ -49,7 +49,7 @@ class OtherContent extends StatelessWidget {
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container(),
+      "Anonym kontaktsida": Container()
     };
 
     return ListView(

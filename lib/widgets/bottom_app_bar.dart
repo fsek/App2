@@ -1,7 +1,9 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
+import 'package:fsek_mobile/widgets/easterEgg/familyGuyFoset.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
@@ -10,16 +12,17 @@ class FsekAppBarItem {
 }
 
 class FsekAppBar extends StatefulWidget {
-  FsekAppBar(
-      {this.items,
-      this.centerItemText,
-      this.height = 60.0,
-      this.iconSize = 24.0,
-      this.color,
-      this.selectedColor,
-      this.notchedShape,
-      required this.onTabSelected,
-      required this.currentIndex}) {
+  FsekAppBar({
+    this.items,
+    this.centerItemText,
+    this.height = 60.0,
+    this.iconSize = 24.0,
+    this.color,
+    this.selectedColor,
+    this.notchedShape,
+    required this.onTabSelected,
+    required this.currentIndex,
+  }) {
     assert(this.items!.length == 2 || this.items!.length == 5);
   }
   final List<FsekAppBarItem>? items;
@@ -37,14 +40,10 @@ class FsekAppBar extends StatefulWidget {
 }
 
 class FsekAppBarState extends State<FsekAppBar> {
-  List<int> appBarItemsClickedAmounts = [
-    0,
-    0,
-    0,
-    0
-  ]; //For activating easter egg codes
+  List<int> appBarItemsClickedAmounts = [0, 0, 0, 0]; //For activating easter egg codes
   DateTime lastEasterEggClick = DateTime.now();
   bool bababoeActive = false;
+  bool fosetActive = false;
 
   void _processEasterEggClick(int? index) async {
     // takes index of which nav bar item was clicked
@@ -67,15 +66,35 @@ class FsekAppBarState extends State<FsekAppBar> {
     String? easterEggCode = await easterEggCodeDialog(context);
     if (easterEggCode == null) return; // User cancels dialog i think
     //For more than one code, please don't stack else if's
-    if (easterEggCode == 'bababoe') {
-      setState(() {
-        bababoeActive = true;
-        Future.delayed(const Duration(seconds: 9), () {
-          setState(() {
-            bababoeActive = false;
+    switch (easterEggCode) {
+      case "bababoe":
+        setState(() {
+          bababoeActive = true;
+          Future.delayed(const Duration(seconds: 9), () {
+            setState(() {
+              bababoeActive = false;
+            });
           });
         });
-      });
+        break;
+
+      case "wow":
+        AudioPlayer().play(AssetSource('audio/wow.mp3'));
+        break;
+
+      case "föset":
+        setState(() {
+          fosetActive = true;
+          Future.delayed(const Duration(seconds: 14), () {
+            setState(() {
+              fosetActive = false;
+            });
+          });
+        });
+        break;
+
+      default:
+        break;
     }
   }
 
@@ -96,10 +115,12 @@ class FsekAppBarState extends State<FsekAppBar> {
 
     return BottomAppBar(
         shape: widget.notchedShape,
+        padding: EdgeInsets.zero,
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             Visibility(child: AnimatedNils(), visible: bababoeActive),
+            Visibility(child: familyGuyFoset(), visible: fosetActive),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -109,28 +130,27 @@ class FsekAppBarState extends State<FsekAppBar> {
         ));
   }
 
-  Widget _buildMiddleTabItem() {
-    return Expanded(
-      child: SizedBox(
-        height: widget.height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: widget.iconSize),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildMiddleTabItem() {
+  //   return Expanded(
+  //     child: SizedBox(
+  //       height: widget.height,
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           SizedBox(height: widget.iconSize),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildTabItem({
     required FsekAppBarItem item,
     int? index,
     ValueChanged<int?>? onPressed,
   }) {
-    Color? color =
-        widget.currentIndex == index ? widget.selectedColor : widget.color;
+    Color? color = widget.currentIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       key: Key(item.text!.toLowerCase() + "_btn"),
       child: SizedBox(
