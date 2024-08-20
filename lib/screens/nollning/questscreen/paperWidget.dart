@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
-import 'package:fsek_mobile/screens/nollning/mission.dart';
-import 'package:fsek_mobile/services/nollning.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
-import 'package:fsek_mobile/screens/nollning/questscreen/finishedMissions.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fsek_mobile/screens/nollning/questscreen/goodbyePaperPage.dart";
-import "package:fsek_mobile/screens/nollning/adventure_missions_new.dart";
-import "package:fsek_mobile/screens/nollning/adventure_missions_tab_new.dart";
 
 //behöver vecka, synas eller inte, klarade,total
 
@@ -31,7 +22,6 @@ class PaperWidget extends StatefulWidget {
 }
 
 class _PaperWidgetState extends State<PaperWidget> {
-  List<AdventureMissionWeek>? _adventureWeeks;
   List<int>? totalMissionsList;
   List<int>? acceptedMissionsList;
 
@@ -46,11 +36,8 @@ class _PaperWidgetState extends State<PaperWidget> {
     String content = widget.content;
 
     //assets
-    String paperPath =
-        "assets/img/nollning-24/uppdrag/questscreen_paper_cropped.png";
-    String goodbyePaperPath = locale == "sv"
-        ? "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png"
-        : "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_english.png";
+    String paperPath = "assets/img/nollning-24/uppdrag/questscreen_paper_cropped.png";
+    String goodbyePaperPath = locale == "sv" ? "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_cropped.png" : "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper_english.png";
 
     // Determine which path to use based on the length of _adventureWeeks
     String currentPaperPath = finalWeek ? goodbyePaperPath : paperPath;
@@ -58,8 +45,7 @@ class _PaperWidgetState extends State<PaperWidget> {
     //make it clickable if its the goodbyepaper
 
     Widget paperContent = SizedBox(
-      width: MediaQuery.of(context).size.width *
-          0.28, // Set width to 1/3 of the screen width
+      width: MediaQuery.of(context).size.width * 0.28, // Set width to 1/3 of the screen width
       child: AspectRatio(
         aspectRatio: 1325 / 1856, // Maintain the 1325:1856 aspect ratio
         child: Container(
@@ -79,9 +65,7 @@ class _PaperWidgetState extends State<PaperWidget> {
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Text(
-                          (week != 5)
-                              ? t.weekQuests + " " + week.toString()
-                              : "",
+                          (week != 5) ? t.weekQuests + " " + week.toString() : "",
                           // totalMissionsList!.length.toString() +
                           //     acceptedMissionsList!.length.toString(),
                           style: TextStyle(
@@ -120,7 +104,7 @@ class _PaperWidgetState extends State<PaperWidget> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => goodbyePaperPage(),
+                  builder: (context) => GoodbyePaperPage(),
                   // Navigate to the GoodbyePaperPage
                 ),
               );

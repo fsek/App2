@@ -43,7 +43,6 @@ class _StodFunktionerScreenState extends State<StodFunktionerScreenPage> {
     String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     var t = AppLocalizations.of(context)!;
 

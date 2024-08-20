@@ -8,8 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdventureMissionsTabNew extends StatefulWidget {
   @override
-  _AdventureMissionsTabNewState createState() =>
-      _AdventureMissionsTabNewState();
+  _AdventureMissionsTabNewState createState() => _AdventureMissionsTabNewState();
 }
 
 class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
@@ -61,12 +60,10 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
           ),
         ),
         body: TabBarView(
-          children: List.generate(weekCount,
-              (index) => _showAdventureWeek(_adventureWeeks![index])),
+          children: List.generate(weekCount, (index) => _showAdventureWeek(_adventureWeeks![index])),
         ),
       ),
-      initialIndex:
-          weekCount - 1, // make sure the current week is chosen as default
+      initialIndex: weekCount - 1, // make sure the current week is chosen as default
     );
   }
 
@@ -81,8 +78,7 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
         physics: const AlwaysScrollableScrollPhysics(),
       ),
       onRefresh: () async {
-        this._adventureWeeks =
-            await locator<NollningService>().getAdventureWeeks();
+        this._adventureWeeks = await locator<NollningService>().getAdventureWeeks();
         setState(() {});
       },
     );
@@ -98,23 +94,14 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
             textColor: Color(0xFFE9CA97),
             title: Text(mission.title!),
             // subtitle has to change wether or not we have variable amount of points
-            subtitle: mission.variable_points!
-                ? Text("1-${mission.max_points} " +
-                    t.introductionPoints2.toLowerCase())
-                : Text("${mission.max_points} " +
-                    t.introductionPoints2.toLowerCase()),
+            subtitle: mission.variable_points! ? Text("1-${mission.max_points} " + t.introductionPoints2.toLowerCase()) : Text("${mission.max_points} " + t.introductionPoints2.toLowerCase()),
             trailing: locator<NollningService>().is_mentor
                 ? Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       _getIconDescription(mission),
                       IconButton(
-                        onPressed: mission.locked ?? false
-                            ? null
-                            : () => {
-                                  _setCompletedState(mission)
-                                      .then((value) => setState(() {}))
-                                },
+                        onPressed: mission.locked ?? false ? null : () => {_setCompletedState(mission).then((value) => setState(() {}))},
                         icon: _getIcon(mission),
                       ),
                     ],
@@ -193,23 +180,19 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
         // if the mission has variable points, let them fill in the amount,
         // else just post instantly
         if (mission.variable_points!) {
-          int? points =
-              await _variablePointsDialog(context, mission.max_points!);
+          int? points = await _variablePointsDialog(context, mission.max_points!);
           if (points != null) {
-            Map json = await locator<NollningService>()
-                .finishAdventureMission(mission.id!, points);
+            Map json = await locator<NollningService>().finishAdventureMission(mission.id!, points);
             _changeLookOnMissionOrThrowError(mission, json);
           }
         } else {
-          Map json = await locator<NollningService>()
-              .finishAdventureMission(mission.id!, mission.max_points!);
+          Map json = await locator<NollningService>().finishAdventureMission(mission.id!, mission.max_points!);
           _changeLookOnMissionOrThrowError(mission, json);
         }
       } else {
         bool? remove = await _resetMissionDialog(context);
         if (remove == true) {
-          Map json = await locator<NollningService>()
-              .resetAdventureMission(mission.id!);
+          Map json = await locator<NollningService>().resetAdventureMission(mission.id!);
           _changeLookOnMissionOrThrowError(mission, json);
         }
       }
@@ -239,8 +222,7 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
     }
   }
 
-  Future<void> _failedToUpdateDialog(
-      BuildContext context, String errorMessage) {
+  Future<void> _failedToUpdateDialog(BuildContext context, String errorMessage) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -259,7 +241,7 @@ class _AdventureMissionsTabNewState extends State<AdventureMissionsTabNew> {
   }
 
   Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
-    final _formKey = GlobalKey<FormState>();
+    // final _formKey = GlobalKey<FormState>();
     TextEditingController _textFieldController = TextEditingController();
     int? points;
     var t = AppLocalizations.of(context)!;

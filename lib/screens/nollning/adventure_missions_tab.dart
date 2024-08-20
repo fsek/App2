@@ -88,18 +88,14 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
           return ListTile(
             title: Text(mission.title!),
             // subtitle has to change wether or not we have variable amount of points
-            subtitle: mission.variable_points!
-                ? Text("1-${mission.max_points} " + t.introductionPoints2.toLowerCase())
-                : Text("${mission.max_points} " + t.introductionPoints2.toLowerCase()),
+            subtitle: mission.variable_points! ? Text("1-${mission.max_points} " + t.introductionPoints2.toLowerCase()) : Text("${mission.max_points} " + t.introductionPoints2.toLowerCase()),
             trailing: locator<NollningService>().is_mentor
                 ? Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       _getIconDescription(mission),
                       IconButton(
-                        onPressed: mission.locked ?? false
-                            ? null
-                            : () => {_setCompletedState(mission).then((value) => setState(() {}))},
+                        onPressed: mission.locked ?? false ? null : () => {_setCompletedState(mission).then((value) => setState(() {}))},
                         icon: _getIcon(mission),
                       ),
                     ],
@@ -229,7 +225,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
   }
 
   Future<int?> _variablePointsDialog(BuildContext context, int max_points) {
-    final _formKey = GlobalKey<FormState>();
+    // final _formKey = GlobalKey<FormState>();
     TextEditingController _textFieldController = TextEditingController();
     int? points;
     var t = AppLocalizations.of(context)!;

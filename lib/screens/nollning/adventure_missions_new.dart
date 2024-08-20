@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
-import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
 import 'package:fsek_mobile/screens/nollning/questscreen/quests.dart';
-import 'package:fsek_mobile/services/nollning.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdventureMissionsPageNew extends StatefulWidget {
   static const routeName = '/adventure_missions';
 
   @override
-  _AdventureMissionsPageNewState createState() =>
-      _AdventureMissionsPageNewState();
+  _AdventureMissionsPageNewState createState() => _AdventureMissionsPageNewState();
 }
 
 class _AdventureMissionsPageNewState extends State<AdventureMissionsPageNew> {
-  AdventureData? _adventureData;
+  // AdventureData? _adventureData;
 
-  void initState() {
-    locator<NollningService>().getAdventures().then((value) {
-      if (mounted) {
-        setState(() {
-          this._adventureData = value;
-        });
-      }
-    });
-    super.initState();
-  }
+  // void initState() {
+  //   locator<nollningservice>().getadventures().then((value) {
+  //     if (mounted) {
+  //       setstate(() {
+  //         this._adventuredata = value;
+  //       });
+  //     }
+  //   });
+  //   super.initstate();
+  // }
 
   @override
   void dispose() {

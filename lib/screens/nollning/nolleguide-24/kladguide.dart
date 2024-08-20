@@ -30,7 +30,6 @@ class _KladguideScreenState extends State<KladguidePage> {
     String i11 = "assets/img/nollning-24/nolleguide/kladguide/IMG_0149.jpg";
 
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
         extendBodyBehindAppBar: true,

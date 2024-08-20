@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/nollning/adventure_data.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/my_group_tab.dart';
-import 'package:fsek_mobile/services/nollning.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdventureMissionsPage extends StatefulWidget {
@@ -15,18 +12,18 @@ class AdventureMissionsPage extends StatefulWidget {
 }
 
 class _AdventureMissionsPageState extends State<AdventureMissionsPage> {
-  AdventureData? _adventureData;
+  // AdventureData? _adventureData;
 
-  void initState() {
-    locator<NollningService>().getAdventures().then((value) {
-      if (mounted) {
-        setState(() {
-          this._adventureData = value;
-        });
-      }
-    });
-    super.initState();
-  }
+  // void initState() {
+  //   locator<NollningService>().getAdventures().then((value) {
+  //     if (mounted) {
+  //       setState(() {
+  //         this._adventureData = value;
+  //       });
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose() {

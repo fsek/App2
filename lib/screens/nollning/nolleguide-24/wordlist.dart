@@ -23,11 +23,9 @@ class _WordListState extends State<WordListPage> {
   }
 
   Future<List<Word>> _loadWordList() async {
-    final String raw =
-        await rootBundle.loadString('assets/data/guide/wordlist.json');
+    final String raw = await rootBundle.loadString('assets/data/guide/wordlist.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
-    List<Word> out =
-        (jsonRaw['words'] as List).map((data) => Word.fromJson(data)).toList();
+    List<Word> out = (jsonRaw['words'] as List).map((data) => Word.fromJson(data)).toList();
     return out;
   }
 
@@ -45,9 +43,9 @@ class _WordListState extends State<WordListPage> {
               children: [
                 Text(
                   w.key![locale]!,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenWidth/24),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenWidth / 24),
                 ),
-                Text(w.value![locale]!, style: TextStyle(fontSize: screenWidth/28, fontWeight: FontWeight.w500))
+                Text(w.value![locale]!, style: TextStyle(fontSize: screenWidth / 28, fontWeight: FontWeight.w500))
               ],
             ),
           ),
@@ -65,7 +63,6 @@ class _WordListState extends State<WordListPage> {
     String superBackgroundWoodPath = "assets/img/nollning-24/nolleguide/superlong_wood_background.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -75,34 +72,23 @@ class _WordListState extends State<WordListPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(
-        child: 
-        SingleChildScrollView(
-          child: 
-            Stack(
-              children: [
-                Positioned.fill(child: Image.asset(superBackgroundWoodPath, fit: BoxFit.fill)),
-                Positioned.fill(child: Image.asset(superBackgroundPaperPath, fit: BoxFit.fill,)),
-                Container(
-                  margin: EdgeInsets.only(top: 120, left: 40, right: 40, bottom: 60),
-                  child: Column(
-                    children: [
-                      Text(
-                        t.nolleguideWordlist,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Testament",
-                            fontSize: screenWidth/12,
-                            color: Color(0xFF540909)
-                        )
-                      ),
-                      ...wordlist.map(
-                      (Word w) => _createWordCard(w),
-                    ),
-                  ]
-                  )
-              ),
-              ]
-              ),
+        child: SingleChildScrollView(
+          child: Stack(children: [
+            Positioned.fill(child: Image.asset(superBackgroundWoodPath, fit: BoxFit.fill)),
+            Positioned.fill(
+                child: Image.asset(
+              superBackgroundPaperPath,
+              fit: BoxFit.fill,
+            )),
+            Container(
+                margin: EdgeInsets.only(top: 120, left: 40, right: 40, bottom: 60),
+                child: Column(children: [
+                  Text(t.nolleguideWordlist, style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Testament", fontSize: screenWidth / 12, color: Color(0xFF540909))),
+                  ...wordlist.map(
+                    (Word w) => _createWordCard(w),
+                  ),
+                ])),
+          ]),
         ),
       ),
     );

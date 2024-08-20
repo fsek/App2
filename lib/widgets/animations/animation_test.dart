@@ -6,8 +6,8 @@ import 'package:fsek_mobile/widgets/animations/size_animation.dart';
 import 'package:fsek_mobile/widgets/animations/slide_animation.dart';
 
 class AnimationPage extends StatelessWidget {
-  List<Widget> routes = [SlideAnimation(), FadeAnimation(), ScaleAnimation(), SizeAnimation(), RotationAnimation()];
-  var animationTypeList = ["slide", "fade", "scale", "size", "rotation"];
+  final List<Widget> routes = [SlideAnimation(), FadeAnimation(), ScaleAnimation(), SizeAnimation(), RotationAnimation()];
+  final List<String> animationTypeList = ["slide", "fade", "scale", "size", "rotation"];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Page Tranaction")),

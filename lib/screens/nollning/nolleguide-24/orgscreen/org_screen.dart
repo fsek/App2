@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/april_fools.dart';
-import 'package:fsek_mobile/screens/cafe/cafe.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/accountingDepartment.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/cafe.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/conscience.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/corporateRelations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/educationalCouncil.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/facilitiesCommittee.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/festivitiesCommittee.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/foset.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/freja.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/management.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/ministryOfCulture.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/ministryOfTruth.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/nations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/procession.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/committee_page.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/teknologkaren.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/others.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
@@ -30,16 +13,21 @@ class OrganizationScreenPage extends StatefulWidget {
   _OrganizationScreenState createState() => _OrganizationScreenState();
 }
 
-
 class _OrganizationScreenState extends State<OrganizationScreenPage> {
-  void initState(){
+  ButtonStyle _buttonStyle = ElevatedButton.styleFrom(
+    padding: EdgeInsets.zero,
+    shape: BeveledRectangleBorder(borderRadius: BorderRadius.horizontal()),
+    backgroundColor: Colors.transparent,
+    shadowColor: Colors.transparent,
+  );
+  void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var t =  AppLocalizations.of(context)!;
-    
+    var t = AppLocalizations.of(context)!;
+
     String backgroundPaperPath = "assets/img/nollning-24/nolleguide/organization_tree/orgscreen_paper.png";
     String backgroundWoodPath = "assets/img/nollning-24/nolleguide/wood_background.png";
 
@@ -67,774 +55,124 @@ class _OrganizationScreenState extends State<OrganizationScreenPage> {
     String facilitiesCommitteePath = "assets/img/nollning-24/nolleguide/organization_tree/facilities_${t.localeName}.png";
 
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    
 
-return Scaffold(
-  appBar: AppBar(
-        backgroundColor: Color(0xFF7E5127), //#540909 för den röda färgen
-        title: Text(
-          t.organizationTree,
-          style: TextStyle(
-            fontFamily: "Testament",
-            fontSize: screenWidth/15,
-            color: Color(0xFFE9CA97),
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Color(0xFF7E5127), //#540909 för den röda färgen
+          title: Text(
+            t.organizationTree,
+            style: TextStyle(
+              fontFamily: "Testament",
+              fontSize: screenWidth / 15,
+              color: Color(0xFFE9CA97),
+            ),
+          )),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Image.asset(backgroundWoodPath, fit: BoxFit.cover),
+            Image.asset(backgroundPaperPath, fit: BoxFit.cover),
+            Image.asset(orgFortPath, fit: BoxFit.cover),
+            Padding(
+                padding: EdgeInsets.only(top: 70),
+                child: Column(children: [
+                  Row(children: [
+                    _otherButton(tlthButtonPath, onTap: () => launchUrl(Uri.parse('https://www.tlth.se/nollning/')), padding: EdgeInsets.only(left: 60, right: 60, bottom: 5)),
+                  ]),
+                  Row(
+                    children: [
+                      _committeeButton("Teknologkåren", "teknologkarenPaths", "teknologkaren.json", organizationPath, leftmost: true),
+                      _otherButton(guildsPath, onTap: _pushAndPreload(GuildScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
+                    ],
+                  ),
+                  Row(children: [
+                    _otherButton(fsekButtonPath, onTap: () => launchUrl(Uri.parse('https://fsektionen.se/')), padding: EdgeInsets.only(top: 15, left: 60, right: 60, bottom: 5)),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.theManagement, "managementPaths", "management.json", managementPath, leftmost: true),
+                    _committeeButton(t.introductionCommittee, "fosetPaths", "foset.json", introductionCommitteePath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.ministryOfCulture, "culturePaths", "ministryOfCulture.json", ministryOfCulturePath, leftmost: true),
+                    _committeeButton(t.festivitiesCommittee, "festivitiesPath", "festivitiesCommittee.json", festivitiesCommitteePath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.educationalCouncil, "educationPaths", "educationalCouncil.json", educationalCouncilPath, leftmost: true),
+                    _committeeButton(t.theAccountingDepartment, "accountingPaths", "accountingDepartment.json", accountingDepartmentPath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.hilbertCafe, "cafePaths", "cafe.json", cafePath, leftmost: true),
+                    _committeeButton(t.corporateRelations, "corporatePaths", "corporateRelations.json", corporateRelationsPath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.facilitiesCommittee, "facilitiesPaths", "facilitiesCommittee.json", facilitiesCommitteePath, leftmost: true),
+                    _committeeButton(t.theConscience, "consciencePaths", "conscience.json", consciencePath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _committeeButton(t.ministryOfTruth, "truthPaths", "minstryOfTruth.json", ministryOfTruthPath, leftmost: true),
+                    _committeeButton(t.theProcession, "processtionPaths", "procession.json", processionPath, leftmost: false),
+                  ]),
+                  Row(children: [
+                    _otherButton(othersPath, onTap: _pushAndPreload(OthersScreenPage()), padding: EdgeInsets.only(left: 115, right: 115, bottom: 40)),
+                  ]),
+                  Row(
+                    children: [
+                      _committeeButton("FREJA", "frejaPaths", "freja.json", frejaButtonPath, leftmost: true),
+                      _otherButton(nationsPath, onTap: _pushAndPreload(NationScreenPage()), padding: EdgeInsets.only(left: 5, right: 40)),
+                    ],
+                  ),
+                  Row(children: [
+                    _otherButton(spexPath, onTap: _pushAndPreload(SpexPage()), padding: EdgeInsets.only(left: 115, right: 115)),
+                  ]),
+                ]))
+          ],
         ),
-      )),
-  body: InteractiveViewer(
-  panEnabled: true,
-  child:
-   SingleChildScrollView(
-    child: Stack(
-      children: [
-        Image.asset(
-          backgroundWoodPath,
-          fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _committeeButton(String committeeName, String assetNames, String dataPath, String buttonPath, {bool leftmost = true}) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.only(left: leftmost ? 40 : 5, right: leftmost ? 5 : 40),
+        child: ElevatedButton(
+          style: _buttonStyle,
+          onPressed: _pushAndPreload(
+            CommitteePage(committeeName: committeeName, committeeDataLocation: dataPath),
+            assetNames: assetNames,
+          ),
+          child: Image.asset(buttonPath),
         ),
-        Image.asset(
-          backgroundPaperPath,
-          fit: BoxFit.cover,
-        ),
-        Image.asset(
-          orgFortPath,
-          fit: BoxFit.cover,
-        ),
-        Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 70),
-            child: 
-              Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 60, right: 60),
-                    child:
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(),
-                        shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadius.horizontal()
-                        ),
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent
-                      ),
-                      onPressed: () {launchUrl(Uri.parse('https://www.tlth.se/nollning/'));},
-                      child: Image.asset(
-                        tlthButtonPath,
-                  ))),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 5 , left: 40, right: 5), 
-                              child:
-                              Center(   
-                                child: 
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "teknologkarenPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (TeknologkarenScreenPage())));
-                                    },
-                                  child:
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          organizationPath
-                                        ),
-                          ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 5, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "backgroundPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => GuildScreenPage()));
-                                    },
-                                  child:
-                                    Stack(
-                                      children: [ 
-                                        Image.asset(
-                                          guildsPath,
-                                        ),
-                      ]))))),
-                    ],
-                    )),
-                  Container(
-                    margin: EdgeInsets.only(top: 15, left: 60, right: 60),
-                    child:
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(),
-                        shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadius.horizontal()
-                        ),
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent
-                      ),
-                      onPressed: () {launchUrl(Uri.parse('https://fsektionen.se/'));},
-                      child: Image.asset(
-                        fsekButtonPath,
-                  ))),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 5, left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "managementPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ManagementScreenPage())));
-                                    },
-                                  child:
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          managementPath,
-                                        ), 
-                      ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 5, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "fosetPaths");
-                                    Navigator.pop(context); 
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FosetScreenPage())));
-                                    },
-                                  child: 
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          introductionCommitteePath,
-                                        ),
-                      ]))))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "culturePaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfCultureScreenPage())));
-                                    },
-                                  child: 
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          ministryOfCulturePath,
-                                        ),                 
-                      ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "festivitiesPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FestivitiesCommitteeScreenPage())));
-                                    },
-                                  child: 
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          festivitiesCommitteePath,
-                                        ),    
-                      ]))))),
-                    ])),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "educationPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (EducationalCouncilScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          educationalCouncilPath,
-                                        ),
-                      ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "accountingPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (AccountingDepartmentScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          accountingDepartmentPath,
-                                        ),
-                      ]))))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: 
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "cafePaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (CafeScreenPage())));
-                                    },
-                                  child: 
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          cafePath,
-                                        ),
-                            ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "corporatePaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (CorporateRelationsScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          corporateRelationsPath,
-                                        ),
-                      ]))))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "facilitiesPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FacilitiesCommitteeScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          facilitiesCommitteePath,
-                                        ),
-                        ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
-                              child: Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "consciencePaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ConscienceScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          consciencePath,
-                                        ),
-                      ]))))),
-                    ])),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0 , left: 40, right: 5), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "truthPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (MinistryOfTruthScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          ministryOfTruthPath,
-                                        ),
-                        ]))))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 0, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "processionPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (ProcessionScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          processionPath,
-                                        ),
-                      ]))))),
-                    ])),
-                  SizedBox(
-                    width: screenWidth,
-                    child: Container(    
-                              margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "backgroundPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (OthersScreenPage())));
-                                    },
-                                  child: 
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          othersPath,
-                                        ),
-                      ]))),
-                    ),
-                  SizedBox(
-                    width: screenWidth,
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 40, left: 40, right: 5), 
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "frejaPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (FrejaScreenPage())));
-                                    },
-                                  child:           
-                                    Image.asset(
-                                      frejaButtonPath,
-                        )))),
-                        Expanded(
-                          child:
-                            Container(    
-                              margin: EdgeInsets.only(top: 40, left: 5, right: 40), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "backgroundPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => (NationScreenPage())));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          nationsPath,
-                                        ),
-                      ]))))),
-                    ],
-                    )),
-                  SizedBox(
-                    width: screenWidth,
-                    child: Container(    
-                              margin: EdgeInsets.only(top: 0, left: 115, right: 115), 
-                              child: 
-                              Center(   
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.only(),
-                                    shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.horizontal()
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(), 
-                                        );
-                                      },
-                                    );
-                                    await preloadAssets(context, "backgroundPaths");
-                                    Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SpexPage()));
-                                    },
-                                  child:  
-                                    Stack(
-                                      children: [        
-                                        Image.asset(
-                                          spexPath,
-                                        ),
-                      ]))))),
-      ])) 
-    )]
-    )
-  ))
-  );
+      ),
+    );
+  }
+
+  Widget _otherButton(String buttonPath, {required Function() onTap, EdgeInsetsGeometry padding = EdgeInsets.zero}) {
+    return Expanded(
+      child: Padding(
+          padding: padding,
+          child: ElevatedButton(
+            style: _buttonStyle,
+            onPressed: onTap,
+            child: Image.asset(buttonPath),
+          )),
+    );
+  }
+
+  Function() _pushAndPreload(Widget destination, {String assetNames = "backgroundPaths"}) {
+    return () async {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+      await preloadAssets(context, assetNames);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+    };
   }
 }

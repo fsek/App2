@@ -7,9 +7,6 @@ import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
 import 'package:fsek_mobile/screens/nollning/questscreen/paperWidget.dart';
 import 'package:fsek_mobile/screens/nollning/questscreen/finishedMissions.dart';
 
-// import "package:fsek_mobile/screens/nollning/my_group_tab.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
-
 class QuestPage extends StatefulWidget {
   @override
   _QuestPageState createState() => _QuestPageState();
@@ -46,22 +43,17 @@ class _QuestPageState extends State<QuestPage> {
 
   @override
   Widget build(BuildContext context) {
-    String locale = Localizations.localeOf(context).toString();
+    // String locale = Localizations.localeOf(context).toString();
 
     //assets
-    String backgroundPath =
-        "assets/img/nollning-24/uppdrag/questscreen_background.png";
-    String woodBoardPath =
-        "assets/img/nollning-24/uppdrag/questscreen_woodboard_cropped.png";
-    String goodbyePaperPath =
-        "assets/img/nollning-24/uppdrag/questscreen_goodbye_paper.png";
+    String backgroundPath = "assets/img/nollning-24/uppdrag/questscreen_background.png";
+    String woodBoardPath = "assets/img/nollning-24/uppdrag/questscreen_woodboard_cropped.png";
+    // String titlePath =
+    //     "assets/img/nollning-24/uppdrag/questscreen_titletext_cropped.png";
+    // String titlePathEnglish =
+    //     "assets/img/nollning-24/uppdrag/questscreen_titletext_cropped.png";
 
-    String titlePath =
-        "assets/img/nollning-24/uppdrag/questscreen_titletext_cropped.png";
-    String titlePathEnglish =
-        "assets/img/nollning-24/uppdrag/questscreen_titletext_cropped.png";
-
-    String currentTitlePath = locale == ("sv") ? titlePath : titlePathEnglish;
+    // String currentTitlePath = locale == ("sv") ? titlePath : titlePathEnglish;
 
     return
         // Scaffold(
@@ -153,17 +145,12 @@ class _QuestPageState extends State<QuestPage> {
   Widget getPaper(week) {
     //text for button
     String content = '';
-    if (_adventureWeeks != null &&
-        totalMissionsList != null &&
-        acceptedMissionsList != null &&
-        week < totalMissionsList!.length &&
-        week < acceptedMissionsList!.length) {
+    if (_adventureWeeks != null && totalMissionsList != null && acceptedMissionsList != null && week < totalMissionsList!.length && week < acceptedMissionsList!.length) {
       content = '${acceptedMissionsList![week]}/${totalMissionsList![week]}';
     } else {
       content = ''; // Default text if data is not available
     }
-    int week_tracker =
-        WeekTracker.determineWeek(differentPreIntroduction: true);
+    int week_tracker = WeekTracker.determineWeek(differentPreIntroduction: true);
 
     bool finalWeek = (week_tracker == 5 && week == 5);
 

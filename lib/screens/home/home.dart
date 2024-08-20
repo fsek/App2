@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/guild_meeting/candidacy_poster.dart';
@@ -7,31 +9,19 @@ import 'package:fsek_mobile/screens/guild_meeting/other_documents.dart';
 import 'package:fsek_mobile/screens/guild_meeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
 import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-
-import 'package:flutter/foundation.dart';
-import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/nollning/map_page.dart';
-import 'package:fsek_mobile/screens/guild_meeting/proposition_card.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
 import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
-import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
+
+import 'package:fsek_mobile/models/documents/election_document.dart';
+
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
+
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
-import 'package:fsek_mobile/util/nollning/week_tracker.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/nollning/introduction_schedule.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
-import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
-import 'package:fsek_mobile/screens/nollning/map_page.dart';
-import 'package:fsek_mobile/util/nollning/week_tracker.dart';
-import 'package:turn_page_transition/turn_page_transition.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -65,11 +55,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var t = AppLocalizations.of(context)!;
+    // var t = AppLocalizations.of(context)!;
     double circleSize = MediaQuery.of(context).size.height / 8;
 
-    double edgePadding = MediaQuery.of(context).size.width / 25;
-    String defaultBackground = "assets/img/default_background.png";
+    // double edgePadding = MediaQuery.of(context).size.width / 25;
+    // String defaultBackground = "assets/img/default_background.png";
 
     String locale = Localizations.localeOf(context).toString();
 
@@ -223,16 +213,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Currently unused, used in nollning 2023
-  Widget _pageFlipButton(Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
-    return InkWell(
-      customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
-      onTap: () => Navigator.push(context, TurnPageRoute(builder: (context) => destination, overleafColor: WeekTracker.weekColors[week])),
-      child: Padding(
-        padding: EdgeInsets.only(left: padding, right: padding),
-        child: Image.asset(assetPath, height: circleSize),
-      ),
-    );
-  }
+  // Widget _pageFlipButton(Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
+  //   return InkWell(
+  //     customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(inkwellCurvature)),
+  //     onTap: () => Navigator.push(context, TurnPageRoute(builder: (context) => destination, overleafColor: WeekTracker.weekColors[week])),
+  //     child: Padding(
+  //       padding: EdgeInsets.only(left: padding, right: padding),
+  //       child: Image.asset(assetPath, height: circleSize),
+  //     ),
+  //   );
+  // }
 
   Widget button(String text, Widget destination) {
     return TextButton(

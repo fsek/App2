@@ -32,7 +32,6 @@ class _HighscoreTabState extends State<HighscoreTab> {
       );
     }
     _groups!.sort((g1, g2) => compareGroups(g1, g2));
-    var t = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Color(0xFFE9CA97),
       body: Column(
@@ -56,8 +55,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
-                this._groups =
-                    await locator<NollningService>().getNollningGroups();
+                this._groups = await locator<NollningService>().getNollningGroups();
                 setState(() {});
               },
               child: ListView.builder(
@@ -94,8 +92,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 25),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -118,8 +115,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -142,8 +138,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 20),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),
@@ -165,8 +160,7 @@ class _HighscoreTabState extends State<HighscoreTab> {
             "${_groups![index].name}",
             style: TextStyle(fontSize: 18),
           ),
-          subtitle: Text(
-              "${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
+          subtitle: Text("${_groups![index].finished_missions} ${t.introductionCompletedMissions}"),
           trailing: Text(
             "${_groups![index].total_points} p",
             style: TextStyle(fontSize: 18),

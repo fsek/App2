@@ -2,7 +2,6 @@ import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
-import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
@@ -13,8 +12,7 @@ class TopSongsPage extends StatefulWidget {
   _TopSongsPageState createState() => _TopSongsPageState();
 }
 
-class _TopSongsPageState extends State<TopSongsPage>
-    with TickerProviderStateMixin {
+class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMixin {
   List<SongbookEntry> songs = [];
   List<SongbookEntry> TopSongs = [];
 
@@ -30,16 +28,12 @@ class _TopSongsPageState extends State<TopSongsPage>
   @override
   void initState() {
     int num_top_songs = 10;
-    animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1400));
-    locator<SongbookService>()
-        .getTopSongs(num_top_songs)
-        .then((value) => setState(() {
-              this.songs = value;
-              songs
-                  .sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
-              TopSongs = List.from(songs);
-            }));
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 1400));
+    locator<SongbookService>().getTopSongs(num_top_songs).then((value) => setState(() {
+          this.songs = value;
+          songs.sort((a, b) => a.title!.compareTo(b.title!)); // handle null?
+          TopSongs = List.from(songs);
+        }));
 
     setRotation(360);
 
@@ -55,8 +49,7 @@ class _TopSongsPageState extends State<TopSongsPage>
   void setRotation(int degrees) {
     final angle = degrees * 3.1415 / 180;
 
-    animation =
-        Tween<double>(begin: 0, end: angle).animate(animationController);
+    animation = Tween<double>(begin: 0, end: angle).animate(animationController);
   }
 
   Widget build(BuildContext context) {
@@ -65,11 +58,7 @@ class _TopSongsPageState extends State<TopSongsPage>
         ? Scaffold(
             //change text
             appBar: AppBar(title: Text(t.songbookSongbook)),
-            body: Center(
-                child: CircularProgressIndicator(
-                    color: (isAprilFools
-                        ? Color(0xFFF17F9F)
-                        : Colors.orange[600]))))
+            body: Center(child: CircularProgressIndicator(color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: AnimatedBuilder(
@@ -84,9 +73,7 @@ class _TopSongsPageState extends State<TopSongsPage>
                       Expanded(
                         child: songs.isNotEmpty
                             ? ListView(
-                                children: songs
-                                    .map((song) => _generateSongTile(song))
-                                    .toList(),
+                                children: songs.map((song) => _generateSongTile(song)).toList(),
                               )
                             : Padding(
                                 padding: EdgeInsets.all(16),
@@ -97,8 +84,7 @@ class _TopSongsPageState extends State<TopSongsPage>
                   ),
                 ),
                 //Part of doing a barrel roll
-                builder: (context, child) =>
-                    Transform.rotate(angle: animation.value, child: child)));
+                builder: (context, child) => Transform.rotate(angle: animation.value, child: child)));
   }
 
   Widget _generateSongTile(SongbookEntry song) {
@@ -136,8 +122,7 @@ class _TopSongsPageState extends State<TopSongsPage>
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),
-                  child: ListTile(
-                      title: Text(song.title == null ? "" : song.title!)),
+                  child: ListTile(title: Text(song.title == null ? "" : song.title!)),
                 ))
           ],
     );
@@ -145,8 +130,7 @@ class _TopSongsPageState extends State<TopSongsPage>
 
   void openSong(int id) {
     locator<SongService>().getSong(id).then((song) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SongPage(song: song)));
     });
   }
 }

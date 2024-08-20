@@ -3,7 +3,7 @@ import 'package:fsek_mobile/screens/other/fap.dart';
 
 class RotationAnimation extends StatelessWidget {
   static const routeName = 'Rotation_Animation';
-  List<Curve> curveList = [
+  final List<Curve> curveList = [
     Curves.bounceIn,
     Curves.bounceInOut,
     Curves.bounceOut,
