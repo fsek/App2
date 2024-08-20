@@ -278,12 +278,12 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Icon(
                   Icons.info_outline_rounded,
-                  color: Colors.red[300],
+                  color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                 ),
                 Text(
                   t.eventNotSignedUp,
                   style: TextStyle(
-                    color: Colors.red[300],
+                    color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                   ),
                 ),
               ],
@@ -310,12 +310,12 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.cancel,
-                          color: Colors.red[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                         ),
                         Text(
                           t.eventNoSpot,
                           style: TextStyle(
-                            color: Colors.red[300],
+                            color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                           ),
                         ),
                       ],
@@ -334,12 +334,12 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.check_circle,
-                          color: Colors.green[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                         ),
                         Text(
                           t.eventGotSpot,
                           style: TextStyle(
-                            color: Colors.green[300],
+                            color: (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                           ),
                         ),
                       ],
@@ -359,12 +359,12 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Icon(
                         Icons.info_outline_rounded,
-                        color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                        color: (event?.is_introduction == true ? Color.fromARGB(255, 159, 126, 6) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
-                          color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 159, 126, 6) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                         ),
                       ),
                     ],
@@ -392,7 +392,7 @@ class _EventPageState extends State<EventPage> {
         children: [
           Text(
             t.eventSignUp,
-            style: TextStyle(fontSize: 25, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+            style: TextStyle(fontSize: 25, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
           ),
           Divider(
             color: (event?.is_introduction == true ? Color(0xFF565656) : null),
@@ -547,7 +547,7 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
                 GestureDetector(
-                  child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+                  child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -708,7 +708,7 @@ class _EventPageState extends State<EventPage> {
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
         GestureDetector(
-          child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+          child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
           onTap: () => goToSettings(),
         ),
       ]),
@@ -781,7 +781,7 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                    color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                   ),
                 ),
                 Divider(
