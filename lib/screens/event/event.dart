@@ -53,8 +53,10 @@ class _EventPageState extends State<EventPage> {
           this.event = value;
           if (this.event != null) {
             this.drinkPackageAnswer = drinkPackageAlcohol;
-            this.defaultGroup = event!.groups![0];
-            this.group = defaultGroup;
+            if (event!.groups != null) {
+              this.defaultGroup = event!.groups![0];
+              this.group = defaultGroup;
+            }
             if (this.group == null) {
               this.displayGroupInput = true;
             }
@@ -110,7 +112,8 @@ class _EventPageState extends State<EventPage> {
       });
     }
     int eventId = event?.id ?? -1;
-    Map json = await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
+    Map json =
+        await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -339,7 +342,8 @@ class _EventPageState extends State<EventPage> {
                         Text(
                           t.eventGotSpot,
                           style: TextStyle(
-                            color: (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
+                            color:
+                                (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                           ),
                         ),
                       ],
@@ -359,12 +363,16 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Icon(
                         Icons.info_outline_rounded,
-                        color: (event?.is_introduction == true ? Color.fromARGB(255, 159, 126, 6) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                        color: (event?.is_introduction == true
+                            ? Color.fromARGB(255, 159, 126, 6)
+                            : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
-                          color: (event?.is_introduction == true ? Color.fromARGB(255, 159, 126, 6) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          color: (event?.is_introduction == true
+                              ? Color.fromARGB(255, 159, 126, 6)
+                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                         ),
                       ),
                     ],
@@ -392,7 +400,11 @@ class _EventPageState extends State<EventPage> {
         children: [
           Text(
             t.eventSignUp,
-            style: TextStyle(fontSize: 25, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+            style: TextStyle(
+                fontSize: 25,
+                color: (event?.is_introduction == true
+                    ? Color(0xFF630b0b)
+                    : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
           ),
           Divider(
             color: (event?.is_introduction == true ? Color(0xFF565656) : null),
@@ -427,7 +439,10 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_available_rounded,
                     ),
                     Text(
-                      t.eventSignUpOpens + DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
+                      t.eventSignUpOpens +
+                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
@@ -437,7 +452,10 @@ class _EventPageState extends State<EventPage> {
                       Icons.event_busy_rounded,
                     ),
                     Text(
-                      t.eventSignUpCloses + DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) + " " + DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
+                      t.eventSignUpCloses +
+                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
                 ),
@@ -536,8 +554,11 @@ class _EventPageState extends State<EventPage> {
               drinkPackageInput,
               Wrap(
                 children: [
-                  Text(t.eventFoodPreferences + " ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-                  ...?foodPreferences[locale]?.where((element) => element.isNotEmpty).map((foodPreference) => Text(foodPreference + " ")),
+                  Text(t.eventFoodPreferences + " ",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  ...?foodPreferences[locale]
+                      ?.where((element) => element.isNotEmpty)
+                      .map((foodPreference) => Text(foodPreference + " ")),
                   Text("  " + (foodCustom ?? "")),
                 ],
               ),
@@ -547,7 +568,12 @@ class _EventPageState extends State<EventPage> {
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
                 GestureDetector(
-                  child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
+                  child: Text(t.eventLinkToFoodPrefs,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: (event?.is_introduction == true
+                              ? Color(0xFF630b0b)
+                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -691,14 +717,24 @@ class _EventPageState extends State<EventPage> {
           ? RichText(
               text: TextSpan(
                   text: event!.event_signup!.question!,
-                  children: [TextSpan(text: " "), TextSpan(text: event!.event_user!.answer, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+                  children: [
+                    TextSpan(text: " "),
+                    TextSpan(
+                        text: event!.event_user!.answer,
+                        style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                  ],
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
       drinkPackage,
       Wrap(
         children: [
-          RichText(text: TextSpan(text: t.eventFoodPreferences + " ", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
-          ...?foodPreferences[locale]?.where((element) => element.isNotEmpty).map((foodPreferences) => Text(foodPreferences + " ")),
+          RichText(
+              text: TextSpan(
+                  text: t.eventFoodPreferences + " ",
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+          ...?foodPreferences[locale]
+              ?.where((element) => element.isNotEmpty)
+              .map((foodPreferences) => Text(foodPreferences + " ")),
           Text(foodCustom ?? ""),
         ],
       ),
@@ -708,7 +744,12 @@ class _EventPageState extends State<EventPage> {
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
         GestureDetector(
-          child: Text(t.eventLinkToFoodPrefs, style: TextStyle(decoration: TextDecoration.underline, color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
+          child: Text(t.eventLinkToFoodPrefs,
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: (event?.is_introduction == true
+                      ? Color(0xFF630b0b)
+                      : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
           onTap: () => goToSettings(),
         ),
       ]),
@@ -781,7 +822,9 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color: (event?.is_introduction == true ? Color(0xFF630b0b) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                    color: (event?.is_introduction == true
+                        ? Color(0xFF630b0b)
+                        : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                   ),
                 ),
                 Divider(
@@ -841,8 +884,13 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [Text(t.eventDressCode), ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))]),
-                      Visibility(visible: event!.cash ?? false, child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
+                      Row(children: [
+                        Text(t.eventDressCode),
+                        ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
+                      ]),
+                      Visibility(
+                          visible: event!.cash ?? false,
+                          child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
                     ],
                   ),
                 ),
