@@ -59,75 +59,74 @@ class _CalendarState extends State<Calendar> {
 
             margin: EdgeInsets.zero,
             child: Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    margin: EdgeInsets.only(bottom: 7),
+                    child: Text(
+                      event.title ?? "no title",
+                      style: TextStyle(
+                        fontSize: 20,
+                        // Double ternary just works :)
+                        color: (event.is_introduction == true
+                            ? Color(0xFF630B0B)
+                            : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Row(
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 7),
-                        child: Text(
-                          event.title ?? "no title",
-                          style: TextStyle(
-                            fontSize: 20,
-                            // Double ternary just works :)
-                            color: (event.is_introduction == true ? Color(0xFF630B0B) : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
-                          ),
-                          textAlign: TextAlign.left,
+                      Icon(
+                        Icons.access_time_rounded,
+                        size: 20,
+                      ),
+                      Text(
+                        /* better error checking */
+                        "  " +
+                            DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                            " - " +
+                            DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                            ", " +
+                            DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
+                        style: TextStyle(
+                          fontSize: 14,
                         ),
+                        textAlign: TextAlign.left,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.access_time_rounded,
-                            size: 20,
-                          ),
-                          Text(
-                            /* better error checking */
-                            "  " +
-                                DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
-                                " - " +
-                                DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
-                                ", " +
-                                DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            // Alcohol is served
+                            if (event.drink == true) Icon(Icons.wine_bar_rounded, size: 20),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.room,
+                        size: 20,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.room,
-                            size: 20,
-                          ),
-                          Text(
-                            "  " + (event.location ?? "intigheten"),
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
+                      Text(
+                        "  " + (event.location ?? "intigheten"),
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        // Alcohol is served
-                        if (event.drink == true) Icon(Icons.wine_bar_rounded, size: 20),
-                      ],
-                    ),
-                  ),
                 ],
               ),
-              margin: event.is_introduction == true ? EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 6, 15, 15, 15) : EdgeInsets.all(10),
+              margin: event.is_introduction == true
+                  ? EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 6, 15, 15, 15)
+                  : EdgeInsets.all(10),
             ),
           ),
         ),
