@@ -26,10 +26,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
-      body: InteractiveViewer(child: SingleChildScrollView(
-        child: Positioned.fill(child: Image.asset(schemaPath, fit: BoxFit.fill)),
-      ),
-      )
+      body: InteractiveViewer(child: SingleChildScrollView(child: Column(children: [Image.asset(schemaPath, fit: BoxFit.fill)])))
     );
   }
 }
