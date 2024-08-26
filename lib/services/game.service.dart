@@ -1,5 +1,7 @@
 import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/models/moose_game/game_score_entry.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/user.service.dart';
 
 class GameScoreService extends AbstractService {
   Future<List<GameScoreEntry>> getScores() async {
@@ -10,9 +12,11 @@ class GameScoreService extends AbstractService {
         .toList();
     return result;
   }
-  Future<Map> postScore({ score = int }) {
-    return AbstractService.post("/game_scores", mapBody: {
-      score: score
+  Future<Map> postScore({ score = int }) async {
+
+    return AbstractService.post("/game_scores", mapBody: { 
+      "score": score,
+      "user": await locator<UserService>().getUser()
     });
   }
 }

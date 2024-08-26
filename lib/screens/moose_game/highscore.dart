@@ -36,7 +36,7 @@ class _HighscorePageState extends State<HighscorePage>
     locator<GameScoreService>().getScores().then((value) => setState(() {
           allScores = value;
           allScores
-              .sort((a, b) => a.score!.compareTo(b.score!)); // handle null?
+              .sort((a, b) => b.score!.compareTo(a.score!)); // handle null?
           results = List.from(allScores);
         }));
     locator<UserService>().getUser().then((value) async {
@@ -166,7 +166,7 @@ class _HighscorePageState extends State<HighscorePage>
                                       : Text(
                                           "${results[index].user!.firstname}"),
                                   trailing: Text(
-                                      "${results[index].user!.game_score}"),
+                                      "${results[index].score ?? 0}"),
                                 ));
                           },
                         ) // change for translate variable later

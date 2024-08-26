@@ -9,6 +9,8 @@ import 'package:fsek_mobile/screens/moose_game/ground.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/game.service.dart';
+import 'package:fsek_mobile/services/user.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +63,11 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     super.initState();
 
     cameraPos = Vector2.zero();
+    late int tempuserid; 
+    locator<UserService>().getUser().then((user) => tempuserid = user.id ?? 0);
+    locator<GameScoreService>().getScores().then((users) => {
+      highscore = (users.firstWhere((gamescore) => gamescore.user?.id == tempuserid).score ?? 0).toDouble()
+    });
 
     initializeGame();
 
@@ -142,6 +149,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       if (score > highscore) {
         highscore = score;
         newHighscore = true;
+        locator<GameScoreService>().postScore(score: highscore.toInt()); 
       }
       isDead = true;
     });
