@@ -205,11 +205,8 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
           alignment: Alignment.center,
           child: Text(
             score.toInt().toString(),
-            style: const TextStyle(fontFamily: "VT323", fontSize: 60),
-          )
-        )
-      )
-    );
+              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 60),
+            ))));
 
     // Highscore counter
     children.add(
@@ -219,11 +216,8 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
           alignment: Alignment.center,
           child: Text(
             "Highscore: " + highscore.toInt().toString(),
-            style: const TextStyle(fontFamily: "VT323", fontSize: 40),
-          )
-        )
-      )
-    );
+              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+            ))));
     
     // "Try again" text
     if (isDead) {
@@ -234,11 +228,8 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
             alignment: Alignment.center,
             child: Text(
               "Touch to try again",
-              style: const TextStyle(fontFamily: "VT323", fontSize: 40),
-            )
-          )
-        )
-      );
+                style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+              ))));
 
       if (newHighscore) {
         children.add(
@@ -248,11 +239,8 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
               alignment: Alignment.center,
               child: Text(
                 "New Highscore",
-                style: const TextStyle(fontFamily: "VT323", fontSize: 50),
-              )
-            )
-          )
-        );
+                  style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 50),
+                ))));
       }
     }
 
