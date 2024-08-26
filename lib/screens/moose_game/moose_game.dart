@@ -12,7 +12,6 @@ import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fsek_mobile/services/moose.service.dart';
 //import 'package:audioplayers/audioplayers.dart';
 
 import 'package:vector_math/vector_math.dart';

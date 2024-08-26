@@ -52,3 +52,6 @@ app.*.map.json
 
 # Ignore Gradle build output directory
 build
+
+# Why is this not here already?
+pubspec.lock
