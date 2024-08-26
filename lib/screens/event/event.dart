@@ -28,14 +28,13 @@ class _EventPageState extends State<EventPage> {
   String? customGroup;
   Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
-  bool displayGroupInput = true;
-  bool? drinkPackageAnswer;
+  bool displayGroupInput = false;
+  String? drinkPackageAnswer;
+  Group? defaultGroup;
+
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
-    "p": Style(
-        padding: HtmlPaddings.zero,
-        margin: Margins.zero,
-        lineHeight: LineHeight(1.2))
+    "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2)),
   };
 
   static const foodPrefsDisplay = {
@@ -43,58 +42,78 @@ class _EventPageState extends State<EventPage> {
     "vegan": "Vegan",
     "pescetarian": "Pescetarian",
     "milk": "Mjölkallergi",
-    "gluten": "Gluten"
+    "gluten": "Gluten",
   };
+  static const String drinkPackageNone = "Inget";
+  static const String drinkPackageAlcohol = "Alkohol";
+  static const String drinkPackageAlcoholFree = "Alkoholfritt";
+
   void initState() {
-    locator<EventService>()
-        .getEvent(widget.eventId)
-        .then((value) => setState(() {
-              this.event = value;
-            }));
+    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
+          this.event = value;
+          if (this.event != null) {
+            this.drinkPackageAnswer = drinkPackageAlcohol;
+            if (event!.groups != null) {
+              this.defaultGroup = event!.groups![0];
+              this.group = defaultGroup;
+            }
+            if (this.group == null) {
+              this.displayGroupInput = true;
+            }
+          }
+        }));
     locator<UserService>().getUser().then((value) => setState(() {
           this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
           this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-            this.foodPreferences['sv']![i] =
-                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
+            this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
-
     super.initState();
   }
 
   void update() {
-    locator<EventService>()
-        .getEvent(widget.eventId)
-        .then((value) => setState(() {
-              this.event = value;
+    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
+          this.event = value;
+          if (event != null) {
+            if (event!.user_types != null) {
+              this.userType = event!.user_types![0][0];
+            } else {
               this.userType = null;
-              this.group = null;
-              this.answer = null;
-            }));
+            }
+            // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
+            this.group = event!.groups![0];
+          } else {
+            this.group = null;
+            this.userType = null;
+          }
+          this.answer = null;
+        }));
     locator<UserService>().getUser().then((value) => setState(() {
           this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
           this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
           this.foodCustom = value.food_custom;
           for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-            this.foodPreferences['sv']![i] =
-                foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
+            this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
           }
         }));
   }
 
   void sendSignup() async {
-    EventUser eventUser =
-        EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
+    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
     /* just to be sure */
     if (group?.id != null) {
       customGroup = null;
     }
+    if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
+      setState(() {
+        drinkPackageAnswer = drinkPackageNone;
+      });
+    }
     int eventId = event?.id ?? -1;
-    Map json = await AbstractService.post(
-        "/events/" + eventId.toString() + "/event_users",
-        mapBody: eventUser.toJson());
+    Map json =
+        await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
     if (!json.containsKey('errors')) {}
     update();
   }
@@ -111,9 +130,7 @@ class _EventPageState extends State<EventPage> {
 
   //Bör denna vara async som de andra funktionerna?
   void goToSettings() {
-    Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SettingsPage()))
-        .then((_) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage())).then((_) {
       //uppdaterar sidan så man ser sin ändring
       update();
     });
@@ -139,12 +156,17 @@ class _EventPageState extends State<EventPage> {
               });
             },
             items: [
+              // DropdownMenuItem<String?>(
+              //   value: ,
+              //   child: Text(t.eventOther),
+              // ),
               ...?event!.user_types?.map(((List<String> ut) {
                 return DropdownMenuItem<String?>(
                   value: ut[1],
                   child: Text(ut[0]),
                 );
               })),
+
               DropdownMenuItem<String?>(
                 value: null,
                 child: Text(t.eventOther),
@@ -190,7 +212,7 @@ class _EventPageState extends State<EventPage> {
               DropdownMenuItem<Group?>(
                 value: null,
                 child: Text(t.eventOtherDifferent),
-              )
+              ),
             ],
           ),
           Visibility(
@@ -212,8 +234,7 @@ class _EventPageState extends State<EventPage> {
   }
 
   Widget questionInput() {
-    if (event?.event_signup?.question == null ||
-        event?.event_signup?.question == "") {
+    if (event?.event_signup?.question == null || event?.event_signup?.question == "") {
       return Container();
     }
     return Container(
@@ -260,12 +281,12 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Icon(
                   Icons.info_outline_rounded,
-                  color: Colors.red[300],
+                  color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                 ),
                 Text(
                   t.eventNotSignedUp,
                   style: TextStyle(
-                    color: Colors.red[300],
+                    color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                   ),
                 ),
               ],
@@ -292,17 +313,19 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.cancel,
-                          color: Colors.red[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                         ),
                         Text(
                           t.eventNoSpot,
                           style: TextStyle(
-                            color: Colors.red[300],
+                            color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                           ),
                         ),
                       ],
                     ),
-                    const Divider(),
+                    Divider(
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                    ),
                     ..._signupDetails(groupName, userType),
                   ],
                 );
@@ -314,17 +337,20 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.check_circle,
-                          color: Colors.green[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                         ),
                         Text(
                           t.eventGotSpot,
                           style: TextStyle(
-                            color: Colors.green[300],
+                            color:
+                                (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                           ),
                         ),
                       ],
                     ),
-                    const Divider(),
+                    Divider(
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                    ),
                     ..._signupDetails(groupName, userType),
                   ],
                 );
@@ -337,21 +363,23 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Icon(
                         Icons.info_outline_rounded,
-                        color: (isAprilFools
-                            ? Color(0xFFF17F9F)
-                            : Colors.orange[600]),
+                        color: (event?.is_introduction == true
+                            ? Color.fromARGB(255, 159, 126, 6)
+                            : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
-                          color: (isAprilFools
-                              ? Color(0xFFF17F9F)
-                              : Colors.orange[600]),
+                          color: (event?.is_introduction == true
+                              ? Color.fromARGB(255, 159, 126, 6)
+                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                         ),
                       ),
                     ],
                   ),
-                  const Divider(),
+                  Divider(
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                  ),
                   ..._signupDetails(groupName, userType),
                 ],
               );
@@ -374,9 +402,13 @@ class _EventPageState extends State<EventPage> {
             t.eventSignUp,
             style: TextStyle(
                 fontSize: 25,
-                color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                color: (event?.is_introduction == true
+                    ? Color(0xFF630b0b)
+                    : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
           ),
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             child: Column(
@@ -408,11 +440,9 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpOpens +
-                          DateFormat("d/M")
-                              .format(event!.event_signup!.opens!.toLocal()) +
+                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
                           " " +
-                          DateFormat("jm", locale)
-                              .format(event!.event_signup!.opens!.toLocal()),
+                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
                     ),
                   ],
                 ),
@@ -423,20 +453,22 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpCloses +
-                          DateFormat("d/M")
-                              .format(event!.event_signup!.closes!.toLocal()) +
+                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
                           " " +
-                          DateFormat("jm", locale)
-                              .format(event!.event_signup!.closes!.toLocal()),
+                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           signup,
-          const Divider(),
+          Divider(
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+          ),
           Container(
             margin: EdgeInsets.all(10),
             child: Column(
@@ -450,10 +482,11 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  onTap: () => launchUrl(
-                      Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                  onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
               ],
             ),
           ),
@@ -473,16 +506,38 @@ class _EventPageState extends State<EventPage> {
     }
     Widget drinkPackageInput = Container();
     if (event!.drink_package ?? false) {
-      drinkPackageInput = Row(
+      drinkPackageInput = Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(" ${t.eventDrinkPackage}"),
-          Checkbox(
-              value: drinkPackageAnswer ?? false,
-              onChanged: (value) {
-                setState(() {
-                  this.drinkPackageAnswer = value;
-                });
-              }),
+          Container(
+              height: 50,
+              child: DropdownButton<String?>(
+                isExpanded: false,
+                value: drinkPackageAnswer,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    drinkPackageAnswer = newValue;
+                  });
+                },
+                items: [
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcohol,
+                    child: Text(t.eventAlcohol),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcoholFree,
+                    child: Text(t.eventAlcoholFree),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageNone,
+                    child: Text(t.eventNoAlcohol),
+                  )
+                ],
+              )),
         ],
       );
     }
@@ -500,8 +555,7 @@ class _EventPageState extends State<EventPage> {
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences + " ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black)),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
                   ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text(foodPreference + " ")),
@@ -517,9 +571,9 @@ class _EventPageState extends State<EventPage> {
                   child: Text(t.eventLinkToFoodPrefs,
                       style: TextStyle(
                           decoration: TextDecoration.underline,
-                          color: (isAprilFools
-                              ? Color(0xFFF17F9F)
-                              : Colors.orange[600]))),
+                          color: (event?.is_introduction == true
+                              ? Color(0xFF630b0b)
+                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -534,9 +588,7 @@ class _EventPageState extends State<EventPage> {
                   child: InkWell(
                     onTap: () => sendSignup(),
                     child: Card(
-                      color: (isAprilFools
-                          ? Color(0xFFF17F9F)
-                          : Colors.orange[400]),
+                      color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[400]),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -632,57 +684,35 @@ class _EventPageState extends State<EventPage> {
     }
     Widget drinkPackage = Container();
     if (event!.drink_package ?? false) {
-      if (event!.event_user!.drink_package_answer ?? false) {
-        drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: t.eventYes,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
-        );
-      } else {
-        drinkPackage = RichText(
-          text: TextSpan(
-              text: t.eventDrinkPackage,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: t.eventNo,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black))
-              ]),
-        );
+      switch (event!.event_user!.drink_package_answer) {
+        case drinkPackageAlcohol:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
+          break;
+        case drinkPackageAlcoholFree:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
+          break;
+        case drinkPackageNone:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+          break;
+        default:
+          this.drinkPackageAnswer = drinkPackageNone;
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+          break;
       }
     }
     return [
       RichText(
           text: TextSpan(
-              text: t.eventGroup,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(
-                text: groupName,
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
+        text: t.eventGroup,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      )),
       RichText(
           text: TextSpan(
-              text: t.eventPriority2,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              children: [
-            TextSpan(
-                text: userType,
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Colors.black))
-          ])),
+        text: t.eventPriority2,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      )),
       event!.event_signup!.question != ""
           ? RichText(
               text: TextSpan(
@@ -691,11 +721,9 @@ class _EventPageState extends State<EventPage> {
                     TextSpan(text: " "),
                     TextSpan(
                         text: event!.event_user!.answer,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.black))
+                        style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
                   ],
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black)))
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
           : Container(),
       drinkPackage,
       Wrap(
@@ -703,8 +731,7 @@ class _EventPageState extends State<EventPage> {
           RichText(
               text: TextSpan(
                   text: t.eventFoodPreferences + " ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black))),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
           ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
@@ -720,12 +747,23 @@ class _EventPageState extends State<EventPage> {
           child: Text(t.eventLinkToFoodPrefs,
               style: TextStyle(
                   decoration: TextDecoration.underline,
-                  color:
-                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+                  color: (event?.is_introduction == true
+                      ? Color(0xFF630b0b)
+                      : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
           onTap: () => goToSettings(),
         ),
       ]),
     ];
+  }
+
+  Widget _drinkPackageWidget(String drinkPackageText, String choice) {
+    return RichText(
+      text: TextSpan(
+        text: drinkPackageText,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+      ),
+    );
   }
 
   String getDots() {
@@ -764,6 +802,15 @@ class _EventPageState extends State<EventPage> {
         title: Text(t.eventTitle),
       ),
       body: Container(
+        // Introduction events have a different background
+        decoration: event?.is_introduction == true
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/img/nollning-24/schedule/event_background.png"),
+                  fit: BoxFit.fill,
+                ),
+              )
+            : null,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -775,11 +822,14 @@ class _EventPageState extends State<EventPage> {
                   event?.title ?? t.eventNoTitle,
                   style: TextStyle(
                     fontSize: 30,
-                    color:
-                        (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                    color: (event?.is_introduction == true
+                        ? Color(0xFF630b0b)
+                        : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Row(
                   children: [
                     Icon(
@@ -788,15 +838,12 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(
-                              event?.starts_at?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.starts_at?.toLocal() ?? DateTime.now()) +
                           getDots() +
                           " - " +
-                          DateFormat("HH:mm").format(
-                              event?.ends_at?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.ends_at?.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale).format(
-                              event?.starts_at?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale).format(event?.starts_at?.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -816,19 +863,22 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ],
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Container(
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
                       data: event?.description ?? t.eventNoDescription,
                       style: _htmlStyle,
-                      onLinkTap: (String? url, Map<String, String> attributes,
-                          element) {
+                      onLinkTap: (String? url, Map<String, String> attributes, element) {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -836,18 +886,17 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Row(children: [
                         Text(t.eventDressCode),
-                        ...?event?.dress_code
-                            ?.map((dressCode) => Text(dressCode + " "))
+                        ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
                       ]),
                       Visibility(
                           visible: event!.cash ?? false,
-                          child: Text(t.eventPrice +
-                              (event?.price?.toString() ?? "") +
-                              " kr")),
+                          child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
                     ],
                   ),
                 ),
-                const Divider(),
+                Divider(
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
@@ -855,10 +904,7 @@ class _EventPageState extends State<EventPage> {
                       Visibility(
                         visible: event!.cash ?? false,
                         child: Row(
-                          children: [
-                            Icon(Icons.attach_money_rounded),
-                            Text(t.eventCostsMoney)
-                          ],
+                          children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
                         ),
                       ),
                       Visibility(
@@ -899,7 +945,9 @@ class _EventPageState extends State<EventPage> {
                 ),
                 Visibility(
                   visible: event!.can_signup ?? false,
-                  child: const Divider(),
+                  child: Divider(
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                  ),
                 ),
                 Visibility(
                   visible: (!(event!.contact == null)),
@@ -918,11 +966,12 @@ class _EventPageState extends State<EventPage> {
                             ),
                           ),
                           onTap: () => launchUrl(Uri.parse(
-                            "https://www.fsektionen.se/kontakter/" +
-                                (event!.contact?.id ?? 0).toString(),
+                            "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
                           )),
                         ),
-                        const Divider(),
+                        Divider(
+                          color: (event?.is_introduction == true ? Color(0xFF565656) : null),
+                        ),
                       ],
                     ),
                   ),

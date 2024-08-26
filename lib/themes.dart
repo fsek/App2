@@ -8,6 +8,7 @@ final ThemeData fsekTheme = ThemeData(
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white))),
+  appBarTheme: AppBarTheme(color: Colors.orange[700]),
   bottomAppBarTheme: BottomAppBarTheme(color: Colors.orange[700]),
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange)),

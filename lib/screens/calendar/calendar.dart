@@ -30,10 +30,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   void openEventPage(CalendarEvent event) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => EventPage(eventId: event.id ?? -1)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id ?? -1)));
   }
 
   List<CalendarEvent> _getEventsForDay(DateTime day) {
@@ -44,69 +41,97 @@ class _CalendarState extends State<Calendar> {
     String locale = Localizations.localeOf(context).toString();
     return Container(
       child: Card(
+        // Hide card for introduction events
+        shadowColor: event.is_introduction == true ? Colors.transparent : null,
+        color: event.is_introduction == true ? Colors.transparent : null,
         child: InkWell(
           onTap: () => openEventPage(event),
           child: Container(
-            margin: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Text(
-                    event.title ?? "no title",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: (isAprilFools
-                          ? Color(0xFFF17F9F)
-                          : Colors.orange[600]),
+            // Introduction events have a different background
+            decoration: event.is_introduction == true
+                ? BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/img/nollning-24/schedule/event_card_background.png"),
+                      fit: BoxFit.fill,
                     ),
-                    textAlign: TextAlign.left,
+                  )
+                : null,
+
+            margin: EdgeInsets.zero,
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 7),
+                    child: Text(
+                      event.title ?? "no title",
+                      style: TextStyle(
+                        fontSize: 20,
+                        // Double ternary just works :)
+                        color: (event.is_introduction == true
+                            ? Color(0xFF630B0B)
+                            : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time_rounded,
-                      size: 20,
-                    ),
-                    Text(
-                      /* better error checking */
-                      "  " +
-                          DateFormat("HH:mm").format(
-                              event.start?.toLocal() ?? DateTime.now()) +
-                          " - " +
-                          DateFormat("HH:mm")
-                              .format(event.end?.toLocal() ?? DateTime.now()) +
-                          ", " +
-                          DateFormat("MMMMd", locale)
-                              .format(event.start?.toLocal() ?? DateTime.now()),
-                      style: TextStyle(
-                        fontSize: 14,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time_rounded,
+                        size: 20,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.room,
-                      size: 20,
-                    ),
-                    Text(
-                      "  " + (event.location ?? "intigheten"),
-                      style: TextStyle(
-                        fontSize: 14,
+                      Text(
+                        /* better error checking */
+                        "  " +
+                            DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                            " - " +
+                            DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                            ", " +
+                            DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-              ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            // Alcohol is served
+                            if (event.drink == true) Icon(Icons.wine_bar_rounded, size: 20),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.room,
+                        size: 20,
+                      ),
+                      Text(
+                        "  " + (event.location ?? "intigheten"),
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              margin: event.is_introduction == true
+                  ? EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 6, 15, 15, 15)
+                  : EdgeInsets.all(10),
             ),
           ),
         ),
+        // Introduction events background needs access to entire card
+        margin: event.is_introduction == true ? EdgeInsets.symmetric(vertical: 4) : EdgeInsets.all(4),
       ),
     );
   }
@@ -151,8 +176,7 @@ class _CalendarState extends State<Calendar> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay =
-                          focusedDay; // update `_focusedDay` here as well
+                      _focusedDay = focusedDay; // update `_focusedDay` here as well
                       _selectedEvents = _getEventsForDay(selectedDay);
                     });
                   },
@@ -167,8 +191,7 @@ class _CalendarState extends State<Calendar> {
                   alignment: Alignment.centerLeft,
                   width: double.infinity,
                   height: 20,
-                  color:
-                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                  color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
                   child: Text(
                     /* It's too late to write pretty code, take this formatting space*/
                     "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),

@@ -1,0 +1,158 @@
+
+{
+      "people": [
+        {
+          "image": "overfosMattis.jpg",
+          "name": {
+              "sv": "Överfös Mattis",
+              "en": "Överfös Mattis"
+          },
+          "position": {
+              "sv": "Överfös",
+              "en": "Head of the Introduction Committee"
+          },
+          "text": {
+              "sv": "Hej, jag heter Mattis Mattsson!\nDet är jag som är Överföset på F-sektionen och därmed huvudansvarig för årets nollning. Jag, tillsammans med mina Cofös -  Thea, Lovisa, Hanne, Sebastian, Albin och Linnea -  utgör Föset. Föset har tillsammans planerat en nollning vi hoppas kommer bli ett minne för livet.\nUnder våren har vi arbetat med att rekrytera nollningsvolontärer, planerat evenemang, hållit i utbildningar, designat samt haft kontakt med sponsorer. Nollningen hade aldrig gått ihop utan alla fantastiska volontärer som bidrar på olika sätt. Nu, efter en lång vår, är allt äntligen på plats och vi är redo att få bjuda med Dig på ett spännande och roligt äventyr!\nNollningen i år är en berättelse som för oss tillbaka till de första lundaborna, rövarna, som härjar i borgar, i skogen och bland klipporna. Jag hoppas att Du får en oförglömlig upplevelse och en fantastisk start på Din studieperiod.",
+              "en": "Hi, my name is Mattis Mattsson!\nI'm the Head of the Introduction Committee at the F-guild and thus responsible for this year's introduction. I, together with the Introduction Committee Commissioners - Thea, Lovisa, Hanne, Sebastian, Albin and Linnea - make up the Introduction Committee. Together we have planned an introduction we hope will be a memory for life.\nDuring the spring, we have worked to recruit introduction volunteers, planned events, held educations, made designs and had contact with sponsors. The introduction would never have come together without all the fantastic volunteers who contribute in different ways. Now, after a long spring, everything is finally in place and we are ready to invite you on an exciting and fun adventure!\nThis year's introduction is a story that takes us back to the first inhabitants of Lund, the bandits; ravaging castles, forests and rocks. I hope you have an unforgettable experience and a great start to your study period."
+          }
+      },
+      {
+      "image": "cofosThea.jpg",
+      "name": {
+              "sv": "Cofös Thea",
+              "en": "Cofös Thea"
+          },
+          "position": {
+              "sv": "Cofös",
+              "en": "Introduction Committee Commissioner"
+          },
+          "text": {
+              "sv": "Hej där! Det är jag som är Cofös Thea. Jag föddes för 23 år sedan i den lilla hålan Stockholm. Min resa genom livet har lett mig hit till teknisk fysik i Lund, där jag nu påbörjar mitt tredje år. Vi i föset planerar och arrangerar nollningen och ser till att ni ska få en kickstart på ert nya liv här i Lund. Vårt arbete började redan innan jul och det är så kul att nollningen äntligen är här. Vilket äventyr!! Just mitt ansvar i föset är i första hand bokföring och att hålla ett öga på ekonomin för nollningen. Men nog om det, vad kul att just du är här, och jag hoppas att du är redo att ge dig ut på rövartåg!!",
+              "en": "Hi there! I'm Cofös Thea. I was born 23 years ago in the small town of Stockholm. My journey through life has led me here to engineering physics in Lund, where I am now starting my third year. We in the Introduction Committee plan and organize the introduction and make sure that you get a kick start on your new life here in Lund. Our work started already before Christmas and it's so great that the introduction is finally here. What an adventure! My responsibility in the Introduction Committee is primarily accounting and keeping an eye on the finances for the introduction. But enough about that, I am glad you're here, and I hope that you are ready to go on an adventure!"
+          }
+      },
+      {
+          "image": "cofosLovisa.jpg",
+          "name": {
+                  "sv": "Cofös Lovisa",
+                  "en": "Cofös Lovisa"
+              },
+              "position": {
+                  "sv": "Cofös",
+                  "en": "Introduction Committee Commissioner"
+              },
+              "text": {
+                  "sv": "Hejsan nollan! Det är jag, Cofös Lovisa, som skickar ut meddelanden i F-appen varje kväll, där jag berättar om dagen som varit och dagen som komma skall. Jag är informationsansvarig i föset, så mitt jobb är att se till att alla får den info de behöver. Utöver det ser jag till, med hjälp av mina fantastiska webbfös, att appen fungerar som den ska. Ta hand om dig så ses vi nog snart, på detta rövar-äventyr som är nollningen!",
+                  "en": "Hello mentee! I, Cofös Lovisa, am the one who sends out messages in the F-app every night, where I tell you about the day that has been and the day to come. I'm the Introduction Committee Commissioner with Information responsibility, so my job is to make sure everyone gets the information they need. In addition, with the help of my fantastic webfös, I make sure that the app works as it should. Take care and I'll see you soon, on this adventure that is the introduction!"
+              }
+          },
+          {
+              "image": "cofosHanne.jpg",
+              "name": {
+                      "sv": "Cofös Hanne",
+                      "en": "Cofös Hanne"
+                  },
+                  "position": {
+                      "sv": "Cofös",
+                      "en": "Introduction Committee Commissioner"
+                  },
+                  "text": {
+                      "sv": "Hallå där! Jag är Cofös Hanne och är eventansvarig inom föset. Min roll innebär att jag har ansvar över eventplanering inför nollningen. Mitt arbete innefattar huvudsakligen schemaläggning och att pyssla med logistiken kring nollningens event. Rollen innebär mycket kontakt och samarbete med alla F-sektionens finfina utskott och eventansvariga på LTH:s övriga sektioner. Har ni frågor om nollningsevent eller andra funderingar är det bara att jaga rätt på mig. Jag hoppas ni får en underbar nollning och en fortsatt härlig tid här på F-sektionen!",
+                      "en": "Hi there! I am Cofös Hanne and am responsible for events during the introduction. My role mainly consists of making the introduction schedule and puzzling with the logistics surrounding the introduction events. The role involves a lot of contact and collaboration with all the amazing committees at the F-guild, and also with the other guilds at LTH. If you have any questions regarding events at the introduction or anything else, just hunt me down. I hope you all have a wonderful introduction and a great time here at the F-guild!"
+                  }
+              },
+              {
+                  "image": "cofosAlbin.jpg",
+                  "name": {
+                          "sv": "Cofös Albin",
+                          "en": "Cofös Albin"
+                      },
+                      "position": {
+                          "sv": "Cofös",
+                          "en": "Introduction Committee Commissioner"
+                      },
+                      "text": {
+                          "sv": "Hallå eller! Det är jag som är Cofös Albin. Jag är 21 år gammal och kommer från Kalmar, men sedan förra hösten studerar jag teknisk matematik här i Lund. Utöver de gemensamma ansvarsområdena i Föset, har jag internrollen som Designfös. I praktiken innebär det att jag designat märken, nollningsväggen, logotyper och massa annat som tillsammans skapar den temaenliga känslan till årets nollning, En Nollning Bland Rövare 2024. Se till att ta vara på dessa fem veckor, ty minnena av denna nollning skall förevigt eka.",
+                          "en": "Hello! I am Cofös Albin. I am 21 years old and come from Kalmar, but since last fall I have been studying engineering mathematics here in Lund. In addition to the common responsibilities in the Introduction Committee, I have the internal role as Introduction Committee Commissioner with Design responsibilities. In practice, this means that I've designed patches, the introduction wall, the app and lots of other things that together create the thematic feeling of this year's introduction, An Introduction Among Bandits 2024. Make sure to make the most of these five weeks, because the memories of this introduction shall forever echo on. "
+                      }
+                  },
+                  {
+                      "image": "cofosLinnea.jpg",
+                      "name": {
+                              "sv": "Cofös Linnea",
+                              "en": "Cofös Linnea"
+                          },
+                          "position": {
+                              "sv": "Cofös",
+                              "en": "Introduction Committee Commissioner"
+                          },
+                          "text": {
+                              "sv": "Tjolahoppsan nollan! Jag är Cofös Linnea, och kommer från de djupaste skogarna utanför Norrtälje. Jag börjar nu mitt fjärde år som plundrare av kunskap på pi-programmet, där jag har stormtrivts sedan dag ett. Inom Föset har jag rollen som fadder- och intisansvarig, vilket innebär att jag jobbar för att se till att alla mår bra och inkluderas. Ni kan alltid komma till mig om det är något!<3 Röva på säkert mina små trollungar.",
+                              "en": "Howdy-do mentee! I am Cofös Linnea, and come from the deepest forests outside of Norrtälje. I am now starting my fourth year as a plunderer of knowledge at the math program, where I’ve felt like a fish in water since day one. Within the Introduction Committee (Fös) I am responsible for the mentors and international students, meaning that I work towards their well-being and inclusion. You can always come to me for any reason!<3 Rob safely my little troll kiddos."
+                          }
+                      },
+                      {
+                          "image": "cofosLian.jpg",
+                          "name": {
+                                  "sv": "Cofös Lian",
+                                  "en": "Cofös Lian"
+                              },
+                              "position": {
+                                  "sv": "Cofös",
+                                  "en": "Introduction Committee Commissioner"
+                              },
+                              "text": {
+                                  "sv": "Hejsan! Jag är Cofös Lian, ett 24 år gammalt Cofös från Stockholm. Jag heter egentligen Sebastian, fast också Lian, Sebastian Lian alltså, och jag har nu påbörjat mitt femte år på teknisk fysik. Tillsammans med mina flinka kollegor i föset har jag jobbat sedan december med diverse fössysslor och väntat ivrigt på att du och alla andra nollor ska dyka upp så vi kan välkomna er! Min huvuduppgift är att styra upp sponsring och fösets kontakt med företag, men ibland gör jag även andra saker, som att ta en kopp kaffe till exempel. Hoppas du kommer att trivas här. Ta det chill och njut av nollningen!",
+                                  "en": "Hello! I’m Cofös Lian, a 24 year old Cofös from Stockholm. My real name is Sebastian, but also Lian, Sebastian Lian, and I have just started my fifth year at engineering physics. Together with my clever colleagues in the Introduction Committee, I’ve worked since December with very important Introduction Committee things, waiting eagerly for your arrival so that we can welcome you! My main responsibility is to coordinate sponsorships and the Introduction Committee’s contact with companies, but sometimes I do other things, such as enjoying a cup of coffee. I hope you will like it here. Take it easy and enjoy the introduction!"
+                              }
+                          },
+
+
+
+                          {
+                              "image": "faddrar.png",
+                              "name": {
+                                      "sv": "Faddrar",
+                                      "en": "Mentors"
+                                  },
+                                  "position": {
+                                      "sv": "Faddrar",
+                                      "en": "Mentors"
+                                  },
+                                  "text": {
+                                      "sv": "Det finns tre sätt att engagera sig som fadder; gruppfadder, internationell fadder samt uppdragsfadder. Som gruppfadder och internationell fadder blir man tilldelad en faddergrupp som man ansvarar för under hela nollningen. Som uppdragsfadder har man ansvar över ett av uppdragen, och håller i bygg-, träning- eller pysselkväll samt hänger med på ett par sittningar och event från och med vecka 1. De uppdrag som finns är Ballongistapulten, Cheer, FlyING, Nollympiaden, Nollesexet, Nollefilmen, Regattan, Revyn och Överföshinderbanan.",
+                                      "en": "There are three ways to get involved as a mentor; group mentor, international mentor and mission mentor. As a group mentor and international mentor, you are assigned to a mentor group that you are responsible for during the entire introduction. As a mission mentor, you are responsible for one of the missions, and hold construction, training or craft evenings and hang out at a couple of sittings and events from week 1. The missions that are available are the Balloonistapult, Cheer, FlyING, Nollympiaden, Nollesexet, Nollefilmen, Regattan, Revyn and Överföshinderbanan."
+                                  }
+                              },
+                              {
+                                  "image": "extrafos.jpg",
+                                  "name": {
+                                          "sv": "Extrafös",
+                                          "en": "Extrafös"
+                                      },
+                                      "position": {
+                                          "sv": "Extrafös",
+                                          "en": "Extrafös"
+                                      },
+                                      "text": {
+                                          "sv": "Utöver Överföset och de sex Cofösen finns det ungefär 60 extrafös indelade i olika ansvarsområden där de assisterar föset i olika aspekter av nollningen. Som extrafös kan man arbeta med att sy Fösets mantlar eller att stå och grilla mat till evenemang under nollningen. Man kan vara med och skapa filmen som visades första dagen eller så kan man planera och anordna en sittning. Den sammanlagda listan av extrafös är: Aftermoviefös, Filmfös, Färgfös, Grafikfös, Pluggfös, Syfös, Sittningsfös, Stortorgsfös, Mössfös, Korvfös, Falukorv, Campfös och Webbfös.",
+                                          "en": "In addition to the Head of the Introduction Committee and the six Introduction Committee Commissioners, there are around 60 extrafös divided into different areas of responsibility where they assist the  Introduction Committee in different aspects of the Introduction. As an extrafös, you can work on sewing the cloaks or grilling food for events during the introduction. You can help create the film that was shown on the first day or you can plan and organize a sitting. The total list of extrafös is: Graphics Fös, Colourfös, Sewingfös, Stortorgsfös, Campfös, Sittingfös, Studyfös, Falukorv, Hot dog fös, Filmfös, Aftermovie Fös, Webfös and Hatfös."
+                                      }
+                                  },
+                                  {
+                                      "image": "peppare.png",
+                                      "name": {
+                                              "sv": "Reiseleiter",
+                                              "en": "Reiseleiter"
+                                          },
+                                          "position": {
+                                              "sv": "Reiseleiter",
+                                              "en": "Reiseleiter"
+                                          },
+                                          "text": {
+                                              "sv": "På andra sektioner finns så kallade Peppare, vars uppgift är att hjälpa Föset under nollningsevent. Under nollningsperioden på F-sektionen ingår istället Reiseleiteriet under Nollningsutskottet.",
+                                              "en": "In other guilds they have Peppare, whose task is to help the Introduction Committee during the introduction events. For the F-guild, during the introduction period, the Reiseleiteri is part of the Introduction Committee instead."
+                                          }
+                                      }
+      ]
+}
