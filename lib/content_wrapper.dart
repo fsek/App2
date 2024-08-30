@@ -51,7 +51,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
       isSpeakerphoneOn: true,
       stayAwake: true,
       contentType: AndroidContentType.sonification,
-      usageType: AndroidUsageType.assistanceSonification,
+      usageType: AndroidUsageType.game,
       audioFocus: AndroidAudioFocus.none,
     ),
   );
