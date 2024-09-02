@@ -53,7 +53,7 @@ class _EventPageState extends State<EventPage> {
           this.event = value;
           if (this.event != null) {
             this.drinkPackageAnswer = drinkPackageAlcohol;
-            if (event!.groups != null) {
+            if (event!.groups != null && event!.groups!.isNotEmpty) {
               this.defaultGroup = event!.groups![0];
               this.group = defaultGroup;
             }
