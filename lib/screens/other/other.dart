@@ -38,7 +38,7 @@ class OtherContent extends StatelessWidget {
 
     // Temporary moose game reveal holdoff until 18:30 6th of September 2024, 
     // after that date, remove this please
-    if (DateTime.now().isBefore(DateTime(2024, 9, 6, 18, 30))) {
+    if (DateTime.now().isBefore(DateTime(2023, 9, 6, 18, 30))) {
       routeMap = {
         "Songbook": SongbookPage(),
         "Photo Gallery": GalleryPage(),

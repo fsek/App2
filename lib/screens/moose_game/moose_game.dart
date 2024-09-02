@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/fredmansky/fredmansky.dart';
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
 import 'package:fsek_mobile/screens/moose_game/ground.dart';
+import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
+import 'package:fsek_mobile/screens/songbook/top_songs.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/game.service.dart';
@@ -262,6 +264,21 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         title: Text("Moose Game"),
+        actions: [
+                    // Add actions here
+                    IconButton(
+                      icon: Icon(Icons.emoji_events), // Trophy icon
+                      onPressed: () {
+                        gameOver();
+                        Future.delayed(Duration(milliseconds: 500));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HighscorePage()),
+                        );
+                      },
+                    ),
+                  ],
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
