@@ -31,7 +31,7 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Moose Score", "Moose Game"];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Moose Game"];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
@@ -43,7 +43,7 @@ class OtherContent extends StatelessWidget {
         "Songbook": SongbookPage(),
         "Photo Gallery": GalleryPage(),
         "Hilbert Café": CafePage(),
-        "Moose Score": PlaceholderPage(title: "Moose Score", disc: "Wait a bit longer!"),
+        //"Moose Score": PlaceholderPage(title: "Moose Score", disc: "Wait a bit longer!"),
         "Moose Game": PlaceholderPage(title: "Moose Game", disc: "Vänta lite längre tack!"),
         "The F guild": AboutGuildPage(),
         "The F-app": FapPage(),
@@ -66,7 +66,7 @@ class OtherContent extends StatelessWidget {
         "Songbook": SongbookPage(),
         "Photo Gallery": GalleryPage(),
         "Hilbert Café": CafePage(),
-        "Moose Score": HighscorePage(),
+        //"Moose Score": HighscorePage(),
         "Moose Game": MooseGamePage(),
         "The F guild": AboutGuildPage(),
         "The F-app": FapPage(),

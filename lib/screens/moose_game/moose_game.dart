@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:audioplayers/audioplayers.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'package:vector_math/vector_math.dart';
 
@@ -171,7 +172,12 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       );
   }
 
-  void restart() {
+  void restart() async {
+    ConnectivityResult connectivityResult;
+    connectivityResult = await Connectivity().checkConnectivity();
+    if(connectivityResult == ConnectivityResult.none) {
+    }
+    else {
     setState(() {
       moose.reset();
       score = 0;
@@ -181,6 +187,7 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       newHighscore = false;
       gameAnimController.forward();
     });
+    }
   }
 
   Widget getGameObjectWidget(GameObject gameObject, Size screenSize) {
