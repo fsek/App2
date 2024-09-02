@@ -69,11 +69,14 @@ class _MooseGamePageState extends State<MooseGamePage> with SingleTickerProvider
       highscore = (users.firstWhere((gamescore) => gamescore.user?.id == tempuserid).score ?? 0).toDouble()
     });
 
-    initializeGame();
-
     gameAnimController = AnimationController(vsync: this, duration: Duration(days: 6122));
     gameAnimController.addListener(update);
-    gameAnimController.forward();
+
+    initializeGame();
+
+    // This works (not)
+    isDead = true;
+
   }
 
   @override
