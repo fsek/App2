@@ -38,13 +38,12 @@ class OtherContent extends StatelessWidget {
 
     // Temporary moose game reveal holdoff until 18:30 6th of September 2024, 
     // after that date, remove this please
-    if (DateTime.now().isBefore(DateTime(2023, 9, 6, 18, 30))) {
+    if (DateTime.now().isBefore(DateTime(2024, 9, 6, 18, 30))) {
       routeMap = {
         "Songbook": SongbookPage(),
         "Photo Gallery": GalleryPage(),
         "Hilbert Café": CafePage(),
-        //"Moose Score": PlaceholderPage(title: "Moose Score", disc: "Wait a bit longer!"),
-        "Moose Game": PlaceholderPage(title: "Moose Game", disc: "Vänta lite längre tack!"),
+        "Moose Game": PlaceholderPage(title: "Moose Game", disc: "Coming to a sittning near you..."),
         "The F guild": AboutGuildPage(),
         "The F-app": FapPage(),
         "Account": SettingsPage(),
@@ -66,7 +65,6 @@ class OtherContent extends StatelessWidget {
         "Songbook": SongbookPage(),
         "Photo Gallery": GalleryPage(),
         "Hilbert Café": CafePage(),
-        //"Moose Score": HighscorePage(),
         "Moose Game": MooseGamePage(),
         "The F guild": AboutGuildPage(),
         "The F-app": FapPage(),
