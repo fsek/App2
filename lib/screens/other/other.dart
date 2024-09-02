@@ -10,6 +10,7 @@ import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
+import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/services/notifications.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
@@ -30,32 +31,60 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Highscore temp"];
-    about = [t.otherAboutGuild, t.otherFap, "Dinosaur"];
+    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Moose Score", "Moose Game"];
+    about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage];
     support = [t.otherContact, t.otherAnon];
-    /* I am so sorry for this Teo */
-    routeMap = {
-      "Songbook": SongbookPage(),
-      "Photo Gallery": GalleryPage(),
-      "Hilbert Café": CafePage(),
-      "Highscore temp": HighscorePage(),
-      "The F guild": AboutGuildPage(),
-      "The F-app": FapPage(),
-      "Account": SettingsPage(),
-      "Language": LanguageSettingsPage(),
-      "Contact": ContactPage(),
-      "Anonymous contact page": Container(),
-      "Sångbok": SongbookPage(),
-      "Bildgalleri": GalleryPage(),
-      "F-sektionen": AboutGuildPage(),
-      "F-appen": FapPage(),
-      "Dinosaur": MooseGamePage(),
-      "Konto": SettingsPage(),
-      "Språk": LanguageSettingsPage(),
-      "Kontakt": ContactPage(),
-      "Anonym kontaktsida": Container()
-    };
+
+    // Temporary moose game reveal holdoff until 18:30 6th of September 2024, 
+    // after that date, remove this please
+    if (DateTime.now().isBefore(DateTime(2024, 9, 6, 18, 30))) {
+      routeMap = {
+        "Songbook": SongbookPage(),
+        "Photo Gallery": GalleryPage(),
+        "Hilbert Café": CafePage(),
+        "Moose Score": PlaceholderPage(title: "Moose Score", disc: "Wait a bit longer!"),
+        "Moose Game": PlaceholderPage(title: "Moose Game", disc: "Vänta lite längre tack!"),
+        "The F guild": AboutGuildPage(),
+        "The F-app": FapPage(),
+        "Account": SettingsPage(),
+        "Language": LanguageSettingsPage(),
+        "Contact": ContactPage(),
+        "Anonymous contact page": Container(),
+        "Sångbok": SongbookPage(),
+        "Bildgalleri": GalleryPage(),
+        "F-sektionen": AboutGuildPage(),
+        "F-appen": FapPage(),
+        "Konto": SettingsPage(),
+        "Språk": LanguageSettingsPage(),
+        "Kontakt": ContactPage(),
+        "Anonym kontaktsida": Container()
+      };
+    } else {
+      /* I am so sorry for this Teo */
+      routeMap = {
+        "Songbook": SongbookPage(),
+        "Photo Gallery": GalleryPage(),
+        "Hilbert Café": CafePage(),
+        "Moose Score": HighscorePage(),
+        "Moose Game": MooseGamePage(),
+        "The F guild": AboutGuildPage(),
+        "The F-app": FapPage(),
+        "Account": SettingsPage(),
+        "Language": LanguageSettingsPage(),
+        "Contact": ContactPage(),
+        "Anonymous contact page": Container(),
+        "Sångbok": SongbookPage(),
+        "Bildgalleri": GalleryPage(),
+        "F-sektionen": AboutGuildPage(),
+        "F-appen": FapPage(),
+        "Konto": SettingsPage(),
+        "Språk": LanguageSettingsPage(),
+        "Kontakt": ContactPage(),
+        "Anonym kontaktsida": Container()
+      };
+    }
+    
 
     return ListView(
         children: _generateListTiles(categories, context) +
