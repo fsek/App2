@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
 import 'package:fsek_mobile/widgets/easterEgg/familyGuyFoset.dart';
@@ -92,6 +93,10 @@ class FsekAppBarState extends State<FsekAppBar> {
             });
           });
         });
+        break;
+
+      case "moosegame":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => (MooseGamePage())));
         break;
 
       default:
