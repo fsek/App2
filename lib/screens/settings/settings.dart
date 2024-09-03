@@ -13,7 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   User? user;
-
+  
   static List<int> years =
       List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
 
@@ -90,10 +90,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   user!.firstname,
                   (input) => user!.firstname = input,
                 ),
-                _makeTextField(
-                  t.settingsLastName + "*",
-                  user!.lastname,
-                  (input) => user!.lastname = input,
+                _makeTextField( "Game nickname", user!.game_nickname,
+                  // TODO use translate var
+                  (input) {
+                    changedSetting = true;
+                    user!.game_nickname = input;
+                  },
                 ),
                 _makeDropDown<String>(
                   t.settingsProgramme,

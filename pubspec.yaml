@@ -76,6 +76,7 @@ dependencies:
   html: any
   photo_view: ^0.15.0
   package_info_plus: ^8.0.1
+  connectivity_plus: ^3.0.3
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object
@@ -104,13 +105,13 @@ flutter:
     - assets/
     - assets/audio/
     - assets/img/
+    - assets/img/moose_game/
     - assets/img/memes/
     - assets/img/nollning-24/
     - assets/img/nollning-24/nolleguide/
     - assets/img/nollning-24/schedule/
     - assets/img/nollning-24/homescreen/
     - assets/data/guide/
-    - assets/img/nollning-24/hemsidan/
     - assets/img/nollning-24/schema/
     - assets/img/nollning-24/karta/
     - assets/img/nollning-24/karta/extraAssets/
@@ -130,6 +131,9 @@ flutter:
     - family: Brandon Grotesque
       fonts:
         - asset: assets/BrandonGrotesque-Regular.ttf
+    - family: NF-Pixels
+      fonts:
+        - asset: assets/NFPixels-Regular.ttf
     - family: Testament
       fonts:
         - asset: assets/Testament-Medium.ttf

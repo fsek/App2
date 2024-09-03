@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
 import 'package:fsek_mobile/widgets/easterEgg/familyGuyFoset.dart';
@@ -65,6 +66,7 @@ class FsekAppBarState extends State<FsekAppBar> {
     // 6 1 2 2 clicked: Easter egg codes activated
     String? easterEggCode = await easterEggCodeDialog(context);
     if (easterEggCode == null) return; // User cancels dialog i think
+    // EDIT: yes it is, without it it goes on forever
     //For more than one code, please don't stack else if's
     switch (easterEggCode) {
       case "bababoe":
@@ -91,6 +93,10 @@ class FsekAppBarState extends State<FsekAppBar> {
             });
           });
         });
+        break;
+
+      case "moosegame":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => (MooseGamePage())));
         break;
 
       default:
