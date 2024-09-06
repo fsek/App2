@@ -13,9 +13,14 @@ class GameScoreService extends AbstractService {
     return result;
   }
   Future<Map> postScore({ score = int }) async {
-
     return AbstractService.post("/game_scores", mapBody: { 
       "score": score,
+      "user": await locator<UserService>().getUser()
+    });
+  }
+  Future<Map> resetScore() async {
+    return AbstractService.post("/game_scores", mapBody: { 
+      "score": 0,
       "user": await locator<UserService>().getUser()
     });
   }
