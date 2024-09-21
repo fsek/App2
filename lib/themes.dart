@@ -17,10 +17,62 @@ final ThemeData fsekTheme = ThemeData(
   ),
 );
 
+// Unused since flutter 3.19 upgrade for some reason
 final List<Color> fsekBackground = [
   Color(0xFFf77e14),
   Color(0xFFe6660b),
 ];
+
+final ThemeData mat3Theme = ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
+    brightness: Brightness.dark,
+  ),
+  // Color used for circular loading indicator in some places 
+  primaryColor: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
+
+  textTheme: TextTheme(
+    displayLarge: const TextStyle(
+      fontSize: 72,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Helvetica Neue'
+    ),
+    titleLarge: const TextStyle(
+      fontSize: 30,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Helvetica Neue'
+    ),
+    headlineMedium: const TextStyle( // Ex: titles on the event page
+      fontSize: 25,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Helvetica Neue',
+      color: const Color.fromRGBO(56, 142, 60, 1) // colors.green[700]
+    ),
+    bodyMedium: const TextStyle(
+      fontSize: 15,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Helvetica Neue'
+    ),
+    displaySmall: const TextStyle(
+      fontSize: 12,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Helvetica Neue'
+    ),
+    labelLarge: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Helvetica Neue'
+    ),
+  ),
+
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.green[700]!),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+    ),
+  ),
+);
 
 final ThemeData nollning2023themeV0 = ThemeData(
   brightness: Brightness.light,

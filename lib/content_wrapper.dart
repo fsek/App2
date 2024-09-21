@@ -195,6 +195,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           ])),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
+            color: Theme.of(context).colorScheme.surface,
             child: FsekAppBar(
               currentIndex: _currentIndex,
               centerItemText: "F-sektionen",
@@ -206,7 +207,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   locator<ThemeService>().theme = dsekTheme;
                   locator<ThemeService>().backgroundColors = dsekBackground;
                 } else {
-                  locator<ThemeService>().theme = fsekTheme;
+                  locator<ThemeService>().theme = mat3Theme;
                   locator<ThemeService>().backgroundColors = fsekBackground;
                 }
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
@@ -216,8 +217,8 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],
-              selectedColor: Colors.white,
-              color: Colors.black,
+              selectedColor: Theme.of(context).colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.surfaceTint,
             ),
           ),
         ),
