@@ -64,7 +64,7 @@ void main() async {
     locator<ThemeService>().theme = dsekTheme;
     locator<ThemeService>().backgroundColors = dsekBackground;
   } else {
-    locator<ThemeService>().theme = fsekTheme;
+    locator<ThemeService>().theme = mat3Theme;
     locator<ThemeService>().backgroundColors = fsekBackground;
   }
   locator<ThemeService>().loginIcon = [

@@ -400,11 +400,7 @@ class _EventPageState extends State<EventPage> {
         children: [
           Text(
             t.eventSignUp,
-            style: TextStyle(
-                fontSize: 25,
-                color: (event?.is_introduction == true
-                    ? Color(0xFF630b0b)
-                    : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           Divider(
             color: (event?.is_introduction == true ? Color(0xFF565656) : null),
@@ -820,12 +816,7 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Text(
                   event?.title ?? t.eventNoTitle,
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: (event?.is_introduction == true
-                        ? Color(0xFF630b0b)
-                        : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
                 ),
                 Divider(
                   color: (event?.is_introduction == true ? Color(0xFF565656) : null),

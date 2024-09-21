@@ -81,7 +81,7 @@ class _SongbookPageState extends State<SongbookPage>
             ),
             body: Center(
               child: CircularProgressIndicator(
-                color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+                color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.secondary),
               ),
             ),
           )
@@ -95,7 +95,7 @@ class _SongbookPageState extends State<SongbookPage>
                   actions: [
                     // Add actions here
                     IconButton(
-                      icon: Icon(Icons.emoji_events, color: Colors.grey[900]), // Trophy icon
+                      icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onSurface), // Trophy icon
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -124,20 +124,20 @@ class _SongbookPageState extends State<SongbookPage>
                                 ? IconButton(
                                     icon: Icon(
                                       Icons.arrow_back,
-                                      color: Colors.grey[800],
+                                      color: Theme.of(context).colorScheme.onSurface,
                                     ),
                                     onPressed: () =>
                                         FocusScope.of(context).unfocus(),
                                   )
                                 : Icon(
                                     Icons.search,
-                                    color: Colors.grey[800],
+                                    color: Theme.of(context).colorScheme.onSurface,
                                   ),
                             hintText: t.songbookSearch,
                             suffixIcon: _controller.text.isNotEmpty
                                 ? IconButton(
                                     icon: Icon(Icons.clear),
-                                    color: Colors.grey[800],
+                                    color: Theme.of(context).colorScheme.onSurface,
                                     onPressed: () => setState(() {
                                       _controller.clear();
                                       FocusScope.of(context).unfocus();
@@ -238,11 +238,11 @@ class _SongbookPageState extends State<SongbookPage>
     if (song.title![0] != initChar) {
       initChar = song.title![0];
       index.add(Container(
-        decoration: BoxDecoration(color: Colors.grey[300]),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
         child: ListTile(
           title: Text(
             initChar,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondary),
           ),
         ),
       ));
@@ -253,7 +253,7 @@ class _SongbookPageState extends State<SongbookPage>
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Colors.grey[400]!),
+                  bottom: BorderSide(color: Theme.of(context).colorScheme.secondary),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),

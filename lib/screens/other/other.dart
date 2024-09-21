@@ -107,10 +107,10 @@ class OtherContent extends StatelessWidget {
                 margin: EdgeInsets.all(2),
                 child: InkWell(
                     child: ListTile(
-                  tileColor: Colors.red[600],
+                  tileColor: Theme.of(context).colorScheme.error,
                   title: Text(
                     t.otherLogOut,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onError),
                   ),
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);

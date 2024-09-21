@@ -90,14 +90,14 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
     else if (initChar == 3)
       color = Color.fromARGB(255, 205, 127, 50);
     else
-      color = Color.fromARGB(255, 243, 240, 241);
+      color = Theme.of(context).colorScheme.secondary;
 
     index.add(Container(
       decoration: BoxDecoration(color: color),
       child: ListTile(
         title: Text(
           initChar.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     ));
@@ -109,7 +109,7 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Colors.grey[400]!),
+                  bottom: BorderSide(color: Theme.of(context).colorScheme.secondary),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),

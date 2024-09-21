@@ -45,7 +45,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
               SizedBox(
                 width: 16,
               ),
-              CircularProgressIndicator()
+              CircularProgressIndicator(color: Theme.of(context).primaryColor)
             ],
           )
         ]));
