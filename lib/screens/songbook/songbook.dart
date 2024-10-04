@@ -81,7 +81,7 @@ class _SongbookPageState extends State<SongbookPage>
             ),
             body: Center(
               child: CircularProgressIndicator(
-                color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.secondary),
+                color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).primaryColor),
               ),
             ),
           )
@@ -95,7 +95,7 @@ class _SongbookPageState extends State<SongbookPage>
                   actions: [
                     // Add actions here
                     IconButton(
-                      icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onSurface), // Trophy icon
+                      icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onPrimary), // Trophy icon
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -238,11 +238,11 @@ class _SongbookPageState extends State<SongbookPage>
     if (song.title![0] != initChar) {
       initChar = song.title![0];
       index.add(Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
         child: ListTile(
           title: Text(
             initChar,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondary),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ),
       ));
@@ -253,7 +253,7 @@ class _SongbookPageState extends State<SongbookPage>
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Theme.of(context).colorScheme.secondary),
+                  bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceVariant),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),

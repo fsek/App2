@@ -56,7 +56,7 @@ class _CafePageState extends State<CafePage> {
                       shift.duration ?? "för alltid",
                       style: TextStyle(
                         fontSize: 15,
-                        color: (shift.user != null ? Theme.of(context).colorScheme.onInverseSurface : Theme.of(context).colorScheme.onSurface),
+                        color: (Theme.of(context).colorScheme.primary),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -163,7 +163,7 @@ class _CafePageState extends State<CafePage> {
                 "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),
                 style: TextStyle(
                   fontSize: 12,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ),
             ),

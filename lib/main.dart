@@ -64,18 +64,25 @@ void main() async {
     locator<ThemeService>().theme = dsekTheme;
     locator<ThemeService>().backgroundColors = dsekBackground;
   } else {
-    locator<ThemeService>().theme = mat3Theme;
+    locator<ThemeService>().theme = mat3ThemeLight;
     locator<ThemeService>().backgroundColors = fsekBackground;
   }
   locator<ThemeService>().loginIcon = [
     CircleAvatar(
       radius: 40.0,
-      backgroundImage: (isAprilFools ? AssetImage("assets/img/d_logo.png") : AssetImage("assets/img/f_logo.png")),
+      backgroundImage: (locator<ThemeService>().theme.brightness == Brightness.dark ? 
+        AssetImage("assets/img/f_logo_white.png") : AssetImage("assets/img/f_logo.png")),
       backgroundColor: Colors.transparent,
     ),
     SizedBox(width: 16),
     Text(isAprilFools ? "D-sektionen" : "F-sektionen",
-        style: TextStyle(fontFamily: 'Helvetica Neue', fontSize: 28.0, color: Colors.grey[700]))
+      style: TextStyle(
+        fontFamily: 'Helvetica Neue', 
+        fontSize: 28.0, 
+        // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode. 
+        color: locator<ThemeService>().theme.colorScheme.onBackground.withAlpha(170)
+      )
+    ),
   ];
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {

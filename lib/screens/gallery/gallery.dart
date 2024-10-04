@@ -38,12 +38,12 @@ class _GalleryPageState extends State<GalleryPage> {
             //Make dropdown prettier mayb :
             children: [
               Container(
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.background),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: DropdownButton(
-                    iconDisabledColor: Theme.of(context).colorScheme.onPrimary,
-                    iconEnabledColor: Theme.of(context).colorScheme.onPrimary,
-                    dropdownColor: Theme.of(context).colorScheme.primary,
+                    iconDisabledColor: Theme.of(context).colorScheme.onBackground,
+                    iconEnabledColor: Theme.of(context).colorScheme.onBackground,
+                    dropdownColor: Theme.of(context).colorScheme.background,
                     elevation: 2,
                     isExpanded: true,
                     value: selectedYear,
@@ -111,7 +111,7 @@ class _GalleryPageState extends State<GalleryPage> {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Icon(Icons.date_range,
-                        color: Colors.white),
+                        color: Theme.of(context).colorScheme.primary),
                     SizedBox(
                       width: 2,
                     ),
@@ -128,7 +128,7 @@ class _GalleryPageState extends State<GalleryPage> {
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Icon(Icons.location_pin,
-                        color: Colors.white),
+                        color: Theme.of(context).colorScheme.primary),
                     SizedBox(
                       width: 2,
                     ),
@@ -147,7 +147,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     height: 3,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.image, color: Colors.white),
+                    Icon(Icons.image, color: Theme.of(context).colorScheme.primary),
                     SizedBox(
                       width: 2,
                     ),
