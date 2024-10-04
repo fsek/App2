@@ -31,7 +31,7 @@ class _AppBackgroundState extends State<AppBackground> {
         clipper: TopWaveClipper(),
         child: Container(
           decoration: BoxDecoration(
-            color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.primary.withOpacity(0.5)),
+            color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).primaryColor),
           )
           //   gradient: LinearGradient(
           //       colors: widget.backgroundColors, begin: Alignment.centerLeft, end: Alignment.centerRight),

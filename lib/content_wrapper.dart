@@ -115,7 +115,8 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           children: [
             IconButton(
               icon: Image(
-                image: (isAprilFools ? AssetImage("assets/img/d_logo.png") : AssetImage("assets/img/f_logo_black.png")),
+                image: (Theme.of(context).brightness == Brightness.dark ? 
+                  AssetImage("assets/img/f_logo_white.png") : AssetImage("assets/img/f_logo_black.png")),
                 width: 64,
               ),
               onPressed: () => {
@@ -195,8 +196,12 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
           ])),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
-            color: Theme.of(context).colorScheme.surface,
+            // This should be set to the same color as backgroundColor of FsekAppBar
+            color: Theme.of(context).bottomAppBarTheme.color,
             child: FsekAppBar(
+              selectedColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              color: Theme.of(context).colorScheme.onPrimary,
+              backgroundColor: Theme.of(context).bottomAppBarTheme.color,
               currentIndex: _currentIndex,
               centerItemText: "F-sektionen",
               onTabSelected: (int? index) {
@@ -207,7 +212,6 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   locator<ThemeService>().theme = dsekTheme;
                   locator<ThemeService>().backgroundColors = dsekBackground;
                 } else {
-                  locator<ThemeService>().theme = mat3Theme;
                   locator<ThemeService>().backgroundColors = fsekBackground;
                 }
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
@@ -217,8 +221,6 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                   return FsekAppBarItem(iconData: destination.icon, text: indexToTitle[destination.index]);
                 }).toList()
               ],
-              selectedColor: Theme.of(context).colorScheme.onSurface,
-              color: Theme.of(context).colorScheme.surfaceTint,
             ),
           ),
         ),

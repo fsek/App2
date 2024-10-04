@@ -76,9 +76,7 @@ class _ContactPageState extends State<ContactPage> {
                 height: 200,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: (isAprilFools
-                          ? Color(0xFFF17F9F)
-                          : Theme.of(context).colorScheme.primary.withOpacity(0.5))),
+                      color: Theme.of(context).primaryColorLight),
                   child: Stack(children: <Widget>[
                     Center(
                       child: SizedBox(
@@ -206,13 +204,13 @@ class _ContactPageState extends State<ContactPage> {
                     decoration: BoxDecoration(
                         color: (isAprilFools
                             ? Color(0xFFF17F9F)
-                            : Theme.of(context).colorScheme.primary.withOpacity(0.5))),
+                            : Theme.of(context).primaryColorLight)),
                     child: InkWell(
                         child: Center(
                             child: Text(
                           t.contactSend,
                           style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Theme.of(context).colorScheme.onBackground
+                              color: Theme.of(context).colorScheme.onPrimary
                           ),
                         )),
                         onTap: () => _sendMessage(localMessage)),

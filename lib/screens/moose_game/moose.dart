@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
 import 'package:fsek_mobile/screens/moose_game/sprite.dart';
 import 'package:vector_math/vector_math.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 enum MooseState { running, jumping, ducking, falling }
 
