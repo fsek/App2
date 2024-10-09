@@ -28,13 +28,15 @@ class ThemeService {
   ];
 
   ThemeData getThemeData(themeName) {
-    if (themeName == 'mat3ThemeLight') {
-      return mat3ThemeLight;
-    } else if (themeName == 'mat3ThemeDark') {
-      return mat3ThemeDark;
+    if (themeName == 'themeF') {
+      return themeF;
+    } else if (themeName == 'themeN') {
+      return themeN;
+    } else if (themeName == 'themeO') {
+      return themeO;
     } else {
       print("Warning: Theme not found, returning light theme");
-      return mat3ThemeLight;
+      return themeF;
     }
   }
 

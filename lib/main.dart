@@ -90,11 +90,11 @@ void main() async {
   cachedTheme = await _storage.read('cached-theme');
 
   if (cachedTheme == null) {
-    cachedTheme = 'mat3ThemeLight';
+    cachedTheme = 'themeF';
   }
 
   locator<ThemeService>().theme = locator<ThemeService>().getThemeData(cachedTheme);
-  print("Theme set in main to: ${cachedTheme}");
+  print("Theme set in main to: ${cachedTheme} (or standard themeF)");
 
   runApp(FsekMobileApp(initialThemeMode: cachedTheme));
 

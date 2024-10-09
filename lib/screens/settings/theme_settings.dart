@@ -27,7 +27,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
   void loadTheme() {
     locator<ThemeService>().loadTheme().then((value) {
       setState(() {
-        this._theme = value ?? 'mat3ThemeLight';
+        this._theme = value ?? 'themeF';
       });
     });
   }
@@ -70,24 +70,39 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Theme"), //TODO: Translate
+        title: Text(t.themeSettingsTitle),
       ),
       body: Column(
         children: [
           RadioListTile<String>(
-            title: Text("F-Ljust"),//TODO: Translate
-            value: 'mat3ThemeLight',
+            title: Text(t.themeSettingsTheme1),
+            value: 'themeF',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!),
           ),
           RadioListTile<String>(
-            title: Text("nano-Grönt"),
-            value: 'mat3ThemeDark',
+            title: Text(t.themeSettingsTheme2),
+            value: 'themeN',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!),
           ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme3),
+            value: 'themeO',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: Container(
+              color: Theme.of(context).colorScheme.surfaceVariant,
+              padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
+              child: Text(t.themeSettingsHelp),
+            ),
+          )
         ],
       ),
     );
