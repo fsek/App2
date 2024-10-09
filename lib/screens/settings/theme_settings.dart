@@ -15,29 +15,34 @@ class ThemeSettingsPage extends StatefulWidget {
 }
 
 class ThemeSettingsState<ThemeSettingsPage> extends State {
+
   String? _theme;
 
-
   void initState() {
+    loadTheme();
+
     super.initState();
   }
 
-  void _setTheme(BuildContext context, String? theme) {
+  void loadTheme() {
+    locator<ThemeService>().loadTheme().then((value) {
+      setState(() {
+        this._theme = value ?? 'mat3ThemeLight';
+      });
+    });
+  }
+
+  void _setTheme(BuildContext context, String theme) {
     setState(
       () {
         this._theme = theme;
-        // This is a bad way to do this
-        if (theme == 'mat3ThemeLight') {
-          context.read<ThemeCubit>().setTheme(mat3ThemeLight);
-          // This is (probably) just for moose game etc. to load in the right images
-          locator<ThemeService>().theme = mat3ThemeLight;
-          print("Theme changed to light");
-        } else if (theme == 'mat3ThemeDark') {
-          context.read<ThemeCubit>().setTheme(mat3ThemeDark);
-          locator<ThemeService>().theme = mat3ThemeDark;
-          print("Theme changed to dark");
-        } 
-        changeLogInIcon();
+
+        // context.read has to be used here, not locator<ThemeCubit>().setTheme
+        context.read<ThemeCubit>().setTheme(locator<ThemeService>().getThemeData(theme));
+        locator<ThemeService>().theme = locator<ThemeService>().getThemeData(theme);
+        
+        locator<ThemeService>().changeLogInIcon();
+        locator<ThemeService>().saveTheme(theme);
       },
     );
   }
@@ -75,13 +80,13 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
             title: Text("F-Ljust"),//TODO: Translate
             value: 'mat3ThemeLight',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value),
+            onChanged: (value) => _setTheme(context, value!),
           ),
           RadioListTile<String>(
             title: Text("nano-Grönt"),
             value: 'mat3ThemeDark',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value),
+            onChanged: (value) => _setTheme(context, value!),
           ),
         ],
       ),

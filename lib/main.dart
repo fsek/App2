@@ -26,6 +26,7 @@ import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/services/navigation.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
+import 'package:fsek_mobile/util/storage_wrapper.dart';
 
 // Shows the transitions between currentstate and nextstate for all blocs
 class SimpleBlocObserver extends BlocObserver {
@@ -59,31 +60,7 @@ void main() async {
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
     '/wordlist': (context) => WordListPage(),
-  };
-  if (isAprilFools) {
-    locator<ThemeService>().theme = dsekTheme;
-    locator<ThemeService>().backgroundColors = dsekBackground;
-  } else {
-    locator<ThemeService>().theme = mat3ThemeLight;
-    locator<ThemeService>().backgroundColors = fsekBackground;
-  }
-  locator<ThemeService>().loginIcon = [
-    CircleAvatar(
-      radius: 40.0,
-      backgroundImage: (locator<ThemeService>().theme.brightness == Brightness.dark ? 
-        AssetImage("assets/img/f_logo_white.png") : AssetImage("assets/img/f_logo.png")),
-      backgroundColor: Colors.transparent,
-    ),
-    SizedBox(width: 16),
-    Text(isAprilFools ? "D-sektionen" : "F-sektionen",
-      style: TextStyle(
-        fontFamily: 'Helvetica Neue', 
-        fontSize: 28.0, 
-        // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode. 
-        color: locator<ThemeService>().theme.colorScheme.onBackground.withAlpha(170)
-      )
-    ),
-  ];
+  }; 
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
@@ -103,7 +80,23 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  runApp(FsekMobileApp());
+  // We load the theme here because async is needed, then we pass it to the app 
+  // where ThemeCubit gets initialised with the cached theme
+  TokenStorageWrapper? _storage;
+  String? cachedTheme = null;
+
+  _storage = locator<TokenStorageWrapper>();
+
+  cachedTheme = await _storage.read('cached-theme');
+
+  if (cachedTheme == null) {
+    cachedTheme = 'mat3ThemeLight';
+  }
+
+  locator<ThemeService>().theme = locator<ThemeService>().getThemeData(cachedTheme);
+  print("Theme set in main to: ${cachedTheme}");
+
+  runApp(FsekMobileApp(initialThemeMode: cachedTheme));
 
   // Whenever an error occurs, call the `_reportError` function. This sends
   // Dart errors to the dev console or Sentry depending on the environment.

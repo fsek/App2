@@ -30,6 +30,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FsekMobileApp extends StatefulWidget {
+  final String initialThemeMode;
+
+  // We pull the cached theme from storage in main.dart since that is async
+  FsekMobileApp({required this.initialThemeMode});
+
   @override
   _FsekMobileAppState createState() => _FsekMobileAppState();
   static _FsekMobileAppState? of(BuildContext context) =>
@@ -44,6 +49,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   Locale? _locale;
   String? localeName;
   int backgroundIndex = 1;
+  String? _themeMode = "mat3ThemeLight";
 
   User? _user;
 
@@ -63,6 +69,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
 
   @override
   void initState() {
+    _themeMode = widget.initialThemeMode;
     _locale = Locale('sv', '');
     _userService = locator<UserService>();
     //checkApiVersion();
@@ -116,11 +123,13 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           create: (context) => _authenticationBloc!,
         ),
         BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
+          create: (context) => ThemeCubit()..setTheme(locator<ThemeService>().getThemeData(_themeMode)),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, theme) {
+          locator<ThemeService>().changeLogInIcon();
+          
           return MaterialApp(
             theme: theme,
             localizationsDelegates: [
