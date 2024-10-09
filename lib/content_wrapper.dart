@@ -146,7 +146,7 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
               width: 8,
             ),
             Text(
-              isAprilFools ? AppLocalizations.of(context)!.dGuildName : AppLocalizations.of(context)!.fGuildName,
+              AppLocalizations.of(context)!.fGuildName,
               style: Theme.of(context).textTheme.headlineSmall,
             )
           ],

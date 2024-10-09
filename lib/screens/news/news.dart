@@ -62,9 +62,7 @@ class _NewsPageState extends State<NewsPage> {
                           isThreeLine: true,
                           trailing: (news.is_pinned ?? false)
                               ? Icon(Icons.push_pin_outlined,
-                                  color: (isAprilFools
-                                      ? Color(0xFFF17F9F)
-                                      : Colors.orange[600]))
+                                  color: Colors.orange[600])
                               : SizedBox.shrink())));
             }, noItemsFoundIndicatorBuilder: (context) {
               return Container(

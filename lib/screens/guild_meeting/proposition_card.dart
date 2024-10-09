@@ -16,9 +16,9 @@ class PropositionCard extends StatefulWidget {
 
 class _PropositionCardState extends State<PropositionCard> {
   Color buttonColor =
-      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.3);
+      Colors.orange[700]!.withOpacity(0.3);
   Color backgroundColor =
-      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.2);
+      Colors.orange[700]!.withOpacity(0.2);
   Color bottomColor = Colors.grey[400]!;
 
   @override

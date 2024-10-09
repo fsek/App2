@@ -37,9 +37,7 @@ class _CafePageState extends State<CafePage> {
     var t = AppLocalizations.of(context)!;
     return Card(
       color: (shift.user != null)
-          ? (isAprilFools
-              ? Color.fromARGB(255, 240, 184, 200)
-              : Theme.of(context).colorScheme.surfaceTint)
+          ? Theme.of(context).colorScheme.surfaceTint
           : null,
       child: InkWell(
         onTap: () => openCafeShiftPage(shift),
@@ -157,7 +155,7 @@ class _CafePageState extends State<CafePage> {
               alignment: Alignment.centerLeft,
               width: double.infinity,
               height: 20,
-              color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.primary),
+              color: Theme.of(context).colorScheme.primary,
               child: Text(
                 /* It's too late to write pretty code, take this formatting space*/
                 "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),

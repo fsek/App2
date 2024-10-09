@@ -56,8 +56,7 @@ class _FapPageState extends State<FapPage> {
             Text(
               t.fapFap,
               style: Theme.of(context).textTheme.headlineMedium?.apply(
-                  color:
-                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                  color:Colors.orange[600]),
             ),
             SizedBox(
               height: 10,
@@ -73,8 +72,7 @@ class _FapPageState extends State<FapPage> {
             Text(
               t.fapConstructed,
               style: Theme.of(context).textTheme.bodyLarge?.apply(
-                  color:
-                      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])),
+                  color:Colors.orange[700]),
             ),
             ...(knackare.map((e) => Text(e)).toList()),
             SizedBox(

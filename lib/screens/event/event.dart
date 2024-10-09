@@ -365,14 +365,14 @@ class _EventPageState extends State<EventPage> {
                         Icons.info_outline_rounded,
                         color: (event?.is_introduction == true
                             ? Color.fromARGB(255, 159, 126, 6)
-                            : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                            : Colors.orange[600]),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
                           color: (event?.is_introduction == true
                               ? Color.fromARGB(255, 159, 126, 6)
-                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                              : Colors.orange[600]),
                         ),
                       ),
                     ],
@@ -569,7 +569,7 @@ class _EventPageState extends State<EventPage> {
                           decoration: TextDecoration.underline,
                           color: (event?.is_introduction == true
                               ? Color(0xFF630b0b)
-                              : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
+                              : Colors.orange[600]))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -584,7 +584,7 @@ class _EventPageState extends State<EventPage> {
                   child: InkWell(
                     onTap: () => sendSignup(),
                     child: Card(
-                      color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[400]),
+                      color: Colors.orange[400],
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -745,7 +745,7 @@ class _EventPageState extends State<EventPage> {
                   decoration: TextDecoration.underline,
                   color: (event?.is_introduction == true
                       ? Color(0xFF630b0b)
-                      : (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])))),
+                      : Colors.orange[600]))),
           onTap: () => goToSettings(),
         ),
       ]),

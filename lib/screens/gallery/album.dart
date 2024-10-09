@@ -60,9 +60,7 @@ class AlbumPage extends StatelessWidget {
                       text: TextSpan(
                           text: t.albumPhotographers,
                           style: Theme.of(context).textTheme.bodyMedium?.apply(
-                              color: (isAprilFools
-                                  ? Color(0xFFCF6D89)
-                                  : Theme.of(context).primaryColor)),
+                              color: Theme.of(context).primaryColor),
                           children: [
                         TextSpan(
                             text: album.photographers?.join(", ") ??

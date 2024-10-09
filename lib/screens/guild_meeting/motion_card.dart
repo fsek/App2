@@ -17,9 +17,9 @@ class MotionCard extends StatefulWidget {
 
 class _MotionCardState extends State<MotionCard> {
   Color button_color =
-      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.3);
+      Colors.orange[700]!.withOpacity(0.3);
   Color background_color =
-      (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[700])!.withOpacity(0.2);
+      Colors.orange[700]!.withOpacity(0.2);
   Color bottom_color = Colors.grey[400]!;
 
   @override

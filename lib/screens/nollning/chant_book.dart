@@ -46,9 +46,7 @@ class _ChantBookPageState extends State<ChantBookPage> {
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Center(
                 child: CircularProgressIndicator(
-                    color: (isAprilFools
-                        ? Color(0xFFF17F9F)
-                        : Colors.orange[600]))))
+                    color: Colors.orange[600])))
         : Scaffold(
             appBar: AppBar(title: Text(t.introductionGuildChants)),
             body: Column(

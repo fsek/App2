@@ -71,7 +71,7 @@ class _CalendarState extends State<Calendar> {
                         // Double ternary just works :)
                         color: (event.is_introduction == true
                             ? Color(0xFF630B0B)
-                            : (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.primary)),
+                            : Theme.of(context).colorScheme.primary),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -194,7 +194,7 @@ class _CalendarState extends State<Calendar> {
                   alignment: Alignment.centerLeft,
                   width: double.infinity,
                   height: 20,
-                  color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.primary),
+                  color: Theme.of(context).colorScheme.primary,
                   child: Text(
                     /* It's too late to write pretty code, take this formatting space*/
                     "  " + DateFormat("MMMMEEEEd", locale).format(_selectedDay),

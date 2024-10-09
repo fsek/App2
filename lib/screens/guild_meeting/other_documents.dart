@@ -31,9 +31,7 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
         body: otherList == null
             ? Center(
                 child: CircularProgressIndicator(
-                    color: (isAprilFools
-                        ? Color(0xFFF17F9F)
-                        : Colors.orange[600])))
+                    color: Colors.orange[600]))
             : !listEquals([],
                     otherList) //listEquals är mycket viktigt, annars jämför den pointers
                 ? Column(//Det finns övriga dokument
