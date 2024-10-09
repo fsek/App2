@@ -82,6 +82,14 @@
     "settingsUnsavedText": "Du har osparade ändringar.\nVill du spara eller slänga dessa?",
     "settingsDiscard": "Släng",
 
+    "themeSettingsTitle": "Tema",
+    "themeSettingsHelp": "Har du hittat en färgkombination som är osmaklig eller svår att tyda i någon av temana? Kontakta spindlarna på kontaktsidan och beskriv vad som ser fel ut och hur du kom dit.",
+    "themeSettingsTheme1": "F-Orange (Standard)",
+    "themeSettingsTheme2": "nano-Grönt",
+    "themeSettingsTheme3": "O-Brunt (Alfa)",
+    "themeSettingsTheme4": "D-Rosa (Alfa)",
+    "themeSettingsTheme5": "V-Blått (Alfa)",
+
     "vegetarian": "Vegetarian",
     "vegan": "Vegan",
     "pescetarian": "Pescetarian",

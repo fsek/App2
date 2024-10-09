@@ -49,7 +49,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   Locale? _locale;
   String? localeName;
   int backgroundIndex = 1;
-  String? _themeMode = "mat3ThemeLight";
+  String? _themeMode = "themeF";
 
   User? _user;
 

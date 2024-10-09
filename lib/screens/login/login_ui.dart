@@ -194,7 +194,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
             scale: loginBtnAnimation as Animation<double>,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 key: Key("login_btn"),
                 onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
