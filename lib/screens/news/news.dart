@@ -52,7 +52,10 @@ class _NewsPageState extends State<NewsPage> {
                           subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(news.user!.name!),
+                                Text(news.user!.name!,
+                                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    fontWeight: FontWeight.normal
+                                  )),
                                 SizedBox(height: 6),
                                 Text(
                                   news.created_at.toString().substring(0, 16),

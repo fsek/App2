@@ -225,6 +225,11 @@ final ThemeData themeF = ThemeData(
       fontWeight: FontWeight.bold,
       fontFamily: 'Helvetica Neue'
     ),
+    labelMedium: const TextStyle( // Ex: text on author of news in news card list
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Helvetica Neue'
+    ),
   ),
 
   // Used in cafe shift page, required to not crash
