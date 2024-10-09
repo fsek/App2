@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
 import 'package:fsek_mobile/screens/moose_game/sprite.dart';
 import 'package:vector_math/vector_math.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 enum MooseState {
   running,
@@ -12,7 +15,9 @@ enum MooseState {
 }
 
 class Moose extends GameObject {
-  Sprite mooseRun = Sprite("assets/img/moose_game/hilbert_pixel_run.gif", 24, 24);
+  Sprite mooseRun = Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
+                          "assets/img/moose_game/hilbert_pixel_run.gif" :
+                          "assets/img/moose_game/hilbert_pixel_run_d.gif", 24, 24);
   Sprite mooseDuck = Sprite("assets/img/moose_game/hilbert_pixel_duck.png", 24, 24);
   
   double yVelocity = 0;

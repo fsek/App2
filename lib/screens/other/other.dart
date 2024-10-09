@@ -8,6 +8,7 @@ import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/other/dinosaur.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
+import 'package:fsek_mobile/screens/settings/theme_settings.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
@@ -33,7 +34,7 @@ class OtherContent extends StatelessWidget {
     var t = AppLocalizations.of(context)!;
     categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Moose Game"];
     about = [t.otherAboutGuild, t.otherFap];
-    settings = [t.otherAccount, t.otherLanguage];
+    settings = [t.otherAccount, t.otherLanguage, t.otherTheme];
     support = [t.otherContact, t.otherAnon];
 
     // Temporary moose game reveal holdoff until 18:30 6th of September 2024, 
@@ -70,6 +71,7 @@ class OtherContent extends StatelessWidget {
         "The F-app": FapPage(),
         "Account": SettingsPage(),
         "Language": LanguageSettingsPage(),
+        "Theme": ThemeSettingsPage(),
         "Contact": ContactPage(),
         "Anonymous contact page": Container(),
         "Sångbok": SongbookPage(),
@@ -78,6 +80,7 @@ class OtherContent extends StatelessWidget {
         "F-appen": FapPage(),
         "Konto": SettingsPage(),
         "Språk": LanguageSettingsPage(),
+        "Tema": ThemeSettingsPage(),
         "Kontakt": ContactPage(),
         "Anonym kontaktsida": Container()
       };
@@ -109,10 +112,10 @@ class OtherContent extends StatelessWidget {
                 margin: EdgeInsets.all(2),
                 child: InkWell(
                     child: ListTile(
-                  tileColor: Colors.red[600],
+                  tileColor: Theme.of(context).colorScheme.error,
                   title: Text(
                     t.otherLogOut,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onError),
                   ),
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);
@@ -161,6 +164,7 @@ class OtherContent extends StatelessWidget {
     var t = AppLocalizations.of(context)!;
     for (String tileText in tileTexts) {
       tiles.add(Card(
+        color: Theme.of(context).colorScheme.surface,
         margin: EdgeInsets.all(2),
         child: InkWell(
             child: ListTile(
