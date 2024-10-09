@@ -42,7 +42,7 @@ class _MyGroupTabState extends State<MyGroupTab> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Colors.orange[600],
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       );

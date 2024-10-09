@@ -116,6 +116,12 @@ final ThemeData mat3ThemeLight = ThemeData(
 
     // onError: Colors.white
 
+    // onSurface: some gray color. Used for icons on search bars
+
+    // onBackground: 
+
+    // shadow: Colors.black, // Likely unused
+
     /* OLD COLORS */
     //surface: Color.fromRGBO(246, 243, 254, 1), // I guessed this color, it's close but not exactly the same as the old one
     //background: const Color.fromRGBO(241, 241, 241, 1), // Main old background color

@@ -42,7 +42,7 @@ class _finishedMissionsState extends State<finishedMissions> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Colors.orange[600],
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       );

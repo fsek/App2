@@ -27,7 +27,7 @@ class _AdventureMissionsTabState extends State<AdventureMissionsTab> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Colors.orange[600],
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       );
