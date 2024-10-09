@@ -94,7 +94,6 @@ void main() async {
   }
 
   locator<ThemeService>().theme = locator<ThemeService>().getThemeData(cachedTheme);
-  print("Theme set in main to: ${cachedTheme} (or standard themeF)");
 
   runApp(FsekMobileApp(initialThemeMode: cachedTheme));
 

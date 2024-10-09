@@ -72,7 +72,7 @@ class ForgottenPassword {
                               ElevatedButton(
                                   key: Key('submit_btn'),
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context).primaryColor),
+                                      backgroundColor: Theme.of(context).colorScheme.primary),
                                   child: Text(
                                     "SUBMIT",
                                     style: TextStyle(
