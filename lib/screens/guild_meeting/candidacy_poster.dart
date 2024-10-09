@@ -30,7 +30,7 @@ class _CandidacyPosterPageState extends State<CandidacyPosterPage> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Colors.orange[600],
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       );

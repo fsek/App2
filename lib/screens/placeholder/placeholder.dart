@@ -26,7 +26,7 @@ class PlaceholderPage extends StatelessWidget {
                   "HÅLLER PÅ ATT KNAPPRA PÅ FÖR FULLT!\n\n $disc",
                   style: TextStyle(
                       fontSize: 18,
-                      color: Colors.orange[600]))),
+                      color: Theme.of(context).colorScheme.primary))),
           Image.asset("assets/img/underConstruction.png"),
         ],
       ),

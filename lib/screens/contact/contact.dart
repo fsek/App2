@@ -285,7 +285,7 @@ class _ContactPageState extends State<ContactPage> {
             Align(
               alignment: Alignment.bottomRight,
               child: IconButton(
-                  icon: Icon(Icons.check, color: Colors.grey[800]),
+                  icon: Icon(Icons.check, color: Theme.of(context).colorScheme.onBackground),
                   onPressed: () => Navigator.pop(context)),
             )
           ],

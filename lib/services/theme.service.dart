@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 
 class ThemeService {
+  // This should be defined before the app is built, but juuuust in case there are standard values I guess
   ThemeData theme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.orange[600],

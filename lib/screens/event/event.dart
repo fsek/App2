@@ -365,14 +365,14 @@ class _EventPageState extends State<EventPage> {
                         Icons.info_outline_rounded,
                         color: (event?.is_introduction == true
                             ? Color.fromARGB(255, 159, 126, 6)
-                            : Colors.orange[600]),
+                            : Theme.of(context).colorScheme.primary),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
                           color: (event?.is_introduction == true
                               ? Color.fromARGB(255, 159, 126, 6)
-                              : Colors.orange[600]),
+                              : Theme.of(context).colorScheme.primary),
                         ),
                       ),
                     ],
@@ -551,7 +551,7 @@ class _EventPageState extends State<EventPage> {
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences + " ",
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                   ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text(foodPreference + " ")),
@@ -569,7 +569,7 @@ class _EventPageState extends State<EventPage> {
                           decoration: TextDecoration.underline,
                           color: (event?.is_introduction == true
                               ? Color(0xFF630b0b)
-                              : Colors.orange[600]))),
+                              : Theme.of(context).colorScheme.primary))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -584,7 +584,7 @@ class _EventPageState extends State<EventPage> {
                   child: InkWell(
                     onTap: () => sendSignup(),
                     child: Card(
-                      color: Colors.orange[400],
+                      color: Theme.of(context).colorScheme.primary,
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -629,7 +629,7 @@ class _EventPageState extends State<EventPage> {
                   if (unenroll ?? false) removeSignup();
                 },
                 child: Card(
-                  color: Colors.red[400],
+                  color: Theme.of(context).colorScheme.error,
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -700,14 +700,14 @@ class _EventPageState extends State<EventPage> {
       RichText(
           text: TextSpan(
         text: t.eventGroup,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+        style: TextStyle(fontWeight: FontWeight.bold),
+        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal))],
       )),
       RichText(
           text: TextSpan(
         text: t.eventPriority2,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+        style: TextStyle(fontWeight: FontWeight.bold),
+        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal))],
       )),
       event!.event_signup!.question != ""
           ? RichText(
@@ -717,9 +717,9 @@ class _EventPageState extends State<EventPage> {
                     TextSpan(text: " "),
                     TextSpan(
                         text: event!.event_user!.answer,
-                        style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))
+                        style: TextStyle(fontWeight: FontWeight.normal))
                   ],
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)))
+                  style: TextStyle(fontWeight: FontWeight.bold)))
           : Container(),
       drinkPackage,
       Wrap(
@@ -727,7 +727,7 @@ class _EventPageState extends State<EventPage> {
           RichText(
               text: TextSpan(
                   text: t.eventFoodPreferences + " ",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+                  style: TextStyle(fontWeight: FontWeight.bold))),
           ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
@@ -745,7 +745,7 @@ class _EventPageState extends State<EventPage> {
                   decoration: TextDecoration.underline,
                   color: (event?.is_introduction == true
                       ? Color(0xFF630b0b)
-                      : Colors.orange[600]))),
+                      : Theme.of(context).colorScheme.primary))),
           onTap: () => goToSettings(),
         ),
       ]),
@@ -756,8 +756,8 @@ class _EventPageState extends State<EventPage> {
     return RichText(
       text: TextSpan(
         text: drinkPackageText,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))],
+        style: TextStyle(fontWeight: FontWeight.bold),
+        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal))],
       ),
     );
   }

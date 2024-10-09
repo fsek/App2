@@ -56,7 +56,7 @@ class _FapPageState extends State<FapPage> {
             Text(
               t.fapFap,
               style: Theme.of(context).textTheme.headlineMedium?.apply(
-                  color:Colors.orange[600]),
+                  color:Theme.of(context).colorScheme.primary),
             ),
             SizedBox(
               height: 10,
@@ -72,7 +72,7 @@ class _FapPageState extends State<FapPage> {
             Text(
               t.fapConstructed,
               style: Theme.of(context).textTheme.bodyLarge?.apply(
-                  color:Colors.orange[700]),
+                  color:Theme.of(context).primaryColor),
             ),
             ...(knackare.map((e) => Text(e)).toList()),
             SizedBox(

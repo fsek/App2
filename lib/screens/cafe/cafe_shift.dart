@@ -146,7 +146,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
-                decorationColor: Colors.orange[600],
+                decorationColor: Theme.of(context).colorScheme.primary,
                 decorationThickness: 1.3,
               ),
             ),
