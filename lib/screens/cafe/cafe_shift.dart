@@ -146,9 +146,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
-                decorationColor: (isAprilFools
-                    ? Color.fromARGB(255, 247, 179, 198)
-                    : Colors.orange[600]),
+                decorationColor: Colors.orange[600],
                 decorationThickness: 1.3,
               ),
             ),

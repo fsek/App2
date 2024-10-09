@@ -47,9 +47,7 @@ class _ContactPageState extends State<ContactPage> {
                   style: Theme.of(context).textTheme.headlineSmall)),
           body: Center(
               child: CircularProgressIndicator(
-                  color: (isAprilFools
-                      ? Color(0xFFF17F9F)
-                      : Theme.of(context).colorScheme.primary))));
+                  color: Theme.of(context).colorScheme.primary)));
     }
 
     //We only want to attempt to fetch a network image if it it's url is not null. Hence map accessing weirdness with nullcheck
@@ -202,9 +200,7 @@ class _ContactPageState extends State<ContactPage> {
                   height: 50,
                   child: Ink(
                     decoration: BoxDecoration(
-                        color: (isAprilFools
-                            ? Color(0xFFF17F9F)
-                            : Theme.of(context).primaryColorLight)),
+                        color: Theme.of(context).primaryColorLight),
                     child: InkWell(
                         child: Center(
                             child: Text(

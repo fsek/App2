@@ -29,7 +29,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                         TextSpan(text: t.guildMeetingNominateOne, style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: " ${t.guildMeetingNominateTwo} ",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('https://fsektionen.se/val'));
@@ -38,7 +38,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                         TextSpan(text: t.guildMeetingSendMotionOne, style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: t.guildMeetingSendMotionTwo,
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('mailto:sekreterare@fsektionen.se'));
@@ -57,7 +57,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingBoard}",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('mailto:styrelsen@fsektionen.se'));
@@ -85,7 +85,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: " ${t.guildMeetingBoard} ",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('mailto:styrelsen@fsektionen.se'));
@@ -94,7 +94,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                         TextSpan(text: "${t.guildMeetingAboutFive}", style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingAboutSix}",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('https://fsektionen.se/kontakter'));
@@ -105,7 +105,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                             style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingAboutNine} ",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('mailto:sekreterare@fsektionen.se'));
@@ -125,7 +125,7 @@ class AboutGuildMeetingPage extends StatelessWidget {
                         TextSpan(text: "${t.guildMeetingElectionInfoTwo}", style: TextStyle(height: 1.5)),
                         TextSpan(
                           text: "${t.guildMeetingElectionInfoThree} ",
-                          style: TextStyle(height: 1.5, color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600])),
+                          style: TextStyle(height: 1.5, color: Colors.orange[600]),
                           recognizer: new TapGestureRecognizer()
                             ..onTap = () {
                               launchUrl(Uri.parse('https://fsektionen.se/val'));

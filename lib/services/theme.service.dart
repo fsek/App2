@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class ThemeService {
   ThemeData theme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]),
+    primaryColor: Colors.orange[600],
   );
   List<Color> backgroundColors = [
     Color(0xFFf77e14),

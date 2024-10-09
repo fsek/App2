@@ -81,7 +81,7 @@ class _SongbookPageState extends State<SongbookPage>
             ),
             body: Center(
               child: CircularProgressIndicator(
-                color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).primaryColor),
+                color: Theme.of(context).primaryColor,
               ),
             ),
           )

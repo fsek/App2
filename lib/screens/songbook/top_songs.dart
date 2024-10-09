@@ -52,7 +52,7 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
         ? Scaffold(
             //change text
             appBar: AppBar(title: Text(t.songbookSongbook)),
-            body: Center(child: CircularProgressIndicator(color: (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).primaryColor))))
+            body: Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor)))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(

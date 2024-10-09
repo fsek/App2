@@ -54,7 +54,7 @@ class _MotionsPageState extends State<MotionsPage> with TickerProviderStateMixin
         ? Scaffold(
             appBar: AppBar(title: Text(t.motionsPageTitle)),
             body: Center(
-                child: CircularProgressIndicator(color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))))
+                child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(

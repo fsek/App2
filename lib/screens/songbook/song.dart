@@ -38,9 +38,7 @@ class SongPage extends StatelessWidget {
                           TextSpan(
                               text: "${t.songbookMelody}: ",
                               style: TextStyle(
-                                  color: (isAprilFools
-                                      ? Color(0xFFF17F9F)
-                                      : Theme.of(context).primaryColor))),
+                                  color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.melody!,
                               style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
@@ -56,9 +54,7 @@ class SongPage extends StatelessWidget {
                           TextSpan(
                               text: "${t.songbookAuthor}: ",
                               style: TextStyle(
-                                  color: (isAprilFools
-                                      ? Color(0xFFF17F9F)
-                                      : Theme.of(context).primaryColor))),
+                                  color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.author!,
                               style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))

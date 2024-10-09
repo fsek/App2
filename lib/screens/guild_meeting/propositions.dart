@@ -49,7 +49,7 @@ class _PropositionsPageState extends State<PropositionsPage> with TickerProvider
         ? Scaffold(
             appBar: AppBar(title: Text(t.propositionsPageTitle)),
             body: Center(
-                child: CircularProgressIndicator(color: (isAprilFools ? Color(0xFFF17F9F) : Colors.orange[600]))))
+                child: CircularProgressIndicator(color: Colors.orange[600])))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(

@@ -51,9 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
           appBar: AppBar(title: Text(t.otherAccount)),
           body: Center(
               child: CircularProgressIndicator(
-                  color: (isAprilFools
-                      ? Color(0xFFF17F9F)
-                      : Theme.of(context).colorScheme.primary))));
+                  color: Theme.of(context).colorScheme.primary)));
     }
     return WillPopScope(
       onWillPop: () async {
@@ -309,8 +307,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Column(
               children: [
                 CircularProgressIndicator(
-                  color:
-                      (isAprilFools ? Color(0xFFF17F9F) : Theme.of(context).colorScheme.primary),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ],
             ),
