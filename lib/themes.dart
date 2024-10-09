@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ThemeCubit extends Cubit<ThemeData> {
   ThemeCubit(): super(mat3ThemeLight);
 
-void setTheme(_theme) {
+  void setTheme(_theme) {
     emit(_theme);
   }
 }
@@ -101,7 +101,7 @@ final ThemeData mat3ThemeDark = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.green[700]!)),
     labelStyle: TextStyle(color: Colors.green[700]!),
-    hintStyle: TextStyle(color: Colors.grey[600]),
+    hintStyle: TextStyle(color: const Color.fromRGBO(117, 117, 117, 1)), // Colors.grey[600]
   ),
 );
 
