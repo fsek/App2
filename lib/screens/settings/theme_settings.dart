@@ -95,6 +95,18 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!),
           ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme4),
+            value: 'themeD',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!),
+          ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme5),
+            value: 'themeV',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!),
+          ),
           SizedBox(
             width: double.infinity,
             child: Container(

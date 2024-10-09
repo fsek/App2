@@ -34,6 +34,10 @@ class ThemeService {
       return themeN;
     } else if (themeName == 'themeO') {
       return themeO;
+    } else if (themeName == 'themeD') {
+      return themeD;
+    } else if (themeName == 'themeV') {
+      return themeV;
     } else {
       print("Warning: Theme not found, returning light theme");
       return themeF;
