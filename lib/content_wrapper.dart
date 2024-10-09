@@ -208,12 +208,6 @@ class _ContentWrapperState extends State<ContentWrapper> with TickerProviderStat
                 setState(() {
                   _currentIndex = index ?? 0;
                 });
-                if (isAprilFools) {
-                  locator<ThemeService>().theme = dsekTheme;
-                  locator<ThemeService>().backgroundColors = dsekBackground;
-                } else {
-                  locator<ThemeService>().backgroundColors = fsekBackground;
-                }
                 widget.onNavigation!.add(widget.navbarDestinations[_currentIndex].widget.runtimeType);
               },
               items: [
