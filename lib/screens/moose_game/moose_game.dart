@@ -41,6 +41,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   final String duckingLink = "assets/img/moose_game/hilbert_scaled_ducking.png";
   final Color googleDinosaurColor = Color.fromRGBO(83, 83, 83, 1.0);
   final AudioPlayer soundtrackPlayer = AudioPlayer();
+  final AudioPlayer sfxPlayer = AudioPlayer();
   late Vector2 cameraPos;
   final double gameViewportWidth = 10; // How many mooses should fit-
   late double worldScale;
@@ -108,6 +109,8 @@ class _MooseGamePageState extends State<MooseGamePage>
     gameAnimController.dispose();
     soundtrackPlayer.stop();
     soundtrackPlayer.dispose();
+    sfxPlayer.stop();
+    sfxPlayer.dispose();
 
     WidgetsBinding.instance.removeObserver(this);
 
@@ -129,7 +132,7 @@ class _MooseGamePageState extends State<MooseGamePage>
 
     ground1 = Ground(-Ground.groundWidth / 2, floorY - 1 / 2);
     ground2 = Ground(Ground.groundWidth / 2, floorY - 1 / 2);
-    soundtrackPlayer.setSource(AssetSource('audio/moosegame.ogg'));
+    soundtrackPlayer.setSource(AssetSource('audio/moosegame.mp3'));
     soundtrackPlayer.setReleaseMode(ReleaseMode.loop);
     soundtrackPlayer.resume();
   }
@@ -226,7 +229,12 @@ class _MooseGamePageState extends State<MooseGamePage>
 
   void gameOver() {
     gameAnimController.stop();
-    soundtrackPlayer.stop();
+    soundtrackPlayer.pause();
+    sfxPlayer.play(AssetSource('audio/gameoverfart.mp3'));
+    Future.delayed(Duration(milliseconds: 1000), () {
+      soundtrackPlayer.resume();
+    });
+
     setState(() {
       sandwichBonusPopupFadeout = 0;
       if (score > highscore) {
@@ -303,7 +311,7 @@ class _MooseGamePageState extends State<MooseGamePage>
               style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 60),
             ))));
 
-    // Sandwhich bonus popup
+    // Sandwich bonus score popup
     children.add(Positioned.fill(
         top: -270,
         child: Align(

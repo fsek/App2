@@ -65,7 +65,6 @@ dependencies:
   image_gallery_saver: ^2.0.3
   cached_network_image: ^3.3.0
 
-  # flutter_gen: any
   audioplayers_web: any
   firebase_core_web: any
   firebase_messaging_web: any
@@ -105,7 +104,7 @@ flutter:
     - lib/l10n/
     - assets/
     - assets/audio/
-    - assets/audio/moosegame.ogg
+    - assets/audio/moosegame.mp3
     - assets/img/
     - assets/img/moose_game/
     - assets/img/memes/

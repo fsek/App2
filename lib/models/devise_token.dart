@@ -44,8 +44,6 @@ class DeviseToken {
     token.uid = await storage.read("uid");
     token.client = await storage.read("client");
     String? expires = await storage.read("expires");
-    if(expires == null)
-      return DeviseToken();
       
     token.expires = DateTime.tryParse(expires);
     return token;

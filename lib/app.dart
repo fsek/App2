@@ -81,10 +81,8 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       /* If we have saved a language setting we use that*/
       if (_storage != null) {
         String? cachedLocale = await _storage!.read('cached-locale');
-        if (cachedLocale != null) {
-          setLocale(cachedLocale);
-        }
-      }
+        setLocale(cachedLocale);
+            }
     });
     // Change background-listener
     locator<NavigationService>().onNavigation.stream.listen((event) {

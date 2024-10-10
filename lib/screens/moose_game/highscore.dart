@@ -51,9 +51,6 @@ class _HighscorePageState extends State<HighscorePage>
 
         enteredName = await inputDialog(context,
             "Enter a nickname (can be changed in settings)", "Name", true);
-
-        // If cancelled then go back
-        if (enteredName == null) return;
         if (enteredName.isEmpty) continue;
 
         // I hate this btw

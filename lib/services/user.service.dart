@@ -90,10 +90,7 @@ class UserService extends AbstractService {
   Future<User> getUser() async {
     if (_user == null) {
       String? json = await storage.read('user-data');
-      if (json != null)
-        return User.fromJson(jsonDecode(json));
-      else
-        return User();
+      return User.fromJson(jsonDecode(json));
     }
     return _user!;
   }
@@ -153,7 +150,7 @@ class UserService extends AbstractService {
     if (AbstractService.token == null) return false;
 
     DateTime? value = AbstractService.token!.expires;
-    if (value != null && value.compareTo(DateTime.now().toUtc()) > 0)
+    if (value.compareTo(DateTime.now().toUtc()) > 0)
       return true;
     return false;
   }

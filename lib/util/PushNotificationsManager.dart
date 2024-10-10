@@ -81,7 +81,6 @@ class PushNotificationsManager {
     if (_initialized) {
       // For testing purposes print the Firebase Messaging token
       String? token = await _firebaseMessaging.getToken();
-      if (token == null) throw new Exception("Could not get token");
 
       print("FirebaseMessaging token: $token"); //send to server
       return token;
