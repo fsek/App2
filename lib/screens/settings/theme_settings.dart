@@ -32,7 +32,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
     });
   }
 
-  void _setTheme(BuildContext context, String theme) {
+  void _setTheme(BuildContext context, String theme, AppLocalizations t) {
     setState(
       () {
         this._theme = theme;
@@ -43,8 +43,54 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
         
         locator<ThemeService>().changeLogInIcon();
         locator<ThemeService>().saveTheme(theme);
+
+        // Send an angry message if the user picks a certain theme
+        String? message = angryMessage(theme, t);
+        if (message != null && theme != 'themeD') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message, style: TextStyle(fontFamily: 'Nabla')),
+              duration: Duration(seconds: 5),
+            ),
+          );        
+        } else if (message != null && theme == 'themeD') {
+          // Send textbox instead of snackbar
+          generalPopup(t.themeSettingsWarning, message);
+        }
       },
     );
+  }
+
+  Future<void> generalPopup(String title, String body) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(body),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  String? angryMessage(String theme, AppLocalizations t) {
+    switch (theme) {
+      case 'themeD':
+        return t.themeSettingsWarningTextD;
+      case 'themeV':
+        return t.themeSettingsWarningTextV;
+      case 'themeO':
+        return t.themeSettingsWarningTextO;
+      default:
+        return null;
+    }
   }
 
   void changeLogInIcon() {
@@ -81,31 +127,31 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
             title: Text(t.themeSettingsTheme1),
             value: 'themeF',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value!),
+            onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme2),
             value: 'themeN',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value!),
+            onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme3),
             value: 'themeO',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value!),
+            onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme4),
             value: 'themeD',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value!),
+            onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme5),
             value: 'themeV',
             groupValue: _theme,
-            onChanged: (value) => _setTheme(context, value!),
+            onChanged: (value) => _setTheme(context, value!, t),
           ),
           SizedBox(
             width: double.infinity,
@@ -114,7 +160,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
               padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
               child: Text(t.themeSettingsHelp),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -89,6 +89,10 @@
     "themeSettingsTheme3": "O-Brunt (Alfa)",
     "themeSettingsTheme4": "Rosa (absolut inte någon sektion) (Alfa)",
     "themeSettingsTheme5": "V-Blått (Alfa)",
+    "themeSettingsWarning": "Varning!",
+    "themeSettingsWarningTextO": "Bytte till O-sektionens tema #ickesponsrat. Grafisk stabilitet kan ej garanteras.",
+    "themeSettingsWarningTextD": "Du kommer nu att byta från den finaste färgen som skådats på denna jord de senaste (nuvarande år - 1961) åren, till råsa. Hilbert älg har blivit ledsen, men är alltid redo att välkomna dig tillbaka till den ljusa sidan. Grafisk stabilitet kan ej garanteras.",
+    "themeSettingsWarningTextV": "Bytte till ett tema baserat på V-sektionens färger (ej officiellt). Grafisk stabilitet kan ej garanteras.",
 
     "vegetarian": "Vegetarian",
     "vegan": "Vegan",
