@@ -8,8 +8,8 @@ overly complicated in order to look as close to the old theme as possible. theme
 is a little more straightforward and has been tested thoroughly so that everything 
 is workable and looks okay.
 
-themeO is the simplest possible auto-generated theme. Nothing is guaranteed to look good,
-but things should at least be navigable and not crash.
+There is an example theme at the bottom of the file of the old themeV. It represents the
+smallest possible specification that still works graphics-wise.
 
 To add another theme you also have to edit the language files, getThemeData in theme.service.dart 
 and theme_settings.dart.
@@ -88,10 +88,10 @@ final ThemeData themeN = ThemeData(
       fontSize: 30,
       fontWeight: FontWeight.normal,
     ),
-    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums
+    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums, titles of news after tapping them
       fontSize: 22,
       fontStyle: FontStyle.normal,
-      color: Colors.white
+      color: Colors.white // This color is not inhereted by the titles on the top bar
     ),
     headlineMedium: const TextStyle( // Ex: titles on the event page and songs
       fontSize: 25,
@@ -132,6 +132,118 @@ final ThemeData themeN = ThemeData(
   // Theme for most snackbar messages. Without this the colors are very hard to read.
   snackBarTheme: SnackBarThemeData(
     contentTextStyle: TextStyle(color: Colors.black),
+  ),
+
+);
+
+final ThemeData themePi = ThemeData(
+  /* Since the app is not built around material 3, I've had to be a
+  bit creative with the application of some of these colours. */
+
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Color.fromARGB(255, 179, 179, 179),
+    brightness: Brightness.light,
+    onPrimary: Colors.black, // Used for a unselected element in the bottom bar
+    onPrimaryContainer: Colors.white, // colors.green[700], // (only) Used for a selected element in the bottom bar
+    primary: const Color.fromARGB(255, 179, 179, 179), // used often and in random places, this is a remnant from the old theme
+
+    // Used, ex. for the background of the cafe shifts/the notification cards
+    // this is the wrong way to use this color (it should not have 100% opacity), 
+    // so please change it when time allows
+    surfaceTint: Color.fromRGBO(247, 247, 247, 1), 
+
+    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
+    surface: Color.fromRGBO(233, 233, 233, 1),
+    onBackground: Colors.black,
+    onSecondary: Colors.black,
+
+    onInverseSurface: Colors.black,// Used, ex. for the text on the cafe shifts
+
+    onError: Colors.white,
+    error: Color.fromARGB(255, 156, 8, 16),
+
+    /* NOT CHANGED */
+
+    // Sometimes used on top of primary, for example in the divider between the calendar and event cards. Sorry :(
+    // (and on buttons in the login page)
+    // onSecondary: Colors.white
+
+    // onError: Colors.white
+
+    // onSurface: some gray color. Used for icons on search bars
+
+    // onBackground: 
+
+    // shadow: Colors.black, // Likely unused
+
+    // Used, ex. for the background of letters in songbook and as background for other text that 
+    // should stand out a bit (like explanations in the account settings)
+    // surfaceVariant: UNCHANGED 
+
+    // onPrimaryContainer: UNCHANGED // (only) Used for a selected element in the bottom bar
+  ),
+
+  // Color used for circular loading indicator in some places
+  // Also used in the background shape, and in many other places where previous
+  // developers used orange to spice things up. Don't blame me if it looks bad.
+  primaryColor: const Color.fromARGB(255, 179, 179, 179),
+  primaryColorLight: Color.fromARGB(255, 197, 197, 197), // Used for the banner/background on the contact page
+
+  appBarTheme: AppBarTheme(color: Color.fromARGB(255, 179, 179, 179)), // Top bar color
+  bottomAppBarTheme: BottomAppBarTheme(color: Color.fromARGB(255, 179, 179, 179)),
+
+  fontFamily: 'Helvetica Neue',
+
+  textTheme: TextTheme(
+    displayMedium: const TextStyle( // Used for the text on the loading widget
+      fontSize: 30,
+      fontWeight: FontWeight.normal,
+    ),
+    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums, titles of news after tapping them
+      fontSize: 22,
+      fontStyle: FontStyle.normal,
+      color: Colors.black // This color is not inhereted by the titles on the top bar
+    ),
+    headlineMedium: const TextStyle( // Ex: titles on the event page and songs
+      fontSize: 25,
+      fontStyle: FontStyle.normal,
+      color: Color.fromARGB(255, 179, 179, 179), // colors.green[700]
+    ),
+    bodyMedium: const TextStyle(
+      fontSize: 15,
+      fontStyle: FontStyle.normal,
+    ),
+    displaySmall: const TextStyle(
+      fontSize: 12,
+      fontStyle: FontStyle.normal,
+    ),
+    labelLarge: const TextStyle( // Ex: text on image saving snackbar
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+
+  // Used in cafe shift page, required to not crash
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 245, 147, 35)),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+    ),
+  ),
+
+  // Used for log in page (among other places?)
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 245, 147, 35))),
+    labelStyle: TextStyle(color: Color.fromARGB(255, 245, 147, 35)),
+    hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
+    floatingLabelStyle: TextStyle(color: Color.fromARGB(255, 245, 147, 35)),
+    iconColor: Colors.grey[600],
+  ),
+
+  // Theme for most snackbar messages. Without this the colors are very hard to read.
+  snackBarTheme: SnackBarThemeData(
+    contentTextStyle: TextStyle(color: Colors.white),
   ),
 
 );
@@ -306,11 +418,11 @@ final ThemeData themeD = ThemeData(
   useMaterial3: true,
 
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.pink[400]!, 
+    seedColor: Color(0xFFF280A1), 
     brightness: Brightness.dark,
     onPrimary: Colors.white, // Used for a unselected element in the bottom bar
     onPrimaryContainer: Colors.black, // colors.green[700], // (only) Used for a selected element in the bottom bar
-    primary: Colors.pink[300]!, // used often and in random places, this is a remnant from the old theme
+    primary: Color(0xFFF280A1), // used often and in random places, this is a remnant from the old theme
 
     // Used, ex. for the background of the cafe shifts/the notification cards
     // this is the wrong way to use this color (it should not have 100% opacity), 
@@ -352,27 +464,27 @@ final ThemeData themeD = ThemeData(
   // Color used for circular loading indicator in some places
   // Also used in the background shape, and in many other places where previous
   // developers used orange to spice things up. Don't blame me if it looks bad.
-  primaryColor: Colors.pink[400]!, // colors.green[700]
-  primaryColorLight: Colors.pink[300]!, // Used for the banner/background on the contact page
+  primaryColor: Color(0xFFF280A1), // colors.green[700]
+  primaryColorLight: Color.fromRGBO(236, 143, 170, 1), // Used for the banner/background on the contact page
 
-  appBarTheme: AppBarTheme(color: Colors.pink[400]!), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Colors.pink[400]!),
+  appBarTheme: AppBarTheme(color: Color(0xFFF280A1)), // Top bar color
+  bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFFF280A1)),
 
   fontFamily: 'NF-Pixels',
 
   // Used for log in page (among other places?)
   inputDecorationTheme: InputDecorationTheme(
-    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.pink[900]!)),
-    labelStyle: TextStyle(color: Colors.pink[900]!),
+    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFF280A1))),
+    labelStyle: TextStyle(color: Color(0xFFF280A1)),
     hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
-    floatingLabelStyle: TextStyle(color: Colors.pink[900]!), // Colors.deepOrange[900]
+    floatingLabelStyle: TextStyle(color: Color(0xFFF280A1)), // Colors.deepOrange[900]
     iconColor: Colors.grey[600],
   ),
 
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.pink[400]!),
+      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFF280A1)),
       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
     ),
   ),
@@ -421,3 +533,46 @@ final ThemeData themeV = ThemeData(
 );
 
 
+
+
+
+/*
+
+// OLD THEME EXAMPLE
+
+final ThemeData themeV = ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.blue[600]!, 
+    brightness: Brightness.light,
+    onPrimary: Colors.black, // Used for a unselected element in the bottom bar
+    onPrimaryContainer: Colors.blue[700]!, // (only) Used for a selected element in the bottom bar
+    surfaceTint: Colors.lightBlue[50], // Used, ex. for the background of the cafe shifts/the notification cards
+    onInverseSurface: Colors.black, // Used, ex. for the text on the cafe shifts
+  ),
+
+  // Used for log in page (among other places?)
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blue[600]!)), // Colors.deepOrange[900]
+    labelStyle: TextStyle(color: Colors.blue[600]!), // Colors.deepOrange[900]
+    hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
+    floatingLabelStyle: TextStyle(color: Colors.blue[600]!), // Colors.deepOrange[900]
+    iconColor: Colors.grey[600],
+  ),
+
+  // Used in cafe shift page, required to not crash
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[400]!),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+    ),
+  ),
+
+  // Theme for most snackbar messages. Without this the colors are very hard to read.
+  snackBarTheme: SnackBarThemeData(
+    contentTextStyle: TextStyle(color: Colors.white),
+  ),
+
+);
+
+*/

@@ -32,6 +32,8 @@ class ThemeService {
       return themeF;
     } else if (themeName == 'themeN') {
       return themeN;
+    } else if (themeName == 'themePi') {
+      return themePi;
     } else if (themeName == 'themeO') {
       return themeO;
     } else if (themeName == 'themeD') {
