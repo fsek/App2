@@ -50,7 +50,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(message, style: TextStyle(fontFamily: 'Nabla')),
-              duration: Duration(seconds: 5),
+              duration: Duration(seconds: 4),
             ),
           );        
         } else if (message != null && theme == 'themeD') {
@@ -82,6 +82,12 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
 
   String? angryMessage(String theme, AppLocalizations t) {
     switch (theme) {
+      case 'themeF':
+        return t.themeSettingsWarningTextF;
+      case 'themeN':
+        return t.themeSettingsWarningTextN;
+      case 'themePi':
+        return t.themeSettingsWarningTextPi;
       case 'themeD':
         return t.themeSettingsWarningTextD;
       case 'themeV':
@@ -137,18 +143,24 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme3),
-            value: 'themeO',
+            value: 'themePi',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme4),
-            value: 'themeD',
+            value: 'themeO',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme5),
+            value: 'themeD',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!, t),
+          ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme6),
             value: 'themeV',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
