@@ -28,21 +28,22 @@ class ThemeService {
   ];
 
   ThemeData getThemeData(themeName) {
-    if (themeName == 'themeF') {
-      return themeF;
-    } else if (themeName == 'themeN') {
-      return themeN;
-    } else if (themeName == 'themePi') {
-      return themePi;
-    } else if (themeName == 'themeO') {
-      return themeO;
-    } else if (themeName == 'themeD') {
-      return themeD;
-    } else if (themeName == 'themeV') {
-      return themeV;
-    } else {
-      print("Warning: Theme not found, returning light theme");
-      return themeF;
+    switch (themeName) {
+      case 'themeF':
+        return themeF;
+      case 'themeN':
+        return themeN;
+      case 'themePi':
+        return themePi;
+      case 'themeO':
+        return themeO;
+      case 'themeD':
+        return themeD;
+      case 'themeV':
+        return themeV;
+      default:
+        print("Warning: Theme not found, returning light theme");
+        return themeF;
     }
   }
 

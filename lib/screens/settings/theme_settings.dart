@@ -47,6 +47,8 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
         // Send an angry message if the user picks a certain theme
         String? message = angryMessage(theme, t);
         if (message != null && theme != 'themeD') {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(context).clearSnackBars(); // Clear the queue
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(message, style: TextStyle(fontFamily: 'Nabla')),
