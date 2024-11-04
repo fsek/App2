@@ -38,15 +38,15 @@ class DeviseToken {
   static Future<DeviseToken> getFromStorage(TokenStorageWrapper storage) async {
     DeviseToken token = DeviseToken();
     token.accessToken = await storage.read("access-token");
-    if(token.accessToken == null)
+    if (token.accessToken == null) 
       return DeviseToken();
 
     token.uid = await storage.read("uid");
     token.client = await storage.read("client");
     String? expires = await storage.read("expires");
-    if(expires == null)
+    if (expires == null) 
       return DeviseToken();
-      
+
     token.expires = DateTime.tryParse(expires);
     return token;
   }
@@ -56,16 +56,15 @@ class DeviseToken {
       accessToken: headers['access-token'],
       uid: headers['uid'],
       client: headers['client'],
-      expires: timeConvert(headers["expiry"])
-    );
+      expires: timeConvert(headers["expiry"]));
   }
 
   static DateTime timeConvert(String? rubytimestring) {
-    if(rubytimestring == null)
+    if (rubytimestring == null) 
       return DateTime.now();
 
     int? time = int.tryParse(rubytimestring);
-    if(time == null)
+    if (time == null) 
       return DateTime.now();
 
     int rubytime = int.parse(rubytimestring);
@@ -75,4 +74,5 @@ class DeviseToken {
   factory DeviseToken.fromJson(Map<String, dynamic> json) => _$DeviseTokenFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeviseTokenToJson(this);
+  
 }
