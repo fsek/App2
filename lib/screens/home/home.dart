@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
         } else {
           this.election = false;
         }
-        this.election = true;
         this.backgroundUrl = value.last.url;
       }
     }));
