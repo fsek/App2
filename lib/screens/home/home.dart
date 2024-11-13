@@ -20,6 +20,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/services/theme.service.dart';
 
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
@@ -41,7 +42,6 @@ class _HomePageState extends State<HomePage> {
 
   void initState() {
     locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
-      print(value?.last.document_name!.toLowerCase());
       // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
       if (!listEquals(value, []) && value != null) {
         this.backgroundDocuments = value;
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.topCenter,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Color(0xFFFB8C00))),
+            placeholder: (context, url) => Center(child: CircularProgressIndicator(color: locator<ThemeService>().theme.primaryColor)),
             imageUrl: backgroundUrl!,
           )
         : Image.asset(
@@ -84,6 +84,7 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.topCenter,
           ),
       Scaffold(
+        backgroundColor: Colors.transparent,
         body: Padding(
           padding: EdgeInsets.fromLTRB(
               edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
