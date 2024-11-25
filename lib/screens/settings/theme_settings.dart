@@ -15,7 +15,6 @@ class ThemeSettingsPage extends StatefulWidget {
 }
 
 class ThemeSettingsState<ThemeSettingsPage> extends State {
-
   String? _theme;
 
   void initState() {
@@ -38,9 +37,12 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
         this._theme = theme;
 
         // context.read has to be used here, not locator<ThemeCubit>().setTheme
-        context.read<ThemeCubit>().setTheme(locator<ThemeService>().getThemeData(theme));
-        locator<ThemeService>().theme = locator<ThemeService>().getThemeData(theme);
-        
+        context
+            .read<ThemeCubit>()
+            .setTheme(locator<ThemeService>().getThemeData(theme));
+        locator<ThemeService>().theme =
+            locator<ThemeService>().getThemeData(theme);
+
         locator<ThemeService>().changeLogInIcon();
         locator<ThemeService>().saveTheme(theme);
 
@@ -54,7 +56,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
               content: Text(message, style: TextStyle(fontFamily: 'Nabla')),
               duration: Duration(seconds: 4),
             ),
-          );        
+          );
         } else if (message != null && theme == 'themeD') {
           // Send textbox instead of snackbar
           generalPopup(t.themeSettingsWarning, message);
@@ -86,6 +88,8 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
     switch (theme) {
       case 'themeF':
         return t.themeSettingsWarningTextF;
+      case 'themeFdark':
+        return t.themeSettingsWarningTextFdark;
       case 'themeN':
         return t.themeSettingsWarningTextN;
       case 'themePi':
@@ -104,21 +108,25 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
   void changeLogInIcon() {
     // If this is not called, the color of some text will not change depending on the theme
     locator<ThemeService>().loginIcon = [
-    CircleAvatar(
-      radius: 40.0,
-      backgroundImage: (locator<ThemeService>().theme.brightness == Brightness.dark ? 
-        AssetImage("assets/img/f_logo_white.png") : AssetImage("assets/img/f_logo.png")),
-      backgroundColor: Colors.transparent,
-    ),
-    SizedBox(width: 16),
-    Text("F-sektionen",
-      style: TextStyle(
-        fontFamily: 'Helvetica Neue', 
-        fontSize: 28.0, 
-        // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode. 
-        color: locator<ThemeService>().theme.colorScheme.onBackground.withAlpha(170)
-        )
+      CircleAvatar(
+        radius: 40.0,
+        backgroundImage:
+            (locator<ThemeService>().theme.brightness == Brightness.dark
+                ? AssetImage("assets/img/f_logo_white.png")
+                : AssetImage("assets/img/f_logo.png")),
+        backgroundColor: Colors.transparent,
       ),
+      SizedBox(width: 16),
+      Text("F-sektionen",
+          style: TextStyle(
+              fontFamily: 'Helvetica Neue',
+              fontSize: 28.0,
+              // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode.
+              color: locator<ThemeService>()
+                  .theme
+                  .colorScheme
+                  .onBackground
+                  .withAlpha(170))),
     ];
   }
 
@@ -139,30 +147,36 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme2),
-            value: 'themeN',
+            value: 'themeFdark',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme3),
-            value: 'themePi',
+            value: 'themeN',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme4),
-            value: 'themeO',
+            value: 'themePi',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme5),
-            value: 'themeD',
+            value: 'themeO',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme6),
+            value: 'themeD',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!, t),
+          ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme7),
             value: 'themeV',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
@@ -179,4 +193,4 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
       ),
     );
   }
-} 
+}
