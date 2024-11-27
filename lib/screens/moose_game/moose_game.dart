@@ -152,10 +152,10 @@ class _MooseGamePageState extends State<MooseGamePage>
       });
     }
 
-    Rect mooseRect = getGameObjectCameraRect(screenSize, moose).deflate(10);
+    Rect mooseRect = getGameObjectCameraRect(screenSize, moose, 0.45);//.deflate(10);
     for (Obstacle obst in obstacles) {
       obst.position.x -= (gameSpeed + obst.speed) * deltaTime;
-      Rect obstRect = getGameObjectCameraRect(screenSize, obst).deflate(11);
+      Rect obstRect = getGameObjectCameraRect(screenSize, obst, 0.45);//.deflate(11);
       if (mooseRect.overlaps(obstRect)) {
         gameOver();
         return;
@@ -178,7 +178,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     sandwich.position.y =
         1.0 + 1.0 * (sin(1.2 * sandwich.position.x + sandwichOffset) + 1.0);
     Rect sandwichRect =
-        getGameObjectCameraRect(screenSize, sandwich).deflate(10);
+        getGameObjectCameraRect(screenSize, sandwich, 0.55);//.deflate(10);
     if (mooseRect.overlaps(sandwichRect)) {
       setState(() {
         lastSandwichBonus = score * 0.05;
@@ -223,13 +223,13 @@ class _MooseGamePageState extends State<MooseGamePage>
     });
   }
 
-  Rect getGameObjectCameraRect(Size screenSize, GameObject gameObject) {
+  Rect getGameObjectCameraRect(Size screenSize, GameObject gameObject, double deflation) {
     return Rect.fromCenter(
       center: Offset(
           screenSize.width / 2 + (gameObject.position.x - cameraPos.x) * worldScale * 24,
           screenSize.height / 2 - (gameObject.position.y + cameraPos.y) * worldScale * 24),
-      width: gameObject.sprite.imageWidth * worldScale,
-      height: gameObject.sprite.imageHeight * worldScale,
+      width: gameObject.sprite.imageWidth * worldScale * deflation,
+      height: gameObject.sprite.imageHeight * worldScale * deflation,
     );
   }
 
@@ -255,7 +255,7 @@ class _MooseGamePageState extends State<MooseGamePage>
         animation: gameAnimController,
         builder: (context, _) {
           // Rect needs to be defined here for it to update during the game animation.
-          Rect rect = getGameObjectCameraRect(screenSize, gameObject);
+          Rect rect = getGameObjectCameraRect(screenSize, gameObject, 1.0);
           return Positioned(
             left: rect.left,
             top: rect.top,
@@ -272,7 +272,7 @@ class _MooseGamePageState extends State<MooseGamePage>
 
     Size screenSize = MediaQuery.of(context).size;
     worldScale = screenSize.width / (gameViewportWidth * 24);
-    //print(worldScale);
+    print(worldScale);
 
     List<Widget> children = [getGameObjectWidget(moose, screenSize)];
 
