@@ -31,6 +31,8 @@ class ThemeService {
     switch (themeName) {
       case 'themeF':
         return themeF;
+      case 'themeFdark':
+        return themeFdark;
       case 'themeN':
         return themeN;
       case 'themePi':

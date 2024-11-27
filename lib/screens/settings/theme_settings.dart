@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fsek_mobile/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/themes.dart';
@@ -86,6 +84,8 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
     switch (theme) {
       case 'themeF':
         return t.themeSettingsWarningTextF;
+      case 'themeFdark':
+        return t.themeSettingsWarningTextFdark;
       case 'themeN':
         return t.themeSettingsWarningTextN;
       case 'themePi':
@@ -139,30 +139,36 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme2),
-            value: 'themeN',
+            value: 'themeFdark',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme3),
-            value: 'themePi',
+            value: 'themeN',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme4),
-            value: 'themeO',
+            value: 'themePi',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme5),
-            value: 'themeD',
+            value: 'themeO',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
           ),
           RadioListTile<String>(
             title: Text(t.themeSettingsTheme6),
+            value: 'themeD',
+            groupValue: _theme,
+            onChanged: (value) => _setTheme(context, value!, t),
+          ),
+          RadioListTile<String>(
+            title: Text(t.themeSettingsTheme7),
             value: 'themeV',
             groupValue: _theme,
             onChanged: (value) => _setTheme(context, value!, t),
