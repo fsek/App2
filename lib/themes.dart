@@ -14,6 +14,12 @@ smallest possible specification that still works graphics-wise.
 To add another theme you also have to edit the language files, getThemeData in theme.service.dart 
 and theme_settings.dart.
 
+Since the app is not originally built around material 3, I've had to be a
+bit creative with the application of some of these colours.
+
+All documentation is at the end of the file. Please update that when you you add 
+new color labels.
+
 */
 
 class ThemeCubit extends Cubit<ThemeData> {
@@ -25,58 +31,29 @@ class ThemeCubit extends Cubit<ThemeData> {
 }
 
 final ThemeData themeFdark = ThemeData(
-  /* Since the app is not built around material 3, I've had to be a
-  bit creative with the application of some of these colours. */
-
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromRGBO(235, 113, 37, 1), // colors.green[700]
+    seedColor: const Color.fromRGBO(235, 113, 37, 1), 
     brightness: Brightness.dark,
-    onPrimary: Colors.white, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: Colors.black, // colors.green[700], // (only) Used for a selected element in the bottom bar
-    primary: const Color.fromRGBO(235, 113, 37, 1), // colors.green[700], used often and in random places, this is a remnant from the old theme
+    onPrimary: Colors.white,
+    onPrimaryContainer: Colors.black, 
+    primary: const Color.fromRGBO(235, 113, 37, 1), 
 
-    // Used, ex. for the background of the cafe shifts/the notification cards
-    // this is the wrong way to use this color (it should not have 100% opacity), 
-    // so please change it when time allows
     surfaceTint: Color.fromRGBO(56, 29, 3, 1), 
 
-    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
     surface: Color.fromRGBO(50, 49, 45, 1),
     onBackground: Colors.white,
     onSecondary: Colors.white,
 
-    onInverseSurface: Colors.white,// Used, ex. for the text on the cafe shifts
+    onInverseSurface: Colors.white,
 
     onError: Colors.white,
     error: Color.fromARGB(255, 156, 8, 16),
 
-    /* NOT CHANGED */
-
-    // Sometimes used on top of primary, for example in the divider between the calendar and event cards. Sorry :(
-    // (and on buttons in the login page)
-    // onSecondary: Colors.white
-
-    // onError: Colors.white
-
-    // onSurface: some gray color. Used for icons on search bars
-
-    // onBackground: 
-
-    // shadow: Colors.black, // Likely unused
-
-    // Used, ex. for the background of letters in songbook and as background for other text that 
-    // should stand out a bit (like explanations in the account settings)
-    // surfaceVariant: UNCHANGED 
-
-    // onPrimaryContainer: UNCHANGED // (only) Used for a selected element in the bottom bar
   ),
 
-  // Color used for circular loading indicator in some places
-  // Also used in the background shape, and in many other places where previous
-  // developers used orange to spice things up. Don't blame me if it looks bad.
-  primaryColor: const Color.fromRGBO(235, 113, 37, 1), // colors.green[700]
-  primaryColorLight: Color.fromRGBO(186, 83, 19, 1), // Used for the banner/background on the contact page
+  primaryColor: const Color.fromRGBO(235, 113, 37, 1), 
+  primaryColorLight: Color.fromRGBO(186, 83, 19, 1), 
 
   appBarTheme: AppBarTheme(color: Color.fromRGBO(235, 113, 37, 1)), // Top bar color
   bottomAppBarTheme: BottomAppBarTheme(color: Color.fromRGBO(235, 113, 37, 1)),
@@ -84,19 +61,19 @@ final ThemeData themeFdark = ThemeData(
   fontFamily: 'Helvetica Neue',
 
   textTheme: TextTheme(
-    displayMedium: const TextStyle( // Used for the text on the loading widget
+    displayMedium: const TextStyle( 
       fontSize: 30,
       fontWeight: FontWeight.normal,
     ),
-    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums, titles of news after tapping them
+    titleLarge: const TextStyle( 
       fontSize: 22,
       fontStyle: FontStyle.normal,
-      color: Colors.white // This color is not inhereted by the titles on the top bar
+      color: Colors.white 
     ),
-    headlineMedium: const TextStyle( // Ex: titles on the event page and songs
+    headlineMedium: const TextStyle(
       fontSize: 25,
       fontStyle: FontStyle.normal,
-      color: const Color.fromRGBO(235, 113, 37, 1), // colors.green[700]
+      color: const Color.fromRGBO(235, 113, 37, 1), 
     ),
     bodyMedium: const TextStyle(
       fontSize: 15,
@@ -106,7 +83,7 @@ final ThemeData themeFdark = ThemeData(
       fontSize: 12,
       fontStyle: FontStyle.normal,
     ),
-    labelLarge: const TextStyle( // Ex: text on image saving snackbar
+    labelLarge: const TextStyle( 
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
@@ -124,7 +101,7 @@ final ThemeData themeFdark = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orange[700]!)),
     labelStyle: TextStyle(color: Colors.orange[700]!),
-    hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
+    hintStyle: TextStyle(color: Colors.grey[600]),
     floatingLabelStyle: TextStyle(color: Colors.orange[700]!),
     iconColor: Colors.grey[600],
   ),
@@ -137,58 +114,29 @@ final ThemeData themeFdark = ThemeData(
 );
 
 final ThemeData themeN = ThemeData(
-  /* Since the app is not built around material 3, I've had to be a
-  bit creative with the application of some of these colours. */
 
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     seedColor: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
     brightness: Brightness.dark,
-    onPrimary: Colors.white, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: Colors.black, // colors.green[700], // (only) Used for a selected element in the bottom bar
-    primary: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700], used often and in random places, this is a remnant from the old theme
+    onPrimary: Colors.white,
+    onPrimaryContainer: Colors.black,
+    primary: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700],
 
-    // Used, ex. for the background of the cafe shifts/the notification cards
-    // this is the wrong way to use this color (it should not have 100% opacity), 
-    // so please change it when time allows
     surfaceTint: Color.fromRGBO(3, 51, 6, 1), 
 
-    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
     surface: Color.fromRGBO(45, 45, 45, 1),
     onBackground: Colors.white,
     onSecondary: Colors.white,
 
-    onInverseSurface: Colors.white,// Used, ex. for the text on the cafe shifts
-
+    onInverseSurface: Colors.white,
     onError: Colors.white,
     error: Color.fromARGB(255, 156, 8, 16),
 
-    /* NOT CHANGED */
-
-    // Sometimes used on top of primary, for example in the divider between the calendar and event cards. Sorry :(
-    // (and on buttons in the login page)
-    // onSecondary: Colors.white
-
-    // onError: Colors.white
-
-    // onSurface: some gray color. Used for icons on search bars
-
-    // onBackground: 
-
-    // shadow: Colors.black, // Likely unused
-
-    // Used, ex. for the background of letters in songbook and as background for other text that 
-    // should stand out a bit (like explanations in the account settings)
-    // surfaceVariant: UNCHANGED 
-
-    // onPrimaryContainer: UNCHANGED // (only) Used for a selected element in the bottom bar
   ),
 
-  // Color used for circular loading indicator in some places
-  // Also used in the background shape, and in many other places where previous
-  // developers used orange to spice things up. Don't blame me if it looks bad.
   primaryColor: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
-  primaryColorLight: Colors.green[800], // Used for the banner/background on the contact page
+  primaryColorLight: Colors.green[800], 
 
   appBarTheme: AppBarTheme(color: Colors.green[700]), // Top bar color
   bottomAppBarTheme: BottomAppBarTheme(color: Colors.green[700]),
@@ -196,16 +144,16 @@ final ThemeData themeN = ThemeData(
   fontFamily: 'Helvetica Neue',
 
   textTheme: TextTheme(
-    displayMedium: const TextStyle( // Used for the text on the loading widget
+    displayMedium: const TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.normal,
     ),
-    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums, titles of news after tapping them
+    titleLarge: const TextStyle(
       fontSize: 22,
       fontStyle: FontStyle.normal,
-      color: Colors.white // This color is not inhereted by the titles on the top bar
+      color: Colors.white 
     ),
-    headlineMedium: const TextStyle( // Ex: titles on the event page and songs
+    headlineMedium: const TextStyle( 
       fontSize: 25,
       fontStyle: FontStyle.normal,
       color: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
@@ -218,7 +166,7 @@ final ThemeData themeN = ThemeData(
       fontSize: 12,
       fontStyle: FontStyle.normal,
     ),
-    labelLarge: const TextStyle( // Ex: text on image saving snackbar
+    labelLarge: const TextStyle( 
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
@@ -249,58 +197,29 @@ final ThemeData themeN = ThemeData(
 );
 
 final ThemeData themePi = ThemeData(
-  /* Since the app is not built around material 3, I've had to be a
-  bit creative with the application of some of these colours. */
 
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     seedColor: Color.fromARGB(255, 179, 179, 179),
     brightness: Brightness.light,
-    onPrimary: Colors.black, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: Colors.white, // colors.green[700], // (only) Used for a selected element in the bottom bar
-    primary: const Color.fromARGB(255, 179, 179, 179), // used often and in random places, this is a remnant from the old theme
+    onPrimary: Colors.black, 
+    onPrimaryContainer: Colors.white, 
+    primary: const Color.fromARGB(255, 179, 179, 179),
 
-    // Used, ex. for the background of the cafe shifts/the notification cards
-    // this is the wrong way to use this color (it should not have 100% opacity), 
-    // so please change it when time allows
     surfaceTint: Color.fromRGBO(247, 247, 247, 1), 
 
-    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
     surface: Color.fromRGBO(233, 233, 233, 1),
     onBackground: Colors.black,
     onSecondary: Colors.black,
 
-    onInverseSurface: Colors.black,// Used, ex. for the text on the cafe shifts
+    onInverseSurface: Colors.black,
 
     onError: Colors.white,
     error: Color.fromARGB(255, 156, 8, 16),
-
-    /* NOT CHANGED */
-
-    // Sometimes used on top of primary, for example in the divider between the calendar and event cards. Sorry :(
-    // (and on buttons in the login page)
-    // onSecondary: Colors.white
-
-    // onError: Colors.white
-
-    // onSurface: some gray color. Used for icons on search bars
-
-    // onBackground: 
-
-    // shadow: Colors.black, // Likely unused
-
-    // Used, ex. for the background of letters in songbook and as background for other text that 
-    // should stand out a bit (like explanations in the account settings)
-    // surfaceVariant: UNCHANGED 
-
-    // onPrimaryContainer: UNCHANGED // (only) Used for a selected element in the bottom bar
   ),
 
-  // Color used for circular loading indicator in some places
-  // Also used in the background shape, and in many other places where previous
-  // developers used orange to spice things up. Don't blame me if it looks bad.
   primaryColor: const Color.fromARGB(255, 179, 179, 179),
-  primaryColorLight: Color.fromARGB(255, 197, 197, 197), // Used for the banner/background on the contact page
+  primaryColorLight: Color.fromARGB(255, 197, 197, 197), 
 
   appBarTheme: AppBarTheme(color: Color.fromARGB(255, 179, 179, 179)), // Top bar color
   bottomAppBarTheme: BottomAppBarTheme(color: Color.fromARGB(255, 179, 179, 179)),
@@ -308,19 +227,19 @@ final ThemeData themePi = ThemeData(
   fontFamily: 'Helvetica Neue',
 
   textTheme: TextTheme(
-    displayMedium: const TextStyle( // Used for the text on the loading widget
+    displayMedium: const TextStyle( 
       fontSize: 30,
       fontWeight: FontWeight.normal,
     ),
-    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums, titles of news after tapping them
+    titleLarge: const TextStyle( 
       fontSize: 22,
       fontStyle: FontStyle.normal,
-      color: Colors.black // This color is not inhereted by the titles on the top bar
+      color: Colors.black 
     ),
-    headlineMedium: const TextStyle( // Ex: titles on the event page and songs
+    headlineMedium: const TextStyle(
       fontSize: 25,
       fontStyle: FontStyle.normal,
-      color: Color.fromARGB(255, 179, 179, 179), // colors.green[700]
+      color: Color.fromARGB(255, 179, 179, 179), 
     ),
     bodyMedium: const TextStyle(
       fontSize: 15,
@@ -330,7 +249,7 @@ final ThemeData themePi = ThemeData(
       fontSize: 12,
       fontStyle: FontStyle.normal,
     ),
-    labelLarge: const TextStyle( // Ex: text on image saving snackbar
+    labelLarge: const TextStyle( 
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
@@ -361,8 +280,6 @@ final ThemeData themePi = ThemeData(
 );
 
 final ThemeData themeF = ThemeData(
-  /* Since the app is not built around material 3, I've had to be a
-  bit creative with the application of some of these colours. */
 
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
@@ -370,20 +287,13 @@ final ThemeData themeF = ThemeData(
     primary: Colors.orange[600], // colors.orange[600], used unsparingly and in random places, I just ported it over
     brightness: Brightness.light,
 
-    // Used, ex. for the background of letters in songbook and as background for other text that 
-    // should stand out a bit (like explanations in the account settings)
     surfaceVariant: Colors.grey[200]!, 
     onSurfaceVariant: Colors.black,
-    onPrimary: Colors.black, // Used for a unselected element in the bottom bar
-    // (only) Used for a selected element in the bottom bar
+    onPrimary: Colors.black, 
     onPrimaryContainer: Colors.white,
 
-    // Used, ex. for the background of the cafe shifts/the notification cards
-    // this is the wrong way to use this color (it should not have 100% opacity), 
-    // so please change it when time allows
     surfaceTint: Colors.orange[100], 
-    onInverseSurface: Colors.black, // Used, ex. for the text on the cafe shifts
-    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
+    onInverseSurface: Colors.black, 
     surface: Color.fromRGBO(255, 254, 251, 1), // A color that kinda looked nice
     background: Colors.white, //  Main new background color
 
@@ -413,7 +323,7 @@ final ThemeData themeF = ThemeData(
   // Also used in the background shape, and in many other places where previous
   // developers used orange to spice things up. Don't blame me if it looks bad.
   primaryColor: const Color.fromRGBO(245, 124, 0, 1), // colors.orange[700]
-  primaryColorLight: const Color.fromRGBO(251, 140, 0, 1), //Colors.orange[600] // Used for the banner/background on the contact page
+  primaryColorLight: const Color.fromRGBO(251, 140, 0, 1), //Colors.orange[600] 
 
   appBarTheme: AppBarTheme(
     color: Colors.orange[700]
@@ -421,21 +331,21 @@ final ThemeData themeF = ThemeData(
   bottomAppBarTheme: BottomAppBarTheme(color: Colors.orange[800]), // Bottom bar color
 
   textTheme: TextTheme(
-    displayMedium: const TextStyle( // Used for the text on the loading widget
+    displayMedium: const TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.normal,
       fontFamily: 'Helvetica Neue'
     ),
-    titleLarge: const TextStyle( // Ex: all titles on top bar, titles of gallery albums
+    titleLarge: const TextStyle( 
       fontSize: 22,
       fontStyle: FontStyle.normal,
       fontFamily: 'Helvetica Neue'
     ),
-    headlineMedium: const TextStyle( // Ex: titles on the event page and songs
+    headlineMedium: const TextStyle( 
       fontSize: 25,
       fontStyle: FontStyle.normal,
       fontFamily: 'Helvetica Neue',
-      color: const Color.fromRGBO(251, 140, 0, 1), // colors.orange[600]
+      color: const Color.fromRGBO(251, 140, 0, 1), 
     ),
     bodyMedium: const TextStyle(
       fontSize: 15,
@@ -447,12 +357,12 @@ final ThemeData themeF = ThemeData(
       fontStyle: FontStyle.normal,
       fontFamily: 'Helvetica Neue'
     ),
-    labelLarge: const TextStyle( // Ex: text on image saving snackbar
+    labelLarge: const TextStyle( 
       fontSize: 16,
       fontWeight: FontWeight.bold,
       fontFamily: 'Helvetica Neue'
     ),
-    labelMedium: const TextStyle( // Ex: text on author of news in news card list
+    labelMedium: const TextStyle( 
       fontSize: 14,
       fontWeight: FontWeight.bold,
       fontFamily: 'Helvetica Neue'
@@ -495,15 +405,15 @@ final ThemeData themeO = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: const Color.fromRGBO(191, 54, 12, 1), // Colors.deepOrange[900]
     brightness: Brightness.dark,
-    onPrimary: Colors.white, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: const Color.fromRGBO(191, 54, 12, 1), // Colors.deepOrange[900], (only) Used for a selected element in the bottom bar
-    surfaceTint: Color.fromRGBO(51, 26, 3, 1), // Used, ex. for the background of the cafe shifts/the notification cards
-    onInverseSurface: Colors.white, // Used, ex. for the text on the cafe shifts
+    onPrimary: Colors.white,
+    onPrimaryContainer: const Color.fromRGBO(191, 54, 12, 1), // Colors.deepOrange[900]
+    surfaceTint: Color.fromRGBO(51, 26, 3, 1), 
+    onInverseSurface: Colors.white, 
   ),
 
-  // Used for log in page (among other places?)
+  // Used for log in page 
   inputDecorationTheme: InputDecorationTheme(
-    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: const Color.fromRGBO(191, 54, 12, 1))), // Colors.deepOrange[900]
+    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: const Color.fromRGBO(191, 54, 12, 1))),
     labelStyle: TextStyle(color: const Color.fromRGBO(191, 54, 12, 1)), // Colors.deepOrange[900]
     hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
     floatingLabelStyle: TextStyle(color: const Color.fromRGBO(191, 54, 12, 1)), // Colors.deepOrange[900]
@@ -532,52 +442,24 @@ final ThemeData themeD = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Color(0xFFF280A1), 
     brightness: Brightness.dark,
-    onPrimary: Colors.white, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: Colors.black, // colors.green[700], // (only) Used for a selected element in the bottom bar
-    primary: Color(0xFFF280A1), // used often and in random places, this is a remnant from the old theme
+    onPrimary: Colors.white, 
+    onPrimaryContainer: Colors.black, 
+    primary: Color(0xFFF280A1), 
 
-    // Used, ex. for the background of the cafe shifts/the notification cards
-    // this is the wrong way to use this color (it should not have 100% opacity), 
-    // so please change it when time allows
     surfaceTint: Colors.pink[800],
 
-
-    // Used as background for cards, like event cards in calendar, notification cards, items on "other" page
     surface: Color.fromRGBO(34, 34, 34, 1),
     onBackground: Colors.white,
     onSecondary: Colors.white,
 
-    onInverseSurface: Colors.white,// Used, ex. for the text on the cafe shifts
+    onInverseSurface: Colors.white,
 
     onError: Colors.white,
     error: Color.fromARGB(255, 156, 8, 16),
-
-    /* NOT CHANGED */
-
-    // Sometimes used on top of primary, for example in the divider between the calendar and event cards. Sorry :(
-    // (and on buttons in the login page)
-    // onSecondary: Colors.white
-
-    // onError: Colors.white
-
-    // onSurface: some gray color. Used for icons on search bars
-
-    // onBackground: 
-
-    // shadow: Colors.black, // Likely unused
-
-    // Used, ex. for the background of letters in songbook and as background for other text that 
-    // should stand out a bit (like explanations in the account settings)
-    // surfaceVariant: UNCHANGED 
-
-    // onPrimaryContainer: UNCHANGED // (only) Used for a selected element in the bottom bar
   ),
 
-  // Color used for circular loading indicator in some places
-  // Also used in the background shape, and in many other places where previous
-  // developers used orange to spice things up. Don't blame me if it looks bad.
-  primaryColor: Color(0xFFF280A1), // colors.green[700]
-  primaryColorLight: Color.fromRGBO(236, 143, 170, 1), // Used for the banner/background on the contact page
+  primaryColor: Color(0xFFF280A1), 
+  primaryColorLight: Color.fromRGBO(236, 143, 170, 1), 
 
   appBarTheme: AppBarTheme(color: Color(0xFFF280A1)), // Top bar color
   bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFFF280A1)),
@@ -588,8 +470,8 @@ final ThemeData themeD = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFF280A1))),
     labelStyle: TextStyle(color: Color(0xFFF280A1)),
-    hintStyle: TextStyle(color: Colors.grey[600]), // Colors.grey[600]
-    floatingLabelStyle: TextStyle(color: Color(0xFFF280A1)), // Colors.deepOrange[900]
+    hintStyle: TextStyle(color: Colors.grey[600]), 
+    floatingLabelStyle: TextStyle(color: Color(0xFFF280A1)),
     iconColor: Colors.grey[600],
   ),
 
@@ -614,10 +496,10 @@ final ThemeData themeV = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.blue[600]!, 
     brightness: Brightness.light,
-    onPrimary: Colors.black, // Used for a unselected element in the bottom bar
-    onPrimaryContainer: Colors.blue[700]!, // (only) Used for a selected element in the bottom bar
-    surfaceTint: Colors.lightBlue[50], // Used, ex. for the background of the cafe shifts/the notification cards
-    onInverseSurface: Colors.black, // Used, ex. for the text on the cafe shifts
+    onPrimary: Colors.black, 
+    onPrimaryContainer: Colors.blue[700]!, 
+    surfaceTint: Colors.lightBlue[50], 
+    onInverseSurface: Colors.black,
   ),
 
   // Used for log in page (among other places?)
@@ -643,6 +525,104 @@ final ThemeData themeV = ThemeData(
   ),
 
 );
+
+
+/*
+
+#### COLOR LABEL EXPLANATIONS ####
+
+Only labels that are non-intuitive are explained.
+
+
+final ThemeData ThemeName = ThemeData(
+  useMaterial3: true, // Required for the theme to work
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: 
+    primary: Used unsparingly and in random places, I just ported it over from the
+            old theme system, its application is not bound by rules or laws.
+
+    brightness:
+    surfaceVariant: Used, ex. for the background of letters in songbook and as background for other text that 
+                    should stand out a bit (like explanations in the account settings)
+
+    onSurfaceVariant: Only changed in main F theme. Used in the songbook on top of surfaceVariant exclusively.
+
+    onPrimary: Used for a unselected element in the bottom bar among other small things
+
+    onPrimaryContainer: Only (so far) specified for a selected element in the bottom bar
+
+    surfaceTint: Used, among other places, for the background of the cafe shifts/the notification cards
+                this is the wrong way to use this color (it should not have 100% opacity when set in themes), 
+                so please change it when time allows. Or don't.
+
+    onInverseSurface: Used, among other places, for the text on the cafe shifts.
+
+    surface: Used as background for cards, like event cards in calendar, notification cards, items on "other" page.
+
+    background: Used in main background and in other pages where continuity to the main background should be kept.
+
+    error:
+    onError:
+
+    onSecondary: Sometimes used on top of primary, for example in the divider 
+                  between the calendar and event cards. Sorry :( 
+                  (and on buttons in the login page)
+
+    onSurface: Used for icons on search bars
+
+    onBackground: 
+
+    shadow: Not specified to be used anywhere, but might still be used by default somewhere.
+  ),
+
+  primaryColor: Color used for circular loading indicator in some places
+                Also used in the background shape, and in many other places where previous
+                developers used orange to spice things up. Don't (git) blame me if it looks bad.
+
+  primaryColorLight: Used for the banner/background on the contact page
+
+  appBarTheme: AppBarTheme(
+    color: Color of the top bar
+  ), 
+  bottomAppBarTheme: Color of the bottom bar
+
+  textTheme: TextTheme(
+    displayMedium: Used for the text on the loading widget
+
+    titleLarge: Example: all titles on top bar, titles of gallery albums, titles of news after tapping them
+                The color of this is not inhereted by the titles on the top bar
+
+    headlineMedium: Example: titles on the event page and songs
+
+    bodyMedium: 
+
+    displaySmall: 
+
+    labelLarge: Example: text on image saving snackbar
+
+    labelMedium: Example: text on author of news in news card list
+
+  ),
+
+  textButtonTheme: Used in cafe shift page, required to not crash
+
+  checkboxTheme: This is here to make checkboxes have the strange colors they did before
+                  the theme update. You should probably not specify this in new themes,
+                  the standard colors usually look better.
+
+  inputDecorationTheme: Used for log in page. You need this for the app to work.
+
+  snackBarTheme: Theme for most snackbar messages. Without this the colors might be very hard to read.
+);
+
+*/
+
+
+
+
+
+
+
 
 
 
