@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
@@ -165,7 +168,9 @@ class _HighscorePageState extends State<HighscorePage>
                                   title: results[index].user!.game_nickname !=
                                           null
                                       ? Text(
-                                          "${results[index].user!.game_nickname}")
+                                          "${results[index].user!.game_nickname!
+                                          .substring(0, min(28, results[index].user!.game_nickname!.length))}" // 28 char name length limit fits well on the emulator screen.
+                                          + (results[index].user!.game_nickname!.length > 28 ? "..." : "")) // Ellipsis if name too long
                                       : Text(
                                           "${results[index].user!.firstname}"),
                                   trailing:
