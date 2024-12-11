@@ -207,7 +207,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   }
 
   void gameOver() {
-    print(locator<ThemeService>().theme.brightness.toString());
+    //print(locator<ThemeService>().theme.brightness.toString());
     gameAnimController.stop();
     soundtrackPlayer.stop();
     soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
@@ -272,7 +272,7 @@ class _MooseGamePageState extends State<MooseGamePage>
 
     Size screenSize = MediaQuery.of(context).size;
     worldScale = screenSize.width / (gameViewportWidth * 24);
-    print(worldScale);
+    //print(worldScale);
 
     List<Widget> children = [getGameObjectWidget(moose, screenSize)];
 
@@ -344,6 +344,16 @@ class _MooseGamePageState extends State<MooseGamePage>
         title: Text("Moose Game"),
         actions: [
           // Add actions here
+          IconButton(
+            icon: Icon(soundtrackPlayer.volume == 1 ? Icons.volume_up : Icons.volume_off, color: Theme.of(context).colorScheme.onPrimary), // Mute icon
+            onPressed: () {
+              if (soundtrackPlayer.volume == 1) {
+                soundtrackPlayer.setVolume(0);
+              } else {
+                soundtrackPlayer.setVolume(1);
+              }
+            },
+          ),
           IconButton(
             icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onPrimary), // Trophy icon
             onPressed: () {
