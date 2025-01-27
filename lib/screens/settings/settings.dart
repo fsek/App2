@@ -1,4 +1,3 @@
-import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -54,11 +53,24 @@ class _SettingsPageState extends State<SettingsPage> {
               child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.primary)));
     }
-    return WillPopScope(
-      onWillPop: () async {
-        if (changedSetting)
-          await showDialog(context: context, builder: _saveOnClosePopup());
-        return true;
+    // Below fix is thanks to https://stackoverflow.com/a/77566209
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) async {
+        bool? shouldLeave;
+        if (changedSetting) {
+          shouldLeave = await showDialog<bool>(context: context, builder: _saveOnClosePopup());
+        } else (
+          shouldLeave = true // nothing changed, just leave
+        );
+
+        if (shouldLeave ?? false) {
+          // Manually navigate back
+          if (mounted) Navigator.of(context).pop();
+        } else {
+          // User is still on the same page, do whatever you want
+        }
+
       },
       child: Scaffold(
         appBar: AppBar(
@@ -368,13 +380,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   Spacer(),
                   TextButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Navigator.pop(context, true), // closes the settings dialog
                       child: Text(t.settingsDiscard)),
                   Spacer(),
                   TextButton(
                     onPressed: () async {
                       _save();
-                      Navigator.pop(context);
+                      Navigator.pop(context); // leaves settings menu
                     },
                     child: Text(t.settingsSave),
                   ),
@@ -395,10 +407,10 @@ class _SettingsPageState extends State<SettingsPage> {
         extraPref = user!.food_custom != "";
         changedSetting = false;
       });
-      Navigator.pop(context);
+      Navigator.pop(context, true); // Closes the saving dialog
     }).catchError(
       (error) {
-        Navigator.pop(context);
+        Navigator.pop(context, false); // Closes the saving dialog
         showDialog(context: context, builder: _failedPopup());
       },
     );
