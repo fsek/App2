@@ -30,9 +30,9 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
-    ndkVersion "25.2.9519653"
+    ndkVersion "27.0.12077973"
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -44,6 +44,8 @@ android {
     }
 
     kotlinOptions {
+        apiVersion = "1.8"
+        languageVersion = "1.8"
         jvmTarget = "17"
     }
 
@@ -102,6 +104,6 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.20"
     implementation 'com.android.support:multidex:1.0.3'
 }

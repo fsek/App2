@@ -16,11 +16,12 @@ description: Mobile application for the F-guild
 version: 1.15.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
   characters: ^1.0.0 # required for flutter master branch 2020-08-04
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -28,7 +29,7 @@ dependencies:
   provider: ^6.0.0 # For Blocs and more
   http: ^1.1.0 # For Http requests
   json_annotation: ^4.9.0 # For json serializing
-  flutter_secure_storage: ^9.0.0 # For storing encryption keys for Boxes
+  flutter_secure_storage: ^10.0.0-beta.4 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
   firebase_messaging: ^15.1.0 # For Push notifications
   firebase_core: ^3.4.0
@@ -40,11 +41,11 @@ dependencies:
   table_calendar: ^3.0.1 # For calender
   url_launcher: ^6.0.9 # For memes
   action_cable: ^1.2.0 # For messaging
-  infinite_scroll_pagination: ^4.0.0 # For messaging
+  infinite_scroll_pagination: ^5.0.0 # For messaging
   linkable: ^3.0.1 # For making numbers, emails and links clickable
   flutter_html: ^3.0.0-beta.2 # For rendering HTMLq
   pull_to_refresh: ^2.0.0 # this already exists in flutter
-  flutter_local_notifications: ^18.0.1 # For handling local notifications
+  flutter_local_notifications: ^19.0.0 # For handling local notifications
   flutter_math_fork: ^0.7.1
   flutter_localizations:
     sdk: flutter
@@ -62,7 +63,8 @@ dependencies:
   wakelock_web: ^0.4.0
   firebase_core_platform_interface: ^5.0.0
   bloc_concurrency: ^0.3.0
-  image_gallery_saver: ^2.0.3
+  #image_gallery_saver: ^2.0.3
+  flutter_image_gallery_saver: ^0.0.2
   cached_network_image: ^3.3.0
 
   # flutter_gen: any
