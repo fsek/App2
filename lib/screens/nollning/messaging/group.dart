@@ -293,7 +293,7 @@ class _GroupPageState extends State<GroupPage> with WidgetsBindingObserver {
 
       // NOTE: ActionCable dosent work on stage, why? i dunno, ask förberg or smth
       // Connects to websocket with the token and sets origin because ActionCable respects CORS
-      cable = ActionCable.Connect("${Environment.CABLE_URL}?token=$token",
+      cable = ActionCable.connect("${Environment.CABLE_URL}?token=$token",
           headers: {"Origin": Environment.API_URL}, onConnected: () {
         print("connected");
 
