@@ -27,9 +27,9 @@ class _NewsPageState extends State<NewsPage> {
   );
 
   void initState() {
-    _pagingController.addPageRequestListener((pageKey) {
-      loadMoreNews(pageKey);
-    });
+    // _pagingController.addPageRequestListener((pageKey) {
+    //   loadMoreNews(pageKey);
+    // });
     super.initState();
   }
 
@@ -39,26 +39,25 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return createNewsCard();
-  }
-
-  Widget createNewsCard() {
     var t = AppLocalizations.of(context)!;
     return RefreshIndicator(
-        onRefresh: () => _onRefresh(),
-        child: Container(
-          child: PagedListView<int, News>(
-            pagingController: _pagingController,
-            shrinkWrap: true,
-            builderDelegate: PagedChildBuilderDelegate<News>(
-                itemBuilder: (context, news, index) {
-              return Card(
+      onRefresh: () => _onRefresh(),
+      child: PagingListener(
+        controller: _pagingController, 
+        builder: (context, state, fetchNextPage) => 
+          PagedListView<int, NewsRead>.separated(
+            state: state,
+            fetchNextPage: fetchNextPage,
+            builderDelegate: PagedChildBuilderDelegate(
+              itemBuilder: (context, news, index) {
+                return Card(
                   child: InkWell(
                       onTap: () => openNews(news),
                       child: ListTile(
-                          title: Text((news.title == "" || news.title == null)
-                              ? t.homeTitleUntranslated
-                              : news.title!),
+                          title: Text(
+                            (t.localeName == "sv" ? news.titleSv : news.titleEn).isEmpty ?? true 
+                              ? t.homeTitleUntranslated : (t.localeName == "sv" ? news.titleSv : news.titleEn)
+                          ),
                           subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -79,35 +78,84 @@ class _NewsPageState extends State<NewsPage> {
                               ? Icon(Icons.push_pin_outlined,
                                   color: Theme.of(context).colorScheme.primary)
                               : SizedBox.shrink())));
-            }, noItemsFoundIndicatorBuilder: (context) {
-              return Container(
-                  height: 400,
-                  child: Center(
-                      child: Text(t.homeNoNews,
-                          style: Theme.of(context).textTheme.titleLarge)));
-            }),
-          ),
-        ));
+              }
+              ),
+            separatorBuilder: ,
+          )
+        ),
+      )
   }
 
-  void openNews(News news) {
+
+
+
+
+  // Widget createNewsCard() {
+  //   var t = AppLocalizations.of(context)!;
+  //   return RefreshIndicator(
+  //       onRefresh: () => _onRefresh(),
+  //       child: Container(
+  //         child: PagedListView<int, News>(
+  //           pagingController: _pagingController,
+  //           shrinkWrap: true,
+  //           builderDelegate: PagedChildBuilderDelegate<News>(
+  //               itemBuilder: (context, news, index) {
+  //             return Card(
+  //                 child: InkWell(
+  //                     onTap: () => openNews(news),
+  //                     child: ListTile(
+  //                         title: Text((news.title == "" || news.title == null)
+  //                             ? t.homeTitleUntranslated
+  //                             : news.title!),
+  //                         subtitle: Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               Text(news.user!.name!,
+  //                                   style: Theme.of(context)
+  //                                       .textTheme
+  //                                       .labelMedium
+  //                                       ?.copyWith(
+  //                                           fontWeight: FontWeight.normal)),
+  //                               SizedBox(height: 6),
+  //                               Text(
+  //                                 news.created_at.toString().substring(0, 16),
+  //                                 style: TextStyle(fontSize: 12),
+  //                               )
+  //                             ]),
+  //                         isThreeLine: true,
+  //                         trailing: (news.is_pinned ?? false)
+  //                             ? Icon(Icons.push_pin_outlined,
+  //                                 color: Theme.of(context).colorScheme.primary)
+  //                             : SizedBox.shrink())));
+  //           }, noItemsFoundIndicatorBuilder: (context) {
+  //             return Container(
+  //                 height: 400,
+  //                 child: Center(
+  //                     child: Text(t.homeNoNews,
+  //                         style: Theme.of(context).textTheme.titleLarge)));
+  //           }),
+  //         ),
+  //       ));
+  //  }
+
+  void openNews(NewsRead news) {
     //redirect to other page and shit
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
   }
 
-  void loadMoreNews(int page) {
-    locator<HomeService>().getMoreNews(page).then((value) {
-      if (value.meta?.next_page == null) {
-        _pagingController.appendLastPage(value.news ?? []);
-      } else if (page == 1) {
-        locator<HomeService>().getPinnedNews().then((pinned) {
-          _pagingController.appendPage(
-              (pinned.news ?? []) + (value.news ?? []), page + 1);
-        });
-      } else {
-        _pagingController.appendPage(value.news ?? [], page + 1);
-      }
-    });
-  }
+  // void loadMoreNews(int page) {
+  //   locator<HomeService>().getMoreNews(page).then((value) {
+  //     if (value.meta?.next_page == null) {
+  //       _pagingController.appendLastPage(value.news ?? []);
+  //     } else if (page == 1) {
+  //       locator<HomeService>().getPinnedNews().then((pinned) {
+  //         _pagingController.appendPage(
+  //             (pinned.news ?? []) + (value.news ?? []), page + 1);
+  //       });
+  //     } else {
+  //       _pagingController.appendPage(value.news ?? [], page + 1);
+  //     }
+  //   });
+  // }
 }
