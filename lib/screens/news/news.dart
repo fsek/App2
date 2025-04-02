@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/models/home/news.dart';
 import 'package:fsek_mobile/screens/news/single_news.dart';
 import 'package:fsek_mobile/services/home.service.dart';
@@ -12,8 +13,18 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  final PagingController<int, News> _pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, NewsRead> _pagingController = PagingController(
+    getNextPageKey: (state) => (state.keys?.last ?? 0) + 1,
+    fetchPage: (pageKey) async {
+      final response =
+          await ApiClient().getNewsApi().newsGetPaginatedNews(pageNbr: pageKey);
+
+      if (response.data == null) {
+        throw Exception("Failed to load news");
+      }
+      return response.data!.toList();
+    },
+  );
 
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
@@ -52,9 +63,11 @@ class _NewsPageState extends State<NewsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(news.user!.name!,
-                                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    fontWeight: FontWeight.normal
-                                  )),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.normal)),
                                 SizedBox(height: 6),
                                 Text(
                                   news.created_at.toString().substring(0, 16),
