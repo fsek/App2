@@ -18,6 +18,7 @@ class _NewsPageState extends State<NewsPage> {
     fetchPage: (pageKey) async {
       final response =
           await ApiClient().getNewsApi().newsGetPaginatedNews(pageNbr: pageKey);
+      print("hello");
 
       if (response.data == null) {
         throw Exception("Failed to load news");
@@ -26,15 +27,25 @@ class _NewsPageState extends State<NewsPage> {
     },
   );
 
+  @override
   void initState() {
     // _pagingController.addPageRequestListener((pageKey) {
     //   loadMoreNews(pageKey);
     // });
     super.initState();
+    _pagingController.refresh();
   }
 
+  @override
   Future<void> _onRefresh() async {
     _pagingController.refresh();
+    print("refreshed");
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,52 +54,53 @@ class _NewsPageState extends State<NewsPage> {
     return RefreshIndicator(
       onRefresh: () => _onRefresh(),
       child: PagingListener(
-        controller: _pagingController, 
-        builder: (context, state, fetchNextPage) => 
-          PagedListView<int, NewsRead>.separated(
-            state: state,
-            fetchNextPage: fetchNextPage,
-            builderDelegate: PagedChildBuilderDelegate(
-              itemBuilder: (context, news, index) {
-                return Card(
-                  child: InkWell(
-                      onTap: () => openNews(news),
-                      child: ListTile(
-                          title: Text(
-                            (t.localeName == "sv" ? news.titleSv : news.titleEn).isEmpty ?? true 
-                              ? t.homeTitleUntranslated : (t.localeName == "sv" ? news.titleSv : news.titleEn)
-                          ),
-                          subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(news.user!.name!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium
-                                        ?.copyWith(
-                                            fontWeight: FontWeight.normal)),
-                                SizedBox(height: 6),
-                                Text(
-                                  news.created_at.toString().substring(0, 16),
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ]),
-                          isThreeLine: true,
-                          trailing: (news.is_pinned ?? false)
-                              ? Icon(Icons.push_pin_outlined,
-                                  color: Theme.of(context).colorScheme.primary)
-                              : SizedBox.shrink())));
-              }
-              ),
-            separatorBuilder: ,
-          )
-        ),
-      )
+          controller: _pagingController,
+          builder: (context, state, fetchNextPage) =>
+              PagedListView<int, NewsRead>(
+                state: state,
+                fetchNextPage: fetchNextPage,
+                builderDelegate: PagedChildBuilderDelegate(
+                    itemBuilder: (context, news, index) {
+                  return Card(
+                      child: InkWell(
+                          onTap: () => openNews(news),
+                          child: ListTile(
+                              title: Text((t.localeName == "sv"
+                                          ? news.titleSv
+                                          : news.titleEn)
+                                      .isEmpty
+                                  ? t.homeTitleUntranslated
+                                  : (t.localeName == "sv"
+                                      ? news.titleSv
+                                      : news.titleEn)),
+                              subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("${news.authorId}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.normal)),
+                                    SizedBox(height: 6),
+                                    Text(
+                                      news.createdAt
+                                          .toString()
+                                          .substring(0, 16),
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ]),
+                              isThreeLine: true,
+                              trailing: ((news.pinnedFrom != false) ||
+                                      (news.pinnedTo != false))
+                                  ? Icon(Icons.push_pin_outlined,
+                                      color:
+                                          Theme.of(context).colorScheme.primary)
+                                  : SizedBox.shrink())));
+                }),
+              )),
+    );
   }
-
-
-
-
 
   // Widget createNewsCard() {
   //   var t = AppLocalizations.of(context)!;
@@ -138,10 +150,11 @@ class _NewsPageState extends State<NewsPage> {
   //       ));
   //  }
 
+  // TODO this will have to be fixed after SingleNewsPage is changed
   void openNews(NewsRead news) {
     //redirect to other page and shit
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
   }
 
   // void loadMoreNews(int page) {
