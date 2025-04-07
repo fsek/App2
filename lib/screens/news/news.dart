@@ -16,30 +16,29 @@ class _NewsPageState extends State<NewsPage> {
   final PagingController<int, NewsRead> _pagingController = PagingController(
     getNextPageKey: (state) => (state.keys?.last ?? 0) + 1,
     fetchPage: (pageKey) async {
-      final response =
-          await ApiClient().getNewsApi().newsGetPaginatedNews(pageNbr: pageKey);
-      print("hello");
+      try {
+        final response = await ApiClient()
+            .getNewsApi()
+            .newsGetPaginatedNews(pageNbr: pageKey);
 
-      if (response.data == null) {
-        throw Exception("Failed to load news");
+        if (response.data == null) {
+          throw Exception("Failed to load news");
+        }
+        return response.data!.toList();
+      } catch (e, st) {
+        print("Error fetching news: $e\n$st");
+        rethrow;
       }
-      return response.data!.toList();
     },
   );
 
   @override
   void initState() {
-    // _pagingController.addPageRequestListener((pageKey) {
-    //   loadMoreNews(pageKey);
-    // });
     super.initState();
-    _pagingController.refresh();
   }
 
-  @override
   Future<void> _onRefresh() async {
     _pagingController.refresh();
-    print("refreshed");
   }
 
   @override
