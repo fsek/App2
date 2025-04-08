@@ -12,4 +12,6 @@ openapi-generator generate \
 
 rm "$temp_spec"
 
+# command for running in cmd with openapi.json file in App2 folder:
+# openapi-generator-cli generate -i openapi.json -g dart-dio -o lib/api_client --additional-properties=pubName=api_client,baseUrl=http://localhost:8000
 
