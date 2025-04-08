@@ -14,7 +14,16 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   final PagingController<int, NewsRead> _pagingController = PagingController(
-    getNextPageKey: (state) => (state.keys?.last ?? 0) + 1,
+    getNextPageKey: (state) {
+      if (state.items != null) {
+        if ((state.items!.length % 20) != 0) {
+          //The value 20 here is the news per page from the backend
+          return null;
+        }
+      }
+
+      return (state.keys?.last ?? -1) + 1;
+    },
     fetchPage: (pageKey) async {
       try {
         final response = await ApiClient()
@@ -24,6 +33,7 @@ class _NewsPageState extends State<NewsPage> {
         if (response.data == null) {
           throw Exception("Failed to load news");
         }
+
         return response.data!.toList();
       } catch (e, st) {
         print("Error fetching news: $e\n$st");
@@ -90,8 +100,12 @@ class _NewsPageState extends State<NewsPage> {
                                     )
                                   ]),
                               isThreeLine: true,
-                              trailing: ((news.pinnedFrom != false) ||
-                                      (news.pinnedTo != false))
+                              trailing: ((news.pinnedFrom != null) &&
+                                      (news.pinnedTo != null) &&
+                                      (news.pinnedFrom!
+                                              .isBefore(DateTime.now()) &&
+                                          (news.pinnedTo!
+                                              .isAfter(DateTime.now()))))
                                   ? Icon(Icons.push_pin_outlined,
                                       color:
                                           Theme.of(context).colorScheme.primary)
