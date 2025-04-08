@@ -115,6 +115,13 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
+  // TODO this will have to be fixed after SingleNewsPage is changed
+  void openNews(NewsRead newsRead) {
+    // redirect to other page and shit
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+  }
+
   // Widget createNewsCard() {
   //   var t = AppLocalizations.of(context)!;
   //   return RefreshIndicator(
@@ -162,26 +169,4 @@ class _NewsPageState extends State<NewsPage> {
   //         ),
   //       ));
   //  }
-
-  // TODO this will have to be fixed after SingleNewsPage is changed
-  void openNews(NewsRead news) {
-    //redirect to other page and shit
-    // Navigator.push(context,
-    //     MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
-  }
-
-  // void loadMoreNews(int page) {
-  //   locator<HomeService>().getMoreNews(page).then((value) {
-  //     if (value.meta?.next_page == null) {
-  //       _pagingController.appendLastPage(value.news ?? []);
-  //     } else if (page == 1) {
-  //       locator<HomeService>().getPinnedNews().then((pinned) {
-  //         _pagingController.appendPage(
-  //             (pinned.news ?? []) + (value.news ?? []), page + 1);
-  //       });
-  //     } else {
-  //       _pagingController.appendPage(value.news ?? [], page + 1);
-  //     }
-  //   });
-  // }
 }
