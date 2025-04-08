@@ -6,62 +6,69 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'council_create.g.dart';
+part 'user_in_news_read.g.dart';
 
-/// CouncilCreate
+/// UserInNewsRead
 ///
 /// Properties:
-/// * [name] 
-/// * [description] 
+/// * [id] 
+/// * [firstName] 
+/// * [lastName] 
 @BuiltValue()
-abstract class CouncilCreate implements Built<CouncilCreate, CouncilCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+abstract class UserInNewsRead implements Built<UserInNewsRead, UserInNewsReadBuilder> {
+  @BuiltValueField(wireName: r'id')
+  int get id;
 
-  @BuiltValueField(wireName: r'description')
-  String? get description;
+  @BuiltValueField(wireName: r'first_name')
+  String get firstName;
 
-  CouncilCreate._();
+  @BuiltValueField(wireName: r'last_name')
+  String get lastName;
 
-  factory CouncilCreate([void updates(CouncilCreateBuilder b)]) = _$CouncilCreate;
+  UserInNewsRead._();
+
+  factory UserInNewsRead([void updates(UserInNewsReadBuilder b)]) = _$UserInNewsRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CouncilCreateBuilder b) => b;
+  static void _defaults(UserInNewsReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CouncilCreate> get serializer => _$CouncilCreateSerializer();
+  static Serializer<UserInNewsRead> get serializer => _$UserInNewsReadSerializer();
 }
 
-class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
+class _$UserInNewsReadSerializer implements PrimitiveSerializer<UserInNewsRead> {
   @override
-  final Iterable<Type> types = const [CouncilCreate, _$CouncilCreate];
+  final Iterable<Type> types = const [UserInNewsRead, _$UserInNewsRead];
 
   @override
-  final String wireName = r'CouncilCreate';
+  final String wireName = r'UserInNewsRead';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    CouncilCreate object, {
+    UserInNewsRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'id';
     yield serializers.serialize(
-      object.name,
+      object.id,
+      specifiedType: const FullType(int),
+    );
+    yield r'first_name';
+    yield serializers.serialize(
+      object.firstName,
       specifiedType: const FullType(String),
     );
-    if (object.description != null) {
-      yield r'description';
-      yield serializers.serialize(
-        object.description,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
+    yield r'last_name';
+    yield serializers.serialize(
+      object.lastName,
+      specifiedType: const FullType(String),
+    );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    CouncilCreate object, {
+    UserInNewsRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -72,27 +79,33 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required CouncilCreateBuilder result,
+    required UserInNewsReadBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
+          break;
+        case r'first_name':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.firstName = valueDes;
           break;
-        case r'description':
+        case r'last_name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.description = valueDes;
+            specifiedType: const FullType(String),
+          ) as String;
+          result.lastName = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -103,12 +116,12 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
   }
 
   @override
-  CouncilCreate deserialize(
+  UserInNewsRead deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = CouncilCreateBuilder();
+    final result = UserInNewsReadBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

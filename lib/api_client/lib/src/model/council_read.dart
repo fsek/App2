@@ -18,6 +18,7 @@ part 'council_read.g.dart';
 /// * [name] 
 /// * [posts] 
 /// * [events] 
+/// * [description] 
 @BuiltValue()
 abstract class CouncilRead implements Built<CouncilRead, CouncilReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -31,6 +32,9 @@ abstract class CouncilRead implements Built<CouncilRead, CouncilReadBuilder> {
 
   @BuiltValueField(wireName: r'events')
   BuiltList<EventRead> get events;
+
+  @BuiltValueField(wireName: r'description')
+  String? get description;
 
   CouncilRead._();
 
@@ -74,6 +78,11 @@ class _$CouncilReadSerializer implements PrimitiveSerializer<CouncilRead> {
     yield serializers.serialize(
       object.events,
       specifiedType: const FullType(BuiltList, [FullType(EventRead)]),
+    );
+    yield r'description';
+    yield object.description == null ? null : serializers.serialize(
+      object.description,
+      specifiedType: const FullType.nullable(String),
     );
   }
 
@@ -125,6 +134,14 @@ class _$CouncilReadSerializer implements PrimitiveSerializer<CouncilRead> {
             specifiedType: const FullType(BuiltList, [FullType(EventRead)]),
           ) as BuiltList<EventRead>;
           result.events.replace(valueDes);
+          break;
+        case r'description':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.description = valueDes;
           break;
         default:
           unhandled.add(key);

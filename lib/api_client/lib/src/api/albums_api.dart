@@ -284,7 +284,7 @@ class AlbumsApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [albumId] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -295,7 +295,7 @@ class AlbumsApi {
   /// Returns a [Future] containing a [Response] with a [AlbumRead] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<AlbumRead>> albumsGetOneAlbum({ 
-    required int id,
+    required int albumId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -303,7 +303,7 @@ class AlbumsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/albums/';
+    final _path = r'/albums/{album_id}'.replaceAll('{' r'album_id' '}', encodeQueryParameter(_serializers, albumId, const FullType(int)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -321,14 +321,9 @@ class AlbumsApi {
       validateStatus: validateStatus,
     );
 
-    final _queryParameters = <String, dynamic>{
-      r'id': encodeQueryParameter(_serializers, id, const FullType(int)),
-    };
-
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
-      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

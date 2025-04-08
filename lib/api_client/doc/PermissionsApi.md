@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**permissionsChangePostPermission**](PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [**permissionsCreatePermission**](PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
 [**permissionsGetAllPermissions**](PermissionsApi.md#permissionsgetallpermissions) | **GET** /permissions/ | Get All Permissions
+[**permissionsRemovePermission**](PermissionsApi.md#permissionsremovepermission) | **DELETE** /permissions/ | Remove Permission
 
 
 # **permissionsChangePostPermission**
@@ -135,6 +136,49 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **permissionsRemovePermission**
+> PermissionRead permissionsRemovePermission(permissionRemove)
+
+Remove Permission
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getPermissionsApi();
+final PermissionRemove permissionRemove = ; // PermissionRemove | 
+
+try {
+    final response = api.permissionsRemovePermission(permissionRemove);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling PermissionsApi->permissionsRemovePermission: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **permissionRemove** | [**PermissionRemove**](PermissionRemove.md)|  | 
+
+### Return type
+
+[**PermissionRead**](PermissionRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

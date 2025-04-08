@@ -6,49 +6,51 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'council_create.g.dart';
+part 'council_update.g.dart';
 
-/// CouncilCreate
+/// CouncilUpdate
 ///
 /// Properties:
 /// * [name] 
 /// * [description] 
 @BuiltValue()
-abstract class CouncilCreate implements Built<CouncilCreate, CouncilCreateBuilder> {
+abstract class CouncilUpdate implements Built<CouncilUpdate, CouncilUpdateBuilder> {
   @BuiltValueField(wireName: r'name')
-  String get name;
+  String? get name;
 
   @BuiltValueField(wireName: r'description')
   String? get description;
 
-  CouncilCreate._();
+  CouncilUpdate._();
 
-  factory CouncilCreate([void updates(CouncilCreateBuilder b)]) = _$CouncilCreate;
+  factory CouncilUpdate([void updates(CouncilUpdateBuilder b)]) = _$CouncilUpdate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CouncilCreateBuilder b) => b;
+  static void _defaults(CouncilUpdateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CouncilCreate> get serializer => _$CouncilCreateSerializer();
+  static Serializer<CouncilUpdate> get serializer => _$CouncilUpdateSerializer();
 }
 
-class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
+class _$CouncilUpdateSerializer implements PrimitiveSerializer<CouncilUpdate> {
   @override
-  final Iterable<Type> types = const [CouncilCreate, _$CouncilCreate];
+  final Iterable<Type> types = const [CouncilUpdate, _$CouncilUpdate];
 
   @override
-  final String wireName = r'CouncilCreate';
+  final String wireName = r'CouncilUpdate';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    CouncilCreate object, {
+    CouncilUpdate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
-    yield serializers.serialize(
-      object.name,
-      specifiedType: const FullType(String),
-    );
+    if (object.name != null) {
+      yield r'name';
+      yield serializers.serialize(
+        object.name,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     if (object.description != null) {
       yield r'description';
       yield serializers.serialize(
@@ -61,7 +63,7 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
   @override
   Object serialize(
     Serializers serializers,
-    CouncilCreate object, {
+    CouncilUpdate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -72,7 +74,7 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required CouncilCreateBuilder result,
+    required CouncilUpdateBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -82,8 +84,9 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
         case r'name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'description':
@@ -103,12 +106,12 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
   }
 
   @override
-  CouncilCreate deserialize(
+  CouncilUpdate deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = CouncilCreateBuilder();
+    final result = CouncilUpdateBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

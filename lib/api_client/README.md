@@ -73,7 +73,7 @@ Class | Method | HTTP request | Description
 [*AdsApi*](doc/AdsApi.md) | [**adsGetBookAdByTitle**](doc/AdsApi.md#adsgetbookadbytitle) | **GET** /ad/title/{stitle} | Get Book Ad By Title
 [*AdsApi*](doc/AdsApi.md) | [**adsRemoveAd**](doc/AdsApi.md#adsremovead) | **DELETE** /ad/{id} | Remove Ad
 [*AdsApi*](doc/AdsApi.md) | [**adsRemoveAdSuperUser**](doc/AdsApi.md#adsremoveadsuperuser) | **DELETE** /ad/manage-route/{id} | Remove Ad Super User
-[*AdsApi*](doc/AdsApi.md) | [**adsUpdateAd**](doc/AdsApi.md#adsupdatead) | **PUT** /ad/updateAd/{id} | Update Ad
+[*AdsApi*](doc/AdsApi.md) | [**adsUpdateAd**](doc/AdsApi.md#adsupdatead) | **PATCH** /ad/updateAd/{ad_id} | Update Ad
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionDeleteAdventureMission**](doc/AdventureMissionApi.md#adventuremissiondeleteadventuremission) | **DELETE** /adventure-mission/delete/{id} | Delete Adventure Mission
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionGetAdventureMission**](doc/AdventureMissionApi.md#adventuremissiongetadventuremission) | **GET** /adventure-mission/{id} | Get Adventure Mission
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionGetAllAdventureMissions**](doc/AdventureMissionApi.md#adventuremissiongetalladventuremissions) | **GET** /adventure-mission/all | Get All Adventure Missions
@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsCreateAlbum**](doc/AlbumsApi.md#albumscreatealbum) | **POST** /albums/ | Create Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
-[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/ | Get One Album
+[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
 [*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogin**](doc/AuthApi.md#authauthjwtlogin) | **POST** /auth/login | Auth:Jwt.Login
 [*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogout**](doc/AuthApi.md#authauthjwtlogout) | **POST** /auth/logout | Auth:Jwt.Logout
 [*AuthApi*](doc/AuthApi.md) | [**authRegisterRegister**](doc/AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 [*CouncilApi*](doc/CouncilApi.md) | [**councilCreateCouncil**](doc/CouncilApi.md#councilcreatecouncil) | **POST** /councils/ | Create Council
 [*CouncilApi*](doc/CouncilApi.md) | [**councilGetAllCouncils**](doc/CouncilApi.md#councilgetallcouncils) | **GET** /councils/ | Get All Councils
 [*CouncilApi*](doc/CouncilApi.md) | [**councilGetCouncil**](doc/CouncilApi.md#councilgetcouncil) | **GET** /councils/{council_id} | Get Council
+[*CouncilApi*](doc/CouncilApi.md) | [**councilUpdateCouncil**](doc/CouncilApi.md#councilupdatecouncil) | **PATCH** /councils/update_council/{council_id} | Update Council
 [*DefaultApi*](doc/DefaultApi.md) | [**helloRoute**](doc/DefaultApi.md#helloroute) | **GET** / | Hello Route
 [*DefaultApi*](doc/DefaultApi.md) | [**manageEventOnlypermissionRoute**](doc/DefaultApi.md#manageeventonlypermissionroute) | **GET** /manage-event-only | Permission Route
 [*DefaultApi*](doc/DefaultApi.md) | [**memberOnlymemberOnly**](doc/DefaultApi.md#memberonlymemberonly) | **GET** /member-only | Member Only
@@ -127,6 +128,7 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/{event_id} | Get Random Event Signup
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsAddUserToGroup**](doc/GroupsApi.md#groupsaddusertogroup) | **POST** /groups/add_user/{id} | Add User To Group
@@ -158,6 +160,7 @@ Class | Method | HTTP request | Description
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsCreatePermission**](doc/PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsGetAllPermissions**](doc/PermissionsApi.md#permissionsgetallpermissions) | **GET** /permissions/ | Get All Permissions
+[*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsRemovePermission**](doc/PermissionsApi.md#permissionsremovepermission) | **DELETE** /permissions/ | Remove Permission
 [*PostsApi*](doc/PostsApi.md) | [**postsCreatePost**](doc/PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [*PostsApi*](doc/PostsApi.md) | [**postsDeletePost**](doc/PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
@@ -210,6 +213,7 @@ Class | Method | HTTP request | Description
  - [CarUpdate](doc/CarUpdate.md)
  - [CouncilCreate](doc/CouncilCreate.md)
  - [CouncilRead](doc/CouncilRead.md)
+ - [CouncilUpdate](doc/CouncilUpdate.md)
  - [Detail](doc/Detail.md)
  - [ElectionAddPosts](doc/ElectionAddPosts.md)
  - [ElectionCreate](doc/ElectionCreate.md)
@@ -246,6 +250,7 @@ Class | Method | HTTP request | Description
  - [NollningRead](doc/NollningRead.md)
  - [PermissionCreate](doc/PermissionCreate.md)
  - [PermissionRead](doc/PermissionRead.md)
+ - [PermissionRemove](doc/PermissionRemove.md)
  - [PostCreate](doc/PostCreate.md)
  - [PostPermissionRead](doc/PostPermissionRead.md)
  - [PostRead](doc/PostRead.md)
@@ -263,6 +268,7 @@ Class | Method | HTTP request | Description
  - [UserCreate](doc/UserCreate.md)
  - [UserEventRead](doc/UserEventRead.md)
  - [UserInGroupRead](doc/UserInGroupRead.md)
+ - [UserInNewsRead](doc/UserInNewsRead.md)
  - [UserPostRead](doc/UserPostRead.md)
  - [UserRead](doc/UserRead.md)
  - [ValidationError](doc/ValidationError.md)

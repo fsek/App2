@@ -40,6 +40,7 @@ import 'package:api_client/src/model/car_read.dart';
 import 'package:api_client/src/model/car_update.dart';
 import 'package:api_client/src/model/council_create.dart';
 import 'package:api_client/src/model/council_read.dart';
+import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
 import 'package:api_client/src/model/election_add_posts.dart';
 import 'package:api_client/src/model/election_create.dart';
@@ -76,6 +77,7 @@ import 'package:api_client/src/model/nollning_group_read.dart';
 import 'package:api_client/src/model/nollning_read.dart';
 import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
+import 'package:api_client/src/model/permission_remove.dart';
 import 'package:api_client/src/model/post_create.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:api_client/src/model/post_read.dart';
@@ -93,6 +95,7 @@ import 'package:api_client/src/model/update_user_member.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_event_read.dart';
 import 'package:api_client/src/model/user_in_group_read.dart';
+import 'package:api_client/src/model/user_in_news_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:api_client/src/model/user_read.dart';
 import 'package:api_client/src/model/validation_error.dart';
@@ -127,6 +130,7 @@ part 'serializers.g.dart';
   CarUpdate,
   CouncilCreate,
   CouncilRead,
+  CouncilUpdate,
   Detail,
   ElectionAddPosts,
   ElectionCreate,
@@ -163,6 +167,7 @@ part 'serializers.g.dart';
   NollningRead,
   PermissionCreate,
   PermissionRead,
+  PermissionRemove,
   PostCreate,
   PostPermissionRead,
   PostRead,
@@ -180,6 +185,7 @@ part 'serializers.g.dart';
   UserCreate,
   UserEventRead,
   UserInGroupRead,
+  UserInNewsRead,
   UserPostRead,
   UserRead,
   ValidationError,

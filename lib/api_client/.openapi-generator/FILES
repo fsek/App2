@@ -35,6 +35,7 @@ doc/CarsApi.md
 doc/CouncilApi.md
 doc/CouncilCreate.md
 doc/CouncilRead.md
+doc/CouncilUpdate.md
 doc/DefaultApi.md
 doc/Detail.md
 doc/ElectionAddPosts.md
@@ -79,6 +80,7 @@ doc/NollningGroupRead.md
 doc/NollningRead.md
 doc/PermissionCreate.md
 doc/PermissionRead.md
+doc/PermissionRemove.md
 doc/PermissionsApi.md
 doc/PostCreate.md
 doc/PostPermissionRead.md
@@ -101,6 +103,7 @@ doc/UpdateUserMember.md
 doc/UserCreate.md
 doc/UserEventRead.md
 doc/UserInGroupRead.md
+doc/UserInNewsRead.md
 doc/UserPostRead.md
 doc/UserRead.md
 doc/UsersApi.md
@@ -163,6 +166,7 @@ lib/src/model/car_read.dart
 lib/src/model/car_update.dart
 lib/src/model/council_create.dart
 lib/src/model/council_read.dart
+lib/src/model/council_update.dart
 lib/src/model/date.dart
 lib/src/model/detail.dart
 lib/src/model/election_add_posts.dart
@@ -200,6 +204,7 @@ lib/src/model/nollning_group_read.dart
 lib/src/model/nollning_read.dart
 lib/src/model/permission_create.dart
 lib/src/model/permission_read.dart
+lib/src/model/permission_remove.dart
 lib/src/model/post_create.dart
 lib/src/model/post_permission_read.dart
 lib/src/model/post_read.dart
@@ -217,9 +222,13 @@ lib/src/model/update_user_member.dart
 lib/src/model/user_create.dart
 lib/src/model/user_event_read.dart
 lib/src/model/user_in_group_read.dart
+lib/src/model/user_in_news_read.dart
 lib/src/model/user_post_read.dart
 lib/src/model/user_read.dart
 lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/council_update_test.dart
+test/permission_remove_test.dart
+test/user_in_news_read_test.dart

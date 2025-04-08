@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**adsGetBookAdByTitle**](AdsApi.md#adsgetbookadbytitle) | **GET** /ad/title/{stitle} | Get Book Ad By Title
 [**adsRemoveAd**](AdsApi.md#adsremovead) | **DELETE** /ad/{id} | Remove Ad
 [**adsRemoveAdSuperUser**](AdsApi.md#adsremoveadsuperuser) | **DELETE** /ad/manage-route/{id} | Remove Ad Super User
-[**adsUpdateAd**](AdsApi.md#adsupdatead) | **PUT** /ad/updateAd/{id} | Update Ad
+[**adsUpdateAd**](AdsApi.md#adsupdatead) | **PATCH** /ad/updateAd/{ad_id} | Update Ad
 
 
 # **adsCreateAd**
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **adsUpdateAd**
-> AdRead adsUpdateAd(id, adUpdate)
+> AdRead adsUpdateAd(adId, adUpdate)
 
 Update Ad
 
@@ -360,11 +360,11 @@ import 'package:api_client/api.dart';
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = ApiClient().getAdsApi();
-final int id = 56; // int | 
+final int adId = 56; // int | 
 final AdUpdate adUpdate = ; // AdUpdate | 
 
 try {
-    final response = api.adsUpdateAd(id, adUpdate);
+    final response = api.adsUpdateAd(adId, adUpdate);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling AdsApi->adsUpdateAd: $e\n');
@@ -375,7 +375,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **adId** | **int**|  | 
  **adUpdate** | [**AdUpdate**](AdUpdate.md)|  | 
 
 ### Return type

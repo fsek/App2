@@ -655,7 +655,7 @@ class AdsApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [adId] 
   /// * [adUpdate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -667,7 +667,7 @@ class AdsApi {
   /// Returns a [Future] containing a [Response] with a [AdRead] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<AdRead>> adsUpdateAd({ 
-    required int id,
+    required int adId,
     required AdUpdate adUpdate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -676,9 +676,9 @@ class AdsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/ad/updateAd/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/ad/updateAd/{ad_id}'.replaceAll('{' r'ad_id' '}', encodeQueryParameter(_serializers, adId, const FullType(int)).toString());
     final _options = Options(
-      method: r'PUT',
+      method: r'PATCH',
       headers: <String, dynamic>{
         ...?headers,
       },

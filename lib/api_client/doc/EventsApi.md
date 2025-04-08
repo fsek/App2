@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**eventsEventUpdate**](EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [**eventsGetAllEventSignups**](EventsApi.md#eventsgetalleventsignups) | **GET** /events/all/{event_id} | Get All Event Signups
 [**eventsGetAllEvents**](EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
+[**eventsGetEventCsv**](EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
 [**eventsGetEventTags**](EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
 [**eventsGetRandomEventSignup**](EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/{event_id} | Get Random Event Signup
 
@@ -265,6 +266,49 @@ This endpoint does not need any parameter.
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventsGetEventCsv**
+> JsonObject eventsGetEventCsv(eventId)
+
+Get Event Csv
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getEventsApi();
+final int eventId = 56; // int | 
+
+try {
+    final response = api.eventsGetEventCsv(eventId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling EventsApi->eventsGetEventCsv: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eventId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 

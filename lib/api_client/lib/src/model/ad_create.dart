@@ -11,13 +11,13 @@ part 'ad_create.g.dart';
 /// AdCreate
 ///
 /// Properties:
-/// * [title]
-/// * [author]
-/// * [price]
-/// * [course]
-/// * [userId]
-/// * [selling]
-/// * [condition]
+/// * [title] 
+/// * [author] 
+/// * [price] 
+/// * [course] 
+/// * [userId] 
+/// * [selling] 
+/// * [condition] 
 @BuiltValue()
 abstract class AdCreate implements Built<AdCreate, AdCreateBuilder> {
   @BuiltValueField(wireName: r'title')
@@ -70,26 +70,20 @@ class _$AdCreateSerializer implements PrimitiveSerializer<AdCreate> {
       specifiedType: const FullType(String),
     );
     yield r'author';
-    yield object.author == null
-        ? null
-        : serializers.serialize(
-            object.author,
-            specifiedType: const FullType.nullable(String),
-          );
+    yield object.author == null ? null : serializers.serialize(
+      object.author,
+      specifiedType: const FullType.nullable(String),
+    );
     yield r'price';
-    yield object.price == null
-        ? null
-        : serializers.serialize(
-            object.price,
-            specifiedType: const FullType.nullable(int),
-          );
+    yield object.price == null ? null : serializers.serialize(
+      object.price,
+      specifiedType: const FullType.nullable(int),
+    );
     yield r'course';
-    yield object.course == null
-        ? null
-        : serializers.serialize(
-            object.course,
-            specifiedType: const FullType.nullable(String),
-          );
+    yield object.course == null ? null : serializers.serialize(
+      object.course,
+      specifiedType: const FullType.nullable(String),
+    );
     yield r'user_id';
     yield serializers.serialize(
       object.userId,
@@ -113,9 +107,7 @@ class _$AdCreateSerializer implements PrimitiveSerializer<AdCreate> {
     AdCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object,
-            specifiedType: specifiedType)
-        .toList();
+    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
   }
 
   void _deserializeProperties(
@@ -210,3 +202,4 @@ class _$AdCreateSerializer implements PrimitiveSerializer<AdCreate> {
     return result.build();
   }
 }
+
