@@ -18,6 +18,7 @@ class _NewsPageState extends State<NewsPage> {
       if (state.items != null) {
         if ((state.items!.length % 20) != 0) {
           //The value 20 here is the news per page from the backend
+          //This implementation is really cursed and should probably be changed
           return null;
         }
       }
