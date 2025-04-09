@@ -18,7 +18,8 @@ class _NewsPageState extends State<NewsPage> {
       if (state.items != null) {
         if ((state.items!.length % 20) != 0) {
           //The value 20 here is the news per page from the backend
-          //This implementation is really cursed and should probably be changed
+          //This implementation is really cursed since if the amount is divisible by 20,
+          //the user will be able to basicly spam requests and should probably be changed.
           return null;
         }
       }
@@ -119,8 +120,10 @@ class _NewsPageState extends State<NewsPage> {
   // TODO this will have to be fixed after SingleNewsPage is changed
   void openNews(NewsRead newsRead) {
     // redirect to other page and shit
-    // Navigator.push(context,
-    //     MaterialPageRoute(builder: (context) => SingleNewsPage(news: news)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SingleNewsPage(news: newsRead)));
   }
 
   // Widget createNewsCard() {
