@@ -66,7 +66,6 @@ doc/GroupsApi.md
 doc/HTTPValidationError.md
 doc/ImgApi.md
 doc/ImgInAlbum.md
-doc/MeUpdate.md
 doc/NewsApi.md
 doc/NewsCreate.md
 doc/NewsRead.md
@@ -106,6 +105,7 @@ doc/UserInGroupRead.md
 doc/UserInNewsRead.md
 doc/UserPostRead.md
 doc/UserRead.md
+doc/UserUpdate.md
 doc/UsersApi.md
 doc/ValidationError.md
 doc/ValidationErrorLocInner.md
@@ -192,7 +192,6 @@ lib/src/model/group_remove_user.dart
 lib/src/model/group_user_read.dart
 lib/src/model/http_validation_error.dart
 lib/src/model/img_in_album.dart
-lib/src/model/me_update.dart
 lib/src/model/news_create.dart
 lib/src/model/news_read.dart
 lib/src/model/news_tag_read.dart
@@ -225,7 +224,9 @@ lib/src/model/user_in_group_read.dart
 lib/src/model/user_in_news_read.dart
 lib/src/model/user_post_read.dart
 lib/src/model/user_read.dart
+lib/src/model/user_update.dart
 lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/user_update_test.dart

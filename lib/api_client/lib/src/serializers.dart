@@ -65,7 +65,6 @@ import 'package:api_client/src/model/group_remove_user.dart';
 import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/img_in_album.dart';
-import 'package:api_client/src/model/me_update.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
 import 'package:api_client/src/model/news_tag_read.dart';
@@ -98,6 +97,7 @@ import 'package:api_client/src/model/user_in_group_read.dart';
 import 'package:api_client/src/model/user_in_news_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:api_client/src/model/user_read.dart';
+import 'package:api_client/src/model/user_update.dart';
 import 'package:api_client/src/model/validation_error.dart';
 import 'package:api_client/src/model/validation_error_loc_inner.dart';
 
@@ -155,7 +155,6 @@ part 'serializers.g.dart';
   GroupUserRead,
   HTTPValidationError,
   ImgInAlbum,
-  MeUpdate,
   NewsCreate,
   NewsRead,
   NewsTagRead,
@@ -188,6 +187,7 @@ part 'serializers.g.dart';
   UserInNewsRead,
   UserPostRead,
   UserRead,
+  UserUpdate,
   ValidationError,
   ValidationErrorLocInner,
 ])

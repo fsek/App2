@@ -13,9 +13,8 @@ void main() async {
   // // Use the response.
   // print(response.data);
 
-  final response2 = await ApiClient()
-      .getAdventureMissionApi()
-      .adventureMissionGetAllAdventureMissions();
+  final response2 =
+      await ApiClient().getNewsApi().newsGetPaginatedNews(pageNbr: 0);
 
   print(response2.data);
 }

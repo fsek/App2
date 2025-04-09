@@ -16,7 +16,7 @@ description: Mobile application for the F-guild
 version: 1.15.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: '>=2.18.0 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:

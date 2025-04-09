@@ -84,7 +84,6 @@ export 'package:api_client/src/model/group_remove_user.dart';
 export 'package:api_client/src/model/group_user_read.dart';
 export 'package:api_client/src/model/http_validation_error.dart';
 export 'package:api_client/src/model/img_in_album.dart';
-export 'package:api_client/src/model/me_update.dart';
 export 'package:api_client/src/model/news_create.dart';
 export 'package:api_client/src/model/news_read.dart';
 export 'package:api_client/src/model/news_tag_read.dart';
@@ -117,6 +116,7 @@ export 'package:api_client/src/model/user_in_group_read.dart';
 export 'package:api_client/src/model/user_in_news_read.dart';
 export 'package:api_client/src/model/user_post_read.dart';
 export 'package:api_client/src/model/user_read.dart';
+export 'package:api_client/src/model/user_update.dart';
 export 'package:api_client/src/model/validation_error.dart';
 export 'package:api_client/src/model/validation_error_loc_inner.dart';
 

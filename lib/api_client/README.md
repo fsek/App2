@@ -147,6 +147,7 @@ Class | Method | HTTP request | Description
 [*NewsApi*](doc/NewsApi.md) | [**newsGetAllNews**](doc/NewsApi.md#newsgetallnews) | **GET** /news/all | Get All News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetNews**](doc/NewsApi.md#newsgetnews) | **GET** /news/{news_id} | Get News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetPaginatedNews**](doc/NewsApi.md#newsgetpaginatednews) | **GET** /news/page/{page_nbr} | Get Paginated News
+[*NewsApi*](doc/NewsApi.md) | [**newsGetPinnedNews**](doc/NewsApi.md#newsgetpinnednews) | **GET** /news/pinned/ | Get Pinned News
 [*NewsApi*](doc/NewsApi.md) | [**newsUpdateNews**](doc/NewsApi.md#newsupdatenews) | **PATCH** /news/{news_id} | Update News
 [*NollningApi*](doc/NollningApi.md) | [**nollningAddCompletedMission**](doc/NollningApi.md#nollningaddcompletedmission) | **POST** /group_mission/{id} | Add Completed Mission
 [*NollningApi*](doc/NollningApi.md) | [**nollningAddGroupToNollning**](doc/NollningApi.md#nollningaddgrouptonollning) | **POST** /nollning/add_group/{id} | Add Group To Nollning
@@ -181,8 +182,9 @@ Class | Method | HTTP request | Description
 [*TagsApi*](doc/TagsApi.md) | [**tagsPostTag**](doc/TagsApi.md#tagsposttag) | **POST** /tags/ | Post Tag
 [*UsersApi*](doc/UsersApi.md) | [**usersGetAllUsers**](doc/UsersApi.md#usersgetallusers) | **GET** /users/ | Get All Users
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
-[*UsersApi*](doc/UsersApi.md) | [**usersUpdateMe**](doc/UsersApi.md#usersupdateme) | **PATCH** /users/me | Update Me
-[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUser**](doc/UsersApi.md#usersupdateuser) | **PATCH** /users/member-status/{user_id} | Update User
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUser**](doc/UsersApi.md#usersupdateuser) | **PATCH** /users/update/{user_id} | Update User
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/member-status/{user_id} | Update User Status
 
 
 ## Documentation For Models
@@ -238,7 +240,6 @@ Class | Method | HTTP request | Description
  - [GroupUserRead](doc/GroupUserRead.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ImgInAlbum](doc/ImgInAlbum.md)
- - [MeUpdate](doc/MeUpdate.md)
  - [NewsCreate](doc/NewsCreate.md)
  - [NewsRead](doc/NewsRead.md)
  - [NewsTagRead](doc/NewsTagRead.md)
@@ -271,6 +272,7 @@ Class | Method | HTTP request | Description
  - [UserInNewsRead](doc/UserInNewsRead.md)
  - [UserPostRead](doc/UserPostRead.md)
  - [UserRead](doc/UserRead.md)
+ - [UserUpdate](doc/UserUpdate.md)
  - [ValidationError](doc/ValidationError.md)
  - [ValidationErrorLocInner](doc/ValidationErrorLocInner.md)
 

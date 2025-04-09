@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**newsGetAllNews**](NewsApi.md#newsgetallnews) | **GET** /news/all | Get All News
 [**newsGetNews**](NewsApi.md#newsgetnews) | **GET** /news/{news_id} | Get News
 [**newsGetPaginatedNews**](NewsApi.md#newsgetpaginatednews) | **GET** /news/page/{page_nbr} | Get Paginated News
+[**newsGetPinnedNews**](NewsApi.md#newsgetpinnednews) | **GET** /news/pinned/ | Get Pinned News
 [**newsUpdateNews**](NewsApi.md#newsupdatenews) | **PATCH** /news/{news_id} | Update News
 
 
@@ -249,6 +250,43 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageNbr** | **int**|  | 
+
+### Return type
+
+[**BuiltList&lt;NewsRead&gt;**](NewsRead.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **newsGetPinnedNews**
+> BuiltList<NewsRead> newsGetPinnedNews()
+
+Get Pinned News
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+
+final api = ApiClient().getNewsApi();
+
+try {
+    final response = api.newsGetPinnedNews();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling NewsApi->newsGetPinnedNews: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
 
 ### Return type
 
