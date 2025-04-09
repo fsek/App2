@@ -229,6 +229,3 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/council_update_test.dart
-test/permission_remove_test.dart
-test/user_in_news_read_test.dart
