@@ -13,20 +13,20 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  final PagingController<int, NewsRead> _pagingController = PagingController(
-    getNextPageKey: (state) {
-      if (state.items != null) {
-        if ((state.items!.length % 20) != 0) {
-          //The value 20 here is the news per page from the backend
-          //This implementation is really cursed since if the amount is divisible by 20,
-          //the user will be able to basicly spam requests and should probably be changed.
-          return null;
-        }
+  final PagingController<int, NewsRead> _pagingController =
+      PagingController(getNextPageKey: (state) {
+    if (state.items != null) {
+      if ((state.items!.length % 20) != 0) {
+        //The value 20 here is the news per page from the backend
+        //This implementation is really cursed since if the amount is divisible by 20,
+        //the user will be able to basicly spam requests and should probably be changed.
+        return null;
       }
+    }
 
-      return (state.keys?.last ?? -1) + 1;
-    },
-    fetchPage: (pageKey) async {
+    return (state.keys?.last ?? -1) + 1;
+  }, fetchPage: (pageKey) async {
+    if (pageKey == 0) {
       try {
         final normalResponse = await ApiClient()
             .getNewsApi()
@@ -53,8 +53,21 @@ class _NewsPageState extends State<NewsPage> {
         print("Error fetching news: $e\n$st");
         rethrow;
       }
-    },
-  );
+    } else {
+      try {
+        final response = await ApiClient()
+            .getNewsApi()
+            .newsGetPaginatedNews(pageNbr: pageKey);
+        if (response.data == null) {
+          throw Exception("Failed to load news");
+        }
+        return response.data!.toList();
+      } catch (e, st) {
+        print("Error fetching news: $e\n$st");
+        rethrow;
+      }
+    }
+  });
 
   @override
   void initState() {
