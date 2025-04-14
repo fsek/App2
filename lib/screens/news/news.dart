@@ -42,12 +42,10 @@ class _NewsPageState extends State<NewsPage> {
         final pinnedNews = pinnedResponse.data!;
         final normalNews = normalResponse.data!;
 
-        // Remove any normal news that are already in the pinned list
         final pinnedIds = pinnedNews.map((item) => item.id).toSet();
         final filteredNews =
             normalNews.where((item) => !pinnedIds.contains(item.id)).toList();
 
-        // Combine: pinned news first
         final combinedNews = [...pinnedNews, ...filteredNews];
 
         return combinedNews;
