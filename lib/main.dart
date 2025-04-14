@@ -51,7 +51,7 @@ void main() async {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
     // '/messages': (context) => MessagesPage(),
-    // '/chant_book': (context) => ChantBookPage(),
+    '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
     '/homepage': (context) => HomePage(),
     '/nolleguide': (context) => GuidePage(),
