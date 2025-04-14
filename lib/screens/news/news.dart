@@ -28,15 +28,29 @@ class _NewsPageState extends State<NewsPage> {
     },
     fetchPage: (pageKey) async {
       try {
-        final response = await ApiClient()
+        final normalResponse = await ApiClient()
             .getNewsApi()
             .newsGetPaginatedNews(pageNbr: pageKey);
 
-        if (response.data == null) {
+        final pinnedResponse =
+            await ApiClient().getNewsApi().newsGetPinnedNews();
+
+        if (normalResponse.data == null) {
           throw Exception("Failed to load news");
         }
 
-        return response.data!.toList();
+        final pinnedNews = pinnedResponse.data!;
+        final normalNews = normalResponse.data!;
+
+        // Remove any normal news that are already in the pinned list
+        final pinnedIds = pinnedNews.map((item) => item.id).toSet();
+        final filteredNews =
+            normalNews.where((item) => !pinnedIds.contains(item.id)).toList();
+
+        // Combine: pinned news first
+        final combinedNews = [...pinnedNews, ...filteredNews];
+
+        return combinedNews;
       } catch (e, st) {
         print("Error fetching news: $e\n$st");
         rethrow;
@@ -117,7 +131,6 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  // TODO this will have to be fixed after SingleNewsPage is changed
   void openNews(NewsRead newsRead) {
     // redirect to other page and shit
     Navigator.push(
