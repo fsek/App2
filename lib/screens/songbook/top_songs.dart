@@ -108,7 +108,7 @@ class _TopSongsPageState extends State<TopSongsPage>
     else if (initChar == 3)
       color = Color.fromARGB(255, 205, 127, 50);
     else
-      color = Theme.of(context).colorScheme.surfaceVariant;
+      color = Theme.of(context).colorScheme.surfaceContainerHighest;
 
     // Same for the number
     if (initChar <= 3)
@@ -134,10 +134,10 @@ class _TopSongsPageState extends State<TopSongsPage>
                 decoration: BoxDecoration(
                     border: Border(
                   bottom: BorderSide(
-                      color: Theme.of(context).colorScheme.surfaceVariant),
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest),
                 )),
                 child: InkWell(
-                  onTap: () => openSong(song.id!),
+                  onTap: () => openSong(song.id),
                   child: ListTile(
                       title: Text(song.title)),
                 ))

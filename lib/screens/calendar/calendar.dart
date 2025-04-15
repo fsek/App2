@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/models/home/calendarevent.dart';
 import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -15,29 +17,37 @@ class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now().toLocal();
   DateTime _now = DateTime.now().toLocal();
   DateTime _selectedDay = DateTime.now().toLocal();
-  List<CalendarEvent> _selectedEvents = [];
-  Map<DateTime, List<CalendarEvent>> _events = {};
+  List<EventRead> _selectedEvents = [];
+  List<EventRead> _events = [];
 
   void initState() {
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
 
-    locator<EventService>().getEvents().then((value) => setState(() {
-          this._events = value;
+    ApiClient().getEventsApi().eventsGetAllEvents().then((value) => setState(() {
+          this._events = value.data!.toList();
           _selectedEvents = _getEventsForDay(_selectedDay);
         }));
     super.initState();
   }
 
-  void openEventPage(CalendarEvent event) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id ?? -1)));
+  void openEventPage(EventRead event) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
   }
 
-  List<CalendarEvent> _getEventsForDay(DateTime day) {
-    return _events[day] ?? [];
+  List<EventRead> _getEventsForDay(DateTime day) {
+    return this._events.where((item) => isSameDay(item.startsAt, day)).toList();
   }
 
-  Widget createEventCard(CalendarEvent event) {
+  Future<void> _onRefresh() async {
+    ApiClient().getEventsApi().eventsGetAllEvents().then((value) => setState(() {
+          this._events = value.data!.toList();
+          _selectedEvents = _getEventsForDay(_selectedDay);
+        }));
+  }
+
+  Widget createEventCard(EventRead event) {
     String locale = Localizations.localeOf(context).toString();
+    var t = AppLocalizations.of(context)!;
     return Container(
       child: Card(
         shadowColor: null,
@@ -53,7 +63,7 @@ class _CalendarState extends State<Calendar> {
                   Container(
                     margin: EdgeInsets.only(bottom: 7),
                     child: Text(
-                      event.title ?? "no title",
+                      t.localeName == "en" ? event.titleEn : event.titleSv,
                       style: TextStyle(
                         fontSize: 20,
                         color: Theme.of(context).colorScheme.primary,
@@ -70,11 +80,11 @@ class _CalendarState extends State<Calendar> {
                       Text(
                         /* better error checking */
                         "  " +
-                            DateFormat("HH:mm").format(event.start?.toLocal() ?? DateTime.now()) +
+                            DateFormat("HH:mm").format(event.startsAt.toLocal()) +
                             " - " +
-                            DateFormat("HH:mm").format(event.end?.toLocal() ?? DateTime.now()) +
+                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
                             ", " +
-                            DateFormat("MMMMd", locale).format(event.start?.toLocal() ?? DateTime.now()),
+                            DateFormat("MMMMd", locale).format(event.startsAt.toLocal()),
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -99,7 +109,7 @@ class _CalendarState extends State<Calendar> {
                         size: 20,
                       ),
                       Text(
-                        "  " + (event.location ?? "intigheten"),
+                        "  " + "intigheten", // (event.location ?? "intigheten"), TODO change this when event actually has a location
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -118,13 +128,6 @@ class _CalendarState extends State<Calendar> {
         margin: EdgeInsets.all(4),
       ),
     );
-  }
-
-  Future<void> _onRefresh() async {
-    locator<EventService>().getEvents().then((value) => setState(() {
-          this._events = value;
-          _selectedEvents = _getEventsForDay(_selectedDay);
-        }));
   }
 
   @override
@@ -190,7 +193,7 @@ class _CalendarState extends State<Calendar> {
                 ),
               ],
             ),
-            ..._selectedEvents.map((CalendarEvent e) => createEventCard(e)),
+            ..._selectedEvents.map((EventRead e) => createEventCard(e)),
             Container(
               height: 50,
             ),
