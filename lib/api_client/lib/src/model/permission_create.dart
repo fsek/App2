@@ -22,7 +22,7 @@ abstract class PermissionCreate implements Built<PermissionCreate, PermissionCre
 
   @BuiltValueField(wireName: r'target')
   PermissionCreateTargetEnum get target;
-  // enum targetEnum {  Event,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  Tags,  Council,  };
+  // enum targetEnum {  Event,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
 
   PermissionCreate._();
 
@@ -168,6 +168,8 @@ class PermissionCreateTargetEnum extends EnumClass {
   static const PermissionCreateTargetEnum adventureMissions = _$permissionCreateTargetEnum_adventureMissions;
   @BuiltValueEnumConst(wireName: r'Nollning')
   static const PermissionCreateTargetEnum nollning = _$permissionCreateTargetEnum_nollning;
+  @BuiltValueEnumConst(wireName: r'UserDoorAccess')
+  static const PermissionCreateTargetEnum userDoorAccess = _$permissionCreateTargetEnum_userDoorAccess;
   @BuiltValueEnumConst(wireName: r'Tags')
   static const PermissionCreateTargetEnum tags = _$permissionCreateTargetEnum_tags;
   @BuiltValueEnumConst(wireName: r'Council')

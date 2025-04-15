@@ -16,10 +16,10 @@ class SongbookPage extends StatefulWidget {
 
 class _SongbookPageState extends State<SongbookPage>
     with TickerProviderStateMixin {
-  List<SongRead> songs = [];
-  List<SongRead> allSongs = [];
-  List<SongRead> topSongs = [];
 
+  List<SongRead> allSongs = [];
+  List<SongRead> songs = [];
+ 
   bool searchFocus = false;
   String initChar = "";
 
@@ -45,7 +45,7 @@ class _SongbookPageState extends State<SongbookPage>
     //   });
     //   print("All songs loaded: ${songs.length}");
     // });
-    fetchSongsAndTopSongs();
+    fetchSongs();
     // Fetch top songs
     // int num_songs = 3; // Number of top songs to fetch
     // locator<SongbookService>().getTopSongs(num_songs).then((value) {
@@ -59,16 +59,11 @@ class _SongbookPageState extends State<SongbookPage>
     setRotation(360);
   }
 
-  void fetchSongsAndTopSongs() async {
+  void fetchSongs() async {
     final response = await ApiClient().getSongsApi().songsGetAllSongs();
-    int num_songs = 10;
     setState(() {
-      this.songs = response.data!.toList();
-      this.allSongs = this.songs;
-      this.topSongs = (response.data!.toList()
-            ..sort((a, b) => a.views.compareTo(b.views)))
-          .take(num_songs)
-          .toList();
+      this.allSongs = response.data!.toList();
+      this.songs = this.allSongs;
     });
   }
 
@@ -112,13 +107,13 @@ class _SongbookPageState extends State<SongbookPage>
                             color: Theme.of(context)
                                 .colorScheme
                                 .onPrimary), // Trophy icon
-                        onPressed: () {} // {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => TopSongsPage()),
-                        //   );
-                        // },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TopSongsPage()),
+                          );
+                        },
                         ),
                   ],
                 ),

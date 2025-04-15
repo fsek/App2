@@ -1,4 +1,4 @@
-# api_client.api.TagsApi
+# api_client.api.UserDoorAccessApi
 
 ## Load the API package
 ```dart
@@ -9,16 +9,16 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**tagsDeleteTag**](TagsApi.md#tagsdeletetag) | **DELETE** /tags/{tag_id} | Delete Tag
-[**tagsEditTag**](TagsApi.md#tagsedittag) | **PATCH** /tags/ | Edit Tag
-[**tagsGetTags**](TagsApi.md#tagsgettags) | **GET** /tags/ | Get Tags
-[**tagsPostTag**](TagsApi.md#tagsposttag) | **POST** /tags/ | Post Tag
+[**userDoorAccessDeleteUserAccess**](UserDoorAccessApi.md#userdooraccessdeleteuseraccess) | **DELETE** /user_access/ | Delete User Access
+[**userDoorAccessGetAllUserAccesses**](UserDoorAccessApi.md#userdooraccessgetalluseraccesses) | **GET** /user_access/ | Get All User Accesses
+[**userDoorAccessPostUserAccess**](UserDoorAccessApi.md#userdooraccesspostuseraccess) | **POST** /user_access/ | Post User Access
+[**userDoorAccessUpdateUserAccess**](UserDoorAccessApi.md#userdooraccessupdateuseraccess) | **PATCH** /user_access/ | Update User Access
 
 
-# **tagsDeleteTag**
-> TagRead tagsDeleteTag(tagId)
+# **userDoorAccessDeleteUserAccess**
+> userDoorAccessDeleteUserAccess(accessId)
 
-Delete Tag
+Delete User Access
 
 ### Example
 ```dart
@@ -26,14 +26,13 @@ import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api = ApiClient().getTagsApi();
-final int tagId = 56; // int | 
+final api = ApiClient().getUserDoorAccessApi();
+final int accessId = 56; // int | 
 
 try {
-    final response = api.tagsDeleteTag(tagId);
-    print(response);
+    api.userDoorAccessDeleteUserAccess(accessId);
 } catch on DioException (e) {
-    print('Exception when calling TagsApi->tagsDeleteTag: $e\n');
+    print('Exception when calling UserDoorAccessApi->userDoorAccessDeleteUserAccess: $e\n');
 }
 ```
 
@@ -41,11 +40,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tagId** | **int**|  | 
+ **accessId** | **int**|  | 
 
 ### Return type
 
-[**TagRead**](TagRead.md)
+void (empty response body)
 
 ### Authorization
 
@@ -58,10 +57,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **tagsEditTag**
-> TagRead tagsEditTag(tagEdit)
+# **userDoorAccessGetAllUserAccesses**
+> BuiltList<UserAccessRead> userDoorAccessGetAllUserAccesses()
 
-Edit Tag
+Get All User Accesses
 
 ### Example
 ```dart
@@ -69,14 +68,53 @@ import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api = ApiClient().getTagsApi();
-final TagEdit tagEdit = ; // TagEdit | 
+final api = ApiClient().getUserDoorAccessApi();
 
 try {
-    final response = api.tagsEditTag(tagEdit);
+    final response = api.userDoorAccessGetAllUserAccesses();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling TagsApi->tagsEditTag: $e\n');
+    print('Exception when calling UserDoorAccessApi->userDoorAccessGetAllUserAccesses: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**BuiltList&lt;UserAccessRead&gt;**](UserAccessRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **userDoorAccessPostUserAccess**
+> UserAccessRead userDoorAccessPostUserAccess(userAccessCreate)
+
+Post User Access
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getUserDoorAccessApi();
+final UserAccessCreate userAccessCreate = ; // UserAccessCreate | 
+
+try {
+    final response = api.userDoorAccessPostUserAccess(userAccessCreate);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UserDoorAccessApi->userDoorAccessPostUserAccess: $e\n');
 }
 ```
 
@@ -84,11 +122,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tagEdit** | [**TagEdit**](TagEdit.md)|  | 
+ **userAccessCreate** | [**UserAccessCreate**](UserAccessCreate.md)|  | 
 
 ### Return type
 
-[**TagRead**](TagRead.md)
+[**UserAccessRead**](UserAccessRead.md)
 
 ### Authorization
 
@@ -101,47 +139,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **tagsGetTags**
-> BuiltList<TagRead> tagsGetTags()
+# **userDoorAccessUpdateUserAccess**
+> UserAccessRead userDoorAccessUpdateUserAccess(userAccessUpdate)
 
-Get Tags
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-
-final api = ApiClient().getTagsApi();
-
-try {
-    final response = api.tagsGetTags();
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling TagsApi->tagsGetTags: $e\n');
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**BuiltList&lt;TagRead&gt;**](TagRead.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **tagsPostTag**
-> TagRead tagsPostTag(tagCreate)
-
-Post Tag
+Update User Access
 
 ### Example
 ```dart
@@ -149,14 +150,14 @@ import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api = ApiClient().getTagsApi();
-final TagCreate tagCreate = ; // TagCreate | 
+final api = ApiClient().getUserDoorAccessApi();
+final UserAccessUpdate userAccessUpdate = ; // UserAccessUpdate | 
 
 try {
-    final response = api.tagsPostTag(tagCreate);
+    final response = api.userDoorAccessUpdateUserAccess(userAccessUpdate);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling TagsApi->tagsPostTag: $e\n');
+    print('Exception when calling UserDoorAccessApi->userDoorAccessUpdateUserAccess: $e\n');
 }
 ```
 
@@ -164,11 +165,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tagCreate** | [**TagCreate**](TagCreate.md)|  | 
+ **userAccessUpdate** | [**UserAccessUpdate**](UserAccessUpdate.md)|  | 
 
 ### Return type
 
-[**TagRead**](TagRead.md)
+[**UserAccessRead**](UserAccessRead.md)
 
 ### Authorization
 

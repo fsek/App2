@@ -7,6 +7,7 @@ import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
 class TopSongsPage extends StatefulWidget {
   @override
   _TopSongsPageState createState() => _TopSongsPageState();
@@ -14,8 +15,8 @@ class TopSongsPage extends StatefulWidget {
 
 class _TopSongsPageState extends State<TopSongsPage>
     with TickerProviderStateMixin {
-  List<SongbookEntry> songs = [];
-  List<SongbookEntry> TopSongs = [];
+  List<SongRead> songs = [];
+  List<SongRead> topSongs = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
@@ -28,17 +29,26 @@ class _TopSongsPageState extends State<TopSongsPage>
 
   @override
   void initState() {
-    int num_top_songs = 10;
     animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1400));
-    locator<SongbookService>()
-        .getTopSongs(num_top_songs)
-        .then((value) => setState(() {
-              this.songs = value;
-              TopSongs = List.from(songs);
-            }));
+    
+
 
     super.initState();
+  }
+
+
+  void fetchTopSongs() async {
+    int num_top_songs = 10;
+    final response = await ApiClient().getSongsApi().songsGetAllSongs();
+
+    setState(() {
+      this.topSongs = (response.data!.toList()
+            ..sort((a, b) => a.views.compareTo(b.views)))
+          .take(num_top_songs)
+          .toList();
+    });
+
   }
 
   @override
@@ -50,7 +60,7 @@ class _TopSongsPageState extends State<TopSongsPage>
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     initChar = 1;
-    return TopSongs == []
+    return topSongs == []
         ? Scaffold(
             //change text
             appBar: AppBar(title: Text(t.songbookSongbook)),
@@ -84,7 +94,7 @@ class _TopSongsPageState extends State<TopSongsPage>
           );
   }
 
-  Widget _generateSongTile(SongbookEntry song) {
+  Widget _generateSongTile(SongRead song) {
     Color color;
     Color numColor;
 

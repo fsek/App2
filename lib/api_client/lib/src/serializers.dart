@@ -82,6 +82,8 @@ import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:api_client/src/model/post_read.dart';
 import 'package:api_client/src/model/post_update.dart';
 import 'package:api_client/src/model/priority_db.dart';
+import 'package:api_client/src/model/simple_user_access_read.dart';
+import 'package:api_client/src/model/simple_user_read.dart';
 import 'package:api_client/src/model/song_category_create.dart';
 import 'package:api_client/src/model/song_category_read.dart';
 import 'package:api_client/src/model/song_create.dart';
@@ -91,6 +93,9 @@ import 'package:api_client/src/model/tag_edit.dart';
 import 'package:api_client/src/model/tag_read.dart';
 import 'package:api_client/src/model/update_permission.dart';
 import 'package:api_client/src/model/update_user_member.dart';
+import 'package:api_client/src/model/user_access_create.dart';
+import 'package:api_client/src/model/user_access_read.dart';
+import 'package:api_client/src/model/user_access_update.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_event_read.dart';
 import 'package:api_client/src/model/user_in_group_read.dart';
@@ -172,6 +177,8 @@ part 'serializers.g.dart';
   PostRead,
   PostUpdate,
   PriorityDB,
+  SimpleUserAccessRead,
+  SimpleUserRead,
   SongCategoryCreate,
   SongCategoryRead,
   SongCreate,
@@ -181,6 +188,9 @@ part 'serializers.g.dart';
   TagRead,
   UpdatePermission,
   UpdateUserMember,
+  UserAccessCreate,
+  UserAccessRead,
+  UserAccessUpdate,
   UserCreate,
   UserEventRead,
   UserInGroupRead,
@@ -247,6 +257,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(ElectionRead)]),
         () => ListBuilder<ElectionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UserAccessRead)]),
+        () => ListBuilder<UserAccessRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NewsRead)]),

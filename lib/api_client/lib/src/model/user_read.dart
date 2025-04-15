@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
+import 'package:api_client/src/model/simple_user_access_read.dart';
 import 'package:api_client/src/model/user_event_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:built_value/built_value.dart';
@@ -28,6 +29,7 @@ part 'user_read.g.dart';
 /// * [accountCreated] 
 /// * [wantNotifications] 
 /// * [stilId] 
+/// * [accesses] 
 @BuiltValue()
 abstract class UserRead implements Built<UserRead, UserReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -71,6 +73,9 @@ abstract class UserRead implements Built<UserRead, UserReadBuilder> {
 
   @BuiltValueField(wireName: r'stil_id')
   String? get stilId;
+
+  @BuiltValueField(wireName: r'accesses')
+  BuiltList<SimpleUserAccessRead> get accesses;
 
   UserRead._();
 
@@ -176,6 +181,11 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
         specifiedType: const FullType.nullable(String),
       );
     }
+    yield r'accesses';
+    yield serializers.serialize(
+      object.accesses,
+      specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
+    );
   }
 
   @override
@@ -297,6 +307,13 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
           ) as String?;
           if (valueDes == null) continue;
           result.stilId = valueDes;
+          break;
+        case r'accesses':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
+          ) as BuiltList<SimpleUserAccessRead>;
+          result.accesses.replace(valueDes);
           break;
         default:
           unhandled.add(key);

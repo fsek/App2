@@ -4,6 +4,7 @@ temp_spec=$(mktemp)
 
 curl http://localhost:8000/openapi.json > "$temp_spec"
 
+# If using openapi generator cli, change to: openapi-generator-cli generate
 openapi-generator generate \
   -i "$temp_spec" \
   -g dart-dio \

@@ -61,7 +61,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://10.0.2.2:8000*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -180,6 +180,10 @@ Class | Method | HTTP request | Description
 [*TagsApi*](doc/TagsApi.md) | [**tagsEditTag**](doc/TagsApi.md#tagsedittag) | **PATCH** /tags/ | Edit Tag
 [*TagsApi*](doc/TagsApi.md) | [**tagsGetTags**](doc/TagsApi.md#tagsgettags) | **GET** /tags/ | Get Tags
 [*TagsApi*](doc/TagsApi.md) | [**tagsPostTag**](doc/TagsApi.md#tagsposttag) | **POST** /tags/ | Post Tag
+[*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessDeleteUserAccess**](doc/UserDoorAccessApi.md#userdooraccessdeleteuseraccess) | **DELETE** /user_access/ | Delete User Access
+[*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessGetAllUserAccesses**](doc/UserDoorAccessApi.md#userdooraccessgetalluseraccesses) | **GET** /user_access/ | Get All User Accesses
+[*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessPostUserAccess**](doc/UserDoorAccessApi.md#userdooraccesspostuseraccess) | **POST** /user_access/ | Post User Access
+[*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessUpdateUserAccess**](doc/UserDoorAccessApi.md#userdooraccessupdateuseraccess) | **PATCH** /user_access/ | Update User Access
 [*UsersApi*](doc/UsersApi.md) | [**usersGetAllUsers**](doc/UsersApi.md#usersgetallusers) | **GET** /users/ | Get All Users
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
@@ -257,6 +261,8 @@ Class | Method | HTTP request | Description
  - [PostRead](doc/PostRead.md)
  - [PostUpdate](doc/PostUpdate.md)
  - [PriorityDB](doc/PriorityDB.md)
+ - [SimpleUserAccessRead](doc/SimpleUserAccessRead.md)
+ - [SimpleUserRead](doc/SimpleUserRead.md)
  - [SongCategoryCreate](doc/SongCategoryCreate.md)
  - [SongCategoryRead](doc/SongCategoryRead.md)
  - [SongCreate](doc/SongCreate.md)
@@ -266,6 +272,9 @@ Class | Method | HTTP request | Description
  - [TagRead](doc/TagRead.md)
  - [UpdatePermission](doc/UpdatePermission.md)
  - [UpdateUserMember](doc/UpdateUserMember.md)
+ - [UserAccessCreate](doc/UserAccessCreate.md)
+ - [UserAccessRead](doc/UserAccessRead.md)
+ - [UserAccessUpdate](doc/UserAccessUpdate.md)
  - [UserCreate](doc/UserCreate.md)
  - [UserEventRead](doc/UserEventRead.md)
  - [UserInGroupRead](doc/UserInGroupRead.md)
