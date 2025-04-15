@@ -15,6 +15,6 @@ rm "$temp_spec"
 
 # For usage from emulator, use http://10.0.2.2 instead of localhost in api.dart.
 # We also might need to change pubspec.yaml it should be sdk: '>=3.0.0 <4.0.0'.
-# command for running in cmd with -cli using openapi.json file in App2 folder:
+# command for running in windows cmd with -cli using openapi.json file in App2 folder:
 # openapi-generator-cli generate -i openapi.json -g dart-dio -o lib/api_client --additional-properties=pubName=api_client,basePath=http://10.0.2.2
 

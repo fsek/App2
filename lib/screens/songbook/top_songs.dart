@@ -29,12 +29,12 @@ class _TopSongsPageState extends State<TopSongsPage>
 
   @override
   void initState() {
+    super.initState();
+    
     animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1400));
-    
 
-
-    super.initState();
+    fetchTopSongs();
   }
 
 
@@ -47,6 +47,7 @@ class _TopSongsPageState extends State<TopSongsPage>
             ..sort((a, b) => a.views.compareTo(b.views)))
           .take(num_top_songs)
           .toList();
+      this.songs = this.topSongs;
     });
 
   }
@@ -138,7 +139,7 @@ class _TopSongsPageState extends State<TopSongsPage>
                 child: InkWell(
                   onTap: () => openSong(song.id!),
                   child: ListTile(
-                      title: Text(song.title == null ? "" : song.title!)),
+                      title: Text(song.title)),
                 ))
           ],
     );
