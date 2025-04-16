@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:fsek_mobile/environments/environment.dart';
 import 'package:fsek_mobile/models/devise_token.dart';
@@ -18,26 +19,37 @@ class UserService extends AbstractService {
    * HTTP Requests
    */
   Future<DeviseToken> sendLogin(
-      {required String email, required String pass}) async {
+      {required String username, required String pass}) async {
     try {
-      var response = await http.post(
-          Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
-          headers: AbstractService.headers,
-          body: jsonEncode({"email": email, "password": pass}));
+      // var response = await http.post(
+      //     Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
+      //     headers: AbstractService.headers,
+      //     body: jsonEncode({"email": email, "password": pass}));
 
-      var json = jsonDecode(response.body);
-      if (json["data"] != null) {
-        setCurrentUser(User.fromJson(json["data"]));
-        return DeviseToken.getFromHeaders(response.headers);
-      } else {
-        var err = json["errors"] ?? json["error"];
-        String? msg;
+      final response = await ApiClient().getAuthApi().authAuthJwtLogin(username: username, password: pass, grantType: "password");
 
-        if (err != null) {
-          msg = err[0];
-        }
-        return DeviseToken(error: msg);
+      final token = response.data?.accessToken;
+
+
+      if(token != null){
+        storage.write(key: "access_token", value: token);
       }
+
+      return DeviseToken(accessToken: token);
+
+      // var json = jsonDecode(response.body);
+      // if (json["data"] != null) {
+      //   setCurrentUser(User.fromJson(json["data"]));
+      //   return DeviseToken.getFromHeaders(response.headers);
+      // } else {
+      //   var err = json["errors"] ?? json["error"];
+      //   String? msg;
+
+      //   if (err != null) {
+      //     msg = err[0];
+      //   }
+      //   return DeviseToken(error: msg);
+      // }
     } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
     }
