@@ -241,9 +241,3 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/simple_user_access_read_test.dart
-test/simple_user_read_test.dart
-test/user_access_create_test.dart
-test/user_access_read_test.dart
-test/user_access_update_test.dart
-test/user_door_access_api_test.dart

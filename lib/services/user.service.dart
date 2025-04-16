@@ -56,32 +56,42 @@ class UserService extends AbstractService {
   }
 
   Future<void> signOut() async {
-    AbstractService.delete("/auth/sign_out");
-    clearToken();
+    await ApiClient().getAuthApi().authAuthJwtLogout();
+    // AbstractService.delete("/auth/sign_out");
+    // clearToken();
   }
 
   Future<DeviseToken> validateToken() async {
     try {
-      AbstractService.mapAuthHeaders();
+      // AbstractService.mapAuthHeaders();
 
-      var response = await http.get(
-          Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
-          headers: AbstractService.headers);
+      // var response = await http.get(
+      //     Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
+      //     headers: AbstractService.headers);
 
-      var json = jsonDecode(response.body);
-      if (json["data"] != null) {
-        setCurrentUser(User.fromJson(json["data"]));
-        return DeviseToken.getFromHeaders(response.headers);
-      } else {
-        try {
-          return DeviseToken(error: json["error"][0]);
-        } on NoSuchMethodError {
-          return DeviseToken(error: json["errors"][0]);
-        }
+      // var json = jsonDecode(response.body);
+      // if (json["data"] != null) {
+      //   setCurrentUser(User.fromJson(json["data"]));
+      //   return DeviseToken.getFromHeaders(response.headers);
+      
+
+      final token = await storage.read('accessToken');
+
+      if (token == null) {
+      return DeviseToken(error: 'No token found in storage');
       }
-    } on UnauthorisedException catch (e) {
-      return DeviseToken(error: e.toString());
-    }
+
+      final response = await ApiClient().getAuthApi().authVerifyVerify(bodyAuthVerifyVerify: BodyAuthVerifyVerify((b) => b..token = token));
+
+      return DeviseToken(accessToken: token);
+
+      }
+      on UnauthorisedException catch (e) {
+       return DeviseToken(error: e.toString());
+      }
+      catch (e) {
+        return DeviseToken(error: 'Unexpected error: $e');
+      }
   }
 
   Future<bool> resetPasswordRequest(String email) async {

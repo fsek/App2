@@ -126,11 +126,12 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsCreateEvent**](doc/EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventRemove**](doc/EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
-[*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/all/{event_id} | Get All Event Signups
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
-[*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/{event_id} | Get Random Event Signup
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetSingleEvent**](doc/EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsAddUserToGroup**](doc/GroupsApi.md#groupsaddusertogroup) | **POST** /groups/add_user/{id} | Add User To Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetGroups**](doc/GroupsApi.md#groupsgetgroups) | **GET** /groups/ | Get Groups
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetSingleGroup**](doc/GroupsApi.md#groupsgetsinglegroup) | **GET** /groups/{id} | Get Single Group

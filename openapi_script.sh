@@ -13,6 +13,7 @@ openapi-generator generate \
 
 rm "$temp_spec"
 
+# After running the script, you also need to change the lower version lock of flutter in pubspec.yaml to 3.0.0
 # For usage from emulator, use http://10.0.2.2 instead of localhost in api.dart.
 # We also might need to change pubspec.yaml it should be sdk: '>=3.0.0 <4.0.0'.
 # command for running in windows cmd with -cli using openapi.json file in App2 folder:
