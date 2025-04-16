@@ -6,6 +6,7 @@ import 'package:fsek_mobile/services/home.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/util/time.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -112,26 +113,25 @@ class _NewsPageState extends State<NewsPage> {
                               subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("${news.authorId}",
+                                    Text("${news.author.firstName} ${news.author.lastName}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelMedium
                                             ?.copyWith(
                                                 fontWeight: FontWeight.normal)),
                                     SizedBox(height: 6),
-                                    Text(
-                                      news.createdAt
+                                    Text(Time.format(news.createdAt, "%d %M %Y %h:%m")
                                           .toString()
-                                          .substring(0, 16),
+                                          .substring(0, 19),
                                       style: TextStyle(fontSize: 12),
                                     )
                                   ]),
                               isThreeLine: true,
                               trailing: ((news.pinnedFrom != null) &&
                                       (news.pinnedTo != null) &&
-                                      (news.pinnedFrom!
+                                      (news.pinnedFrom!.toLocal()
                                               .isBefore(DateTime.now()) &&
-                                          (news.pinnedTo!
+                                          (news.pinnedTo!.toLocal()
                                               .isAfter(DateTime.now()))))
                                   ? Icon(Icons.push_pin_outlined,
                                       color:
