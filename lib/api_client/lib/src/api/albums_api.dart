@@ -34,9 +34,9 @@ class AlbumsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String>] as data
+  /// Returns a [Future] containing a [Response] with a [AlbumRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, String>>> albumsCreateAlbum({ 
+  Future<Response<AlbumRead>> albumsCreateAlbum({ 
     required AlbumCreate albumCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -91,14 +91,14 @@ class AlbumsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltMap<String, String>? _responseData;
+    AlbumRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
-      ) as BuiltMap<String, String>;
+        specifiedType: const FullType(AlbumRead),
+      ) as AlbumRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -110,7 +110,7 @@ class AlbumsApi {
       );
     }
 
-    return Response<BuiltMap<String, String>>(
+    return Response<AlbumRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -122,11 +122,11 @@ class AlbumsApi {
     );
   }
 
-  /// Delete One Album
+  /// Delete Album Year
   /// 
   ///
   /// Parameters:
-  /// * [albumId] 
+  /// * [year] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -136,8 +136,8 @@ class AlbumsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, String>>> albumsDeleteOneAlbum({ 
-    required int albumId,
+  Future<Response<BuiltMap<String, String>>> albumsDeleteAlbumYear({ 
+    required int year,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -145,7 +145,7 @@ class AlbumsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/albums/{album_id}'.replaceAll('{' r'album_id' '}', encodeQueryParameter(_serializers, albumId, const FullType(int)).toString());
+    final _path = r'/albums/year/{year}'.replaceAll('{' r'year' '}', encodeQueryParameter(_serializers, year, const FullType(int)).toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -191,6 +191,86 @@ class AlbumsApi {
     }
 
     return Response<BuiltMap<String, String>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Delete One Album
+  /// 
+  ///
+  /// Parameters:
+  /// * [albumId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [AlbumRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<AlbumRead>> albumsDeleteOneAlbum({ 
+    required int albumId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/albums/{album_id}'.replaceAll('{' r'album_id' '}', encodeQueryParameter(_serializers, albumId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'DELETE',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },
+        ],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    AlbumRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(AlbumRead),
+      ) as AlbumRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<AlbumRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

@@ -12,10 +12,14 @@ part 'album_create.g.dart';
 ///
 /// Properties:
 /// * [name] 
+/// * [year] 
 @BuiltValue()
 abstract class AlbumCreate implements Built<AlbumCreate, AlbumCreateBuilder> {
   @BuiltValueField(wireName: r'name')
   String get name;
+
+  @BuiltValueField(wireName: r'year')
+  int get year;
 
   AlbumCreate._();
 
@@ -44,6 +48,11 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
     yield serializers.serialize(
       object.name,
       specifiedType: const FullType(String),
+    );
+    yield r'year';
+    yield serializers.serialize(
+      object.year,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -74,6 +83,13 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
             specifiedType: const FullType(String),
           ) as String;
           result.name = valueDes;
+          break;
+        case r'year':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.year = valueDes;
           break;
         default:
           unhandled.add(key);

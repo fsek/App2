@@ -15,6 +15,7 @@ part 'album_read.g.dart';
 /// Properties:
 /// * [id] 
 /// * [name] 
+/// * [year] 
 /// * [imgs] 
 @BuiltValue()
 abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
@@ -23,6 +24,9 @@ abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
 
   @BuiltValueField(wireName: r'name')
   String get name;
+
+  @BuiltValueField(wireName: r'year')
+  int get year;
 
   @BuiltValueField(wireName: r'imgs')
   BuiltList<ImgInAlbum> get imgs;
@@ -59,6 +63,11 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
     yield serializers.serialize(
       object.name,
       specifiedType: const FullType(String),
+    );
+    yield r'year';
+    yield serializers.serialize(
+      object.year,
+      specifiedType: const FullType(int),
     );
     yield r'imgs';
     yield serializers.serialize(
@@ -101,6 +110,13 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
             specifiedType: const FullType(String),
           ) as String;
           result.name = valueDes;
+          break;
+        case r'year':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.year = valueDes;
           break;
         case r'imgs':
           final valueDes = serializers.deserialize(

@@ -3,7 +3,7 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/user_in_news_read.dart';
+import 'package:api_client/src/model/simple_user_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -44,7 +44,7 @@ abstract class NewsRead implements Built<NewsRead, NewsReadBuilder> {
   int get authorId;
 
   @BuiltValueField(wireName: r'author')
-  UserInNewsRead get author;
+  SimpleUserRead get author;
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;
@@ -114,7 +114,7 @@ class _$NewsReadSerializer implements PrimitiveSerializer<NewsRead> {
     yield r'author';
     yield serializers.serialize(
       object.author,
-      specifiedType: const FullType(UserInNewsRead),
+      specifiedType: const FullType(SimpleUserRead),
     );
     yield r'created_at';
     yield serializers.serialize(
@@ -204,8 +204,8 @@ class _$NewsReadSerializer implements PrimitiveSerializer<NewsRead> {
         case r'author':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(UserInNewsRead),
-          ) as UserInNewsRead;
+            specifiedType: const FullType(SimpleUserRead),
+          ) as SimpleUserRead;
           result.author.replace(valueDes);
           break;
         case r'created_at':

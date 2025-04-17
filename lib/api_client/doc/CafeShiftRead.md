@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **userId** | **int** |  | 
+**user** | [**SimpleUserRead**](SimpleUserRead.md) |  | 
 **startsAt** | [**DateTime**](DateTime.md) |  | 
 **endsAt** | [**DateTime**](DateTime.md) |  | 
 

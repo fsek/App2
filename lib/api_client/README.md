@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPatchAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpatchadventuremission) | **PATCH** /adventure-mission/patch/{id} | Patch Adventure Mission
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPostAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpostadventuremission) | **POST** /adventure-mission/ | Post Adventure Mission
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsCreateAlbum**](doc/AlbumsApi.md#albumscreatealbum) | **POST** /albums/ | Create Album
+[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteAlbumYear**](doc/AlbumsApi.md#albumsdeletealbumyear) | **DELETE** /albums/year/{year} | Delete Album Year
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
@@ -279,7 +280,6 @@ Class | Method | HTTP request | Description
  - [UserCreate](doc/UserCreate.md)
  - [UserEventRead](doc/UserEventRead.md)
  - [UserInGroupRead](doc/UserInGroupRead.md)
- - [UserInNewsRead](doc/UserInNewsRead.md)
  - [UserPostRead](doc/UserPostRead.md)
  - [UserRead](doc/UserRead.md)
  - [UserUpdate](doc/UserUpdate.md)

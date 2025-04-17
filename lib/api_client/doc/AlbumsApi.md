@@ -10,13 +10,14 @@ All URIs are relative to *http://10.0.2.2:8000*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**albumsCreateAlbum**](AlbumsApi.md#albumscreatealbum) | **POST** /albums/ | Create Album
+[**albumsDeleteAlbumYear**](AlbumsApi.md#albumsdeletealbumyear) | **DELETE** /albums/year/{year} | Delete Album Year
 [**albumsDeleteOneAlbum**](AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [**albumsGetAlbums**](AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [**albumsGetOneAlbum**](AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
 
 
 # **albumsCreateAlbum**
-> BuiltMap<String, String> albumsCreateAlbum(albumCreate)
+> AlbumRead albumsCreateAlbum(albumCreate)
 
 Create Album
 
@@ -45,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+[**AlbumRead**](AlbumRead.md)
 
 ### Authorization
 
@@ -58,8 +59,51 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **albumsDeleteAlbumYear**
+> BuiltMap<String, String> albumsDeleteAlbumYear(year)
+
+Delete Album Year
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getAlbumsApi();
+final int year = 56; // int | 
+
+try {
+    final response = api.albumsDeleteAlbumYear(year);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling AlbumsApi->albumsDeleteAlbumYear: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **year** | **int**|  | 
+
+### Return type
+
+**BuiltMap&lt;String, String&gt;**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **albumsDeleteOneAlbum**
-> BuiltMap<String, String> albumsDeleteOneAlbum(albumId)
+> AlbumRead albumsDeleteOneAlbum(albumId)
 
 Delete One Album
 
@@ -88,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+[**AlbumRead**](AlbumRead.md)
 
 ### Authorization
 

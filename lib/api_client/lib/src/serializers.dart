@@ -99,7 +99,6 @@ import 'package:api_client/src/model/user_access_update.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_event_read.dart';
 import 'package:api_client/src/model/user_in_group_read.dart';
-import 'package:api_client/src/model/user_in_news_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:api_client/src/model/user_read.dart';
 import 'package:api_client/src/model/user_update.dart';
@@ -194,7 +193,6 @@ part 'serializers.g.dart';
   UserCreate,
   UserEventRead,
   UserInGroupRead,
-  UserInNewsRead,
   UserPostRead,
   UserRead,
   UserUpdate,

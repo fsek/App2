@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **contentSv** | **String** |  | 
 **contentEn** | **String** |  | 
 **authorId** | **int** |  | 
-**author** | [**UserInNewsRead**](UserInNewsRead.md) |  | 
+**author** | [**SimpleUserRead**](SimpleUserRead.md) |  | 
 **createdAt** | [**DateTime**](DateTime.md) |  | 
 **bumpedAt** | [**DateTime**](DateTime.md) |  | 
 **pinnedFrom** | [**DateTime**](DateTime.md) |  | 

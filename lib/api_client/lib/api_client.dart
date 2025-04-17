@@ -119,7 +119,6 @@ export 'package:api_client/src/model/user_access_update.dart';
 export 'package:api_client/src/model/user_create.dart';
 export 'package:api_client/src/model/user_event_read.dart';
 export 'package:api_client/src/model/user_in_group_read.dart';
-export 'package:api_client/src/model/user_in_news_read.dart';
 export 'package:api_client/src/model/user_post_read.dart';
 export 'package:api_client/src/model/user_read.dart';
 export 'package:api_client/src/model/user_update.dart';
