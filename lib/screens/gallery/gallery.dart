@@ -12,6 +12,7 @@ import 'package:fsek_mobile/services/gallery.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 
 class GalleryPage extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _GalleryPageState extends State<GalleryPage> {
   List<AlbumRead>? galleries;
   int selectedYear = DateTime.now().year;
   void initState() {
-    ApiClient().getAlbumsApi().albumsGetAlbums().then((value) {
+    ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
       setState(() {
         this.galleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
         // selectedYear = galleries![0].year;
@@ -61,7 +62,7 @@ class _GalleryPageState extends State<GalleryPage> {
                         setState(() {
                           if (selectedYear != newYear) {
                             selectedYear = newYear!;
-                            ApiClient().getAlbumsApi().albumsGetAlbums().then((value) {
+                            ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
                               setState(() {
                                 this.galleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
                               });
@@ -256,7 +257,7 @@ class _GalleryPageState extends State<GalleryPage> {
 
     Uint8List decodedString = Uint8List(0);
     
-    ApiClient().getImgApi().imgGetImage(id: elem.id).then((value) {
+    ApiService.apiClient.getImgApi().imgGetImage(id: elem.id).then((value) {
       if(value.data != null){
          decodedString = base64Decode(value.data!.asString);
       }
@@ -285,7 +286,7 @@ class _GalleryPageState extends State<GalleryPage> {
 
    
 
-    // final response  = await ApiClient().getImgApi().imgGetImage(id: elem.id);
+    // final response  = await ApiService.apiClient.getImgApi().imgGetImage(id: elem.id);
 
     // if (response.data != null){
     //   final rawResponse = response.response;

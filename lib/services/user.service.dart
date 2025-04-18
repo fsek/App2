@@ -7,6 +7,7 @@ import 'package:fsek_mobile/models/devise_token.dart';
 import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
 import 'package:fsek_mobile/util/storage_wrapper.dart';
+import 'api.service.dart';
 
 import 'abstract.service.dart';
 
@@ -26,7 +27,7 @@ class UserService extends AbstractService {
       //     headers: AbstractService.headers,
       //     body: jsonEncode({"email": email, "password": pass}));
 
-      final response = await ApiClient().getAuthApi().authAuthJwtLogin(username: username, password: pass, grantType: "password");
+      final response = await ApiService.apiClient.getAuthApi().authAuthJwtLogin(username: username, password: pass, grantType: "password");
 
       final token = response.data?.accessToken;
 
@@ -34,6 +35,12 @@ class UserService extends AbstractService {
       if(token != null){
         storage.write(key: "access_token", value: token);
       }
+
+      ApiService.apiClient.setBearerAuth('Authorization', token!);
+
+      ApiService.apiClient.setOAuthToken('OAuth2', token);
+
+
 
       return DeviseToken(accessToken: token);
 
@@ -56,7 +63,7 @@ class UserService extends AbstractService {
   }
 
   Future<void> signOut() async {
-    await ApiClient().getAuthApi().authAuthJwtLogout();
+    await ApiService.apiClient.getAuthApi().authAuthJwtLogout();
     // AbstractService.delete("/auth/sign_out");
     // clearToken();
   }
@@ -81,7 +88,7 @@ class UserService extends AbstractService {
       return DeviseToken(error: 'No token found in storage');
       }
 
-      final response = await ApiClient().getAuthApi().authVerifyVerify(bodyAuthVerifyVerify: BodyAuthVerifyVerify((b) => b..token = token));
+      final response = await ApiService.apiClient.getAuthApi().authVerifyVerify(bodyAuthVerifyVerify: BodyAuthVerifyVerify((b) => b..token = token));
 
       return DeviseToken(accessToken: token);
 
