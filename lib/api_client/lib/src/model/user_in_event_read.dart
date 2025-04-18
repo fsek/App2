@@ -3,63 +3,58 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/img_in_album.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'album_read.g.dart';
+part 'user_in_event_read.g.dart';
 
-/// AlbumRead
+/// UserInEventRead
 ///
 /// Properties:
 /// * [id] 
-/// * [name] 
-/// * [year] 
-/// * [date] 
-/// * [location] 
-/// * [imgs] 
+/// * [firstName] 
+/// * [lastName] 
+/// * [standardFoodPreferences] 
+/// * [otherFoodPreferences] 
 @BuiltValue()
-abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
+abstract class UserInEventRead implements Built<UserInEventRead, UserInEventReadBuilder> {
   @BuiltValueField(wireName: r'id')
   int get id;
 
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'first_name')
+  String get firstName;
 
-  @BuiltValueField(wireName: r'year')
-  int get year;
+  @BuiltValueField(wireName: r'last_name')
+  String get lastName;
 
-  @BuiltValueField(wireName: r'date')
-  DateTime get date;
+  @BuiltValueField(wireName: r'standard_food_preferences')
+  BuiltList<String>? get standardFoodPreferences;
 
-  @BuiltValueField(wireName: r'location')
-  String get location;
+  @BuiltValueField(wireName: r'other_food_preferences')
+  String? get otherFoodPreferences;
 
-  @BuiltValueField(wireName: r'imgs')
-  BuiltList<ImgInAlbum> get imgs;
+  UserInEventRead._();
 
-  AlbumRead._();
-
-  factory AlbumRead([void updates(AlbumReadBuilder b)]) = _$AlbumRead;
+  factory UserInEventRead([void updates(UserInEventReadBuilder b)]) = _$UserInEventRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlbumReadBuilder b) => b;
+  static void _defaults(UserInEventReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlbumRead> get serializer => _$AlbumReadSerializer();
+  static Serializer<UserInEventRead> get serializer => _$UserInEventReadSerializer();
 }
 
-class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
+class _$UserInEventReadSerializer implements PrimitiveSerializer<UserInEventRead> {
   @override
-  final Iterable<Type> types = const [AlbumRead, _$AlbumRead];
+  final Iterable<Type> types = const [UserInEventRead, _$UserInEventRead];
 
   @override
-  final String wireName = r'AlbumRead';
+  final String wireName = r'UserInEventRead';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    AlbumRead object, {
+    UserInEventRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'id';
@@ -67,37 +62,32 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
       object.id,
       specifiedType: const FullType(int),
     );
-    yield r'name';
+    yield r'first_name';
     yield serializers.serialize(
-      object.name,
+      object.firstName,
       specifiedType: const FullType(String),
     );
-    yield r'year';
+    yield r'last_name';
     yield serializers.serialize(
-      object.year,
-      specifiedType: const FullType(int),
-    );
-    yield r'date';
-    yield serializers.serialize(
-      object.date,
-      specifiedType: const FullType(DateTime),
-    );
-    yield r'location';
-    yield serializers.serialize(
-      object.location,
+      object.lastName,
       specifiedType: const FullType(String),
     );
-    yield r'imgs';
-    yield serializers.serialize(
-      object.imgs,
-      specifiedType: const FullType(BuiltList, [FullType(ImgInAlbum)]),
+    yield r'standard_food_preferences';
+    yield object.standardFoodPreferences == null ? null : serializers.serialize(
+      object.standardFoodPreferences,
+      specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+    );
+    yield r'other_food_preferences';
+    yield object.otherFoodPreferences == null ? null : serializers.serialize(
+      object.otherFoodPreferences,
+      specifiedType: const FullType.nullable(String),
     );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    AlbumRead object, {
+    UserInEventRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -108,7 +98,7 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required AlbumReadBuilder result,
+    required UserInEventReadBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -122,40 +112,35 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'name':
+        case r'first_name':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.firstName = valueDes;
           break;
-        case r'year':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.year = valueDes;
-          break;
-        case r'date':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.date = valueDes;
-          break;
-        case r'location':
+        case r'last_name':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.location = valueDes;
+          result.lastName = valueDes;
           break;
-        case r'imgs':
+        case r'standard_food_preferences':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(ImgInAlbum)]),
-          ) as BuiltList<ImgInAlbum>;
-          result.imgs.replace(valueDes);
+            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+          ) as BuiltList<String>?;
+          if (valueDes == null) continue;
+          result.standardFoodPreferences.replace(valueDes);
+          break;
+        case r'other_food_preferences':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.otherFoodPreferences = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -166,12 +151,12 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
   }
 
   @override
-  AlbumRead deserialize(
+  UserInEventRead deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = AlbumReadBuilder();
+    final result = UserInEventReadBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

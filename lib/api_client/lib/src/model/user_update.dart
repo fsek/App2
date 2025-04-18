@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,6 +18,8 @@ part 'user_update.g.dart';
 /// * [program] 
 /// * [notifications] 
 /// * [stilId] 
+/// * [standardFoodPreferences] 
+/// * [otherFoodPreferences] 
 @BuiltValue()
 abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
   @BuiltValueField(wireName: r'first_name')
@@ -36,6 +39,12 @@ abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
 
   @BuiltValueField(wireName: r'stil_id')
   String? get stilId;
+
+  @BuiltValueField(wireName: r'standard_food_preferences')
+  BuiltList<String>? get standardFoodPreferences;
+
+  @BuiltValueField(wireName: r'other_food_preferences')
+  String? get otherFoodPreferences;
 
   UserUpdate._();
 
@@ -102,6 +111,16 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
         specifiedType: const FullType.nullable(String),
       );
     }
+    yield r'standard_food_preferences';
+    yield object.standardFoodPreferences == null ? null : serializers.serialize(
+      object.standardFoodPreferences,
+      specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+    );
+    yield r'other_food_preferences';
+    yield object.otherFoodPreferences == null ? null : serializers.serialize(
+      object.otherFoodPreferences,
+      specifiedType: const FullType.nullable(String),
+    );
   }
 
   @override
@@ -172,6 +191,22 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
           ) as String?;
           if (valueDes == null) continue;
           result.stilId = valueDes;
+          break;
+        case r'standard_food_preferences':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+          ) as BuiltList<String>?;
+          if (valueDes == null) continue;
+          result.standardFoodPreferences.replace(valueDes);
+          break;
+        case r'other_food_preferences':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.otherFoodPreferences = valueDes;
           break;
         default:
           unhandled.add(key);

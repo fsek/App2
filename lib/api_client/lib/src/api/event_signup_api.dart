@@ -9,9 +9,9 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:api_client/src/api_util.dart';
-import 'package:api_client/src/model/event_read.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
 import 'package:api_client/src/model/event_signup_delete.dart';
+import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 
@@ -36,9 +36,9 @@ class EventSignupApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [EventRead] as data
+  /// Returns a [Future] containing a [Response] with a [EventSignupRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EventRead>> eventSignupEventSignoffRoute({ 
+  Future<Response<EventSignupRead>> eventSignupEventSignoffRoute({ 
     required int eventId,
     required EventSignupDelete eventSignupDelete,
     CancelToken? cancelToken,
@@ -94,14 +94,14 @@ class EventSignupApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    EventRead? _responseData;
+    EventSignupRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(EventRead),
-      ) as EventRead;
+        specifiedType: const FullType(EventSignupRead),
+      ) as EventSignupRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -113,7 +113,7 @@ class EventSignupApi {
       );
     }
 
-    return Response<EventRead>(
+    return Response<EventSignupRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -138,9 +138,9 @@ class EventSignupApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [EventRead] as data
+  /// Returns a [Future] containing a [Response] with a [EventSignupRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EventRead>> eventSignupEventSignupRoute({ 
+  Future<Response<EventSignupRead>> eventSignupEventSignupRoute({ 
     required int eventId,
     required EventSignupCreate eventSignupCreate,
     CancelToken? cancelToken,
@@ -196,14 +196,14 @@ class EventSignupApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    EventRead? _responseData;
+    EventSignupRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(EventRead),
-      ) as EventRead;
+        specifiedType: const FullType(EventSignupRead),
+      ) as EventSignupRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -215,7 +215,7 @@ class EventSignupApi {
       );
     }
 
-    return Response<EventRead>(
+    return Response<EventSignupRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -240,9 +240,9 @@ class EventSignupApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [EventRead] as data
+  /// Returns a [Future] containing a [Response] with a [EventSignupRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EventRead>> eventSignupUpdateEventSignupRoute({ 
+  Future<Response<EventSignupRead>> eventSignupUpdateEventSignupRoute({ 
     required int eventId,
     required EventSignupUpdate eventSignupUpdate,
     CancelToken? cancelToken,
@@ -298,14 +298,14 @@ class EventSignupApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    EventRead? _responseData;
+    EventSignupRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(EventRead),
-      ) as EventRead;
+        specifiedType: const FullType(EventSignupRead),
+      ) as EventSignupRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -317,7 +317,7 @@ class EventSignupApi {
       );
     }
 
-    return Response<EventRead>(
+    return Response<EventSignupRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

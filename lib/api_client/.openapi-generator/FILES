@@ -34,6 +34,7 @@ doc/CarUpdate.md
 doc/CarsApi.md
 doc/CouncilApi.md
 doc/CouncilCreate.md
+doc/CouncilInEventRead.md
 doc/CouncilRead.md
 doc/CouncilUpdate.md
 doc/DefaultApi.md
@@ -50,6 +51,7 @@ doc/EventRead.md
 doc/EventSignupApi.md
 doc/EventSignupCreate.md
 doc/EventSignupDelete.md
+doc/EventSignupRead.md
 doc/EventSignupUpdate.md
 doc/EventTagRead.md
 doc/EventUpdate.md
@@ -107,6 +109,7 @@ doc/UserAccessUpdate.md
 doc/UserCreate.md
 doc/UserDoorAccessApi.md
 doc/UserEventRead.md
+doc/UserInEventRead.md
 doc/UserInGroupRead.md
 doc/UserPostRead.md
 doc/UserRead.md
@@ -171,6 +174,7 @@ lib/src/model/car_create.dart
 lib/src/model/car_read.dart
 lib/src/model/car_update.dart
 lib/src/model/council_create.dart
+lib/src/model/council_in_event_read.dart
 lib/src/model/council_read.dart
 lib/src/model/council_update.dart
 lib/src/model/date.dart
@@ -185,6 +189,7 @@ lib/src/model/event_create.dart
 lib/src/model/event_read.dart
 lib/src/model/event_signup_create.dart
 lib/src/model/event_signup_delete.dart
+lib/src/model/event_signup_read.dart
 lib/src/model/event_signup_update.dart
 lib/src/model/event_tag_read.dart
 lib/src/model/event_update.dart
@@ -231,6 +236,7 @@ lib/src/model/user_access_read.dart
 lib/src/model/user_access_update.dart
 lib/src/model/user_create.dart
 lib/src/model/user_event_read.dart
+lib/src/model/user_in_event_read.dart
 lib/src/model/user_in_group_read.dart
 lib/src/model/user_post_read.dart
 lib/src/model/user_read.dart
@@ -239,3 +245,6 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/council_in_event_read_test.dart
+test/event_signup_read_test.dart
+test/user_in_event_read_test.dart

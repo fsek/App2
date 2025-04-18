@@ -5,6 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
 import 'package:api_client/src/model/priority_db.dart';
+import 'package:api_client/src/model/council_in_event_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -23,6 +24,8 @@ part 'event_read.g.dart';
 /// * [titleEn] 
 /// * [descriptionSv] 
 /// * [descriptionEn] 
+/// * [council] 
+/// * [location] 
 /// * [maxEventUsers] 
 /// * [priorities] 
 /// * [allDay] 
@@ -65,6 +68,12 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'description_en')
   String get descriptionEn;
+
+  @BuiltValueField(wireName: r'council')
+  CouncilInEventRead get council;
+
+  @BuiltValueField(wireName: r'location')
+  String get location;
 
   @BuiltValueField(wireName: r'max_event_users')
   int get maxEventUsers;
@@ -170,6 +179,16 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'description_en';
     yield serializers.serialize(
       object.descriptionEn,
+      specifiedType: const FullType(String),
+    );
+    yield r'council';
+    yield serializers.serialize(
+      object.council,
+      specifiedType: const FullType(CouncilInEventRead),
+    );
+    yield r'location';
+    yield serializers.serialize(
+      object.location,
       specifiedType: const FullType(String),
     );
     yield r'max_event_users';
@@ -319,6 +338,20 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(String),
           ) as String;
           result.descriptionEn = valueDes;
+          break;
+        case r'council':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(CouncilInEventRead),
+          ) as CouncilInEventRead;
+          result.council.replace(valueDes);
+          break;
+        case r'location':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.location = valueDes;
           break;
         case r'max_event_users':
           final valueDes = serializers.deserialize(

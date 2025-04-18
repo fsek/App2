@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **eventSignupEventSignoffRoute**
-> EventRead eventSignupEventSignoffRoute(eventId, eventSignupDelete)
+> EventSignupRead eventSignupEventSignoffRoute(eventId, eventSignupDelete)
 
 Event Signoff Route
 
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EventRead**](EventRead.md)
+[**EventSignupRead**](EventSignupRead.md)
 
 ### Authorization
 
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **eventSignupEventSignupRoute**
-> EventRead eventSignupEventSignupRoute(eventId, eventSignupCreate)
+> EventSignupRead eventSignupEventSignupRoute(eventId, eventSignupCreate)
 
 Event Signup Route
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EventRead**](EventRead.md)
+[**EventSignupRead**](EventSignupRead.md)
 
 ### Authorization
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **eventSignupUpdateEventSignupRoute**
-> EventRead eventSignupUpdateEventSignupRoute(eventId, eventSignupUpdate)
+> EventSignupRead eventSignupUpdateEventSignupRoute(eventId, eventSignupUpdate)
 
 Update Event Signup Route
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EventRead**](EventRead.md)
+[**EventSignupRead**](EventSignupRead.md)
 
 ### Authorization
 

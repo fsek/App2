@@ -19,6 +19,7 @@ part 'event_update.g.dart';
 /// * [titleEn] 
 /// * [descriptionSv] 
 /// * [descriptionEn] 
+/// * [location] 
 /// * [maxEventUsers] 
 /// * [allDay] 
 /// * [signupNotOpenedYet] 
@@ -54,6 +55,9 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
 
   @BuiltValueField(wireName: r'description_en')
   String? get descriptionEn;
+
+  @BuiltValueField(wireName: r'location')
+  String get location;
 
   @BuiltValueField(wireName: r'max_event_users')
   int? get maxEventUsers;
@@ -164,6 +168,11 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(String),
       );
     }
+    yield r'location';
+    yield serializers.serialize(
+      object.location,
+      specifiedType: const FullType(String),
+    );
     if (object.maxEventUsers != null) {
       yield r'max_event_users';
       yield serializers.serialize(
@@ -320,6 +329,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           ) as String?;
           if (valueDes == null) continue;
           result.descriptionEn = valueDes;
+          break;
+        case r'location':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.location = valueDes;
           break;
         case r'max_event_users':
           final valueDes = serializers.deserialize(

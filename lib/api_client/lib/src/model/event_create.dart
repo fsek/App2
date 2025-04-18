@@ -21,6 +21,7 @@ part 'event_create.g.dart';
 /// * [titleEn] 
 /// * [descriptionSv] 
 /// * [descriptionEn] 
+/// * [location] 
 /// * [maxEventUsers] 
 /// * [priorities] 
 /// * [allDay] 
@@ -60,6 +61,9 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
 
   @BuiltValueField(wireName: r'description_en')
   String get descriptionEn;
+
+  @BuiltValueField(wireName: r'location')
+  String get location;
 
   @BuiltValueField(wireName: r'max_event_users')
   int get maxEventUsers;
@@ -161,6 +165,11 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield r'description_en';
     yield serializers.serialize(
       object.descriptionEn,
+      specifiedType: const FullType(String),
+    );
+    yield r'location';
+    yield serializers.serialize(
+      object.location,
       specifiedType: const FullType(String),
     );
     yield r'max_event_users';
@@ -303,6 +312,13 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
             specifiedType: const FullType(String),
           ) as String;
           result.descriptionEn = valueDes;
+          break;
+        case r'location':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.location = valueDes;
           break;
         case r'max_event_users':
           final valueDes = serializers.deserialize(

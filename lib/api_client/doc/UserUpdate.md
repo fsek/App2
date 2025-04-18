@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **program** | **String** |  | [optional] 
 **notifications** | **bool** |  | [optional] 
 **stilId** | **String** |  | [optional] 
+**standardFoodPreferences** | **BuiltList&lt;String&gt;** |  | 
+**otherFoodPreferences** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

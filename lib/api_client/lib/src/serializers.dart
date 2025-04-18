@@ -39,6 +39,7 @@ import 'package:api_client/src/model/car_create.dart';
 import 'package:api_client/src/model/car_read.dart';
 import 'package:api_client/src/model/car_update.dart';
 import 'package:api_client/src/model/council_create.dart';
+import 'package:api_client/src/model/council_in_event_read.dart';
 import 'package:api_client/src/model/council_read.dart';
 import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
@@ -52,6 +53,7 @@ import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
 import 'package:api_client/src/model/event_signup_delete.dart';
+import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
 import 'package:api_client/src/model/event_tag_read.dart';
 import 'package:api_client/src/model/event_update.dart';
@@ -98,6 +100,7 @@ import 'package:api_client/src/model/user_access_read.dart';
 import 'package:api_client/src/model/user_access_update.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_event_read.dart';
+import 'package:api_client/src/model/user_in_event_read.dart';
 import 'package:api_client/src/model/user_in_group_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:api_client/src/model/user_read.dart';
@@ -133,6 +136,7 @@ part 'serializers.g.dart';
   CarRead,
   CarUpdate,
   CouncilCreate,
+  CouncilInEventRead,
   CouncilRead,
   CouncilUpdate,
   Detail,
@@ -146,6 +150,7 @@ part 'serializers.g.dart';
   EventRead,
   EventSignupCreate,
   EventSignupDelete,
+  EventSignupRead,
   EventSignupUpdate,
   EventTagRead,
   EventUpdate,
@@ -192,6 +197,7 @@ part 'serializers.g.dart';
   UserAccessUpdate,
   UserCreate,
   UserEventRead,
+  UserInEventRead,
   UserInGroupRead,
   UserPostRead,
   UserRead,

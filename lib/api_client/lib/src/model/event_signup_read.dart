@@ -3,81 +3,82 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/user_in_event_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'album_create.g.dart';
+part 'event_signup_read.g.dart';
 
-/// AlbumCreate
+/// EventSignupRead
 ///
 /// Properties:
-/// * [name] 
-/// * [year] 
-/// * [location] 
-/// * [date] 
+/// * [user] 
+/// * [eventId] 
+/// * [priority] 
+/// * [groupName] 
 @BuiltValue()
-abstract class AlbumCreate implements Built<AlbumCreate, AlbumCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+abstract class EventSignupRead implements Built<EventSignupRead, EventSignupReadBuilder> {
+  @BuiltValueField(wireName: r'user')
+  UserInEventRead get user;
 
-  @BuiltValueField(wireName: r'year')
-  int get year;
+  @BuiltValueField(wireName: r'event_id')
+  int get eventId;
 
-  @BuiltValueField(wireName: r'location')
-  String get location;
+  @BuiltValueField(wireName: r'priority')
+  String get priority;
 
-  @BuiltValueField(wireName: r'date')
-  DateTime get date;
+  @BuiltValueField(wireName: r'group_name')
+  String get groupName;
 
-  AlbumCreate._();
+  EventSignupRead._();
 
-  factory AlbumCreate([void updates(AlbumCreateBuilder b)]) = _$AlbumCreate;
+  factory EventSignupRead([void updates(EventSignupReadBuilder b)]) = _$EventSignupRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlbumCreateBuilder b) => b;
+  static void _defaults(EventSignupReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlbumCreate> get serializer => _$AlbumCreateSerializer();
+  static Serializer<EventSignupRead> get serializer => _$EventSignupReadSerializer();
 }
 
-class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
+class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead> {
   @override
-  final Iterable<Type> types = const [AlbumCreate, _$AlbumCreate];
+  final Iterable<Type> types = const [EventSignupRead, _$EventSignupRead];
 
   @override
-  final String wireName = r'AlbumCreate';
+  final String wireName = r'EventSignupRead';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    AlbumCreate object, {
+    EventSignupRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'user';
     yield serializers.serialize(
-      object.name,
-      specifiedType: const FullType(String),
+      object.user,
+      specifiedType: const FullType(UserInEventRead),
     );
-    yield r'year';
+    yield r'event_id';
     yield serializers.serialize(
-      object.year,
+      object.eventId,
       specifiedType: const FullType(int),
     );
-    yield r'location';
+    yield r'priority';
     yield serializers.serialize(
-      object.location,
+      object.priority,
       specifiedType: const FullType(String),
     );
-    yield r'date';
+    yield r'group_name';
     yield serializers.serialize(
-      object.date,
-      specifiedType: const FullType(DateTime),
+      object.groupName,
+      specifiedType: const FullType(String),
     );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    AlbumCreate object, {
+    EventSignupRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -88,40 +89,40 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required AlbumCreateBuilder result,
+    required EventSignupReadBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'user':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.name = valueDes;
+            specifiedType: const FullType(UserInEventRead),
+          ) as UserInEventRead;
+          result.user.replace(valueDes);
           break;
-        case r'year':
+        case r'event_id':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(int),
           ) as int;
-          result.year = valueDes;
+          result.eventId = valueDes;
           break;
-        case r'location':
+        case r'priority':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.location = valueDes;
+          result.priority = valueDes;
           break;
-        case r'date':
+        case r'group_name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.date = valueDes;
+            specifiedType: const FullType(String),
+          ) as String;
+          result.groupName = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -132,12 +133,12 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
   }
 
   @override
-  AlbumCreate deserialize(
+  EventSignupRead deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = AlbumCreateBuilder();
+    final result = EventSignupReadBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

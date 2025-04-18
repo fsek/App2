@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **titleEn** | **String** |  | 
 **descriptionSv** | **String** |  | 
 **descriptionEn** | **String** |  | 
+**location** | **String** |  | 
 **maxEventUsers** | **int** |  | 
 **priorities** | **BuiltList&lt;String&gt;** |  | 
 **allDay** | **bool** |  | 

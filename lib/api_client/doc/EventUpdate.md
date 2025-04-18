@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **titleEn** | **String** |  | [optional] 
 **descriptionSv** | **String** |  | [optional] 
 **descriptionEn** | **String** |  | [optional] 
+**location** | **String** |  | 
 **maxEventUsers** | **int** |  | [optional] 
 **allDay** | **bool** |  | [optional] 
 **signupNotOpenedYet** | **bool** |  | [optional] 
