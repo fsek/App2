@@ -34,13 +34,12 @@ class UserService extends AbstractService {
 
       if(token != null){
         storage.write(key: "access_token", value: token);
+
+        ApiService.apiClient.setBearerAuth('Authorization', token!);
+
+        ApiService.apiClient.setOAuthToken('OAuth2', token);
+
       }
-
-      ApiService.apiClient.setBearerAuth('Authorization', token!);
-
-      ApiService.apiClient.setOAuthToken('OAuth2', token);
-
-
 
       return DeviseToken(accessToken: token);
 
