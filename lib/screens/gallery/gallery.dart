@@ -20,12 +20,15 @@ class GalleryPage extends StatefulWidget {
 }
 
 class _GalleryPageState extends State<GalleryPage> {
-  List<AlbumRead>? galleries;
-  int selectedYear = DateTime.now().year;
+  List<AlbumRead>? allGalleries;
+  List<AlbumRead>? selectedGalleries;
+  int? selectedYear;
   void initState() {
     ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
       setState(() {
-        this.galleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
+        this.allGalleries = value.data!.toList();
+        this.selectedYear = allGalleries!.reduce((a, b) => a.year > b.year ? a : b).year;
+        this.selectedGalleries = allGalleries!.where((item) => item.year == selectedYear).toList();
         // selectedYear = galleries![0].year;
       });
     });
@@ -35,6 +38,49 @@ class _GalleryPageState extends State<GalleryPage> {
 
   Widget build(BuildContext context) {
       var t = AppLocalizations.of(context)!;
+
+      if (allGalleries == null || selectedGalleries == null) {
+        return Scaffold(
+          appBar: AppBar(title: Text(t.galleryTitle)),
+          body: Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if (selectedGalleries!.isEmpty) {
+        return Scaffold(
+        appBar: AppBar(title: Text(t.galleryTitle)),
+        body: Container(
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: DropdownButton(
+                    iconDisabledColor: Theme.of(context).colorScheme.surface,
+                    iconEnabledColor: Theme.of(context).colorScheme.surface,
+                    dropdownColor: Theme.of(context).colorScheme.surface,
+                    elevation: 2,
+                    isExpanded: true,
+                    value: selectedYear,
+                    items: allGalleries!.map((item) => item.year).toList().map((year) => DropdownMenuItem(
+                      child: Text(
+                        year.toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary)),
+                              value: year)).toList(),
+                      onChanged: (int? newYear) {
+                        setState(() {
+                          if (selectedYear != newYear) {
+                            selectedYear = newYear!;
+                            ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
+                              setState(() {
+                                this.selectedGalleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
+                              });
+                            });
+                          }
+                      });
+                    }
+                  )
+                ),
+        );
+      }
+
       return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -53,7 +99,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     elevation: 2,
                     isExpanded: true,
                     value: selectedYear,
-                    items: galleries!.map((item) => item.year).toList().map((year) => DropdownMenuItem(
+                    items: allGalleries!.map((item) => item.year).toList().map((year) => DropdownMenuItem(
                       child: Text(
                         year.toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary)),
@@ -64,7 +110,7 @@ class _GalleryPageState extends State<GalleryPage> {
                             selectedYear = newYear!;
                             ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
                               setState(() {
-                                this.galleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
+                                this.selectedGalleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
                               });
                             });
                           }
@@ -87,8 +133,6 @@ class _GalleryPageState extends State<GalleryPage> {
                         
         ]),
       );
-
-
   }
 
   // Widget build(BuildContext context) {
@@ -150,11 +194,11 @@ class _GalleryPageState extends State<GalleryPage> {
   // }
 
   List<Widget> generateAlbumThumbnails() {
-    if (galleries == null) {
+    if (selectedGalleries == null) {
       return [];
     }
     List<Widget> result = [];
-    for (AlbumRead elem in galleries!) {
+    for (AlbumRead elem in selectedGalleries!) {
       result.add(Stack(children: [
         Padding(
           padding: EdgeInsets.only(top: 16),
@@ -199,7 +243,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     ),
                     Flexible(
                       child: Text(
-                        "Intigheten",                         //elem.location.toString(), TODO change this after its been added to the album model
+                        elem.location.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
@@ -229,13 +273,16 @@ class _GalleryPageState extends State<GalleryPage> {
             )
           ]),
         ),
-        Ink.image(
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-            image: getPicture(elem.imgs.first),
-            fit: BoxFit.cover,
-            child: InkWell(
-              onTap: () => goToAlbum(elem.id!),
-            ))
+        elem.imgs.isNotEmpty
+          ? buildThumbnailImage(elem.imgs.first.id)
+          : Ink.image(
+              image: AssetImage("assets/img/f_logo.png"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+              child: InkWell(
+              onTap: () => goToAlbum(elem.id),
+      ),
+    )
       ]));
     }
     return result;
@@ -250,27 +297,66 @@ class _GalleryPageState extends State<GalleryPage> {
     //Send to correct page and then fetch complete album on other page :^)
   }
 
-  // IDK if this shit even works
-  ImageProvider<Object> getPicture(ImgInAlbum elem) {
-    ImageProvider<Object> imageProv =
-        AssetImage("assets/img/f_logo.png"); //default
+  // // IDK if this shit even works
+  // ImageProvider<Object> getPicture(ImgInAlbum elem) {
+  //   ImageProvider<Object> imageProv =
+  //       AssetImage("assets/img/f_logo.png"); //default
 
-    Uint8List decodedString = Uint8List(0);
+  //   Uint8List decodedString = Uint8List(0);
     
-    ApiService.apiClient.getImgApi().imgGetImage(id: elem.id).then((value) {
-      if(value.data != null){
-         decodedString = base64Decode(value.data!.asString);
+  //   ApiService.apiClient.getImgApi().imgGetImage(id: elem.id).then((value) {
+  //     if(value.data != null){
+  //        decodedString = base64Decode(value.data!.asString);
+  //     }
+  //   }
+  //   );
+
+  //   if (decodedString.length != 0) {
+  //     return MemoryImage(decodedString);
+  //   }
+  //   return imageProv;
+  // }
+
+
+  Future<ImageProvider<Object>> fetchImage(int id) async {
+  try {
+    final response = await ApiService.apiClient.dio.get(
+      "/img/$id", 
+      options: Options(responseType: ResponseType.bytes));
+
+    return MemoryImage(Uint8List.fromList(response.data!));
+    
+  } catch (e) {
+    print("Error fetching image: $e");
+    return AssetImage("assets/img/f_logo.png");
+  }
+}
+
+
+
+Widget buildThumbnailImage(int imgId) {
+  return FutureBuilder<ImageProvider>(
+    future: fetchImage(imgId),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+        return Ink.image(
+          image: snapshot.data!,
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+          child: InkWell(
+            onTap: () => goToAlbum(imgId),
+          ),
+        );
+      } else {
+        return Ink.image(
+          image: AssetImage("assets/img/f_logo.png"),
+          fit: BoxFit.cover,
+          child: Container(), // Empty while loading
+        );
       }
-    }
-    );
-
-    if (decodedString.length != 0) {
-      return MemoryImage(decodedString);
-    }
-    return imageProv;
-    
-
-
+    },
+  );
+}
 
 
 
@@ -293,5 +379,5 @@ class _GalleryPageState extends State<GalleryPage> {
     //   final bytes = Uint8List.fromList(response.data!)
     //   return MemoryImage(bytes)
     // }
-  }
+
 }
