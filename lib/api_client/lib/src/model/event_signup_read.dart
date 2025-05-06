@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:api_client/src/model/user_in_event_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -16,6 +17,7 @@ part 'event_signup_read.g.dart';
 /// * [eventId] 
 /// * [priority] 
 /// * [groupName] 
+/// * [drinkPackage] 
 @BuiltValue()
 abstract class EventSignupRead implements Built<EventSignupRead, EventSignupReadBuilder> {
   @BuiltValueField(wireName: r'user')
@@ -29,6 +31,10 @@ abstract class EventSignupRead implements Built<EventSignupRead, EventSignupRead
 
   @BuiltValueField(wireName: r'group_name')
   String get groupName;
+
+  @BuiltValueField(wireName: r'drinkPackage')
+  EventSignupReadDrinkPackageEnum get drinkPackage;
+  // enum drinkPackageEnum {  None,  AlcoholFree,  Alcohol,  };
 
   EventSignupRead._();
 
@@ -72,6 +78,11 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
     yield serializers.serialize(
       object.groupName,
       specifiedType: const FullType(String),
+    );
+    yield r'drinkPackage';
+    yield serializers.serialize(
+      object.drinkPackage,
+      specifiedType: const FullType(EventSignupReadDrinkPackageEnum),
     );
   }
 
@@ -124,6 +135,13 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
           ) as String;
           result.groupName = valueDes;
           break;
+        case r'drinkPackage':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(EventSignupReadDrinkPackageEnum),
+          ) as EventSignupReadDrinkPackageEnum;
+          result.drinkPackage = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -151,5 +169,22 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
     );
     return result.build();
   }
+}
+
+class EventSignupReadDrinkPackageEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventSignupReadDrinkPackageEnum none = _$eventSignupReadDrinkPackageEnum_none;
+  @BuiltValueEnumConst(wireName: r'AlcoholFree')
+  static const EventSignupReadDrinkPackageEnum alcoholFree = _$eventSignupReadDrinkPackageEnum_alcoholFree;
+  @BuiltValueEnumConst(wireName: r'Alcohol')
+  static const EventSignupReadDrinkPackageEnum alcohol = _$eventSignupReadDrinkPackageEnum_alcohol;
+
+  static Serializer<EventSignupReadDrinkPackageEnum> get serializer => _$eventSignupReadDrinkPackageEnumSerializer;
+
+  const EventSignupReadDrinkPackageEnum._(String name): super(name);
+
+  static BuiltSet<EventSignupReadDrinkPackageEnum> get values => _$eventSignupReadDrinkPackageEnumValues;
+  static EventSignupReadDrinkPackageEnum valueOf(String name) => _$eventSignupReadDrinkPackageEnumValueOf(name);
 }
 

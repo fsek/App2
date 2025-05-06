@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/models/home/calendarevent.dart';
@@ -23,7 +24,7 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
 
-    ApiClient().getEventsApi().eventsGetAllEvents().then((value) => setState(() {
+    ApiService.apiClient.getEventsApi().eventsGetAllEvents().then((value) => setState(() {
           this._events = value.data!.toList();
           _selectedEvents = _getEventsForDay(_selectedDay);
         }));
@@ -39,7 +40,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   Future<void> _onRefresh() async {
-    ApiClient().getEventsApi().eventsGetAllEvents().then((value) => setState(() {
+    ApiService.apiClient.getEventsApi().eventsGetAllEvents().then((value) => setState(() {
           this._events = value.data!.toList();
           _selectedEvents = _getEventsForDay(_selectedDay);
         }));
@@ -140,7 +141,7 @@ class _CalendarState extends State<Calendar> {
     }
     return Container(
       height: MediaQuery.of(context).size.height,
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.onSecondary,
       child: RefreshIndicator(
         onRefresh: () => _onRefresh(),
         child: ListView(
@@ -149,7 +150,7 @@ class _CalendarState extends State<Calendar> {
               children: [
                 TableCalendar(
                   calendarStyle: CalendarStyle(markerDecoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       shape: BoxShape.circle)),
                   availableGestures: AvailableGestures.horizontalSwipe,
                   locale: locale,

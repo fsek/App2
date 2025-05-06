@@ -10,9 +10,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **email** | **String** |  | 
-**isActive** | **bool** |  | [optional] [default to true]
-**isSuperuser** | **bool** |  | [optional] [default to false]
-**isVerified** | **bool** |  | [optional] [default to false]
 **firstName** | **String** |  | 
 **lastName** | **String** |  | 
 **program** | **String** |  | 

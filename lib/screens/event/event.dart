@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
 import 'package:fsek_mobile/models/home/group.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
@@ -11,6 +12,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart'; //For the food-prefs link
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
+
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -20,16 +23,16 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  Event? event;
+  EventRead? event;
+  UserRead? user;
   String? userType;
-  Group? group;
+  GroupRead? group;
   String? answer;
   String? customGroup;
-  Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
   bool displayGroupInput = false;
   String? drinkPackageAnswer;
-  Group? defaultGroup;
+  GroupRead? defaultGroup;
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
@@ -48,25 +51,20 @@ class _EventPageState extends State<EventPage> {
   static const String drinkPackageAlcoholFree = "Alkoholfritt";
 
   void initState() {
-    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
-          this.event = value;
+    ApiService.apiClient.getEventsApi().eventsGetSingleEvent(eventId: widget.eventId).then((value) => setState(() {
+          this.event = value.data;
           if (this.event != null) {
             this.drinkPackageAnswer = drinkPackageAlcohol;
-            if (event!.groups != null && event!.groups!.isNotEmpty) {
-              this.defaultGroup = event!.groups![0];
-              this.group = defaultGroup;
-            }
-            if (this.group == null) {
-              this.displayGroupInput = true;
-            }
-          }
-        }));
-    locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
-          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
-          this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-            this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
+            ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
+              this.user = value.data;
+              if(user!.groups.isNotEmpty){
+                this.defaultGroup = user!.groups.first;
+                this.group = defaultGroup;
+              }else{
+                this.displayGroupInput = true;
+              }
+              
+            });
           }
         }));
     super.initState();

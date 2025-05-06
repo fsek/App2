@@ -13,9 +13,6 @@ part 'user_in_group_read.g.dart';
 /// Properties:
 /// * [id] 
 /// * [email] 
-/// * [isActive] 
-/// * [isSuperuser] 
-/// * [isVerified] 
 /// * [firstName] 
 /// * [lastName] 
 /// * [program] 
@@ -26,15 +23,6 @@ abstract class UserInGroupRead implements Built<UserInGroupRead, UserInGroupRead
 
   @BuiltValueField(wireName: r'email')
   String get email;
-
-  @BuiltValueField(wireName: r'is_active')
-  bool? get isActive;
-
-  @BuiltValueField(wireName: r'is_superuser')
-  bool? get isSuperuser;
-
-  @BuiltValueField(wireName: r'is_verified')
-  bool? get isVerified;
 
   @BuiltValueField(wireName: r'first_name')
   String get firstName;
@@ -50,10 +38,7 @@ abstract class UserInGroupRead implements Built<UserInGroupRead, UserInGroupRead
   factory UserInGroupRead([void updates(UserInGroupReadBuilder b)]) = _$UserInGroupRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserInGroupReadBuilder b) => b
-      ..isActive = true
-      ..isSuperuser = false
-      ..isVerified = false;
+  static void _defaults(UserInGroupReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserInGroupRead> get serializer => _$UserInGroupReadSerializer();
@@ -81,27 +66,6 @@ class _$UserInGroupReadSerializer implements PrimitiveSerializer<UserInGroupRead
       object.email,
       specifiedType: const FullType(String),
     );
-    if (object.isActive != null) {
-      yield r'is_active';
-      yield serializers.serialize(
-        object.isActive,
-        specifiedType: const FullType(bool),
-      );
-    }
-    if (object.isSuperuser != null) {
-      yield r'is_superuser';
-      yield serializers.serialize(
-        object.isSuperuser,
-        specifiedType: const FullType(bool),
-      );
-    }
-    if (object.isVerified != null) {
-      yield r'is_verified';
-      yield serializers.serialize(
-        object.isVerified,
-        specifiedType: const FullType(bool),
-      );
-    }
     yield r'first_name';
     yield serializers.serialize(
       object.firstName,
@@ -153,27 +117,6 @@ class _$UserInGroupReadSerializer implements PrimitiveSerializer<UserInGroupRead
             specifiedType: const FullType(String),
           ) as String;
           result.email = valueDes;
-          break;
-        case r'is_active':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isActive = valueDes;
-          break;
-        case r'is_superuser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isSuperuser = valueDes;
-          break;
-        case r'is_verified':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isVerified = valueDes;
           break;
         case r'first_name':
           final valueDes = serializers.deserialize(

@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -14,6 +15,7 @@ part 'event_signup_update.g.dart';
 /// * [userId] 
 /// * [priority] 
 /// * [groupName] 
+/// * [drinkPackage] 
 @BuiltValue()
 abstract class EventSignupUpdate implements Built<EventSignupUpdate, EventSignupUpdateBuilder> {
   @BuiltValueField(wireName: r'user_id')
@@ -24,6 +26,10 @@ abstract class EventSignupUpdate implements Built<EventSignupUpdate, EventSignup
 
   @BuiltValueField(wireName: r'group_name')
   String? get groupName;
+
+  @BuiltValueField(wireName: r'drinkPackage')
+  EventSignupUpdateDrinkPackageEnum? get drinkPackage;
+  // enum drinkPackageEnum {  None,  AlcoholFree,  Alcohol,  };
 
   EventSignupUpdate._();
 
@@ -67,6 +73,13 @@ class _$EventSignupUpdateSerializer implements PrimitiveSerializer<EventSignupUp
       yield serializers.serialize(
         object.groupName,
         specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.drinkPackage != null) {
+      yield r'drinkPackage';
+      yield serializers.serialize(
+        object.drinkPackage,
+        specifiedType: const FullType.nullable(EventSignupUpdateDrinkPackageEnum),
       );
     }
   }
@@ -116,6 +129,14 @@ class _$EventSignupUpdateSerializer implements PrimitiveSerializer<EventSignupUp
           if (valueDes == null) continue;
           result.groupName = valueDes;
           break;
+        case r'drinkPackage':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(EventSignupUpdateDrinkPackageEnum),
+          ) as EventSignupUpdateDrinkPackageEnum?;
+          if (valueDes == null) continue;
+          result.drinkPackage = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -143,5 +164,22 @@ class _$EventSignupUpdateSerializer implements PrimitiveSerializer<EventSignupUp
     );
     return result.build();
   }
+}
+
+class EventSignupUpdateDrinkPackageEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventSignupUpdateDrinkPackageEnum none = _$eventSignupUpdateDrinkPackageEnum_none;
+  @BuiltValueEnumConst(wireName: r'AlcoholFree')
+  static const EventSignupUpdateDrinkPackageEnum alcoholFree = _$eventSignupUpdateDrinkPackageEnum_alcoholFree;
+  @BuiltValueEnumConst(wireName: r'Alcohol')
+  static const EventSignupUpdateDrinkPackageEnum alcohol = _$eventSignupUpdateDrinkPackageEnum_alcohol;
+
+  static Serializer<EventSignupUpdateDrinkPackageEnum> get serializer => _$eventSignupUpdateDrinkPackageEnumSerializer;
+
+  const EventSignupUpdateDrinkPackageEnum._(String name): super(name);
+
+  static BuiltSet<EventSignupUpdateDrinkPackageEnum> get values => _$eventSignupUpdateDrinkPackageEnumValues;
+  static EventSignupUpdateDrinkPackageEnum valueOf(String name) => _$eventSignupUpdateDrinkPackageEnumValueOf(name);
 }
 

@@ -121,8 +121,7 @@ class _NewsPageState extends State<NewsPage> {
                                                 fontWeight: FontWeight.normal)),
                                     SizedBox(height: 6),
                                     Text(Time.format(news.createdAt, "%d %M %Y %h:%m")
-                                          .toString()
-                                          .substring(0, 19),
+                                          .toString(),
                                       style: TextStyle(fontSize: 12),
                                     )
                                   ]),

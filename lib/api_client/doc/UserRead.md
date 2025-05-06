@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **standardFoodPreferences** | **BuiltList&lt;String&gt;** |  | 
 **otherFoodPreferences** | **String** |  | 
 **accesses** | [**BuiltList&lt;SimpleUserAccessRead&gt;**](SimpleUserAccessRead.md) |  | 
+**groups** | [**BuiltList&lt;GroupRead&gt;**](GroupRead.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

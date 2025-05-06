@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/group_read.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:api_client/src/model/simple_user_access_read.dart';
 import 'package:api_client/src/model/user_event_read.dart';
@@ -32,6 +33,7 @@ part 'user_read.g.dart';
 /// * [standardFoodPreferences] 
 /// * [otherFoodPreferences] 
 /// * [accesses] 
+/// * [groups] 
 @BuiltValue()
 abstract class UserRead implements Built<UserRead, UserReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -84,6 +86,9 @@ abstract class UserRead implements Built<UserRead, UserReadBuilder> {
 
   @BuiltValueField(wireName: r'accesses')
   BuiltList<SimpleUserAccessRead> get accesses;
+
+  @BuiltValueField(wireName: r'groups')
+  BuiltList<GroupRead> get groups;
 
   UserRead._();
 
@@ -203,6 +208,11 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
     yield serializers.serialize(
       object.accesses,
       specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
+    );
+    yield r'groups';
+    yield serializers.serialize(
+      object.groups,
+      specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
     );
   }
 
@@ -348,6 +358,13 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
             specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
           ) as BuiltList<SimpleUserAccessRead>;
           result.accesses.replace(valueDes);
+          break;
+        case r'groups':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
+          ) as BuiltList<GroupRead>;
+          result.groups.replace(valueDes);
           break;
         default:
           unhandled.add(key);

@@ -280,13 +280,15 @@ class _GalleryPageState extends State<GalleryPage> {
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
               child: InkWell(
-              onTap: () => goToAlbum(elem.id),
+              onTap: () => placeHolder(elem.id) //goToAlbum(elem.id),
       ),
     )
       ]));
     }
     return result;
   }
+
+  void placeHolder(int id) {}
 
   void goToAlbum(int id) {
     locator<AlbumService>().getAlbum(id).then((album) {
