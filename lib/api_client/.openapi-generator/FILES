@@ -102,6 +102,8 @@ doc/TagEdit.md
 doc/TagRead.md
 doc/TagsApi.md
 doc/UpdatePermission.md
+doc/UpdatePermissionPart.md
+doc/UpdatePermissions.md
 doc/UpdateUserMember.md
 doc/UserAccessCreate.md
 doc/UserAccessRead.md
@@ -230,6 +232,8 @@ lib/src/model/tag_create.dart
 lib/src/model/tag_edit.dart
 lib/src/model/tag_read.dart
 lib/src/model/update_permission.dart
+lib/src/model/update_permission_part.dart
+lib/src/model/update_permissions.dart
 lib/src/model/update_user_member.dart
 lib/src/model/user_access_create.dart
 lib/src/model/user_access_read.dart
@@ -245,6 +249,3 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/council_in_event_read_test.dart
-test/event_signup_read_test.dart
-test/user_in_event_read_test.dart

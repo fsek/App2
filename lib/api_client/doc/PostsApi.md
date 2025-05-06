@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**postsCreatePost**](PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [**postsDeletePost**](PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [**postsGetAllPosts**](PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
+[**postsGetPost**](PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
 [**postsUpdatePost**](PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
 
 
@@ -129,6 +130,49 @@ This endpoint does not need any parameter.
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **postsGetPost**
+> PostRead postsGetPost(postId)
+
+Get Post
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getPostsApi();
+final int postId = 56; // int | 
+
+try {
+    final response = api.postsGetPost(postId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling PostsApi->postsGetPost: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **postId** | **int**|  | 
+
+### Return type
+
+[**PostRead**](PostRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 

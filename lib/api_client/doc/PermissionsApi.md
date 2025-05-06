@@ -10,13 +10,14 @@ All URIs are relative to *http://10.0.2.2:8000*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**permissionsChangePostPermission**](PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
+[**permissionsChangePostPermissions**](PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
 [**permissionsCreatePermission**](PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
 [**permissionsGetAllPermissions**](PermissionsApi.md#permissionsgetallpermissions) | **GET** /permissions/ | Get All Permissions
 [**permissionsRemovePermission**](PermissionsApi.md#permissionsremovepermission) | **DELETE** /permissions/ | Remove Permission
 
 
 # **permissionsChangePostPermission**
-> JsonObject permissionsChangePostPermission(updatePermission)
+> PostRead permissionsChangePostPermission(updatePermission)
 
 Change Post Permission
 
@@ -45,7 +46,50 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**JsonObject**](JsonObject.md)
+[**PostRead**](PostRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **permissionsChangePostPermissions**
+> PostRead permissionsChangePostPermissions(updatePermissions)
+
+Change Post Permissions
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getPermissionsApi();
+final UpdatePermissions updatePermissions = ; // UpdatePermissions | 
+
+try {
+    final response = api.permissionsChangePostPermissions(updatePermissions);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling PermissionsApi->permissionsChangePostPermissions: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updatePermissions** | [**UpdatePermissions**](UpdatePermissions.md)|  | 
+
+### Return type
+
+[**PostRead**](PostRead.md)
 
 ### Authorization
 

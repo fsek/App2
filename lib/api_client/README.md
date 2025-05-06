@@ -161,12 +161,14 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/patch/{id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
+[*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermissions**](doc/PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsCreatePermission**](doc/PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsGetAllPermissions**](doc/PermissionsApi.md#permissionsgetallpermissions) | **GET** /permissions/ | Get All Permissions
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsRemovePermission**](doc/PermissionsApi.md#permissionsremovepermission) | **DELETE** /permissions/ | Remove Permission
 [*PostsApi*](doc/PostsApi.md) | [**postsCreatePost**](doc/PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [*PostsApi*](doc/PostsApi.md) | [**postsDeletePost**](doc/PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
+[*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
 [*SongsApi*](doc/SongsApi.md) | [**songsCreateSong**](doc/SongsApi.md#songscreatesong) | **POST** /songs/ | Create Song
 [*SongsApi*](doc/SongsApi.md) | [**songsDeleteSong**](doc/SongsApi.md#songsdeletesong) | **DELETE** /songs/{song_id} | Delete Song
@@ -275,6 +277,8 @@ Class | Method | HTTP request | Description
  - [TagEdit](doc/TagEdit.md)
  - [TagRead](doc/TagRead.md)
  - [UpdatePermission](doc/UpdatePermission.md)
+ - [UpdatePermissionPart](doc/UpdatePermissionPart.md)
+ - [UpdatePermissions](doc/UpdatePermissions.md)
  - [UpdateUserMember](doc/UpdateUserMember.md)
  - [UserAccessCreate](doc/UserAccessCreate.md)
  - [UserAccessRead](doc/UserAccessRead.md)

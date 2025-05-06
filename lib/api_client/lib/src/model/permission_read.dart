@@ -26,7 +26,7 @@ abstract class PermissionRead implements Built<PermissionRead, PermissionReadBui
 
   @BuiltValueField(wireName: r'target')
   PermissionReadTargetEnum get target;
-  // enum targetEnum {  Event,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
 
   PermissionRead._();
 
@@ -158,6 +158,8 @@ class PermissionReadTargetEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Event')
   static const PermissionReadTargetEnum event = _$permissionReadTargetEnum_event;
+  @BuiltValueEnumConst(wireName: r'Document')
+  static const PermissionReadTargetEnum document = _$permissionReadTargetEnum_document;
   @BuiltValueEnumConst(wireName: r'User')
   static const PermissionReadTargetEnum user = _$permissionReadTargetEnum_user;
   @BuiltValueEnumConst(wireName: r'Post')

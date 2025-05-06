@@ -94,6 +94,8 @@ import 'package:api_client/src/model/tag_create.dart';
 import 'package:api_client/src/model/tag_edit.dart';
 import 'package:api_client/src/model/tag_read.dart';
 import 'package:api_client/src/model/update_permission.dart';
+import 'package:api_client/src/model/update_permission_part.dart';
+import 'package:api_client/src/model/update_permissions.dart';
 import 'package:api_client/src/model/update_user_member.dart';
 import 'package:api_client/src/model/user_access_create.dart';
 import 'package:api_client/src/model/user_access_read.dart';
@@ -191,6 +193,8 @@ part 'serializers.g.dart';
   TagEdit,
   TagRead,
   UpdatePermission,
+  UpdatePermissionPart,
+  UpdatePermissions,
   UpdateUserMember,
   UserAccessCreate,
   UserAccessRead,
