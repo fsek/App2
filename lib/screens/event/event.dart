@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
@@ -280,12 +281,12 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Icon(
                   Icons.info_outline_rounded,
-                  color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
+                  color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                 ),
                 Text(
                   t.eventNotSignedUp,
                   style: TextStyle(
-                    color: Colors.red[300],
+                    color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                   ),
                 ),
               ],
@@ -312,18 +313,18 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.cancel,
-                          color: Colors.red[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                         ),
                         Text(
                           t.eventNoSpot,
                           style: TextStyle(
-                            color: Colors.red[300],
+                            color: (event?.is_introduction == true ? Color.fromARGB(255, 204, 8, 8) : Colors.red[300]),
                           ),
                         ),
                       ],
                     ),
                     Divider(
-                      color: null,
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                     ),
                     ..._signupDetails(groupName, userType),
                   ],
@@ -336,18 +337,19 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         Icon(
                           Icons.check_circle,
-                          color: Colors.green[300],
+                          color: (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                         ),
                         Text(
                           t.eventGotSpot,
                           style: TextStyle(
-                            color:Colors.green[300],
+                            color:
+                                (event?.is_introduction == true ? Color.fromARGB(255, 62, 91, 46) : Colors.green[300]),
                           ),
                         ),
                       ],
                     ),
                     Divider(
-                      color: null,
+                      color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                     ),
                     ..._signupDetails(groupName, userType),
                   ],
@@ -361,18 +363,22 @@ class _EventPageState extends State<EventPage> {
                     children: [
                       Icon(
                         Icons.info_outline_rounded,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: (event?.is_introduction == true
+                            ? Color.fromARGB(255, 159, 126, 6)
+                            : Theme.of(context).colorScheme.primary),
                       ),
                       Text(
                         t.eventLotterySpot,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: (event?.is_introduction == true
+                              ? Color.fromARGB(255, 159, 126, 6)
+                              : Theme.of(context).colorScheme.primary),
                         ),
                       ),
                     ],
                   ),
                   Divider(
-                    color: null,
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                   ),
                   ..._signupDetails(groupName, userType),
                 ],
@@ -397,7 +403,7 @@ class _EventPageState extends State<EventPage> {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           Divider(
-            color: null,
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -453,11 +459,11 @@ class _EventPageState extends State<EventPage> {
             ),
           ),
           Divider(
-            color: null,
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
           ),
           signup,
           Divider(
-            color: null,
+            color: (event?.is_introduction == true ? Color(0xFF565656) : null),
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -475,7 +481,7 @@ class _EventPageState extends State<EventPage> {
                   onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
                 ),
                 Divider(
-                  color: null,
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                 ),
               ],
             ),
@@ -561,7 +567,9 @@ class _EventPageState extends State<EventPage> {
                   child: Text(t.eventLinkToFoodPrefs,
                       style: TextStyle(
                           decoration: TextDecoration.underline,
-                          color: Theme.of(context).colorScheme.primary)),
+                          color: (event?.is_introduction == true
+                              ? Color(0xFF630b0b)
+                              : Theme.of(context).colorScheme.primary))),
                   onTap: () => goToSettings(),
                 ),
               ]),
@@ -735,7 +743,9 @@ class _EventPageState extends State<EventPage> {
           child: Text(t.eventLinkToFoodPrefs,
               style: TextStyle(
                   decoration: TextDecoration.underline,
-                  color: Theme.of(context).colorScheme.primary)),
+                  color: (event?.is_introduction == true
+                      ? Color(0xFF630b0b)
+                      : Theme.of(context).colorScheme.primary))),
           onTap: () => goToSettings(),
         ),
       ]),
@@ -788,6 +798,15 @@ class _EventPageState extends State<EventPage> {
         title: Text(t.eventTitle),
       ),
       body: Container(
+        // Introduction events have a different background
+        decoration: event?.is_introduction == true
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/img/nollning-24/schedule/event_background.png"),
+                  fit: BoxFit.fill,
+                ),
+              )
+            : null,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -800,7 +819,7 @@ class _EventPageState extends State<EventPage> {
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
                 ),
                 Divider(
-                  color: null,
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                 ),
                 Row(
                   children: [
@@ -838,7 +857,7 @@ class _EventPageState extends State<EventPage> {
                   ],
                 ),
                 Divider(
-                  color: null,
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
@@ -851,7 +870,7 @@ class _EventPageState extends State<EventPage> {
                       }),
                 ),
                 Divider(
-                  color: null,
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -869,7 +888,7 @@ class _EventPageState extends State<EventPage> {
                   ),
                 ),
                 Divider(
-                  color: null,
+                  color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -920,7 +939,7 @@ class _EventPageState extends State<EventPage> {
                 Visibility(
                   visible: event!.can_signup ?? false,
                   child: Divider(
-                    color: null,
+                    color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                   ),
                 ),
                 Visibility(
@@ -944,7 +963,7 @@ class _EventPageState extends State<EventPage> {
                           )),
                         ),
                         Divider(
-                          color: null,
+                          color: (event?.is_introduction == true ? Color(0xFF565656) : null),
                         ),
                       ],
                     ),
