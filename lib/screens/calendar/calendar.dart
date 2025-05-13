@@ -53,13 +53,13 @@ class _CalendarState extends State<Calendar> {
     return Container(
       child: Card(
         // Hide card for introduction events
-        shadowColor: event.is_introduction == true ? Colors.transparent : null,
-        color: event.is_introduction == true ? Colors.transparent : null,
+        shadowColor: /*event.is_introduction*/ true == true ? Colors.transparent : null,
+        color: /*event.is_introduction*/ true == true ? Colors.transparent : null,
         child: InkWell(
           onTap: () => openEventPage(event),
           child: Container(
             // Introduction events have a different background
-            decoration: event.is_introduction == true
+            decoration: /*event.is_introduction*/ true == true
                 ? BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/img/nollning-24/schedule/event_card_background.png"),
@@ -80,7 +80,7 @@ class _CalendarState extends State<Calendar> {
                       style: TextStyle(
                         fontSize: 20,
                         // Double ternary just works :)
-                        color: (event.is_introduction == true
+                        color: (/*event.is_introduction*/ true == true
                             ? Color(0xFF630B0B)
                             : Theme.of(context).colorScheme.primary),
                       ),
@@ -135,14 +135,14 @@ class _CalendarState extends State<Calendar> {
                   ),
                 ],
               ),
-              margin: event.is_introduction == true
+              margin: /*event.is_introduction*/ true == true
                   ? EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 6, 15, 15, 15)
                   : EdgeInsets.all(10),
             ),
           ),
         ),
         // Introduction events background needs access to entire card
-        margin: event.is_introduction == true ? EdgeInsets.symmetric(vertical: 4) : EdgeInsets.all(4),
+        margin: /*event.is_introduction*/ true == true ? EdgeInsets.symmetric(vertical: 4) : EdgeInsets.all(4),
       ),
     );
   }
