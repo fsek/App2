@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -66,7 +67,8 @@ class _ChantBookPageState extends State<ChantBookPage> {
                             ? IconButton(
                                 icon: Icon(
                                   Icons.arrow_back,
-                                  color: Theme.of(context).colorScheme.onSurface,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                                 onPressed: () =>
                                     FocusScope.of(context).unfocus())
@@ -129,7 +131,8 @@ class _ChantBookPageState extends State<ChantBookPage> {
     if (song.author != chantAuthor) {
       chantAuthor = song.author!;
       index.add(Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+        decoration:
+            BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
         child: ListTile(
           title: Text(
             chantAuthor,
@@ -144,7 +147,8 @@ class _ChantBookPageState extends State<ChantBookPage> {
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),
@@ -155,10 +159,10 @@ class _ChantBookPageState extends State<ChantBookPage> {
     );
   }
 
-  void openSong(int id) {
-    locator<SongService>().getSong(id).then((song) {
+  void openSong(int id) async {
+    await ApiClient().getSongsApi().songsGetSong(songId: id).then((song) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+          MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });
   }
 }

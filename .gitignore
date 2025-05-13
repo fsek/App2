@@ -57,3 +57,7 @@ build
 
 # Ignore missings translations file from I10n.yaml
 missingTranslations.txt
+
+# Ignore Android Studio generated files
+android/app/.cxx/Debug/
+openapitools.json

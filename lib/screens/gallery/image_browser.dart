@@ -6,10 +6,11 @@ import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:flutter_image_gallery_saver/flutter_image_gallery_saver.dart';
 
 class ImageBrowserPage extends StatefulWidget {
-  const ImageBrowserPage({Key? key, required this.album, required this.initial}) : super(key: key);
+  const ImageBrowserPage({Key? key, required this.album, required this.initial})
+      : super(key: key);
 
   final Album album;
   final int initial;
@@ -56,10 +57,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     icon: Icon(Icons.download_for_offline_rounded, size: 40),
                     onPressed: () async {
                       try {
-                        http.Response image = await http.get(
-                            Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                        ImageGallerySaver.saveImage(image.bodyBytes,
-                            name: "${widget.album.images![index].filename!}", quality: 1);
+                        http.Response image = await http.get(Uri.parse(
+                            "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
+                        FlutterImageGallerySaver.saveImage(image.bodyBytes);
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
                         ));
@@ -77,19 +77,24 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                 icon: Icon(Icons.download),
                 onPressed: () async {
                   try {
-                    http.Response image = await http
-                        .get(Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    ImageGallerySaver.saveImage(image.bodyBytes,
-                        name: "${widget.album.images![index].filename!}", quality: 100);
+                    http.Response image = await http.get(Uri.parse(
+                        "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
+                    FlutterImageGallerySaver.saveImage(image.bodyBytes);
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloaded, style: Theme.of(context).textTheme.labelLarge,), 
-                      backgroundColor: Theme.of(context).colorScheme.surfaceVariant
-                    ));
+                        content: Text(
+                          t.galleryImageDownloaded,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.surfaceVariant));
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloadError, style: Theme.of(context).textTheme.labelLarge,),
-                      backgroundColor: Theme.of(context).colorScheme.surfaceVariant
-                    ));
+                        content: Text(
+                          t.galleryImageDownloadError,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.surfaceVariant));
                   }
                 },
               ),
@@ -127,7 +132,11 @@ class PageViewBuilder extends StatefulWidget {
   final PageController pageController;
 
   const PageViewBuilder(
-      {Key? key, required this.album, required this.initial, required this.callback, required this.pageController})
+      {Key? key,
+      required this.album,
+      required this.initial,
+      required this.callback,
+      required this.pageController})
       : super(key: key);
 
   @override
@@ -141,7 +150,9 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: _pagingEnabled ? const PageScrollPhysics() : const NeverScrollableScrollPhysics(),
+      physics: _pagingEnabled
+          ? const PageScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       itemCount: widget.album.images!.length,
       controller: widget.pageController,
       itemBuilder: (context, index) {
@@ -195,7 +206,8 @@ class ImageContainer extends StatefulWidget {
 }
 
 class _ImageContainerState extends State<ImageContainer> {
-  final TransformationController _transformationController = TransformationController();
+  final TransformationController _transformationController =
+      TransformationController();
 
   @override
   Widget build(BuildContext context) {

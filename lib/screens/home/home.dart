@@ -30,28 +30,34 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
-  List<ElectionDocument>? backgroundDocuments;
-  String? backgroundUrl;
-  bool? election;
+  String? background;
+
+
+
 
   void initState() {
-    locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
-          // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
-          if (!listEquals(value, []) && value != null) {
-            this.backgroundDocuments = value;
-            // title cant be empty so it is always a string
-            if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
-              // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
-              this.election = true;
-            } else {
-              this.election = false;
-            }
-            this.backgroundUrl = value.last.url;
-          }
-        }));
+
+    background = "assets/img/default_background.png";
+
+    // locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
+    //   // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
+    //   if (!listEquals(value, []) && value != null) {
+    //     this.backgroundDocuments = value;
+    //     // title cant be empty so it is always a string
+    //     if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
+    //       // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
+    //       this.election = true;
+    //     } else {
+    //       this.election = false;
+    //     }
+    //     this.backgroundUrl = value.last.url;
+    //   }
+    // }));
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -212,6 +218,75 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
+  // Old code maybe needed on a rainy day
+  // class _HomePageState extends State<HomePage> {
+  //   List<ElectionDocument>? backgroundDocuments;
+  //   String? backgroundUrl;
+  //   bool? election;
+
+  //   void initState() {
+  //     locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
+  //       // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
+  //       if (!listEquals(value, []) && value != null) {
+  //         this.backgroundDocuments = value;
+  //         // title cant be empty so it is always a string
+  //         if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
+  //           // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
+  //           this.election = true;
+  //         } else {
+  //           this.election = false;
+  //         }
+  //         this.backgroundUrl = value.last.url;
+  //       }
+  //     }));
+  //     super.initState();
+  //   }
+
+  //   @override
+  //   Widget build(BuildContext context) {
+  //     var t = AppLocalizations.of(context)!;
+  //     double edgePadding = MediaQuery.of(context).size.width / 25;
+  //     String defaultBackground = "assets/img/default_background.png";
+
+  //     return Stack(children: [
+  //       // If we couldnt get a background image for whatever reason make it the default
+  //       backgroundUrl != null
+  //         ? CachedNetworkImage(
+  //             fit: BoxFit.cover,
+  //             alignment: Alignment.topCenter,
+  //             height: MediaQuery.of(context).size.height,
+  //             width: MediaQuery.of(context).size.width,
+  //             placeholder: (context, url) => Center(child: CircularProgressIndicator(color: locator<ThemeService>().theme.primaryColor)),
+  //             imageUrl: backgroundUrl!,
+  //           )
+  //         : Image.asset(
+  //             defaultBackground,
+  //             height: MediaQuery.of(context).size.height,
+  //             width: MediaQuery.of(context).size.width,
+  //             fit: BoxFit.cover,
+  //             alignment: Alignment.topCenter,
+  //           ),
+  //       Scaffold(
+  //         backgroundColor: Colors.transparent,
+  //         body: Padding(
+  //           padding: EdgeInsets.fromLTRB(
+  //               edgePadding, MediaQuery.of(context).size.height / 2.69420 /* lemao */, edgePadding, 0),
+  //           child: Center(
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               // check thar election bool isnt null and if it is true make the home design according to electionbuttons.
+  //               // if null or false just use standard buttons, null means that there wasnt any picture on website
+  //               children: this.election != null
+  //                   ? (this.election! ? _getElectionButtons() : _getStandardButtons())
+  //                   : _getStandardButtons(),
+  //             )
+  //           )
+  //         ),
+  //       ),
+  //     ]);
+  //   }
+
+
   // Currently unused, used in nollning 2023
   // Widget _pageFlipButton(Widget destination, String assetPath, int week, double circleSize, double inkwellCurvature, double padding) {
   //   return InkWell(
@@ -270,35 +345,38 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  List<Widget> _getElectionButtons() {
-    var t = AppLocalizations.of(context)!;
+//   List<Widget> _getElectionButtons() {
+//     var t = AppLocalizations.of(context)!;
 
-    return [
-      Spacer(flex: 6),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          button(t.guildMeetingButtonAbout, AboutGuildMeetingPage()),
-          button(t.guildMeetingButtonPoster, CandidacyPosterPage()),
-        ],
-      ),
-      Spacer(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          button(t.guildMeetingButtonMotions, MotionsPage()),
-          button(t.guildMeetingButtonProposition, PropositionsPage()),
-        ],
-      ),
-      Spacer(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button matches up with the grid above
-          button(t.guildMeetingButtonOther, OtherDocumentsPage()),
-        ],
-      ),
-      Spacer(flex: 2),
-    ];
-  }
+//     return [
+//       Spacer(flex: 6),
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceAround,
+//         children: [
+//           button(t.guildMeetingButtonAbout, AboutGuildMeetingPage()),
+//           button(t.guildMeetingButtonPoster, CandidacyPosterPage()),
+//         ],
+//       ),
+//       Spacer(),
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceAround,
+//         children: [
+//           button(t.guildMeetingButtonMotions, MotionsPage()),
+//           button(t.guildMeetingButtonProposition, PropositionsPage()),
+//         ],
+//       ),
+//       Spacer(),
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children: [
+//           SizedBox(width: MediaQuery.of(context).size.width / 48), // space so that the fifth button matches up with the grid above
+//           button(t.guildMeetingButtonOther, OtherDocumentsPage()),
+//         ],
+//       ),
+//       Spacer(flex: 2),
+//     ];
+//   }
+// }
+
+
 }

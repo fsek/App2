@@ -27,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       var token;
       try {
         token = await userService.sendLogin(
-          email: event.username,
+          username: event.username,
           pass: event.password,
         );
       } catch (ex) {
