@@ -11,14 +11,26 @@ part 'album_create.g.dart';
 /// AlbumCreate
 ///
 /// Properties:
-/// * [name] 
+/// * [titleSv] 
+/// * [titleEn] 
+/// * [descSv] 
+/// * [descEn] 
 /// * [year] 
 /// * [location] 
 /// * [date] 
 @BuiltValue()
 abstract class AlbumCreate implements Built<AlbumCreate, AlbumCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'title_sv')
+  String get titleSv;
+
+  @BuiltValueField(wireName: r'title_en')
+  String get titleEn;
+
+  @BuiltValueField(wireName: r'desc_sv')
+  String get descSv;
+
+  @BuiltValueField(wireName: r'desc_en')
+  String get descEn;
 
   @BuiltValueField(wireName: r'year')
   int get year;
@@ -52,9 +64,24 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
     AlbumCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'title_sv';
     yield serializers.serialize(
-      object.name,
+      object.titleSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'title_en';
+    yield serializers.serialize(
+      object.titleEn,
+      specifiedType: const FullType(String),
+    );
+    yield r'desc_sv';
+    yield serializers.serialize(
+      object.descSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'desc_en';
+    yield serializers.serialize(
+      object.descEn,
       specifiedType: const FullType(String),
     );
     yield r'year';
@@ -95,12 +122,33 @@ class _$AlbumCreateSerializer implements PrimitiveSerializer<AlbumCreate> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'title_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.titleSv = valueDes;
+          break;
+        case r'title_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.titleEn = valueDes;
+          break;
+        case r'desc_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descSv = valueDes;
+          break;
+        case r'desc_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descEn = valueDes;
           break;
         case r'year':
           final valueDes = serializers.deserialize(

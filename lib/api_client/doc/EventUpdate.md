@@ -27,6 +27,9 @@ Name | Type | Description | Notes
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
+**isNollningEvent** | **bool** |  | [optional] 
+**dresscode** | **String** |  | 
+**price** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

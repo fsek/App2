@@ -194,6 +194,7 @@ class _GalleryPageState extends State<GalleryPage> {
   // }
 
   List<Widget> generateAlbumThumbnails() {
+    var t = AppLocalizations.of(context)!;
     if (selectedGalleries == null) {
       return [];
     }
@@ -204,7 +205,7 @@ class _GalleryPageState extends State<GalleryPage> {
           padding: EdgeInsets.only(top: 16),
           child: Column(children: [
             Text(
-              elem.name.toString(),
+              t.localeName == "sv" ? elem.titleSv : elem.titleEn,
               style: Theme.of(context).textTheme.titleLarge?.apply(
                     color: Colors.white,
                     fontSizeDelta: -4,

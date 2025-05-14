@@ -3,10 +3,7 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/group_read.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:api_client/src/model/simple_user_access_read.dart';
-import 'package:api_client/src/model/user_event_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -17,39 +14,15 @@ part 'user_read.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [email] 
-/// * [isActive] 
-/// * [isSuperuser] 
-/// * [isVerified] 
 /// * [firstName] 
 /// * [lastName] 
+/// * [program] 
 /// * [posts] 
-/// * [events] 
-/// * [telephoneNumber] 
 /// * [startYear] 
-/// * [accountCreated] 
-/// * [wantNotifications] 
-/// * [stilId] 
-/// * [standardFoodPreferences] 
-/// * [otherFoodPreferences] 
-/// * [accesses] 
-/// * [groups] 
 @BuiltValue()
 abstract class UserRead implements Built<UserRead, UserReadBuilder> {
   @BuiltValueField(wireName: r'id')
   int get id;
-
-  @BuiltValueField(wireName: r'email')
-  String get email;
-
-  @BuiltValueField(wireName: r'is_active')
-  bool? get isActive;
-
-  @BuiltValueField(wireName: r'is_superuser')
-  bool? get isSuperuser;
-
-  @BuiltValueField(wireName: r'is_verified')
-  bool? get isVerified;
 
   @BuiltValueField(wireName: r'first_name')
   String get firstName;
@@ -57,48 +30,22 @@ abstract class UserRead implements Built<UserRead, UserReadBuilder> {
   @BuiltValueField(wireName: r'last_name')
   String get lastName;
 
+  @BuiltValueField(wireName: r'program')
+  UserReadProgramEnum? get program;
+  // enum programEnum {  F,  Pi,  N,  };
+
   @BuiltValueField(wireName: r'posts')
   BuiltList<UserPostRead> get posts;
 
-  @BuiltValueField(wireName: r'events')
-  BuiltList<UserEventRead> get events;
-
-  @BuiltValueField(wireName: r'telephone_number')
-  String get telephoneNumber;
-
   @BuiltValueField(wireName: r'start_year')
   int get startYear;
-
-  @BuiltValueField(wireName: r'account_created')
-  DateTime get accountCreated;
-
-  @BuiltValueField(wireName: r'want_notifications')
-  bool get wantNotifications;
-
-  @BuiltValueField(wireName: r'stil_id')
-  String? get stilId;
-
-  @BuiltValueField(wireName: r'standard_food_preferences')
-  BuiltList<String>? get standardFoodPreferences;
-
-  @BuiltValueField(wireName: r'other_food_preferences')
-  String? get otherFoodPreferences;
-
-  @BuiltValueField(wireName: r'accesses')
-  BuiltList<SimpleUserAccessRead> get accesses;
-
-  @BuiltValueField(wireName: r'groups')
-  BuiltList<GroupRead> get groups;
 
   UserRead._();
 
   factory UserRead([void updates(UserReadBuilder b)]) = _$UserRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserReadBuilder b) => b
-      ..isActive = true
-      ..isSuperuser = false
-      ..isVerified = false;
+  static void _defaults(UserReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserRead> get serializer => _$UserReadSerializer();
@@ -121,32 +68,6 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
       object.id,
       specifiedType: const FullType(int),
     );
-    yield r'email';
-    yield serializers.serialize(
-      object.email,
-      specifiedType: const FullType(String),
-    );
-    if (object.isActive != null) {
-      yield r'is_active';
-      yield serializers.serialize(
-        object.isActive,
-        specifiedType: const FullType(bool),
-      );
-    }
-    if (object.isSuperuser != null) {
-      yield r'is_superuser';
-      yield serializers.serialize(
-        object.isSuperuser,
-        specifiedType: const FullType(bool),
-      );
-    }
-    if (object.isVerified != null) {
-      yield r'is_verified';
-      yield serializers.serialize(
-        object.isVerified,
-        specifiedType: const FullType(bool),
-      );
-    }
     yield r'first_name';
     yield serializers.serialize(
       object.firstName,
@@ -157,62 +78,20 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
       object.lastName,
       specifiedType: const FullType(String),
     );
+    yield r'program';
+    yield object.program == null ? null : serializers.serialize(
+      object.program,
+      specifiedType: const FullType.nullable(UserReadProgramEnum),
+    );
     yield r'posts';
     yield serializers.serialize(
       object.posts,
       specifiedType: const FullType(BuiltList, [FullType(UserPostRead)]),
     );
-    yield r'events';
-    yield serializers.serialize(
-      object.events,
-      specifiedType: const FullType(BuiltList, [FullType(UserEventRead)]),
-    );
-    yield r'telephone_number';
-    yield serializers.serialize(
-      object.telephoneNumber,
-      specifiedType: const FullType(String),
-    );
     yield r'start_year';
     yield serializers.serialize(
       object.startYear,
       specifiedType: const FullType(int),
-    );
-    yield r'account_created';
-    yield serializers.serialize(
-      object.accountCreated,
-      specifiedType: const FullType(DateTime),
-    );
-    yield r'want_notifications';
-    yield serializers.serialize(
-      object.wantNotifications,
-      specifiedType: const FullType(bool),
-    );
-    if (object.stilId != null) {
-      yield r'stil_id';
-      yield serializers.serialize(
-        object.stilId,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
-    yield r'standard_food_preferences';
-    yield object.standardFoodPreferences == null ? null : serializers.serialize(
-      object.standardFoodPreferences,
-      specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-    );
-    yield r'other_food_preferences';
-    yield object.otherFoodPreferences == null ? null : serializers.serialize(
-      object.otherFoodPreferences,
-      specifiedType: const FullType.nullable(String),
-    );
-    yield r'accesses';
-    yield serializers.serialize(
-      object.accesses,
-      specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
-    );
-    yield r'groups';
-    yield serializers.serialize(
-      object.groups,
-      specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
     );
   }
 
@@ -244,34 +123,6 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.email = valueDes;
-          break;
-        case r'is_active':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isActive = valueDes;
-          break;
-        case r'is_superuser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isSuperuser = valueDes;
-          break;
-        case r'is_verified':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isVerified = valueDes;
-          break;
         case r'first_name':
           final valueDes = serializers.deserialize(
             value,
@@ -286,6 +137,14 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
           ) as String;
           result.lastName = valueDes;
           break;
+        case r'program':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(UserReadProgramEnum),
+          ) as UserReadProgramEnum?;
+          if (valueDes == null) continue;
+          result.program = valueDes;
+          break;
         case r'posts':
           final valueDes = serializers.deserialize(
             value,
@@ -293,78 +152,12 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
           ) as BuiltList<UserPostRead>;
           result.posts.replace(valueDes);
           break;
-        case r'events':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(UserEventRead)]),
-          ) as BuiltList<UserEventRead>;
-          result.events.replace(valueDes);
-          break;
-        case r'telephone_number':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.telephoneNumber = valueDes;
-          break;
         case r'start_year':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(int),
           ) as int;
           result.startYear = valueDes;
-          break;
-        case r'account_created':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.accountCreated = valueDes;
-          break;
-        case r'want_notifications':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.wantNotifications = valueDes;
-          break;
-        case r'stil_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.stilId = valueDes;
-          break;
-        case r'standard_food_preferences':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
-          if (valueDes == null) continue;
-          result.standardFoodPreferences.replace(valueDes);
-          break;
-        case r'other_food_preferences':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.otherFoodPreferences = valueDes;
-          break;
-        case r'accesses':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
-          ) as BuiltList<SimpleUserAccessRead>;
-          result.accesses.replace(valueDes);
-          break;
-        case r'groups':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
-          ) as BuiltList<GroupRead>;
-          result.groups.replace(valueDes);
           break;
         default:
           unhandled.add(key);
@@ -393,5 +186,22 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
     );
     return result.build();
   }
+}
+
+class UserReadProgramEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'F')
+  static const UserReadProgramEnum F = _$userReadProgramEnum_F;
+  @BuiltValueEnumConst(wireName: r'Pi')
+  static const UserReadProgramEnum pi = _$userReadProgramEnum_pi;
+  @BuiltValueEnumConst(wireName: r'N')
+  static const UserReadProgramEnum N = _$userReadProgramEnum_N;
+
+  static Serializer<UserReadProgramEnum> get serializer => _$userReadProgramEnumSerializer;
+
+  const UserReadProgramEnum._(String name): super(name);
+
+  static BuiltSet<UserReadProgramEnum> get values => _$userReadProgramEnumValues;
+  static UserReadProgramEnum valueOf(String name) => _$userReadProgramEnumValueOf(name);
 }
 

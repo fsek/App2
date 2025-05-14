@@ -33,6 +33,9 @@ part 'event_create.g.dart';
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
+/// * [isNollningEvent] 
+/// * [dressCode] 
+/// * [price] 
 @BuiltValue()
 abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -98,6 +101,15 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
 
   @BuiltValueField(wireName: r'drink_package')
   bool get drinkPackage;
+
+  @BuiltValueField(wireName: r'is_nollning_event')
+  bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'dress_code')
+  String get dressCode;
+
+  @BuiltValueField(wireName: r'price')
+  int get price;
 
   EventCreate._();
 
@@ -226,6 +238,21 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield serializers.serialize(
       object.drinkPackage,
       specifiedType: const FullType(bool),
+    );
+    yield r'is_nollning_event';
+    yield serializers.serialize(
+      object.isNollningEvent,
+      specifiedType: const FullType(bool),
+    );
+    yield r'dress_code';
+    yield serializers.serialize(
+      object.dressCode,
+      specifiedType: const FullType(String),
+    );
+    yield r'price';
+    yield serializers.serialize(
+      object.price,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -396,6 +423,27 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.drinkPackage = valueDes;
+          break;
+        case r'is_nollning_event':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.isNollningEvent = valueDes;
+          break;
+        case r'dress_code':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.dressCode = valueDes;
+          break;
+        case r'price':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.price = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -5,11 +5,13 @@ doc/AdCreate.md
 doc/AdRead.md
 doc/AdUpdate.md
 doc/AddEventTag.md
+doc/AdminUserRead.md
 doc/AdsApi.md
 doc/AdventureMissionApi.md
 doc/AdventureMissionCreate.md
 doc/AdventureMissionRead.md
 doc/AlbumCreate.md
+doc/AlbumPhotographerAdd.md
 doc/AlbumRead.md
 doc/AlbumsApi.md
 doc/AuthApi.md
@@ -155,9 +157,11 @@ lib/src/model/ad_create.dart
 lib/src/model/ad_read.dart
 lib/src/model/ad_update.dart
 lib/src/model/add_event_tag.dart
+lib/src/model/admin_user_read.dart
 lib/src/model/adventure_mission_create.dart
 lib/src/model/adventure_mission_read.dart
 lib/src/model/album_create.dart
+lib/src/model/album_photographer_add.dart
 lib/src/model/album_read.dart
 lib/src/model/bearer_response.dart
 lib/src/model/body_auth_reset_forgot_password.dart

@@ -1,4 +1,4 @@
-# api_client.model.AlbumCreate
+# api_client.model.AlbumPhotographerAdd
 
 ## Load the model package
 ```dart
@@ -8,13 +8,8 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**titleSv** | **String** |  | 
-**titleEn** | **String** |  | 
-**descSv** | **String** |  | 
-**descEn** | **String** |  | 
-**year** | **int** |  | 
-**location** | **String** |  | 
-**date** | [**DateTime**](DateTime.md) |  | 
+**userId** | **int** |  | 
+**albumId** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

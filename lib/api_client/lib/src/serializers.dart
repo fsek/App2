@@ -18,9 +18,11 @@ import 'package:api_client/src/model/ad_create.dart';
 import 'package:api_client/src/model/ad_read.dart';
 import 'package:api_client/src/model/ad_update.dart';
 import 'package:api_client/src/model/add_event_tag.dart';
+import 'package:api_client/src/model/admin_user_read.dart';
 import 'package:api_client/src/model/adventure_mission_create.dart';
 import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/album_create.dart';
+import 'package:api_client/src/model/album_photographer_add.dart';
 import 'package:api_client/src/model/album_read.dart';
 import 'package:api_client/src/model/bearer_response.dart';
 import 'package:api_client/src/model/body_auth_reset_forgot_password.dart';
@@ -117,9 +119,11 @@ part 'serializers.g.dart';
   AdRead,
   AdUpdate,
   AddEventTag,
+  AdminUserRead,
   AdventureMissionCreate,
   AdventureMissionRead,
   AlbumCreate,
+  AlbumPhotographerAdd,
   AlbumRead,
   BearerResponse,
   BodyAuthResetForgotPassword,
@@ -239,6 +243,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<AdventureMissionRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdminUserRead)]),
+        () => ListBuilder<AdminUserRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(UserRead)]),
         () => ListBuilder<UserRead>(),
       )
@@ -297,6 +305,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SongRead)]),
         () => ListBuilder<SongRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NollningGroupRead)]),
+        () => ListBuilder<NollningGroupRead>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())

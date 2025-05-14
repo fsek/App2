@@ -30,6 +30,9 @@ part 'event_update.g.dart';
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
+/// * [isNollningEvent] 
+/// * [dresscode] 
+/// * [price] 
 @BuiltValue()
 abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'starts_at')
@@ -88,6 +91,15 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
 
   @BuiltValueField(wireName: r'drink_package')
   bool? get drinkPackage;
+
+  @BuiltValueField(wireName: r'is_nollning_event')
+  bool? get isNollningEvent;
+
+  @BuiltValueField(wireName: r'dresscode')
+  String? get dresscode;
+
+  @BuiltValueField(wireName: r'price')
+  int? get price;
 
   EventUpdate._();
 
@@ -243,6 +255,23 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
+    if (object.isNollningEvent != null) {
+      yield r'is_nollning_event';
+      yield serializers.serialize(
+        object.isNollningEvent,
+        specifiedType: const FullType.nullable(bool),
+      );
+    }
+    yield r'dresscode';
+    yield object.dresscode == null ? null : serializers.serialize(
+      object.dresscode,
+      specifiedType: const FullType.nullable(String),
+    );
+    yield r'price';
+    yield object.price == null ? null : serializers.serialize(
+      object.price,
+      specifiedType: const FullType.nullable(int),
+    );
   }
 
   @override
@@ -416,6 +445,30 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           ) as bool?;
           if (valueDes == null) continue;
           result.drinkPackage = valueDes;
+          break;
+        case r'is_nollning_event':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isNollningEvent = valueDes;
+          break;
+        case r'dresscode':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.dresscode = valueDes;
+          break;
+        case r'price':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.price = valueDes;
           break;
         default:
           unhandled.add(key);

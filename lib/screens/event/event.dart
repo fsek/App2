@@ -24,7 +24,7 @@ class EventPage extends StatefulWidget {
 
 class _EventPageState extends State<EventPage> {
   EventRead? event;
-  UserRead? user;
+  AdminUserRead? user;
   String? userType;
   GroupRead? group;
   String? answer;
@@ -70,6 +70,34 @@ class _EventPageState extends State<EventPage> {
     super.initState();
   }
 
+
+  void update() {
+    ApiService.apiClient.getEventsApi().eventsGetSingleEvent(eventId: widget.eventId).then((value) => setState(() {
+          this.event = value.data;
+          if (event != null) {
+            this.drinkPackageAnswer = drinkPackageAlcohol;
+            // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
+            ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
+              this.user = value.data;
+              if(user!.groups.isNotEmpty){
+                this.defaultGroup = user!.groups.first;
+                this.group = defaultGroup;
+              }else{
+                this.displayGroupInput = true;
+              }
+              
+            });
+          }
+          this.answer = null;
+        }));
+  }
+
+
+   Future<void> _onRefresh() async {
+    update();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -99,7 +127,7 @@ class _EventPageState extends State<EventPage> {
             child: ListView(
               children: [
                 Text(
-                  event?.title ?? t.eventNoTitle,
+                  t.localeName == "sv" ? event!.titleSv : event!.titleEn,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
                 ),
                 Divider(
@@ -113,12 +141,11 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(event?.starts_at?.toLocal() ?? DateTime.now()) +
-                          getDots() +
+                          DateFormat("HH:mm").format(event?.startsAt.toLocal() ?? DateTime.now()) +
                           " - " +
-                          DateFormat("HH:mm").format(event?.ends_at?.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.endsAt.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale).format(event?.starts_at?.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale).format(event?.startsAt.toLocal() ?? DateTime.now()),
                       style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).textTheme.bodyMedium!.color
@@ -147,7 +174,7 @@ class _EventPageState extends State<EventPage> {
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                      data: event?.description ?? t.eventNoDescription,
+                      data: t.localeName == "sv" ? event!.descriptionSv : event!.descriptionEn,
                       style: _htmlStyle,
                       onLinkTap: (String? url, Map<String, String> attributes, element) {
                         launchUrl(Uri.parse(url!));
@@ -162,12 +189,11 @@ class _EventPageState extends State<EventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        Text(t.eventDressCode),
-                        ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
+                        Text(t.eventDressCode + event!.dressCode)
                       ]),
                       Visibility(
                           visible: event!.cash ?? false,
-                          child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
+                          child: Text(t.eventPrice + (event?.price.toString() ?? "") + " kr")),
                     ],
                   ),
                 ),
@@ -196,7 +222,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: event!.drink ?? false,
+                        visible: event!.drink,
                         child: Row(
                           children: [
                             Icon(
@@ -207,7 +233,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: event!.can_signup ?? false,
+                        visible: event!.canSignup,
                         child: Row(
                           children: [
                             Icon(
@@ -221,13 +247,13 @@ class _EventPageState extends State<EventPage> {
                   ),
                 ),
                 Visibility(
-                  visible: event!.can_signup ?? false,
+                  visible: event!.canSignup,
                   child: Divider(
                     color: null,
                   ),
                 ),
                 Visibility(
-                  visible: (!(event!.contact == null)),
+                  visible: (!(event!.council == null)),
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,13 +263,13 @@ class _EventPageState extends State<EventPage> {
                         ),
                         InkWell(
                           child: new Text(
-                            event!.contact?.name ?? "",
+                            event!.council.name,
                             style: TextStyle(
                               color: Colors.blue[300],
                             ),
                           ),
                           onTap: () => launchUrl(Uri.parse(
-                            "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
+                            "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(),
                           )),
                         ),
                         Divider(
@@ -263,34 +289,6 @@ class _EventPageState extends State<EventPage> {
   }
 }
 
-
-
-//   void update() {
-//     locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
-//           this.event = value;
-//           if (event != null) {
-//             if (event!.user_types != null) {
-//               this.userType = event!.user_types![0][0];
-//             } else {
-//               this.userType = null;
-//             }
-//             // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
-//             this.group = event!.groups![0];
-//           } else {
-//             this.group = null;
-//             this.userType = null;
-//           }
-//           this.answer = null;
-//         }));
-//     locator<UserService>().getUser().then((value) => setState(() {
-//           this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
-//           this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
-//           this.foodCustom = value.food_custom;
-//           for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-//             this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
-//           }
-//         }));
-//   }
 
 //   void sendSignup() async {
 //     EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
@@ -956,9 +954,9 @@ class _EventPageState extends State<EventPage> {
 //     }
 //   }
 
-//   Future<void> _onRefresh() async {
-//     update();
-//   }
+  // Future<void> _onRefresh() async {
+  //   update();
+  // }
 
 //   @override
 //   Widget build(BuildContext context) {
