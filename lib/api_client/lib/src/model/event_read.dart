@@ -33,7 +33,6 @@ part 'event_read.g.dart';
 /// * [recurring] 
 /// * [drink] 
 /// * [food] 
-/// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
@@ -98,9 +97,6 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'food')
   bool get food;
-
-  @BuiltValueField(wireName: r'cash')
-  bool get cash;
 
   @BuiltValueField(wireName: r'closed')
   bool get closed;
@@ -236,11 +232,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'food';
     yield serializers.serialize(
       object.food,
-      specifiedType: const FullType(bool),
-    );
-    yield r'cash';
-    yield serializers.serialize(
-      object.cash,
       specifiedType: const FullType(bool),
     );
     yield r'closed';
@@ -428,13 +419,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.food = valueDes;
-          break;
-        case r'cash':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.cash = valueDes;
           break;
         case r'closed':
           final valueDes = serializers.deserialize(

@@ -23,7 +23,6 @@ Name | Type | Description | Notes
 **recurring** | **bool** |  | [optional] 
 **drink** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
-**cash** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 

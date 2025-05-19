@@ -25,7 +25,6 @@ Name | Type | Description | Notes
 **recurring** | **bool** |  | 
 **drink** | **bool** |  | 
 **food** | **bool** |  | 
-**cash** | **bool** |  | 
 **closed** | **bool** |  | 
 **canSignup** | **bool** |  | 
 **drinkPackage** | **bool** |  | 

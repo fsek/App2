@@ -33,6 +33,7 @@ class _EventPageState extends State<EventPage> {
   bool displayGroupInput = false;
   String? drinkPackageAnswer;
   GroupRead? defaultGroup;
+  EventSignupRead? eventSignup;
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
@@ -63,6 +64,7 @@ class _EventPageState extends State<EventPage> {
               }else{
                 this.displayGroupInput = true;
               }
+            ApiService.apiClient.getEventSignupApi().
               
             });
           }
@@ -127,7 +129,7 @@ class _EventPageState extends State<EventPage> {
             child: ListView(
               children: [
                 Text(
-                  t.localeName == "sv" ? event!.titleSv : event!.titleEn,
+                  locale == "sv" ? event!.titleSv : event!.titleEn,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
                 ),
                 Divider(
@@ -174,7 +176,7 @@ class _EventPageState extends State<EventPage> {
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                      data: t.localeName == "sv" ? event!.descriptionSv : event!.descriptionEn,
+                      data: locale == "sv" ? event!.descriptionSv : event!.descriptionEn,
                       style: _htmlStyle,
                       onLinkTap: (String? url, Map<String, String> attributes, element) {
                         launchUrl(Uri.parse(url!));
@@ -192,7 +194,7 @@ class _EventPageState extends State<EventPage> {
                         Text(t.eventDressCode + event!.dressCode)
                       ]),
                       Visibility(
-                          visible: event!.cash ?? false,
+                          visible: event!.price <= 0 ? false : true,
                           child: Text(t.eventPrice + (event?.price.toString() ?? "") + " kr")),
                     ],
                   ),
@@ -205,13 +207,13 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     children: [
                       Visibility(
-                        visible: event!.cash ?? false,
+                        visible: event!.price <= 0 ? false : true,
                         child: Row(
                           children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
                         ),
                       ),
                       Visibility(
-                        visible: event!.food ?? false,
+                        visible: event!.price <= 0 ? false : true,
                         child: Row(
                           children: [
                             Icon(
@@ -268,9 +270,9 @@ class _EventPageState extends State<EventPage> {
                               color: Colors.blue[300],
                             ),
                           ),
-                          onTap: () => launchUrl(Uri.parse(
-                            "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(),
-                          )),
+                          // onTap: () => launchUrl(Uri.parse(
+                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), //TODO add the correct URL here
+                          //)),
                         ),
                         Divider(
                           color: null,
@@ -279,7 +281,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ),
                 ),
-                signupInfoWidget(),
+                // signupInfoWidget(),
               ],
             ),
           ),
@@ -287,7 +289,7 @@ class _EventPageState extends State<EventPage> {
       ),
     );
   }
-}
+
 
 
 //   void sendSignup() async {
@@ -452,229 +454,229 @@ class _EventPageState extends State<EventPage> {
 //     );
 //   }
 
-//   Widget signupInfoWidget() {
-//     var t = AppLocalizations.of(context)!;
-//     Widget signup;
-//     String locale = Localizations.localeOf(context).toString();
-//     /* If no event or no event signup recieved */
-//     if (event == null || event?.event_signup == null) {
-//       return Container();
-//     }
+  Widget signupInfoWidget() {
+    var t = AppLocalizations.of(context)!;
+    Widget signup;
+    String locale = Localizations.localeOf(context).toString();
+    /* If no event or no event signup recieved */
+    if (event == null || event?.event_signup == null) {
+      return Container();
+    }
 
-//     if (event!.can_signup!) {
-//       if (event!.event_signup!.open!)
-//         signup = signupWidget(t);
-//       else {
-//         if (event!.event_signup!.closed!) {
-//           if (event!.event_user == null) {
-//             signup = Row(
-//               children: [
-//                 Icon(
-//                   Icons.info_outline_rounded,
-//                   color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
-//                 ),
-//                 Text(
-//                   t.eventNotSignedUp,
-//                   style: TextStyle(
-//                     color: Colors.red[300],
-//                   ),
-//                 ),
-//               ],
-//             );
-//           } else {
-//             String groupName = "";
-//             if (event!.event_user!.group_id != null) {
-//               for (int i = 0; i < event!.groups!.length; i++) {
-//                 if (event!.groups![i].id == event!.event_user!.group_id) {
-//                   groupName = event!.groups![i].name!;
-//                   break;
-//                 }
-//               }
-//             } else {
-//               groupName = event!.event_user!.group_custom ?? "";
-//             }
-//             String userType = event!.event_user!.user_type ?? t.eventOther;
-//             if (!(event!.event_signup!.lottery ?? false)) {
-//               if (event!.event_user?.reserve ?? false) {
-//                 signup = Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         Icon(
-//                           Icons.cancel,
-//                           color: Colors.red[300],
-//                         ),
-//                         Text(
-//                           t.eventNoSpot,
-//                           style: TextStyle(
-//                             color: Colors.red[300],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Divider(
-//                       color: null,
-//                     ),
-//                     ..._signupDetails(groupName, userType),
-//                   ],
-//                 );
-//               } else {
-//                 signup = Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         Icon(
-//                           Icons.check_circle,
-//                           color: Colors.green[300],
-//                         ),
-//                         Text(
-//                           t.eventGotSpot,
-//                           style: TextStyle(
-//                             color:Colors.green[300],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Divider(
-//                       color: null,
-//                     ),
-//                     ..._signupDetails(groupName, userType),
-//                   ],
-//                 );
-//               }
-//             } else {
-//               signup = Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Row(
-//                     children: [
-//                       Icon(
-//                         Icons.info_outline_rounded,
-//                         color: Theme.of(context).colorScheme.primary,
-//                       ),
-//                       Text(
-//                         t.eventLotterySpot,
-//                         style: TextStyle(
-//                           color: Theme.of(context).colorScheme.primary,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   Divider(
-//                     color: null,
-//                   ),
-//                   ..._signupDetails(groupName, userType),
-//                 ],
-//               );
-//             }
-//           }
-//         } else {
-//           signup = SizedBox.shrink();
-//         }
-//       }
-//     } else {
-//       signup = Text("hej");
-//     }
+    if (event!.can_signup!) {
+      if (event!.event_signup!.open!)
+        signup = signupWidget(t);
+      else {
+        if (event!.event_signup!.closed!) {
+          if (event!.event_user == null) {
+            signup = Row(
+              children: [
+                Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
+                ),
+                Text(
+                  t.eventNotSignedUp,
+                  style: TextStyle(
+                    color: Colors.red[300],
+                  ),
+                ),
+              ],
+            );
+          } else {
+            String groupName = "";
+            if (event!.event_user!.group_id != null) {
+              for (int i = 0; i < event!.groups!.length; i++) {
+                if (event!.groups![i].id == event!.event_user!.group_id) {
+                  groupName = event!.groups![i].name!;
+                  break;
+                }
+              }
+            } else {
+              groupName = event!.event_user!.group_custom ?? "";
+            }
+            String userType = event!.event_user!.user_type ?? t.eventOther;
+            if (!(event!.event_signup!.lottery ?? false)) {
+              if (event!.event_user?.reserve ?? false) {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
+                          color: Colors.red[300],
+                        ),
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: null,
+                    ),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              } else {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green[300],
+                        ),
+                        Text(
+                          t.eventGotSpot,
+                          style: TextStyle(
+                            color:Colors.green[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: null,
+                    ),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              }
+            } else {
+              signup = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Text(
+                        t.eventLotterySpot,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                  ..._signupDetails(groupName, userType),
+                ],
+              );
+            }
+          }
+        } else {
+          signup = SizedBox.shrink();
+        }
+      }
+    } else {
+      signup = Text("hej");
+    }
 
-//     return Container(
-//       width: double.infinity,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             t.eventSignUp,
-//             style: Theme.of(context).textTheme.headlineMedium,
-//           ),
-//           Divider(
-//             color: null,
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-//             child: Column(
-//               children: [
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.person,
-//                     ),
-//                     Text(
-//                       t.eventNbrSignUps + event!.event_user_count!.toString(),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.people,
-//                     ),
-//                     Text(
-//                       t.eventNbrSpots + event!.event_signup!.slots!.toString(),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.event_available_rounded,
-//                     ),
-//                     Text(
-//                       t.eventSignUpOpens +
-//                           DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
-//                           " " +
-//                           DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.event_busy_rounded,
-//                     ),
-//                     Text(
-//                       t.eventSignUpCloses +
-//                           DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
-//                           " " +
-//                           DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Divider(
-//             color: null,
-//           ),
-//           signup,
-//           Divider(
-//             color: null,
-//           ),
-//           Container(
-//             margin: EdgeInsets.all(10),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(t.eventTechnicalDifficulties),
-//                 InkWell(
-//                   child: new Text(
-//                     "spindelmännen",
-//                     style: TextStyle(
-//                       color: Colors.blue[300],
-//                     ),
-//                   ),
-//                   onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
-//                 ),
-//                 Divider(
-//                   color: null,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+    return Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            t.eventSignUp,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          Divider(
+            color: null,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                    ),
+                    Text(
+                      t.eventNbrSignUps + event!.event_user_count!.toString(),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.people,
+                    ),
+                    Text(
+                      t.eventNbrSpots + event!.event_signup!.slots!.toString(),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_available_rounded,
+                    ),
+                    Text(
+                      t.eventSignUpOpens +
+                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_busy_rounded,
+                    ),
+                    Text(
+                      t.eventSignUpCloses +
+                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: null,
+          ),
+          signup,
+          Divider(
+            color: null,
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t.eventTechnicalDifficulties),
+                InkWell(
+                  child: new Text(
+                    "spindelmännen",
+                    style: TextStyle(
+                      color: Colors.blue[300],
+                    ),
+                  ),
+                  onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                ),
+                Divider(
+                  color: null,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 //   Widget signupWidget(AppLocalizations t) {
 //     String locale = Localizations.localeOf(context).toString();
@@ -1150,3 +1152,5 @@ class _EventPageState extends State<EventPage> {
 //     );
 //   }
 // }
+
+}

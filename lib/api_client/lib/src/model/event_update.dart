@@ -26,7 +26,6 @@ part 'event_update.g.dart';
 /// * [recurring] 
 /// * [drink] 
 /// * [food] 
-/// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
@@ -79,9 +78,6 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
 
   @BuiltValueField(wireName: r'food')
   bool? get food;
-
-  @BuiltValueField(wireName: r'cash')
-  bool? get cash;
 
   @BuiltValueField(wireName: r'closed')
   bool? get closed;
@@ -224,13 +220,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
       yield r'food';
       yield serializers.serialize(
         object.food,
-        specifiedType: const FullType.nullable(bool),
-      );
-    }
-    if (object.cash != null) {
-      yield r'cash';
-      yield serializers.serialize(
-        object.cash,
         specifiedType: const FullType.nullable(bool),
       );
     }
@@ -413,14 +402,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           ) as bool?;
           if (valueDes == null) continue;
           result.food = valueDes;
-          break;
-        case r'cash':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
-          if (valueDes == null) continue;
-          result.cash = valueDes;
           break;
         case r'closed':
           final valueDes = serializers.deserialize(
