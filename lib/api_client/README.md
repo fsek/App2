@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsGetElection**](doc/ElectionsApi.md#electionsgetelection) | **GET** /election/{election_id} | Get Election
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignoffRoute**](doc/EventSignupApi.md#eventsignupeventsignoffroute) | **DELETE** /event-signup/{event_id} | Event Signoff Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignupRoute**](doc/EventSignupApi.md#eventsignupeventsignuproute) | **POST** /event-signup/{event_id} | Event Signup Route
+[*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeEventSignup**](doc/EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupUpdateEventSignupRoute**](doc/EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 [*EventsApi*](doc/EventsApi.md) | [**eventsAddTagToEvent**](doc/EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsCreateEvent**](doc/EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
@@ -170,6 +171,7 @@ Class | Method | HTTP request | Description
 [*PostsApi*](doc/PostsApi.md) | [**postsCreatePost**](doc/PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [*PostsApi*](doc/PostsApi.md) | [**postsDeletePost**](doc/PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
+[*PostsApi*](doc/PostsApi.md) | [**postsGetAllUsersWithPost**](doc/PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
 [*SongsApi*](doc/SongsApi.md) | [**songsCreateSong**](doc/SongsApi.md#songscreatesong) | **POST** /songs/ | Create Song
@@ -195,6 +197,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersAdminUpdateUser**](doc/UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 

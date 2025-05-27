@@ -8,6 +8,7 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**councilId** | **int** |  | [optional] 
 **startsAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **endsAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **signupStart** | [**DateTime**](DateTime.md) |  | [optional] 
@@ -23,12 +24,11 @@ Name | Type | Description | Notes
 **recurring** | **bool** |  | [optional] 
 **drink** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
+**cash** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
-**dresscode** | **String** |  | 
-**price** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

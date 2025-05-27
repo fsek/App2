@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**usersAdminUpdateUser**](UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [**usersGetMe**](UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [**usersGetUser**](UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
+[**usersGetUserPosts**](UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
 [**usersUpdateSelf**](UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
 [**usersUpdateUserStatus**](UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
@@ -215,6 +216,49 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserRead**](UserRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersGetUserPosts**
+> BuiltList<PostRead> usersGetUserPosts(userId)
+
+Get User Posts
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+
+try {
+    final response = api.usersGetUserPosts(userId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersGetUserPosts: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+
+### Return type
+
+[**BuiltList&lt;PostRead&gt;**](PostRead.md)
 
 ### Authorization
 

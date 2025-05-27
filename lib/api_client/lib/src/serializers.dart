@@ -231,6 +231,46 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CandidateRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SimpleUserRead)]),
+        () => ListBuilder<SimpleUserRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UserRead)]),
+        () => ListBuilder<UserRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AlbumRead)]),
+        () => ListBuilder<AlbumRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CouncilRead)]),
+        () => ListBuilder<CouncilRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(ElectionRead)]),
+        () => ListBuilder<ElectionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UserAccessRead)]),
+        () => ListBuilder<UserAccessRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EventTagRead)]),
+        () => ListBuilder<EventTagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdRead)]),
+        () => ListBuilder<AdRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SongRead)]),
+        () => ListBuilder<SongRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NollningGroupRead)]),
+        () => ListBuilder<NollningGroupRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GroupRead)]),
         () => ListBuilder<GroupRead>(),
       )
@@ -247,14 +287,6 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<AdminUserRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(UserRead)]),
-        () => ListBuilder<UserRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlbumRead)]),
-        () => ListBuilder<AlbumRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CarRead)]),
         () => ListBuilder<CarRead>(),
       )
@@ -267,24 +299,8 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<PermissionRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CouncilRead)]),
-        () => ListBuilder<CouncilRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ElectionRead)]),
-        () => ListBuilder<ElectionRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(UserAccessRead)]),
-        () => ListBuilder<UserAccessRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NewsRead)]),
         () => ListBuilder<NewsRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EventTagRead)]),
-        () => ListBuilder<EventTagRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GroupMissionRead)]),
@@ -297,18 +313,6 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
         () => ListBuilder<NollningRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AdRead)]),
-        () => ListBuilder<AdRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SongRead)]),
-        () => ListBuilder<SongRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NollningGroupRead)]),
-        () => ListBuilder<NollningGroupRead>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())

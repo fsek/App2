@@ -64,11 +64,18 @@ class _EventPageState extends State<EventPage> {
               }else{
                 this.displayGroupInput = true;
               }
-            ApiService.apiClient.getEventSignupApi().
-              
             });
           }
         }));
+    if(this.event != null) {
+      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) {
+              if (value.data != null) {
+                this.eventSignup = value.data;
+              }
+            });
+    } else {
+      this.eventSignup = null;
+    }
     super.initState();
   }
 
@@ -92,10 +99,19 @@ class _EventPageState extends State<EventPage> {
           }
           this.answer = null;
         }));
+    if(this.event != null) {
+      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) {
+              if (value.data != null) {
+                this.eventSignup = value.data;
+              }
+            });
+    } else {
+      this.eventSignup = null;
+    }
   }
 
 
-   Future<void> _onRefresh() async {
+  Future<void> _onRefresh() async {
     update();
   }
 
@@ -271,7 +287,7 @@ class _EventPageState extends State<EventPage> {
                             ),
                           ),
                           // onTap: () => launchUrl(Uri.parse(
-                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), //TODO add the correct URL here
+                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), // TODO add the correct URL here
                           //)),
                         ),
                         Divider(
@@ -291,24 +307,42 @@ class _EventPageState extends State<EventPage> {
   }
 
 
+  void sendSignup() async {
+    if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
+      setState(() {
+        drinkPackageAnswer = drinkPackageNone;
+      });
+    }
 
-//   void sendSignup() async {
-//     EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
-//     /* just to be sure */
-//     if (group?.id != null) {
-//       customGroup = null;
-//     }
-//     if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
-//       setState(() {
-//         drinkPackageAnswer = drinkPackageNone;
-//       });
-//     }
-//     int eventId = event?.id ?? -1;
-//     Map json =
-//         await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
-//     if (!json.containsKey('errors')) {}
-//     update();
-//   }
+    final eventSignupCreate = EventSignupCreate((b) => b
+    ..userId = user!.id
+    //..priority = // TODO fixa detta
+    ..groupName = group!.name
+    ..drinkPackage
+    );
+
+
+    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(eventId: event!.id, eventSignupCreate: eventSignupCreate);
+  }
+
+
+  // void sendSignup() async {
+  //   EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
+  //   /* just to be sure */
+  //   if (group?.id != null) {
+  //     customGroup = null;
+  //   }
+  //   if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
+  //     setState(() {
+  //       drinkPackageAnswer = drinkPackageNone;
+  //     });
+  //   }
+  //   int eventId = event?.id ?? -1;
+  //   Map json =
+  //       await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
+  //   if (!json.containsKey('errors')) {}
+  //   update();
+  // }
 
 //   void removeSignup() async {
 //     int userId = event?.event_user?.id ?? -1;
@@ -454,21 +488,33 @@ class _EventPageState extends State<EventPage> {
 //     );
 //   }
 
+
+  // This is ugly af but works 
+  String isSignupOpen(EventRead event) {
+    if(event.signupStart.toLocal().isAfter(DateTime.now())) {
+      if (event.signupEnd.toLocal().isBefore(DateTime.now())) {
+        return "open";
+      }
+      return "closed";
+    }
+    return "upcoming";
+  }
+
   Widget signupInfoWidget() {
     var t = AppLocalizations.of(context)!;
     Widget signup;
     String locale = Localizations.localeOf(context).toString();
-    /* If no event or no event signup recieved */
-    if (event == null || event?.event_signup == null) {
+    // If no event
+    if (event == null || eventSignup == null) {
       return Container();
     }
 
-    if (event!.can_signup!) {
-      if (event!.event_signup!.open!)
+    if (event!.canSignup) {
+      if (isSignupOpen(event!) == "open")
         signup = signupWidget(t);
       else {
-        if (event!.event_signup!.closed!) {
-          if (event!.event_user == null) {
+        if (isSignupOpen(event!) == "closed") {
+          if (eventSignup == null) {
             signup = Row(
               children: [
                 Icon(
@@ -484,17 +530,7 @@ class _EventPageState extends State<EventPage> {
               ],
             );
           } else {
-            String groupName = "";
-            if (event!.event_user!.group_id != null) {
-              for (int i = 0; i < event!.groups!.length; i++) {
-                if (event!.groups![i].id == event!.event_user!.group_id) {
-                  groupName = event!.groups![i].name!;
-                  break;
-                }
-              }
-            } else {
-              groupName = event!.event_user!.group_custom ?? "";
-            }
+            String groupName = eventSignup!.groupName;
             String userType = event!.event_user!.user_type ?? t.eventOther;
             if (!(event!.event_signup!.lottery ?? false)) {
               if (event!.event_user?.reserve ?? false) {
@@ -678,158 +714,158 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-//   Widget signupWidget(AppLocalizations t) {
-//     String locale = Localizations.localeOf(context).toString();
-//     /* Failsafe */
-//     if (locale != "sv" && locale != "en") {
-//       locale = "en";
-//     }
-//     if (event == null) {
-//       if (event?.can_signup ?? false) return Container();
-//     }
-//     Widget drinkPackageInput = Container();
-//     if (event!.drink_package ?? false) {
-//       drinkPackageInput = Column(
-//         crossAxisAlignment: CrossAxisAlignment.end,
-//         children: [
-//           Text(" ${t.eventDrinkPackage}"),
-//           Container(
-//               height: 50,
-//               child: DropdownButton<String?>(
-//                 isExpanded: false,
-//                 value: drinkPackageAnswer,
-//                 icon: const Icon(Icons.arrow_downward),
-//                 iconSize: 24,
-//                 elevation: 16,
-//                 onChanged: (String? newValue) {
-//                   setState(() {
-//                     drinkPackageAnswer = newValue;
-//                   });
-//                 },
-//                 items: [
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageAlcohol,
-//                     child: Text(t.eventAlcohol),
-//                   ),
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageAlcoholFree,
-//                     child: Text(t.eventAlcoholFree),
-//                   ),
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageNone,
-//                     child: Text(t.eventNoAlcohol),
-//                   )
-//                 ],
-//               )),
-//         ],
-//       );
-//     }
-//     if (event?.event_user == null) {
-//       return Container(
-//           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-//           width: double.infinity,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               groupDropdown(),
-//               userTypeDropDown(),
-//               questionInput(),
-//               drinkPackageInput,
-//               Wrap(
-//                 children: [
-//                   Text(t.eventFoodPreferences + " ",
-//                       style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)),
-//                   ...?foodPreferences[locale]
-//                       ?.where((element) => element.isNotEmpty)
-//                       .map((foodPreference) => Text(foodPreference + " ")),
-//                   Text("  " + (foodCustom ?? "")),
-//                 ],
-//               ),
-//               Wrap(children: [
-//                 Text(
-//                   t.eventFoodPrefInfo,
-//                   style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
-//                 ),
-//                 GestureDetector(
-//                   child: Text(t.eventLinkToFoodPrefs,
-//                       style: TextStyle(
-//                           decoration: TextDecoration.underline,
-//                           color: Theme.of(context).colorScheme.primary)),
-//                   onTap: () => goToSettings(),
-//                 ),
-//               ]),
-//               SizedBox(
-//                 height: 16,
-//               ),
-//               Align(
-//                 alignment: Alignment.center,
-//                 child: SizedBox(
-//                   height: 50,
-//                   width: 200,
-//                   child: InkWell(
-//                     onTap: () => sendSignup(),
-//                     child: Card(
-//                       color: Theme.of(context).colorScheme.primary,
-//                       child: Align(
-//                         alignment: Alignment.center,
-//                         child: Text(
-//                           t.eventSendSignup,
-//                           style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ));
-//     } else {
-//       String groupName = "";
-//       if (event!.event_user!.group_id != null) {
-//         for (int i = 0; i < event!.groups!.length; i++) {
-//           if (event!.groups![i].id == event!.event_user!.group_id) {
-//             groupName = event!.groups![i].name!;
-//             break;
-//           }
-//         }
-//       } else {
-//         groupName = event!.event_user!.group_custom ?? "";
-//       }
-//       String userType = event!.event_user!.user_type ?? t.eventOther;
-//       return Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           ..._signupDetails(groupName, userType),
-//           SizedBox(
-//             height: 16,
-//           ),
-//           Align(
-//             alignment: Alignment.center,
-//             child: SizedBox(
-//               height: 50,
-//               width: 200,
-//               child: InkWell(
-//                 onTap: () async {
-//                   bool? unenroll = await _confirmUnenroll(context);
-//                   if (unenroll ?? false) removeSignup();
-//                 },
-//                 child: Card(
-//                   color: Theme.of(context).colorScheme.error,
-//                   child: Align(
-//                     alignment: Alignment.center,
-//                     child: Text(
-//                       t.eventDesignup,
-//                       style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onError),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           )
-//         ],
-//       );
-//     }
-//   }
+  Widget signupWidget(AppLocalizations t) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    if (event == null) {
+      if (event?.can_signup ?? false) return Container();
+    }
+    Widget drinkPackageInput = Container();
+    if (event!.drink_package ?? false) {
+      drinkPackageInput = Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(" ${t.eventDrinkPackage}"),
+          Container(
+              height: 50,
+              child: DropdownButton<String?>(
+                isExpanded: false,
+                value: drinkPackageAnswer,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    drinkPackageAnswer = newValue;
+                  });
+                },
+                items: [
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcohol,
+                    child: Text(t.eventAlcohol),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcoholFree,
+                    child: Text(t.eventAlcoholFree),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageNone,
+                    child: Text(t.eventNoAlcohol),
+                  )
+                ],
+              )),
+        ],
+      );
+    }
+    if (event?.event_user == null) {
+      return Container(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              groupDropdown(),
+              userTypeDropDown(),
+              questionInput(),
+              drinkPackageInput,
+              Wrap(
+                children: [
+                  Text(t.eventFoodPreferences + " ",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)),
+                  ...?foodPreferences[locale]
+                      ?.where((element) => element.isNotEmpty)
+                      .map((foodPreference) => Text(foodPreference + " ")),
+                  Text("  " + (foodCustom ?? "")),
+                ],
+              ),
+              Wrap(children: [
+                Text(
+                  t.eventFoodPrefInfo,
+                  style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
+                ),
+                GestureDetector(
+                  child: Text(t.eventLinkToFoodPrefs,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Theme.of(context).colorScheme.primary)),
+                  onTap: () => goToSettings(),
+                ),
+              ]),
+              SizedBox(
+                height: 16,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: InkWell(
+                    onTap: () => sendSignup(),
+                    child: Card(
+                      color: Theme.of(context).colorScheme.primary,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          t.eventSendSignup,
+                          style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ));
+    } else {
+      String groupName = "";
+      if (event!.event_user!.group_id != null) {
+        for (int i = 0; i < event!.groups!.length; i++) {
+          if (event!.groups![i].id == event!.event_user!.group_id) {
+            groupName = event!.groups![i].name!;
+            break;
+          }
+        }
+      } else {
+        groupName = event!.event_user!.group_custom ?? "";
+      }
+      String userType = event!.event_user!.user_type ?? t.eventOther;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ..._signupDetails(groupName, userType),
+          SizedBox(
+            height: 16,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: SizedBox(
+              height: 50,
+              width: 200,
+              child: InkWell(
+                onTap: () async {
+                  bool? unenroll = await _confirmUnenroll(context);
+                  if (unenroll ?? false) removeSignup();
+                },
+                child: Card(
+                  color: Theme.of(context).colorScheme.error,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      t.eventDesignup,
+                      style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onError),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      );
+    }
+  }
 
 //   Future<bool?> _confirmUnenroll(BuildContext context) {
 //     var t = AppLocalizations.of(context)!;
