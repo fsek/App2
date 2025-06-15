@@ -13,13 +13,17 @@ part 'group_mission_edit.g.dart';
 /// Properties:
 /// * [points] 
 /// * [adventureMissionId] 
+/// * [isAccepted] 
 @BuiltValue()
 abstract class GroupMissionEdit implements Built<GroupMissionEdit, GroupMissionEditBuilder> {
   @BuiltValueField(wireName: r'points')
-  int get points;
+  int? get points;
 
   @BuiltValueField(wireName: r'adventure_mission_id')
-  int get adventureMissionId;
+  int? get adventureMissionId;
+
+  @BuiltValueField(wireName: r'is_accepted')
+  bool? get isAccepted;
 
   GroupMissionEdit._();
 
@@ -44,16 +48,27 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
     GroupMissionEdit object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'points';
-    yield serializers.serialize(
-      object.points,
-      specifiedType: const FullType(int),
-    );
-    yield r'adventure_mission_id';
-    yield serializers.serialize(
-      object.adventureMissionId,
-      specifiedType: const FullType(int),
-    );
+    if (object.points != null) {
+      yield r'points';
+      yield serializers.serialize(
+        object.points,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.adventureMissionId != null) {
+      yield r'adventure_mission_id';
+      yield serializers.serialize(
+        object.adventureMissionId,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.isAccepted != null) {
+      yield r'is_accepted';
+      yield serializers.serialize(
+        object.isAccepted,
+        specifiedType: const FullType.nullable(bool),
+      );
+    }
   }
 
   @override
@@ -80,16 +95,26 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
         case r'points':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
           result.points = valueDes;
           break;
         case r'adventure_mission_id':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
           result.adventureMissionId = valueDes;
+          break;
+        case r'is_accepted':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isAccepted = valueDes;
           break;
         default:
           unhandled.add(key);

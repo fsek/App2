@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **points** | **int** |  | 
 **adventureMission** | [**AdventureMissionRead**](AdventureMissionRead.md) |  | 
 **nollningGroup** | [**NollningGroupRead**](NollningGroupRead.md) |  | 
+**isAccepted** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,13 +22,15 @@ Name | Type | Description | Notes
 **allDay** | **bool** |  | [optional] 
 **signupNotOpenedYet** | **bool** |  | [optional] 
 **recurring** | **bool** |  | [optional] 
-**drink** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
 **cash** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
+**alcoholEventType** | **String** |  | [optional] 
+**confirmedEventUsers** | [**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md) |  | [optional] 
+**reserveEventUsers** | [**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

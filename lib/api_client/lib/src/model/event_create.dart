@@ -27,13 +27,13 @@ part 'event_create.g.dart';
 /// * [allDay] 
 /// * [signupNotOpenedYet] 
 /// * [recurring] 
-/// * [drink] 
 /// * [food] 
 /// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [alcoholEventType] 
 @BuiltValue()
 abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -82,9 +82,6 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'recurring')
   bool get recurring;
 
-  @BuiltValueField(wireName: r'drink')
-  bool get drink;
-
   @BuiltValueField(wireName: r'food')
   bool get food;
 
@@ -102,6 +99,10 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
 
   @BuiltValueField(wireName: r'is_nollning_event')
   bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'alcohol_event_type')
+  EventCreateAlcoholEventTypeEnum get alcoholEventType;
+  // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
 
   EventCreate._();
 
@@ -201,11 +202,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
       object.recurring,
       specifiedType: const FullType(bool),
     );
-    yield r'drink';
-    yield serializers.serialize(
-      object.drink,
-      specifiedType: const FullType(bool),
-    );
     yield r'food';
     yield serializers.serialize(
       object.food,
@@ -235,6 +231,11 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield serializers.serialize(
       object.isNollningEvent,
       specifiedType: const FullType(bool),
+    );
+    yield r'alcohol_event_type';
+    yield serializers.serialize(
+      object.alcoholEventType,
+      specifiedType: const FullType(EventCreateAlcoholEventTypeEnum),
     );
   }
 
@@ -364,13 +365,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
           ) as bool;
           result.recurring = valueDes;
           break;
-        case r'drink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.drink = valueDes;
-          break;
         case r'food':
           final valueDes = serializers.deserialize(
             value,
@@ -412,6 +406,13 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.isNollningEvent = valueDes;
+          break;
+        case r'alcohol_event_type':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(EventCreateAlcoholEventTypeEnum),
+          ) as EventCreateAlcoholEventTypeEnum;
+          result.alcoholEventType = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -457,5 +458,22 @@ class EventCreatePrioritiesEnum extends EnumClass {
 
   static BuiltSet<EventCreatePrioritiesEnum> get values => _$eventCreatePrioritiesEnumValues;
   static EventCreatePrioritiesEnum valueOf(String name) => _$eventCreatePrioritiesEnumValueOf(name);
+}
+
+class EventCreateAlcoholEventTypeEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Alcohol')
+  static const EventCreateAlcoholEventTypeEnum alcohol = _$eventCreateAlcoholEventTypeEnum_alcohol;
+  @BuiltValueEnumConst(wireName: r'Alcohol-Served')
+  static const EventCreateAlcoholEventTypeEnum alcoholServed = _$eventCreateAlcoholEventTypeEnum_alcoholServed;
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventCreateAlcoholEventTypeEnum none = _$eventCreateAlcoholEventTypeEnum_none;
+
+  static Serializer<EventCreateAlcoholEventTypeEnum> get serializer => _$eventCreateAlcoholEventTypeEnumSerializer;
+
+  const EventCreateAlcoholEventTypeEnum._(String name): super(name);
+
+  static BuiltSet<EventCreateAlcoholEventTypeEnum> get values => _$eventCreateAlcoholEventTypeEnumValues;
+  static EventCreateAlcoholEventTypeEnum valueOf(String name) => _$eventCreateAlcoholEventTypeEnumValueOf(name);
 }
 

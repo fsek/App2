@@ -23,13 +23,13 @@ Name | Type | Description | Notes
 **allDay** | **bool** |  | 
 **signupNotOpenedYet** | **bool** |  | 
 **recurring** | **bool** |  | 
-**drink** | **bool** |  | 
 **food** | **bool** |  | 
 **cash** | **bool** |  | 
 **closed** | **bool** |  | 
 **canSignup** | **bool** |  | 
 **drinkPackage** | **bool** |  | 
 **isNollningEvent** | **bool** |  | 
+**alcoholEventType** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

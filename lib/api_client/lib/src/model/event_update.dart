@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/event_signup_read.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -25,13 +27,15 @@ part 'event_update.g.dart';
 /// * [allDay] 
 /// * [signupNotOpenedYet] 
 /// * [recurring] 
-/// * [drink] 
 /// * [food] 
 /// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [alcoholEventType] 
+/// * [confirmedEventUsers] 
+/// * [reserveEventUsers] 
 @BuiltValue()
 abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -76,9 +80,6 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'recurring')
   bool? get recurring;
 
-  @BuiltValueField(wireName: r'drink')
-  bool? get drink;
-
   @BuiltValueField(wireName: r'food')
   bool? get food;
 
@@ -96,6 +97,16 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
 
   @BuiltValueField(wireName: r'is_nollning_event')
   bool? get isNollningEvent;
+
+  @BuiltValueField(wireName: r'alcohol_event_type')
+  EventUpdateAlcoholEventTypeEnum? get alcoholEventType;
+  // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
+
+  @BuiltValueField(wireName: r'confirmed_event_users')
+  BuiltList<EventSignupRead>? get confirmedEventUsers;
+
+  @BuiltValueField(wireName: r'reserve_event_users')
+  BuiltList<EventSignupRead>? get reserveEventUsers;
 
   EventUpdate._();
 
@@ -216,13 +227,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
-    if (object.drink != null) {
-      yield r'drink';
-      yield serializers.serialize(
-        object.drink,
-        specifiedType: const FullType.nullable(bool),
-      );
-    }
     if (object.food != null) {
       yield r'food';
       yield serializers.serialize(
@@ -263,6 +267,27 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
       yield serializers.serialize(
         object.isNollningEvent,
         specifiedType: const FullType.nullable(bool),
+      );
+    }
+    if (object.alcoholEventType != null) {
+      yield r'alcohol_event_type';
+      yield serializers.serialize(
+        object.alcoholEventType,
+        specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
+      );
+    }
+    if (object.confirmedEventUsers != null) {
+      yield r'confirmed_event_users';
+      yield serializers.serialize(
+        object.confirmedEventUsers,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+      );
+    }
+    if (object.reserveEventUsers != null) {
+      yield r'reserve_event_users';
+      yield serializers.serialize(
+        object.reserveEventUsers,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
       );
     }
   }
@@ -399,14 +424,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.recurring = valueDes;
           break;
-        case r'drink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
-          if (valueDes == null) continue;
-          result.drink = valueDes;
-          break;
         case r'food':
           final valueDes = serializers.deserialize(
             value,
@@ -455,6 +472,30 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.isNollningEvent = valueDes;
           break;
+        case r'alcohol_event_type':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
+          ) as EventUpdateAlcoholEventTypeEnum?;
+          if (valueDes == null) continue;
+          result.alcoholEventType = valueDes;
+          break;
+        case r'confirmed_event_users':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+          ) as BuiltList<EventSignupRead>?;
+          if (valueDes == null) continue;
+          result.confirmedEventUsers.replace(valueDes);
+          break;
+        case r'reserve_event_users':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+          ) as BuiltList<EventSignupRead>?;
+          if (valueDes == null) continue;
+          result.reserveEventUsers.replace(valueDes);
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -482,5 +523,22 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
     );
     return result.build();
   }
+}
+
+class EventUpdateAlcoholEventTypeEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Alcohol')
+  static const EventUpdateAlcoholEventTypeEnum alcohol = _$eventUpdateAlcoholEventTypeEnum_alcohol;
+  @BuiltValueEnumConst(wireName: r'Alcohol-Served')
+  static const EventUpdateAlcoholEventTypeEnum alcoholServed = _$eventUpdateAlcoholEventTypeEnum_alcoholServed;
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventUpdateAlcoholEventTypeEnum none = _$eventUpdateAlcoholEventTypeEnum_none;
+
+  static Serializer<EventUpdateAlcoholEventTypeEnum> get serializer => _$eventUpdateAlcoholEventTypeEnumSerializer;
+
+  const EventUpdateAlcoholEventTypeEnum._(String name): super(name);
+
+  static BuiltSet<EventUpdateAlcoholEventTypeEnum> get values => _$eventUpdateAlcoholEventTypeEnumValues;
+  static EventUpdateAlcoholEventTypeEnum valueOf(String name) => _$eventUpdateAlcoholEventTypeEnumValueOf(name);
 }
 

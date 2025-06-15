@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:api_client/src/model/priority_db.dart';
 import 'package:api_client/src/model/council_in_event_read.dart';
@@ -31,13 +32,15 @@ part 'event_read.g.dart';
 /// * [allDay] 
 /// * [signupNotOpenedYet] 
 /// * [recurring] 
-/// * [drink] 
 /// * [food] 
 /// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [alcoholEventType] 
+/// * [confirmedEventUsers] 
+/// * [reserveEventUsers] 
 @BuiltValue()
 abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -91,9 +94,6 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'recurring')
   bool get recurring;
 
-  @BuiltValueField(wireName: r'drink')
-  bool get drink;
-
   @BuiltValueField(wireName: r'food')
   bool get food;
 
@@ -111,6 +111,15 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'is_nollning_event')
   bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'alcohol_event_type')
+  String get alcoholEventType;
+
+  @BuiltValueField(wireName: r'confirmed_event_users')
+  BuiltList<EventSignupRead>? get confirmedEventUsers;
+
+  @BuiltValueField(wireName: r'reserve_event_users')
+  BuiltList<EventSignupRead>? get reserveEventUsers;
 
   EventRead._();
 
@@ -220,11 +229,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
       object.recurring,
       specifiedType: const FullType(bool),
     );
-    yield r'drink';
-    yield serializers.serialize(
-      object.drink,
-      specifiedType: const FullType(bool),
-    );
     yield r'food';
     yield serializers.serialize(
       object.food,
@@ -254,6 +258,21 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield serializers.serialize(
       object.isNollningEvent,
       specifiedType: const FullType(bool),
+    );
+    yield r'alcohol_event_type';
+    yield serializers.serialize(
+      object.alcoholEventType,
+      specifiedType: const FullType(String),
+    );
+    yield r'confirmed_event_users';
+    yield object.confirmedEventUsers == null ? null : serializers.serialize(
+      object.confirmedEventUsers,
+      specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+    );
+    yield r'reserve_event_users';
+    yield object.reserveEventUsers == null ? null : serializers.serialize(
+      object.reserveEventUsers,
+      specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
     );
   }
 
@@ -397,13 +416,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
           ) as bool;
           result.recurring = valueDes;
           break;
-        case r'drink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.drink = valueDes;
-          break;
         case r'food':
           final valueDes = serializers.deserialize(
             value,
@@ -445,6 +457,29 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.isNollningEvent = valueDes;
+          break;
+        case r'alcohol_event_type':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.alcoholEventType = valueDes;
+          break;
+        case r'confirmed_event_users':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+          ) as BuiltList<EventSignupRead>?;
+          if (valueDes == null) continue;
+          result.confirmedEventUsers.replace(valueDes);
+          break;
+        case r'reserve_event_users':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
+          ) as BuiltList<EventSignupRead>?;
+          if (valueDes == null) continue;
+          result.reserveEventUsers.replace(valueDes);
           break;
         default:
           unhandled.add(key);

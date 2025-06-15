@@ -16,6 +16,7 @@ part 'group_mission_read.g.dart';
 /// * [points] 
 /// * [adventureMission] 
 /// * [nollningGroup] 
+/// * [isAccepted] 
 @BuiltValue()
 abstract class GroupMissionRead implements Built<GroupMissionRead, GroupMissionReadBuilder> {
   @BuiltValueField(wireName: r'points')
@@ -26,6 +27,9 @@ abstract class GroupMissionRead implements Built<GroupMissionRead, GroupMissionR
 
   @BuiltValueField(wireName: r'nollning_group')
   NollningGroupRead get nollningGroup;
+
+  @BuiltValueField(wireName: r'is_accepted')
+  bool get isAccepted;
 
   GroupMissionRead._();
 
@@ -64,6 +68,11 @@ class _$GroupMissionReadSerializer implements PrimitiveSerializer<GroupMissionRe
     yield serializers.serialize(
       object.nollningGroup,
       specifiedType: const FullType(NollningGroupRead),
+    );
+    yield r'is_accepted';
+    yield serializers.serialize(
+      object.isAccepted,
+      specifiedType: const FullType(bool),
     );
   }
 
@@ -108,6 +117,13 @@ class _$GroupMissionReadSerializer implements PrimitiveSerializer<GroupMissionRe
             specifiedType: const FullType(NollningGroupRead),
           ) as NollningGroupRead;
           result.nollningGroup.replace(valueDes);
+          break;
+        case r'is_accepted':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.isAccepted = valueDes;
           break;
         default:
           unhandled.add(key);

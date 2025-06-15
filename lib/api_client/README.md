@@ -126,6 +126,7 @@ Class | Method | HTTP request | Description
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeEventSignup**](doc/EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupUpdateEventSignupRoute**](doc/EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 [*EventsApi*](doc/EventsApi.md) | [**eventsAddTagToEvent**](doc/EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
+[*EventsApi*](doc/EventsApi.md) | [**eventsConfirmEventUsers**](doc/EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
 [*EventsApi*](doc/EventsApi.md) | [**eventsCreateEvent**](doc/EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventRemove**](doc/EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
@@ -163,6 +164,7 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetCompletedMissions**](doc/NollningApi.md#nollninggetcompletedmissions) | **GET** /group_mission/{nollning_id} | Get Completed Missions
 [*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/patch/{id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningRemoveGroupFromNollning**](doc/NollningApi.md#nollningremovegroupfromnollning) | **DELETE** /nollning/remove_group/{nollning_group_id} | Remove Group From Nollning
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermissions**](doc/PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsCreatePermission**](doc/PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
