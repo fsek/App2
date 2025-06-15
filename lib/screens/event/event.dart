@@ -240,7 +240,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: event!.drink,
+                        visible: !(event!.alcoholEventType == "None"),
                         child: Row(
                           children: [
                             Icon(
@@ -531,7 +531,7 @@ class _EventPageState extends State<EventPage> {
             );
           } else {
             String groupName = eventSignup!.groupName;
-            String userType = event!.event_user!.user_type ?? t.eventOther;
+            String userType = eventSignup!.priority;
             if (!(event!.event_signup!.lottery ?? false)) {
               if (event!.event_user?.reserve ?? false) {
                 signup = Column(
@@ -638,7 +638,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.person,
                     ),
                     Text(
-                      t.eventNbrSignUps + event!.event_user_count!.toString(),
+                      t.eventNbrSignUps + event!.signupCount.toString(),
                     ),
                   ],
                 ),
@@ -648,7 +648,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      t.eventNbrSpots + event!.event_signup!.slots!.toString(),
+                      t.eventNbrSpots + event!.maxEventUsers.toString(),
                     ),
                   ],
                 ),
@@ -659,9 +659,9 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpOpens +
-                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
+                          DateFormat("d/M").format(event!.signupStart.toLocal()) +
                           " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
+                          DateFormat("jm", locale).format(event!.signupStart.toLocal()),
                     ),
                   ],
                 ),
@@ -672,9 +672,9 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpCloses +
-                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
+                          DateFormat("d/M").format(event!.signupEnd.toLocal()) +
                           " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
+                          DateFormat("jm", locale).format(event!.signupEnd.toLocal()),
                     ),
                   ],
                 ),
@@ -720,11 +720,11 @@ class _EventPageState extends State<EventPage> {
     if (locale != "sv" && locale != "en") {
       locale = "en";
     }
-    if (event == null) {
-      if (event?.can_signup ?? false) return Container();
-    }
+    // if (event == null) {
+    //   if (event?.can_signup ?? false) return Container();
+    // }
     Widget drinkPackageInput = Container();
-    if (event!.drink_package ?? false) {
+    if (!(event!.alcoholEventType  == "None")) {
       drinkPackageInput = Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -760,7 +760,7 @@ class _EventPageState extends State<EventPage> {
         ],
       );
     }
-    if (event?.event_user == null) {
+    if (eventSignup == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
           width: double.infinity,

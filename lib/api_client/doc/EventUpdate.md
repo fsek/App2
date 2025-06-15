@@ -23,14 +23,13 @@ Name | Type | Description | Notes
 **signupNotOpenedYet** | **bool** |  | [optional] 
 **recurring** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
-**cash** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
 **alcoholEventType** | **String** |  | [optional] 
-**confirmedEventUsers** | [**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md) |  | [optional] 
-**reserveEventUsers** | [**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md) |  | [optional] 
+**dresscode** | **String** |  | 
+**price** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

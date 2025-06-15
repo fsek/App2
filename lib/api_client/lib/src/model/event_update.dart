@@ -3,7 +3,6 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -28,14 +27,13 @@ part 'event_update.g.dart';
 /// * [signupNotOpenedYet] 
 /// * [recurring] 
 /// * [food] 
-/// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
 /// * [alcoholEventType] 
-/// * [confirmedEventUsers] 
-/// * [reserveEventUsers] 
+/// * [dresscode] 
+/// * [price] 
 @BuiltValue()
 abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -83,9 +81,6 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'food')
   bool? get food;
 
-  @BuiltValueField(wireName: r'cash')
-  bool? get cash;
-
   @BuiltValueField(wireName: r'closed')
   bool? get closed;
 
@@ -102,11 +97,11 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   EventUpdateAlcoholEventTypeEnum? get alcoholEventType;
   // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
 
-  @BuiltValueField(wireName: r'confirmed_event_users')
-  BuiltList<EventSignupRead>? get confirmedEventUsers;
+  @BuiltValueField(wireName: r'dresscode')
+  String? get dresscode;
 
-  @BuiltValueField(wireName: r'reserve_event_users')
-  BuiltList<EventSignupRead>? get reserveEventUsers;
+  @BuiltValueField(wireName: r'price')
+  int? get price;
 
   EventUpdate._();
 
@@ -234,13 +229,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
-    if (object.cash != null) {
-      yield r'cash';
-      yield serializers.serialize(
-        object.cash,
-        specifiedType: const FullType.nullable(bool),
-      );
-    }
     if (object.closed != null) {
       yield r'closed';
       yield serializers.serialize(
@@ -276,20 +264,16 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
       );
     }
-    if (object.confirmedEventUsers != null) {
-      yield r'confirmed_event_users';
-      yield serializers.serialize(
-        object.confirmedEventUsers,
-        specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
-      );
-    }
-    if (object.reserveEventUsers != null) {
-      yield r'reserve_event_users';
-      yield serializers.serialize(
-        object.reserveEventUsers,
-        specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
-      );
-    }
+    yield r'dresscode';
+    yield object.dresscode == null ? null : serializers.serialize(
+      object.dresscode,
+      specifiedType: const FullType.nullable(String),
+    );
+    yield r'price';
+    yield object.price == null ? null : serializers.serialize(
+      object.price,
+      specifiedType: const FullType.nullable(int),
+    );
   }
 
   @override
@@ -432,14 +416,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.food = valueDes;
           break;
-        case r'cash':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
-          if (valueDes == null) continue;
-          result.cash = valueDes;
-          break;
         case r'closed':
           final valueDes = serializers.deserialize(
             value,
@@ -480,21 +456,21 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.alcoholEventType = valueDes;
           break;
-        case r'confirmed_event_users':
+        case r'dresscode':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
-          ) as BuiltList<EventSignupRead>?;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
           if (valueDes == null) continue;
-          result.confirmedEventUsers.replace(valueDes);
+          result.dresscode = valueDes;
           break;
-        case r'reserve_event_users':
+        case r'price':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EventSignupRead)]),
-          ) as BuiltList<EventSignupRead>?;
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
           if (valueDes == null) continue;
-          result.reserveEventUsers.replace(valueDes);
+          result.price = valueDes;
           break;
         default:
           unhandled.add(key);

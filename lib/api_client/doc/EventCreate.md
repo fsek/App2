@@ -24,12 +24,13 @@ Name | Type | Description | Notes
 **signupNotOpenedYet** | **bool** |  | 
 **recurring** | **bool** |  | 
 **food** | **bool** |  | 
-**cash** | **bool** |  | 
 **closed** | **bool** |  | 
 **canSignup** | **bool** |  | 
 **drinkPackage** | **bool** |  | 
 **isNollningEvent** | **bool** |  | 
 **alcoholEventType** | **String** |  | 
+**dressCode** | **String** |  | 
+**price** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

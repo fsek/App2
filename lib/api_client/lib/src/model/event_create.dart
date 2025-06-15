@@ -28,12 +28,13 @@ part 'event_create.g.dart';
 /// * [signupNotOpenedYet] 
 /// * [recurring] 
 /// * [food] 
-/// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
 /// * [alcoholEventType] 
+/// * [dressCode] 
+/// * [price] 
 @BuiltValue()
 abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -85,9 +86,6 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'food')
   bool get food;
 
-  @BuiltValueField(wireName: r'cash')
-  bool get cash;
-
   @BuiltValueField(wireName: r'closed')
   bool get closed;
 
@@ -103,6 +101,12 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'alcohol_event_type')
   EventCreateAlcoholEventTypeEnum get alcoholEventType;
   // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
+
+  @BuiltValueField(wireName: r'dress_code')
+  String get dressCode;
+
+  @BuiltValueField(wireName: r'price')
+  int get price;
 
   EventCreate._();
 
@@ -207,11 +211,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
       object.food,
       specifiedType: const FullType(bool),
     );
-    yield r'cash';
-    yield serializers.serialize(
-      object.cash,
-      specifiedType: const FullType(bool),
-    );
     yield r'closed';
     yield serializers.serialize(
       object.closed,
@@ -236,6 +235,16 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield serializers.serialize(
       object.alcoholEventType,
       specifiedType: const FullType(EventCreateAlcoholEventTypeEnum),
+    );
+    yield r'dress_code';
+    yield serializers.serialize(
+      object.dressCode,
+      specifiedType: const FullType(String),
+    );
+    yield r'price';
+    yield serializers.serialize(
+      object.price,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -372,13 +381,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
           ) as bool;
           result.food = valueDes;
           break;
-        case r'cash':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.cash = valueDes;
-          break;
         case r'closed':
           final valueDes = serializers.deserialize(
             value,
@@ -413,6 +415,20 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
             specifiedType: const FullType(EventCreateAlcoholEventTypeEnum),
           ) as EventCreateAlcoholEventTypeEnum;
           result.alcoholEventType = valueDes;
+          break;
+        case r'dress_code':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.dressCode = valueDes;
+          break;
+        case r'price':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.price = valueDes;
           break;
         default:
           unhandled.add(key);
