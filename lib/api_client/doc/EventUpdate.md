@@ -17,10 +17,9 @@ Name | Type | Description | Notes
 **titleEn** | **String** |  | [optional] 
 **descriptionSv** | **String** |  | [optional] 
 **descriptionEn** | **String** |  | [optional] 
-**location** | **String** |  | 
+**location** | **String** |  | [optional] 
 **maxEventUsers** | **int** |  | [optional] 
 **allDay** | **bool** |  | [optional] 
-**signupNotOpenedYet** | **bool** |  | [optional] 
 **recurring** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
@@ -28,8 +27,9 @@ Name | Type | Description | Notes
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
 **alcoholEventType** | **String** |  | [optional] 
-**dresscode** | **String** |  | 
-**price** | **int** |  | 
+**dresscode** | **String** |  | [optional] 
+**price** | **int** |  | [optional] 
+**dot** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

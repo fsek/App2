@@ -23,7 +23,6 @@ Name | Type | Description | Notes
 **maxEventUsers** | **int** |  | 
 **priorities** | [**BuiltList&lt;PriorityDB&gt;**](PriorityDB.md) |  | 
 **allDay** | **bool** |  | 
-**signupNotOpenedYet** | **bool** |  | 
 **recurring** | **bool** |  | 
 **food** | **bool** |  | 
 **closed** | **bool** |  | 
@@ -34,6 +33,8 @@ Name | Type | Description | Notes
 **dressCode** | **String** |  | 
 **price** | **int** |  | 
 **signupCount** | **int** |  | 
+**dot** | **String** |  | 
+**lottery** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

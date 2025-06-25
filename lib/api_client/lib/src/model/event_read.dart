@@ -29,7 +29,6 @@ part 'event_read.g.dart';
 /// * [maxEventUsers] 
 /// * [priorities] 
 /// * [allDay] 
-/// * [signupNotOpenedYet] 
 /// * [recurring] 
 /// * [food] 
 /// * [closed] 
@@ -40,6 +39,8 @@ part 'event_read.g.dart';
 /// * [dressCode] 
 /// * [price] 
 /// * [signupCount] 
+/// * [dot] 
+/// * [lottery] 
 @BuiltValue()
 abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -87,9 +88,6 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'all_day')
   bool get allDay;
 
-  @BuiltValueField(wireName: r'signup_not_opened_yet')
-  bool get signupNotOpenedYet;
-
   @BuiltValueField(wireName: r'recurring')
   bool get recurring;
 
@@ -119,6 +117,12 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'signup_count')
   int get signupCount;
+
+  @BuiltValueField(wireName: r'dot')
+  String get dot;
+
+  @BuiltValueField(wireName: r'lottery')
+  bool get lottery;
 
   EventRead._();
 
@@ -218,11 +222,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
       object.allDay,
       specifiedType: const FullType(bool),
     );
-    yield r'signup_not_opened_yet';
-    yield serializers.serialize(
-      object.signupNotOpenedYet,
-      specifiedType: const FullType(bool),
-    );
     yield r'recurring';
     yield serializers.serialize(
       object.recurring,
@@ -272,6 +271,16 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield serializers.serialize(
       object.signupCount,
       specifiedType: const FullType(int),
+    );
+    yield r'dot';
+    yield serializers.serialize(
+      object.dot,
+      specifiedType: const FullType(String),
+    );
+    yield r'lottery';
+    yield serializers.serialize(
+      object.lottery,
+      specifiedType: const FullType(bool),
     );
   }
 
@@ -401,13 +410,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
           ) as bool;
           result.allDay = valueDes;
           break;
-        case r'signup_not_opened_yet':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.signupNotOpenedYet = valueDes;
-          break;
         case r'recurring':
           final valueDes = serializers.deserialize(
             value,
@@ -477,6 +479,20 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(int),
           ) as int;
           result.signupCount = valueDes;
+          break;
+        case r'dot':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.dot = valueDes;
+          break;
+        case r'lottery':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.lottery = valueDes;
           break;
         default:
           unhandled.add(key);

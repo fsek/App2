@@ -21,7 +21,6 @@ Name | Type | Description | Notes
 **maxEventUsers** | **int** |  | 
 **priorities** | **BuiltList&lt;String&gt;** |  | 
 **allDay** | **bool** |  | 
-**signupNotOpenedYet** | **bool** |  | 
 **recurring** | **bool** |  | 
 **food** | **bool** |  | 
 **closed** | **bool** |  | 
@@ -31,6 +30,8 @@ Name | Type | Description | Notes
 **alcoholEventType** | **String** |  | 
 **dressCode** | **String** |  | 
 **price** | **int** |  | 
+**dot** | **String** |  | 
+**lottery** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

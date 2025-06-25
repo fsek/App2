@@ -54,7 +54,6 @@ import 'package:api_client/src/model/error_model.dart';
 import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
-import 'package:api_client/src/model/event_signup_delete.dart';
 import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
 import 'package:api_client/src/model/event_tag_read.dart';
@@ -155,7 +154,6 @@ part 'serializers.g.dart';
   EventCreate,
   EventRead,
   EventSignupCreate,
-  EventSignupDelete,
   EventSignupRead,
   EventSignupUpdate,
   EventTagRead,

@@ -10,7 +10,6 @@ import 'package:dio/dio.dart';
 
 import 'package:api_client/src/api_util.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
-import 'package:api_client/src/model/event_signup_delete.dart';
 import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
@@ -28,7 +27,7 @@ class EventSignupApi {
   ///
   /// Parameters:
   /// * [eventId] 
-  /// * [eventSignupDelete] 
+  /// * [userId] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -40,7 +39,7 @@ class EventSignupApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<EventSignupRead>> eventSignupEventSignoffRoute({ 
     required int eventId,
-    required EventSignupDelete eventSignupDelete,
+    required int userId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -63,32 +62,17 @@ class EventSignupApi {
         ],
         ...?extra,
       },
-      contentType: 'application/json',
       validateStatus: validateStatus,
     );
 
-    dynamic _bodyData;
-
-    try {
-      const _type = FullType(EventSignupDelete);
-      _bodyData = _serializers.serialize(eventSignupDelete, specifiedType: _type);
-
-    } catch(error, stackTrace) {
-      throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
+    final _queryParameters = <String, dynamic>{
+      r'user_id': encodeQueryParameter(_serializers, userId, const FullType(int)),
+    };
 
     final _response = await _dio.request<Object>(
       _path,
-      data: _bodyData,
       options: _options,
+      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

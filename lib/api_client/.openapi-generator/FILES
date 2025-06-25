@@ -52,7 +52,6 @@ doc/EventCreate.md
 doc/EventRead.md
 doc/EventSignupApi.md
 doc/EventSignupCreate.md
-doc/EventSignupDelete.md
 doc/EventSignupRead.md
 doc/EventSignupUpdate.md
 doc/EventTagRead.md
@@ -194,7 +193,6 @@ lib/src/model/error_model.dart
 lib/src/model/event_create.dart
 lib/src/model/event_read.dart
 lib/src/model/event_signup_create.dart
-lib/src/model/event_signup_delete.dart
 lib/src/model/event_signup_read.dart
 lib/src/model/event_signup_update.dart
 lib/src/model/event_tag_read.dart

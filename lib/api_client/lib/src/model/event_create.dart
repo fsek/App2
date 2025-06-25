@@ -25,7 +25,6 @@ part 'event_create.g.dart';
 /// * [maxEventUsers] 
 /// * [priorities] 
 /// * [allDay] 
-/// * [signupNotOpenedYet] 
 /// * [recurring] 
 /// * [food] 
 /// * [closed] 
@@ -35,6 +34,8 @@ part 'event_create.g.dart';
 /// * [alcoholEventType] 
 /// * [dressCode] 
 /// * [price] 
+/// * [dot] 
+/// * [lottery] 
 @BuiltValue()
 abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -77,9 +78,6 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   @BuiltValueField(wireName: r'all_day')
   bool get allDay;
 
-  @BuiltValueField(wireName: r'signup_not_opened_yet')
-  bool get signupNotOpenedYet;
-
   @BuiltValueField(wireName: r'recurring')
   bool get recurring;
 
@@ -107,6 +105,13 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
 
   @BuiltValueField(wireName: r'price')
   int get price;
+
+  @BuiltValueField(wireName: r'dot')
+  EventCreateDotEnum get dot;
+  // enum dotEnum {  None,  Single,  Double,  };
+
+  @BuiltValueField(wireName: r'lottery')
+  bool get lottery;
 
   EventCreate._();
 
@@ -196,11 +201,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
       object.allDay,
       specifiedType: const FullType(bool),
     );
-    yield r'signup_not_opened_yet';
-    yield serializers.serialize(
-      object.signupNotOpenedYet,
-      specifiedType: const FullType(bool),
-    );
     yield r'recurring';
     yield serializers.serialize(
       object.recurring,
@@ -245,6 +245,16 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield serializers.serialize(
       object.price,
       specifiedType: const FullType(int),
+    );
+    yield r'dot';
+    yield serializers.serialize(
+      object.dot,
+      specifiedType: const FullType(EventCreateDotEnum),
+    );
+    yield r'lottery';
+    yield serializers.serialize(
+      object.lottery,
+      specifiedType: const FullType(bool),
     );
   }
 
@@ -360,13 +370,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
           ) as bool;
           result.allDay = valueDes;
           break;
-        case r'signup_not_opened_yet':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.signupNotOpenedYet = valueDes;
-          break;
         case r'recurring':
           final valueDes = serializers.deserialize(
             value,
@@ -430,6 +433,20 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
           ) as int;
           result.price = valueDes;
           break;
+        case r'dot':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(EventCreateDotEnum),
+          ) as EventCreateDotEnum;
+          result.dot = valueDes;
+          break;
+        case r'lottery':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.lottery = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -491,5 +508,22 @@ class EventCreateAlcoholEventTypeEnum extends EnumClass {
 
   static BuiltSet<EventCreateAlcoholEventTypeEnum> get values => _$eventCreateAlcoholEventTypeEnumValues;
   static EventCreateAlcoholEventTypeEnum valueOf(String name) => _$eventCreateAlcoholEventTypeEnumValueOf(name);
+}
+
+class EventCreateDotEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventCreateDotEnum none = _$eventCreateDotEnum_none;
+  @BuiltValueEnumConst(wireName: r'Single')
+  static const EventCreateDotEnum single = _$eventCreateDotEnum_single;
+  @BuiltValueEnumConst(wireName: r'Double')
+  static const EventCreateDotEnum double_ = _$eventCreateDotEnum_double_;
+
+  static Serializer<EventCreateDotEnum> get serializer => _$eventCreateDotEnumSerializer;
+
+  const EventCreateDotEnum._(String name): super(name);
+
+  static BuiltSet<EventCreateDotEnum> get values => _$eventCreateDotEnumValues;
+  static EventCreateDotEnum valueOf(String name) => _$eventCreateDotEnumValueOf(name);
 }
 

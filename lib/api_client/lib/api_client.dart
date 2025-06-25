@@ -74,7 +74,6 @@ export 'package:api_client/src/model/error_model.dart';
 export 'package:api_client/src/model/event_create.dart';
 export 'package:api_client/src/model/event_read.dart';
 export 'package:api_client/src/model/event_signup_create.dart';
-export 'package:api_client/src/model/event_signup_delete.dart';
 export 'package:api_client/src/model/event_signup_read.dart';
 export 'package:api_client/src/model/event_signup_update.dart';
 export 'package:api_client/src/model/event_tag_read.dart';

@@ -246,7 +246,6 @@ Class | Method | HTTP request | Description
  - [EventCreate](doc/EventCreate.md)
  - [EventRead](doc/EventRead.md)
  - [EventSignupCreate](doc/EventSignupCreate.md)
- - [EventSignupDelete](doc/EventSignupDelete.md)
  - [EventSignupRead](doc/EventSignupRead.md)
  - [EventSignupUpdate](doc/EventSignupUpdate.md)
  - [EventTagRead](doc/EventTagRead.md)

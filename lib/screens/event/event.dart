@@ -27,13 +27,15 @@ class _EventPageState extends State<EventPage> {
   AdminUserRead? user;
   String? userType;
   GroupRead? group;
-  String? answer;
+  // String? answer;
   String? customGroup;
   String? foodCustom;
+  Map<String, List<String>?> foodPreferences = {};
   bool displayGroupInput = false;
   String? drinkPackageAnswer;
   GroupRead? defaultGroup;
   EventSignupRead? eventSignup;
+ 
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
@@ -47,9 +49,9 @@ class _EventPageState extends State<EventPage> {
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
   };
-  static const String drinkPackageNone = "Inget";
-  static const String drinkPackageAlcohol = "Alkohol";
-  static const String drinkPackageAlcoholFree = "Alkoholfritt";
+  static const String drinkPackageNone = "None";
+  static const String drinkPackageAlcohol = "Alcohol";
+  static const String drinkPackageAlcoholFree = "AlcoholFree";
 
   void initState() {
     ApiService.apiClient.getEventsApi().eventsGetSingleEvent(eventId: widget.eventId).then((value) => setState(() {
@@ -64,18 +66,27 @@ class _EventPageState extends State<EventPage> {
               }else{
                 this.displayGroupInput = true;
               }
+              this.foodPreferences['en'] = [...(value.data!.standardFoodPreferences ?? [])];
+              this.foodPreferences['sv'] = [...(value.data!.standardFoodPreferences ?? [])];
+              this.foodCustom = value.data!.otherFoodPreferences;
+              for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+              this.foodPreferences['en']![i] = foodPrefsDisplay[this.foodPreferences['en']![i]] ?? "";
+              }
             });
           }
         }));
     if(this.event != null) {
-      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) {
+      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) =>
+        setState(() {
               if (value.data != null) {
                 this.eventSignup = value.data;
               }
-            });
+            }));
     } else {
       this.eventSignup = null;
     }
+
+
     super.initState();
   }
 
@@ -94,10 +105,10 @@ class _EventPageState extends State<EventPage> {
               }else{
                 this.displayGroupInput = true;
               }
-              
+
             });
           }
-          this.answer = null;
+          // this.answer = null;
         }));
     if(this.event != null) {
       ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) {
@@ -159,7 +170,7 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(event?.startsAt.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(event?.startsAt.toLocal() ?? DateTime.now()) + getDots() +
                           " - " +
                           DateFormat("HH:mm").format(event?.endsAt.toLocal() ?? DateTime.now()) +
                           ", " +
@@ -297,7 +308,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ),
                 ),
-                // signupInfoWidget(),
+                signupInfoWidget(),
               ],
             ),
           ),
@@ -316,7 +327,7 @@ class _EventPageState extends State<EventPage> {
 
     final eventSignupCreate = EventSignupCreate((b) => b
     ..userId = user!.id
-    //..priority = // TODO fixa detta
+    ..priority = userType 
     ..groupName = group!.name
     ..drinkPackage
     );
@@ -326,138 +337,124 @@ class _EventPageState extends State<EventPage> {
   }
 
 
-  // void sendSignup() async {
-  //   EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
-  //   /* just to be sure */
-  //   if (group?.id != null) {
-  //     customGroup = null;
-  //   }
-  //   if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
-  //     setState(() {
-  //       drinkPackageAnswer = drinkPackageNone;
-  //     });
-  //   }
-  //   int eventId = event?.id ?? -1;
-  //   Map json =
-  //       await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
-  //   if (!json.containsKey('errors')) {}
-  //   update();
-  // }
+  void removeSignup() async {
+    int userId = user?.id ?? -1;
+    int eventId = event?.id ?? -1;
 
-//   void removeSignup() async {
-//     int userId = event?.event_user?.id ?? -1;
-//     int eventId = event?.id ?? -1;
-//     Map json = await AbstractService.delete(
-//       "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
-//     );
-//     if (!json.containsKey('errors')) {}
-//     update();
-//   }
+    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignoffRoute(eventId: eventId, userId: userId);
 
-//   //Bör denna vara async som de andra funktionerna?
-//   void goToSettings() {
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage())).then((_) {
-//       //uppdaterar sidan så man ser sin ändring
-//       update();
-//     });
-//   }
+    // Map json = await AbstractService.delete(
+    //   "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
+    // );
+    // if (!json.containsKey('errors')) {}
+    update();
+  }
 
-//   Widget userTypeDropDown() {
-//     var t = AppLocalizations.of(context)!;
-//     return Container(
-//       margin: EdgeInsets.all(10),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: <Widget>[
-//           Text(t.eventPriority),
-//           DropdownButton<String?>(
-//             isExpanded: true,
-//             value: userType,
-//             icon: const Icon(Icons.arrow_downward),
-//             iconSize: 24,
-//             elevation: 16,
-//             onChanged: (String? newValue) {
-//               setState(() {
-//                 userType = newValue;
-//               });
-//             },
-//             items: [
-//               // DropdownMenuItem<String?>(
-//               //   value: ,
-//               //   child: Text(t.eventOther),
-//               // ),
-//               ...?event!.user_types?.map(((List<String> ut) {
-//                 return DropdownMenuItem<String?>(
-//                   value: ut[1],
-//                   child: Text(ut[0]),
-//                 );
-//               })),
+  //Bör denna vara async som de andra funktionerna?
+  void goToSettings() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage())).then((_) {
+      //uppdaterar sidan så man ser sin ändring
+      update();
+    });
+  }
 
-//               DropdownMenuItem<String?>(
-//                 value: null,
-//                 child: Text(t.eventOther),
-//               )
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+  Widget userTypeDropDown() {
+    var t = AppLocalizations.of(context)!;
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(t.eventPriority),
+          DropdownButton<String?>(
+            isExpanded: true,
+            value: userType,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            onChanged: (String? newValue) {
+              setState(() {
+                userType = newValue;
+              });
+            },
+            items: [
+              // DropdownMenuItem<String?>(
+              //   value: ,
+              //   child: Text(t.eventOther),
+              // ),
+              ...event!.priorities.map(((PriorityDB prio) {
+                return DropdownMenuItem<String?>(
+                  // value: prio.priority,
+                  child: Text(prio.priority),
+                );
+              }
+              )),
 
-//   Widget groupDropdown() {
-//     var t = AppLocalizations.of(context)!;
-//     return Container(
-//       margin: EdgeInsets.all(10),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(t.eventChooseGroup),
-//           DropdownButton<Group?>(
-//             isExpanded: true,
-//             value: group,
-//             icon: const Icon(Icons.arrow_downward),
-//             iconSize: 24,
-//             elevation: 16,
-//             onChanged: (Group? newValue) {
-//               setState(() {
-//                 group = newValue;
-//                 if (newValue == null) {
-//                   displayGroupInput = true;
-//                 } else {
-//                   displayGroupInput = false;
-//                 }
-//               });
-//             },
-//             items: [
-//               ...?event!.groups?.map(((Group? g) {
-//                 return DropdownMenuItem<Group?>(
-//                   value: g,
-//                   child: Text(g!.name!),
-//                 );
-//               })),
-//               DropdownMenuItem<Group?>(
-//                 value: null,
-//                 child: Text(t.eventOtherDifferent),
-//               ),
-//             ],
-//           ),
-//           Visibility(
-//             visible: displayGroupInput,
-//             child: TextField(
-//                 onChanged: (String? newValue) {
-//                   setState(() {
-//                     customGroup = newValue;
-//                   });
-//                 },
-//                 decoration: InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   hintText: t.eventCustomGroupName,
-//                 )),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+              DropdownMenuItem<String?>(
+                value: null,
+                child: Text(t.eventOther),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget groupDropdown() {
+    var t = AppLocalizations.of(context)!;
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(t.eventChooseGroup),
+          DropdownButton<GroupRead?>(
+            isExpanded: true,
+            value: group,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            onChanged: (GroupRead? newValue) {
+              setState(() {
+                group = newValue;
+                if (newValue == null) {
+                  displayGroupInput = true;
+                } else {
+                  displayGroupInput = false;
+                }
+              });
+            },
+            items: [
+              ...?user!.groups.map(((GroupRead? g) {
+                return DropdownMenuItem<GroupRead?>(
+                  value: g,
+                  child: Text(g!.name),
+                );
+              })),
+              DropdownMenuItem<GroupRead?>(
+                value: null,
+                child: Text(t.eventOtherDifferent),
+              ),
+            ],
+          ),
+          Visibility(
+            visible: displayGroupInput,
+            child: TextField(
+                onChanged: (String? newValue) {
+                  setState(() {
+                    customGroup = newValue;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: t.eventCustomGroupName,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
 
 //   Widget questionInput() {
 //     if (event?.event_signup?.question == null || event?.event_signup?.question == "") {
@@ -489,7 +486,7 @@ class _EventPageState extends State<EventPage> {
 //   }
 
 
-  // This is ugly af but works 
+  // This is ugly af but works
   String isSignupOpen(EventRead event) {
     if(event.signupStart.toLocal().isAfter(DateTime.now())) {
       if (event.signupEnd.toLocal().isBefore(DateTime.now())) {
@@ -505,15 +502,34 @@ class _EventPageState extends State<EventPage> {
     Widget signup;
     String locale = Localizations.localeOf(context).toString();
     // If no event
-    if (event == null || eventSignup == null) {
-      return Container();
+    if (event == null || event!.canSignup == false) {
+      return Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t.eventTechnicalDifficulties),
+                InkWell(
+                  child: new Text(
+                    "spindelmännen",
+                    style: TextStyle(
+                      color: Colors.blue[300],
+                    ),
+                  ),
+                  onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                ),
+                Divider(
+                  color: null,
+                ),
+              ],
+            ),
+          );
     }
-
     if (event!.canSignup) {
       if (isSignupOpen(event!) == "open")
         signup = signupWidget(t);
       else {
-        if (isSignupOpen(event!) == "closed") {
+        if (isSignupOpen(event!) == "closed"){
           if (eventSignup == null) {
             signup = Row(
               children: [
@@ -532,9 +548,9 @@ class _EventPageState extends State<EventPage> {
           } else {
             String groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
-            if (!(event!.event_signup!.lottery ?? false)) {
-              if (event!.event_user?.reserve ?? false) {
-                signup = Column(
+            if (event!.lottery == true) {
+              if (eventSignup!.confirmedStatus == "unconfirmed") {
+              signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -557,8 +573,8 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-              } else {
-                signup = Column(
+            } else {
+              signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -613,7 +629,7 @@ class _EventPageState extends State<EventPage> {
         }
       }
     } else {
-      signup = Text("hej");
+      signup = SizedBox.shrink();
     }
 
     return Container(
@@ -714,6 +730,220 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
+  // Widget signupInfoWidget() {
+  //   var t = AppLocalizations.of(context)!;
+  //   Widget signup;
+  //   String locale = Localizations.localeOf(context).toString();
+  //   // If no event
+  //   if (event == null || eventSignup == null) {
+  //     return Container();
+  //   }
+
+  //   if (event!.canSignup) {
+  //     if (isSignupOpen(event!) == "open")
+  //       signup = signupWidget(t);
+  //     else {
+  //       if (isSignupOpen(event!) == "closed") {
+  //         if (eventSignup == null) {
+  //           signup = Row(
+  //             children: [
+  //               Icon(
+  //                 Icons.info_outline_rounded,
+  //                 color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
+  //               ),
+  //               Text(
+  //                 t.eventNotSignedUp,
+  //                 style: TextStyle(
+  //                   color: Colors.red[300],
+  //                 ),
+  //               ),
+  //             ],
+  //           );
+  //         } else {
+  //           String groupName = eventSignup!.groupName;
+  //           String userType = eventSignup!.priority;
+  //           if (!(event!.event_signup!.lottery ?? false)) {
+  //             if (event!.event_user?.reserve ?? false) {
+  //               signup = Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Row(
+  //                     children: [
+  //                       Icon(
+  //                         Icons.cancel,
+  //                         color: Colors.red[300],
+  //                       ),
+  //                       Text(
+  //                         t.eventNoSpot,
+  //                         style: TextStyle(
+  //                           color: Colors.red[300],
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Divider(
+  //                     color: null,
+  //                   ),
+  //                   ..._signupDetails(groupName, userType),
+  //                 ],
+  //               );
+  //             } else {
+  //               signup = Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Row(
+  //                     children: [
+  //                       Icon(
+  //                         Icons.check_circle,
+  //                         color: Colors.green[300],
+  //                       ),
+  //                       Text(
+  //                         t.eventGotSpot,
+  //                         style: TextStyle(
+  //                           color:Colors.green[300],
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Divider(
+  //                     color: null,
+  //                   ),
+  //                   ..._signupDetails(groupName, userType),
+  //                 ],
+  //               );
+  //             }
+  //           } else {
+  //             signup = Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 Row(
+  //                   children: [
+  //                     Icon(
+  //                       Icons.info_outline_rounded,
+  //                       color: Theme.of(context).colorScheme.primary,
+  //                     ),
+  //                     Text(
+  //                       t.eventLotterySpot,
+  //                       style: TextStyle(
+  //                         color: Theme.of(context).colorScheme.primary,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 Divider(
+  //                   color: null,
+  //                 ),
+  //                 ..._signupDetails(groupName, userType),
+  //               ],
+  //             );
+  //           }
+  //         }
+  //       } else {
+  //         signup = SizedBox.shrink();
+  //       }
+  //     }
+  //   } else {
+  //     signup = Text("hej");
+  //   }
+
+  //   return Container(
+  //     width: double.infinity,
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           t.eventSignUp,
+  //           style: Theme.of(context).textTheme.headlineMedium,
+  //         ),
+  //         Divider(
+  //           color: null,
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+  //           child: Column(
+  //             children: [
+  //               Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.person,
+  //                   ),
+  //                   Text(
+  //                     t.eventNbrSignUps + event!.signupCount.toString(),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.people,
+  //                   ),
+  //                   Text(
+  //                     t.eventNbrSpots + event!.maxEventUsers.toString(),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.event_available_rounded,
+  //                   ),
+  //                   Text(
+  //                     t.eventSignUpOpens +
+  //                         DateFormat("d/M").format(event!.signupStart.toLocal()) +
+  //                         " " +
+  //                         DateFormat("jm", locale).format(event!.signupStart.toLocal()),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.event_busy_rounded,
+  //                   ),
+  //                   Text(
+  //                     t.eventSignUpCloses +
+  //                         DateFormat("d/M").format(event!.signupEnd.toLocal()) +
+  //                         " " +
+  //                         DateFormat("jm", locale).format(event!.signupEnd.toLocal()),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         Divider(
+  //           color: null,
+  //         ),
+  //         signup,
+  //         Divider(
+  //           color: null,
+  //         ),
+  //         Container(
+  //           margin: EdgeInsets.all(10),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(t.eventTechnicalDifficulties),
+  //               InkWell(
+  //                 child: new Text(
+  //                   "spindelmännen",
+  //                   style: TextStyle(
+  //                     color: Colors.blue[300],
+  //                   ),
+  //                 ),
+  //                 onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+  //               ),
+  //               Divider(
+  //                 color: null,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget signupWidget(AppLocalizations t) {
     String locale = Localizations.localeOf(context).toString();
     /* Failsafe */
@@ -724,7 +954,7 @@ class _EventPageState extends State<EventPage> {
     //   if (event?.can_signup ?? false) return Container();
     // }
     Widget drinkPackageInput = Container();
-    if (!(event!.alcoholEventType  == "None")) {
+    if (!(event!.alcoholEventType == "None")) {
       drinkPackageInput = Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -769,7 +999,7 @@ class _EventPageState extends State<EventPage> {
             children: [
               groupDropdown(),
               userTypeDropDown(),
-              questionInput(),
+              // questionInput(),
               drinkPackageInput,
               Wrap(
                 children: [
@@ -820,18 +1050,18 @@ class _EventPageState extends State<EventPage> {
             ],
           ));
     } else {
-      String groupName = "";
-      if (event!.event_user!.group_id != null) {
-        for (int i = 0; i < event!.groups!.length; i++) {
-          if (event!.groups![i].id == event!.event_user!.group_id) {
-            groupName = event!.groups![i].name!;
-            break;
-          }
-        }
-      } else {
-        groupName = event!.event_user!.group_custom ?? "";
-      }
-      String userType = event!.event_user!.user_type ?? t.eventOther;
+      String groupName = eventSignup!.groupName;
+      // if (eventSignup.groupName != null) {
+      //   for (int i = 0; i < event!.groups!.length; i++) {
+      //     if (event!.groups![i].id == event!.event_user!.group_id) {
+      //       groupName = event!.groups![i].name!;
+      //       break;
+      //     }
+      //   }
+      // } else {
+      //   groupName = event!.event_user!.group_custom ?? "";
+      // }
+      String userType = eventSignup!.priority;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -867,130 +1097,130 @@ class _EventPageState extends State<EventPage> {
     }
   }
 
-//   Future<bool?> _confirmUnenroll(BuildContext context) {
-//     var t = AppLocalizations.of(context)!;
-//     return showDialog(
-//         context: context,
-//         builder: (context) {
-//           return AlertDialog(
-//             title: Text(t.eventConfirmCancel),
-//             actions: [
-//               TextButton(
-//                 child: Text(t.eventCancel),
-//                 onPressed: () {
-//                   Navigator.pop(context, false);
-//                 },
-//               ),
-//               TextButton(
-//                 child: Text(t.eventConfirmRemoveSignUp),
-//                 onPressed: () {
-//                   Navigator.pop(context, true);
-//                 },
-//               ),
-//             ],
-//           );
-//         });
-//   }
+  Future<bool?> _confirmUnenroll(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(t.eventConfirmCancel),
+            actions: [
+              TextButton(
+                child: Text(t.eventCancel),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              TextButton(
+                child: Text(t.eventConfirmRemoveSignUp),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        });
+  }
 
-//   List<Widget> _signupDetails(String? groupName, String? userType) {
-//     var t = AppLocalizations.of(context)!;
-//     String locale = Localizations.localeOf(context).toString();
-//     /* Failsafe */
-//     if (locale != "sv" && locale != "en") {
-//       locale = "en";
-//     }
-//     Widget drinkPackage = Container();
-//     if (event!.drink_package ?? false) {
-//       switch (event!.event_user!.drink_package_answer) {
-//         case drinkPackageAlcohol:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
-//           break;
-//         case drinkPackageAlcoholFree:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
-//           break;
-//         case drinkPackageNone:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
-//           break;
-//         default:
-//           this.drinkPackageAnswer = drinkPackageNone;
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
-//           break;
-//       }
-//     }
-//     return [
-//       RichText(
-//           text: TextSpan(
-//         text: t.eventGroup,
-//         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//       )),
-//       RichText(
-//           text: TextSpan(
-//         text: t.eventPriority2,
-//         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//       )),
-//       event!.event_signup!.question != ""
-//           ? RichText(
-//               text: TextSpan(
-//                   text: event!.event_signup!.question!,
-//                   children: [
-//                     TextSpan(text: " "),
-//                     TextSpan(
-//                         text: event!.event_user!.answer,
-//                         style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
-//                   ],
-//                   style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
-//           : Container(),
-//       drinkPackage,
-//       Wrap(
-//         children: [
-//           RichText(
-//               text: TextSpan(
-//                   text: t.eventFoodPreferences + " ",
-//                   style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),)),
-//           ...?foodPreferences[locale]
-//               ?.where((element) => element.isNotEmpty)
-//               .map((foodPreferences) => Text(foodPreferences + " ")),
-//           Text(foodCustom ?? ""),
-//         ],
-//       ),
-//       Wrap(children: [
-//         Text(
-//           t.eventFoodPrefInfo,
-//           style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         ),
-//         GestureDetector(
-//           child: Text(t.eventLinkToFoodPrefs,
-//               style: TextStyle(
-//                   decoration: TextDecoration.underline,
-//                   color: Theme.of(context).colorScheme.primary)),
-//           onTap: () => goToSettings(),
-//         ),
-//       ]),
-//     ];
-//   }
+  List<Widget> _signupDetails(String? groupName, String? userType) {
+    var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    Widget drinkPackage = Container();
+    if (event!.drinkPackage) {
+      switch (eventSignup!.drinkPackage.name) {
+        case drinkPackageAlcohol:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
+          break;
+        case drinkPackageAlcoholFree:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
+          break;
+        case drinkPackageNone:
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+          break;
+        default:
+          this.drinkPackageAnswer = drinkPackageNone;
+          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+          break;
+      }
+    }
+    return [
+      RichText(
+          text: TextSpan(
+        text: t.eventGroup,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+      )),
+      RichText(
+          text: TextSpan(
+        text: t.eventPriority2,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+      )),
+      // event!.event_signup!.question != ""
+      //     ? RichText(
+      //         text: TextSpan(
+      //             text: event!.event_signup!.question!,
+      //             children: [
+      //               TextSpan(text: " "),
+      //               TextSpan(
+      //                   text: event!.event_user!.answer,
+      //                   style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
+      //             ],
+      //             style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
+      //     : Container(),
+      drinkPackage,
+      Wrap(
+        children: [
+          RichText(
+              text: TextSpan(
+                  text: t.eventFoodPreferences + " ",
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),)),
+          ...?foodPreferences[locale]
+              ?.where((element) => element.isNotEmpty)
+              .map((foodPreferences) => Text(foodPreferences + " ")),
+          Text(foodCustom ?? ""),
+        ],
+      ),
+      Wrap(children: [
+        Text(
+          t.eventFoodPrefInfo,
+          style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
+        ),
+        GestureDetector(
+          child: Text(t.eventLinkToFoodPrefs,
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Theme.of(context).colorScheme.primary)),
+          onTap: () => goToSettings(),
+        ),
+      ]),
+    ];
+  }
 
-//   Widget _drinkPackageWidget(String drinkPackageText, String choice) {
-//     return RichText(
-//       text: TextSpan(
-//         text: drinkPackageText,
-//         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//       ),
-//     );
-//   }
+  Widget _drinkPackageWidget(String drinkPackageText, String choice) {
+    return RichText(
+      text: TextSpan(
+        text: drinkPackageText,
+        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+      ),
+    );
+  }
 
-//   String getDots() {
-//     switch (event!.dot) {
-//       case "single":
-//         return " (.)";
-//       case "double":
-//         return " (..)";
-//       default:
-//         return "";
-//     }
-//   }
+  String getDots() {
+    switch (event!.dot) {
+      case "Single":
+        return " (.)";
+      case "Double":
+        return " (..)";
+      default:
+        return "";
+    }
+  }
 
   // Future<void> _onRefresh() async {
   //   update();

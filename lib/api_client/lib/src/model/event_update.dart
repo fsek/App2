@@ -24,7 +24,6 @@ part 'event_update.g.dart';
 /// * [location] 
 /// * [maxEventUsers] 
 /// * [allDay] 
-/// * [signupNotOpenedYet] 
 /// * [recurring] 
 /// * [food] 
 /// * [closed] 
@@ -34,6 +33,7 @@ part 'event_update.g.dart';
 /// * [alcoholEventType] 
 /// * [dresscode] 
 /// * [price] 
+/// * [dot] 
 @BuiltValue()
 abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -64,16 +64,13 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   String? get descriptionEn;
 
   @BuiltValueField(wireName: r'location')
-  String get location;
+  String? get location;
 
   @BuiltValueField(wireName: r'max_event_users')
   int? get maxEventUsers;
 
   @BuiltValueField(wireName: r'all_day')
   bool? get allDay;
-
-  @BuiltValueField(wireName: r'signup_not_opened_yet')
-  bool? get signupNotOpenedYet;
 
   @BuiltValueField(wireName: r'recurring')
   bool? get recurring;
@@ -102,6 +99,10 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
 
   @BuiltValueField(wireName: r'price')
   int? get price;
+
+  @BuiltValueField(wireName: r'dot')
+  EventUpdateDotEnum? get dot;
+  // enum dotEnum {  None,  Single,  Double,  };
 
   EventUpdate._();
 
@@ -189,11 +190,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(String),
       );
     }
-    yield r'location';
-    yield serializers.serialize(
-      object.location,
-      specifiedType: const FullType(String),
-    );
+    if (object.location != null) {
+      yield r'location';
+      yield serializers.serialize(
+        object.location,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     if (object.maxEventUsers != null) {
       yield r'max_event_users';
       yield serializers.serialize(
@@ -205,13 +208,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
       yield r'all_day';
       yield serializers.serialize(
         object.allDay,
-        specifiedType: const FullType.nullable(bool),
-      );
-    }
-    if (object.signupNotOpenedYet != null) {
-      yield r'signup_not_opened_yet';
-      yield serializers.serialize(
-        object.signupNotOpenedYet,
         specifiedType: const FullType.nullable(bool),
       );
     }
@@ -264,16 +260,27 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
       );
     }
-    yield r'dresscode';
-    yield object.dresscode == null ? null : serializers.serialize(
-      object.dresscode,
-      specifiedType: const FullType.nullable(String),
-    );
-    yield r'price';
-    yield object.price == null ? null : serializers.serialize(
-      object.price,
-      specifiedType: const FullType.nullable(int),
-    );
+    if (object.dresscode != null) {
+      yield r'dresscode';
+      yield serializers.serialize(
+        object.dresscode,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.price != null) {
+      yield r'price';
+      yield serializers.serialize(
+        object.price,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.dot != null) {
+      yield r'dot';
+      yield serializers.serialize(
+        object.dot,
+        specifiedType: const FullType.nullable(EventUpdateDotEnum),
+      );
+    }
   }
 
   @override
@@ -372,8 +379,9 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         case r'location':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
           result.location = valueDes;
           break;
         case r'max_event_users':
@@ -391,14 +399,6 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           ) as bool?;
           if (valueDes == null) continue;
           result.allDay = valueDes;
-          break;
-        case r'signup_not_opened_yet':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
-          if (valueDes == null) continue;
-          result.signupNotOpenedYet = valueDes;
           break;
         case r'recurring':
           final valueDes = serializers.deserialize(
@@ -472,6 +472,14 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.price = valueDes;
           break;
+        case r'dot':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(EventUpdateDotEnum),
+          ) as EventUpdateDotEnum?;
+          if (valueDes == null) continue;
+          result.dot = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -516,5 +524,22 @@ class EventUpdateAlcoholEventTypeEnum extends EnumClass {
 
   static BuiltSet<EventUpdateAlcoholEventTypeEnum> get values => _$eventUpdateAlcoholEventTypeEnumValues;
   static EventUpdateAlcoholEventTypeEnum valueOf(String name) => _$eventUpdateAlcoholEventTypeEnumValueOf(name);
+}
+
+class EventUpdateDotEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'None')
+  static const EventUpdateDotEnum none = _$eventUpdateDotEnum_none;
+  @BuiltValueEnumConst(wireName: r'Single')
+  static const EventUpdateDotEnum single = _$eventUpdateDotEnum_single;
+  @BuiltValueEnumConst(wireName: r'Double')
+  static const EventUpdateDotEnum double_ = _$eventUpdateDotEnum_double_;
+
+  static Serializer<EventUpdateDotEnum> get serializer => _$eventUpdateDotEnumSerializer;
+
+  const EventUpdateDotEnum._(String name): super(name);
+
+  static BuiltSet<EventUpdateDotEnum> get values => _$eventUpdateDotEnumValues;
+  static EventUpdateDotEnum valueOf(String name) => _$eventUpdateDotEnumValueOf(name);
 }
 

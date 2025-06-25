@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **eventSignupEventSignoffRoute**
-> EventSignupRead eventSignupEventSignoffRoute(eventId, eventSignupDelete)
+> EventSignupRead eventSignupEventSignoffRoute(eventId, userId)
 
 Event Signoff Route
 
@@ -28,10 +28,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getEventSignupApi();
 final int eventId = 56; // int | 
-final EventSignupDelete eventSignupDelete = ; // EventSignupDelete | 
+final int userId = 56; // int | 
 
 try {
-    final response = api.eventSignupEventSignoffRoute(eventId, eventSignupDelete);
+    final response = api.eventSignupEventSignoffRoute(eventId, userId);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling EventSignupApi->eventSignupEventSignoffRoute: $e\n');
@@ -43,7 +43,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **eventId** | **int**|  | 
- **eventSignupDelete** | [**EventSignupDelete**](EventSignupDelete.md)|  | 
+ **userId** | **int**|  | 
 
 ### Return type
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
