@@ -14,7 +14,7 @@ New part:
 
 1. Start the backend while running on the most up to date app backend branch (https://github.com/fsek/WebWebWeb/pull/220) at the time of writing.
 1. Run `bash script.sh`, which will take care of most work for you.
-1. Run `flutter run` or run the app via the VSCode standard runner.
+1. Run `flutter run` or run the app via the VSCode standard runner. (If it tells you errors exist, try selecting "run anyway")
 
 Old outdated instructions:
 
