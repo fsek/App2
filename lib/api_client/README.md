@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionGetAllAdventureMissions**](doc/AdventureMissionApi.md#adventuremissiongetalladventuremissions) | **GET** /adventure-mission/all | Get All Adventure Missions
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPatchAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpatchadventuremission) | **PATCH** /adventure-mission/patch/{id} | Patch Adventure Mission
 [*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPostAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpostadventuremission) | **POST** /adventure-mission/ | Post Adventure Mission
+[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsAddAlbumPhotographer**](doc/AlbumsApi.md#albumsaddalbumphotographer) | **PATCH** /albums/add_photographer | Add Album Photographer
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsCreateAlbum**](doc/AlbumsApi.md#albumscreatealbum) | **POST** /albums/ | Create Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteAlbumYear**](doc/AlbumsApi.md#albumsdeletealbumyear) | **DELETE** /albums/year/{year} | Delete Album Year
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
@@ -122,8 +123,10 @@ Class | Method | HTTP request | Description
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsGetElection**](doc/ElectionsApi.md#electionsgetelection) | **GET** /election/{election_id} | Get Election
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignoffRoute**](doc/EventSignupApi.md#eventsignupeventsignoffroute) | **DELETE** /event-signup/{event_id} | Event Signoff Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignupRoute**](doc/EventSignupApi.md#eventsignupeventsignuproute) | **POST** /event-signup/{event_id} | Event Signup Route
+[*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeEventSignup**](doc/EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupUpdateEventSignupRoute**](doc/EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 [*EventsApi*](doc/EventsApi.md) | [**eventsAddTagToEvent**](doc/EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
+[*EventsApi*](doc/EventsApi.md) | [**eventsConfirmEventUsers**](doc/EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
 [*EventsApi*](doc/EventsApi.md) | [**eventsCreateEvent**](doc/EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventRemove**](doc/EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
@@ -157,9 +160,11 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningDeleteNollning**](doc/NollningApi.md#nollningdeletenollning) | **DELETE** /nollning/delete/{id} | Delete Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningEditCompletedMission**](doc/NollningApi.md#nollningeditcompletedmission) | **PATCH** /group_mission/{id} | Edit Completed Mission
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollning**](doc/NollningApi.md#nollninggetallnollning) | **GET** /nollning/all | Get All Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollningGroups**](doc/NollningApi.md#nollninggetallnollninggroups) | **GET** /nollning/ | Get All Nollning Groups
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetCompletedMissions**](doc/NollningApi.md#nollninggetcompletedmissions) | **GET** /group_mission/{nollning_id} | Get Completed Missions
 [*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/patch/{id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningRemoveGroupFromNollning**](doc/NollningApi.md#nollningremovegroupfromnollning) | **DELETE** /nollning/remove_group/{nollning_group_id} | Remove Group From Nollning
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermissions**](doc/PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsCreatePermission**](doc/PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
@@ -168,6 +173,7 @@ Class | Method | HTTP request | Description
 [*PostsApi*](doc/PostsApi.md) | [**postsCreatePost**](doc/PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [*PostsApi*](doc/PostsApi.md) | [**postsDeletePost**](doc/PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
+[*PostsApi*](doc/PostsApi.md) | [**postsGetAllUsersWithPost**](doc/PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
 [*SongsApi*](doc/SongsApi.md) | [**songsCreateSong**](doc/SongsApi.md#songscreatesong) | **POST** /songs/ | Create Song
@@ -188,11 +194,14 @@ Class | Method | HTTP request | Description
 [*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessGetAllUserAccesses**](doc/UserDoorAccessApi.md#userdooraccessgetalluseraccesses) | **GET** /user_access/ | Get All User Accesses
 [*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessPostUserAccess**](doc/UserDoorAccessApi.md#userdooraccesspostuseraccess) | **POST** /user_access/ | Post User Access
 [*UserDoorAccessApi*](doc/UserDoorAccessApi.md) | [**userDoorAccessUpdateUserAccess**](doc/UserDoorAccessApi.md#userdooraccessupdateuseraccess) | **PATCH** /user_access/ | Update User Access
-[*UsersApi*](doc/UsersApi.md) | [**usersGetAllUsers**](doc/UsersApi.md#usersgetallusers) | **GET** /users/ | Get All Users
+[*UsersApi*](doc/UsersApi.md) | [**usersAdminGetAllUsers**](doc/UsersApi.md#usersadmingetallusers) | **GET** /users/admin/all/ | Admin Get All Users
+[*UsersApi*](doc/UsersApi.md) | [**usersAdminGetUser**](doc/UsersApi.md#usersadmingetuser) | **GET** /users/admin/{user_id} | Admin Get User
+[*UsersApi*](doc/UsersApi.md) | [**usersAdminUpdateUser**](doc/UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
-[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUser**](doc/UsersApi.md#usersupdateuser) | **PATCH** /users/update/{user_id} | Update User
-[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/member-status/{user_id} | Update User Status
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
 
 ## Documentation For Models
@@ -201,9 +210,11 @@ Class | Method | HTTP request | Description
  - [AdRead](doc/AdRead.md)
  - [AdUpdate](doc/AdUpdate.md)
  - [AddEventTag](doc/AddEventTag.md)
+ - [AdminUserRead](doc/AdminUserRead.md)
  - [AdventureMissionCreate](doc/AdventureMissionCreate.md)
  - [AdventureMissionRead](doc/AdventureMissionRead.md)
  - [AlbumCreate](doc/AlbumCreate.md)
+ - [AlbumPhotographerAdd](doc/AlbumPhotographerAdd.md)
  - [AlbumRead](doc/AlbumRead.md)
  - [BearerResponse](doc/BearerResponse.md)
  - [BodyAuthResetForgotPassword](doc/BodyAuthResetForgotPassword.md)
@@ -235,7 +246,6 @@ Class | Method | HTTP request | Description
  - [EventCreate](doc/EventCreate.md)
  - [EventRead](doc/EventRead.md)
  - [EventSignupCreate](doc/EventSignupCreate.md)
- - [EventSignupDelete](doc/EventSignupDelete.md)
  - [EventSignupRead](doc/EventSignupRead.md)
  - [EventSignupUpdate](doc/EventSignupUpdate.md)
  - [EventTagRead](doc/EventTagRead.md)

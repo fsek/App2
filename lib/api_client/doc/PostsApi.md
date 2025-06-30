@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**postsCreatePost**](PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [**postsDeletePost**](PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
 [**postsGetAllPosts**](PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
+[**postsGetAllUsersWithPost**](PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [**postsGetPost**](PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
 [**postsUpdatePost**](PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
 
@@ -126,6 +127,47 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**BuiltList&lt;PostRead&gt;**](PostRead.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **postsGetAllUsersWithPost**
+> BuiltList<SimpleUserRead> postsGetAllUsersWithPost(postId)
+
+Get All Users With Post
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+
+final api = ApiClient().getPostsApi();
+final int postId = 56; // int | 
+
+try {
+    final response = api.postsGetAllUsersWithPost(postId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling PostsApi->postsGetAllUsersWithPost: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **postId** | **int**|  | 
+
+### Return type
+
+[**BuiltList&lt;SimpleUserRead&gt;**](SimpleUserRead.md)
 
 ### Authorization
 

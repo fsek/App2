@@ -8,6 +8,7 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**councilId** | **int** |  | [optional] 
 **startsAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **endsAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **signupStart** | [**DateTime**](DateTime.md) |  | [optional] 
@@ -16,17 +17,19 @@ Name | Type | Description | Notes
 **titleEn** | **String** |  | [optional] 
 **descriptionSv** | **String** |  | [optional] 
 **descriptionEn** | **String** |  | [optional] 
-**location** | **String** |  | 
+**location** | **String** |  | [optional] 
 **maxEventUsers** | **int** |  | [optional] 
 **allDay** | **bool** |  | [optional] 
-**signupNotOpenedYet** | **bool** |  | [optional] 
 **recurring** | **bool** |  | [optional] 
-**drink** | **bool** |  | [optional] 
 **food** | **bool** |  | [optional] 
-**cash** | **bool** |  | [optional] 
 **closed** | **bool** |  | [optional] 
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
+**isNollningEvent** | **bool** |  | [optional] 
+**alcoholEventType** | **String** |  | [optional] 
+**dresscode** | **String** |  | [optional] 
+**price** | **int** |  | [optional] 
+**dot** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

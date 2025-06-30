@@ -112,7 +112,7 @@ class _CalendarState extends State<Calendar> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             // Alcohol is served
-                            if (event.drink == true) Icon(Icons.wine_bar_rounded, size: 20),
+                            if (!(event.alcoholEventType == "None")) Icon(Icons.wine_bar_rounded, size: 20),
                           ],
                         ),
                       )

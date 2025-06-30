@@ -29,14 +29,18 @@ part 'event_read.g.dart';
 /// * [maxEventUsers] 
 /// * [priorities] 
 /// * [allDay] 
-/// * [signupNotOpenedYet] 
 /// * [recurring] 
-/// * [drink] 
 /// * [food] 
-/// * [cash] 
 /// * [closed] 
 /// * [canSignup] 
 /// * [drinkPackage] 
+/// * [isNollningEvent] 
+/// * [alcoholEventType] 
+/// * [dressCode] 
+/// * [price] 
+/// * [signupCount] 
+/// * [dot] 
+/// * [lottery] 
 @BuiltValue()
 abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -84,20 +88,11 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'all_day')
   bool get allDay;
 
-  @BuiltValueField(wireName: r'signup_not_opened_yet')
-  bool get signupNotOpenedYet;
-
   @BuiltValueField(wireName: r'recurring')
   bool get recurring;
 
-  @BuiltValueField(wireName: r'drink')
-  bool get drink;
-
   @BuiltValueField(wireName: r'food')
   bool get food;
-
-  @BuiltValueField(wireName: r'cash')
-  bool get cash;
 
   @BuiltValueField(wireName: r'closed')
   bool get closed;
@@ -107,6 +102,27 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'drink_package')
   bool get drinkPackage;
+
+  @BuiltValueField(wireName: r'is_nollning_event')
+  bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'alcohol_event_type')
+  String get alcoholEventType;
+
+  @BuiltValueField(wireName: r'dress_code')
+  String get dressCode;
+
+  @BuiltValueField(wireName: r'price')
+  int get price;
+
+  @BuiltValueField(wireName: r'signup_count')
+  int get signupCount;
+
+  @BuiltValueField(wireName: r'dot')
+  String get dot;
+
+  @BuiltValueField(wireName: r'lottery')
+  bool get lottery;
 
   EventRead._();
 
@@ -206,29 +222,14 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
       object.allDay,
       specifiedType: const FullType(bool),
     );
-    yield r'signup_not_opened_yet';
-    yield serializers.serialize(
-      object.signupNotOpenedYet,
-      specifiedType: const FullType(bool),
-    );
     yield r'recurring';
     yield serializers.serialize(
       object.recurring,
       specifiedType: const FullType(bool),
     );
-    yield r'drink';
-    yield serializers.serialize(
-      object.drink,
-      specifiedType: const FullType(bool),
-    );
     yield r'food';
     yield serializers.serialize(
       object.food,
-      specifiedType: const FullType(bool),
-    );
-    yield r'cash';
-    yield serializers.serialize(
-      object.cash,
       specifiedType: const FullType(bool),
     );
     yield r'closed';
@@ -244,6 +245,41 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'drink_package';
     yield serializers.serialize(
       object.drinkPackage,
+      specifiedType: const FullType(bool),
+    );
+    yield r'is_nollning_event';
+    yield serializers.serialize(
+      object.isNollningEvent,
+      specifiedType: const FullType(bool),
+    );
+    yield r'alcohol_event_type';
+    yield serializers.serialize(
+      object.alcoholEventType,
+      specifiedType: const FullType(String),
+    );
+    yield r'dress_code';
+    yield serializers.serialize(
+      object.dressCode,
+      specifiedType: const FullType(String),
+    );
+    yield r'price';
+    yield serializers.serialize(
+      object.price,
+      specifiedType: const FullType(int),
+    );
+    yield r'signup_count';
+    yield serializers.serialize(
+      object.signupCount,
+      specifiedType: const FullType(int),
+    );
+    yield r'dot';
+    yield serializers.serialize(
+      object.dot,
+      specifiedType: const FullType(String),
+    );
+    yield r'lottery';
+    yield serializers.serialize(
+      object.lottery,
       specifiedType: const FullType(bool),
     );
   }
@@ -374,13 +410,6 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
           ) as bool;
           result.allDay = valueDes;
           break;
-        case r'signup_not_opened_yet':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.signupNotOpenedYet = valueDes;
-          break;
         case r'recurring':
           final valueDes = serializers.deserialize(
             value,
@@ -388,26 +417,12 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
           ) as bool;
           result.recurring = valueDes;
           break;
-        case r'drink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.drink = valueDes;
-          break;
         case r'food':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(bool),
           ) as bool;
           result.food = valueDes;
-          break;
-        case r'cash':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.cash = valueDes;
           break;
         case r'closed':
           final valueDes = serializers.deserialize(
@@ -429,6 +444,55 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.drinkPackage = valueDes;
+          break;
+        case r'is_nollning_event':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.isNollningEvent = valueDes;
+          break;
+        case r'alcohol_event_type':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.alcoholEventType = valueDes;
+          break;
+        case r'dress_code':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.dressCode = valueDes;
+          break;
+        case r'price':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.price = valueDes;
+          break;
+        case r'signup_count':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.signupCount = valueDes;
+          break;
+        case r'dot':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.dot = valueDes;
+          break;
+        case r'lottery':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.lottery = valueDes;
           break;
         default:
           unhandled.add(key);

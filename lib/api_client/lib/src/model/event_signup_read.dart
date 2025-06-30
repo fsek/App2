@@ -18,6 +18,7 @@ part 'event_signup_read.g.dart';
 /// * [priority] 
 /// * [groupName] 
 /// * [drinkPackage] 
+/// * [confirmedStatus] 
 @BuiltValue()
 abstract class EventSignupRead implements Built<EventSignupRead, EventSignupReadBuilder> {
   @BuiltValueField(wireName: r'user')
@@ -35,6 +36,9 @@ abstract class EventSignupRead implements Built<EventSignupRead, EventSignupRead
   @BuiltValueField(wireName: r'drinkPackage')
   EventSignupReadDrinkPackageEnum get drinkPackage;
   // enum drinkPackageEnum {  None,  AlcoholFree,  Alcohol,  };
+
+  @BuiltValueField(wireName: r'confirmed_status')
+  bool get confirmedStatus;
 
   EventSignupRead._();
 
@@ -83,6 +87,11 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
     yield serializers.serialize(
       object.drinkPackage,
       specifiedType: const FullType(EventSignupReadDrinkPackageEnum),
+    );
+    yield r'confirmed_status';
+    yield serializers.serialize(
+      object.confirmedStatus,
+      specifiedType: const FullType(bool),
     );
   }
 
@@ -141,6 +150,13 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
             specifiedType: const FullType(EventSignupReadDrinkPackageEnum),
           ) as EventSignupReadDrinkPackageEnum;
           result.drinkPackage = valueDes;
+          break;
+        case r'confirmed_status':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.confirmedStatus = valueDes;
           break;
         default:
           unhandled.add(key);

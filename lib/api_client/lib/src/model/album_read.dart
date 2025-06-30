@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/simple_user_read.dart';
 import 'package:api_client/src/model/img_in_album.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -14,18 +15,31 @@ part 'album_read.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [name] 
+/// * [titleSv] 
+/// * [titleEn] 
+/// * [descSv] 
+/// * [descEn] 
 /// * [year] 
 /// * [date] 
 /// * [location] 
+/// * [photographer] 
 /// * [imgs] 
 @BuiltValue()
 abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
   @BuiltValueField(wireName: r'id')
   int get id;
 
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'title_sv')
+  String get titleSv;
+
+  @BuiltValueField(wireName: r'title_en')
+  String get titleEn;
+
+  @BuiltValueField(wireName: r'desc_sv')
+  String get descSv;
+
+  @BuiltValueField(wireName: r'desc_en')
+  String get descEn;
 
   @BuiltValueField(wireName: r'year')
   int get year;
@@ -35,6 +49,9 @@ abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
 
   @BuiltValueField(wireName: r'location')
   String get location;
+
+  @BuiltValueField(wireName: r'photographer')
+  SimpleUserRead? get photographer;
 
   @BuiltValueField(wireName: r'imgs')
   BuiltList<ImgInAlbum> get imgs;
@@ -67,9 +84,24 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
       object.id,
       specifiedType: const FullType(int),
     );
-    yield r'name';
+    yield r'title_sv';
     yield serializers.serialize(
-      object.name,
+      object.titleSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'title_en';
+    yield serializers.serialize(
+      object.titleEn,
+      specifiedType: const FullType(String),
+    );
+    yield r'desc_sv';
+    yield serializers.serialize(
+      object.descSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'desc_en';
+    yield serializers.serialize(
+      object.descEn,
       specifiedType: const FullType(String),
     );
     yield r'year';
@@ -86,6 +118,11 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
     yield serializers.serialize(
       object.location,
       specifiedType: const FullType(String),
+    );
+    yield r'photographer';
+    yield object.photographer == null ? null : serializers.serialize(
+      object.photographer,
+      specifiedType: const FullType.nullable(SimpleUserRead),
     );
     yield r'imgs';
     yield serializers.serialize(
@@ -122,12 +159,33 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'name':
+        case r'title_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.titleSv = valueDes;
+          break;
+        case r'title_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.titleEn = valueDes;
+          break;
+        case r'desc_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descSv = valueDes;
+          break;
+        case r'desc_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descEn = valueDes;
           break;
         case r'year':
           final valueDes = serializers.deserialize(
@@ -149,6 +207,14 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
             specifiedType: const FullType(String),
           ) as String;
           result.location = valueDes;
+          break;
+        case r'photographer':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(SimpleUserRead),
+          ) as SimpleUserRead?;
+          if (valueDes == null) continue;
+          result.photographer.replace(valueDes);
           break;
         case r'imgs':
           final valueDes = serializers.deserialize(

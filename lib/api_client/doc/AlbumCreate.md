@@ -8,7 +8,10 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | 
+**titleSv** | **String** |  | 
+**titleEn** | **String** |  | 
+**descSv** | **String** |  | 
+**descEn** | **String** |  | 
 **year** | **int** |  | 
 **location** | **String** |  | 
 **date** | [**DateTime**](DateTime.md) |  | 

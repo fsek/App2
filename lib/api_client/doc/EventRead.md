@@ -23,14 +23,18 @@ Name | Type | Description | Notes
 **maxEventUsers** | **int** |  | 
 **priorities** | [**BuiltList&lt;PriorityDB&gt;**](PriorityDB.md) |  | 
 **allDay** | **bool** |  | 
-**signupNotOpenedYet** | **bool** |  | 
 **recurring** | **bool** |  | 
-**drink** | **bool** |  | 
 **food** | **bool** |  | 
-**cash** | **bool** |  | 
 **closed** | **bool** |  | 
 **canSignup** | **bool** |  | 
 **drinkPackage** | **bool** |  | 
+**isNollningEvent** | **bool** |  | 
+**alcoholEventType** | **String** |  | 
+**dressCode** | **String** |  | 
+**price** | **int** |  | 
+**signupCount** | **int** |  | 
+**dot** | **String** |  | 
+**lottery** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

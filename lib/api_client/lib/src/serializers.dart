@@ -18,9 +18,11 @@ import 'package:api_client/src/model/ad_create.dart';
 import 'package:api_client/src/model/ad_read.dart';
 import 'package:api_client/src/model/ad_update.dart';
 import 'package:api_client/src/model/add_event_tag.dart';
+import 'package:api_client/src/model/admin_user_read.dart';
 import 'package:api_client/src/model/adventure_mission_create.dart';
 import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/album_create.dart';
+import 'package:api_client/src/model/album_photographer_add.dart';
 import 'package:api_client/src/model/album_read.dart';
 import 'package:api_client/src/model/bearer_response.dart';
 import 'package:api_client/src/model/body_auth_reset_forgot_password.dart';
@@ -52,7 +54,6 @@ import 'package:api_client/src/model/error_model.dart';
 import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
-import 'package:api_client/src/model/event_signup_delete.dart';
 import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
 import 'package:api_client/src/model/event_tag_read.dart';
@@ -117,9 +118,11 @@ part 'serializers.g.dart';
   AdRead,
   AdUpdate,
   AddEventTag,
+  AdminUserRead,
   AdventureMissionCreate,
   AdventureMissionRead,
   AlbumCreate,
+  AlbumPhotographerAdd,
   AlbumRead,
   BearerResponse,
   BodyAuthResetForgotPassword,
@@ -151,7 +154,6 @@ part 'serializers.g.dart';
   EventCreate,
   EventRead,
   EventSignupCreate,
-  EventSignupDelete,
   EventSignupRead,
   EventSignupUpdate,
   EventTagRead,
@@ -227,16 +229,8 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CandidateRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GroupRead)]),
-        () => ListBuilder<GroupRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TagRead)]),
-        () => ListBuilder<TagRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AdventureMissionRead)]),
-        () => ListBuilder<AdventureMissionRead>(),
+        const FullType(BuiltList, [FullType(SimpleUserRead)]),
+        () => ListBuilder<SimpleUserRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(UserRead)]),
@@ -245,18 +239,6 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AlbumRead)]),
         () => ListBuilder<AlbumRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CarRead)]),
-        () => ListBuilder<CarRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CafeShiftRead)]),
-        () => ListBuilder<CafeShiftRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(PermissionRead)]),
-        () => ListBuilder<PermissionRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CouncilRead)]),
@@ -271,12 +253,52 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<UserAccessRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NewsRead)]),
-        () => ListBuilder<NewsRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(EventTagRead)]),
         () => ListBuilder<EventTagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdRead)]),
+        () => ListBuilder<AdRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SongRead)]),
+        () => ListBuilder<SongRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NollningGroupRead)]),
+        () => ListBuilder<NollningGroupRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(GroupRead)]),
+        () => ListBuilder<GroupRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(TagRead)]),
+        () => ListBuilder<TagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdventureMissionRead)]),
+        () => ListBuilder<AdventureMissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdminUserRead)]),
+        () => ListBuilder<AdminUserRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarRead)]),
+        () => ListBuilder<CarRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CafeShiftRead)]),
+        () => ListBuilder<CafeShiftRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PermissionRead)]),
+        () => ListBuilder<PermissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NewsRead)]),
+        () => ListBuilder<NewsRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GroupMissionRead)]),
@@ -289,14 +311,6 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
         () => ListBuilder<NollningRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AdRead)]),
-        () => ListBuilder<AdRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SongRead)]),
-        () => ListBuilder<SongRead>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())
