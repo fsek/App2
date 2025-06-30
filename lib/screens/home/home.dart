@@ -17,7 +17,6 @@ import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 
-
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/document.service.dart';
 
@@ -28,20 +27,14 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   String? background;
 
-
-
-
   void initState() {
-
     background = "assets/img/default_background.png";
 
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +53,17 @@ class _HomePageState extends State<HomePage> {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: EdgeInsets.fromLTRB(edgePadding, MediaQuery.of(context).size.height / 2.69420, edgePadding, 0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _getStandardButtons()
-              ),
-            )
-            ),
+              padding: EdgeInsets.fromLTRB(edgePadding,
+                  MediaQuery.of(context).size.height / 2.69420, edgePadding, 0),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _getStandardButtons()),
+              )),
         )
       ],
     );
   }
-
-
-
 
 // class _HomePageState extends State<HomePage> {
 //   List<ElectionDocument>? backgroundDocuments;
@@ -146,7 +135,8 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(
         text,
@@ -181,7 +171,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           button(t.otherCafe, CafePage()),
-          button(t.game, MooseGamePage()),
+          // button(t.game, MooseGamePage()),
         ],
       ),
       Spacer(flex: 4)
@@ -220,6 +210,4 @@ class _HomePageState extends State<HomePage> {
 //     ];
 //   }
 // }
-
-
 }

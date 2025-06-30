@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -18,8 +17,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   AdminUserRead? user;
   UserUpdateBuilder? userChanges;
-  
-  
+
   static List<int> years =
       List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
 
@@ -52,6 +50,13 @@ class _SettingsPageState extends State<SettingsPage> {
       t.nano: "Teknisk Nanovetenskap",
       t.unknown: "Oklart",
     };
+    Map<String, UserUpdateProgramEnum> programToEnum = {
+      "Teknisk Fysik": UserUpdateProgramEnum.F,
+      "Teknisk Matematik": UserUpdateProgramEnum.pi,
+      "Teknisk Nanovetenskap": UserUpdateProgramEnum.N,
+      "Oklart": UserUpdateProgramEnum.oklart
+    };
+
     if (user == null) {
       return Scaffold(
           appBar: AppBar(title: Text(t.otherAccount)),
@@ -63,10 +68,7 @@ class _SettingsPageState extends State<SettingsPage> {
       canPop: true,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
         if (!didPop && changedSetting)
-          await showDialog(
-            context: context, 
-            builder: _saveOnClosePopup()
-            );
+          await showDialog(context: context, builder: _saveOnClosePopup());
       },
       child: Scaffold(
         appBar: AppBar(
@@ -110,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 //         locator<GameScoreService>().resetScore();
                 //       }
                 //     }
-                    
+
                 //     changedSetting = true;
                 //     if (input == null) user!.game_nickname = input;
                 //     // remove version control char if it exists, then add it back at the end
@@ -121,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   t.settingsProgramme,
                   programs.values.toList(),
                   programs[user!.program],
-                  (program) => userChanges!.program = reverseProgramsMap[program],
+                  (program) => userChanges!.program = programToEnum[program],
                 ),
                 _makeDropDown<int>(
                   t.settingsStartYear,
@@ -147,9 +149,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 // ),
                 DropdownButton(
                   iconEnabledColor: Theme.of(context).colorScheme.onBackground,
-                  iconDisabledColor: Theme.of(context).colorScheme.onBackground, 
+                  iconDisabledColor: Theme.of(context).colorScheme.onBackground,
                   isExpanded: true,
-                  hint: Text(t.settingsFoodPrefs, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground)),
+                  hint: Text(t.settingsFoodPrefs,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onBackground)),
                   onChanged: (_) {},
                   items: {
                     "vegetarian": t.vegetarian,
@@ -163,12 +168,16 @@ class _SettingsPageState extends State<SettingsPage> {
                             value: foodPref.value,
                             child: _makeCheckBox(
                               foodPref.value,
-                              user!.standardFoodPreferences!.toList().contains(foodPref.key),
+                              user!.standardFoodPreferences!
+                                  .toList()
+                                  .contains(foodPref.key),
                               (bool? change) {
                                 if (change!)
-                                  userChanges!.standardFoodPreferences.add(foodPref.key);
+                                  userChanges!.standardFoodPreferences
+                                      .add(foodPref.key);
                                 else
-                                  userChanges!.standardFoodPreferences.remove(foodPref.key);
+                                  userChanges!.standardFoodPreferences
+                                      .remove(foodPref.key);
                               },
                             ),
                           ))
@@ -180,13 +189,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     )),
                 ),
                 if (extraPref)
-                  _makeTextField(t.settingsOtherFoodPrefs, user!.otherFoodPreferences,
+                  _makeTextField(
+                      t.settingsOtherFoodPrefs,
+                      user!.otherFoodPreferences,
                       (input) => userChanges!.otherFoodPreferences = input),
                 Text(
                   t.settingsFoodPrefsPrivacy,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground.withAlpha(200),
-                  ),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withAlpha(200),
+                      ),
                 )
               ]),
               // _makeGrayTextbox(t.notifications),
@@ -397,8 +411,11 @@ class _SettingsPageState extends State<SettingsPage> {
   void _save() async {
     FocusScope.of(context).unfocus();
     showDialog(context: context, builder: _savingPopup());
-    if (!extraPref) userChanges!.otherFoodPreferences = "";
-    ApiService.apiClient.getUsersApi().usersUpdateSelf(userUpdate: userChanges!.build()).then((value) {
+    if (!extraPref) userChanges!.otherFoodPreferences = " ";
+    ApiService.apiClient
+        .getUsersApi()
+        .usersUpdateSelf(userUpdate: userChanges!.build())
+        .then((value) {
       setState(() {
         // extraPref = user!.food_custom != "";
         changedSetting = false;
