@@ -34,7 +34,7 @@ import 'package:api_client/src/api/user_door_access_api.dart';
 import 'package:api_client/src/api/users_api.dart';
 
 class ApiClient {
-  static const String basePath = r'http://localhost';
+  static const String basePath = r'http://10.0.2.2:8000';
 
   final Dio dio;
   final Serializers serializers;

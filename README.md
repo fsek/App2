@@ -6,19 +6,11 @@ Flutter App for interacting with the API of fsektionen.se.
 
 This project uses Flutter 3.19.6.
 
-1. Install Flutter from [here](https://docs.flutter.dev/release/archive). Installation will include Dart.
-1. Include `flutter/bin` in your PATH environment variable.
+1. Use our handy installation guide [here](https://fsek.readthedocs.io/en/latest/installing_systems/installation_app.html). Installation will include Dart.
+1. You might need to include `flutter/bin` in your PATH environment variable.
 1. Clone the repo: `git clone https://github.com/fsek/App2.git`
-
-New part:
-
-1. Start the backend while running on the most up to date app backend branch (https://github.com/fsek/WebWebWeb/pull/220) at the time of writing.
+1. In the backend, search for and uncomment this line: `openapi_schema["servers"] = [{"url": "http://10.0.2.2:8000"}]`
+1. Start the backend while running on the most up to date app backend branch [(which can be found here](https://github.com/fsek/WebWebWeb/pull/220) at the time of writing).
 1. Run `bash script.sh`, which will take care of most work for you.
 1. Run `flutter run` or run the app via the VSCode standard runner. (If it tells you errors exist, try selecting "run anyway")
-
-Old outdated instructions:
-
-1. Run `flutter pub get` inside project root.
-1. `flutter build apk` (if this doesn't work skip/try without this step, it is probably and often not needed)
-1. Run `flutter pub run build_runner build` or `dart run build_runner build`.
-1. To start the app on your emulator, run `flutter run`.
+1. If everything works, you can recomment the line again!
