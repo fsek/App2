@@ -32,7 +32,8 @@ abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
   int? get startYear;
 
   @BuiltValueField(wireName: r'program')
-  String? get program;
+  UserUpdateProgramEnum? get program;
+  // enum programEnum {  Oklart,  F,  Pi,  N,  };
 
   @BuiltValueField(wireName: r'notifications')
   bool? get notifications;
@@ -94,7 +95,7 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
       yield r'program';
       yield serializers.serialize(
         object.program,
-        specifiedType: const FullType.nullable(String),
+        specifiedType: const FullType.nullable(UserUpdateProgramEnum),
       );
     }
     if (object.notifications != null) {
@@ -171,8 +172,8 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
         case r'program':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+            specifiedType: const FullType.nullable(UserUpdateProgramEnum),
+          ) as UserUpdateProgramEnum?;
           if (valueDes == null) continue;
           result.program = valueDes;
           break;
@@ -235,5 +236,24 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
     );
     return result.build();
   }
+}
+
+class UserUpdateProgramEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Oklart')
+  static const UserUpdateProgramEnum oklart = _$userUpdateProgramEnum_oklart;
+  @BuiltValueEnumConst(wireName: r'F')
+  static const UserUpdateProgramEnum F = _$userUpdateProgramEnum_F;
+  @BuiltValueEnumConst(wireName: r'Pi')
+  static const UserUpdateProgramEnum pi = _$userUpdateProgramEnum_pi;
+  @BuiltValueEnumConst(wireName: r'N')
+  static const UserUpdateProgramEnum N = _$userUpdateProgramEnum_N;
+
+  static Serializer<UserUpdateProgramEnum> get serializer => _$userUpdateProgramEnumSerializer;
+
+  const UserUpdateProgramEnum._(String name): super(name);
+
+  static BuiltSet<UserUpdateProgramEnum> get values => _$userUpdateProgramEnumValues;
+  static UserUpdateProgramEnum valueOf(String name) => _$userUpdateProgramEnumValueOf(name);
 }
 

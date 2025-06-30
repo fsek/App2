@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **lastName** | **String** |  | 
 **telephoneNumber** | **String** |  | [optional] 
 **startYear** | **int** |  | [optional] 
-**program** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
