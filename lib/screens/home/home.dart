@@ -75,13 +75,20 @@ class _HomePageState extends State<HomePage> {
     }
 
     int week = WeekTracker.determineWeek();
-    String backgroundPath = "assets/img/nollning-24/homescreen/background-v$week.png";
-    String nolleguidePath = "assets/img/nollning-24/homescreen/button-nolleguide.png";
-    String uppdragPath = "assets/img/nollning-24/homescreen/button-adventure-missions.png";
-    String schedulePath = "assets/img/nollning-24/homescreen/button-schedule.png";
-    String mapPath = "assets/img/nollning-24/homescreen/button-map.png";
-    String emergencyPath = "assets/img/nollning-24/homescreen/button-emergency.png";
-    String messagesPath = "assets/img/nollning-24/homescreen/button-messages.png";
+    // String backgroundPath = "assets/img/nollning-24/homescreen/background-v$week.png";
+    // String nolleguidePath = "assets/img/nollning-24/homescreen/button-nolleguide.png";
+    // String uppdragPath = "assets/img/nollning-24/homescreen/button-adventure-missions.png";
+    // String schedulePath = "assets/img/nollning-24/homescreen/button-schedule.png";
+    // String mapPath = "assets/img/nollning-24/homescreen/button-map.png";
+    // String emergencyPath = "assets/img/nollning-24/homescreen/button-emergency.png";
+    // String messagesPath = "assets/img/nollning-24/homescreen/button-messages.png";
+    String backgroundPath = "assets/img/underConstruction.png";
+    String nolleguidePath = "assets/img/underConstruction.png";
+    String uppdragPath = "assets/img/underConstruction.png";
+    String schedulePath = "assets/img/underConstruction.png";
+    String mapPath = "assets/img/underConstruction.png";
+    String emergencyPath = "assets/img/underConstruction.png";
+    String messagesPath = "assets/img/underConstruction.png";
 
     return Stack(children: [
       Image.asset(
