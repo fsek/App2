@@ -69,6 +69,7 @@ doc/GroupsApi.md
 doc/HTTPValidationError.md
 doc/ImgApi.md
 doc/ImgInAlbum.md
+doc/MEMBERROLES.md
 doc/NewsApi.md
 doc/NewsCreate.md
 doc/NewsRead.md
@@ -208,6 +209,7 @@ lib/src/model/group_remove_user.dart
 lib/src/model/group_user_read.dart
 lib/src/model/http_validation_error.dart
 lib/src/model/img_in_album.dart
+lib/src/model/memberroles.dart
 lib/src/model/news_create.dart
 lib/src/model/news_read.dart
 lib/src/model/news_tag_read.dart
@@ -253,4 +255,4 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/update_user_member_multiple_test.dart
+test/memberroles_test.dart

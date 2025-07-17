@@ -529,7 +529,7 @@ class _EventPageState extends State<EventPage> {
               ],
             );
           } else {
-            String groupName = eventSignup!.groupName;
+            String? groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
             if (event!.lottery == true) {
               if (eventSignup!.confirmedStatus == "unconfirmed") {
@@ -830,7 +830,7 @@ class _EventPageState extends State<EventPage> {
             ],
           ));
     } else {
-      String groupName = eventSignup!.groupName;
+      String? groupName = eventSignup!.groupName;
       // if (eventSignup.groupName != null) {
       //   for (int i = 0; i < event!.groups!.length; i++) {
       //     if (event!.groups![i].id == event!.event_user!.group_id) {

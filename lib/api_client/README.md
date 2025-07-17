@@ -264,6 +264,7 @@ Class | Method | HTTP request | Description
  - [GroupUserRead](doc/GroupUserRead.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ImgInAlbum](doc/ImgInAlbum.md)
+ - [MEMBERROLES](doc/MEMBERROLES.md)
  - [NewsCreate](doc/NewsCreate.md)
  - [NewsRead](doc/NewsRead.md)
  - [NewsTagRead](doc/NewsTagRead.md)

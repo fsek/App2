@@ -68,6 +68,7 @@ import 'package:api_client/src/model/group_remove_user.dart';
 import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/img_in_album.dart';
+import 'package:api_client/src/model/memberroles.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
 import 'package:api_client/src/model/news_tag_read.dart';
@@ -169,6 +170,7 @@ part 'serializers.g.dart';
   GroupUserRead,
   HTTPValidationError,
   ImgInAlbum,
+  MEMBERROLES,
   NewsCreate,
   NewsRead,
   NewsTagRead,

@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
+import 'package:api_client/src/model/memberroles.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -72,8 +73,7 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   int get maxEventUsers;
 
   @BuiltValueField(wireName: r'priorities')
-  BuiltList<EventUpdatePrioritiesEnum> get priorities;
-  // enum prioritiesEnum {  photographer,  ordförande,  dinmamma,  };
+  BuiltList<MEMBERROLES> get priorities;
 
   @BuiltValueField(wireName: r'all_day')
   bool get allDay;
@@ -194,7 +194,7 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield r'priorities';
     yield serializers.serialize(
       object.priorities,
-      specifiedType: const FullType(BuiltList, [FullType(EventUpdatePrioritiesEnum)]),
+      specifiedType: const FullType(BuiltList, [FullType(MEMBERROLES)]),
     );
     yield r'all_day';
     yield serializers.serialize(
@@ -359,8 +359,8 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
         case r'priorities':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(EventUpdatePrioritiesEnum)]),
-          ) as BuiltList<EventUpdatePrioritiesEnum>;
+            specifiedType: const FullType(BuiltList, [FullType(MEMBERROLES)]),
+          ) as BuiltList<MEMBERROLES>;
           result.priorities.replace(valueDes);
           break;
         case r'all_day':
@@ -474,23 +474,6 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     );
     return result.build();
   }
-}
-
-class EventUpdatePrioritiesEnum extends EnumClass {
-
-  @BuiltValueEnumConst(wireName: r'photographer')
-  static const EventUpdatePrioritiesEnum photographer = _$eventUpdatePrioritiesEnum_photographer;
-  @BuiltValueEnumConst(wireName: r'ordförande')
-  static const EventUpdatePrioritiesEnum ordfrande = _$eventUpdatePrioritiesEnum_ordfrande;
-  @BuiltValueEnumConst(wireName: r'dinmamma')
-  static const EventUpdatePrioritiesEnum dinmamma = _$eventUpdatePrioritiesEnum_dinmamma;
-
-  static Serializer<EventUpdatePrioritiesEnum> get serializer => _$eventUpdatePrioritiesEnumSerializer;
-
-  const EventUpdatePrioritiesEnum._(String name): super(name);
-
-  static BuiltSet<EventUpdatePrioritiesEnum> get values => _$eventUpdatePrioritiesEnumValues;
-  static EventUpdatePrioritiesEnum valueOf(String name) => _$eventUpdatePrioritiesEnumValueOf(name);
 }
 
 class EventCreateAlcoholEventTypeEnum extends EnumClass {
