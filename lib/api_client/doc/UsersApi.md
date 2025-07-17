@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**usersGetMe**](UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [**usersGetUser**](UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
 [**usersGetUserPosts**](UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
+[**usersUpdateMultipleUsersStatus**](UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [**usersUpdateSelf**](UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
 [**usersUpdateUserStatus**](UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
@@ -29,6 +30,10 @@ Admin Get All Users
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 
@@ -49,7 +54,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -68,6 +73,10 @@ Admin Get User
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
@@ -92,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -111,6 +120,10 @@ Admin Update User
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
@@ -137,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -156,6 +169,10 @@ Get Me
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 
@@ -176,7 +193,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -195,6 +212,10 @@ Get User
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
@@ -219,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -238,6 +259,10 @@ Get User Posts
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
@@ -262,11 +287,58 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersUpdateMultipleUsersStatus**
+> BuiltList<AdminUserRead> usersUpdateMultipleUsersStatus(updateUserMemberMultiple)
+
+Update Multiple Users Status
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final BuiltList<UpdateUserMemberMultiple> updateUserMemberMultiple = ; // BuiltList<UpdateUserMemberMultiple> | 
+
+try {
+    final response = api.usersUpdateMultipleUsersStatus(updateUserMemberMultiple);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersUpdateMultipleUsersStatus: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateUserMemberMultiple** | [**BuiltList&lt;UpdateUserMemberMultiple&gt;**](UpdateUserMemberMultiple.md)|  | 
+
+### Return type
+
+[**BuiltList&lt;AdminUserRead&gt;**](AdminUserRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -281,6 +353,10 @@ Update Self
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final UserUpdate userUpdate = ; // UserUpdate | 
@@ -305,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -324,6 +400,10 @@ Update User Status
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
@@ -350,7 +430,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 

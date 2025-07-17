@@ -30,8 +30,9 @@ part 'event_update.g.dart';
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [priorities] 
 /// * [alcoholEventType] 
-/// * [dresscode] 
+/// * [dressCode] 
 /// * [price] 
 /// * [dot] 
 @BuiltValue()
@@ -90,12 +91,16 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'is_nollning_event')
   bool? get isNollningEvent;
 
+  @BuiltValueField(wireName: r'priorities')
+  BuiltList<EventUpdatePrioritiesEnum>? get priorities;
+  // enum prioritiesEnum {  photographer,  ordförande,  dinmamma,  };
+
   @BuiltValueField(wireName: r'alcohol_event_type')
   EventUpdateAlcoholEventTypeEnum? get alcoholEventType;
   // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
 
-  @BuiltValueField(wireName: r'dresscode')
-  String? get dresscode;
+  @BuiltValueField(wireName: r'dress_code')
+  String? get dressCode;
 
   @BuiltValueField(wireName: r'price')
   int? get price;
@@ -253,6 +258,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
+    if (object.priorities != null) {
+      yield r'priorities';
+      yield serializers.serialize(
+        object.priorities,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(EventUpdatePrioritiesEnum)]),
+      );
+    }
     if (object.alcoholEventType != null) {
       yield r'alcohol_event_type';
       yield serializers.serialize(
@@ -260,10 +272,10 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
       );
     }
-    if (object.dresscode != null) {
-      yield r'dresscode';
+    if (object.dressCode != null) {
+      yield r'dress_code';
       yield serializers.serialize(
-        object.dresscode,
+        object.dressCode,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -448,6 +460,14 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.isNollningEvent = valueDes;
           break;
+        case r'priorities':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventUpdatePrioritiesEnum)]),
+          ) as BuiltList<EventUpdatePrioritiesEnum>?;
+          if (valueDes == null) continue;
+          result.priorities.replace(valueDes);
+          break;
         case r'alcohol_event_type':
           final valueDes = serializers.deserialize(
             value,
@@ -456,13 +476,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.alcoholEventType = valueDes;
           break;
-        case r'dresscode':
+        case r'dress_code':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(String),
           ) as String?;
           if (valueDes == null) continue;
-          result.dresscode = valueDes;
+          result.dressCode = valueDes;
           break;
         case r'price':
           final valueDes = serializers.deserialize(
@@ -507,6 +527,23 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
     );
     return result.build();
   }
+}
+
+class EventUpdatePrioritiesEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'photographer')
+  static const EventUpdatePrioritiesEnum photographer = _$eventUpdatePrioritiesEnum_photographer;
+  @BuiltValueEnumConst(wireName: r'ordförande')
+  static const EventUpdatePrioritiesEnum ordfrande = _$eventUpdatePrioritiesEnum_ordfrande;
+  @BuiltValueEnumConst(wireName: r'dinmamma')
+  static const EventUpdatePrioritiesEnum dinmamma = _$eventUpdatePrioritiesEnum_dinmamma;
+
+  static Serializer<EventUpdatePrioritiesEnum> get serializer => _$eventUpdatePrioritiesEnumSerializer;
+
+  const EventUpdatePrioritiesEnum._(String name): super(name);
+
+  static BuiltSet<EventUpdatePrioritiesEnum> get values => _$eventUpdatePrioritiesEnumValues;
+  static EventUpdatePrioritiesEnum valueOf(String name) => _$eventUpdatePrioritiesEnumValueOf(name);
 }
 
 class EventUpdateAlcoholEventTypeEnum extends EnumClass {

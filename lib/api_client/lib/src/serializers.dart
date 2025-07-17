@@ -98,6 +98,7 @@ import 'package:api_client/src/model/update_permission.dart';
 import 'package:api_client/src/model/update_permission_part.dart';
 import 'package:api_client/src/model/update_permissions.dart';
 import 'package:api_client/src/model/update_user_member.dart';
+import 'package:api_client/src/model/update_user_member_multiple.dart';
 import 'package:api_client/src/model/user_access_create.dart';
 import 'package:api_client/src/model/user_access_read.dart';
 import 'package:api_client/src/model/user_access_update.dart';
@@ -198,6 +199,7 @@ part 'serializers.g.dart';
   UpdatePermissionPart,
   UpdatePermissions,
   UpdateUserMember,
+  UpdateUserMemberMultiple,
   UserAccessCreate,
   UserAccessRead,
   UserAccessUpdate,
@@ -227,6 +229,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CandidateRead)]),
         () => ListBuilder<CandidateRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UpdateUserMemberMultiple)]),
+        () => ListBuilder<UpdateUserMemberMultiple>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SimpleUserRead)]),
@@ -311,6 +317,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
         () => ListBuilder<NollningRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(String)]),
+        () => ListBuilder<String>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())

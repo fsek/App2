@@ -9,8 +9,10 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authAuthJwtLogin**](AuthApi.md#authauthjwtlogin) | **POST** /auth/login | Auth:Jwt.Login
-[**authAuthJwtLogout**](AuthApi.md#authauthjwtlogout) | **POST** /auth/logout | Auth:Jwt.Logout
+[**authAuthCookieLogin**](AuthApi.md#authauthcookielogin) | **POST** /auth/login | Auth:Cookie.Login
+[**authAuthCookieLogout**](AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
+[**authAuthCookieLogoutAll**](AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
+[**authAuthCookieRefresh**](AuthApi.md#authauthcookierefresh) | **POST** /auth/refresh | Auth:Cookie.Refresh
 [**authRegisterRegister**](AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
 [**authResetForgotPassword**](AuthApi.md#authresetforgotpassword) | **POST** /auth/forgot-password | Reset:Forgot Password
 [**authResetResetPassword**](AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
@@ -18,10 +20,10 @@ Method | HTTP request | Description
 [**authVerifyVerify**](AuthApi.md#authverifyverify) | **POST** /auth/verify | Verify:Verify
 
 
-# **authAuthJwtLogin**
-> BearerResponse authAuthJwtLogin(username, password, grantType, scope, clientId, clientSecret)
+# **authAuthCookieLogin**
+> BearerResponse authAuthCookieLogin(username, password, grantType, scope, clientId, clientSecret)
 
-Auth:Jwt.Login
+Auth:Cookie.Login
 
 ### Example
 ```dart
@@ -36,10 +38,10 @@ final String clientId = clientId_example; // String |
 final String clientSecret = clientSecret_example; // String | 
 
 try {
-    final response = api.authAuthJwtLogin(username, password, grantType, scope, clientId, clientSecret);
+    final response = api.authAuthCookieLogin(username, password, grantType, scope, clientId, clientSecret);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling AuthApi->authAuthJwtLogin: $e\n');
+    print('Exception when calling AuthApi->authAuthCookieLogin: $e\n');
 }
 ```
 
@@ -69,24 +71,28 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authAuthJwtLogout**
-> JsonObject authAuthJwtLogout()
+# **authAuthCookieLogout**
+> JsonObject authAuthCookieLogout()
 
-Auth:Jwt.Logout
+Auth:Cookie.Logout
 
 ### Example
 ```dart
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getAuthApi();
 
 try {
-    final response = api.authAuthJwtLogout();
+    final response = api.authAuthCookieLogout();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling AuthApi->authAuthJwtLogout: $e\n');
+    print('Exception when calling AuthApi->authAuthCookieLogout: $e\n');
 }
 ```
 
@@ -99,7 +105,93 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authAuthCookieLogoutAll**
+> JsonObject authAuthCookieLogoutAll()
+
+Auth:Cookie.Logout All
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getAuthApi();
+
+try {
+    final response = api.authAuthCookieLogoutAll();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling AuthApi->authAuthCookieLogoutAll: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authAuthCookieRefresh**
+> BearerResponse authAuthCookieRefresh()
+
+Auth:Cookie.Refresh
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getAuthApi();
+
+try {
+    final response = api.authAuthCookieRefresh();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling AuthApi->authAuthCookieRefresh: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**BearerResponse**](BearerResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 

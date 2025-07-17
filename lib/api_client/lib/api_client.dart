@@ -118,6 +118,7 @@ export 'package:api_client/src/model/update_permission.dart';
 export 'package:api_client/src/model/update_permission_part.dart';
 export 'package:api_client/src/model/update_permissions.dart';
 export 'package:api_client/src/model/update_user_member.dart';
+export 'package:api_client/src/model/update_user_member_multiple.dart';
 export 'package:api_client/src/model/user_access_create.dart';
 export 'package:api_client/src/model/user_access_read.dart';
 export 'package:api_client/src/model/user_access_update.dart';

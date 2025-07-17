@@ -85,8 +85,10 @@ Class | Method | HTTP request | Description
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
-[*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogin**](doc/AuthApi.md#authauthjwtlogin) | **POST** /auth/login | Auth:Jwt.Login
-[*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogout**](doc/AuthApi.md#authauthjwtlogout) | **POST** /auth/logout | Auth:Jwt.Logout
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogin**](doc/AuthApi.md#authauthcookielogin) | **POST** /auth/login | Auth:Cookie.Login
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogout**](doc/AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogoutAll**](doc/AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieRefresh**](doc/AuthApi.md#authauthcookierefresh) | **POST** /auth/refresh | Auth:Cookie.Refresh
 [*AuthApi*](doc/AuthApi.md) | [**authRegisterRegister**](doc/AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
 [*AuthApi*](doc/AuthApi.md) | [**authResetForgotPassword**](doc/AuthApi.md#authresetforgotpassword) | **POST** /auth/forgot-password | Reset:Forgot Password
 [*AuthApi*](doc/AuthApi.md) | [**authResetResetPassword**](doc/AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
@@ -133,6 +135,7 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetSingleEvent**](doc/EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
@@ -200,6 +203,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateMultipleUsersStatus**](doc/UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
@@ -290,6 +294,7 @@ Class | Method | HTTP request | Description
  - [UpdatePermissionPart](doc/UpdatePermissionPart.md)
  - [UpdatePermissions](doc/UpdatePermissions.md)
  - [UpdateUserMember](doc/UpdateUserMember.md)
+ - [UpdateUserMemberMultiple](doc/UpdateUserMemberMultiple.md)
  - [UserAccessCreate](doc/UserAccessCreate.md)
  - [UserAccessRead](doc/UserAccessRead.md)
  - [UserAccessUpdate](doc/UserAccessUpdate.md)
@@ -314,6 +319,12 @@ Authentication schemes defined for the API:
 - **Flow**: password
 - **Authorization URL**: 
 - **Scopes**: N/A
+
+### APIKeyCookie
+
+- **Type**: API key
+- **API key parameter name**: _fsek_refresh_token
+- **Location**: 
 
 
 ## Author

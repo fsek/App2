@@ -26,8 +26,9 @@ Name | Type | Description | Notes
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
+**priorities** | **BuiltList&lt;String&gt;** |  | [optional] 
 **alcoholEventType** | **String** |  | [optional] 
-**dresscode** | **String** |  | [optional] 
+**dressCode** | **String** |  | [optional] 
 **price** | **int** |  | [optional] 
 **dot** | **String** |  | [optional] 
 

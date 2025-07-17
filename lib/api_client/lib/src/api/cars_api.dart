@@ -57,6 +57,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -155,6 +160,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -235,6 +245,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -315,6 +330,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -397,6 +417,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,

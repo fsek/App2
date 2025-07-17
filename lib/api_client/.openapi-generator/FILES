@@ -106,6 +106,7 @@ doc/UpdatePermission.md
 doc/UpdatePermissionPart.md
 doc/UpdatePermissions.md
 doc/UpdateUserMember.md
+doc/UpdateUserMemberMultiple.md
 doc/UserAccessCreate.md
 doc/UserAccessRead.md
 doc/UserAccessUpdate.md
@@ -237,6 +238,7 @@ lib/src/model/update_permission.dart
 lib/src/model/update_permission_part.dart
 lib/src/model/update_permissions.dart
 lib/src/model/update_user_member.dart
+lib/src/model/update_user_member_multiple.dart
 lib/src/model/user_access_create.dart
 lib/src/model/user_access_read.dart
 lib/src/model/user_access_update.dart
@@ -251,3 +253,4 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/update_user_member_multiple_test.dart
