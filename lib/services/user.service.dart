@@ -27,18 +27,19 @@ class UserService extends AbstractService {
       //     headers: AbstractService.headers,
       //     body: jsonEncode({"email": email, "password": pass}));
 
-      final response = await ApiService.apiClient.getAuthApi().authAuthJwtLogin(username: username, password: pass, grantType: "password");
+      final response = await ApiService.apiClient
+          .getAuthApi()
+          .authAuthCookieLogin(
+              username: username, password: pass, grantType: "password");
 
       final token = response.data?.accessToken;
 
-
-      if(token != null){
+      if (token != null) {
         storage.write(key: "access_token", value: token);
 
         // ApiService.apiClient.setBearerAuth('http', token);
 
         ApiService.apiClient.setOAuthToken('OAuth2PasswordBearer', token);
-
       }
 
       return DeviseToken(accessToken: token);
@@ -62,7 +63,7 @@ class UserService extends AbstractService {
   }
 
   Future<void> signOut() async {
-    await ApiService.apiClient.getAuthApi().authAuthJwtLogout();
+    await ApiService.apiClient.getAuthApi().authAuthCookieLogout();
     // AbstractService.delete("/auth/sign_out");
     // clearToken();
   }
@@ -79,25 +80,22 @@ class UserService extends AbstractService {
       // if (json["data"] != null) {
       //   setCurrentUser(User.fromJson(json["data"]));
       //   return DeviseToken.getFromHeaders(response.headers);
-      
 
       final token = await storage.read('accessToken');
 
       if (token == null) {
-      return DeviseToken(error: 'No token found in storage');
+        return DeviseToken(error: 'No token found in storage');
       }
 
-      final response = await ApiService.apiClient.getAuthApi().authVerifyVerify(bodyAuthVerifyVerify: BodyAuthVerifyVerify((b) => b..token = token));
+      final response = await ApiService.apiClient.getAuthApi().authVerifyVerify(
+          bodyAuthVerifyVerify: BodyAuthVerifyVerify((b) => b..token = token));
 
       return DeviseToken(accessToken: token);
-
-      }
-      on UnauthorisedException catch (e) {
-       return DeviseToken(error: e.toString());
-      }
-      catch (e) {
-        return DeviseToken(error: 'Unexpected error: $e');
-      }
+    } on UnauthorisedException catch (e) {
+      return DeviseToken(error: e.toString());
+    } catch (e) {
+      return DeviseToken(error: 'Unexpected error: $e');
+    }
   }
 
   Future<bool> resetPasswordRequest(String email) async {

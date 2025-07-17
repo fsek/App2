@@ -51,9 +51,17 @@ class _EventPageState extends State<EventPage> {
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
   };
+
   static const String drinkPackageNone = "None";
   static const String drinkPackageAlcohol = "Alcohol";
   static const String drinkPackageAlcoholFree = "AlcoholFree";
+
+  static const Map<String, EventSignupCreateDrinkPackageEnum>
+      drinkPackageToEnum = {
+    "None": EventSignupCreateDrinkPackageEnum.none,
+    "Alcohol": EventSignupCreateDrinkPackageEnum.alcohol,
+    "AlcoholFree": EventSignupCreateDrinkPackageEnum.alcoholFree
+  };
 
   void initState() {
     super.initState();
@@ -246,7 +254,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: event!.price <= 0 ? false : true,
+                        visible: event!.food,
                         child: Row(
                           children: [
                             Icon(
@@ -257,7 +265,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: !(event!.alcoholEventType == "None"),
+                        visible: (event!.alcoholEventType == "Alcohol-Served"),
                         child: Row(
                           children: [
                             Icon(
@@ -334,10 +342,12 @@ class _EventPageState extends State<EventPage> {
       ..userId = user!.id
       ..priority = userType
       ..groupName = group?.name ?? null
-      ..drinkPackage);
+      ..drinkPackage = drinkPackageToEnum[drinkPackageAnswer]);
 
     await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(
         eventId: event!.id, eventSignupCreate: eventSignupCreate);
+
+    update();
   }
 
   void removeSignup() async {
@@ -914,22 +924,22 @@ class _EventPageState extends State<EventPage> {
     Widget drinkPackage = Container();
     if (event!.drinkPackage) {
       switch (eventSignup!.drinkPackage.name) {
-        case drinkPackageAlcohol:
+        case "alcohol": // Had to hard code this cuz the openapi generator lowered all enums... TODO maybe change this later...
           drinkPackage =
-              _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventAlcohol}");
           break;
-        case drinkPackageAlcoholFree:
-          drinkPackage =
-              _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
+        case "alcoholFree":
+          drinkPackage = _drinkPackageWidget(
+              t.eventDrinkPackage, " ${t.eventAlcoholFree}");
           break;
-        case drinkPackageNone:
+        case "none":
           drinkPackage =
-              _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
           break;
         default:
           this.drinkPackageAnswer = drinkPackageNone;
           drinkPackage =
-              _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
           break;
       }
     }
@@ -942,7 +952,7 @@ class _EventPageState extends State<EventPage> {
             color: Theme.of(context).textTheme.bodyMedium!.color),
         children: [
           TextSpan(
-              text: groupName,
+              text: " $groupName",
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   color: Theme.of(context).textTheme.bodyMedium!.color))
