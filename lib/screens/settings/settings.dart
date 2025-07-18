@@ -24,17 +24,52 @@ class _SettingsPageState extends State<SettingsPage> {
   bool extraPref = false;
   bool changedSetting = false;
 
+  String? _selectedProgram;
+  int? _selectedYear;
+
   @override
   void initState() {
-    ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
-      setState(() {
-        user = value.data;
-        extraPref = user!.otherFoodPreferences != "";
-        userChanges = UserUpdate().toBuilder();
-      });
-    });
     super.initState();
+    _loadInitData();
   }
+
+  Future<void> _loadInitData() async {
+    final response = await ApiService.apiClient.getUsersApi().usersGetMe();
+    final response_data = response.data;
+    setState(() {
+      this.user = response_data;
+      this.extraPref = user?.otherFoodPreferences != "";
+      this.userChanges = UserUpdate().toBuilder();
+      this._selectedProgram = enumToProgram[user!.program];
+      this._selectedYear = user!.startYear;
+      this
+          .userChanges!
+          .standardFoodPreferences
+          .addAll(user!.standardFoodPreferences!.toList());
+    });
+
+    // ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
+    //   setState(() {
+    //     user = value.data;
+    //     extraPref = user!.otherFoodPreferences != "";
+    //     userChanges = UserUpdate().toBuilder();
+    //   });
+    // });
+  }
+
+  Map<String, UserUpdateProgramEnum> programToEnum = {
+    "Teknisk Fysik": UserUpdateProgramEnum.F,
+    "Teknisk Matematik": UserUpdateProgramEnum.pi,
+    "Teknisk Nanovetenskap": UserUpdateProgramEnum.N,
+    "Oklart": UserUpdateProgramEnum.oklart
+  };
+
+  Map<AdminUserReadProgramEnum, String> enumToProgram = {
+    AdminUserReadProgramEnum.F: "Teknisk Fysik",
+    AdminUserReadProgramEnum.pi: "Teknisk Matematik",
+    AdminUserReadProgramEnum.N: "Teknisk Nanovetenskap",
+    AdminUserReadProgramEnum.oklart: "Oklart"
+  };
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -50,12 +85,6 @@ class _SettingsPageState extends State<SettingsPage> {
       t.nano: "Teknisk Nanovetenskap",
       t.unknown: "Oklart",
     };
-    Map<String, UserUpdateProgramEnum> programToEnum = {
-      "Teknisk Fysik": UserUpdateProgramEnum.F,
-      "Teknisk Matematik": UserUpdateProgramEnum.pi,
-      "Teknisk Nanovetenskap": UserUpdateProgramEnum.N,
-      "Oklart": UserUpdateProgramEnum.oklart
-    };
 
     if (user == null) {
       return Scaffold(
@@ -64,6 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
               child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.primary)));
     }
+
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
@@ -99,6 +129,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   user!.firstName,
                   (input) => userChanges!.firstName = input,
                 ),
+                _makeTextField(
+                  t.settingsLastName + "*",
+                  user!.lastName,
+                  (input) => userChanges!.lastName = input,
+                ),
                 // _makeTextField( "Game nickname", user!.game_nickname?.replaceAll("\u{200E}", ""),
                 //   // TODO use translate var
                 //   (input) {
@@ -122,14 +157,26 @@ class _SettingsPageState extends State<SettingsPage> {
                 _makeDropDown<String>(
                   t.settingsProgramme,
                   programs.values.toList(),
-                  programs[user!.program],
-                  (program) => userChanges!.program = programToEnum[program],
+                  programs[_selectedProgram],
+                  (program) {
+                    setState(() {
+                      _selectedProgram = reverseProgramsMap[program];
+                      userChanges!.program = programToEnum[_selectedProgram];
+                      changedSetting = true;
+                    });
+                  },
                 ),
                 _makeDropDown<int>(
                   t.settingsStartYear,
                   years,
-                  user!.startYear,
-                  (year) => userChanges!.startYear = year,
+                  _selectedYear,
+                  (year) {
+                    setState(() {
+                      _selectedYear = year;
+                      userChanges!.startYear = year;
+                      changedSetting = true;
+                    });
+                  },
                 ),
               ]),
               _makeGrayTextbox(t.settingsParagraph),
@@ -157,11 +204,11 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: Theme.of(context).colorScheme.onBackground)),
                   onChanged: (_) {},
                   items: {
-                    "vegetarian": t.vegetarian,
-                    "vegan": t.vegan,
-                    "pescetarian": t.pescetarian,
-                    "milk": t.milk,
-                    "gluten": t.gluten
+                    "Vegetarian": t.vegetarian,
+                    "Vegan": t.vegan,
+                    "Pescetarian": t.pescetarian,
+                    "Milk": t.milk,
+                    "Gluten": t.gluten
                   }
                       .entries
                       .map((foodPref) => DropdownMenuItem(
@@ -203,7 +250,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                 )
               ]),
-              // _makeGrayTextbox(t.notifications),
+              // _makeGrayTextbox(t.notifications), // TODO we have no notifications right now
               // _makePadding([
               //   _makeCheckBox(
               //       t.settingsNotificationsSignUp,
@@ -254,7 +301,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _makeDropDown<T>(String displayText, List<T> dropDownItems, T? value,
-      void Function(T?) modUser) {
+      void Function(T?) onChange) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Column(
@@ -262,20 +309,14 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           Text(displayText, style: TextStyle(fontSize: 16)),
           DropdownButton<T>(
-            autofocus: false,
-            isExpanded: true,
-            value: value,
-            items: dropDownItems
-                .map((item) =>
-                    DropdownMenuItem(child: Text(item.toString()), value: item))
-                .toList(),
-            onChanged: (T? change) => setState(
-              () {
-                modUser(change);
-                changedSetting = true;
-              },
-            ),
-          ),
+              autofocus: false,
+              isExpanded: true,
+              value: value,
+              items: dropDownItems
+                  .map((item) => DropdownMenuItem(
+                      child: Text(item.toString()), value: item))
+                  .toList(),
+              onChanged: onChange),
         ],
       ),
     );
@@ -411,7 +452,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _save() async {
     FocusScope.of(context).unfocus();
     showDialog(context: context, builder: _savingPopup());
-    if (!extraPref) userChanges!.otherFoodPreferences = " ";
+    if (!extraPref) userChanges!.otherFoodPreferences = "";
     ApiService.apiClient
         .getUsersApi()
         .usersUpdateSelf(userUpdate: userChanges!.build())
@@ -421,6 +462,7 @@ class _SettingsPageState extends State<SettingsPage> {
         changedSetting = false;
       });
       Navigator.pop(context);
+      _loadInitData();
     }).catchError(
       (error) {
         Navigator.pop(context);
