@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/screens/cafe/cafe_shift.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 class CafePage extends StatefulWidget {
   @override
@@ -16,23 +18,74 @@ class _CafePageState extends State<CafePage> {
   DateTime _now = DateTime.now().toLocal();
   DateTime _focusedDay = DateTime.now().toLocal();
   DateTime _selectedDay = DateTime.now().toLocal();
-  List<CafeShift> _selectedEvents = [];
-  Map<DateTime, List<CafeShift>> _events = {};
+  List<CafeShiftRead> _selectedEvents = [];
+  Map<DateTime, List<CafeShiftRead>> _events = {};
 
   void initState() {
-    _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
-    locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
-          this._events = value;
-          _selectedEvents = _getEventsForDay(_selectedDay);
-        }));
     super.initState();
+    _loadInitData();
   }
 
-  List<CafeShift> _getEventsForDay(DateTime day) {
+  Future<void> _loadInitData() async {
+    final now = DateTime.now().toUtc();
+    _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
+    final response = await ApiService.apiClient
+        .getCafeApi()
+        .cafeViewShiftsBetweenDates(
+            startDate:
+                truncateToMilliSeconds(now.subtract(Duration(days: 7)).toUtc()),
+            endDate:
+                truncateToMilliSeconds(now.add(Duration(days: 49)).toUtc()));
+    final responseData = response.data;
+    setState(() {
+      if (responseData != null) {
+        this._events = cafeShiftMap(responseData.toList());
+      } else {
+        this._events = {};
+      }
+
+      _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
+      this._selectedEvents = _getEventsForDay(_selectedDay);
+    });
+  }
+
+  DateTime truncateToMilliSeconds(DateTime dt) => DateTime.utc(
+      dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond);
+
+  Map<DateTime, List<CafeShiftRead>> cafeShiftMap(List<CafeShiftRead> shifts) {
+    Map<DateTime, List<CafeShiftRead>> shiftsMap = {};
+    shifts.forEach((shift) {
+      final date = DateTime.utc(
+          shift.startsAt.year, shift.startsAt.month, shift.startsAt.day);
+      shiftsMap.putIfAbsent(date, () => []).add(shift);
+    });
+
+    return shiftsMap;
+  }
+
+  List<CafeShiftRead> _getEventsForDay(DateTime day) {
     return _events[day] ?? [];
   }
 
-  Widget createCafeShiftCard(CafeShift shift) {
+  Future<void> _onRefresh() async {
+    final now = DateTime.now();
+    final response = await ApiService.apiClient
+        .getCafeApi()
+        .cafeViewShiftsBetweenDates(
+            startDate: now.subtract(Duration(days: 7)),
+            endDate: now.add(Duration(days: 49)));
+    final responseData = response.data;
+
+    setState(() {
+      if (responseData != null) {
+        this._events = cafeShiftMap(responseData.toList());
+      } else {
+        this._events = {};
+      }
+    });
+  }
+
+  Widget createCafeShiftCard(CafeShiftRead shift) {
     var t = AppLocalizations.of(context)!;
     return Card(
       color: (shift.user != null)
@@ -50,7 +103,10 @@ class _CafePageState extends State<CafePage> {
                 child: Column(
                   children: [
                     Text(
-                      shift.duration ?? "för alltid",
+                      shift.endsAt
+                          .difference(shift.startsAt)
+                          .inMinutes
+                          .toString(),
                       style: TextStyle(
                         fontSize: 15,
                         color: (Theme.of(context).colorScheme.primary),
@@ -58,10 +114,14 @@ class _CafePageState extends State<CafePage> {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      shift.user?.name ?? t.cafeShiftShift,
+                      shift.user != null
+                          ? "${shift.user?.firstName} ${shift.user?.lastName}"
+                          : t.cafeShiftShift,
                       style: TextStyle(
                         fontSize: 18,
-                        color: (shift.user != null ? Theme.of(context).colorScheme.onInverseSurface : Theme.of(context).colorScheme.onSurface),
+                        color: (shift.user != null
+                            ? Theme.of(context).colorScheme.onInverseSurface
+                            : Theme.of(context).colorScheme.onSurface),
                       ),
                     )
                   ],
@@ -74,27 +134,21 @@ class _CafePageState extends State<CafePage> {
     );
   }
 
-  void openCafeShiftPage(CafeShift shift) {
+  void openCafeShiftPage(CafeShiftRead shift) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => CafeShiftPage(
-          shiftId: shift.id ?? -1,
-          user: shift.user,
+          shiftId: shift.id,
+          cafeUser: shift.user,
         ),
       ),
-    ).then(
-      // after returning from cafe_shift page, update the calendar
-      (value) => locator<CafeService>()
-          .getShiftsForCalendar()
-          .then((value) => setState(() {
-                this._events = value;
-                _selectedEvents = _getEventsForDay(_selectedDay);
-              })),
-    );
+    ).then((value) =>
+        // after returning from cafe_shift page, update the calendar
+        _loadInitData());
   }
 
-  List<Widget> createPairShifts(List<CafeShift> dayShifts) {
+  List<Widget> createPairShifts(List<CafeShiftRead> dayShifts) {
     // create pairs of shifts (which we will assume to have the same time)
     List<Widget> pairList = [];
     Row pair;
@@ -122,7 +176,8 @@ class _CafePageState extends State<CafePage> {
         child: ListView(
           children: [
             TableCalendar(
-              calendarStyle: CalendarStyle(markerDecoration: BoxDecoration(
+              calendarStyle: CalendarStyle(
+                  markerDecoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.onBackground,
                       shape: BoxShape.circle)),
               availableGestures: AvailableGestures.horizontalSwipe,
@@ -169,11 +224,5 @@ class _CafePageState extends State<CafePage> {
         ),
       ),
     );
-  }
-
-  Future<void> _onRefresh() async {
-    locator<CafeService>().getShiftsForCalendar().then((value) => setState(() {
-          this._events = value;
-        }));
   }
 }
