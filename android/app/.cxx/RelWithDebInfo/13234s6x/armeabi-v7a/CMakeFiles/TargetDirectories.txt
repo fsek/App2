@@ -1,2 +1,0 @@
-/Users/benjamin/Spindelförman/App2/android/app/.cxx/RelWithDebInfo/13234s6x/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/benjamin/Spindelförman/App2/android/app/.cxx/RelWithDebInfo/13234s6x/armeabi-v7a/CMakeFiles/rebuild_cache.dir
