@@ -52,6 +52,7 @@ export 'package:api_client/src/model/body_auth_verify_verify.dart';
 export 'package:api_client/src/model/cafe_shift_create.dart';
 export 'package:api_client/src/model/cafe_shift_read.dart';
 export 'package:api_client/src/model/cafe_shift_update.dart';
+export 'package:api_client/src/model/cafe_view_between_dates.dart';
 export 'package:api_client/src/model/candidate_election_create.dart';
 export 'package:api_client/src/model/candidate_election_read.dart';
 export 'package:api_client/src/model/candidate_post_read.dart';

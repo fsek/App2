@@ -101,7 +101,7 @@ Class | Method | HTTP request | Description
 [*CafeApi*](doc/CafeApi.md) | [**cafeUpdateShift**](doc/CafeApi.md#cafeupdateshift) | **PATCH** /cafe-shifts/update/{shift_id} | Update Shift
 [*CafeApi*](doc/CafeApi.md) | [**cafeViewAllShifts**](doc/CafeApi.md#cafeviewallshifts) | **GET** /cafe-shifts/view-shifts | View All Shifts
 [*CafeApi*](doc/CafeApi.md) | [**cafeViewShift**](doc/CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
-[*CafeApi*](doc/CafeApi.md) | [**cafeViewShiftsBetweenDates**](doc/CafeApi.md#cafeviewshiftsbetweendates) | **GET** /cafe-shifts/view-between-dates | View Shifts Between Dates
+[*CafeApi*](doc/CafeApi.md) | [**cafeViewShiftsBetweenDates**](doc/CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidation**](doc/CandidatesApi.md#candidatescreatecandidation) | **POST** /candidate/{election_id} | Create Candidation
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidations**](doc/CandidatesApi.md#candidatescreatecandidations) | **POST** /candidate/many/{election_id} | Create Candidations
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllCandidations**](doc/CandidatesApi.md#candidatesgetallcandidations) | **GET** /candidate/{election_id} | Get All Candidations
@@ -228,6 +228,7 @@ Class | Method | HTTP request | Description
  - [CafeShiftCreate](doc/CafeShiftCreate.md)
  - [CafeShiftRead](doc/CafeShiftRead.md)
  - [CafeShiftUpdate](doc/CafeShiftUpdate.md)
+ - [CafeViewBetweenDates](doc/CafeViewBetweenDates.md)
  - [CandidateElectionCreate](doc/CandidateElectionCreate.md)
  - [CandidateElectionRead](doc/CandidateElectionRead.md)
  - [CandidatePostRead](doc/CandidatePostRead.md)

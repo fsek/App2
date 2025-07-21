@@ -12,6 +12,7 @@ import 'package:api_client/src/api_util.dart';
 import 'package:api_client/src/model/cafe_shift_create.dart';
 import 'package:api_client/src/model/cafe_shift_read.dart';
 import 'package:api_client/src/model/cafe_shift_update.dart';
+import 'package:api_client/src/model/cafe_view_between_dates.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:built_collection/built_collection.dart';
 
@@ -634,8 +635,7 @@ class CafeApi {
   /// 
   ///
   /// Parameters:
-  /// * [startDate] 
-  /// * [endDate] 
+  /// * [cafeViewBetweenDates] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -646,8 +646,7 @@ class CafeApi {
   /// Returns a [Future] containing a [Response] with a [BuiltList<CafeShiftRead>] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<BuiltList<CafeShiftRead>>> cafeViewShiftsBetweenDates({ 
-    required DateTime startDate,
-    required DateTime endDate,
+    required CafeViewBetweenDates cafeViewBetweenDates,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -657,7 +656,7 @@ class CafeApi {
   }) async {
     final _path = r'/cafe-shifts/view-between-dates';
     final _options = Options(
-      method: r'GET',
+      method: r'POST',
       headers: <String, dynamic>{
         ...?headers,
       },
@@ -675,18 +674,32 @@ class CafeApi {
         ],
         ...?extra,
       },
+      contentType: 'application/json',
       validateStatus: validateStatus,
     );
 
-    final _queryParameters = <String, dynamic>{
-      r'start_date': encodeQueryParameter(_serializers, startDate, const FullType(DateTime)),
-      r'end_date': encodeQueryParameter(_serializers, endDate, const FullType(DateTime)),
-    };
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(CafeViewBetweenDates);
+      _bodyData = _serializers.serialize(cafeViewBetweenDates, specifiedType: _type);
+
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
 
     final _response = await _dio.request<Object>(
       _path,
+      data: _bodyData,
       options: _options,
-      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

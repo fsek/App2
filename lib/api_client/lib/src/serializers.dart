@@ -32,6 +32,7 @@ import 'package:api_client/src/model/body_auth_verify_verify.dart';
 import 'package:api_client/src/model/cafe_shift_create.dart';
 import 'package:api_client/src/model/cafe_shift_read.dart';
 import 'package:api_client/src/model/cafe_shift_update.dart';
+import 'package:api_client/src/model/cafe_view_between_dates.dart';
 import 'package:api_client/src/model/candidate_election_create.dart';
 import 'package:api_client/src/model/candidate_election_read.dart';
 import 'package:api_client/src/model/candidate_post_read.dart';
@@ -134,6 +135,7 @@ part 'serializers.g.dart';
   CafeShiftCreate,
   CafeShiftRead,
   CafeShiftUpdate,
+  CafeViewBetweenDates,
   CandidateElectionCreate,
   CandidateElectionRead,
   CandidatePostRead,

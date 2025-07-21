@@ -146,7 +146,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
           : null; // if another person is on the shift, don't show a signup button
     }
     headerText +=
-        "${t.cafeShiftForShift}\n${Time.format(shift!.startsAt, "%D")}${t.cafeShiftClock}${shift!.endsAt.difference(shift!.startsAt).inMinutes.toString()}";
+        "${t.cafeShiftForShift}\n${Time.format(shift!.startsAt, "%D")}${t.cafeShiftClock}${dateTimeToHourAndMinute(shift!.startsAt)}";
     return Scaffold(
       appBar: AppBar(
         title: Text(t.cafeShiftCafeShift),
@@ -172,3 +172,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
     );
   }
 }
+
+String dateTimeToHourAndMinute(DateTime date) {
+    return "${date.hour}:${date.minute}";
+  }

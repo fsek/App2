@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**cafeUpdateShift**](CafeApi.md#cafeupdateshift) | **PATCH** /cafe-shifts/update/{shift_id} | Update Shift
 [**cafeViewAllShifts**](CafeApi.md#cafeviewallshifts) | **GET** /cafe-shifts/view-shifts | View All Shifts
 [**cafeViewShift**](CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
-[**cafeViewShiftsBetweenDates**](CafeApi.md#cafeviewshiftsbetweendates) | **GET** /cafe-shifts/view-between-dates | View Shifts Between Dates
+[**cafeViewShiftsBetweenDates**](CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
 
 
 # **cafeCreateShift**
@@ -346,7 +346,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cafeViewShiftsBetweenDates**
-> BuiltList<CafeShiftRead> cafeViewShiftsBetweenDates(startDate, endDate)
+> BuiltList<CafeShiftRead> cafeViewShiftsBetweenDates(cafeViewBetweenDates)
 
 View Shifts Between Dates
 
@@ -361,11 +361,10 @@ import 'package:api_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCafeApi();
-final DateTime startDate = 2013-10-20T19:20:30+01:00; // DateTime | 
-final DateTime endDate = 2013-10-20T19:20:30+01:00; // DateTime | 
+final CafeViewBetweenDates cafeViewBetweenDates = ; // CafeViewBetweenDates | 
 
 try {
-    final response = api.cafeViewShiftsBetweenDates(startDate, endDate);
+    final response = api.cafeViewShiftsBetweenDates(cafeViewBetweenDates);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling CafeApi->cafeViewShiftsBetweenDates: $e\n');
@@ -376,8 +375,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startDate** | **DateTime**|  | 
- **endDate** | **DateTime**|  | 
+ **cafeViewBetweenDates** | [**CafeViewBetweenDates**](CafeViewBetweenDates.md)|  | 
 
 ### Return type
 
@@ -389,7 +387,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -23,19 +23,18 @@ class _CafePageState extends State<CafePage> {
 
   void initState() {
     super.initState();
+    _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
     _loadInitData();
   }
 
   Future<void> _loadInitData() async {
     final now = DateTime.now().toUtc();
-    _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
+    final cafeDates = CafeViewBetweenDates((b) => b 
+    ..startDate = now.subtract(Duration(days: 7)).toUtc()
+    ..endDate = now.add(Duration(days: 49)).toUtc());
+
     final response = await ApiService.apiClient
-        .getCafeApi()
-        .cafeViewShiftsBetweenDates(
-            startDate:
-                truncateToMilliSeconds(now.subtract(Duration(days: 7)).toUtc()),
-            endDate:
-                truncateToMilliSeconds(now.add(Duration(days: 49)).toUtc()));
+        .getCafeApi().cafeViewShiftsBetweenDates(cafeViewBetweenDates: cafeDates);
     final responseData = response.data;
     setState(() {
       if (responseData != null) {
@@ -43,14 +42,9 @@ class _CafePageState extends State<CafePage> {
       } else {
         this._events = {};
       }
-
-      _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
       this._selectedEvents = _getEventsForDay(_selectedDay);
     });
   }
-
-  DateTime truncateToMilliSeconds(DateTime dt) => DateTime.utc(
-      dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond);
 
   Map<DateTime, List<CafeShiftRead>> cafeShiftMap(List<CafeShiftRead> shifts) {
     Map<DateTime, List<CafeShiftRead>> shiftsMap = {};
@@ -68,21 +62,28 @@ class _CafePageState extends State<CafePage> {
   }
 
   Future<void> _onRefresh() async {
-    final now = DateTime.now();
-    final response = await ApiService.apiClient
-        .getCafeApi()
-        .cafeViewShiftsBetweenDates(
-            startDate: now.subtract(Duration(days: 7)),
-            endDate: now.add(Duration(days: 49)));
-    final responseData = response.data;
+    final now = DateTime.now().toUtc();
+    _selectedDay = DateTime.utc(now.year, now.month, now.day);
+    final cafeDates = CafeViewBetweenDates((b) => b 
+    ..startDate = now.subtract(Duration(days: 7)).toUtc()
+    ..endDate = now.add(Duration(days: 49)).toUtc());
 
+    final response = await ApiService.apiClient
+        .getCafeApi().cafeViewShiftsBetweenDates(cafeViewBetweenDates: cafeDates);
+    final responseData = response.data;
     setState(() {
       if (responseData != null) {
         this._events = cafeShiftMap(responseData.toList());
       } else {
         this._events = {};
       }
-    });
+    }
+    );
+  }
+
+
+  String dateTimeToHourAndMinute(DateTime date) {
+    return "${date.hour}:${date.minute}";
   }
 
   Widget createCafeShiftCard(CafeShiftRead shift) {
@@ -103,17 +104,14 @@ class _CafePageState extends State<CafePage> {
                 child: Column(
                   children: [
                     Text(
-                      shift.endsAt
-                          .difference(shift.startsAt)
-                          .inMinutes
-                          .toString(),
+                      dateTimeToHourAndMinute(shift.startsAt) + " - " + dateTimeToHourAndMinute(shift.endsAt),
                       style: TextStyle(
                         fontSize: 15,
                         color: (Theme.of(context).colorScheme.primary),
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    Text(
+                    Center(child: Text(
                       shift.user != null
                           ? "${shift.user?.firstName} ${shift.user?.lastName}"
                           : t.cafeShiftShift,
@@ -123,7 +121,7 @@ class _CafePageState extends State<CafePage> {
                             ? Theme.of(context).colorScheme.onInverseSurface
                             : Theme.of(context).colorScheme.onSurface),
                       ),
-                    )
+                    ))
                   ],
                 ),
               )
@@ -148,20 +146,34 @@ class _CafePageState extends State<CafePage> {
         _loadInitData());
   }
 
-  List<Widget> createPairShifts(List<CafeShiftRead> dayShifts) {
-    // create pairs of shifts (which we will assume to have the same time)
-    List<Widget> pairList = [];
-    Row pair;
-    for (var i = 0; i < dayShifts.length / 2; i++) {
-      pair = Row(
-        children: [
-          Expanded(child: createCafeShiftCard(dayShifts[2 * i])),
-          Expanded(child: createCafeShiftCard(dayShifts[2 * i + 1])),
-        ],
-      );
-      pairList.add(pair);
+
+  List<Widget> createCafeShiftCards(List<CafeShiftRead> dayshifts) {
+    List<Widget> shiftList = [];
+
+    dayshifts.sort((a, b) { 
+      int comp = a.startsAt.compareTo(b.startsAt);
+      if(comp != 0) return comp;
+      else return a.id.compareTo(b.id);
+    }); 
+
+
+
+    for(int i = 0; i < dayshifts.length; i++) {
+      if(i == dayshifts.length - 1) {
+        shiftList.add(Row(children: [Expanded(child: createCafeShiftCard(dayshifts[i]))]));
+      } else {
+          if(dayshifts[i].startsAt.compareTo(dayshifts[i+1].startsAt) == 0) {
+          shiftList.add(Row(children: [
+            Expanded(child: createCafeShiftCard(dayshifts[i])), 
+            Expanded(child: createCafeShiftCard(dayshifts[i+1]))],));
+          i++;
+          } else {
+          shiftList.add(Row(children: [createCafeShiftCard(dayshifts[i])],));
+        }
+      }
     }
-    return pairList;
+
+    return shiftList;
   }
 
   @override
@@ -219,7 +231,7 @@ class _CafePageState extends State<CafePage> {
                 ),
               ),
             ),
-            ...createPairShifts(_selectedEvents),
+            ...createCafeShiftCards(_selectedEvents),
           ],
         ),
       ),
