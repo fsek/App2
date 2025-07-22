@@ -36,9 +36,9 @@ class CafeApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [CafeShiftCreate] as data
+  /// Returns a [Future] containing a [Response] with a [CafeShiftRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CafeShiftCreate>> cafeCreateShift({ 
+  Future<Response<CafeShiftRead>> cafeCreateShift({ 
     required CafeShiftCreate cafeShiftCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -98,14 +98,14 @@ class CafeApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    CafeShiftCreate? _responseData;
+    CafeShiftRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(CafeShiftCreate),
-      ) as CafeShiftCreate;
+        specifiedType: const FullType(CafeShiftRead),
+      ) as CafeShiftRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -117,7 +117,7 @@ class CafeApi {
       );
     }
 
-    return Response<CafeShiftCreate>(
+    return Response<CafeShiftRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

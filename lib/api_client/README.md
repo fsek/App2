@@ -105,6 +105,9 @@ Class | Method | HTTP request | Description
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidation**](doc/CandidatesApi.md#candidatescreatecandidation) | **POST** /candidate/{election_id} | Create Candidation
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidations**](doc/CandidatesApi.md#candidatescreatecandidations) | **POST** /candidate/many/{election_id} | Create Candidations
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllCandidations**](doc/CandidatesApi.md#candidatesgetallcandidations) | **GET** /candidate/{election_id} | Get All Candidations
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingBlockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingblockuserfromcarbooking) | **POST** /car/block/ | Block User From Car Booking
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingGetAllCarBookingBlocks**](doc/CarBlockingApi.md#carblockinggetallcarbookingblocks) | **GET** /car/block/ | Get All Car Booking Blocks
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingUnblockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingunblockuserfromcarbooking) | **DELETE** /car/block/{user_id} | Unblock User From Car Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsCreateBooking**](doc/CarsApi.md#carscreatebooking) | **POST** /car/ | Create Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsGetAllBooking**](doc/CarsApi.md#carsgetallbooking) | **GET** /car/ | Get All Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsGetBooking**](doc/CarsApi.md#carsgetbooking) | **GET** /car/{booking_id} | Get Booking
@@ -118,6 +121,12 @@ Class | Method | HTTP request | Description
 [*DefaultApi*](doc/DefaultApi.md) | [**manageEventOnlypermissionRoute**](doc/DefaultApi.md#manageeventonlypermissionroute) | **GET** /manage-event-only | Permission Route
 [*DefaultApi*](doc/DefaultApi.md) | [**memberOnlymemberOnly**](doc/DefaultApi.md#memberonlymemberonly) | **GET** /member-only | Member Only
 [*DefaultApi*](doc/DefaultApi.md) | [**userOnlyuserOnly**](doc/DefaultApi.md#useronlyuseronly) | **GET** /user-only | User Only
+[*DocumentApi*](doc/DocumentApi.md) | [**documentDeleteDocument**](doc/DocumentApi.md#documentdeletedocument) | **DELETE** /document/delete_document/{document_id} | Delete Document
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetAllDocuments**](doc/DocumentApi.md#documentgetalldocuments) | **GET** /document/ | Get All Documents
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentDataById**](doc/DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFileById**](doc/DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
+[*DocumentApi*](doc/DocumentApi.md) | [**documentUpdateDocument**](doc/DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
+[*DocumentApi*](doc/DocumentApi.md) | [**documentUploadDocument**](doc/DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsAddPostToElection**](doc/ElectionsApi.md#electionsaddposttoelection) | **POST** /election/{election_id} | Add Post To Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsCreateElection**](doc/ElectionsApi.md#electionscreateelection) | **POST** /election/ | Create Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsDeleteElection**](doc/ElectionsApi.md#electionsdeleteelection) | **DELETE** /election/{election_id} | Delete Election
@@ -234,14 +243,19 @@ Class | Method | HTTP request | Description
  - [CandidatePostRead](doc/CandidatePostRead.md)
  - [CandidateRead](doc/CandidateRead.md)
  - [CandidateUserRead](doc/CandidateUserRead.md)
- - [CarCreate](doc/CarCreate.md)
- - [CarRead](doc/CarRead.md)
- - [CarUpdate](doc/CarUpdate.md)
+ - [CarBlockCreate](doc/CarBlockCreate.md)
+ - [CarBlockRead](doc/CarBlockRead.md)
+ - [CarBookingCreate](doc/CarBookingCreate.md)
+ - [CarBookingRead](doc/CarBookingRead.md)
+ - [CarBookingUpdate](doc/CarBookingUpdate.md)
  - [CouncilCreate](doc/CouncilCreate.md)
+ - [CouncilInCarBookingRead](doc/CouncilInCarBookingRead.md)
  - [CouncilInEventRead](doc/CouncilInEventRead.md)
  - [CouncilRead](doc/CouncilRead.md)
  - [CouncilUpdate](doc/CouncilUpdate.md)
  - [Detail](doc/Detail.md)
+ - [DocumentRead](doc/DocumentRead.md)
+ - [DocumentUpdate](doc/DocumentUpdate.md)
  - [ElectionAddPosts](doc/ElectionAddPosts.md)
  - [ElectionCreate](doc/ElectionCreate.md)
  - [ElectionPostCreate](doc/ElectionPostCreate.md)

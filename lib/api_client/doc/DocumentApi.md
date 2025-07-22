@@ -1,4 +1,4 @@
-# api_client.api.CafeApi
+# api_client.api.DocumentApi
 
 ## Load the API package
 ```dart
@@ -9,20 +9,18 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cafeCreateShift**](CafeApi.md#cafecreateshift) | **POST** /cafe-shifts/ | Create Shift
-[**cafeDeleteShift**](CafeApi.md#cafedeleteshift) | **DELETE** /cafe-shifts/{shift_id} | Delete Shift
-[**cafeSignoffFromShift**](CafeApi.md#cafesignofffromshift) | **PATCH** /cafe-shifts/sign-off/{shift_id} | Signoff From Shift
-[**cafeSignupToShift**](CafeApi.md#cafesignuptoshift) | **PATCH** /cafe-shifts/sign-up/{shift_id} | Signup To Shift
-[**cafeUpdateShift**](CafeApi.md#cafeupdateshift) | **PATCH** /cafe-shifts/update/{shift_id} | Update Shift
-[**cafeViewAllShifts**](CafeApi.md#cafeviewallshifts) | **GET** /cafe-shifts/view-shifts | View All Shifts
-[**cafeViewShift**](CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
-[**cafeViewShiftsBetweenDates**](CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
+[**documentDeleteDocument**](DocumentApi.md#documentdeletedocument) | **DELETE** /document/delete_document/{document_id} | Delete Document
+[**documentGetAllDocuments**](DocumentApi.md#documentgetalldocuments) | **GET** /document/ | Get All Documents
+[**documentGetDocumentDataById**](DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
+[**documentGetDocumentFileById**](DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
+[**documentUpdateDocument**](DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
+[**documentUploadDocument**](DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
 
 
-# **cafeCreateShift**
-> CafeShiftRead cafeCreateShift(cafeShiftCreate)
+# **documentDeleteDocument**
+> DocumentRead documentDeleteDocument(documentId)
 
-Create Shift
+Delete Document
 
 ### Example
 ```dart
@@ -34,14 +32,14 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getCafeApi();
-final CafeShiftCreate cafeShiftCreate = ; // CafeShiftCreate | 
+final api = ApiClient().getDocumentApi();
+final int documentId = 56; // int | 
 
 try {
-    final response = api.cafeCreateShift(cafeShiftCreate);
+    final response = api.documentDeleteDocument(documentId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeCreateShift: $e\n');
+    print('Exception when calling DocumentApi->documentDeleteDocument: $e\n');
 }
 ```
 
@@ -49,57 +47,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cafeShiftCreate** | [**CafeShiftCreate**](CafeShiftCreate.md)|  | 
+ **documentId** | **int**|  | 
 
 ### Return type
 
-[**CafeShiftRead**](CafeShiftRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **cafeDeleteShift**
-> cafeDeleteShift(shiftId)
-
-Delete Shift
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getCafeApi();
-final int shiftId = 56; // int | 
-
-try {
-    api.cafeDeleteShift(shiftId);
-} catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeDeleteShift: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shiftId** | **int**|  | 
-
-### Return type
-
-void (empty response body)
+[**DocumentRead**](DocumentRead.md)
 
 ### Authorization
 
@@ -112,57 +64,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **cafeSignoffFromShift**
-> CafeShiftRead cafeSignoffFromShift(shiftId)
+# **documentGetAllDocuments**
+> BuiltList<DocumentRead> documentGetAllDocuments()
 
-Signoff From Shift
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getCafeApi();
-final int shiftId = 56; // int | 
-
-try {
-    final response = api.cafeSignoffFromShift(shiftId);
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeSignoffFromShift: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shiftId** | **int**|  | 
-
-### Return type
-
-[**CafeShiftRead**](CafeShiftRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **cafeSignupToShift**
-> CafeShiftRead cafeSignupToShift(shiftId)
-
-Signup To Shift
+Get All Documents
 
 ### Example
 ```dart
@@ -174,109 +79,13 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getCafeApi();
-final int shiftId = 56; // int | 
+final api = ApiClient().getDocumentApi();
 
 try {
-    final response = api.cafeSignupToShift(shiftId);
+    final response = api.documentGetAllDocuments();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeSignupToShift: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shiftId** | **int**|  | 
-
-### Return type
-
-[**CafeShiftRead**](CafeShiftRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **cafeUpdateShift**
-> CafeShiftRead cafeUpdateShift(shiftId, cafeShiftUpdate)
-
-Update Shift
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getCafeApi();
-final int shiftId = 56; // int | 
-final CafeShiftUpdate cafeShiftUpdate = ; // CafeShiftUpdate | 
-
-try {
-    final response = api.cafeUpdateShift(shiftId, cafeShiftUpdate);
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeUpdateShift: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shiftId** | **int**|  | 
- **cafeShiftUpdate** | [**CafeShiftUpdate**](CafeShiftUpdate.md)|  | 
-
-### Return type
-
-[**CafeShiftRead**](CafeShiftRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **cafeViewAllShifts**
-> BuiltList<CafeShiftRead> cafeViewAllShifts()
-
-View All Shifts
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getCafeApi();
-
-try {
-    final response = api.cafeViewAllShifts();
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeViewAllShifts: $e\n');
+    print('Exception when calling DocumentApi->documentGetAllDocuments: $e\n');
 }
 ```
 
@@ -285,7 +94,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;CafeShiftRead&gt;**](CafeShiftRead.md)
+[**BuiltList&lt;DocumentRead&gt;**](DocumentRead.md)
 
 ### Authorization
 
@@ -298,10 +107,10 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **cafeViewShift**
-> CafeShiftRead cafeViewShift(shiftId)
+# **documentGetDocumentDataById**
+> DocumentRead documentGetDocumentDataById(documentId)
 
-View Shift
+Get Document Data By Id
 
 ### Example
 ```dart
@@ -313,14 +122,14 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getCafeApi();
-final int shiftId = 56; // int | 
+final api = ApiClient().getDocumentApi();
+final int documentId = 56; // int | 
 
 try {
-    final response = api.cafeViewShift(shiftId);
+    final response = api.documentGetDocumentDataById(documentId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeViewShift: $e\n');
+    print('Exception when calling DocumentApi->documentGetDocumentDataById: $e\n');
 }
 ```
 
@@ -328,11 +137,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shiftId** | **int**|  | 
+ **documentId** | **int**|  | 
 
 ### Return type
 
-[**CafeShiftRead**](CafeShiftRead.md)
+[**DocumentRead**](DocumentRead.md)
 
 ### Authorization
 
@@ -345,10 +154,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **cafeViewShiftsBetweenDates**
-> BuiltList<CafeShiftRead> cafeViewShiftsBetweenDates(cafeViewBetweenDates)
+# **documentGetDocumentFileById**
+> JsonObject documentGetDocumentFileById(documentId)
 
-View Shifts Between Dates
+Get Document File By Id
 
 ### Example
 ```dart
@@ -360,14 +169,14 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getCafeApi();
-final CafeViewBetweenDates cafeViewBetweenDates = ; // CafeViewBetweenDates | 
+final api = ApiClient().getDocumentApi();
+final int documentId = 56; // int | 
 
 try {
-    final response = api.cafeViewShiftsBetweenDates(cafeViewBetweenDates);
+    final response = api.documentGetDocumentFileById(documentId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CafeApi->cafeViewShiftsBetweenDates: $e\n');
+    print('Exception when calling DocumentApi->documentGetDocumentFileById: $e\n');
 }
 ```
 
@@ -375,11 +184,60 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cafeViewBetweenDates** | [**CafeViewBetweenDates**](CafeViewBetweenDates.md)|  | 
+ **documentId** | **int**|  | 
 
 ### Return type
 
-[**BuiltList&lt;CafeShiftRead&gt;**](CafeShiftRead.md)
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **documentUpdateDocument**
+> DocumentRead documentUpdateDocument(documentId, documentUpdate)
+
+Update Document
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getDocumentApi();
+final int documentId = 56; // int | 
+final DocumentUpdate documentUpdate = ; // DocumentUpdate | 
+
+try {
+    final response = api.documentUpdateDocument(documentId, documentUpdate);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling DocumentApi->documentUpdateDocument: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **int**|  | 
+ **documentUpdate** | [**DocumentUpdate**](DocumentUpdate.md)|  | 
+
+### Return type
+
+[**DocumentRead**](DocumentRead.md)
 
 ### Authorization
 
@@ -388,6 +246,59 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **documentUploadDocument**
+> DocumentRead documentUploadDocument(file, title, category, isPrivate)
+
+Upload Document
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getDocumentApi();
+final MultipartFile file = BINARY_DATA_HERE; // MultipartFile | 
+final String title = title_example; // String | 
+final String category = category_example; // String | 
+final bool isPrivate = true; // bool | 
+
+try {
+    final response = api.documentUploadDocument(file, title, category, isPrivate);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling DocumentApi->documentUploadDocument: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **MultipartFile**|  | 
+ **title** | **String**|  | 
+ **category** | **String**|  | 
+ **isPrivate** | **bool**|  | 
+
+### Return type
+
+[**DocumentRead**](DocumentRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

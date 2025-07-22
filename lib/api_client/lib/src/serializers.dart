@@ -38,14 +38,19 @@ import 'package:api_client/src/model/candidate_election_read.dart';
 import 'package:api_client/src/model/candidate_post_read.dart';
 import 'package:api_client/src/model/candidate_read.dart';
 import 'package:api_client/src/model/candidate_user_read.dart';
-import 'package:api_client/src/model/car_create.dart';
-import 'package:api_client/src/model/car_read.dart';
-import 'package:api_client/src/model/car_update.dart';
+import 'package:api_client/src/model/car_block_create.dart';
+import 'package:api_client/src/model/car_block_read.dart';
+import 'package:api_client/src/model/car_booking_create.dart';
+import 'package:api_client/src/model/car_booking_read.dart';
+import 'package:api_client/src/model/car_booking_update.dart';
 import 'package:api_client/src/model/council_create.dart';
+import 'package:api_client/src/model/council_in_car_booking_read.dart';
 import 'package:api_client/src/model/council_in_event_read.dart';
 import 'package:api_client/src/model/council_read.dart';
 import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
+import 'package:api_client/src/model/document_read.dart';
+import 'package:api_client/src/model/document_update.dart';
 import 'package:api_client/src/model/election_add_posts.dart';
 import 'package:api_client/src/model/election_create.dart';
 import 'package:api_client/src/model/election_post_create.dart';
@@ -141,14 +146,19 @@ part 'serializers.g.dart';
   CandidatePostRead,
   CandidateRead,
   CandidateUserRead,
-  CarCreate,
-  CarRead,
-  CarUpdate,
+  CarBlockCreate,
+  CarBlockRead,
+  CarBookingCreate,
+  CarBookingRead,
+  CarBookingUpdate,
   CouncilCreate,
+  CouncilInCarBookingRead,
   CouncilInEventRead,
   CouncilRead,
   CouncilUpdate,
   Detail,
+  DocumentRead,
+  DocumentUpdate,
   ElectionAddPosts,
   ElectionCreate,
   ElectionPostCreate,
@@ -219,8 +229,16 @@ part 'serializers.g.dart';
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarBlockRead)]),
+        () => ListBuilder<CarBlockRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltMap, [FullType(String), FullType(String)]),
         () => MapBuilder<String, String>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarBookingRead)]),
+        () => ListBuilder<CarBookingRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SongCategoryRead)]),
@@ -295,10 +313,6 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<AdminUserRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CarRead)]),
-        () => ListBuilder<CarRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CafeShiftRead)]),
         () => ListBuilder<CafeShiftRead>(),
       )
@@ -321,6 +335,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
         () => ListBuilder<NollningRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(DocumentRead)]),
+        () => ListBuilder<DocumentRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(String)]),
