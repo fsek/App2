@@ -83,8 +83,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                   )
                                 ]),
                             isThreeLine: true,
-                            trailing: ((news.pinnedFrom != false) ||
-                                    (news.pinnedTo != false))
+                            trailing: ((news.pinnedFrom != null) ||
+                                    (news.pinnedTo != null))
                                 ? Icon(Icons.push_pin_outlined,
                                     color:
                                         Theme.of(context).colorScheme.primary)
