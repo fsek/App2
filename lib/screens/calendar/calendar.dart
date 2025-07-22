@@ -121,7 +121,7 @@ class _CalendarState extends State<Calendar> {
                       ),
                       Text(
                         "  " +
-                            "intigheten", // (event.location ?? "intigheten"), TODO change this when event actually has a location
+                            event.location, // TODO change this when event actually has a location
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).colorScheme.onSurface,
