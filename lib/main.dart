@@ -18,6 +18,7 @@ import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
@@ -42,7 +43,7 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.notifications, NotificationsPage()),
+    Destination(3, Icons.question_mark, PlaceholderPage(title: "", disc: "")),// NotificationsPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 
