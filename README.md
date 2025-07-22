@@ -4,7 +4,7 @@ Flutter App for interacting with the API of fsektionen.se.
 
 ## Setup
 
-This project uses Flutter 3.19.6.
+This project uses Flutter 3.29.2.
 
 1. Install Flutter from [here](https://docs.flutter.dev/release/archive). Installation will include Dart.
 1. Include `flutter/bin` in your PATH environment variable.
