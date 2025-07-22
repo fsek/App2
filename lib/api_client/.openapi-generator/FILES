@@ -271,13 +271,3 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/car_block_create_test.dart
-test/car_block_read_test.dart
-test/car_blocking_api_test.dart
-test/car_booking_create_test.dart
-test/car_booking_read_test.dart
-test/car_booking_update_test.dart
-test/council_in_car_booking_read_test.dart
-test/document_api_test.dart
-test/document_read_test.dart
-test/document_update_test.dart
