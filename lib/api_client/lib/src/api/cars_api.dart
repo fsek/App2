@@ -9,9 +9,9 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:api_client/src/api_util.dart';
-import 'package:api_client/src/model/car_create.dart';
-import 'package:api_client/src/model/car_read.dart';
-import 'package:api_client/src/model/car_update.dart';
+import 'package:api_client/src/model/car_booking_create.dart';
+import 'package:api_client/src/model/car_booking_read.dart';
+import 'package:api_client/src/model/car_booking_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:built_collection/built_collection.dart';
 
@@ -27,7 +27,7 @@ class CarsApi {
   /// 
   ///
   /// Parameters:
-  /// * [carCreate] 
+  /// * [carBookingCreate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -35,10 +35,10 @@ class CarsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [CarCreate] as data
+  /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarCreate>> carsCreateBooking({ 
-    required CarCreate carCreate,
+  Future<Response<CarBookingRead>> carsCreateBooking({ 
+    required CarBookingCreate carBookingCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -57,6 +57,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -68,8 +73,8 @@ class CarsApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(CarCreate);
-      _bodyData = _serializers.serialize(carCreate, specifiedType: _type);
+      const _type = FullType(CarBookingCreate);
+      _bodyData = _serializers.serialize(carBookingCreate, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioException(
@@ -92,14 +97,14 @@ class CarsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    CarCreate? _responseData;
+    CarBookingRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(CarCreate),
-      ) as CarCreate;
+        specifiedType: const FullType(CarBookingRead),
+      ) as CarBookingRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -111,7 +116,7 @@ class CarsApi {
       );
     }
 
-    return Response<CarCreate>(
+    return Response<CarBookingRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -134,9 +139,9 @@ class CarsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<CarRead>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<CarBookingRead>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<CarRead>>> carsGetAllBooking({ 
+  Future<Response<BuiltList<CarBookingRead>>> carsGetAllBooking({ 
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -155,6 +160,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -170,14 +180,14 @@ class CarsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltList<CarRead>? _responseData;
+    BuiltList<CarBookingRead>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(CarRead)]),
-      ) as BuiltList<CarRead>;
+        specifiedType: const FullType(BuiltList, [FullType(CarBookingRead)]),
+      ) as BuiltList<CarBookingRead>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -189,7 +199,7 @@ class CarsApi {
       );
     }
 
-    return Response<BuiltList<CarRead>>(
+    return Response<BuiltList<CarBookingRead>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -213,9 +223,9 @@ class CarsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [CarRead] as data
+  /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarRead>> carsGetBooking({ 
+  Future<Response<CarBookingRead>> carsGetBooking({ 
     required int bookingId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -235,6 +245,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -250,14 +265,14 @@ class CarsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    CarRead? _responseData;
+    CarBookingRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(CarRead),
-      ) as CarRead;
+        specifiedType: const FullType(CarBookingRead),
+      ) as CarBookingRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -269,7 +284,7 @@ class CarsApi {
       );
     }
 
-    return Response<CarRead>(
+    return Response<CarBookingRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -293,9 +308,9 @@ class CarsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [CarRead] as data
+  /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarRead>> carsRemoveBooking({ 
+  Future<Response<CarBookingRead>> carsRemoveBooking({ 
     required int bookingId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -315,6 +330,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -330,14 +350,14 @@ class CarsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    CarRead? _responseData;
+    CarBookingRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(CarRead),
-      ) as CarRead;
+        specifiedType: const FullType(CarBookingRead),
+      ) as CarBookingRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -349,7 +369,7 @@ class CarsApi {
       );
     }
 
-    return Response<CarRead>(
+    return Response<CarBookingRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -366,7 +386,7 @@ class CarsApi {
   ///
   /// Parameters:
   /// * [bookingId] 
-  /// * [carUpdate] 
+  /// * [carBookingUpdate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -374,11 +394,11 @@ class CarsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [CarRead] as data
+  /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarRead>> carsUpdateBooking({ 
+  Future<Response<CarBookingRead>> carsUpdateBooking({ 
     required int bookingId,
-    required CarUpdate carUpdate,
+    required CarBookingUpdate carBookingUpdate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -397,6 +417,11 @@ class CarsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -408,8 +433,8 @@ class CarsApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(CarUpdate);
-      _bodyData = _serializers.serialize(carUpdate, specifiedType: _type);
+      const _type = FullType(CarBookingUpdate);
+      _bodyData = _serializers.serialize(carBookingUpdate, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioException(
@@ -432,14 +457,14 @@ class CarsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    CarRead? _responseData;
+    CarBookingRead? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(CarRead),
-      ) as CarRead;
+        specifiedType: const FullType(CarBookingRead),
+      ) as CarBookingRead;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -451,7 +476,7 @@ class CarsApi {
       );
     }
 
-    return Response<CarRead>(
+    return Response<CarBookingRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

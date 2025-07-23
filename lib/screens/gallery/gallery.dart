@@ -59,7 +59,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     elevation: 2,
                     isExpanded: true,
                     value: selectedYear,
-                    items: allGalleries!.map((item) => item.year).toList().map((year) => DropdownMenuItem(
+                    items: allGalleries!.map((item) => item.year).toSet().toList().map((year) => DropdownMenuItem(
                       child: Text(
                         year.toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary)),
@@ -68,11 +68,7 @@ class _GalleryPageState extends State<GalleryPage> {
                         setState(() {
                           if (selectedYear != newYear) {
                             selectedYear = newYear!;
-                            ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
-                              setState(() {
-                                this.selectedGalleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
-                              });
-                            });
+                            selectedGalleries = allGalleries!.where((item) => item.year == selectedYear).toList();
                           }
                       });
                     }
@@ -99,7 +95,7 @@ class _GalleryPageState extends State<GalleryPage> {
                     elevation: 2,
                     isExpanded: true,
                     value: selectedYear,
-                    items: allGalleries!.map((item) => item.year).toList().map((year) => DropdownMenuItem(
+                    items: allGalleries!.map((item) => item.year).toSet().toList().map((year) => DropdownMenuItem(
                       child: Text(
                         year.toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary)),
@@ -108,11 +104,7 @@ class _GalleryPageState extends State<GalleryPage> {
                         setState(() {
                           if (selectedYear != newYear) {
                             selectedYear = newYear!;
-                            ApiService.apiClient.getAlbumsApi().albumsGetAlbums().then((value) {
-                              setState(() {
-                                this.selectedGalleries = value.data!.toList().where((item) => item.year == selectedYear).toList();
-                              });
-                            });
+                            selectedGalleries = allGalleries!.where((item) => item.year == selectedYear).toList();
                           }
                       });
                     }
@@ -135,63 +127,6 @@ class _GalleryPageState extends State<GalleryPage> {
       );
   }
 
-  // Widget build(BuildContext context) {
-  //   var t = AppLocalizations.of(context)!;
-  //   return Scaffold(
-  //       appBar: AppBar(
-  //         title: Text(
-  //           t.galleryTitle,
-  //         ),
-  //       ),
-  //       body: Column(
-  //           //Make dropdown prettier mayb :
-  //           children: [
-  //             Container(
-  //                 decoration: BoxDecoration(color: Theme.of(context).colorScheme.background),
-  //                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-  //                 child: DropdownButton(
-  //                   iconDisabledColor: Theme.of(context).colorScheme.onBackground,
-  //                   iconEnabledColor: Theme.of(context).colorScheme.onBackground,
-  //                   dropdownColor: Theme.of(context).colorScheme.background,
-  //                   elevation: 2,
-  //                   isExpanded: true,
-  //                   value: selectedYear,
-  //                   items: galleries?[0]
-  //                       .years!
-  //                       .map((int year) => DropdownMenuItem(
-  //                           child: Text(year.toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(
-  //                             color: Theme.of(context).colorScheme.onPrimary,
-  //                           )), value: year))
-  //                       .toList(),
-  //                   onChanged: (int? newYear) {
-  //                     setState(() {
-  //                       if (selectedYear != newYear) {
-  //                         selectedYear = newYear!;
-  //                         locator<GalleryService>()
-  //                             .getGalleries(year: selectedYear.toString())
-  //                             .then((value) {
-  //                           setState(() {
-  //                             this.galleries = value;
-  //                           });
-  //                         });
-  //                       }
-  //                     });
-  //                   },
-  //                 )),
-  //             Expanded(
-  //               child: GridView.count(
-  //                 padding: EdgeInsets.all(12),
-  //                 crossAxisSpacing: 5,
-  //                 mainAxisSpacing: 5,
-  //                 crossAxisCount: 2,
-  //                 children: generateAlbumThumbnails(),
-  //                 shrinkWrap: true,
-  //               ),
-  //             ),
-  //           ])
-  //       //Text(selectedYear.toString())
-  //       );
-  // }
 
   List<Widget> generateAlbumThumbnails() {
     var t = AppLocalizations.of(context)!;
@@ -226,7 +161,7 @@ class _GalleryPageState extends State<GalleryPage> {
                       width: 2,
                     ),
                     Text(
-                      DateFormat('d MMM yyyy').format(DateTime.now()), // TODO change till to the actual date after its been added to the model
+                      DateFormat('d MMM yyyy').format(elem.date), // TODO change till to the actual date after its been added to the model
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge
@@ -275,13 +210,13 @@ class _GalleryPageState extends State<GalleryPage> {
           ]),
         ),
         elem.imgs.isNotEmpty
-          ? buildThumbnailImage(elem.imgs.first.id)
+          ? buildThumbnailImage(elem)
           : Ink.image(
               image: AssetImage("assets/img/f_logo.png"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
               child: InkWell(
-              onTap: () => placeHolder(elem.id) //goToAlbum(elem.id),
+              onTap: () => goToAlbum(elem.id),
       ),
     )
       ]));
@@ -289,37 +224,12 @@ class _GalleryPageState extends State<GalleryPage> {
     return result;
   }
 
-  void placeHolder(int id) {}
 
   void goToAlbum(int id) {
-    locator<AlbumService>().getAlbum(id).then((album) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => AlbumPage(album: album)));
+    ApiService.apiClient.getAlbumsApi().albumsGetOneAlbum(albumId: id).then((album) {
+      Navigator.push(context, MaterialPageRoute(builder: ((context) => AlbumPage(album: album.data!))));
     });
-
-    //Send to correct page and then fetch complete album on other page :^)
   }
-
-  // // IDK if this shit even works
-  // ImageProvider<Object> getPicture(ImgInAlbum elem) {
-  //   ImageProvider<Object> imageProv =
-  //       AssetImage("assets/img/f_logo.png"); //default
-
-  //   Uint8List decodedString = Uint8List(0);
-    
-  //   ApiService.apiClient.getImgApi().imgGetImage(id: elem.id).then((value) {
-  //     if(value.data != null){
-  //        decodedString = base64Decode(value.data!.asString);
-  //     }
-  //   }
-  //   );
-
-  //   if (decodedString.length != 0) {
-  //     return MemoryImage(decodedString);
-  //   }
-  //   return imageProv;
-  // }
-
 
   Future<ImageProvider<Object>> fetchImage(int id) async {
   try {
@@ -337,9 +247,9 @@ class _GalleryPageState extends State<GalleryPage> {
 
 
 
-Widget buildThumbnailImage(int imgId) {
+Widget buildThumbnailImage(AlbumRead album) {
   return FutureBuilder<ImageProvider>(
-    future: fetchImage(imgId),
+    future: fetchImage(album.imgs.first.id),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
         return Ink.image(
@@ -347,7 +257,7 @@ Widget buildThumbnailImage(int imgId) {
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
           child: InkWell(
-            onTap: () => goToAlbum(imgId),
+            onTap: () => goToAlbum(album.id),
           ),
         );
       } else {
@@ -360,27 +270,5 @@ Widget buildThumbnailImage(int imgId) {
     },
   );
 }
-
-
-
-    // final dio = Dio();
-    // final response = dio.get(
-    //   'http://10.0.2.2/8000/img/${elem.id}',
-    //   options: Options(responseType: ResponseType.bytes),
-    // ).then((value) {
-    //   if (value.statusCode == 200 && value.data != null) {
-    //   return MemoryImage(Uint8List.fromList(value.data!));
-    // } 
-    // });
-
-   
-
-    // final response  = await ApiService.apiClient.getImgApi().imgGetImage(id: elem.id);
-
-    // if (response.data != null){
-    //   final rawResponse = response.response;
-    //   final bytes = Uint8List.fromList(response.data!)
-    //   return MemoryImage(bytes)
-    // }
 
 }

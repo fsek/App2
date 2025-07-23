@@ -11,15 +11,31 @@ part 'post_create.g.dart';
 /// PostCreate
 ///
 /// Properties:
-/// * [name] 
+/// * [nameSv] 
+/// * [nameEn] 
 /// * [councilId] 
+/// * [email] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
 @BuiltValue()
 abstract class PostCreate implements Built<PostCreate, PostCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'name_sv')
+  String get nameSv;
+
+  @BuiltValueField(wireName: r'name_en')
+  String get nameEn;
 
   @BuiltValueField(wireName: r'council_id')
   int get councilId;
+
+  @BuiltValueField(wireName: r'email')
+  String get email;
+
+  @BuiltValueField(wireName: r'description_sv')
+  String get descriptionSv;
+
+  @BuiltValueField(wireName: r'description_en')
+  String get descriptionEn;
 
   PostCreate._();
 
@@ -44,15 +60,35 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
     PostCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'name_sv';
     yield serializers.serialize(
-      object.name,
+      object.nameSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'name_en';
+    yield serializers.serialize(
+      object.nameEn,
       specifiedType: const FullType(String),
     );
     yield r'council_id';
     yield serializers.serialize(
       object.councilId,
       specifiedType: const FullType(int),
+    );
+    yield r'email';
+    yield serializers.serialize(
+      object.email,
+      specifiedType: const FullType(String),
+    );
+    yield r'description_sv';
+    yield serializers.serialize(
+      object.descriptionSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'description_en';
+    yield serializers.serialize(
+      object.descriptionEn,
+      specifiedType: const FullType(String),
     );
   }
 
@@ -77,12 +113,19 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'name_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.nameSv = valueDes;
+          break;
+        case r'name_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.nameEn = valueDes;
           break;
         case r'council_id':
           final valueDes = serializers.deserialize(
@@ -90,6 +133,27 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
             specifiedType: const FullType(int),
           ) as int;
           result.councilId = valueDes;
+          break;
+        case r'email':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.email = valueDes;
+          break;
+        case r'description_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descriptionSv = valueDes;
+          break;
+        case r'description_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descriptionEn = valueDes;
           break;
         default:
           unhandled.add(key);

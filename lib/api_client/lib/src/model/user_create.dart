@@ -20,7 +20,6 @@ part 'user_create.g.dart';
 /// * [lastName] 
 /// * [telephoneNumber] 
 /// * [startYear] 
-/// * [program] 
 @BuiltValue()
 abstract class UserCreate implements Built<UserCreate, UserCreateBuilder> {
   @BuiltValueField(wireName: r'email')
@@ -49,9 +48,6 @@ abstract class UserCreate implements Built<UserCreate, UserCreateBuilder> {
 
   @BuiltValueField(wireName: r'start_year')
   int? get startYear;
-
-  @BuiltValueField(wireName: r'program')
-  String? get program;
 
   UserCreate._();
 
@@ -129,13 +125,6 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
       yield serializers.serialize(
         object.startYear,
         specifiedType: const FullType.nullable(int),
-      );
-    }
-    if (object.program != null) {
-      yield r'program';
-      yield serializers.serialize(
-        object.program,
-        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -228,14 +217,6 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
           ) as int?;
           if (valueDes == null) continue;
           result.startYear = valueDes;
-          break;
-        case r'program':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.program = valueDes;
           break;
         default:
           unhandled.add(key);

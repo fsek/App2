@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
+import 'package:api_client/src/model/memberroles.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -30,8 +31,9 @@ part 'event_update.g.dart';
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [priorities] 
 /// * [alcoholEventType] 
-/// * [dresscode] 
+/// * [dressCode] 
 /// * [price] 
 /// * [dot] 
 @BuiltValue()
@@ -90,12 +92,15 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'is_nollning_event')
   bool? get isNollningEvent;
 
+  @BuiltValueField(wireName: r'priorities')
+  BuiltList<MEMBERROLES>? get priorities;
+
   @BuiltValueField(wireName: r'alcohol_event_type')
   EventUpdateAlcoholEventTypeEnum? get alcoholEventType;
   // enum alcoholEventTypeEnum {  Alcohol,  Alcohol-Served,  None,  };
 
-  @BuiltValueField(wireName: r'dresscode')
-  String? get dresscode;
+  @BuiltValueField(wireName: r'dress_code')
+  String? get dressCode;
 
   @BuiltValueField(wireName: r'price')
   int? get price;
@@ -253,6 +258,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
+    if (object.priorities != null) {
+      yield r'priorities';
+      yield serializers.serialize(
+        object.priorities,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(MEMBERROLES)]),
+      );
+    }
     if (object.alcoholEventType != null) {
       yield r'alcohol_event_type';
       yield serializers.serialize(
@@ -260,10 +272,10 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(EventUpdateAlcoholEventTypeEnum),
       );
     }
-    if (object.dresscode != null) {
-      yield r'dresscode';
+    if (object.dressCode != null) {
+      yield r'dress_code';
       yield serializers.serialize(
-        object.dresscode,
+        object.dressCode,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -448,6 +460,14 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.isNollningEvent = valueDes;
           break;
+        case r'priorities':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(MEMBERROLES)]),
+          ) as BuiltList<MEMBERROLES>?;
+          if (valueDes == null) continue;
+          result.priorities.replace(valueDes);
+          break;
         case r'alcohol_event_type':
           final valueDes = serializers.deserialize(
             value,
@@ -456,13 +476,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.alcoholEventType = valueDes;
           break;
-        case r'dresscode':
+        case r'dress_code':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(String),
           ) as String?;
           if (valueDes == null) continue;
-          result.dresscode = valueDes;
+          result.dressCode = valueDes;
           break;
         case r'price':
           final valueDes = serializers.deserialize(

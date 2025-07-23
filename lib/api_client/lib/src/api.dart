@@ -15,9 +15,11 @@ import 'package:api_client/src/api/albums_api.dart';
 import 'package:api_client/src/api/auth_api.dart';
 import 'package:api_client/src/api/cafe_api.dart';
 import 'package:api_client/src/api/candidates_api.dart';
+import 'package:api_client/src/api/car_blocking_api.dart';
 import 'package:api_client/src/api/cars_api.dart';
 import 'package:api_client/src/api/council_api.dart';
 import 'package:api_client/src/api/default_api.dart';
+import 'package:api_client/src/api/document_api.dart';
 import 'package:api_client/src/api/elections_api.dart';
 import 'package:api_client/src/api/event_signup_api.dart';
 import 'package:api_client/src/api/events_api.dart';
@@ -123,6 +125,12 @@ class ApiClient {
     return CandidatesApi(dio, serializers);
   }
 
+  /// Get CarBlockingApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  CarBlockingApi getCarBlockingApi() {
+    return CarBlockingApi(dio, serializers);
+  }
+
   /// Get CarsApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   CarsApi getCarsApi() {
@@ -139,6 +147,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   DefaultApi getDefaultApi() {
     return DefaultApi(dio, serializers);
+  }
+
+  /// Get DocumentApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DocumentApi getDocumentApi() {
+    return DocumentApi(dio, serializers);
   }
 
   /// Get ElectionsApi instance, base route and serializer can be overridden by a given but be careful,

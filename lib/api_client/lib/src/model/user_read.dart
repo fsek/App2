@@ -31,8 +31,8 @@ abstract class UserRead implements Built<UserRead, UserReadBuilder> {
   String get lastName;
 
   @BuiltValueField(wireName: r'program')
-  UserReadProgramEnum? get program;
-  // enum programEnum {  F,  Pi,  N,  };
+  UserReadProgramEnum get program;
+  // enum programEnum {  Oklart,  F,  Pi,  N,  };
 
   @BuiltValueField(wireName: r'posts')
   BuiltList<UserPostRead> get posts;
@@ -79,9 +79,9 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
       specifiedType: const FullType(String),
     );
     yield r'program';
-    yield object.program == null ? null : serializers.serialize(
+    yield serializers.serialize(
       object.program,
-      specifiedType: const FullType.nullable(UserReadProgramEnum),
+      specifiedType: const FullType(UserReadProgramEnum),
     );
     yield r'posts';
     yield serializers.serialize(
@@ -140,9 +140,8 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
         case r'program':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(UserReadProgramEnum),
-          ) as UserReadProgramEnum?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(UserReadProgramEnum),
+          ) as UserReadProgramEnum;
           result.program = valueDes;
           break;
         case r'posts':
@@ -190,6 +189,8 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
 
 class UserReadProgramEnum extends EnumClass {
 
+  @BuiltValueEnumConst(wireName: r'Oklart')
+  static const UserReadProgramEnum oklart = _$userReadProgramEnum_oklart;
   @BuiltValueEnumConst(wireName: r'F')
   static const UserReadProgramEnum F = _$userReadProgramEnum_F;
   @BuiltValueEnumConst(wireName: r'Pi')

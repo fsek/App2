@@ -85,8 +85,10 @@ Class | Method | HTTP request | Description
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
-[*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogin**](doc/AuthApi.md#authauthjwtlogin) | **POST** /auth/login | Auth:Jwt.Login
-[*AuthApi*](doc/AuthApi.md) | [**authAuthJwtLogout**](doc/AuthApi.md#authauthjwtlogout) | **POST** /auth/logout | Auth:Jwt.Logout
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogin**](doc/AuthApi.md#authauthcookielogin) | **POST** /auth/login | Auth:Cookie.Login
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogout**](doc/AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogoutAll**](doc/AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieRefresh**](doc/AuthApi.md#authauthcookierefresh) | **POST** /auth/refresh | Auth:Cookie.Refresh
 [*AuthApi*](doc/AuthApi.md) | [**authRegisterRegister**](doc/AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
 [*AuthApi*](doc/AuthApi.md) | [**authResetForgotPassword**](doc/AuthApi.md#authresetforgotpassword) | **POST** /auth/forgot-password | Reset:Forgot Password
 [*AuthApi*](doc/AuthApi.md) | [**authResetResetPassword**](doc/AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
@@ -99,10 +101,13 @@ Class | Method | HTTP request | Description
 [*CafeApi*](doc/CafeApi.md) | [**cafeUpdateShift**](doc/CafeApi.md#cafeupdateshift) | **PATCH** /cafe-shifts/update/{shift_id} | Update Shift
 [*CafeApi*](doc/CafeApi.md) | [**cafeViewAllShifts**](doc/CafeApi.md#cafeviewallshifts) | **GET** /cafe-shifts/view-shifts | View All Shifts
 [*CafeApi*](doc/CafeApi.md) | [**cafeViewShift**](doc/CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
-[*CafeApi*](doc/CafeApi.md) | [**cafeViewShiftsBetweenDates**](doc/CafeApi.md#cafeviewshiftsbetweendates) | **GET** /cafe-shifts/view-between-dates | View Shifts Between Dates
+[*CafeApi*](doc/CafeApi.md) | [**cafeViewShiftsBetweenDates**](doc/CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidation**](doc/CandidatesApi.md#candidatescreatecandidation) | **POST** /candidate/{election_id} | Create Candidation
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesCreateCandidations**](doc/CandidatesApi.md#candidatescreatecandidations) | **POST** /candidate/many/{election_id} | Create Candidations
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllCandidations**](doc/CandidatesApi.md#candidatesgetallcandidations) | **GET** /candidate/{election_id} | Get All Candidations
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingBlockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingblockuserfromcarbooking) | **POST** /car/block/ | Block User From Car Booking
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingGetAllCarBookingBlocks**](doc/CarBlockingApi.md#carblockinggetallcarbookingblocks) | **GET** /car/block/ | Get All Car Booking Blocks
+[*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingUnblockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingunblockuserfromcarbooking) | **DELETE** /car/block/{user_id} | Unblock User From Car Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsCreateBooking**](doc/CarsApi.md#carscreatebooking) | **POST** /car/ | Create Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsGetAllBooking**](doc/CarsApi.md#carsgetallbooking) | **GET** /car/ | Get All Booking
 [*CarsApi*](doc/CarsApi.md) | [**carsGetBooking**](doc/CarsApi.md#carsgetbooking) | **GET** /car/{booking_id} | Get Booking
@@ -116,6 +121,12 @@ Class | Method | HTTP request | Description
 [*DefaultApi*](doc/DefaultApi.md) | [**manageEventOnlypermissionRoute**](doc/DefaultApi.md#manageeventonlypermissionroute) | **GET** /manage-event-only | Permission Route
 [*DefaultApi*](doc/DefaultApi.md) | [**memberOnlymemberOnly**](doc/DefaultApi.md#memberonlymemberonly) | **GET** /member-only | Member Only
 [*DefaultApi*](doc/DefaultApi.md) | [**userOnlyuserOnly**](doc/DefaultApi.md#useronlyuseronly) | **GET** /user-only | User Only
+[*DocumentApi*](doc/DocumentApi.md) | [**documentDeleteDocument**](doc/DocumentApi.md#documentdeletedocument) | **DELETE** /document/delete_document/{document_id} | Delete Document
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetAllDocuments**](doc/DocumentApi.md#documentgetalldocuments) | **GET** /document/ | Get All Documents
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentDataById**](doc/DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFileById**](doc/DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
+[*DocumentApi*](doc/DocumentApi.md) | [**documentUpdateDocument**](doc/DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
+[*DocumentApi*](doc/DocumentApi.md) | [**documentUploadDocument**](doc/DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsAddPostToElection**](doc/ElectionsApi.md#electionsaddposttoelection) | **POST** /election/{election_id} | Add Post To Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsCreateElection**](doc/ElectionsApi.md#electionscreateelection) | **POST** /election/ | Create Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsDeleteElection**](doc/ElectionsApi.md#electionsdeleteelection) | **DELETE** /election/{election_id} | Delete Election
@@ -133,6 +144,7 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetSingleEvent**](doc/EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
@@ -200,6 +212,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateMultipleUsersStatus**](doc/UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
@@ -224,19 +237,25 @@ Class | Method | HTTP request | Description
  - [CafeShiftCreate](doc/CafeShiftCreate.md)
  - [CafeShiftRead](doc/CafeShiftRead.md)
  - [CafeShiftUpdate](doc/CafeShiftUpdate.md)
+ - [CafeViewBetweenDates](doc/CafeViewBetweenDates.md)
  - [CandidateElectionCreate](doc/CandidateElectionCreate.md)
  - [CandidateElectionRead](doc/CandidateElectionRead.md)
  - [CandidatePostRead](doc/CandidatePostRead.md)
  - [CandidateRead](doc/CandidateRead.md)
  - [CandidateUserRead](doc/CandidateUserRead.md)
- - [CarCreate](doc/CarCreate.md)
- - [CarRead](doc/CarRead.md)
- - [CarUpdate](doc/CarUpdate.md)
+ - [CarBlockCreate](doc/CarBlockCreate.md)
+ - [CarBlockRead](doc/CarBlockRead.md)
+ - [CarBookingCreate](doc/CarBookingCreate.md)
+ - [CarBookingRead](doc/CarBookingRead.md)
+ - [CarBookingUpdate](doc/CarBookingUpdate.md)
  - [CouncilCreate](doc/CouncilCreate.md)
+ - [CouncilInCarBookingRead](doc/CouncilInCarBookingRead.md)
  - [CouncilInEventRead](doc/CouncilInEventRead.md)
  - [CouncilRead](doc/CouncilRead.md)
  - [CouncilUpdate](doc/CouncilUpdate.md)
  - [Detail](doc/Detail.md)
+ - [DocumentRead](doc/DocumentRead.md)
+ - [DocumentUpdate](doc/DocumentUpdate.md)
  - [ElectionAddPosts](doc/ElectionAddPosts.md)
  - [ElectionCreate](doc/ElectionCreate.md)
  - [ElectionPostCreate](doc/ElectionPostCreate.md)
@@ -260,6 +279,7 @@ Class | Method | HTTP request | Description
  - [GroupUserRead](doc/GroupUserRead.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ImgInAlbum](doc/ImgInAlbum.md)
+ - [MEMBERROLES](doc/MEMBERROLES.md)
  - [NewsCreate](doc/NewsCreate.md)
  - [NewsRead](doc/NewsRead.md)
  - [NewsTagRead](doc/NewsTagRead.md)
@@ -290,6 +310,7 @@ Class | Method | HTTP request | Description
  - [UpdatePermissionPart](doc/UpdatePermissionPart.md)
  - [UpdatePermissions](doc/UpdatePermissions.md)
  - [UpdateUserMember](doc/UpdateUserMember.md)
+ - [UpdateUserMemberMultiple](doc/UpdateUserMemberMultiple.md)
  - [UserAccessCreate](doc/UserAccessCreate.md)
  - [UserAccessRead](doc/UserAccessRead.md)
  - [UserAccessUpdate](doc/UserAccessUpdate.md)
@@ -314,6 +335,12 @@ Authentication schemes defined for the API:
 - **Flow**: password
 - **Authorization URL**: 
 - **Scopes**: N/A
+
+### APIKeyCookie
+
+- **Type**: API key
+- **API key parameter name**: _fsek_refresh_token
+- **Location**: 
 
 
 ## Author

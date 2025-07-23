@@ -525,6 +525,11 @@ class AdsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -605,6 +610,11 @@ class AdsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,
@@ -687,6 +697,11 @@ class AdsApi {
           {
             'type': 'oauth2',
             'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
           },
         ],
         ...?extra,

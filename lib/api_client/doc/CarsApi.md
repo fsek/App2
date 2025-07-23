@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **carsCreateBooking**
-> CarCreate carsCreateBooking(carCreate)
+> CarBookingRead carsCreateBooking(carBookingCreate)
 
 Create Booking
 
@@ -26,12 +26,16 @@ Create Booking
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCarsApi();
-final CarCreate carCreate = ; // CarCreate | 
+final CarBookingCreate carBookingCreate = ; // CarBookingCreate | 
 
 try {
-    final response = api.carsCreateBooking(carCreate);
+    final response = api.carsCreateBooking(carBookingCreate);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling CarsApi->carsCreateBooking: $e\n');
@@ -42,15 +46,15 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **carCreate** | [**CarCreate**](CarCreate.md)|  | 
+ **carBookingCreate** | [**CarBookingCreate**](CarBookingCreate.md)|  | 
 
 ### Return type
 
-[**CarCreate**](CarCreate.md)
+[**CarBookingRead**](CarBookingRead.md)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -60,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **carsGetAllBooking**
-> BuiltList<CarRead> carsGetAllBooking()
+> BuiltList<CarBookingRead> carsGetAllBooking()
 
 Get All Booking
 
@@ -69,6 +73,10 @@ Get All Booking
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCarsApi();
 
@@ -85,11 +93,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;CarRead&gt;**](CarRead.md)
+[**BuiltList&lt;CarBookingRead&gt;**](CarBookingRead.md)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -99,7 +107,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **carsGetBooking**
-> CarRead carsGetBooking(bookingId)
+> CarBookingRead carsGetBooking(bookingId)
 
 Get Booking
 
@@ -108,6 +116,10 @@ Get Booking
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCarsApi();
 final int bookingId = 56; // int | 
@@ -128,11 +140,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CarRead**](CarRead.md)
+[**CarBookingRead**](CarBookingRead.md)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -142,7 +154,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **carsRemoveBooking**
-> CarRead carsRemoveBooking(bookingId)
+> CarBookingRead carsRemoveBooking(bookingId)
 
 Remove Booking
 
@@ -151,6 +163,10 @@ Remove Booking
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCarsApi();
 final int bookingId = 56; // int | 
@@ -171,11 +187,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CarRead**](CarRead.md)
+[**CarBookingRead**](CarBookingRead.md)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -185,7 +201,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **carsUpdateBooking**
-> CarRead carsUpdateBooking(bookingId, carUpdate)
+> CarBookingRead carsUpdateBooking(bookingId, carBookingUpdate)
 
 Update Booking
 
@@ -194,13 +210,17 @@ Update Booking
 import 'package:api_client/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getCarsApi();
 final int bookingId = 56; // int | 
-final CarUpdate carUpdate = ; // CarUpdate | 
+final CarBookingUpdate carBookingUpdate = ; // CarBookingUpdate | 
 
 try {
-    final response = api.carsUpdateBooking(bookingId, carUpdate);
+    final response = api.carsUpdateBooking(bookingId, carBookingUpdate);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling CarsApi->carsUpdateBooking: $e\n');
@@ -212,15 +232,15 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bookingId** | **int**|  | 
- **carUpdate** | [**CarUpdate**](CarUpdate.md)|  | 
+ **carBookingUpdate** | [**CarBookingUpdate**](CarBookingUpdate.md)|  | 
 
 ### Return type
 
-[**CarRead**](CarRead.md)
+[**CarBookingRead**](CarBookingRead.md)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 

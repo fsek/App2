@@ -1,4 +1,5 @@
 import 'package:fsek_mobile/april_fools.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
 import 'package:fsek_mobile/models/home/eventuser.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart'; //For the food-prefs link
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -36,12 +36,14 @@ class _EventPageState extends State<EventPage> {
   String? drinkPackageAnswer;
   GroupRead? defaultGroup;
   EventSignupRead? eventSignup;
- 
 
-  // final Map<String, Style> _htmlStyle = {
-  //   "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
-  //   "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2)),
-  // };
+  final Map<String, Style> _htmlStyle = {
+    "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
+    "p": Style(
+        padding: HtmlPaddings.zero,
+        margin: Margins.zero,
+        lineHeight: LineHeight(1.2)),
+  };
 
   static const foodPrefsDisplay = {
     "vegetarian": "Vegetarian",
@@ -50,83 +52,85 @@ class _EventPageState extends State<EventPage> {
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
   };
+
   static const String drinkPackageNone = "None";
   static const String drinkPackageAlcohol = "Alcohol";
   static const String drinkPackageAlcoholFree = "AlcoholFree";
 
+  static const Map<String, EventSignupCreateDrinkPackageEnum>
+      drinkPackageToEnum = {
+    "None": EventSignupCreateDrinkPackageEnum.none,
+    "Alcohol": EventSignupCreateDrinkPackageEnum.alcohol,
+    "AlcoholFree": EventSignupCreateDrinkPackageEnum.alcoholFree
+  };
+
   void initState() {
-    ApiService.apiClient.getEventsApi().eventsGetSingleEvent(eventId: widget.eventId).then((value) => setState(() {
-          this.event = value.data;
-          if (this.event != null) {
-            this.drinkPackageAnswer = drinkPackageAlcohol;
-            ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
-              this.user = value.data;
-              if(user!.groups.isNotEmpty){
-                this.defaultGroup = user!.groups.first;
-                this.group = defaultGroup;
-              }else{
-                this.displayGroupInput = true;
-              }
-              this.foodPreferences['en'] = [...(value.data!.standardFoodPreferences ?? [])];
-              this.foodPreferences['sv'] = [...(value.data!.standardFoodPreferences ?? [])];
-              this.foodCustom = value.data!.otherFoodPreferences;
-              for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-              this.foodPreferences['en']![i] = foodPrefsDisplay[this.foodPreferences['en']![i]] ?? "";
-              }
-            });
-          }
-        }));
-    if(this.event != null) {
-      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) =>
-        setState(() {
-              if (value.data != null) {
-                this.eventSignup = value.data;
-              }
-            }));
-    } else {
-      this.eventSignup = null;
-    }
-
-
     super.initState();
+    _loadInitData();
   }
 
+  Future<void> _loadInitData() async {
+    try {
+      final eventResponse = await ApiService.apiClient
+          .getEventsApi()
+          .eventsGetSingleEvent(eventId: widget.eventId);
+
+      final event = eventResponse.data;
+      if (event == null) return;
+
+      final userResponse =
+          await ApiService.apiClient.getUsersApi().usersGetMe();
+
+      final user = userResponse.data;
+      if (user == null) return;
+
+      EventSignupRead? eventSignup = null;
+
+      try {
+        final userSignupResponse = await ApiService.apiClient
+            .getEventSignupApi()
+            .eventSignupGetMeEventSignup(eventId: event.id);
+
+        eventSignup = userSignupResponse.data;
+      } catch (e) {
+        if (e is DioException && e.response!.statusCode == 404) {
+          eventSignup = null;
+        } else {
+          rethrow;
+        }
+      }
+
+      setState(() {
+        this.event = event;
+        this.user = user;
+        this.eventSignup = eventSignup;
+        this.drinkPackageAnswer = drinkPackageAlcohol;
+        if (user.groups.isNotEmpty) {
+          this.defaultGroup = user.groups.first;
+          this.group = defaultGroup;
+        } else {
+          this.displayGroupInput = true;
+        }
+        this.foodPreferences['en'] = [...(user.standardFoodPreferences ?? [])];
+        this.foodPreferences['sv'] = [...(user.standardFoodPreferences ?? [])];
+        this.foodCustom = user.otherFoodPreferences;
+        for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+          this.foodPreferences['en']![i] =
+              foodPrefsDisplay[this.foodPreferences['en']![i]] ?? "";
+        }
+      });
+    } catch (e) {
+      print("Error loading data: $e");
+    }
+  }
 
   void update() {
-    ApiService.apiClient.getEventsApi().eventsGetSingleEvent(eventId: widget.eventId).then((value) => setState(() {
-          this.event = value.data;
-          if (event != null) {
-            this.drinkPackageAnswer = drinkPackageAlcohol;
-            // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
-            ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
-              this.user = value.data;
-              if(user!.groups.isNotEmpty){
-                this.defaultGroup = user!.groups.first;
-                this.group = defaultGroup;
-              }else{
-                this.displayGroupInput = true;
-              }
-
-            });
-          }
-          // this.answer = null;
-        }));
-    if(this.event != null) {
-      ApiService.apiClient.getEventSignupApi().eventSignupGetMeEventSignup(eventId: event!.id).then((value) {
-              if (value.data != null) {
-                this.eventSignup = value.data;
-              }
-            });
-    } else {
-      this.eventSignup = null;
-    }
+    _loadInitData();
   }
-
 
   Future<void> _onRefresh() async {
     update();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -156,10 +160,10 @@ class _EventPageState extends State<EventPage> {
             onRefresh: () => _onRefresh(),
             child: ListView(
               children: [
-                Text(
-                  locale == "sv" ? event!.titleSv : event!.titleEn,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
-                ),
+                Text(locale == "sv" ? event!.titleSv : event!.titleEn,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontSize: 30,
+                        )),
                 Divider(
                   color: null,
                 ),
@@ -171,15 +175,18 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       /* better error checking */
                       "  " +
-                          DateFormat("HH:mm").format(event?.startsAt.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(
+                              event?.startsAt.toLocal() ?? DateTime.now()) +
+                          getDots() +
                           " - " +
-                          DateFormat("HH:mm").format(event?.endsAt.toLocal() ?? DateTime.now()) +
+                          DateFormat("HH:mm").format(
+                              event?.endsAt.toLocal() ?? DateTime.now()) +
                           ", " +
-                          DateFormat("MMMMd", locale).format(event?.startsAt.toLocal() ?? DateTime.now()),
+                          DateFormat("MMMMd", locale).format(
+                              event?.startsAt.toLocal() ?? DateTime.now()),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).textTheme.bodyMedium!.color
-                      ),
+                          fontSize: 14,
+                          color: Theme.of(context).textTheme.bodyMedium!.color),
                     ),
                   ],
                 ),
@@ -191,9 +198,8 @@ class _EventPageState extends State<EventPage> {
                     Text(
                       "  " + (event?.location ?? "intigheten"),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).textTheme.bodyMedium!.color
-                      ),
+                          fontSize: 14,
+                          color: Theme.of(context).textTheme.bodyMedium!.color),
                     ),
                   ],
                 ),
@@ -204,9 +210,12 @@ class _EventPageState extends State<EventPage> {
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                      data: locale == "sv" ? event!.descriptionSv : event!.descriptionEn,
-                      // style: _htmlStyle,
-                      onLinkTap: (String? url, Map<String, String> attributes, element) {
+                      data: locale == "sv"
+                          ? event!.descriptionSv
+                          : event!.descriptionEn,
+                      style: _htmlStyle,
+                      onLinkTap: (String? url, Map<String, String> attributes,
+                          element) {
                         launchUrl(Uri.parse(url!));
                       }),
                 ),
@@ -223,7 +232,9 @@ class _EventPageState extends State<EventPage> {
                       ]),
                       Visibility(
                           visible: event!.price <= 0 ? false : true,
-                          child: Text(t.eventPrice + (event?.price.toString() ?? "") + " kr")),
+                          child: Text(t.eventPrice +
+                              (event?.price.toString() ?? "") +
+                              " kr")),
                     ],
                   ),
                 ),
@@ -237,11 +248,14 @@ class _EventPageState extends State<EventPage> {
                       Visibility(
                         visible: event!.price <= 0 ? false : true,
                         child: Row(
-                          children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
+                          children: [
+                            Icon(Icons.attach_money_rounded),
+                            Text(t.eventCostsMoney)
+                          ],
                         ),
                       ),
                       Visibility(
-                        visible: event!.price <= 0 ? false : true,
+                        visible: event!.food,
                         child: Row(
                           children: [
                             Icon(
@@ -252,7 +266,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                       ),
                       Visibility(
-                        visible: !(event!.alcoholEventType == "None"),
+                        visible: (event!.alcoholEventType == "Alcohol-Served"),
                         child: Row(
                           children: [
                             Icon(
@@ -318,7 +332,6 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-
   void sendSignup() async {
     if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
       setState(() {
@@ -327,22 +340,24 @@ class _EventPageState extends State<EventPage> {
     }
 
     final eventSignupCreate = EventSignupCreate((b) => b
-    ..userId = user!.id
-    ..priority = userType 
-    ..groupName = group!.name
-    ..drinkPackage
-    );
+      ..userId = user!.id
+      ..priority = userType
+      ..groupName = group?.name ?? null
+      ..drinkPackage = drinkPackageToEnum[drinkPackageAnswer]);
 
+    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(
+        eventId: event!.id, eventSignupCreate: eventSignupCreate);
 
-    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(eventId: event!.id, eventSignupCreate: eventSignupCreate);
+    update();
   }
-
 
   void removeSignup() async {
     int userId = user?.id ?? -1;
     int eventId = event?.id ?? -1;
 
-    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignoffRoute(eventId: eventId, userId: userId);
+    await ApiService.apiClient
+        .getEventSignupApi()
+        .eventSignupEventSignoffRoute(eventId: eventId, userId: userId);
 
     // Map json = await AbstractService.delete(
     //   "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
@@ -351,13 +366,15 @@ class _EventPageState extends State<EventPage> {
     update();
   }
 
-  // //Bör denna vara async som de andra funktionerna?
-  // void goToSettings() {
-  //   Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage())).then((_) {
-  //     //uppdaterar sidan så man ser sin ändring
-  //     update();
-  //   });
-  // }
+  //Bör denna vara async som de andra funktionerna?
+  void goToSettings() {
+    Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SettingsPage()))
+        .then((_) {
+      //uppdaterar sidan så man ser sin ändring
+      update();
+    });
+  }
 
   Widget userTypeDropDown() {
     var t = AppLocalizations.of(context)!;
@@ -383,13 +400,13 @@ class _EventPageState extends State<EventPage> {
               //   value: ,
               //   child: Text(t.eventOther),
               // ),
-              ...event!.priorities.map(((PriorityDB prio) {
-                return DropdownMenuItem<String?>(
-                  // value: prio.priority,
-                  child: Text(prio.priority),
-                );
-              }
-              )),
+              if (event!.priorities.toList().isNotEmpty)
+                ...event!.priorities.map(((PriorityDB prio) {
+                  return DropdownMenuItem<String?>(
+                    value: prio.priority,
+                    child: Text(prio.priority),
+                  );
+                })),
 
               DropdownMenuItem<String?>(
                 value: null,
@@ -402,1022 +419,632 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-//   Widget groupDropdown() {
-//     var t = AppLocalizations.of(context)!;
-//     return Container(
-//       margin: EdgeInsets.all(10),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(t.eventChooseGroup),
-//           DropdownButton<GroupRead?>(
-//             isExpanded: true,
-//             value: group,
-//             icon: const Icon(Icons.arrow_downward),
-//             iconSize: 24,
-//             elevation: 16,
-//             onChanged: (GroupRead? newValue) {
-//               setState(() {
-//                 group = newValue;
-//                 if (newValue == null) {
-//                   displayGroupInput = true;
-//                 } else {
-//                   displayGroupInput = false;
-//                 }
-//               });
-//             },
-//             items: [
-//               ...?user!.groups.map(((GroupRead? g) {
-//                 return DropdownMenuItem<GroupRead?>(
-//                   value: g,
-//                   child: Text(g!.name),
-//                 );
-//               })),
-//               DropdownMenuItem<GroupRead?>(
-//                 value: null,
-//                 child: Text(t.eventOtherDifferent),
-//               ),
-//             ],
-//           ),
-//           Visibility(
-//             visible: displayGroupInput,
-//             child: TextField(
-//                 onChanged: (String? newValue) {
-//                   setState(() {
-//                     customGroup = newValue;
-//                   });
-//                 },
-//                 decoration: InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   hintText: t.eventCustomGroupName,
-//                 )),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+  Widget groupDropdown() {
+    var t = AppLocalizations.of(context)!;
 
-// //   Widget questionInput() {
-// //     if (event?.event_signup?.question == null || event?.event_signup?.question == "") {
-// //       return Container();
-// //     }
-// //     return Container(
-// //       margin: EdgeInsets.all(10),
-// //       child: Column(
-// //         crossAxisAlignment: CrossAxisAlignment.start,
-// //         children: <Widget>[
-// //           Text(event?.event_signup?.question ?? ""),
-// //           Padding(
-// //             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-// //             child: TextField(
-// //               onChanged: (String? newValue) {
-// //                 setState(() {
-// //                   answer = newValue;
-// //                 });
-// //               },
-// //               decoration: InputDecoration(
-// //                 border: OutlineInputBorder(),
-// //                 hintText: event?.event_signup?.question,
-// //               ),
-// //             ),
-// //           ),
-// //         ],
-// //       ),
-// //     );
-// //   }
+    if (user == null) {
+      return CircularProgressIndicator();
+    }
 
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(t.eventChooseGroup),
+          DropdownButton<GroupRead?>(
+            isExpanded: true,
+            value: group,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            onChanged: (GroupRead? newValue) {
+              setState(() {
+                group = newValue;
+                if (newValue == null) {
+                  displayGroupInput = true;
+                } else {
+                  displayGroupInput = false;
+                }
+              });
+            },
+            items: [
+              if (user!.groups.toList().isNotEmpty)
+                ...user!.groups.map(((GroupRead? g) {
+                  return DropdownMenuItem<GroupRead?>(
+                      value: g, child: Text(g!.name));
+                })),
+              DropdownMenuItem<GroupRead?>(
+                value: null,
+                child: Text(t.eventOtherDifferent),
+              ),
+            ],
+          ),
+          Visibility(
+            visible: displayGroupInput,
+            child: TextField(
+                onChanged: (String? newValue) {
+                  setState(() {
+                    customGroup = newValue;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: t.eventCustomGroupName,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
 
-//   // This is ugly af but works
-//   String isSignupOpen(EventRead event) {
-//     if(event.signupStart.toLocal().isAfter(DateTime.now())) {
-//       if (event.signupEnd.toLocal().isBefore(DateTime.now())) {
-//         return "open";
-//       }
-//       return "closed";
-//     }
-//     return "upcoming";
-//   }
+  // This is ugly af but works
+  String isSignupOpen(EventRead event) {
+    if (event.signupStart.toLocal().isBefore(DateTime.now())) {
+      if (event.signupEnd.toLocal().isAfter(DateTime.now())) {
+        return "open";
+      }
+      return "closed";
+    }
+    return "upcoming";
+  }
 
-//   Widget signupInfoWidget() {
-//     var t = AppLocalizations.of(context)!;
-//     Widget signup;
-//     String locale = Localizations.localeOf(context).toString();
-//     // If no event
-//     if (event == null || event!.canSignup == false) {
-//       return Container(
-//             margin: EdgeInsets.all(10),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(t.eventTechnicalDifficulties),
-//                 InkWell(
-//                   child: new Text(
-//                     "spindelmännen",
-//                     style: TextStyle(
-//                       color: Colors.blue[300],
-//                     ),
-//                   ),
-//                   onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
-//                 ),
-//                 Divider(
-//                   color: null,
-//                 ),
-//               ],
-//             ),
-//           );
-//     }
-//     if (event!.canSignup) {
-//       if (isSignupOpen(event!) == "open")
-//         signup = signupWidget(t);
-//       else {
-//         if (isSignupOpen(event!) == "closed"){
-//           if (eventSignup == null) {
-//             signup = Row(
-//               children: [
-//                 Icon(
-//                   Icons.info_outline_rounded,
-//                   color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
-//                 ),
-//                 Text(
-//                   t.eventNotSignedUp,
-//                   style: TextStyle(
-//                     color: Colors.red[300],
-//                   ),
-//                 ),
-//               ],
-//             );
-//           } else {
-//             String groupName = eventSignup!.groupName;
-//             String userType = eventSignup!.priority;
-//             if (event!.lottery == true) {
-//               if (eventSignup!.confirmedStatus == "unconfirmed") {
-//               signup = Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         Icon(
-//                           Icons.cancel,
-//                           color: Colors.red[300],
-//                         ),
-//                         Text(
-//                           t.eventNoSpot,
-//                           style: TextStyle(
-//                             color: Colors.red[300],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Divider(
-//                       color: null,
-//                     ),
-//                     ..._signupDetails(groupName, userType),
-//                   ],
-//                 );
-//             } else {
-//               signup = Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         Icon(
-//                           Icons.check_circle,
-//                           color: Colors.green[300],
-//                         ),
-//                         Text(
-//                           t.eventGotSpot,
-//                           style: TextStyle(
-//                             color:Colors.green[300],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Divider(
-//                       color: null,
-//                     ),
-//                     ..._signupDetails(groupName, userType),
-//                   ],
-//                 );
-//               }
-//             } else {
-//               signup = Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Row(
-//                     children: [
-//                       Icon(
-//                         Icons.info_outline_rounded,
-//                         color: Theme.of(context).colorScheme.primary,
-//                       ),
-//                       Text(
-//                         t.eventLotterySpot,
-//                         style: TextStyle(
-//                           color: Theme.of(context).colorScheme.primary,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   Divider(
-//                     color: null,
-//                   ),
-//                   ..._signupDetails(groupName, userType),
-//                 ],
-//               );
-//             }
-//           }
-//         } else {
-//           signup = SizedBox.shrink();
-//         }
-//       }
-//     } else {
-//       signup = SizedBox.shrink();
-//     }
+  Widget signupInfoWidget() {
+    var t = AppLocalizations.of(context)!;
+    Widget signup;
+    String locale = Localizations.localeOf(context).toString();
+    // If no event
+    if (event == null || event!.canSignup == false) {
+      return Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(t.eventTechnicalDifficulties),
+            InkWell(
+              child: new Text(
+                "spindelmännen",
+                style: TextStyle(
+                  color: Colors.blue[300],
+                ),
+              ),
+              onTap: () =>
+                  launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+            ),
+            Divider(
+              color: null,
+            ),
+          ],
+        ),
+      );
+    }
+    if (event!.canSignup) {
+      if (isSignupOpen(event!) == "open") {
+        signup = signupWidget(t);
+      } else {
+        if (isSignupOpen(event!) == "closed") {
+          if (eventSignup == null) {
+            signup = Row(
+              children: [
+                Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.red[
+                      300], // I don't like it, but this hardcoding kinda just works
+                ),
+                Text(
+                  t.eventNotSignedUp,
+                  style: TextStyle(
+                    color: Colors.red[300],
+                  ),
+                ),
+              ],
+            );
+          } else {
+            String? groupName = eventSignup!.groupName;
+            String userType = eventSignup!.priority;
+            if (event!.lottery == true) {
+              if (eventSignup!.confirmedStatus == "unconfirmed") {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
+                          color: Colors.red[300],
+                        ),
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: null,
+                    ),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              } else {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green[300],
+                        ),
+                        Text(
+                          t.eventGotSpot,
+                          style: TextStyle(
+                            color: Colors.green[300],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: null,
+                    ),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
+              }
+            } else {
+              signup = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Text(
+                        t.eventLotterySpot,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                  ..._signupDetails(groupName, userType),
+                ],
+              );
+            }
+          }
+        } else {
+          signup = SizedBox.shrink();
+        }
+      }
+    } else {
+      signup = SizedBox.shrink();
+    }
 
-//     return Container(
-//       width: double.infinity,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             t.eventSignUp,
-//             style: Theme.of(context).textTheme.headlineMedium,
-//           ),
-//           Divider(
-//             color: null,
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-//             child: Column(
-//               children: [
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.person,
-//                     ),
-//                     Text(
-//                       t.eventNbrSignUps + event!.signupCount.toString(),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.people,
-//                     ),
-//                     Text(
-//                       t.eventNbrSpots + event!.maxEventUsers.toString(),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.event_available_rounded,
-//                     ),
-//                     Text(
-//                       t.eventSignUpOpens +
-//                           DateFormat("d/M").format(event!.signupStart.toLocal()) +
-//                           " " +
-//                           DateFormat("jm", locale).format(event!.signupStart.toLocal()),
-//                     ),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.event_busy_rounded,
-//                     ),
-//                     Text(
-//                       t.eventSignUpCloses +
-//                           DateFormat("d/M").format(event!.signupEnd.toLocal()) +
-//                           " " +
-//                           DateFormat("jm", locale).format(event!.signupEnd.toLocal()),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Divider(
-//             color: null,
-//           ),
-//           signup,
-//           Divider(
-//             color: null,
-//           ),
-//           Container(
-//             margin: EdgeInsets.all(10),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(t.eventTechnicalDifficulties),
-//                 InkWell(
-//                   child: new Text(
-//                     "spindelmännen",
-//                     style: TextStyle(
-//                       color: Colors.blue[300],
-//                     ),
-//                   ),
-//                   onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
-//                 ),
-//                 Divider(
-//                   color: null,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+    return Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            t.eventSignUp,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          Divider(
+            color: null,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                    ),
+                    Text(
+                      t.eventNbrSignUps + event!.signupCount.toString(),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.people,
+                    ),
+                    Text(
+                      t.eventNbrSpots + event!.maxEventUsers.toString(),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_available_rounded,
+                    ),
+                    Text(
+                      t.eventSignUpOpens +
+                          DateFormat("d/M")
+                              .format(event!.signupStart.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale)
+                              .format(event!.signupStart.toLocal()),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event_busy_rounded,
+                    ),
+                    Text(
+                      t.eventSignUpCloses +
+                          DateFormat("d/M").format(event!.signupEnd.toLocal()) +
+                          " " +
+                          DateFormat("jm", locale)
+                              .format(event!.signupEnd.toLocal()),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: null,
+          ),
+          signup,
+          Divider(
+            color: null,
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t.eventTechnicalDifficulties),
+                InkWell(
+                  child: new Text(
+                    "spindelmännen",
+                    style: TextStyle(
+                      color: Colors.blue[300],
+                    ),
+                  ),
+                  onTap: () => launchUrl(Uri.parse(
+                      "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
+                ),
+                Divider(
+                  color: null,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-//   // Widget signupInfoWidget() {
-//   //   var t = AppLocalizations.of(context)!;
-//   //   Widget signup;
-//   //   String locale = Localizations.localeOf(context).toString();
-//   //   // If no event
-//   //   if (event == null || eventSignup == null) {
-//   //     return Container();
-//   //   }
+  Widget signupWidget(AppLocalizations t) {
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    // if (event == null) {
+    //   if (event?.can_signup ?? false) return Container();
+    // }
+    Widget drinkPackageInput = Container();
+    if (!(event!.alcoholEventType == "None")) {
+      drinkPackageInput = Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(" ${t.eventDrinkPackage}"),
+          Container(
+              height: 50,
+              child: DropdownButton<String?>(
+                isExpanded: false,
+                value: drinkPackageAnswer,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    drinkPackageAnswer = newValue;
+                  });
+                },
+                items: [
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcohol,
+                    child: Text(t.eventAlcohol),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageAlcoholFree,
+                    child: Text(t.eventAlcoholFree),
+                  ),
+                  DropdownMenuItem<String?>(
+                    value: drinkPackageNone,
+                    child: Text(t.eventNoAlcohol),
+                  )
+                ],
+              )),
+        ],
+      );
+    }
+    if (eventSignup == null) {
+      return Container(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              groupDropdown(),
+              userTypeDropDown(),
+              // questionInput(),
+              drinkPackageInput,
+              Wrap(
+                children: [
+                  Text(t.eventFoodPreferences + " ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color:
+                              Theme.of(context).textTheme.bodyMedium!.color)),
+                  ...?foodPreferences[locale]
+                      ?.where((element) => element.isNotEmpty)
+                      .map((foodPreference) => Text(foodPreference + " ")),
+                  Text("  " + (foodCustom ?? "")),
+                ],
+              ),
+              Wrap(children: [
+                Text(
+                  t.eventFoodPrefInfo,
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).textTheme.bodyMedium!.color),
+                ),
+                GestureDetector(
+                  child: Text(t.eventLinkToFoodPrefs,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Theme.of(context).colorScheme.primary)),
+                  onTap: () => goToSettings(),
+                ),
+              ]),
+              SizedBox(
+                height: 16,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: InkWell(
+                    onTap: () => sendSignup(),
+                    child: Card(
+                      color: Theme.of(context).colorScheme.primary,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          t.eventSendSignup,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ));
+    } else {
+      String? groupName = eventSignup!.groupName;
+      // if (eventSignup.groupName != null) {
+      //   for (int i = 0; i < event!.groups!.length; i++) {
+      //     if (event!.groups![i].id == event!.event_user!.group_id) {
+      //       groupName = event!.groups![i].name!;
+      //       break;
+      //     }
+      //   }
+      // } else {
+      //   groupName = event!.event_user!.group_custom ?? "";
+      // }
+      String userType = eventSignup!.priority;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ..._signupDetails(groupName, userType),
+          SizedBox(
+            height: 16,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: SizedBox(
+              height: 50,
+              width: 200,
+              child: InkWell(
+                onTap: () async {
+                  bool? unenroll = await _confirmUnenroll(context);
+                  if (unenroll ?? false) removeSignup();
+                },
+                child: Card(
+                  color: Theme.of(context).colorScheme.error,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      t.eventDesignup,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.onError),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      );
+    }
+  }
 
-//   //   if (event!.canSignup) {
-//   //     if (isSignupOpen(event!) == "open")
-//   //       signup = signupWidget(t);
-//   //     else {
-//   //       if (isSignupOpen(event!) == "closed") {
-//   //         if (eventSignup == null) {
-//   //           signup = Row(
-//   //             children: [
-//   //               Icon(
-//   //                 Icons.info_outline_rounded,
-//   //                 color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
-//   //               ),
-//   //               Text(
-//   //                 t.eventNotSignedUp,
-//   //                 style: TextStyle(
-//   //                   color: Colors.red[300],
-//   //                 ),
-//   //               ),
-//   //             ],
-//   //           );
-//   //         } else {
-//   //           String groupName = eventSignup!.groupName;
-//   //           String userType = eventSignup!.priority;
-//   //           if (!(event!.event_signup!.lottery ?? false)) {
-//   //             if (event!.event_user?.reserve ?? false) {
-//   //               signup = Column(
-//   //                 crossAxisAlignment: CrossAxisAlignment.start,
-//   //                 children: [
-//   //                   Row(
-//   //                     children: [
-//   //                       Icon(
-//   //                         Icons.cancel,
-//   //                         color: Colors.red[300],
-//   //                       ),
-//   //                       Text(
-//   //                         t.eventNoSpot,
-//   //                         style: TextStyle(
-//   //                           color: Colors.red[300],
-//   //                         ),
-//   //                       ),
-//   //                     ],
-//   //                   ),
-//   //                   Divider(
-//   //                     color: null,
-//   //                   ),
-//   //                   ..._signupDetails(groupName, userType),
-//   //                 ],
-//   //               );
-//   //             } else {
-//   //               signup = Column(
-//   //                 crossAxisAlignment: CrossAxisAlignment.start,
-//   //                 children: [
-//   //                   Row(
-//   //                     children: [
-//   //                       Icon(
-//   //                         Icons.check_circle,
-//   //                         color: Colors.green[300],
-//   //                       ),
-//   //                       Text(
-//   //                         t.eventGotSpot,
-//   //                         style: TextStyle(
-//   //                           color:Colors.green[300],
-//   //                         ),
-//   //                       ),
-//   //                     ],
-//   //                   ),
-//   //                   Divider(
-//   //                     color: null,
-//   //                   ),
-//   //                   ..._signupDetails(groupName, userType),
-//   //                 ],
-//   //               );
-//   //             }
-//   //           } else {
-//   //             signup = Column(
-//   //               crossAxisAlignment: CrossAxisAlignment.start,
-//   //               children: [
-//   //                 Row(
-//   //                   children: [
-//   //                     Icon(
-//   //                       Icons.info_outline_rounded,
-//   //                       color: Theme.of(context).colorScheme.primary,
-//   //                     ),
-//   //                     Text(
-//   //                       t.eventLotterySpot,
-//   //                       style: TextStyle(
-//   //                         color: Theme.of(context).colorScheme.primary,
-//   //                       ),
-//   //                     ),
-//   //                   ],
-//   //                 ),
-//   //                 Divider(
-//   //                   color: null,
-//   //                 ),
-//   //                 ..._signupDetails(groupName, userType),
-//   //               ],
-//   //             );
-//   //           }
-//   //         }
-//   //       } else {
-//   //         signup = SizedBox.shrink();
-//   //       }
-//   //     }
-//   //   } else {
-//   //     signup = Text("hej");
-//   //   }
+  Future<bool?> _confirmUnenroll(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(t.eventConfirmCancel),
+            actions: [
+              TextButton(
+                child: Text(t.eventCancel),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              TextButton(
+                child: Text(t.eventConfirmRemoveSignUp),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        });
+  }
 
-//   //   return Container(
-//   //     width: double.infinity,
-//   //     child: Column(
-//   //       crossAxisAlignment: CrossAxisAlignment.start,
-//   //       children: [
-//   //         Text(
-//   //           t.eventSignUp,
-//   //           style: Theme.of(context).textTheme.headlineMedium,
-//   //         ),
-//   //         Divider(
-//   //           color: null,
-//   //         ),
-//   //         Padding(
-//   //           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-//   //           child: Column(
-//   //             children: [
-//   //               Row(
-//   //                 children: [
-//   //                   Icon(
-//   //                     Icons.person,
-//   //                   ),
-//   //                   Text(
-//   //                     t.eventNbrSignUps + event!.signupCount.toString(),
-//   //                   ),
-//   //                 ],
-//   //               ),
-//   //               Row(
-//   //                 children: [
-//   //                   Icon(
-//   //                     Icons.people,
-//   //                   ),
-//   //                   Text(
-//   //                     t.eventNbrSpots + event!.maxEventUsers.toString(),
-//   //                   ),
-//   //                 ],
-//   //               ),
-//   //               Row(
-//   //                 children: [
-//   //                   Icon(
-//   //                     Icons.event_available_rounded,
-//   //                   ),
-//   //                   Text(
-//   //                     t.eventSignUpOpens +
-//   //                         DateFormat("d/M").format(event!.signupStart.toLocal()) +
-//   //                         " " +
-//   //                         DateFormat("jm", locale).format(event!.signupStart.toLocal()),
-//   //                   ),
-//   //                 ],
-//   //               ),
-//   //               Row(
-//   //                 children: [
-//   //                   Icon(
-//   //                     Icons.event_busy_rounded,
-//   //                   ),
-//   //                   Text(
-//   //                     t.eventSignUpCloses +
-//   //                         DateFormat("d/M").format(event!.signupEnd.toLocal()) +
-//   //                         " " +
-//   //                         DateFormat("jm", locale).format(event!.signupEnd.toLocal()),
-//   //                   ),
-//   //                 ],
-//   //               ),
-//   //             ],
-//   //           ),
-//   //         ),
-//   //         Divider(
-//   //           color: null,
-//   //         ),
-//   //         signup,
-//   //         Divider(
-//   //           color: null,
-//   //         ),
-//   //         Container(
-//   //           margin: EdgeInsets.all(10),
-//   //           child: Column(
-//   //             crossAxisAlignment: CrossAxisAlignment.start,
-//   //             children: [
-//   //               Text(t.eventTechnicalDifficulties),
-//   //               InkWell(
-//   //                 child: new Text(
-//   //                   "spindelmännen",
-//   //                   style: TextStyle(
-//   //                     color: Colors.blue[300],
-//   //                   ),
-//   //                 ),
-//   //                 onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
-//   //               ),
-//   //               Divider(
-//   //                 color: null,
-//   //               ),
-//   //             ],
-//   //           ),
-//   //         ),
-//   //       ],
-//   //     ),
-//   //   );
-//   // }
+  List<Widget> _signupDetails(String? groupName, String? userType) {
+    var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    Widget drinkPackage = Container();
+    if (event!.drinkPackage) {
+      switch (eventSignup!.drinkPackage.name) {
+        case "alcohol": // Had to hard code this cuz the openapi generator lowered all enums... TODO maybe change this later...
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventAlcohol}");
+          break;
+        case "alcoholFree":
+          drinkPackage = _drinkPackageWidget(
+              t.eventDrinkPackage, " ${t.eventAlcoholFree}");
+          break;
+        case "none":
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
+          break;
+        default:
+          this.drinkPackageAnswer = drinkPackageNone;
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
+          break;
+      }
+    }
+    return [
+      RichText(
+          text: TextSpan(
+        text: t.eventGroup,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: " $groupName",
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
+      )),
+      RichText(
+          text: TextSpan(
+        text: t.eventPriority2,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: userType,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
+      )),
+      // event!.event_signup!.question != ""
+      //     ? RichText(
+      //         text: TextSpan(
+      //             text: event!.event_signup!.question!,
+      //             children: [
+      //               TextSpan(text: " "),
+      //               TextSpan(
+      //                   text: event!.event_user!.answer,
+      //                   style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
+      //             ],
+      //             style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
+      //     : Container(),
+      drinkPackage,
+      Wrap(
+        children: [
+          RichText(
+              text: TextSpan(
+            text: t.eventFoodPreferences + " ",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.bodyMedium!.color),
+          )),
+          ...?foodPreferences[locale]
+              ?.where((element) => element.isNotEmpty)
+              .map((foodPreferences) => Text(foodPreferences + " ")),
+          Text(foodCustom ?? ""),
+        ],
+      ),
+      Wrap(children: [
+        Text(
+          t.eventFoodPrefInfo,
+          style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).textTheme.bodyMedium!.color),
+        ),
+        GestureDetector(
+          child: Text(t.eventLinkToFoodPrefs,
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Theme.of(context).colorScheme.primary)),
+          onTap: () => goToSettings(),
+        ),
+      ]),
+    ];
+  }
 
-//   Widget signupWidget(AppLocalizations t) {
-//     String locale = Localizations.localeOf(context).toString();
-//     /* Failsafe */
-//     if (locale != "sv" && locale != "en") {
-//       locale = "en";
-//     }
-//     // if (event == null) {
-//     //   if (event?.can_signup ?? false) return Container();
-//     // }
-//     Widget drinkPackageInput = Container();
-//     if (!(event!.alcoholEventType == "None")) {
-//       drinkPackageInput = Column(
-//         crossAxisAlignment: CrossAxisAlignment.end,
-//         children: [
-//           Text(" ${t.eventDrinkPackage}"),
-//           Container(
-//               height: 50,
-//               child: DropdownButton<String?>(
-//                 isExpanded: false,
-//                 value: drinkPackageAnswer,
-//                 icon: const Icon(Icons.arrow_downward),
-//                 iconSize: 24,
-//                 elevation: 16,
-//                 onChanged: (String? newValue) {
-//                   setState(() {
-//                     drinkPackageAnswer = newValue;
-//                   });
-//                 },
-//                 items: [
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageAlcohol,
-//                     child: Text(t.eventAlcohol),
-//                   ),
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageAlcoholFree,
-//                     child: Text(t.eventAlcoholFree),
-//                   ),
-//                   DropdownMenuItem<String?>(
-//                     value: drinkPackageNone,
-//                     child: Text(t.eventNoAlcohol),
-//                   )
-//                 ],
-//               )),
-//         ],
-//       );
-//     }
-//     if (eventSignup == null) {
-//       return Container(
-//           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-//           width: double.infinity,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               groupDropdown(),
-//               userTypeDropDown(),
-//               // questionInput(),
-//               drinkPackageInput,
-//               Wrap(
-//                 children: [
-//                   Text(t.eventFoodPreferences + " ",
-//                       style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)),
-//                   ...?foodPreferences[locale]
-//                       ?.where((element) => element.isNotEmpty)
-//                       .map((foodPreference) => Text(foodPreference + " ")),
-//                   Text("  " + (foodCustom ?? "")),
-//                 ],
-//               ),
-//               Wrap(children: [
-//                 Text(
-//                   t.eventFoodPrefInfo,
-//                   style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
-//                 ),
-//                 GestureDetector(
-//                   child: Text(t.eventLinkToFoodPrefs,
-//                       style: TextStyle(
-//                           decoration: TextDecoration.underline,
-//                           color: Theme.of(context).colorScheme.primary)),
-//                   onTap: () => goToSettings(),
-//                 ),
-//               ]),
-//               SizedBox(
-//                 height: 16,
-//               ),
-//               Align(
-//                 alignment: Alignment.center,
-//                 child: SizedBox(
-//                   height: 50,
-//                   width: 200,
-//                   child: InkWell(
-//                     onTap: () => sendSignup(),
-//                     child: Card(
-//                       color: Theme.of(context).colorScheme.primary,
-//                       child: Align(
-//                         alignment: Alignment.center,
-//                         child: Text(
-//                           t.eventSendSignup,
-//                           style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ));
-//     } else {
-//       String groupName = eventSignup!.groupName;
-//       // if (eventSignup.groupName != null) {
-//       //   for (int i = 0; i < event!.groups!.length; i++) {
-//       //     if (event!.groups![i].id == event!.event_user!.group_id) {
-//       //       groupName = event!.groups![i].name!;
-//       //       break;
-//       //     }
-//       //   }
-//       // } else {
-//       //   groupName = event!.event_user!.group_custom ?? "";
-//       // }
-//       String userType = eventSignup!.priority;
-//       return Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           ..._signupDetails(groupName, userType),
-//           SizedBox(
-//             height: 16,
-//           ),
-//           Align(
-//             alignment: Alignment.center,
-//             child: SizedBox(
-//               height: 50,
-//               width: 200,
-//               child: InkWell(
-//                 onTap: () async {
-//                   bool? unenroll = await _confirmUnenroll(context);
-//                   if (unenroll ?? false) removeSignup();
-//                 },
-//                 child: Card(
-//                   color: Theme.of(context).colorScheme.error,
-//                   child: Align(
-//                     alignment: Alignment.center,
-//                     child: Text(
-//                       t.eventDesignup,
-//                       style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onError),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           )
-//         ],
-//       );
-//     }
-//   }
+  Widget _drinkPackageWidget(String drinkPackageText, String choice) {
+    return RichText(
+      text: TextSpan(
+        text: drinkPackageText,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: choice,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
+      ),
+    );
+  }
 
-//   // Future<bool?> _confirmUnenroll(BuildContext context) {
-//   //   var t = AppLocalizations.of(context)!;
-//   //   return showDialog(
-//   //       context: context,
-//   //       builder: (context) {
-//   //         return AlertDialog(
-//   //           title: Text(t.eventConfirmCancel),
-//   //           actions: [
-//   //             TextButton(
-//   //               child: Text(t.eventCancel),
-//   //               onPressed: () {
-//   //                 Navigator.pop(context, false);
-//   //               },
-//   //             ),
-//   //             TextButton(
-//   //               child: Text(t.eventConfirmRemoveSignUp),
-//   //               onPressed: () {
-//   //                 Navigator.pop(context, true);
-//   //               },
-//   //             ),
-//   //           ],
-//   //         );
-//   //       });
-//   // }
-
-//   List<Widget> _signupDetails(String? groupName, String? userType) {
-//     var t = AppLocalizations.of(context)!;
-//     String locale = Localizations.localeOf(context).toString();
-//     /* Failsafe */
-//     if (locale != "sv" && locale != "en") {
-//       locale = "en";
-//     }
-//     Widget drinkPackage = Container();
-//     if (event!.drinkPackage) {
-//       switch (eventSignup!.drinkPackage.name) {
-//         case drinkPackageAlcohol:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
-//           break;
-//         case drinkPackageAlcoholFree:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
-//           break;
-//         case drinkPackageNone:
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
-//           break;
-//         default:
-//           this.drinkPackageAnswer = drinkPackageNone;
-//           drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
-//           break;
-//       }
-//     }
-//     return [
-//       RichText(
-//           text: TextSpan(
-//         text: t.eventGroup,
-//         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//       )),
-//       RichText(
-//           text: TextSpan(
-//         text: t.eventPriority2,
-//         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//       )),
-//       // event!.event_signup!.question != ""
-//       //     ? RichText(
-//       //         text: TextSpan(
-//       //             text: event!.event_signup!.question!,
-//       //             children: [
-//       //               TextSpan(text: " "),
-//       //               TextSpan(
-//       //                   text: event!.event_user!.answer,
-//       //                   style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
-//       //             ],
-//       //             style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
-//       //     : Container(),
-//       drinkPackage,
-//       Wrap(
-//         children: [
-//           RichText(
-//               text: TextSpan(
-//                   text: t.eventFoodPreferences + " ",
-//                   style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),)),
-//           ...?foodPreferences[locale]
-//               ?.where((element) => element.isNotEmpty)
-//               .map((foodPreferences) => Text(foodPreferences + " ")),
-//           Text(foodCustom ?? ""),
-//         ],
-//       ),
-//       Wrap(children: [
-//         Text(
-//           t.eventFoodPrefInfo,
-//           style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
-//         ),
-//         GestureDetector(
-//           child: Text(t.eventLinkToFoodPrefs,
-//               style: TextStyle(
-//                   decoration: TextDecoration.underline,
-//                   color: Theme.of(context).colorScheme.primary)),
-//           onTap: () => goToSettings(),
-//         ),
-//       ]),
-//     ];
-//   }
-
-//   // Widget _drinkPackageWidget(String drinkPackageText, String choice) {
-//   //   return RichText(
-//   //     text: TextSpan(
-//   //       text: drinkPackageText,
-//   //       style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-//   //       children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
-//   //     ),
-//   //   );
-//   // }
-
-//   String getDots() {
-//     switch (event!.dot) {
-//       case "Single":
-//         return " (.)";
-//       case "Double":
-//         return " (..)";
-//       default:
-//         return "";
-//     }
-//   };
-
-//   // Future<void> _onRefresh() async {
-//   //   update();
-//   // }
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     var t = AppLocalizations.of(context)!;
-// //     String locale = Localizations.localeOf(context).toString();
-// //     /* Failsafe */
-// //     if (locale != "sv" && locale != "en") {
-// //       locale = "en";
-// //     }
-// //     if (event == null) {
-// //       return Scaffold(
-// //         appBar: AppBar(
-// //           title: Text(t.eventTitle),
-// //         ),
-// //       );
-// //     }
-
-// //     return Scaffold(
-// //       appBar: AppBar(
-// //         title: Text(t.eventTitle),
-// //       ),
-// //       body: Container(
-// //         width: double.infinity,
-// //         child: Padding(
-// //           padding: const EdgeInsets.all(16.0),
-// //           child: RefreshIndicator(
-// //             onRefresh: () => _onRefresh(),
-// //             child: ListView(
-// //               children: [
-// //                 Text(
-// //                   event?.title ?? t.eventNoTitle,
-// //                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
-// //                 ),
-// //                 Divider(
-// //                   color: null,
-// //                 ),
-// //                 Row(
-// //                   children: [
-// //                     Icon(
-// //                       Icons.access_time_rounded,
-// //                     ),
-// //                     Text(
-// //                       /* better error checking */
-// //                       "  " +
-// //                           DateFormat("HH:mm").format(event?.starts_at?.toLocal() ?? DateTime.now()) +
-// //                           getDots() +
-// //                           " - " +
-// //                           DateFormat("HH:mm").format(event?.ends_at?.toLocal() ?? DateTime.now()) +
-// //                           ", " +
-// //                           DateFormat("MMMMd", locale).format(event?.starts_at?.toLocal() ?? DateTime.now()),
-// //                       style: TextStyle(
-// //                         fontSize: 14,
-// //                         color: Theme.of(context).textTheme.bodyMedium!.color
-// //                       ),
-// //                     ),
-// //                   ],
-// //                 ),
-// //                 Row(
-// //                   children: [
-// //                     Icon(
-// //                       Icons.room,
-// //                     ),
-// //                     Text(
-// //                       "  " + (event?.location ?? "intigheten"),
-// //                       style: TextStyle(
-// //                         fontSize: 14,
-// //                         color: Theme.of(context).textTheme.bodyMedium!.color
-// //                       ),
-// //                     ),
-// //                   ],
-// //                 ),
-// //                 Divider(
-// //                   color: null,
-// //                 ),
-// //                 Container(
-// //                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
-// //                   /* should be parsed html */
-// //                   child: Html(
-// //                       data: event?.description ?? t.eventNoDescription,
-// //                       style: _htmlStyle,
-// //                       onLinkTap: (String? url, Map<String, String> attributes, element) {
-// //                         launchUrl(Uri.parse(url!));
-// //                       }),
-// //                 ),
-// //                 Divider(
-// //                   color: null,
-// //                 ),
-// //                 Padding(
-// //                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-// //                   child: Column(
-// //                     crossAxisAlignment: CrossAxisAlignment.start,
-// //                     children: [
-// //                       Row(children: [
-// //                         Text(t.eventDressCode),
-// //                         ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
-// //                       ]),
-// //                       Visibility(
-// //                           visible: event!.cash ?? false,
-// //                           child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
-// //                     ],
-// //                   ),
-// //                 ),
-// //                 Divider(
-// //                   color: null,
-// //                 ),
-// //                 Padding(
-// //                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-// //                   child: Column(
-// //                     children: [
-// //                       Visibility(
-// //                         visible: event!.cash ?? false,
-// //                         child: Row(
-// //                           children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
-// //                         ),
-// //                       ),
-// //                       Visibility(
-// //                         visible: event!.food ?? false,
-// //                         child: Row(
-// //                           children: [
-// //                             Icon(
-// //                               Icons.restaurant_rounded,
-// //                             ),
-// //                             Text(t.eventFoodServed)
-// //                           ],
-// //                         ),
-// //                       ),
-// //                       Visibility(
-// //                         visible: event!.drink ?? false,
-// //                         child: Row(
-// //                           children: [
-// //                             Icon(
-// //                               Icons.wine_bar_rounded,
-// //                             ),
-// //                             Text(t.eventAlcoholServed)
-// //                           ],
-// //                         ),
-// //                       ),
-// //                       Visibility(
-// //                         visible: event!.can_signup ?? false,
-// //                         child: Row(
-// //                           children: [
-// //                             Icon(
-// //                               Icons.event_rounded,
-// //                             ),
-// //                             Text(t.eventHasSignup)
-// //                           ],
-// //                         ),
-// //                       ),
-// //                     ],
-// //                   ),
-// //                 ),
-// //                 Visibility(
-// //                   visible: event!.can_signup ?? false,
-// //                   child: Divider(
-// //                     color: null,
-// //                   ),
-// //                 ),
-// //                 Visibility(
-// //                   visible: (!(event!.contact == null)),
-// //                   child: Container(
-// //                     child: Column(
-// //                       crossAxisAlignment: CrossAxisAlignment.start,
-// //                       children: [
-// //                         Text(
-// //                           t.eventInCaseOfQuestions,
-// //                         ),
-// //                         InkWell(
-// //                           child: new Text(
-// //                             event!.contact?.name ?? "",
-// //                             style: TextStyle(
-// //                               color: Colors.blue[300],
-// //                             ),
-// //                           ),
-// //                           onTap: () => launchUrl(Uri.parse(
-// //                             "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
-// //                           )),
-// //                         ),
-// //                         Divider(
-// //                           color: null,
-// //                         ),
-// //                       ],
-// //                     ),
-// //                   ),
-// //                 ),
-// //                 signupInfoWidget(),
-// //               ],
-// //             ),
-// //           ),
-// //         ),
-// //       ),
-// //     );
-// //   }
-// // }
-
+  String getDots() {
+    switch (event!.dot) {
+      case "Single":
+        return " (.)";
+      case "Double":
+        return " (..)";
+      default:
+        return "";
+    }
+  }
 }

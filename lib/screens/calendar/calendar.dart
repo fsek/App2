@@ -25,15 +25,19 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
 
-    ApiService.apiClient.getEventsApi().eventsGetAllEvents().then((value) => setState(() {
-          this._events = value.data!.toList();
-          _selectedEvents = _getEventsForDay(_selectedDay);
-        }));
+    ApiService.apiClient
+        .getEventsApi()
+        .eventsGetAllEvents()
+        .then((value) => setState(() {
+              this._events = value.data!.toList();
+              _selectedEvents = _getEventsForDay(_selectedDay);
+            }));
     super.initState();
   }
 
   void openEventPage(EventRead event) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
   }
 
   List<EventRead> _getEventsForDay(DateTime day) {
@@ -41,10 +45,13 @@ class _CalendarState extends State<Calendar> {
   }
 
   Future<void> _onRefresh() async {
-    ApiService.apiClient.getEventsApi().eventsGetAllEvents().then((value) => setState(() {
-          this._events = value.data!.toList();
-          _selectedEvents = _getEventsForDay(_selectedDay);
-        }));
+    ApiService.apiClient
+        .getEventsApi()
+        .eventsGetAllEvents()
+        .then((value) => setState(() {
+              this._events = value.data!.toList();
+              _selectedEvents = _getEventsForDay(_selectedDay);
+            }));
   }
 
   Widget createEventCard(EventRead event) {
@@ -96,11 +103,13 @@ class _CalendarState extends State<Calendar> {
                       Text(
                         /* better error checking */
                         "  " +
-                            DateFormat("HH:mm").format(event.startsAt.toLocal()) +
+                            DateFormat("HH:mm")
+                                .format(event.startsAt.toLocal()) +
                             " - " +
                             DateFormat("HH:mm").format(event.endsAt.toLocal()) +
                             ", " +
-                            DateFormat("MMMMd", locale).format(event.startsAt.toLocal()),
+                            DateFormat("MMMMd", locale)
+                                .format(event.startsAt.toLocal()),
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -112,7 +121,8 @@ class _CalendarState extends State<Calendar> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             // Alcohol is served
-                            if (!(event.alcoholEventType == "None")) Icon(Icons.wine_bar_rounded, size: 20),
+                            if (event.alcoholEventType == "Alcohol-Served")
+                              Icon(Icons.wine_bar_rounded, size: 20),
                           ],
                         ),
                       )
@@ -125,7 +135,8 @@ class _CalendarState extends State<Calendar> {
                         size: 20,
                       ),
                       Text(
-                        "  " + "intigheten", // (event.location ?? "intigheten"), TODO change this when event actually has a location
+                        "  " +
+                            event.location, // TODO change this when event actually has a location
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -165,9 +176,10 @@ class _CalendarState extends State<Calendar> {
             Column(
               children: [
                 TableCalendar(
-                  calendarStyle: CalendarStyle(markerDecoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      shape: BoxShape.circle)),
+                  calendarStyle: CalendarStyle(
+                      markerDecoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          shape: BoxShape.circle)),
                   availableGestures: AvailableGestures.horizontalSwipe,
                   locale: locale,
                   startingDayOfWeek: StartingDayOfWeek.monday,
@@ -183,7 +195,8 @@ class _CalendarState extends State<Calendar> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay = focusedDay; // update `_focusedDay` here as well
+                      _focusedDay =
+                          focusedDay; // update `_focusedDay` here as well
                       _selectedEvents = _getEventsForDay(selectedDay);
                     });
                   },

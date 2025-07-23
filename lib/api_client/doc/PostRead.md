@@ -9,9 +9,13 @@ import 'package:api_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**name** | **String** |  | 
+**nameSv** | **String** |  | 
+**nameEn** | **String** |  | 
 **councilId** | **int** |  | 
 **permissions** | [**BuiltList&lt;PostPermissionRead&gt;**](PostPermissionRead.md) |  | 
+**descriptionSv** | **String** |  | 
+**descriptionEn** | **String** |  | 
+**email** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

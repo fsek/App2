@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
-import 'package:fsek_mobile/screens/contact/contact.dart';
+import 'package:fsek_mobile/screens/contact/contact_old.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
@@ -29,18 +30,21 @@ class OtherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    categories = [t.otherSongbook, t.otherGallery, t.otherCafe, "Moose Game"];
+    categories = [
+      t.otherSongbook,
+      t.otherGallery,
+      t.otherCafe
+    ]; // TODO: add this back when moosegame works: "Moose Game"
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage, t.otherTheme];
     support = [t.otherContact, t.otherAnon];
 
-    
     /* I am so sorry for this Teo */
     routeMap = {
       "Songbook": SongbookPage(),
       "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
-      "Moose Game": MooseGamePage(),
+      // "Moose Game": MooseGamePage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
       "Account": SettingsPage(),
@@ -87,7 +91,8 @@ class OtherContent extends StatelessWidget {
                   tileColor: Theme.of(context).colorScheme.error,
                   title: Text(
                     t.otherLogOut,
-                    style: TextStyle(color: Theme.of(context).colorScheme.onError),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.onError),
                   ),
                   onTap: () async {
                     bool? logout = await _confirmLogout(context);

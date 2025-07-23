@@ -32,19 +32,25 @@ import 'package:api_client/src/model/body_auth_verify_verify.dart';
 import 'package:api_client/src/model/cafe_shift_create.dart';
 import 'package:api_client/src/model/cafe_shift_read.dart';
 import 'package:api_client/src/model/cafe_shift_update.dart';
+import 'package:api_client/src/model/cafe_view_between_dates.dart';
 import 'package:api_client/src/model/candidate_election_create.dart';
 import 'package:api_client/src/model/candidate_election_read.dart';
 import 'package:api_client/src/model/candidate_post_read.dart';
 import 'package:api_client/src/model/candidate_read.dart';
 import 'package:api_client/src/model/candidate_user_read.dart';
-import 'package:api_client/src/model/car_create.dart';
-import 'package:api_client/src/model/car_read.dart';
-import 'package:api_client/src/model/car_update.dart';
+import 'package:api_client/src/model/car_block_create.dart';
+import 'package:api_client/src/model/car_block_read.dart';
+import 'package:api_client/src/model/car_booking_create.dart';
+import 'package:api_client/src/model/car_booking_read.dart';
+import 'package:api_client/src/model/car_booking_update.dart';
 import 'package:api_client/src/model/council_create.dart';
+import 'package:api_client/src/model/council_in_car_booking_read.dart';
 import 'package:api_client/src/model/council_in_event_read.dart';
 import 'package:api_client/src/model/council_read.dart';
 import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
+import 'package:api_client/src/model/document_read.dart';
+import 'package:api_client/src/model/document_update.dart';
 import 'package:api_client/src/model/election_add_posts.dart';
 import 'package:api_client/src/model/election_create.dart';
 import 'package:api_client/src/model/election_post_create.dart';
@@ -68,6 +74,7 @@ import 'package:api_client/src/model/group_remove_user.dart';
 import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/img_in_album.dart';
+import 'package:api_client/src/model/memberroles.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
 import 'package:api_client/src/model/news_tag_read.dart';
@@ -98,6 +105,7 @@ import 'package:api_client/src/model/update_permission.dart';
 import 'package:api_client/src/model/update_permission_part.dart';
 import 'package:api_client/src/model/update_permissions.dart';
 import 'package:api_client/src/model/update_user_member.dart';
+import 'package:api_client/src/model/update_user_member_multiple.dart';
 import 'package:api_client/src/model/user_access_create.dart';
 import 'package:api_client/src/model/user_access_read.dart';
 import 'package:api_client/src/model/user_access_update.dart';
@@ -132,19 +140,25 @@ part 'serializers.g.dart';
   CafeShiftCreate,
   CafeShiftRead,
   CafeShiftUpdate,
+  CafeViewBetweenDates,
   CandidateElectionCreate,
   CandidateElectionRead,
   CandidatePostRead,
   CandidateRead,
   CandidateUserRead,
-  CarCreate,
-  CarRead,
-  CarUpdate,
+  CarBlockCreate,
+  CarBlockRead,
+  CarBookingCreate,
+  CarBookingRead,
+  CarBookingUpdate,
   CouncilCreate,
+  CouncilInCarBookingRead,
   CouncilInEventRead,
   CouncilRead,
   CouncilUpdate,
   Detail,
+  DocumentRead,
+  DocumentUpdate,
   ElectionAddPosts,
   ElectionCreate,
   ElectionPostCreate,
@@ -168,6 +182,7 @@ part 'serializers.g.dart';
   GroupUserRead,
   HTTPValidationError,
   ImgInAlbum,
+  MEMBERROLES,
   NewsCreate,
   NewsRead,
   NewsTagRead,
@@ -198,6 +213,7 @@ part 'serializers.g.dart';
   UpdatePermissionPart,
   UpdatePermissions,
   UpdateUserMember,
+  UpdateUserMemberMultiple,
   UserAccessCreate,
   UserAccessRead,
   UserAccessUpdate,
@@ -213,8 +229,16 @@ part 'serializers.g.dart';
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarBlockRead)]),
+        () => ListBuilder<CarBlockRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltMap, [FullType(String), FullType(String)]),
         () => MapBuilder<String, String>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarBookingRead)]),
+        () => ListBuilder<CarBookingRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SongCategoryRead)]),
@@ -227,6 +251,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CandidateRead)]),
         () => ListBuilder<CandidateRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UpdateUserMemberMultiple)]),
+        () => ListBuilder<UpdateUserMemberMultiple>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SimpleUserRead)]),
@@ -285,10 +313,6 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<AdminUserRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CarRead)]),
-        () => ListBuilder<CarRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CafeShiftRead)]),
         () => ListBuilder<CafeShiftRead>(),
       )
@@ -311,6 +335,14 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
         () => ListBuilder<NollningRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(DocumentRead)]),
+        () => ListBuilder<DocumentRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(String)]),
+        () => ListBuilder<String>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())

@@ -16,7 +16,6 @@ import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
 
 import 'package:fsek_mobile/models/documents/election_document.dart';
-
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
 import 'package:fsek_mobile/services/preload_asset.service.dart';
@@ -30,15 +29,10 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   String? background;
 
-
-
-
   void initState() {
-
     background = "assets/img/default_background.png";
 
     // locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
@@ -57,7 +51,6 @@ class _HomePageState extends State<HomePage> {
     // }));
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +302,8 @@ class _HomePageState extends State<HomePage> {
   Widget button(String text, Widget destination) {
     return TextButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => destination));
       },
       child: Text(
         text,
@@ -384,6 +378,4 @@ class _HomePageState extends State<HomePage> {
 //     ];
 //   }
 // }
-
-
 }

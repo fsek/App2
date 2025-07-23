@@ -60,8 +60,8 @@ abstract class AdminUserRead implements Built<AdminUserRead, AdminUserReadBuilde
   String get lastName;
 
   @BuiltValueField(wireName: r'program')
-  AdminUserReadProgramEnum? get program;
-  // enum programEnum {  F,  Pi,  N,  };
+  AdminUserReadProgramEnum get program;
+  // enum programEnum {  Oklart,  F,  Pi,  N,  };
 
   @BuiltValueField(wireName: r'posts')
   BuiltList<PostRead> get posts;
@@ -167,9 +167,9 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
       specifiedType: const FullType(String),
     );
     yield r'program';
-    yield object.program == null ? null : serializers.serialize(
+    yield serializers.serialize(
       object.program,
-      specifiedType: const FullType.nullable(AdminUserReadProgramEnum),
+      specifiedType: const FullType(AdminUserReadProgramEnum),
     );
     yield r'posts';
     yield serializers.serialize(
@@ -308,9 +308,8 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
         case r'program':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(AdminUserReadProgramEnum),
-          ) as AdminUserReadProgramEnum?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(AdminUserReadProgramEnum),
+          ) as AdminUserReadProgramEnum;
           result.program = valueDes;
           break;
         case r'posts':
@@ -431,6 +430,8 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
 
 class AdminUserReadProgramEnum extends EnumClass {
 
+  @BuiltValueEnumConst(wireName: r'Oklart')
+  static const AdminUserReadProgramEnum oklart = _$adminUserReadProgramEnum_oklart;
   @BuiltValueEnumConst(wireName: r'F')
   static const AdminUserReadProgramEnum F = _$adminUserReadProgramEnum_F;
   @BuiltValueEnumConst(wireName: r'Pi')

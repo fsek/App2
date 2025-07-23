@@ -31,7 +31,7 @@ abstract class EventSignupRead implements Built<EventSignupRead, EventSignupRead
   String get priority;
 
   @BuiltValueField(wireName: r'group_name')
-  String get groupName;
+  String? get groupName;
 
   @BuiltValueField(wireName: r'drinkPackage')
   EventSignupReadDrinkPackageEnum get drinkPackage;
@@ -79,9 +79,9 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
       specifiedType: const FullType(String),
     );
     yield r'group_name';
-    yield serializers.serialize(
+    yield object.groupName == null ? null : serializers.serialize(
       object.groupName,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType.nullable(String),
     );
     yield r'drinkPackage';
     yield serializers.serialize(
@@ -140,8 +140,9 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
         case r'group_name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
           result.groupName = valueDes;
           break;
         case r'drinkPackage':
