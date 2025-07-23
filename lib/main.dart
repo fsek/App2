@@ -18,6 +18,7 @@ import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
+import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
@@ -42,7 +43,7 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.notifications, NotificationsPage()),
+    Destination(3, Icons.question_mark, PlaceholderPage(title: "", disc: "")),// NotificationsPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 
@@ -50,15 +51,15 @@ void main() async {
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
-    '/messages': (context) => MessagesPage(),
-    '/chant_book': (context) => ChantBookPage(),
+    // '/messages': (context) => MessagesPage(), We dont want messages in the backend anymore
+    // '/chant_book': (context) => ChantBookPage(), We dont want this either
     '/song_book': (context) => SongbookPage(),
     '/homepage': (context) => HomePage(),
     '/nolleguide': (context) => GuidePage(),
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
     '/wordlist': (context) => WordListPage(),
-  }; 
+  };
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
@@ -78,7 +79,7 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  // We load the theme here because async is needed, then we pass it to the app 
+  // We load the theme here because async is needed, then we pass it to the app
   // where ThemeCubit gets initialised with the cached theme
   TokenStorageWrapper? _storage;
   String? cachedTheme = null;
@@ -91,7 +92,8 @@ void main() async {
     cachedTheme = 'themeF';
   }
 
-  locator<ThemeService>().theme = locator<ThemeService>().getThemeData(cachedTheme);
+  locator<ThemeService>().theme =
+      locator<ThemeService>().getThemeData(cachedTheme);
 
   runApp(FsekMobileApp(initialThemeMode: cachedTheme));
 

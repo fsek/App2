@@ -82,7 +82,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           _userService!.getUser().then((value) => setState(() {
                 this._user = value;
 
-                setupPushNotifications();
+                // setupPushNotifications();
               }));
         });
       }
@@ -234,28 +234,28 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
       _authenticationBloc!.add(AppError(error: error.toString()));
   }
 
-  void setupPushNotifications() async {
-    pushManager = PushNotificationsManager();
-    if (!kIsWeb) await pushManager!.init();
+  // void setupPushNotifications() async {
+  //   pushManager = PushNotificationsManager();
+  //   if (!kIsWeb) await pushManager!.init();
 
-    try {
-      String token = await pushManager!.getToken();
-      locator<NotificationsService>().createPushDevice(token);
+  //   try {
+  //     String token = await pushManager!.getToken();
+  //     locator<NotificationsService>().createPushDevice(token);
 
-      String? oldId =
-          await locator<TokenStorageWrapper>().read("notificationId");
-      if (oldId == null || oldId != token) {
-        User user = await locator<UserService>().getUser();
-        if (user.id == null)
-          locator<NotificationsService>().deletePushDevice(oldId!);
+  //     String? oldId =
+  //         await locator<TokenStorageWrapper>().read("notificationId");
+  //     if (oldId == null || oldId != token) {
+  //       User user = await locator<UserService>().getUser();
+  //       if (user.id == null)
+  //         locator<NotificationsService>().deletePushDevice(oldId!);
 
-        locator<TokenStorageWrapper>()
-            .write(key: "notificationId", value: token);
-      }
-    } catch (ex) {
-      print(ex);
-    }
-  }
+  //       locator<TokenStorageWrapper>()
+  //           .write(key: "notificationId", value: token);
+  //     }
+  //   } catch (ex) {
+  //     print(ex);
+  //   }
+  // }
 
   @override
   void dispose() {
