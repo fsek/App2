@@ -7,14 +7,16 @@ import 'package:fsek_mobile/screens/moose_game/ground.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
 import 'package:fsek_mobile/screens/moose_game/sandwich.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/game.service.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'package:vector_math/vector_math.dart';
+import 'package:fsek_mobile/services/api.service.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'moose.dart';
 
@@ -78,19 +80,25 @@ class _MooseGamePageState extends State<MooseGamePage>
   void initState() {
     super.initState();
 
+
+    ApiService.apiClient.getUsersApi().usersGetMe().then((user) => {
+      user.data != null ? highscore = user.data!.mooseGameScore.toDouble() : highscore = 0
+
+    });
+
     WidgetsBinding.instance.addObserver(this);
 
     cameraPos = Vector2.zero();
-    late int tempuserid;
-    locator<UserService>().getUser().then((user) => tempuserid = user.id ?? 0);
-    locator<GameScoreService>().getScores().then((users) => {
-          highscore = (users
-                      .firstWhere(
-                          (gamescore) => gamescore.user?.id == tempuserid)
-                      .score ??
-                  0)
-              .toDouble()
-        });
+
+    // locator<UserService>().getUser().then((user) => tempuserid = user.id ?? 0);
+    // locator<GameScoreService>().getScores().then((users) => {
+    //       highscore = (users
+    //                   .firstWhere(
+    //                       (gamescore) => gamescore.user?.id == tempuserid)
+    //                   .score ??
+    //               0)
+    //           .toDouble()
+    //     });
 
     gameAnimController =
         AnimationController(vsync: this, duration: Duration(days: 6122));
@@ -233,12 +241,12 @@ class _MooseGamePageState extends State<MooseGamePage>
     soundtrackPlayer.stop();
     soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
     soundtrackPlayer.play(AssetSource('audio/gameoverfart.mp3'));
-    setState(() {
+    setState(() async {
       sandwichBonusPopupFadeout = 0;
       if (score > highscore) {
         highscore = score;
         newHighscore = true;
-        locator<GameScoreService>().postScore(score: highscore.toInt());
+        await ApiService.apiClient.getMooseGameApi().mooseGameUpdateMouseGameScore(score: score.toInt());
       }
       isDead = true;
     });

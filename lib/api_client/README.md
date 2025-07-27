@@ -188,6 +188,7 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollning**](doc/NollningApi.md#nollninggetallnollning) | **GET** /nollning/ | Get All Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollningGroups**](doc/NollningApi.md#nollninggetallnollninggroups) | **GET** /nollning/groups/{nollning_id} | Get All Nollning Groups
 [*NollningApi*](doc/NollningApi.md) | [**nollningGetCompletedMissionsFromGroup**](doc/NollningApi.md#nollninggetcompletedmissionsfromgroup) | **GET** /nollning/groups/missions/{group_id} | Get Completed Missions From Group
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetNollning**](doc/NollningApi.md#nollninggetnollning) | **GET** /nollning/{nollning_id} | Get Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/{nollning_id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningRemoveCompletedMissionFromGroup**](doc/NollningApi.md#nollningremovecompletedmissionfromgroup) | **DELETE** /nollning/groups/missions/{nollning_id} | Remove Completed Mission From Group

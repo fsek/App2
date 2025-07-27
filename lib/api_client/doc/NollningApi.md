@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**nollningGetAllNollning**](NollningApi.md#nollninggetallnollning) | **GET** /nollning/ | Get All Nollning
 [**nollningGetAllNollningGroups**](NollningApi.md#nollninggetallnollninggroups) | **GET** /nollning/groups/{nollning_id} | Get All Nollning Groups
 [**nollningGetCompletedMissionsFromGroup**](NollningApi.md#nollninggetcompletedmissionsfromgroup) | **GET** /nollning/groups/missions/{group_id} | Get Completed Missions From Group
+[**nollningGetNollning**](NollningApi.md#nollninggetnollning) | **GET** /nollning/{nollning_id} | Get Nollning
 [**nollningPatchNollning**](NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/{nollning_id} | Patch Nollning
 [**nollningPostNollning**](NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
 [**nollningRemoveCompletedMissionFromGroup**](NollningApi.md#nollningremovecompletedmissionfromgroup) | **DELETE** /nollning/groups/missions/{nollning_id} | Remove Completed Mission From Group
@@ -625,6 +626,53 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BuiltList&lt;GroupMissionRead&gt;**](GroupMissionRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **nollningGetNollning**
+> NollningRead nollningGetNollning(nollningId)
+
+Get Nollning
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getNollningApi();
+final int nollningId = 56; // int | 
+
+try {
+    final response = api.nollningGetNollning(nollningId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling NollningApi->nollningGetNollning: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nollningId** | **int**|  | 
+
+### Return type
+
+[**NollningRead**](NollningRead.md)
 
 ### Authorization
 

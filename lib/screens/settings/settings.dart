@@ -9,6 +9,7 @@ import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/cafe/cafe_shift.dart';
 
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
@@ -127,33 +128,26 @@ class _SettingsPageState extends State<SettingsPage> {
                 _makeTextField(
                   t.settingsFirstName + "*",
                   user!.firstName,
-                  (input) => userChanges!.firstName = input,
+                  (input) {
+                    userChanges!.firstName = input;
+                    changedSetting = true;
+                  },
                 ),
                 _makeTextField(
                   t.settingsLastName + "*",
                   user!.lastName,
-                  (input) => userChanges!.lastName = input,
+                  (input) {
+                    userChanges!.lastName = input;
+                    changedSetting = true;
+                    } ,
                 ),
-                // _makeTextField( "Game nickname", user!.game_nickname?.replaceAll("\u{200E}", ""),
-                //   // TODO use translate var
-                //   (input) {
-
-                //     // Version control check
-                //     if (user!.game_nickname != null) {
-                //       if (!user!.game_nickname!.contains("\u{200E}"))
-                //       {
-                //         // The user has not updated their nickname since the version control was added
-                //         // this means they might have a cheated in score
-                //         locator<GameScoreService>().resetScore();
-                //       }
-                //     }
-
-                //     changedSetting = true;
-                //     if (input == null) user!.game_nickname = input;
-                //     // remove version control char if it exists, then add it back at the end
-                //     else user!.game_nickname = input.replaceAll("\u{200E}", "") + "\u{200E}";
-                //   },
-                // ),
+                _makeTextField( "Game nickname", user!.mooseGameName, //replaceAll("\u{200E}", ""),
+                  // TODO use translate var
+                  (input) {
+                      userChanges!.mooseGameName = input;
+                      changedSetting = true;
+                  },
+                ),
                 _makeDropDown<String>(
                   t.settingsProgramme,
                   programs.values.toList(),
