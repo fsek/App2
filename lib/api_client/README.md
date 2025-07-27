@@ -74,11 +74,6 @@ Class | Method | HTTP request | Description
 [*AdsApi*](doc/AdsApi.md) | [**adsRemoveAd**](doc/AdsApi.md#adsremovead) | **DELETE** /ad/{id} | Remove Ad
 [*AdsApi*](doc/AdsApi.md) | [**adsRemoveAdSuperUser**](doc/AdsApi.md#adsremoveadsuperuser) | **DELETE** /ad/manage-route/{id} | Remove Ad Super User
 [*AdsApi*](doc/AdsApi.md) | [**adsUpdateAd**](doc/AdsApi.md#adsupdatead) | **PATCH** /ad/updateAd/{ad_id} | Update Ad
-[*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionDeleteAdventureMission**](doc/AdventureMissionApi.md#adventuremissiondeleteadventuremission) | **DELETE** /adventure-mission/delete/{id} | Delete Adventure Mission
-[*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionGetAdventureMission**](doc/AdventureMissionApi.md#adventuremissiongetadventuremission) | **GET** /adventure-mission/{id} | Get Adventure Mission
-[*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionGetAllAdventureMissions**](doc/AdventureMissionApi.md#adventuremissiongetalladventuremissions) | **GET** /adventure-mission/all | Get All Adventure Missions
-[*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPatchAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpatchadventuremission) | **PATCH** /adventure-mission/patch/{id} | Patch Adventure Mission
-[*AdventureMissionApi*](doc/AdventureMissionApi.md) | [**adventureMissionPostAdventureMission**](doc/AdventureMissionApi.md#adventuremissionpostadventuremission) | **POST** /adventure-mission/ | Post Adventure Mission
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsAddAlbumPhotographer**](doc/AlbumsApi.md#albumsaddalbumphotographer) | **PATCH** /albums/add_photographer | Add Album Photographer
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsCreateAlbum**](doc/AlbumsApi.md#albumscreatealbum) | **POST** /albums/ | Create Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteAlbumYear**](doc/AlbumsApi.md#albumsdeletealbumyear) | **DELETE** /albums/year/{year} | Delete Album Year
@@ -89,6 +84,8 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogout**](doc/AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogoutAll**](doc/AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieRefresh**](doc/AuthApi.md#authauthcookierefresh) | **POST** /auth/refresh | Auth:Cookie.Refresh
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieUpdateEmail**](doc/AuthApi.md#authauthcookieupdateemail) | **PATCH** /auth/update-email | Auth:Cookie.Update Email
+[*AuthApi*](doc/AuthApi.md) | [**authAuthCookieUpdatePassword**](doc/AuthApi.md#authauthcookieupdatepassword) | **PATCH** /auth/update-password | Auth:Cookie.Update Password
 [*AuthApi*](doc/AuthApi.md) | [**authRegisterRegister**](doc/AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
 [*AuthApi*](doc/AuthApi.md) | [**authResetForgotPassword**](doc/AuthApi.md#authresetforgotpassword) | **POST** /auth/forgot-password | Reset:Forgot Password
 [*AuthApi*](doc/AuthApi.md) | [**authResetResetPassword**](doc/AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
@@ -108,12 +105,13 @@ Class | Method | HTTP request | Description
 [*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingBlockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingblockuserfromcarbooking) | **POST** /car/block/ | Block User From Car Booking
 [*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingGetAllCarBookingBlocks**](doc/CarBlockingApi.md#carblockinggetallcarbookingblocks) | **GET** /car/block/ | Get All Car Booking Blocks
 [*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingUnblockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingunblockuserfromcarbooking) | **DELETE** /car/block/{user_id} | Unblock User From Car Booking
-[*CarsApi*](doc/CarsApi.md) | [**carsCreateBooking**](doc/CarsApi.md#carscreatebooking) | **POST** /car/ | Create Booking
-[*CarsApi*](doc/CarsApi.md) | [**carsGetAllBooking**](doc/CarsApi.md#carsgetallbooking) | **GET** /car/ | Get All Booking
-[*CarsApi*](doc/CarsApi.md) | [**carsGetBooking**](doc/CarsApi.md#carsgetbooking) | **GET** /car/{booking_id} | Get Booking
-[*CarsApi*](doc/CarsApi.md) | [**carsRemoveBooking**](doc/CarsApi.md#carsremovebooking) | **DELETE** /car/{booking_id} | Remove Booking
-[*CarsApi*](doc/CarsApi.md) | [**carsUpdateBooking**](doc/CarsApi.md#carsupdatebooking) | **PATCH** /car/{booking_id} | Update Booking
+[*CarsApi*](doc/CarsApi.md) | [**carsCreateCarBooking**](doc/CarsApi.md#carscreatecarbooking) | **POST** /car/ | Create Car Booking
+[*CarsApi*](doc/CarsApi.md) | [**carsGetAllCarBookings**](doc/CarsApi.md#carsgetallcarbookings) | **GET** /car/ | Get All Car Bookings
+[*CarsApi*](doc/CarsApi.md) | [**carsGetCarBooking**](doc/CarsApi.md#carsgetcarbooking) | **GET** /car/{booking_id} | Get Car Booking
+[*CarsApi*](doc/CarsApi.md) | [**carsRemoveCarBooking**](doc/CarsApi.md#carsremovecarbooking) | **DELETE** /car/{booking_id} | Remove Car Booking
+[*CarsApi*](doc/CarsApi.md) | [**carsUpdateCarBooking**](doc/CarsApi.md#carsupdatecarbooking) | **PATCH** /car/{booking_id} | Update Car Booking
 [*CouncilApi*](doc/CouncilApi.md) | [**councilCreateCouncil**](doc/CouncilApi.md#councilcreatecouncil) | **POST** /councils/ | Create Council
+[*CouncilApi*](doc/CouncilApi.md) | [**councilDeleteCouncil**](doc/CouncilApi.md#councildeletecouncil) | **DELETE** /councils/{council_id} | Delete Council
 [*CouncilApi*](doc/CouncilApi.md) | [**councilGetAllCouncils**](doc/CouncilApi.md#councilgetallcouncils) | **GET** /councils/ | Get All Councils
 [*CouncilApi*](doc/CouncilApi.md) | [**councilGetCouncil**](doc/CouncilApi.md#councilgetcouncil) | **GET** /councils/{council_id} | Get Council
 [*CouncilApi*](doc/CouncilApi.md) | [**councilUpdateCouncil**](doc/CouncilApi.md#councilupdatecouncil) | **PATCH** /councils/update_council/{council_id} | Update Council
@@ -124,6 +122,7 @@ Class | Method | HTTP request | Description
 [*DocumentApi*](doc/DocumentApi.md) | [**documentDeleteDocument**](doc/DocumentApi.md#documentdeletedocument) | **DELETE** /document/delete_document/{document_id} | Delete Document
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetAllDocuments**](doc/DocumentApi.md#documentgetalldocuments) | **GET** /document/ | Get All Documents
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentDataById**](doc/DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
+[*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFile**](doc/DocumentApi.md#documentgetdocumentfile) | **GET** /document/{document_id} | Get Document File
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFileById**](doc/DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
 [*DocumentApi*](doc/DocumentApi.md) | [**documentUpdateDocument**](doc/DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
 [*DocumentApi*](doc/DocumentApi.md) | [**documentUploadDocument**](doc/DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
@@ -144,10 +143,13 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImage**](doc/EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image | Get Event Image
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImageStream**](doc/EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetSingleEvent**](doc/EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
+[*EventsApi*](doc/EventsApi.md) | [**eventsPostEventImage**](doc/EventsApi.md#eventsposteventimage) | **POST** /events/{event_id}/image | Post Event Image
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsAddUserToGroup**](doc/GroupsApi.md#groupsaddusertogroup) | **POST** /groups/add_user/{id} | Add User To Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetGroups**](doc/GroupsApi.md#groupsgetgroups) | **GET** /groups/ | Get Groups
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetSingleGroup**](doc/GroupsApi.md#groupsgetsinglegroup) | **GET** /groups/{id} | Get Single Group
@@ -156,26 +158,39 @@ Class | Method | HTTP request | Description
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsRemoveUserFromGroup**](doc/GroupsApi.md#groupsremoveuserfromgroup) | **DELETE** /groups/remove_user_from_group/{id} | Remove User From Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsUploadGroup**](doc/GroupsApi.md#groupsuploadgroup) | **POST** /groups/ | Upload Group
 [*ImgApi*](doc/ImgApi.md) | [**imgDeleteImage**](doc/ImgApi.md#imgdeleteimage) | **DELETE** /img/{id} | Delete Image
-[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/{id} | Get Image
+[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/{img_id} | Get Image
+[*ImgApi*](doc/ImgApi.md) | [**imgGetImageStream**](doc/ImgApi.md#imggetimagestream) | **GET** /img/stream/{img_id} | Get Image Stream
 [*ImgApi*](doc/ImgApi.md) | [**imgUploadImage**](doc/ImgApi.md#imguploadimage) | **POST** /img/ | Upload Image
+[*MooseGameApi*](doc/MooseGameApi.md) | [**mooseGameGetAllScores**](doc/MooseGameApi.md#moosegamegetallscores) | **GET** /moose-game/ | Get All Scores
+[*MooseGameApi*](doc/MooseGameApi.md) | [**mooseGameRemoveMouseGameScore**](doc/MooseGameApi.md#moosegameremovemousegamescore) | **DELETE** /moose-game/{user_id} | Remove Mouse Game Score
+[*MooseGameApi*](doc/MooseGameApi.md) | [**mooseGameUpdateMouseGameScore**](doc/MooseGameApi.md#moosegameupdatemousegamescore) | **POST** /moose-game/{score} | Update Mouse Game Score
 [*NewsApi*](doc/NewsApi.md) | [**newsBumpNews**](doc/NewsApi.md#newsbumpnews) | **PATCH** /news/bump/{news_id} | Bump News
 [*NewsApi*](doc/NewsApi.md) | [**newsCreateNews**](doc/NewsApi.md#newscreatenews) | **POST** /news/ | Create News
 [*NewsApi*](doc/NewsApi.md) | [**newsDeleteNews**](doc/NewsApi.md#newsdeletenews) | **DELETE** /news/{news_id} | Delete News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetAllNews**](doc/NewsApi.md#newsgetallnews) | **GET** /news/all | Get All News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetNews**](doc/NewsApi.md#newsgetnews) | **GET** /news/{news_id} | Get News
+[*NewsApi*](doc/NewsApi.md) | [**newsGetNewsImage**](doc/NewsApi.md#newsgetnewsimage) | **GET** /news/{news_id}/image | Get News Image
+[*NewsApi*](doc/NewsApi.md) | [**newsGetNewsImageStream**](doc/NewsApi.md#newsgetnewsimagestream) | **GET** /news/{news_id}/image/stream | Get News Image Stream
 [*NewsApi*](doc/NewsApi.md) | [**newsGetPaginatedNews**](doc/NewsApi.md#newsgetpaginatednews) | **GET** /news/page/{page_nbr} | Get Paginated News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetPinnedNews**](doc/NewsApi.md#newsgetpinnednews) | **GET** /news/pinned/ | Get Pinned News
+[*NewsApi*](doc/NewsApi.md) | [**newsPostNewsImage**](doc/NewsApi.md#newspostnewsimage) | **POST** /news/{news_id}/image | Post News Image
 [*NewsApi*](doc/NewsApi.md) | [**newsUpdateNews**](doc/NewsApi.md#newsupdatenews) | **PATCH** /news/{news_id} | Update News
-[*NollningApi*](doc/NollningApi.md) | [**nollningAddCompletedMission**](doc/NollningApi.md#nollningaddcompletedmission) | **POST** /group_mission/{id} | Add Completed Mission
-[*NollningApi*](doc/NollningApi.md) | [**nollningAddGroupToNollning**](doc/NollningApi.md#nollningaddgrouptonollning) | **POST** /nollning/add_group/{id} | Add Group To Nollning
-[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteGroupMission**](doc/NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/delete_group_mission/{id} | Delete Group Mission
-[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteNollning**](doc/NollningApi.md#nollningdeletenollning) | **DELETE** /nollning/delete/{id} | Delete Nollning
-[*NollningApi*](doc/NollningApi.md) | [**nollningEditCompletedMission**](doc/NollningApi.md#nollningeditcompletedmission) | **PATCH** /group_mission/{id} | Edit Completed Mission
-[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollning**](doc/NollningApi.md#nollninggetallnollning) | **GET** /nollning/all | Get All Nollning
-[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollningGroups**](doc/NollningApi.md#nollninggetallnollninggroups) | **GET** /nollning/ | Get All Nollning Groups
-[*NollningApi*](doc/NollningApi.md) | [**nollningGetCompletedMissions**](doc/NollningApi.md#nollninggetcompletedmissions) | **GET** /group_mission/{nollning_id} | Get Completed Missions
-[*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/patch/{id} | Patch Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningAddCompletedMissionToGroup**](doc/NollningApi.md#nollningaddcompletedmissiontogroup) | **POST** /nollning/groups/missions/{group_id} | Add Completed Mission To Group
+[*NollningApi*](doc/NollningApi.md) | [**nollningAddGroupToNollning**](doc/NollningApi.md#nollningaddgrouptonollning) | **POST** /nollning/add_group/{nollning_id} | Add Group To Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningCreateAdventureMission**](doc/NollningApi.md#nollningcreateadventuremission) | **POST** /nollning/missions/{nollning_id} | Create Adventure Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteAdventureMission**](doc/NollningApi.md#nollningdeleteadventuremission) | **DELETE** /nollning/missions/{mission_id} | Delete Adventure Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteGroupMission**](doc/NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/delete_group_mission/{nollning_id} | Delete Group Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteNollning**](doc/NollningApi.md#nollningdeletenollning) | **DELETE** /nollning/{nollning_id} | Delete Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningEditAdventureMission**](doc/NollningApi.md#nollningeditadventuremission) | **PATCH** /nollning/missions/{mission_id} | Edit Adventure Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningEditCompletedMissionInGroup**](doc/NollningApi.md#nollningeditcompletedmissioningroup) | **PATCH** /nollning/groups/missions/{group_id} | Edit Completed Mission In Group
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetAdventureMission**](doc/NollningApi.md#nollninggetadventuremission) | **GET** /nollning/missions/{mission_id} | Get Adventure Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllAdventureMissionsInNollning**](doc/NollningApi.md#nollninggetalladventuremissionsinnollning) | **GET** /nollning/missions/{nollning_id} | Get All Adventure Missions In Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollning**](doc/NollningApi.md#nollninggetallnollning) | **GET** /nollning/ | Get All Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetAllNollningGroups**](doc/NollningApi.md#nollninggetallnollninggroups) | **GET** /nollning/groups/{nollning_id} | Get All Nollning Groups
+[*NollningApi*](doc/NollningApi.md) | [**nollningGetCompletedMissionsFromGroup**](doc/NollningApi.md#nollninggetcompletedmissionsfromgroup) | **GET** /nollning/groups/missions/{group_id} | Get Completed Missions From Group
+[*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/{nollning_id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
+[*NollningApi*](doc/NollningApi.md) | [**nollningRemoveCompletedMissionFromGroup**](doc/NollningApi.md#nollningremovecompletedmissionfromgroup) | **DELETE** /nollning/groups/missions/{nollning_id} | Remove Completed Mission From Group
 [*NollningApi*](doc/NollningApi.md) | [**nollningRemoveGroupFromNollning**](doc/NollningApi.md#nollningremovegroupfromnollning) | **DELETE** /nollning/remove_group/{nollning_group_id} | Remove Group From Nollning
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermissions**](doc/PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
@@ -187,7 +202,17 @@ Class | Method | HTTP request | Description
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllUsersWithPost**](doc/PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
+[*PostsApi*](doc/PostsApi.md) | [**postsGetPostImage**](doc/PostsApi.md#postsgetpostimage) | **GET** /posts/{post_id}/image | Get Post Image
+[*PostsApi*](doc/PostsApi.md) | [**postsGetPostImageStream**](doc/PostsApi.md#postsgetpostimagestream) | **GET** /posts/{post_id}/image/stream | Get Post Image Stream
+[*PostsApi*](doc/PostsApi.md) | [**postsPostPostImage**](doc/PostsApi.md#postspostpostimage) | **POST** /posts/{post_id}/image | Post Post Image
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingCreateRoomBooking**](doc/RoomBookingApi.md#roombookingcreateroombooking) | **POST** /rooms/ | Create Room Booking
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetAllRoomBookings**](doc/RoomBookingApi.md#roombookinggetallroombookings) | **GET** /rooms/get_all | Get All Room Bookings
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetBookingsByRoom**](doc/RoomBookingApi.md#roombookinggetbookingsbyroom) | **GET** /rooms/get_by_room/ | Get Bookings By Room
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetRoomBooking**](doc/RoomBookingApi.md#roombookinggetroombooking) | **GET** /rooms/get_booking/{booking_id} | Get Room Booking
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetRoomBookingsBetweenTimes**](doc/RoomBookingApi.md#roombookinggetroombookingsbetweentimes) | **POST** /rooms/get_between_times | Get Room Bookings Between Times
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingRemoveRoomBooking**](doc/RoomBookingApi.md#roombookingremoveroombooking) | **DELETE** /rooms/{booking_id} | Remove Room Booking
+[*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingUpdateRoomBooking**](doc/RoomBookingApi.md#roombookingupdateroombooking) | **PATCH** /rooms/{booking_id} | Update Room Booking
 [*SongsApi*](doc/SongsApi.md) | [**songsCreateSong**](doc/SongsApi.md#songscreatesong) | **POST** /songs/ | Create Song
 [*SongsApi*](doc/SongsApi.md) | [**songsDeleteSong**](doc/SongsApi.md#songsdeletesong) | **DELETE** /songs/{song_id} | Delete Song
 [*SongsApi*](doc/SongsApi.md) | [**songsGetAllSongs**](doc/SongsApi.md#songsgetallsongs) | **GET** /songs/ | Get All Songs
@@ -211,9 +236,14 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersAdminUpdateUser**](doc/UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUserImage**](doc/UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUserImageStream**](doc/UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
+[*UsersApi*](doc/UsersApi.md) | [**usersPostUserImage**](doc/UsersApi.md#userspostuserimage) | **POST** /users/{user_id}/image | Post User Image
+[*UsersApi*](doc/UsersApi.md) | [**usersSearchUsers**](doc/UsersApi.md#userssearchusers) | **GET** /users/search/ | Search Users
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateMultipleUsersStatus**](doc/UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
+[*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserPosts**](doc/UsersApi.md#usersupdateuserposts) | **PATCH** /users/admin/user-posts/{user_id} | Update User Posts
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateUserStatus**](doc/UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
 
@@ -249,8 +279,6 @@ Class | Method | HTTP request | Description
  - [CarBookingRead](doc/CarBookingRead.md)
  - [CarBookingUpdate](doc/CarBookingUpdate.md)
  - [CouncilCreate](doc/CouncilCreate.md)
- - [CouncilInCarBookingRead](doc/CouncilInCarBookingRead.md)
- - [CouncilInEventRead](doc/CouncilInEventRead.md)
  - [CouncilRead](doc/CouncilRead.md)
  - [CouncilUpdate](doc/CouncilUpdate.md)
  - [Detail](doc/Detail.md)
@@ -280,6 +308,7 @@ Class | Method | HTTP request | Description
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ImgInAlbum](doc/ImgInAlbum.md)
  - [MEMBERROLES](doc/MEMBERROLES.md)
+ - [MooseGameRead](doc/MooseGameRead.md)
  - [NewsCreate](doc/NewsCreate.md)
  - [NewsRead](doc/NewsRead.md)
  - [NewsTagRead](doc/NewsTagRead.md)
@@ -297,6 +326,11 @@ Class | Method | HTTP request | Description
  - [PostRead](doc/PostRead.md)
  - [PostUpdate](doc/PostUpdate.md)
  - [PriorityDB](doc/PriorityDB.md)
+ - [RoomBookingCreate](doc/RoomBookingCreate.md)
+ - [RoomBookingRead](doc/RoomBookingRead.md)
+ - [RoomBookingUpdate](doc/RoomBookingUpdate.md)
+ - [RoomBookingsBetweenDates](doc/RoomBookingsBetweenDates.md)
+ - [SimpleCouncilRead](doc/SimpleCouncilRead.md)
  - [SimpleUserAccessRead](doc/SimpleUserAccessRead.md)
  - [SimpleUserRead](doc/SimpleUserRead.md)
  - [SongCategoryCreate](doc/SongCategoryCreate.md)
@@ -311,6 +345,7 @@ Class | Method | HTTP request | Description
  - [UpdatePermissions](doc/UpdatePermissions.md)
  - [UpdateUserMember](doc/UpdateUserMember.md)
  - [UpdateUserMemberMultiple](doc/UpdateUserMemberMultiple.md)
+ - [UpdateUserPosts](doc/UpdateUserPosts.md)
  - [UserAccessCreate](doc/UserAccessCreate.md)
  - [UserAccessRead](doc/UserAccessRead.md)
  - [UserAccessUpdate](doc/UserAccessUpdate.md)

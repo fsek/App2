@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**documentDeleteDocument**](DocumentApi.md#documentdeletedocument) | **DELETE** /document/delete_document/{document_id} | Delete Document
 [**documentGetAllDocuments**](DocumentApi.md#documentgetalldocuments) | **GET** /document/ | Get All Documents
 [**documentGetDocumentDataById**](DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
+[**documentGetDocumentFile**](DocumentApi.md#documentgetdocumentfile) | **GET** /document/{document_id} | Get Document File
 [**documentGetDocumentFileById**](DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
 [**documentUpdateDocument**](DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
 [**documentUploadDocument**](DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
@@ -142,6 +143,53 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentRead**](DocumentRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **documentGetDocumentFile**
+> JsonObject documentGetDocumentFile(documentId)
+
+Get Document File
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getDocumentApi();
+final int documentId = 56; // int | 
+
+try {
+    final response = api.documentGetDocumentFile(documentId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling DocumentApi->documentGetDocumentFile: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
 
 ### Authorization
 

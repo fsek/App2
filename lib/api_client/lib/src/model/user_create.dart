@@ -44,7 +44,7 @@ abstract class UserCreate implements Built<UserCreate, UserCreateBuilder> {
   String get lastName;
 
   @BuiltValueField(wireName: r'telephone_number')
-  String? get telephoneNumber;
+  String get telephoneNumber;
 
   @BuiltValueField(wireName: r'start_year')
   int? get startYear;
@@ -113,13 +113,11 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
       object.lastName,
       specifiedType: const FullType(String),
     );
-    if (object.telephoneNumber != null) {
-      yield r'telephone_number';
-      yield serializers.serialize(
-        object.telephoneNumber,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
+    yield r'telephone_number';
+    yield serializers.serialize(
+      object.telephoneNumber,
+      specifiedType: const FullType(String),
+    );
     if (object.startYear != null) {
       yield r'start_year';
       yield serializers.serialize(
@@ -205,9 +203,8 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
         case r'telephone_number':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(String),
+          ) as String;
           result.telephoneNumber = valueDes;
           break;
         case r'start_year':

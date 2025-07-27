@@ -18,11 +18,11 @@ part 'permission_create.g.dart';
 abstract class PermissionCreate implements Built<PermissionCreate, PermissionCreateBuilder> {
   @BuiltValueField(wireName: r'action')
   PermissionCreateActionEnum get action;
-  // enum actionEnum {  view,  manage,  };
+  // enum actionEnum {  view,  manage,  super,  };
 
   @BuiltValueField(wireName: r'target')
   PermissionCreateTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
 
   PermissionCreate._();
 
@@ -129,6 +129,8 @@ class PermissionCreateActionEnum extends EnumClass {
   static const PermissionCreateActionEnum view = _$permissionCreateActionEnum_view;
   @BuiltValueEnumConst(wireName: r'manage')
   static const PermissionCreateActionEnum manage = _$permissionCreateActionEnum_manage;
+  @BuiltValueEnumConst(wireName: r'super')
+  static const PermissionCreateActionEnum super_ = _$permissionCreateActionEnum_super_;
 
   static Serializer<PermissionCreateActionEnum> get serializer => _$permissionCreateActionEnumSerializer;
 
@@ -166,7 +168,7 @@ class PermissionCreateTargetEnum extends EnumClass {
   static const PermissionCreateTargetEnum election = _$permissionCreateTargetEnum_election;
   @BuiltValueEnumConst(wireName: r'Groups')
   static const PermissionCreateTargetEnum groups = _$permissionCreateTargetEnum_groups;
-  @BuiltValueEnumConst(wireName: r'Adventure Missions')
+  @BuiltValueEnumConst(wireName: r'AdventureMissions')
   static const PermissionCreateTargetEnum adventureMissions = _$permissionCreateTargetEnum_adventureMissions;
   @BuiltValueEnumConst(wireName: r'Nollning')
   static const PermissionCreateTargetEnum nollning = _$permissionCreateTargetEnum_nollning;
@@ -176,6 +178,10 @@ class PermissionCreateTargetEnum extends EnumClass {
   static const PermissionCreateTargetEnum tags = _$permissionCreateTargetEnum_tags;
   @BuiltValueEnumConst(wireName: r'Council')
   static const PermissionCreateTargetEnum council = _$permissionCreateTargetEnum_council;
+  @BuiltValueEnumConst(wireName: r'RoomBookings')
+  static const PermissionCreateTargetEnum roomBookings = _$permissionCreateTargetEnum_roomBookings;
+  @BuiltValueEnumConst(wireName: r'Moosegame')
+  static const PermissionCreateTargetEnum moosegame = _$permissionCreateTargetEnum_moosegame;
 
   static Serializer<PermissionCreateTargetEnum> get serializer => _$permissionCreateTargetEnumSerializer;
 

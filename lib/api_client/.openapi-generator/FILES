@@ -7,7 +7,6 @@ doc/AdUpdate.md
 doc/AddEventTag.md
 doc/AdminUserRead.md
 doc/AdsApi.md
-doc/AdventureMissionApi.md
 doc/AdventureMissionCreate.md
 doc/AdventureMissionRead.md
 doc/AlbumCreate.md
@@ -40,8 +39,6 @@ doc/CarBookingUpdate.md
 doc/CarsApi.md
 doc/CouncilApi.md
 doc/CouncilCreate.md
-doc/CouncilInCarBookingRead.md
-doc/CouncilInEventRead.md
 doc/CouncilRead.md
 doc/CouncilUpdate.md
 doc/DefaultApi.md
@@ -78,6 +75,8 @@ doc/HTTPValidationError.md
 doc/ImgApi.md
 doc/ImgInAlbum.md
 doc/MEMBERROLES.md
+doc/MooseGameApi.md
+doc/MooseGameRead.md
 doc/NewsApi.md
 doc/NewsCreate.md
 doc/NewsRead.md
@@ -99,6 +98,12 @@ doc/PostRead.md
 doc/PostUpdate.md
 doc/PostsApi.md
 doc/PriorityDB.md
+doc/RoomBookingApi.md
+doc/RoomBookingCreate.md
+doc/RoomBookingRead.md
+doc/RoomBookingUpdate.md
+doc/RoomBookingsBetweenDates.md
+doc/SimpleCouncilRead.md
 doc/SimpleUserAccessRead.md
 doc/SimpleUserRead.md
 doc/SongCategoryCreate.md
@@ -116,6 +121,7 @@ doc/UpdatePermissionPart.md
 doc/UpdatePermissions.md
 doc/UpdateUserMember.md
 doc/UpdateUserMemberMultiple.md
+doc/UpdateUserPosts.md
 doc/UserAccessCreate.md
 doc/UserAccessRead.md
 doc/UserAccessUpdate.md
@@ -133,7 +139,6 @@ doc/ValidationErrorLocInner.md
 lib/api_client.dart
 lib/src/api.dart
 lib/src/api/ads_api.dart
-lib/src/api/adventure_mission_api.dart
 lib/src/api/albums_api.dart
 lib/src/api/auth_api.dart
 lib/src/api/cafe_api.dart
@@ -148,10 +153,12 @@ lib/src/api/event_signup_api.dart
 lib/src/api/events_api.dart
 lib/src/api/groups_api.dart
 lib/src/api/img_api.dart
+lib/src/api/moose_game_api.dart
 lib/src/api/news_api.dart
 lib/src/api/nollning_api.dart
 lib/src/api/permissions_api.dart
 lib/src/api/posts_api.dart
+lib/src/api/room_booking_api.dart
 lib/src/api/songs_api.dart
 lib/src/api/songs_category_api.dart
 lib/src/api/tags_api.dart
@@ -194,8 +201,6 @@ lib/src/model/car_booking_create.dart
 lib/src/model/car_booking_read.dart
 lib/src/model/car_booking_update.dart
 lib/src/model/council_create.dart
-lib/src/model/council_in_car_booking_read.dart
-lib/src/model/council_in_event_read.dart
 lib/src/model/council_read.dart
 lib/src/model/council_update.dart
 lib/src/model/date.dart
@@ -226,6 +231,7 @@ lib/src/model/group_user_read.dart
 lib/src/model/http_validation_error.dart
 lib/src/model/img_in_album.dart
 lib/src/model/memberroles.dart
+lib/src/model/moose_game_read.dart
 lib/src/model/news_create.dart
 lib/src/model/news_read.dart
 lib/src/model/news_tag_read.dart
@@ -243,6 +249,11 @@ lib/src/model/post_permission_read.dart
 lib/src/model/post_read.dart
 lib/src/model/post_update.dart
 lib/src/model/priority_db.dart
+lib/src/model/room_booking_create.dart
+lib/src/model/room_booking_read.dart
+lib/src/model/room_booking_update.dart
+lib/src/model/room_bookings_between_dates.dart
+lib/src/model/simple_council_read.dart
 lib/src/model/simple_user_access_read.dart
 lib/src/model/simple_user_read.dart
 lib/src/model/song_category_create.dart
@@ -257,6 +268,7 @@ lib/src/model/update_permission_part.dart
 lib/src/model/update_permissions.dart
 lib/src/model/update_user_member.dart
 lib/src/model/update_user_member_multiple.dart
+lib/src/model/update_user_posts.dart
 lib/src/model/user_access_create.dart
 lib/src/model/user_access_read.dart
 lib/src/model/user_access_update.dart

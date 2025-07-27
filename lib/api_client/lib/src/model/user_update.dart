@@ -20,6 +20,8 @@ part 'user_update.g.dart';
 /// * [stilId] 
 /// * [standardFoodPreferences] 
 /// * [otherFoodPreferences] 
+/// * [telephoneNumber] 
+/// * [mooseGameName] 
 @BuiltValue()
 abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
   @BuiltValueField(wireName: r'first_name')
@@ -46,6 +48,12 @@ abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
 
   @BuiltValueField(wireName: r'other_food_preferences')
   String? get otherFoodPreferences;
+
+  @BuiltValueField(wireName: r'telephone_number')
+  String? get telephoneNumber;
+
+  @BuiltValueField(wireName: r'moose_game_name')
+  String? get mooseGameName;
 
   UserUpdate._();
 
@@ -112,16 +120,34 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
         specifiedType: const FullType.nullable(String),
       );
     }
-    yield r'standard_food_preferences';
-    yield object.standardFoodPreferences == null ? null : serializers.serialize(
-      object.standardFoodPreferences,
-      specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-    );
-    yield r'other_food_preferences';
-    yield object.otherFoodPreferences == null ? null : serializers.serialize(
-      object.otherFoodPreferences,
-      specifiedType: const FullType.nullable(String),
-    );
+    if (object.standardFoodPreferences != null) {
+      yield r'standard_food_preferences';
+      yield serializers.serialize(
+        object.standardFoodPreferences,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+      );
+    }
+    if (object.otherFoodPreferences != null) {
+      yield r'other_food_preferences';
+      yield serializers.serialize(
+        object.otherFoodPreferences,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.telephoneNumber != null) {
+      yield r'telephone_number';
+      yield serializers.serialize(
+        object.telephoneNumber,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.mooseGameName != null) {
+      yield r'moose_game_name';
+      yield serializers.serialize(
+        object.mooseGameName,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
   }
 
   @override
@@ -208,6 +234,22 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
           ) as String?;
           if (valueDes == null) continue;
           result.otherFoodPreferences = valueDes;
+          break;
+        case r'telephone_number':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.telephoneNumber = valueDes;
+          break;
+        case r'moose_game_name':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.mooseGameName = valueDes;
           break;
         default:
           unhandled.add(key);

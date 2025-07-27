@@ -9,6 +9,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:api_client/src/api_util.dart';
+import 'package:api_client/src/model/adventure_mission_create.dart';
+import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/group_mission_create.dart';
 import 'package:api_client/src/model/group_mission_edit.dart';
 import 'package:api_client/src/model/group_mission_read.dart';
@@ -28,11 +30,11 @@ class NollningApi {
 
   const NollningApi(this._dio, this._serializers);
 
-  /// Add Completed Mission
+  /// Add Completed Mission To Group
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [groupId] 
   /// * [groupMissionCreate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -43,8 +45,8 @@ class NollningApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GroupMissionRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GroupMissionRead>> nollningAddCompletedMission({ 
-    required int id,
+  Future<Response<GroupMissionRead>> nollningAddCompletedMissionToGroup({ 
+    required int groupId,
     required GroupMissionCreate groupMissionCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -53,7 +55,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/group_mission/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/groups/missions/{group_id}'.replaceAll('{' r'group_id' '}', encodeQueryParameter(_serializers, groupId, const FullType(int)).toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -139,7 +141,7 @@ class NollningApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [nollningId] 
   /// * [nollningAddGroup] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -151,7 +153,7 @@ class NollningApi {
   /// Returns a [Future] containing a [Response] with a [NollningRead] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<NollningRead>> nollningAddGroupToNollning({ 
-    required int id,
+    required int nollningId,
     required NollningAddGroup nollningAddGroup,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -160,7 +162,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/add_group/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/add_group/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -242,11 +244,210 @@ class NollningApi {
     );
   }
 
+  /// Create Adventure Mission
+  /// 
+  ///
+  /// Parameters:
+  /// * [nollningId] 
+  /// * [adventureMissionCreate] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [AdventureMissionRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<AdventureMissionRead>> nollningCreateAdventureMission({ 
+    required int nollningId,
+    required AdventureMissionCreate adventureMissionCreate,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/missions/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'POST',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(AdventureMissionCreate);
+      _bodyData = _serializers.serialize(adventureMissionCreate, specifiedType: _type);
+
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    AdventureMissionRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(AdventureMissionRead),
+      ) as AdventureMissionRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<AdventureMissionRead>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Delete Adventure Mission
+  /// 
+  ///
+  /// Parameters:
+  /// * [missionId] 
+  /// * [nollningId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [AdventureMissionRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<AdventureMissionRead>> nollningDeleteAdventureMission({ 
+    required int missionId,
+    required int nollningId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/missions/{mission_id}'.replaceAll('{' r'mission_id' '}', encodeQueryParameter(_serializers, missionId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'DELETE',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'nollning_id': encodeQueryParameter(_serializers, nollningId, const FullType(int)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    AdventureMissionRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(AdventureMissionRead),
+      ) as AdventureMissionRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<AdventureMissionRead>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
   /// Delete Group Mission
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [nollningId] 
   /// * [nollningDeleteMission] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -258,7 +459,7 @@ class NollningApi {
   /// Returns a [Future] containing a [Response] with a [NollningDeleteMission] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<NollningDeleteMission>> nollningDeleteGroupMission({ 
-    required int id,
+    required int nollningId,
     required NollningDeleteMission nollningDeleteMission,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -267,7 +468,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/delete_group_mission/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/delete_group_mission/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -353,7 +554,7 @@ class NollningApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [nollningId] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -364,7 +565,7 @@ class NollningApi {
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String>] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<BuiltMap<String, String>>> nollningDeleteNollning({ 
-    required int id,
+    required int nollningId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -372,7 +573,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/delete/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -434,11 +635,118 @@ class NollningApi {
     );
   }
 
-  /// Edit Completed Mission
+  /// Edit Adventure Mission
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [missionId] 
+  /// * [adventureMissionCreate] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [AdventureMissionRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<AdventureMissionRead>> nollningEditAdventureMission({ 
+    required int missionId,
+    required AdventureMissionCreate adventureMissionCreate,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/missions/{mission_id}'.replaceAll('{' r'mission_id' '}', encodeQueryParameter(_serializers, missionId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'PATCH',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(AdventureMissionCreate);
+      _bodyData = _serializers.serialize(adventureMissionCreate, specifiedType: _type);
+
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    AdventureMissionRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(AdventureMissionRead),
+      ) as AdventureMissionRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<AdventureMissionRead>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Edit Completed Mission In Group
+  /// 
+  ///
+  /// Parameters:
+  /// * [groupId] 
   /// * [groupMissionEdit] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -449,8 +757,8 @@ class NollningApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GroupMissionRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GroupMissionRead>> nollningEditCompletedMission({ 
-    required int id,
+  Future<Response<GroupMissionRead>> nollningEditCompletedMissionInGroup({ 
+    required int groupId,
     required GroupMissionEdit groupMissionEdit,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -459,7 +767,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/group_mission/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/groups/missions/{group_id}'.replaceAll('{' r'group_id' '}', encodeQueryParameter(_serializers, groupId, const FullType(int)).toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
@@ -541,6 +849,156 @@ class NollningApi {
     );
   }
 
+  /// Get Adventure Mission
+  /// 
+  ///
+  /// Parameters:
+  /// * [missionId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [AdventureMissionRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<AdventureMissionRead>> nollningGetAdventureMission({ 
+    required int missionId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/missions/{mission_id}'.replaceAll('{' r'mission_id' '}', encodeQueryParameter(_serializers, missionId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    AdventureMissionRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(AdventureMissionRead),
+      ) as AdventureMissionRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<AdventureMissionRead>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Get All Adventure Missions In Nollning
+  /// 
+  ///
+  /// Parameters:
+  /// * [nollningId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [BuiltList<AdventureMissionRead>] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<BuiltList<AdventureMissionRead>>> nollningGetAllAdventureMissionsInNollning({ 
+    required int nollningId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/missions/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    BuiltList<AdventureMissionRead>? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(BuiltList, [FullType(AdventureMissionRead)]),
+      ) as BuiltList<AdventureMissionRead>;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<BuiltList<AdventureMissionRead>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
   /// Get All Nollning
   /// 
   ///
@@ -562,7 +1020,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/all';
+    final _path = r'/nollning/';
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -628,7 +1086,7 @@ class NollningApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [nollningId] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -639,7 +1097,7 @@ class NollningApi {
   /// Returns a [Future] containing a [Response] with a [BuiltList<NollningGroupRead>] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<BuiltList<NollningGroupRead>>> nollningGetAllNollningGroups({ 
-    required int id,
+    required int nollningId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -647,7 +1105,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/';
+    final _path = r'/nollning/groups/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -670,14 +1128,9 @@ class NollningApi {
       validateStatus: validateStatus,
     );
 
-    final _queryParameters = <String, dynamic>{
-      r'id': encodeQueryParameter(_serializers, id, const FullType(int)),
-    };
-
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
-      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
@@ -714,11 +1167,11 @@ class NollningApi {
     );
   }
 
-  /// Get Completed Missions
+  /// Get Completed Missions From Group
   /// 
   ///
   /// Parameters:
-  /// * [nollningId] 
+  /// * [groupId] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -728,8 +1181,8 @@ class NollningApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<GroupMissionRead>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<GroupMissionRead>>> nollningGetCompletedMissions({ 
-    required int nollningId,
+  Future<Response<BuiltList<GroupMissionRead>>> nollningGetCompletedMissionsFromGroup({ 
+    required int groupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -737,7 +1190,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/group_mission/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
+    final _path = r'/nollning/groups/missions/{group_id}'.replaceAll('{' r'group_id' '}', encodeQueryParameter(_serializers, groupId, const FullType(int)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -803,7 +1256,7 @@ class NollningApi {
   /// 
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [nollningId] 
   /// * [nollningCreate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -815,7 +1268,7 @@ class NollningApi {
   /// Returns a [Future] containing a [Response] with a [NollningRead] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<NollningRead>> nollningPatchNollning({ 
-    required int id,
+    required int nollningId,
     required NollningCreate nollningCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -824,7 +1277,7 @@ class NollningApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/nollning/patch/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(int)).toString());
+    final _path = r'/nollning/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
@@ -1009,6 +1462,85 @@ class NollningApi {
       statusMessage: _response.statusMessage,
       extra: _response.extra,
     );
+  }
+
+  /// Remove Completed Mission From Group
+  /// 
+  ///
+  /// Parameters:
+  /// * [nollningId] 
+  /// * [nollningDeleteMission] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future]
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<void>> nollningRemoveCompletedMissionFromGroup({ 
+    required int nollningId,
+    required NollningDeleteMission nollningDeleteMission,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/nollning/groups/missions/{nollning_id}'.replaceAll('{' r'nollning_id' '}', encodeQueryParameter(_serializers, nollningId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'DELETE',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(NollningDeleteMission);
+      _bodyData = _serializers.serialize(nollningDeleteMission, specifiedType: _type);
+
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    return _response;
   }
 
   /// Remove Group From Nollning

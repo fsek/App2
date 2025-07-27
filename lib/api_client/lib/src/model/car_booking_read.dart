@@ -3,7 +3,8 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/council_in_car_booking_read.dart';
+import 'package:api_client/src/model/simple_user_read.dart';
+import 'package:api_client/src/model/simple_council_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -13,9 +14,7 @@ part 'car_booking_read.g.dart';
 ///
 /// Properties:
 /// * [bookingId] 
-/// * [userId] 
-/// * [userFirstName] 
-/// * [userLastName] 
+/// * [user] 
 /// * [description] 
 /// * [startTime] 
 /// * [endTime] 
@@ -28,14 +27,8 @@ abstract class CarBookingRead implements Built<CarBookingRead, CarBookingReadBui
   @BuiltValueField(wireName: r'booking_id')
   int get bookingId;
 
-  @BuiltValueField(wireName: r'user_id')
-  int get userId;
-
-  @BuiltValueField(wireName: r'user_first_name')
-  String get userFirstName;
-
-  @BuiltValueField(wireName: r'user_last_name')
-  String get userLastName;
+  @BuiltValueField(wireName: r'user')
+  SimpleUserRead get user;
 
   @BuiltValueField(wireName: r'description')
   String get description;
@@ -56,7 +49,7 @@ abstract class CarBookingRead implements Built<CarBookingRead, CarBookingReadBui
   int? get councilId;
 
   @BuiltValueField(wireName: r'council')
-  CouncilInCarBookingRead? get council;
+  SimpleCouncilRead? get council;
 
   CarBookingRead._();
 
@@ -86,20 +79,10 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
       object.bookingId,
       specifiedType: const FullType(int),
     );
-    yield r'user_id';
+    yield r'user';
     yield serializers.serialize(
-      object.userId,
-      specifiedType: const FullType(int),
-    );
-    yield r'user_first_name';
-    yield serializers.serialize(
-      object.userFirstName,
-      specifiedType: const FullType(String),
-    );
-    yield r'user_last_name';
-    yield serializers.serialize(
-      object.userLastName,
-      specifiedType: const FullType(String),
+      object.user,
+      specifiedType: const FullType(SimpleUserRead),
     );
     yield r'description';
     yield serializers.serialize(
@@ -137,7 +120,7 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
       yield r'council';
       yield serializers.serialize(
         object.council,
-        specifiedType: const FullType.nullable(CouncilInCarBookingRead),
+        specifiedType: const FullType.nullable(SimpleCouncilRead),
       );
     }
   }
@@ -170,26 +153,12 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
           ) as int;
           result.bookingId = valueDes;
           break;
-        case r'user_id':
+        case r'user':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.userId = valueDes;
-          break;
-        case r'user_first_name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.userFirstName = valueDes;
-          break;
-        case r'user_last_name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.userLastName = valueDes;
+            specifiedType: const FullType(SimpleUserRead),
+          ) as SimpleUserRead;
+          result.user.replace(valueDes);
           break;
         case r'description':
           final valueDes = serializers.deserialize(
@@ -237,8 +206,8 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
         case r'council':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(CouncilInCarBookingRead),
-          ) as CouncilInCarBookingRead?;
+            specifiedType: const FullType.nullable(SimpleCouncilRead),
+          ) as SimpleCouncilRead?;
           if (valueDes == null) continue;
           result.council.replace(valueDes);
           break;

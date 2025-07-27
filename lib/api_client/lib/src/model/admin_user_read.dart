@@ -36,6 +36,8 @@ part 'admin_user_read.g.dart';
 /// * [accesses] 
 /// * [isMember] 
 /// * [groups] 
+/// * [mooseGameName] 
+/// * [mooseGameScore] 
 @BuiltValue()
 abstract class AdminUserRead implements Built<AdminUserRead, AdminUserReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -98,6 +100,12 @@ abstract class AdminUserRead implements Built<AdminUserRead, AdminUserReadBuilde
 
   @BuiltValueField(wireName: r'groups')
   BuiltList<GroupRead> get groups;
+
+  @BuiltValueField(wireName: r'moose_game_name')
+  String get mooseGameName;
+
+  @BuiltValueField(wireName: r'moose_game_score')
+  int get mooseGameScore;
 
   AdminUserRead._();
 
@@ -232,6 +240,16 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
     yield serializers.serialize(
       object.groups,
       specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
+    );
+    yield r'moose_game_name';
+    yield serializers.serialize(
+      object.mooseGameName,
+      specifiedType: const FullType(String),
+    );
+    yield r'moose_game_score';
+    yield serializers.serialize(
+      object.mooseGameScore,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -398,6 +416,20 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
             specifiedType: const FullType(BuiltList, [FullType(GroupRead)]),
           ) as BuiltList<GroupRead>;
           result.groups.replace(valueDes);
+          break;
+        case r'moose_game_name':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.mooseGameName = valueDes;
+          break;
+        case r'moose_game_score':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.mooseGameScore = valueDes;
           break;
         default:
           unhandled.add(key);

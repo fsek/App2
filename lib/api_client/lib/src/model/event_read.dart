@@ -5,7 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
 import 'package:api_client/src/model/priority_db.dart';
-import 'package:api_client/src/model/council_in_event_read.dart';
+import 'package:api_client/src/model/simple_council_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -74,7 +74,7 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   String get descriptionEn;
 
   @BuiltValueField(wireName: r'council')
-  CouncilInEventRead get council;
+  SimpleCouncilRead get council;
 
   @BuiltValueField(wireName: r'location')
   String get location;
@@ -200,7 +200,7 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'council';
     yield serializers.serialize(
       object.council,
-      specifiedType: const FullType(CouncilInEventRead),
+      specifiedType: const FullType(SimpleCouncilRead),
     );
     yield r'location';
     yield serializers.serialize(
@@ -378,8 +378,8 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
         case r'council':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(CouncilInEventRead),
-          ) as CouncilInEventRead;
+            specifiedType: const FullType(SimpleCouncilRead),
+          ) as SimpleCouncilRead;
           result.council.replace(valueDes);
           break;
         case r'location':

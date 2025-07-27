@@ -306,7 +306,7 @@ class _EventPageState extends State<EventPage> {
                         ),
                         InkWell(
                           child: new Text(
-                            event!.council.name,
+                            t.localeName == "sv" ? event!.council.nameSv : event!.council.nameEn,
                             style: TextStyle(
                               color: Colors.blue[300],
                             ),
@@ -357,11 +357,6 @@ class _EventPageState extends State<EventPage> {
     await ApiService.apiClient
         .getEventSignupApi()
         .eventSignupEventSignoffRoute(eventId: eventId, userId: userId);
-
-    // Map json = await AbstractService.delete(
-    //   "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
-    // );
-    // if (!json.containsKey('errors')) {}
     update();
   }
 

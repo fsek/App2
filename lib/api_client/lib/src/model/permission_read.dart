@@ -22,11 +22,11 @@ abstract class PermissionRead implements Built<PermissionRead, PermissionReadBui
 
   @BuiltValueField(wireName: r'action')
   PermissionReadActionEnum get action;
-  // enum actionEnum {  view,  manage,  };
+  // enum actionEnum {  view,  manage,  super,  };
 
   @BuiltValueField(wireName: r'target')
   PermissionReadTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
 
   PermissionRead._();
 
@@ -145,6 +145,8 @@ class PermissionReadActionEnum extends EnumClass {
   static const PermissionReadActionEnum view = _$permissionReadActionEnum_view;
   @BuiltValueEnumConst(wireName: r'manage')
   static const PermissionReadActionEnum manage = _$permissionReadActionEnum_manage;
+  @BuiltValueEnumConst(wireName: r'super')
+  static const PermissionReadActionEnum super_ = _$permissionReadActionEnum_super_;
 
   static Serializer<PermissionReadActionEnum> get serializer => _$permissionReadActionEnumSerializer;
 
@@ -182,7 +184,7 @@ class PermissionReadTargetEnum extends EnumClass {
   static const PermissionReadTargetEnum election = _$permissionReadTargetEnum_election;
   @BuiltValueEnumConst(wireName: r'Groups')
   static const PermissionReadTargetEnum groups = _$permissionReadTargetEnum_groups;
-  @BuiltValueEnumConst(wireName: r'Adventure Missions')
+  @BuiltValueEnumConst(wireName: r'AdventureMissions')
   static const PermissionReadTargetEnum adventureMissions = _$permissionReadTargetEnum_adventureMissions;
   @BuiltValueEnumConst(wireName: r'Nollning')
   static const PermissionReadTargetEnum nollning = _$permissionReadTargetEnum_nollning;
@@ -192,6 +194,10 @@ class PermissionReadTargetEnum extends EnumClass {
   static const PermissionReadTargetEnum tags = _$permissionReadTargetEnum_tags;
   @BuiltValueEnumConst(wireName: r'Council')
   static const PermissionReadTargetEnum council = _$permissionReadTargetEnum_council;
+  @BuiltValueEnumConst(wireName: r'RoomBookings')
+  static const PermissionReadTargetEnum roomBookings = _$permissionReadTargetEnum_roomBookings;
+  @BuiltValueEnumConst(wireName: r'Moosegame')
+  static const PermissionReadTargetEnum moosegame = _$permissionReadTargetEnum_moosegame;
 
   static Serializer<PermissionReadTargetEnum> get serializer => _$permissionReadTargetEnumSerializer;
 

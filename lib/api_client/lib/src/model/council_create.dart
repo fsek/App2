@@ -11,15 +11,23 @@ part 'council_create.g.dart';
 /// CouncilCreate
 ///
 /// Properties:
-/// * [name] 
-/// * [description] 
+/// * [nameSv] 
+/// * [nameEn] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
 @BuiltValue()
 abstract class CouncilCreate implements Built<CouncilCreate, CouncilCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'name_sv')
+  String get nameSv;
 
-  @BuiltValueField(wireName: r'description')
-  String? get description;
+  @BuiltValueField(wireName: r'name_en')
+  String get nameEn;
+
+  @BuiltValueField(wireName: r'description_sv')
+  String? get descriptionSv;
+
+  @BuiltValueField(wireName: r'description_en')
+  String? get descriptionEn;
 
   CouncilCreate._();
 
@@ -44,15 +52,27 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
     CouncilCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'name_sv';
     yield serializers.serialize(
-      object.name,
+      object.nameSv,
       specifiedType: const FullType(String),
     );
-    if (object.description != null) {
-      yield r'description';
+    yield r'name_en';
+    yield serializers.serialize(
+      object.nameEn,
+      specifiedType: const FullType(String),
+    );
+    if (object.descriptionSv != null) {
+      yield r'description_sv';
       yield serializers.serialize(
-        object.description,
+        object.descriptionSv,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.descriptionEn != null) {
+      yield r'description_en';
+      yield serializers.serialize(
+        object.descriptionEn,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -79,20 +99,35 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'name_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.nameSv = valueDes;
           break;
-        case r'description':
+        case r'name_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.nameEn = valueDes;
+          break;
+        case r'description_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(String),
           ) as String?;
           if (valueDes == null) continue;
-          result.description = valueDes;
+          result.descriptionSv = valueDes;
+          break;
+        case r'description_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionEn = valueDes;
           break;
         default:
           unhandled.add(key);

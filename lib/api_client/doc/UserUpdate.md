@@ -14,8 +14,10 @@ Name | Type | Description | Notes
 **program** | **String** |  | [optional] 
 **notifications** | **bool** |  | [optional] 
 **stilId** | **String** |  | [optional] 
-**standardFoodPreferences** | **BuiltList&lt;String&gt;** |  | 
-**otherFoodPreferences** | **String** |  | 
+**standardFoodPreferences** | **BuiltList&lt;String&gt;** |  | [optional] 
+**otherFoodPreferences** | **String** |  | [optional] 
+**telephoneNumber** | **String** |  | [optional] 
+**mooseGameName** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

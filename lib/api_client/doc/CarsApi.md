@@ -9,17 +9,17 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**carsCreateBooking**](CarsApi.md#carscreatebooking) | **POST** /car/ | Create Booking
-[**carsGetAllBooking**](CarsApi.md#carsgetallbooking) | **GET** /car/ | Get All Booking
-[**carsGetBooking**](CarsApi.md#carsgetbooking) | **GET** /car/{booking_id} | Get Booking
-[**carsRemoveBooking**](CarsApi.md#carsremovebooking) | **DELETE** /car/{booking_id} | Remove Booking
-[**carsUpdateBooking**](CarsApi.md#carsupdatebooking) | **PATCH** /car/{booking_id} | Update Booking
+[**carsCreateCarBooking**](CarsApi.md#carscreatecarbooking) | **POST** /car/ | Create Car Booking
+[**carsGetAllCarBookings**](CarsApi.md#carsgetallcarbookings) | **GET** /car/ | Get All Car Bookings
+[**carsGetCarBooking**](CarsApi.md#carsgetcarbooking) | **GET** /car/{booking_id} | Get Car Booking
+[**carsRemoveCarBooking**](CarsApi.md#carsremovecarbooking) | **DELETE** /car/{booking_id} | Remove Car Booking
+[**carsUpdateCarBooking**](CarsApi.md#carsupdatecarbooking) | **PATCH** /car/{booking_id} | Update Car Booking
 
 
-# **carsCreateBooking**
-> CarBookingRead carsCreateBooking(carBookingCreate)
+# **carsCreateCarBooking**
+> CarBookingRead carsCreateCarBooking(carBookingCreate)
 
-Create Booking
+Create Car Booking
 
 ### Example
 ```dart
@@ -35,10 +35,10 @@ final api = ApiClient().getCarsApi();
 final CarBookingCreate carBookingCreate = ; // CarBookingCreate | 
 
 try {
-    final response = api.carsCreateBooking(carBookingCreate);
+    final response = api.carsCreateCarBooking(carBookingCreate);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CarsApi->carsCreateBooking: $e\n');
+    print('Exception when calling CarsApi->carsCreateCarBooking: $e\n');
 }
 ```
 
@@ -63,10 +63,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **carsGetAllBooking**
-> BuiltList<CarBookingRead> carsGetAllBooking()
+# **carsGetAllCarBookings**
+> BuiltList<CarBookingRead> carsGetAllCarBookings()
 
-Get All Booking
+Get All Car Bookings
 
 ### Example
 ```dart
@@ -81,10 +81,10 @@ import 'package:api_client/api.dart';
 final api = ApiClient().getCarsApi();
 
 try {
-    final response = api.carsGetAllBooking();
+    final response = api.carsGetAllCarBookings();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CarsApi->carsGetAllBooking: $e\n');
+    print('Exception when calling CarsApi->carsGetAllCarBookings: $e\n');
 }
 ```
 
@@ -106,10 +106,10 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **carsGetBooking**
-> CarBookingRead carsGetBooking(bookingId)
+# **carsGetCarBooking**
+> CarBookingRead carsGetCarBooking(bookingId)
 
-Get Booking
+Get Car Booking
 
 ### Example
 ```dart
@@ -125,10 +125,10 @@ final api = ApiClient().getCarsApi();
 final int bookingId = 56; // int | 
 
 try {
-    final response = api.carsGetBooking(bookingId);
+    final response = api.carsGetCarBooking(bookingId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CarsApi->carsGetBooking: $e\n');
+    print('Exception when calling CarsApi->carsGetCarBooking: $e\n');
 }
 ```
 
@@ -153,10 +153,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **carsRemoveBooking**
-> CarBookingRead carsRemoveBooking(bookingId)
+# **carsRemoveCarBooking**
+> CarBookingRead carsRemoveCarBooking(bookingId)
 
-Remove Booking
+Remove Car Booking
 
 ### Example
 ```dart
@@ -172,10 +172,10 @@ final api = ApiClient().getCarsApi();
 final int bookingId = 56; // int | 
 
 try {
-    final response = api.carsRemoveBooking(bookingId);
+    final response = api.carsRemoveCarBooking(bookingId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CarsApi->carsRemoveBooking: $e\n');
+    print('Exception when calling CarsApi->carsRemoveCarBooking: $e\n');
 }
 ```
 
@@ -200,10 +200,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **carsUpdateBooking**
-> CarBookingRead carsUpdateBooking(bookingId, carBookingUpdate)
+# **carsUpdateCarBooking**
+> CarBookingRead carsUpdateCarBooking(bookingId, carBookingUpdate)
 
-Update Booking
+Update Car Booking
 
 ### Example
 ```dart
@@ -220,10 +220,10 @@ final int bookingId = 56; // int |
 final CarBookingUpdate carBookingUpdate = ; // CarBookingUpdate | 
 
 try {
-    final response = api.carsUpdateBooking(bookingId, carBookingUpdate);
+    final response = api.carsUpdateCarBooking(bookingId, carBookingUpdate);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling CarsApi->carsUpdateBooking: $e\n');
+    print('Exception when calling CarsApi->carsUpdateCarBooking: $e\n');
 }
 ```
 

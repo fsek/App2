@@ -123,13 +123,16 @@ flutter:
   fonts:
     - family: Brandon Grotesque
       fonts:
-        - asset: assets/BrandonGrotesque-Regular.ttf
+        - asset: assets/fonts/BrandonGrotesque-Regular.ttf
     - family: NF-Pixels
       fonts:
-        - asset: assets/NFPixels-Regular.ttf
+        - asset: assets/fonts/NFPixels-Regular.ttf
     - family: Testament
       fonts:
-        - asset: assets/Testament-Medium.ttf
+        - asset: assets/fonts/Testament-Medium.ttf
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/icomoon.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

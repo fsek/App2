@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **isVerified** | **bool** |  | [optional] 
 **firstName** | **String** |  | 
 **lastName** | **String** |  | 
-**telephoneNumber** | **String** |  | [optional] 
+**telephoneNumber** | **String** |  | 
 **startYear** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

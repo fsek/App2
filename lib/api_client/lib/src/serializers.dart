@@ -44,8 +44,6 @@ import 'package:api_client/src/model/car_booking_create.dart';
 import 'package:api_client/src/model/car_booking_read.dart';
 import 'package:api_client/src/model/car_booking_update.dart';
 import 'package:api_client/src/model/council_create.dart';
-import 'package:api_client/src/model/council_in_car_booking_read.dart';
-import 'package:api_client/src/model/council_in_event_read.dart';
 import 'package:api_client/src/model/council_read.dart';
 import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
@@ -75,6 +73,7 @@ import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/img_in_album.dart';
 import 'package:api_client/src/model/memberroles.dart';
+import 'package:api_client/src/model/moose_game_read.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
 import 'package:api_client/src/model/news_tag_read.dart';
@@ -92,6 +91,11 @@ import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:api_client/src/model/post_read.dart';
 import 'package:api_client/src/model/post_update.dart';
 import 'package:api_client/src/model/priority_db.dart';
+import 'package:api_client/src/model/room_booking_create.dart';
+import 'package:api_client/src/model/room_booking_read.dart';
+import 'package:api_client/src/model/room_booking_update.dart';
+import 'package:api_client/src/model/room_bookings_between_dates.dart';
+import 'package:api_client/src/model/simple_council_read.dart';
 import 'package:api_client/src/model/simple_user_access_read.dart';
 import 'package:api_client/src/model/simple_user_read.dart';
 import 'package:api_client/src/model/song_category_create.dart';
@@ -106,6 +110,7 @@ import 'package:api_client/src/model/update_permission_part.dart';
 import 'package:api_client/src/model/update_permissions.dart';
 import 'package:api_client/src/model/update_user_member.dart';
 import 'package:api_client/src/model/update_user_member_multiple.dart';
+import 'package:api_client/src/model/update_user_posts.dart';
 import 'package:api_client/src/model/user_access_create.dart';
 import 'package:api_client/src/model/user_access_read.dart';
 import 'package:api_client/src/model/user_access_update.dart';
@@ -152,8 +157,6 @@ part 'serializers.g.dart';
   CarBookingRead,
   CarBookingUpdate,
   CouncilCreate,
-  CouncilInCarBookingRead,
-  CouncilInEventRead,
   CouncilRead,
   CouncilUpdate,
   Detail,
@@ -183,6 +186,7 @@ part 'serializers.g.dart';
   HTTPValidationError,
   ImgInAlbum,
   MEMBERROLES,
+  MooseGameRead,
   NewsCreate,
   NewsRead,
   NewsTagRead,
@@ -200,6 +204,11 @@ part 'serializers.g.dart';
   PostRead,
   PostUpdate,
   PriorityDB,
+  RoomBookingCreate,
+  RoomBookingRead,
+  RoomBookingUpdate,
+  RoomBookingsBetweenDates,
+  SimpleCouncilRead,
   SimpleUserAccessRead,
   SimpleUserRead,
   SongCategoryCreate,
@@ -214,6 +223,7 @@ part 'serializers.g.dart';
   UpdatePermissions,
   UpdateUserMember,
   UpdateUserMemberMultiple,
+  UpdateUserPosts,
   UserAccessCreate,
   UserAccessRead,
   UserAccessUpdate,
@@ -285,8 +295,16 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<EventTagRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(MooseGameRead)]),
+        () => ListBuilder<MooseGameRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdRead)]),
         () => ListBuilder<AdRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(RoomBookingRead)]),
+        () => ListBuilder<RoomBookingRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SongRead)]),
@@ -319,6 +337,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PermissionRead)]),
         () => ListBuilder<PermissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(int)]),
+        () => ListBuilder<int>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NewsRead)]),

@@ -13,6 +13,8 @@ Method | HTTP request | Description
 [**authAuthCookieLogout**](AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
 [**authAuthCookieLogoutAll**](AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
 [**authAuthCookieRefresh**](AuthApi.md#authauthcookierefresh) | **POST** /auth/refresh | Auth:Cookie.Refresh
+[**authAuthCookieUpdateEmail**](AuthApi.md#authauthcookieupdateemail) | **PATCH** /auth/update-email | Auth:Cookie.Update Email
+[**authAuthCookieUpdatePassword**](AuthApi.md#authauthcookieupdatepassword) | **PATCH** /auth/update-password | Auth:Cookie.Update Password
 [**authRegisterRegister**](AuthApi.md#authregisterregister) | **POST** /auth/register | Register:Register
 [**authResetForgotPassword**](AuthApi.md#authresetforgotpassword) | **POST** /auth/forgot-password | Reset:Forgot Password
 [**authResetResetPassword**](AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
@@ -196,6 +198,124 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authAuthCookieUpdateEmail**
+> UserRead authAuthCookieUpdateEmail(newEmail, username, password, grantType, scope, clientId, clientSecret)
+
+Auth:Cookie.Update Email
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getAuthApi();
+final String newEmail = newEmail_example; // String | 
+final String username = username_example; // String | 
+final String password = password_example; // String | 
+final String grantType = grantType_example; // String | 
+final String scope = scope_example; // String | 
+final String clientId = clientId_example; // String | 
+final String clientSecret = clientSecret_example; // String | 
+
+try {
+    final response = api.authAuthCookieUpdateEmail(newEmail, username, password, grantType, scope, clientId, clientSecret);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling AuthApi->authAuthCookieUpdateEmail: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **newEmail** | **String**|  | 
+ **username** | **String**|  | 
+ **password** | **String**|  | 
+ **grantType** | **String**|  | [optional] 
+ **scope** | **String**|  | [optional] [default to '']
+ **clientId** | **String**|  | [optional] 
+ **clientSecret** | **String**|  | [optional] 
+
+### Return type
+
+[**UserRead**](UserRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authAuthCookieUpdatePassword**
+> JsonObject authAuthCookieUpdatePassword(newPassword, username, password, grantType, scope, clientId, clientSecret)
+
+Auth:Cookie.Update Password
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getAuthApi();
+final String newPassword = newPassword_example; // String | 
+final String username = username_example; // String | 
+final String password = password_example; // String | 
+final String grantType = grantType_example; // String | 
+final String scope = scope_example; // String | 
+final String clientId = clientId_example; // String | 
+final String clientSecret = clientSecret_example; // String | 
+
+try {
+    final response = api.authAuthCookieUpdatePassword(newPassword, username, password, grantType, scope, clientId, clientSecret);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling AuthApi->authAuthCookieUpdatePassword: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **newPassword** | **String**|  | 
+ **username** | **String**|  | 
+ **password** | **String**|  | 
+ **grantType** | **String**|  | [optional] 
+ **scope** | **String**|  | [optional] [default to '']
+ **clientId** | **String**|  | [optional] 
+ **clientSecret** | **String**|  | [optional] 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

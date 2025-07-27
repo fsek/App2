@@ -15,7 +15,6 @@ part 'adventure_mission_create.g.dart';
 /// * [description] 
 /// * [maxPoints] 
 /// * [minPoints] 
-/// * [nollningId] 
 /// * [nollningWeek] 
 @BuiltValue()
 abstract class AdventureMissionCreate implements Built<AdventureMissionCreate, AdventureMissionCreateBuilder> {
@@ -30,9 +29,6 @@ abstract class AdventureMissionCreate implements Built<AdventureMissionCreate, A
 
   @BuiltValueField(wireName: r'min_points')
   int get minPoints;
-
-  @BuiltValueField(wireName: r'nollning_id')
-  int get nollningId;
 
   @BuiltValueField(wireName: r'nollning_week')
   int get nollningWeek;
@@ -78,11 +74,6 @@ class _$AdventureMissionCreateSerializer implements PrimitiveSerializer<Adventur
     yield r'min_points';
     yield serializers.serialize(
       object.minPoints,
-      specifiedType: const FullType(int),
-    );
-    yield r'nollning_id';
-    yield serializers.serialize(
-      object.nollningId,
       specifiedType: const FullType(int),
     );
     yield r'nollning_week';
@@ -140,13 +131,6 @@ class _$AdventureMissionCreateSerializer implements PrimitiveSerializer<Adventur
             specifiedType: const FullType(int),
           ) as int;
           result.minPoints = valueDes;
-          break;
-        case r'nollning_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.nollningId = valueDes;
           break;
         case r'nollning_week':
           final valueDes = serializers.deserialize(

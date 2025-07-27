@@ -18,11 +18,11 @@ part 'permission_remove.g.dart';
 abstract class PermissionRemove implements Built<PermissionRemove, PermissionRemoveBuilder> {
   @BuiltValueField(wireName: r'action')
   PermissionRemoveActionEnum get action;
-  // enum actionEnum {  view,  manage,  };
+  // enum actionEnum {  view,  manage,  super,  };
 
   @BuiltValueField(wireName: r'target')
   PermissionRemoveTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  Adventure Missions,  Nollning,  UserDoorAccess,  Tags,  Council,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
 
   PermissionRemove._();
 
@@ -129,6 +129,8 @@ class PermissionRemoveActionEnum extends EnumClass {
   static const PermissionRemoveActionEnum view = _$permissionRemoveActionEnum_view;
   @BuiltValueEnumConst(wireName: r'manage')
   static const PermissionRemoveActionEnum manage = _$permissionRemoveActionEnum_manage;
+  @BuiltValueEnumConst(wireName: r'super')
+  static const PermissionRemoveActionEnum super_ = _$permissionRemoveActionEnum_super_;
 
   static Serializer<PermissionRemoveActionEnum> get serializer => _$permissionRemoveActionEnumSerializer;
 
@@ -166,7 +168,7 @@ class PermissionRemoveTargetEnum extends EnumClass {
   static const PermissionRemoveTargetEnum election = _$permissionRemoveTargetEnum_election;
   @BuiltValueEnumConst(wireName: r'Groups')
   static const PermissionRemoveTargetEnum groups = _$permissionRemoveTargetEnum_groups;
-  @BuiltValueEnumConst(wireName: r'Adventure Missions')
+  @BuiltValueEnumConst(wireName: r'AdventureMissions')
   static const PermissionRemoveTargetEnum adventureMissions = _$permissionRemoveTargetEnum_adventureMissions;
   @BuiltValueEnumConst(wireName: r'Nollning')
   static const PermissionRemoveTargetEnum nollning = _$permissionRemoveTargetEnum_nollning;
@@ -176,6 +178,10 @@ class PermissionRemoveTargetEnum extends EnumClass {
   static const PermissionRemoveTargetEnum tags = _$permissionRemoveTargetEnum_tags;
   @BuiltValueEnumConst(wireName: r'Council')
   static const PermissionRemoveTargetEnum council = _$permissionRemoveTargetEnum_council;
+  @BuiltValueEnumConst(wireName: r'RoomBookings')
+  static const PermissionRemoveTargetEnum roomBookings = _$permissionRemoveTargetEnum_roomBookings;
+  @BuiltValueEnumConst(wireName: r'Moosegame')
+  static const PermissionRemoveTargetEnum moosegame = _$permissionRemoveTargetEnum_moosegame;
 
   static Serializer<PermissionRemoveTargetEnum> get serializer => _$permissionRemoveTargetEnumSerializer;
 

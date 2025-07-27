@@ -15,7 +15,7 @@ part 'user_access_update.g.dart';
 /// * [accessId] 
 /// * [door] 
 /// * [starttime] 
-/// * [stoptime] 
+/// * [endtime] 
 @BuiltValue()
 abstract class UserAccessUpdate implements Built<UserAccessUpdate, UserAccessUpdateBuilder> {
   @BuiltValueField(wireName: r'access_id')
@@ -28,8 +28,8 @@ abstract class UserAccessUpdate implements Built<UserAccessUpdate, UserAccessUpd
   @BuiltValueField(wireName: r'starttime')
   DateTime? get starttime;
 
-  @BuiltValueField(wireName: r'stoptime')
-  DateTime? get stoptime;
+  @BuiltValueField(wireName: r'endtime')
+  DateTime? get endtime;
 
   UserAccessUpdate._();
 
@@ -73,10 +73,10 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
         specifiedType: const FullType.nullable(DateTime),
       );
     }
-    if (object.stoptime != null) {
-      yield r'stoptime';
+    if (object.endtime != null) {
+      yield r'endtime';
       yield serializers.serialize(
-        object.stoptime,
+        object.endtime,
         specifiedType: const FullType.nullable(DateTime),
       );
     }
@@ -126,13 +126,13 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
           if (valueDes == null) continue;
           result.starttime = valueDes;
           break;
-        case r'stoptime':
+        case r'endtime':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(DateTime),
           ) as DateTime?;
           if (valueDes == null) continue;
-          result.stoptime = valueDes;
+          result.endtime = valueDes;
           break;
         default:
           unhandled.add(key);

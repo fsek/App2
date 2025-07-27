@@ -23,7 +23,7 @@ class CarsApi {
 
   const CarsApi(this._dio, this._serializers);
 
-  /// Create Booking
+  /// Create Car Booking
   /// 
   ///
   /// Parameters:
@@ -37,7 +37,7 @@ class CarsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarBookingRead>> carsCreateBooking({ 
+  Future<Response<CarBookingRead>> carsCreateCarBooking({ 
     required CarBookingCreate carBookingCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -128,7 +128,7 @@ class CarsApi {
     );
   }
 
-  /// Get All Booking
+  /// Get All Car Bookings
   /// 
   ///
   /// Parameters:
@@ -141,7 +141,7 @@ class CarsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<CarBookingRead>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<CarBookingRead>>> carsGetAllBooking({ 
+  Future<Response<BuiltList<CarBookingRead>>> carsGetAllCarBookings({ 
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -211,7 +211,7 @@ class CarsApi {
     );
   }
 
-  /// Get Booking
+  /// Get Car Booking
   /// 
   ///
   /// Parameters:
@@ -225,7 +225,7 @@ class CarsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarBookingRead>> carsGetBooking({ 
+  Future<Response<CarBookingRead>> carsGetCarBooking({ 
     required int bookingId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -296,7 +296,7 @@ class CarsApi {
     );
   }
 
-  /// Remove Booking
+  /// Remove Car Booking
   /// 
   ///
   /// Parameters:
@@ -310,7 +310,7 @@ class CarsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarBookingRead>> carsRemoveBooking({ 
+  Future<Response<CarBookingRead>> carsRemoveCarBooking({ 
     required int bookingId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -381,7 +381,7 @@ class CarsApi {
     );
   }
 
-  /// Update Booking
+  /// Update Car Booking
   /// 
   ///
   /// Parameters:
@@ -396,7 +396,7 @@ class CarsApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CarBookingRead] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CarBookingRead>> carsUpdateBooking({ 
+  Future<Response<CarBookingRead>> carsUpdateCarBooking({ 
     required int bookingId,
     required CarBookingUpdate carBookingUpdate,
     CancelToken? cancelToken,

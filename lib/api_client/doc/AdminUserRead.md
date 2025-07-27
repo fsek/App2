@@ -28,6 +28,8 @@ Name | Type | Description | Notes
 **accesses** | [**BuiltList&lt;SimpleUserAccessRead&gt;**](SimpleUserAccessRead.md) |  | 
 **isMember** | **bool** |  | 
 **groups** | [**BuiltList&lt;GroupRead&gt;**](GroupRead.md) |  | 
+**mooseGameName** | **String** |  | 
+**mooseGameScore** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

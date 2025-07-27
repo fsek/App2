@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
 import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
@@ -36,6 +37,10 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
+class CustomIcons {
+  static const IconData moose = IconData(0xe900, fontFamily: 'CustomIcons');
+}
+
 void main() async {
   setupLocator();
   var route = locator<NavigationService>();
@@ -43,7 +48,7 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.question_mark, PlaceholderPage(title: "", disc: "")),// NotificationsPage()),
+    Destination(3, CustomIcons.moose, MooseGamePage()),// NotificationsPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 

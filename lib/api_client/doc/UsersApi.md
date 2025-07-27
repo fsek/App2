@@ -14,9 +14,14 @@ Method | HTTP request | Description
 [**usersAdminUpdateUser**](UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [**usersGetMe**](UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [**usersGetUser**](UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
+[**usersGetUserImage**](UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
+[**usersGetUserImageStream**](UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [**usersGetUserPosts**](UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
+[**usersPostUserImage**](UsersApi.md#userspostuserimage) | **POST** /users/{user_id}/image | Post User Image
+[**usersSearchUsers**](UsersApi.md#userssearchusers) | **GET** /users/search/ | Search Users
 [**usersUpdateMultipleUsersStatus**](UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [**usersUpdateSelf**](UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
+[**usersUpdateUserPosts**](UsersApi.md#usersupdateuserposts) | **PATCH** /users/admin/user-posts/{user_id} | Update User Posts
 [**usersUpdateUserStatus**](UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
 
@@ -249,6 +254,100 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **usersGetUserImage**
+> JsonObject usersGetUserImage(userId)
+
+Get User Image
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+
+try {
+    final response = api.usersGetUserImage(userId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersGetUserImage: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersGetUserImageStream**
+> JsonObject usersGetUserImageStream(userId)
+
+Get User Image Stream
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+
+try {
+    final response = api.usersGetUserImageStream(userId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersGetUserImageStream: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **usersGetUserPosts**
 > BuiltList<PostRead> usersGetUserPosts(userId)
 
@@ -284,6 +383,112 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BuiltList&lt;PostRead&gt;**](PostRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersPostUserImage**
+> JsonObject usersPostUserImage(userId, image)
+
+Post User Image
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+final MultipartFile image = BINARY_DATA_HERE; // MultipartFile | 
+
+try {
+    final response = api.usersPostUserImage(userId, image);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersPostUserImage: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+ **image** | **MultipartFile**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersSearchUsers**
+> BuiltList<UserRead> usersSearchUsers(name, program, startYear, excludeIds, limit, offset)
+
+Search Users
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final String name = name_example; // String | 
+final String program = program_example; // String | 
+final int startYear = 56; // int | 
+final BuiltList<int> excludeIds = ; // BuiltList<int> | 
+final int limit = 56; // int | 
+final int offset = 56; // int | 
+
+try {
+    final response = api.usersSearchUsers(name, program, startYear, excludeIds, limit, offset);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersSearchUsers: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **String**|  | [optional] 
+ **program** | **String**|  | [optional] 
+ **startYear** | **int**|  | [optional] 
+ **excludeIds** | [**BuiltList&lt;int&gt;**](int.md)|  | [optional] 
+ **limit** | **int**|  | [optional] [default to 20]
+ **offset** | **int**|  | [optional] [default to 0]
+
+### Return type
+
+[**BuiltList&lt;UserRead&gt;**](UserRead.md)
 
 ### Authorization
 
@@ -374,6 +579,55 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userUpdate** | [**UserUpdate**](UserUpdate.md)|  | 
+
+### Return type
+
+[**AdminUserRead**](AdminUserRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **usersUpdateUserPosts**
+> AdminUserRead usersUpdateUserPosts(userId, updateUserPosts)
+
+Update User Posts
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+final UpdateUserPosts updateUserPosts = ; // UpdateUserPosts | 
+
+try {
+    final response = api.usersUpdateUserPosts(userId, updateUserPosts);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling UsersApi->usersUpdateUserPosts: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+ **updateUserPosts** | [**UpdateUserPosts**](UpdateUserPosts.md)|  | 
 
 ### Return type
 

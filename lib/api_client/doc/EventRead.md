@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **titleEn** | **String** |  | 
 **descriptionSv** | **String** |  | 
 **descriptionEn** | **String** |  | 
-**council** | [**CouncilInEventRead**](CouncilInEventRead.md) |  | 
+**council** | [**SimpleCouncilRead**](SimpleCouncilRead.md) |  | 
 **location** | **String** |  | 
 **maxEventUsers** | **int** |  | 
 **priorities** | [**BuiltList&lt;PriorityDB&gt;**](PriorityDB.md) |  | 
