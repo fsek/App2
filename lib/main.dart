@@ -56,8 +56,6 @@ void main() async {
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
-    // '/messages': (context) => MessagesPage(), We dont want messages in the backend anymore
-    // '/chant_book': (context) => ChantBookPage(), We dont want this either
     '/song_book': (context) => SongbookPage(),
     '/homepage': (context) => HomePage(),
     '/nolleguide': (context) => GuidePage(),
