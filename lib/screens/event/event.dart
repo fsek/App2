@@ -131,6 +131,35 @@ class _EventPageState extends State<EventPage> {
     update();
   }
 
+
+
+  Widget alcoholEventRow(EventRead event, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    if(event.alcoholEventType == "Alcohol-Served") {
+      return Row(children: [
+        Icon(Icons.wine_bar_rounded),
+        Text(t.eventAlcoholServed)]);
+    } 
+
+    if(event.isNollningEvent && event.alcoholEventType == "Alcohol"){
+      return Row(children: [
+        Icon(Icons.local_drink_rounded),
+        Text(t.eventAlcohol)
+      ]);
+    }
+
+    if(event.isNollningEvent && event.alcoholEventType == "None") {
+      return Row(children: [
+        Icon(Icons.no_drinks_rounded),
+        Text(t.eventAlcoholFree)
+      ]);
+    }
+
+    return SizedBox.shrink();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -264,17 +293,7 @@ class _EventPageState extends State<EventPage> {
                           ],
                         ),
                       ),
-                      Visibility(
-                        visible: (event!.alcoholEventType == "Alcohol-Served"),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.wine_bar_rounded,
-                            ),
-                            Text(t.eventAlcoholServed)
-                          ],
-                        ),
-                      ),
+                      alcoholEventRow(event!, context),
                       Visibility(
                         visible: event!.canSignup,
                         child: Row(

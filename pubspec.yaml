@@ -119,6 +119,8 @@ flutter:
     - assets/data/guide/
     - assets/data/nollning-24/
     - assets/data/nolleguide_2024/
+    - assets/data/nollning_25/calendar/
+    - assets/data/nollning_25/nolleguide/
 
   fonts:
     - family: Brandon Grotesque
@@ -133,6 +135,12 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/fonts/icomoon.ttf
+    - family: MinionPro
+      fonts: 
+        - asset: assets/fonts/MinionPro-Regular.otf
+          weight: 400
+        - asset: assets/fonts/MinionPro-Bold.otf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

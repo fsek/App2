@@ -53,9 +53,109 @@ class _CalendarState extends State<Calendar> {
             }));
   }
 
+  Widget checkAlcoholEventType(String alcType){
+    final String alcServed = "assets/data/nollning_25/calendar/alkfullImg.png";
+    final String noAlc = "assets/data/nollning_25/calendar/alkfriImg.png";
+    final String byob = "assets/data/nollning_25/calendar/byobImg.png";
+
+    switch (alcType) {
+      case "Alcohol-Served":
+        return Image.asset(alcServed, fit: BoxFit.fill);
+
+      case "Alcohol":
+        return Image.asset(byob, fit: BoxFit.fill);
+
+      default:
+        return Image.asset(noAlc, fit: BoxFit.fill);
+    }
+  }
+
   Widget createEventCard(EventRead event) {
     String locale = Localizations.localeOf(context).toString();
     var t = AppLocalizations.of(context)!;
+    if(event.isNollningEvent) {
+      return Container(
+        child: Card(
+          shadowColor: Colors.transparent,
+          color: Colors.transparent,
+          surfaceTintColor: null,
+          child: InkWell(
+            onTap: () => openEventPage(event),
+            child: Container(
+              margin: EdgeInsets.zero,
+              child: Stack(
+                children: [
+                  Positioned.fill(child: checkAlcoholEventType(event.alcoholEventType)),
+                  Container(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 5)),
+                      Container(
+                    margin: EdgeInsets.only(bottom: 7, left: 30),
+                    child: Text(
+                      t.localeName == "en" ? event.titleEn : event.titleSv,
+                      style: TextStyle(
+                        fontFamily: "MinionPro",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xFFFCBD1D)
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(left: 30)),
+                      Icon(
+                        Icons.access_time_rounded,
+                        size: 20,
+                      ),
+                      Text(
+                        /* better error checking */
+                        "  " +
+                            DateFormat("HH:mm")
+                                .format(event.startsAt.toLocal()) +
+                            " - " +
+                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
+                            ", " +
+                            DateFormat("MMMMd", locale)
+                                .format(event.startsAt.toLocal()),
+                        style: TextStyle(
+                          fontFamily: "MinionPro",
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(left: 30)),
+                      Icon(
+                        Icons.room,
+                        size: 20,
+                      ),
+                      Text(
+                        "  " +
+                            event.location,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                    Padding(padding: EdgeInsets.only(bottom: 10))
+                    ]))
+                ],
+              ),
+            ),
+          )));
+
+    } else {
+
     return Container(
       child: Card(
         shadowColor: null,
@@ -140,6 +240,7 @@ class _CalendarState extends State<Calendar> {
         margin: EdgeInsets.all(4),
       ),
     );
+    }
   }
 
   @override
