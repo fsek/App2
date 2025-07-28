@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**usersGetUserImage**](UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
 [**usersGetUserImageStream**](UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [**usersGetUserPosts**](UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
-[**usersPostUserImage**](UsersApi.md#userspostuserimage) | **POST** /users/{user_id}/image | Post User Image
+[**usersPostUserImage**](UsersApi.md#userspostuserimage) | **POST** /users/image | Post User Image
 [**usersSearchUsers**](UsersApi.md#userssearchusers) | **GET** /users/search/ | Search Users
 [**usersUpdateMultipleUsersStatus**](UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [**usersUpdateSelf**](UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
@@ -396,7 +396,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersPostUserImage**
-> JsonObject usersPostUserImage(userId, image)
+> JsonObject usersPostUserImage(image)
 
 Post User Image
 
@@ -411,11 +411,10 @@ import 'package:api_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getUsersApi();
-final int userId = 56; // int | 
 final MultipartFile image = BINARY_DATA_HERE; // MultipartFile | 
 
 try {
-    final response = api.usersPostUserImage(userId, image);
+    final response = api.usersPostUserImage(image);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling UsersApi->usersPostUserImage: $e\n');
@@ -426,7 +425,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **int**|  | 
  **image** | **MultipartFile**|  | 
 
 ### Return type

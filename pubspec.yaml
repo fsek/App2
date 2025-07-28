@@ -121,6 +121,7 @@ flutter:
     - assets/data/nolleguide_2024/
     - assets/data/nollning_25/calendar/
     - assets/data/nollning_25/nolleguide/
+    - assets/data/nollning_25/nolleguide/kladguide/
 
   fonts:
     - family: Brandon Grotesque

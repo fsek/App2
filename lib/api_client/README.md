@@ -200,6 +200,7 @@ Class | Method | HTTP request | Description
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsRemovePermission**](doc/PermissionsApi.md#permissionsremovepermission) | **DELETE** /permissions/ | Remove Permission
 [*PostsApi*](doc/PostsApi.md) | [**postsCreatePost**](doc/PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [*PostsApi*](doc/PostsApi.md) | [**postsDeletePost**](doc/PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
+[*PostsApi*](doc/PostsApi.md) | [**postsGetAllDoors**](doc/PostsApi.md#postsgetalldoors) | **GET** /posts/door_accesses | Get All Doors
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllUsersWithPost**](doc/PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
@@ -240,7 +241,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserImage**](doc/UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserImageStream**](doc/UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
-[*UsersApi*](doc/UsersApi.md) | [**usersPostUserImage**](doc/UsersApi.md#userspostuserimage) | **POST** /users/{user_id}/image | Post User Image
+[*UsersApi*](doc/UsersApi.md) | [**usersPostUserImage**](doc/UsersApi.md#userspostuserimage) | **POST** /users/image | Post User Image
 [*UsersApi*](doc/UsersApi.md) | [**usersSearchUsers**](doc/UsersApi.md#userssearchusers) | **GET** /users/search/ | Search Users
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateMultipleUsersStatus**](doc/UsersApi.md#usersupdatemultipleusersstatus) | **PATCH** /users/admin/member-status | Update Multiple Users Status
 [*UsersApi*](doc/UsersApi.md) | [**usersUpdateSelf**](doc/UsersApi.md#usersupdateself) | **PATCH** /users/update/me | Update Self
@@ -323,6 +324,7 @@ Class | Method | HTTP request | Description
  - [PermissionRead](doc/PermissionRead.md)
  - [PermissionRemove](doc/PermissionRemove.md)
  - [PostCreate](doc/PostCreate.md)
+ - [PostDoorAccessRead](doc/PostDoorAccessRead.md)
  - [PostPermissionRead](doc/PostPermissionRead.md)
  - [PostRead](doc/PostRead.md)
  - [PostUpdate](doc/PostUpdate.md)

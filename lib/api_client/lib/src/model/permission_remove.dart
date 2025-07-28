@@ -22,7 +22,7 @@ abstract class PermissionRemove implements Built<PermissionRemove, PermissionRem
 
   @BuiltValueField(wireName: r'target')
   PermissionRemoveTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  UserPost,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
 
   PermissionRemove._();
 
@@ -150,6 +150,8 @@ class PermissionRemoveTargetEnum extends EnumClass {
   static const PermissionRemoveTargetEnum user = _$permissionRemoveTargetEnum_user;
   @BuiltValueEnumConst(wireName: r'Post')
   static const PermissionRemoveTargetEnum post = _$permissionRemoveTargetEnum_post;
+  @BuiltValueEnumConst(wireName: r'UserPost')
+  static const PermissionRemoveTargetEnum userPost = _$permissionRemoveTargetEnum_userPost;
   @BuiltValueEnumConst(wireName: r'Permission')
   static const PermissionRemoveTargetEnum permission = _$permissionRemoveTargetEnum_permission;
   @BuiltValueEnumConst(wireName: r'News')

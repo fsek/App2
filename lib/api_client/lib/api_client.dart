@@ -110,6 +110,7 @@ export 'package:api_client/src/model/permission_create.dart';
 export 'package:api_client/src/model/permission_read.dart';
 export 'package:api_client/src/model/permission_remove.dart';
 export 'package:api_client/src/model/post_create.dart';
+export 'package:api_client/src/model/post_door_access_read.dart';
 export 'package:api_client/src/model/post_permission_read.dart';
 export 'package:api_client/src/model/post_read.dart';
 export 'package:api_client/src/model/post_update.dart';
