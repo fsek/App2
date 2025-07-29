@@ -17,5 +17,8 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     super.initState();
   }
 
+  Widget build(BuildContext context) {
 
+    return Scaffold();
+  }
 }

@@ -86,7 +86,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                           );
                           await preloadAssets(context, "backgroundPaths");
                           Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => (WordListPage())));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => (WordListOldPage())));
                         },
                         child: Image.asset(wordlistPath, fit: BoxFit.cover))),
                 Container(

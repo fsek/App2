@@ -62,7 +62,7 @@ void main() async {
     '/nolleguide': (context) => GuidePage(),
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
-    '/wordlist': (context) => WordListPage(),
+    '/wordlist': (context) => WordListOldPage(),
   };
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
