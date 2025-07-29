@@ -93,6 +93,7 @@ doc/PermissionRead.md
 doc/PermissionRemove.md
 doc/PermissionsApi.md
 doc/PostCreate.md
+doc/PostDoorAccessRead.md
 doc/PostPermissionRead.md
 doc/PostRead.md
 doc/PostUpdate.md
@@ -245,6 +246,7 @@ lib/src/model/permission_create.dart
 lib/src/model/permission_read.dart
 lib/src/model/permission_remove.dart
 lib/src/model/post_create.dart
+lib/src/model/post_door_access_read.dart
 lib/src/model/post_permission_read.dart
 lib/src/model/post_read.dart
 lib/src/model/post_update.dart
@@ -283,3 +285,4 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/post_door_access_read_test.dart

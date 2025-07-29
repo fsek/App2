@@ -87,6 +87,7 @@ import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
 import 'package:api_client/src/model/permission_remove.dart';
 import 'package:api_client/src/model/post_create.dart';
+import 'package:api_client/src/model/post_door_access_read.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:api_client/src/model/post_read.dart';
 import 'package:api_client/src/model/post_update.dart';
@@ -200,6 +201,7 @@ part 'serializers.g.dart';
   PermissionRead,
   PermissionRemove,
   PostCreate,
+  PostDoorAccessRead,
   PostPermissionRead,
   PostRead,
   PostUpdate,

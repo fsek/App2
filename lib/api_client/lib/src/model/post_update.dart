@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,6 +18,7 @@ part 'post_update.g.dart';
 /// * [descriptionSv] 
 /// * [descriptionEn] 
 /// * [email] 
+/// * [doors] 
 @BuiltValue()
 abstract class PostUpdate implements Built<PostUpdate, PostUpdateBuilder> {
   @BuiltValueField(wireName: r'name_sv')
@@ -36,6 +38,10 @@ abstract class PostUpdate implements Built<PostUpdate, PostUpdateBuilder> {
 
   @BuiltValueField(wireName: r'email')
   String? get email;
+
+  @BuiltValueField(wireName: r'doors')
+  BuiltList<PostUpdateDoorsEnum>? get doors;
+  // enum doorsEnum {  LC,  Bunkern,  Syster Kents,  Cafét,  Caféförrådet,  Pubförrådet,  Containern,  Arkivet,  };
 
   PostUpdate._();
 
@@ -100,6 +106,13 @@ class _$PostUpdateSerializer implements PrimitiveSerializer<PostUpdate> {
       yield serializers.serialize(
         object.email,
         specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.doors != null) {
+      yield r'doors';
+      yield serializers.serialize(
+        object.doors,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(PostUpdateDoorsEnum)]),
       );
     }
   }
@@ -173,6 +186,14 @@ class _$PostUpdateSerializer implements PrimitiveSerializer<PostUpdate> {
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
+        case r'doors':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(PostUpdateDoorsEnum)]),
+          ) as BuiltList<PostUpdateDoorsEnum>?;
+          if (valueDes == null) continue;
+          result.doors.replace(valueDes);
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -200,5 +221,32 @@ class _$PostUpdateSerializer implements PrimitiveSerializer<PostUpdate> {
     );
     return result.build();
   }
+}
+
+class PostUpdateDoorsEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'LC')
+  static const PostUpdateDoorsEnum LC = _$postUpdateDoorsEnum_LC;
+  @BuiltValueEnumConst(wireName: r'Bunkern')
+  static const PostUpdateDoorsEnum bunkern = _$postUpdateDoorsEnum_bunkern;
+  @BuiltValueEnumConst(wireName: r'Syster Kents')
+  static const PostUpdateDoorsEnum systerKents = _$postUpdateDoorsEnum_systerKents;
+  @BuiltValueEnumConst(wireName: r'Cafét')
+  static const PostUpdateDoorsEnum caft = _$postUpdateDoorsEnum_caft;
+  @BuiltValueEnumConst(wireName: r'Caféförrådet')
+  static const PostUpdateDoorsEnum caffrrdet = _$postUpdateDoorsEnum_caffrrdet;
+  @BuiltValueEnumConst(wireName: r'Pubförrådet')
+  static const PostUpdateDoorsEnum pubfrrdet = _$postUpdateDoorsEnum_pubfrrdet;
+  @BuiltValueEnumConst(wireName: r'Containern')
+  static const PostUpdateDoorsEnum containern = _$postUpdateDoorsEnum_containern;
+  @BuiltValueEnumConst(wireName: r'Arkivet')
+  static const PostUpdateDoorsEnum arkivet = _$postUpdateDoorsEnum_arkivet;
+
+  static Serializer<PostUpdateDoorsEnum> get serializer => _$postUpdateDoorsEnumSerializer;
+
+  const PostUpdateDoorsEnum._(String name): super(name);
+
+  static BuiltSet<PostUpdateDoorsEnum> get values => _$postUpdateDoorsEnumValues;
+  static PostUpdateDoorsEnum valueOf(String name) => _$postUpdateDoorsEnumValueOf(name);
 }
 
