@@ -4,7 +4,6 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
-import 'package:api_client/src/model/post_door_access_read.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -22,7 +21,6 @@ part 'post_read.g.dart';
 /// * [descriptionSv] 
 /// * [descriptionEn] 
 /// * [email] 
-/// * [postDoorAccesses] 
 @BuiltValue()
 abstract class PostRead implements Built<PostRead, PostReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -48,9 +46,6 @@ abstract class PostRead implements Built<PostRead, PostReadBuilder> {
 
   @BuiltValueField(wireName: r'email')
   String get email;
-
-  @BuiltValueField(wireName: r'post_door_accesses')
-  BuiltList<PostDoorAccessRead> get postDoorAccesses;
 
   PostRead._();
 
@@ -114,11 +109,6 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
     yield serializers.serialize(
       object.email,
       specifiedType: const FullType(String),
-    );
-    yield r'post_door_accesses';
-    yield serializers.serialize(
-      object.postDoorAccesses,
-      specifiedType: const FullType(BuiltList, [FullType(PostDoorAccessRead)]),
     );
   }
 
@@ -198,13 +188,6 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
             specifiedType: const FullType(String),
           ) as String;
           result.email = valueDes;
-          break;
-        case r'post_door_accesses':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(PostDoorAccessRead)]),
-          ) as BuiltList<PostDoorAccessRead>;
-          result.postDoorAccesses.replace(valueDes);
           break;
         default:
           unhandled.add(key);

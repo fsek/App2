@@ -13,7 +13,6 @@ import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
 import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/models/destination.dart';
@@ -49,7 +48,7 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     Destination(2, Icons.home, HomePage()),
-    Destination(3, CustomIcons.moose, MooseGamePage()),
+    Destination(3, CustomIcons.moose, MooseGamePage()),// NotificationsPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 

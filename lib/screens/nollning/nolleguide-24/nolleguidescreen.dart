@@ -158,7 +158,7 @@ class _NolleGuideScreenState extends State<NolleGuideScreenPage> {
                           );
                           await preloadAssets(context, "kladguidePaths");
                           Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => KladguideOldPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => KladguidePage()));
                         },
                         child: Image.asset(dresscodePath, fit: BoxFit.cover))),
               ])),

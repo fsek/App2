@@ -11,7 +11,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**postsCreatePost**](PostsApi.md#postscreatepost) | **POST** /posts/ | Create Post
 [**postsDeletePost**](PostsApi.md#postsdeletepost) | **DELETE** /posts/{post_id} | Delete Post
-[**postsGetAllDoors**](PostsApi.md#postsgetalldoors) | **GET** /posts/door_accesses | Get All Doors
 [**postsGetAllPosts**](PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
 [**postsGetAllUsersWithPost**](PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [**postsGetPost**](PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
@@ -102,49 +101,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **postsGetAllDoors**
-> BuiltList<String> postsGetAllDoors()
-
-Get All Doors
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getPostsApi();
-
-try {
-    final response = api.postsGetAllDoors();
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling PostsApi->postsGetAllDoors: $e\n');
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**BuiltList&lt;String&gt;**
 
 ### Authorization
 

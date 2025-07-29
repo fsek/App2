@@ -730,6 +730,7 @@ class UsersApi {
   /// 
   ///
   /// Parameters:
+  /// * [userId] 
   /// * [image] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -741,6 +742,7 @@ class UsersApi {
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<JsonObject>> usersPostUserImage({ 
+    required int userId,
     required MultipartFile image,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -749,7 +751,7 @@ class UsersApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/users/image';
+    final _path = r'/users/{user_id}/image'.replaceAll('{' r'user_id' '}', encodeQueryParameter(_serializers, userId, const FullType(int)).toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
@@ -51,7 +50,7 @@ class OtherContent extends StatelessWidget {
       "Account": SettingsPage(),
       "Language": LanguageSettingsPage(),
       "Theme": ThemeSettingsPage(),
-      "Contact": KladguidePage(), // ContactPage
+      "Contact": ContactPage(),
       "Anonymous contact page": Container(),
       "Sångbok": SongbookPage(),
       "Bildgalleri": GalleryPage(),
@@ -60,7 +59,7 @@ class OtherContent extends StatelessWidget {
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
       "Tema": ThemeSettingsPage(),
-      "Kontakt": KladguidePage(), // ContactPage
+      "Kontakt": ContactPage(),
       "Anonym kontaktsida": Container()
     };
 

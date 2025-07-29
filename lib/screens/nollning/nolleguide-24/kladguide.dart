@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class KladguideOldPage extends StatefulWidget {
+class KladguidePage extends StatefulWidget {
   @override
   _KladguideScreenState createState() => _KladguideScreenState();
 }
 
-class _KladguideScreenState extends State<KladguideOldPage> {
+class _KladguideScreenState extends State<KladguidePage> {
   void initState() {
     super.initState();
   }
