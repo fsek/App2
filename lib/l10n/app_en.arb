@@ -53,8 +53,8 @@
     "eventNo": "No",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
-    "eventAlcohol" : "  Alcohol may be present",
-    "eventAlcoholFree" : "  Alcoholfree",
+    "eventAlcohol" : "Alcohol",
+    "eventAlcoholFree" : "Alcoholfree",
     "eventNoAlcohol" : "None",
 
     "settingsSettings": "Settings",
