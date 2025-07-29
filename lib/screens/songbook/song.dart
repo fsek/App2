@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/models/songbook/song.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SongPage extends StatelessWidget {
   const SongPage({Key? key, required this.song}) : super(key: key);
 
-  final Song song;
+  final SongRead song;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,8 @@ class SongPage extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant),
             padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -40,7 +42,10 @@ class SongPage extends StatelessWidget {
                                   color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.melody!,
-                              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant))
                         ]),
                       ),
                     )
@@ -56,7 +61,10 @@ class SongPage extends StatelessWidget {
                                   color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.author!,
-                              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant))
                         ]),
                       ),
                     )

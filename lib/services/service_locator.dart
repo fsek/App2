@@ -42,6 +42,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => CafeService());
   locator.registerLazySingleton(() => FredmanskyService());
   locator.registerLazySingleton(() => DocumentService());
-  locator.registerLazySingleton(() => GameScoreService());
+  // locator.registerLazySingleton(() => GameScoreService());
   locator.registerLazySingleton(() => ThemeCubit());
 }

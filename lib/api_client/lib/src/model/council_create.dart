@@ -1,0 +1,160 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+
+// ignore_for_file: unused_element
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+
+part 'council_create.g.dart';
+
+/// CouncilCreate
+///
+/// Properties:
+/// * [nameSv] 
+/// * [nameEn] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
+@BuiltValue()
+abstract class CouncilCreate implements Built<CouncilCreate, CouncilCreateBuilder> {
+  @BuiltValueField(wireName: r'name_sv')
+  String get nameSv;
+
+  @BuiltValueField(wireName: r'name_en')
+  String get nameEn;
+
+  @BuiltValueField(wireName: r'description_sv')
+  String? get descriptionSv;
+
+  @BuiltValueField(wireName: r'description_en')
+  String? get descriptionEn;
+
+  CouncilCreate._();
+
+  factory CouncilCreate([void updates(CouncilCreateBuilder b)]) = _$CouncilCreate;
+
+  @BuiltValueHook(initializeBuilder: true)
+  static void _defaults(CouncilCreateBuilder b) => b;
+
+  @BuiltValueSerializer(custom: true)
+  static Serializer<CouncilCreate> get serializer => _$CouncilCreateSerializer();
+}
+
+class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
+  @override
+  final Iterable<Type> types = const [CouncilCreate, _$CouncilCreate];
+
+  @override
+  final String wireName = r'CouncilCreate';
+
+  Iterable<Object?> _serializeProperties(
+    Serializers serializers,
+    CouncilCreate object, {
+    FullType specifiedType = FullType.unspecified,
+  }) sync* {
+    yield r'name_sv';
+    yield serializers.serialize(
+      object.nameSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'name_en';
+    yield serializers.serialize(
+      object.nameEn,
+      specifiedType: const FullType(String),
+    );
+    if (object.descriptionSv != null) {
+      yield r'description_sv';
+      yield serializers.serialize(
+        object.descriptionSv,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.descriptionEn != null) {
+      yield r'description_en';
+      yield serializers.serialize(
+        object.descriptionEn,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+  }
+
+  @override
+  Object serialize(
+    Serializers serializers,
+    CouncilCreate object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+  }
+
+  void _deserializeProperties(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+    required List<Object?> serializedList,
+    required CouncilCreateBuilder result,
+    required List<Object?> unhandled,
+  }) {
+    for (var i = 0; i < serializedList.length; i += 2) {
+      final key = serializedList[i] as String;
+      final value = serializedList[i + 1];
+      switch (key) {
+        case r'name_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.nameSv = valueDes;
+          break;
+        case r'name_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.nameEn = valueDes;
+          break;
+        case r'description_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionSv = valueDes;
+          break;
+        case r'description_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionEn = valueDes;
+          break;
+        default:
+          unhandled.add(key);
+          unhandled.add(value);
+          break;
+      }
+    }
+  }
+
+  @override
+  CouncilCreate deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    final result = CouncilCreateBuilder();
+    final serializedList = (serialized as Iterable<Object?>).toList();
+    final unhandled = <Object?>[];
+    _deserializeProperties(
+      serializers,
+      serialized,
+      specifiedType: specifiedType,
+      serializedList: serializedList,
+      unhandled: unhandled,
+      result: result,
+    );
+    return result.build();
+  }
+}
+

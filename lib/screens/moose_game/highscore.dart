@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/models/user/user.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/widgets/input_dialog.dart';
@@ -25,7 +27,7 @@ class _HighscorePageState extends State<HighscorePage>
   // actual list of all users that gets sorted, never changed
   List<GameScoreEntry> allScores = [];
 
-  User? user;
+  AdminUserRead? user;
 
   //idk i "borrowed" the songbook and they were bad and probably not needed but here they are.
   bool searchFocus = false;
@@ -35,51 +37,64 @@ class _HighscorePageState extends State<HighscorePage>
 
   @override
   void initState() {
-    locator<GameScoreService>().getScores().then((value) => setState(() {
-          allScores = value;
-          allScores
-              .sort((a, b) => b.score!.compareTo(a.score!)); // handle null?
-          results = List.from(allScores);
-        }));
-    locator<UserService>().getUser().then((value) async {
-      user = value;
-      // Set users nickname if first time playing game
-      // TODO add translate var
-      if (user!.game_nickname != null) return;
-
-      String? enteredName = "";
-
-      while (enteredName!.isEmpty) {
-        enteredName = await inputDialog(context,
-            "Enter a nickname (can be changed in settings)", "Name", true);
-
-        // If cancelled then go back
-        if (enteredName == null) return;
-        if (enteredName.isEmpty) continue;
-
-        // I hate this btw
-        // This is a empty char added for version control, but first the name is cleaned up
-        enteredName = enteredName.replaceAll("\u{200E}", "") + "\u{200E}";
-
-        user!.game_nickname = enteredName;
-
-        try {
-          //Try setting nickname in backend. Fails if it was not unique
-          await locator<UserService>().updateUser(user!);
-        } catch (err) {
-          continue;
-        }
-      }
-
-      // If no name is entered then use the users real name
-      //Vi får collisions här ändå
-      // user!.game_nickname = nickname == "" ? user!.firstname : nickname;
-
-      //Här också tar bort för att det är ett objekt som användaren inte har förrän spel klart
-      // setState(() {
-      //   user!.game_score = 0;
-      // });
+    ApiService.apiClient.getMooseGameApi().mooseGameGetAllScores().then((value) {
+      value.data!.forEach((item) {
+        allScores.add(GameScoreEntry()
+        ..score = item.mooseGameScore
+        ..name = item.mooseGameName);
+      });
+      allScores.sort((a, b) => a.score!.compareTo(b.score!));
+      results = allScores;
     });
+    ApiService.apiClient.getUsersApi().usersGetMe().then((user) => user = user);
+
+
+    // locator<GameScoreService>().getScores().then((value) => setState(() {
+    //       allScores = value;
+    //       allScores
+    //           .sort((a, b) => b.score!.compareTo(a.score!)); // handle null?
+    //       results = List.from(allScores);
+    //     }));
+    
+    // locator<UserService>().getUser().then((value) async {
+    //   user = value;
+    //   // Set users nickname if first time playing game
+    //   // TODO add translate var
+    //   if (user!.game_nickname != null) return;
+
+    //   String? enteredName = "";
+
+    //   while (enteredName!.isEmpty) {
+    //     enteredName = await inputDialog(context,
+    //         "Enter a nickname (can be changed in settings)", "Name", true);
+
+    //     // If cancelled then go back
+    //     if (enteredName == null) return;
+    //     if (enteredName.isEmpty) continue;
+
+    //     // I hate this btw
+    //     // This is a empty char added for version control, but first the name is cleaned up
+    //     enteredName = enteredName.replaceAll("\u{200E}", "") + "\u{200E}";
+
+    //     user!.game_nickname = enteredName;
+
+    //     try {
+    //       //Try setting nickname in backend. Fails if it was not unique
+    //       await locator<UserService>().updateUser(user!);
+    //     } catch (err) {
+    //       continue;
+    //     }
+    //   }
+
+    //   // If no name is entered then use the users real name
+    //   //Vi får collisions här ändå
+    //   // user!.game_nickname = nickname == "" ? user!.firstname : nickname;
+
+    //   //Här också tar bort för att det är ett objekt som användaren inte har förrän spel klart
+    //   // setState(() {
+    //   //   user!.game_score = 0;
+    //   // });
+    // });
 
     super.initState();
   }
@@ -142,7 +157,7 @@ class _HighscorePageState extends State<HighscorePage>
                       //TODO change this with api so it looks better
                       results = allScores.where((test_person) {
                         return searchTerms.every((term) => test_person
-                            .user!.game_nickname!
+                            .name!
                             .toLowerCase()
                             .contains(term));
                       }).toList();
@@ -164,14 +179,14 @@ class _HighscorePageState extends State<HighscorePage>
                                           allScores.indexOf(results[index]))
                                       : Text(
                                           "${allScores.indexOf(results[index]) + 1}."),
-                                  title: results[index].user!.game_nickname !=
+                                  title: results[index].name !=
                                           null
                                       ? Text(
-                                          "${results[index].user!.game_nickname!
-                                          .substring(0, min(28, results[index].user!.game_nickname!.length))}" // 28 char name length limit fits well on the emulator screen.
-                                          + (results[index].user!.game_nickname!.length > 28 ? "..." : "")) // Ellipsis if name too long
-                                      : Text(
-                                          "${results[index].user!.firstname}"),
+                                          "${results[index].name!
+                                          .substring(0, min(28, results[index].name!.length))}" // 28 char name length limit fits well on the emulator screen.
+                                          + (results[index].name!.length > 28 ? "..." : "")) // Ellipsis if name too long
+                                      : Text(""), //Text(
+                                          // "${results[index].user!.firstname}"),
                                   trailing:
                                       Text("${results[index].score ?? 0}"),
                                 ));

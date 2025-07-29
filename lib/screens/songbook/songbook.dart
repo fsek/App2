@@ -7,6 +7,7 @@ import 'package:fsek_mobile/services/song.service.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/songbook/top_songs.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 class SongbookPage extends StatefulWidget {
   @override
@@ -15,10 +16,10 @@ class SongbookPage extends StatefulWidget {
 
 class _SongbookPageState extends State<SongbookPage>
     with TickerProviderStateMixin {
-  List<SongbookEntry> songs = [];
-  List<SongbookEntry> allSongs = [];
-  List<SongbookEntry> topSongs = [];
 
+  List<SongRead> allSongs = [];
+  List<SongRead> songs = [];
+ 
   bool searchFocus = false;
   String initChar = "";
 
@@ -36,26 +37,34 @@ class _SongbookPageState extends State<SongbookPage>
     );
 
     // Fetch all songs
-    locator<SongbookService>().getSongbook().then((value) {
-      setState(() {
-        this.songs = value;
-        songs.sort((a, b) => a.title!.compareTo(b.title!)); // Handle null?
-        allSongs = List.from(songs);
-      });
-      print("All songs loaded: ${songs.length}");
-    });
-
+    // locator<SongbookService>().getSongbook().then((value) {
+    //   setState(() {
+    //     this.songs = value;
+    //     songs.sort((a, b) => a.title!.compareTo(b.title!)); // Handle null?
+    //     allSongs = List.from(songs);
+    //   });
+    //   print("All songs loaded: ${songs.length}");
+    // });
+    fetchSongs();
     // Fetch top songs
-    int num_songs = 3; // Number of top songs to fetch
-    locator<SongbookService>().getTopSongs(num_songs).then((value) {
-      setState(() {
-        this.topSongs = value;
-        topSongs.sort((a, b) => a.title!.compareTo(b.title!)); // Handle null?
-      });
-      print("Top songs loaded: ${topSongs.length}");
-    });
+    // int num_songs = 3; // Number of top songs to fetch
+    // locator<SongbookService>().getTopSongs(num_songs).then((value) {
+    //   setState(() {
+    //     this.topSongs = value;
+    //     topSongs.sort((a, b) => a.title!.compareTo(b.title!)); // Handle null?
+    //   });
+    //   print("Top songs loaded: ${topSongs.length}");
+    // });
 
     setRotation(360);
+  }
+
+  void fetchSongs() async {
+    final response = await ApiClient().getSongsApi().songsGetAllSongs();
+    setState(() {
+      this.allSongs = response.data!.toList();
+      this.songs = this.allSongs;
+    });
   }
 
   @override
@@ -94,15 +103,18 @@ class _SongbookPageState extends State<SongbookPage>
                   actions: [
                     // Add actions here
                     IconButton(
-                      icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onPrimary), // Trophy icon
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TopSongsPage()),
-                        );
-                      },
-                    ),
+                        icon: Icon(Icons.emoji_events,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimary), // Trophy icon
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TopSongsPage()),
+                          );
+                        },
+                        ),
                   ],
                 ),
                 body: Column(
@@ -123,20 +135,24 @@ class _SongbookPageState extends State<SongbookPage>
                                 ? IconButton(
                                     icon: Icon(
                                       Icons.arrow_back,
-                                      color: Theme.of(context).colorScheme.onSurface,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
                                     ),
                                     onPressed: () =>
                                         FocusScope.of(context).unfocus(),
                                   )
                                 : Icon(
                                     Icons.search,
-                                    color: Theme.of(context).colorScheme.onSurface,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                             hintText: t.songbookSearch,
                             suffixIcon: _controller.text.isNotEmpty
                                 ? IconButton(
                                     icon: Icon(Icons.clear),
-                                    color: Theme.of(context).colorScheme.onSurface,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                     onPressed: () => setState(() {
                                       _controller.clear();
                                       FocusScope.of(context).unfocus();
@@ -232,16 +248,19 @@ class _SongbookPageState extends State<SongbookPage>
           );
   }
 
-  Widget _generateSongTile(SongbookEntry song) {
+  Widget _generateSongTile(SongRead song) {
     List<Widget> index = [];
     if (song.title![0] != initChar) {
       initChar = song.title![0];
       index.add(Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+        decoration:
+            BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
         child: ListTile(
           title: Text(
             initChar,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ),
       ));
@@ -252,7 +271,10 @@ class _SongbookPageState extends State<SongbookPage>
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceVariant),
+                  bottom: BorderSide(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id!),
@@ -262,10 +284,10 @@ class _SongbookPageState extends State<SongbookPage>
     );
   }
 
-  void openSong(int id) {
-    locator<SongService>().getSong(id).then((song) {
+  void openSong(int id) async {
+    await ApiClient().getSongsApi().songsGetSong(songId: id).then((song) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SongPage(song: song)));
+          MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });
   }
 }
