@@ -312,7 +312,7 @@ class _KladguideScreenState extends State<KladguidePage> {
                                               SizedBox(height: 10,),
                                               Text(
                                                   textAlign: TextAlign.left,
-                                                  data["articles"][0]["sections"][0]["subsections"][1]["title"][t.localeName],
+                                                  data["articles"][0]["sections"][1]["title2"][t.localeName],
                                                   style: TextStyle(
                                                     fontFamily: "MinionPro",
                                                     fontWeight: FontWeight.w900,
@@ -322,7 +322,7 @@ class _KladguideScreenState extends State<KladguidePage> {
                                                 ),
                                               Text(
                                                   textAlign: TextAlign.left,
-                                                  data["articles"][0]["sections"][0]["subsections"][1]["content"][t.localeName],
+                                                  data["articles"][0]["sections"][1]["content2"][t.localeName],
                                                   style: TextStyle(
                                                     fontFamily: "MinionPro",
                                                     fontWeight: FontWeight.normal,
