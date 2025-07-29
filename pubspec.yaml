@@ -139,9 +139,9 @@ flutter:
     - family: MinionPro
       fonts: 
         - asset: assets/fonts/MinionPro-Regular.otf
-          weight: 400
+          weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
-          weight: 700
+          weight: 900
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

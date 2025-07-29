@@ -12,7 +12,7 @@
       "sections": [
         {
           "title": {
-            "sv": "Frack",
+            "sv": "Högtidsdräkt",
             "en": "White tie/Full dress"
           },
           "subsections": [
@@ -52,13 +52,27 @@
           ]
         },
         {
-          "title": {
+          "mainTitle": {
             "sv": "Mörk kostym",
             "en": "Formal"
           },
-          "content": {
-            "sv": "Klänning/Kjol\nFör den som bär klänning eller kjol, bör plagget vara av ett finare tyg, såsom siden eller sammet, och nå ner till eller täcka knäna. Mörka toner rekommenderas för att matcha den formella stilen.\n\nKostym\nEn mörk kostym är formell och ska bestå av kavaj, byxor och eventuell väst i samma tyg och färg. Svart är ett utmärkt val.\n• Skjorta: En ljus skjorta, gärna vit, är att föredra.\n• Skor och Skärp: Skorna ska vara svarta. Om du använder skärp, ska det också vara svart.\n• Accessoarer: Slips eller fluga är obligatoriskt till kavajen.",
-            "en": "Dress/Skirt\nFor those wearing a dress or skirt, the garment should be of a finer fabric, such as silk or velvet, and reach down to or cover the knees. Dark tones are recommended to match the formal style.\n\nSuit\nThe dress code formal consist of a jacket, trousers and possibly a vest in the same fabric and color. Black is an excellent choice.\n• Shirt: A light-colored shirt, preferably white.\n• Shoes and belt: Shoes should be black. If you wear a belt, it should also be black.\n• Accessories: A tie or bow tie is mandatory with the jacket."
+          "title1": {
+            "sv": "Klänning/Kjol",
+            "en": "Dress/Skirt"
+
+          },
+          "title2": {
+            "sv": "Kostym",
+            "en": "Suit"
+
+          },
+          "content1": {
+            "sv": "För den som bär klänning eller kjol, bör plagget vara av ett finare tyg, såsom siden eller sammet, och nå ner till eller täcka knäna. Mörka toner rekommenderas för att matcha den formella stilen.",
+            "en": "For those wearing a dress or skirt, the garment should be of a finer fabric, such as silk or velvet, and reach down to or cover the knees. Dark tones are recommended to match the formal style."
+          },
+          "content3": {
+            "sv": "En mörk kostym är formell och ska bestå av kavaj, byxor och eventuell väst i samma tyg och färg. Svart är ett utmärkt val.\n• Skjorta: En ljus skjorta, gärna vit, är att föredra.\n• Skor och Skärp: Skorna ska vara svarta. Om du använder skärp, ska det också vara svart.\n• Accessoarer: Slips eller fluga är obligatoriskt till kavajen.",
+            "en": "The dress code formal consist of a jacket, trousers and possibly a vest in the same fabric and color. Black is an excellent choice.\n• Shirt: A light-colored shirt, preferably white.\n• Shoes and belt: Shoes should be black. If you wear a belt, it should also be black.\n• Accessories: A tie or bow tie is mandatory with the jacket."
           },
           "image": {
             "url": "url_till_bilden_för_Mork_kostym_section"
@@ -107,6 +121,10 @@
           "title": {
             "sv": "Teknologmössan",
             "en": "Technologist cap"
+          },
+          "subtitle": {
+            "sv": "Vit och blå",
+            "en": "White and blue"
           },
           "content": {
             "sv": "Teknologmössan finns i två varianter, den vita sommarmodellen samt den blåa vintermodellen. Vinterskyddet bärs från 4 oktober till och med mösspåtagningen den 30 april. Ett undantag till detta är att vintermodellen aldrig bärs till högtidsdräkt, då bärs istället den vita sommarmodellen oavsett tid på året.",
