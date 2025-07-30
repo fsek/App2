@@ -1,3 +1,4 @@
+import 'package:fsek_mobile/april_fools.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/home/event.dart';
@@ -341,7 +342,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ),
                 ),
-                signupInfoWidget(),
+                // signupInfoWidget(),
               ],
             ),
           ),

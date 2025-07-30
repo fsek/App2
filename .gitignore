@@ -61,3 +61,4 @@ missingTranslations.txt
 # Ignore Android Studio generated files
 android/app/.cxx/Debug/
 openapitools.json
+android/app/.cxx/RelWithDebInfo/
