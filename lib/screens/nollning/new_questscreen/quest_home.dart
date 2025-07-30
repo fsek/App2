@@ -101,7 +101,9 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
                     height: screenHeight - (screenHeight / 7) - (screenHeight / 15) - 20,
                     child: TabBarView(
                       children: [
-                        QuestScreen(),
+                        QuestScreen(
+                          availableHeight: screenHeight - (screenHeight / 7) - (screenHeight / 15) - 20, 
+                          availableWidth: screenWidth - (screenWidth/8)),
                         Placeholder()
                       ]
                     ),
@@ -111,7 +113,7 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  width: screenWidth/5,
+                  width: screenWidth/6.5,
                   height: screenHeight,
                   child: Image.asset(pelare_left, fit: BoxFit.fitHeight),
                 )
@@ -119,7 +121,7 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  width: screenWidth/5,
+                  width: screenWidth/6.5,
                   height: screenHeight,
                   child: Image.asset(pelare_right, fit: BoxFit.fitHeight),
                 )
