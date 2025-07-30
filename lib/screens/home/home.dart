@@ -11,6 +11,7 @@ import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
 import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
 import 'package:fsek_mobile/screens/nollning/map_page.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/nolleguide_home.dart';
 import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                           );
                           await preloadAssets(context, "nolleGuideScreenPaths");
                           Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideScreenPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => NolleGuideHomePage()));
                         },
                         child: Padding(
                           padding: EdgeInsets.zero,

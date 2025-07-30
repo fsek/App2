@@ -53,8 +53,8 @@ class OtherContent extends StatelessWidget {
       "The F-app": FapPage(),
       "Account": SettingsPage(),
       "Language": LanguageSettingsPage(),
-      "Theme": NolleGuideHomePage(), // ThemeSettingsPage
-      "Contact": VettOEtikettScreenPage(), // ContactPage
+      "Theme": ThemeSettingsPage(), // ThemeSettingsPage
+      "Contact": ContactPage(), // ContactPage
       "Anonymous contact page": Container(),
       "Sångbok": SongbookPage(),
       "Bildgalleri": GalleryPage(),
@@ -62,8 +62,8 @@ class OtherContent extends StatelessWidget {
       "F-appen": FapPage(),
       "Konto": SettingsPage(),
       "Språk": LanguageSettingsPage(),
-      "Tema": NolleGuideHomePage(), // ThemeSettingsPage
-      "Kontakt": VettOEtikettScreenPage(), // ContactPage
+      "Tema": ThemeSettingsPage(), // ThemeSettingsPage
+      "Kontakt": ContactPage(), // ContactPage
       "Anonym kontaktsida": Container()
     };
 
