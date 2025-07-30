@@ -5,6 +5,9 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/vettoetikett.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/wordlist.dart';
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 
 class NolleGuideHomePage extends StatefulWidget {
@@ -24,7 +27,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    String boktrave = "assets/data/nollning_25/nolleguide/homescreen/boktrave_${t.localeName}.png";
+    String boktrave = "assets/data/nollning_25/nolleguide/homescreen/boktrave.png";
     String hjalm = "assets/data/nollning_25/nolleguide/homescreen/hjalm.png";
     String kladkod = "assets/data/nollning_25/nolleguide/homescreen/kladkod_${t.localeName}.png";
     String ordlista = "assets/data/nollning_25/nolleguide/homescreen/ordlista_${t.localeName}.png";
@@ -151,18 +154,102 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
                             children: [
                               Align(alignment: Alignment.bottomCenter, child: Image.asset(hyllaPath, fit: BoxFit.fitWidth)),
                               Row(
-                                children: [Image.asset(urna, fit: BoxFit.none,)],
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 30, right: screenWidth/9),
+                                      child: Container(
+                                        width: screenWidth/4,
+                                        child: InkWell(
+                                          onTap: () => (),
+                                          child: Image.asset(boktrave, fit: BoxFit.fitWidth),
+                                        ),  
+                                      ) 
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 20, right: 20),
+                                      child: Container(
+                                        // width: screenWidth/3,
+                                        height: screenHeight/6,
+                                        child: Row(
+                                          children: [
+                                            InkWell( 
+                                              onTap: () => (Navigator.push(
+                                                context, MaterialPageRoute(builder: (context) => KladguidePage()))),
+                                              child: Image.asset(kladkod, fit: BoxFit.fitHeight),
+                                            ), 
+                                            InkWell(
+                                              onTap: () => (Navigator.push(
+                                                context, MaterialPageRoute(builder: (context) => WordListPage()))),
+                                              child: Image.asset(ordlista, fit: BoxFit.fitHeight)
+                                            )
+                                          ],
+                                        )
+                                      ) 
+                                    ),
+                                  )
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          height: ((screenHeight/1.3)/3)-40,
-                          width: screenWidth,
-                          child: Row(
-                            children: [],
-                          )
-                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            height: ((screenHeight/1.3)/3)-40,
+                            width: screenWidth,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                    padding: EdgeInsets.only(left: 0, bottom: 20),
+                                    child: Container(
+                                      height: screenHeight / 7,
+                                      width: screenWidth / 5,
+                                      child: InkWell(
+                                        onTap:() => (),
+                                        child: Image.asset(stod, fit: BoxFit.contain),
+                                      ),
+                                    )
+                                  )),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                    padding: EdgeInsets.only(left: screenWidth / 12, right: screenWidth / 15, bottom: 10),
+                                    child: Container(
+                                      height: screenHeight / 7,
+                                      width: screenWidth / 5,
+                                      child: InkWell(
+                                        onTap:() => (Navigator.push(
+                                          context, MaterialPageRoute(builder: (context) => VettOEtikettScreenPage()))),
+                                        child: Image.asset(vett, fit: BoxFit.contain),
+                                      ),
+                                    )
+                                  )),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Padding(
+                                    padding: EdgeInsets.only(left: 0),
+                                    child: Container(
+                                      height: screenHeight / 8,
+                                      width: screenWidth / 4,
+                                      child: InkWell(
+                                        onTap:() => (),
+                                        child: Image.asset(hjalm, fit: BoxFit.contain),
+                                      ),
+                                    )
+                                  )),
+                                ],
+                              )
+                            )
+                          ),
                       ],
                     ),
                   )
