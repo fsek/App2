@@ -23,7 +23,7 @@ class _WordListState extends State<WordListPage> {
   }
 
   Future<List<Word>> _loadWordList() async {
-    final String raw = await rootBundle.loadString('assets/data/guide/wordlist.json');
+    final String raw = await rootBundle.loadString('assets/data/nollning_25/nolleguide/wordlist.json');
     Map<String, dynamic> jsonRaw = await json.decode(raw);
     List<Word> out = (jsonRaw['words'] as List).map((data) => Word.fromJson(data)).toList();
     return out;
@@ -66,7 +66,6 @@ class _WordListState extends State<WordListPage> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    print(wordlist.length);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
