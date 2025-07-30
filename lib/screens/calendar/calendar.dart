@@ -1,4 +1,3 @@
-import 'package:fsek_mobile/april_fools.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
@@ -9,22 +8,18 @@ import 'package:fsek_mobile/services/event.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
 }
-
 class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now().toLocal();
   DateTime _now = DateTime.now().toLocal();
   DateTime _selectedDay = DateTime.now().toLocal();
   List<EventRead> _selectedEvents = [];
   List<EventRead> _events = [];
-
   void initState() {
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
-
     ApiService.apiClient
         .getEventsApi()
         .eventsGetAllEvents()
@@ -34,16 +29,13 @@ class _CalendarState extends State<Calendar> {
             }));
     super.initState();
   }
-
   void openEventPage(EventRead event) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
   }
-
   List<EventRead> _getEventsForDay(DateTime day) {
     return this._events.where((item) => isSameDay(item.startsAt, day)).toList();
   }
-
   Future<void> _onRefresh() async {
     ApiService.apiClient
         .getEventsApi()
@@ -159,22 +151,11 @@ class _CalendarState extends State<Calendar> {
 
     return Container(
       child: Card(
-        // Hide card for introduction events
-        shadowColor: /*event.is_introduction*/ true == true ? Colors.transparent : null,
-        color: /*event.is_introduction*/ true == true ? Colors.transparent : null,
+        shadowColor: null,
+        color: null,
         child: InkWell(
           onTap: () => openEventPage(event),
           child: Container(
-            // Introduction events have a different background
-            decoration: /*event.is_introduction*/ true == true
-                ? BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/nollning-24/schedule/event_card_background.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  )
-                : null,
-
             margin: EdgeInsets.zero,
             child: Container(
               child: Column(
@@ -186,10 +167,7 @@ class _CalendarState extends State<Calendar> {
                       t.localeName == "en" ? event.titleEn : event.titleSv,
                       style: TextStyle(
                         fontSize: 20,
-                        // Double ternary just works :)
-                        color: (/*event.is_introduction*/ true == true
-                            ? Color(0xFF630B0B)
-                            : Theme.of(context).colorScheme.primary),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -236,9 +214,10 @@ class _CalendarState extends State<Calendar> {
                       ),
                       Text(
                         "  " +
-                            event.location, // TODO change this when event actually has a location
+                            event.location,
                         style: TextStyle(
                           fontSize: 14,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -246,14 +225,12 @@ class _CalendarState extends State<Calendar> {
                   ),
                 ],
               ),
-              margin: /*event.is_introduction*/ true == true
-                  ? EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 6, 15, 15, 15)
-                  : EdgeInsets.all(10),
+              margin: EdgeInsets.all(10),
             ),
           ),
         ),
         // Introduction events background needs access to entire card
-        margin: /*event.is_introduction*/ true == true ? EdgeInsets.symmetric(vertical: 4) : EdgeInsets.all(4),
+        margin: EdgeInsets.all(4),
       ),
     );
     }
