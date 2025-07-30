@@ -60,9 +60,6 @@ class _WordListState extends State<WordListPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
 
-    // String superBackgroundPaperPath = "assets/img/nollning-24/nolleguide/superlong_paper_background.png";
-    // String superBackgroundWoodPath = "assets/img/nollning-24/nolleguide/superlong_wood_background.png";
-
     String long_marble = "assets/data/nollning_25/nolleguide/long_marble.png";
     String short_marble = "assets/data/nollning_25/nolleguide/short_marble.png";
     String background = "assets/data/nollning_25/nolleguide/landskap_bakgrund.png";
@@ -79,6 +76,7 @@ class _WordListState extends State<WordListPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(
+        panEnabled: true,
         child: Container(
           height: screenHeight,
           width: screenWidth,
