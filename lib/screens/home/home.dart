@@ -10,6 +10,7 @@ import 'package:fsek_mobile/screens/guild_meeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
 import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
 import 'package:fsek_mobile/screens/nollning/map_page.dart';
+import 'package:fsek_mobile/screens/nollning/new_questscreen/quest_home.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/nolleguide_home.dart';
 import 'package:fsek_mobile/screens/nollning/schedule.dart';
@@ -117,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     InkWell(
                       customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circleSize)),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AdventureMissionsPageNew()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => QuestHomeScreen()));
                       },
                       child: Padding(
                         padding: EdgeInsets.zero,

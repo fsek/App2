@@ -13,6 +13,7 @@ doc/AlbumCreate.md
 doc/AlbumPhotographerAdd.md
 doc/AlbumRead.md
 doc/AlbumsApi.md
+doc/AliasRead.md
 doc/AuthApi.md
 doc/BearerResponse.md
 doc/BodyAuthResetForgotPassword.md
@@ -75,6 +76,7 @@ doc/HTTPValidationError.md
 doc/ImgApi.md
 doc/ImgInAlbum.md
 doc/MEMBERROLES.md
+doc/MailAliasApi.md
 doc/MooseGameApi.md
 doc/MooseGameRead.md
 doc/NewsApi.md
@@ -154,6 +156,7 @@ lib/src/api/event_signup_api.dart
 lib/src/api/events_api.dart
 lib/src/api/groups_api.dart
 lib/src/api/img_api.dart
+lib/src/api/mail_alias_api.dart
 lib/src/api/moose_game_api.dart
 lib/src/api/news_api.dart
 lib/src/api/nollning_api.dart
@@ -182,6 +185,7 @@ lib/src/model/adventure_mission_read.dart
 lib/src/model/album_create.dart
 lib/src/model/album_photographer_add.dart
 lib/src/model/album_read.dart
+lib/src/model/alias_read.dart
 lib/src/model/bearer_response.dart
 lib/src/model/body_auth_reset_forgot_password.dart
 lib/src/model/body_auth_reset_reset_password.dart

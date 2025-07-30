@@ -121,6 +121,7 @@ flutter:
     - assets/data/nollning_25/nolleguide/kladguide/
     - assets/data/nollning_25/nolleguide/homescreen/
     - assets/data/nollning_25/nolleguide/vettoetikett/
+    - assets/data/nollning_25/uppdrag/
 
   fonts:
     - family: Brandon Grotesque

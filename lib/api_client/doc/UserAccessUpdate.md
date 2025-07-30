@@ -8,7 +8,6 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accessId** | **int** |  | 
 **door** | **String** |  | [optional] 
 **starttime** | [**DateTime**](DateTime.md) |  | [optional] 
 **endtime** | [**DateTime**](DateTime.md) |  | [optional] 

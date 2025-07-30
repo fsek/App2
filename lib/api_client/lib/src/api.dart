@@ -24,6 +24,7 @@ import 'package:api_client/src/api/event_signup_api.dart';
 import 'package:api_client/src/api/events_api.dart';
 import 'package:api_client/src/api/groups_api.dart';
 import 'package:api_client/src/api/img_api.dart';
+import 'package:api_client/src/api/mail_alias_api.dart';
 import 'package:api_client/src/api/moose_game_api.dart';
 import 'package:api_client/src/api/news_api.dart';
 import 'package:api_client/src/api/nollning_api.dart';
@@ -178,6 +179,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   ImgApi getImgApi() {
     return ImgApi(dio, serializers);
+  }
+
+  /// Get MailAliasApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  MailAliasApi getMailAliasApi() {
+    return MailAliasApi(dio, serializers);
   }
 
   /// Get MooseGameApi instance, base route and serializer can be overridden by a given but be careful,

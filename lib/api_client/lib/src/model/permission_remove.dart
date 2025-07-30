@@ -22,7 +22,7 @@ abstract class PermissionRemove implements Built<PermissionRemove, PermissionRem
 
   @BuiltValueField(wireName: r'target')
   PermissionRemoveTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  UserPost,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  UserPost,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  MailAlias,  };
 
   PermissionRemove._();
 
@@ -184,6 +184,8 @@ class PermissionRemoveTargetEnum extends EnumClass {
   static const PermissionRemoveTargetEnum roomBookings = _$permissionRemoveTargetEnum_roomBookings;
   @BuiltValueEnumConst(wireName: r'Moosegame')
   static const PermissionRemoveTargetEnum moosegame = _$permissionRemoveTargetEnum_moosegame;
+  @BuiltValueEnumConst(wireName: r'MailAlias')
+  static const PermissionRemoveTargetEnum mailAlias = _$permissionRemoveTargetEnum_mailAlias;
 
   static Serializer<PermissionRemoveTargetEnum> get serializer => _$permissionRemoveTargetEnumSerializer;
 

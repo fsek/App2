@@ -29,7 +29,7 @@ abstract class GroupMissionRead implements Built<GroupMissionRead, GroupMissionR
   NollningGroupRead get nollningGroup;
 
   @BuiltValueField(wireName: r'is_accepted')
-  bool get isAccepted;
+  String get isAccepted;
 
   GroupMissionRead._();
 
@@ -72,7 +72,7 @@ class _$GroupMissionReadSerializer implements PrimitiveSerializer<GroupMissionRe
     yield r'is_accepted';
     yield serializers.serialize(
       object.isAccepted,
-      specifiedType: const FullType(bool),
+      specifiedType: const FullType(String),
     );
   }
 
@@ -121,8 +121,8 @@ class _$GroupMissionReadSerializer implements PrimitiveSerializer<GroupMissionRe
         case r'is_accepted':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(bool),
-          ) as bool;
+            specifiedType: const FullType(String),
+          ) as String;
           result.isAccepted = valueDes;
           break;
         default:

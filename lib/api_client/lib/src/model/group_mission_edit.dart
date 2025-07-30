@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -23,7 +24,8 @@ abstract class GroupMissionEdit implements Built<GroupMissionEdit, GroupMissionE
   int? get adventureMissionId;
 
   @BuiltValueField(wireName: r'is_accepted')
-  bool? get isAccepted;
+  GroupMissionEditIsAcceptedEnum? get isAccepted;
+  // enum isAcceptedEnum {  Accepted,  Failed,  Review,  };
 
   GroupMissionEdit._();
 
@@ -66,7 +68,7 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
       yield r'is_accepted';
       yield serializers.serialize(
         object.isAccepted,
-        specifiedType: const FullType.nullable(bool),
+        specifiedType: const FullType.nullable(GroupMissionEditIsAcceptedEnum),
       );
     }
   }
@@ -111,8 +113,8 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
         case r'is_accepted':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+            specifiedType: const FullType.nullable(GroupMissionEditIsAcceptedEnum),
+          ) as GroupMissionEditIsAcceptedEnum?;
           if (valueDes == null) continue;
           result.isAccepted = valueDes;
           break;
@@ -143,5 +145,22 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
     );
     return result.build();
   }
+}
+
+class GroupMissionEditIsAcceptedEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Accepted')
+  static const GroupMissionEditIsAcceptedEnum accepted = _$groupMissionEditIsAcceptedEnum_accepted;
+  @BuiltValueEnumConst(wireName: r'Failed')
+  static const GroupMissionEditIsAcceptedEnum failed = _$groupMissionEditIsAcceptedEnum_failed;
+  @BuiltValueEnumConst(wireName: r'Review')
+  static const GroupMissionEditIsAcceptedEnum review = _$groupMissionEditIsAcceptedEnum_review;
+
+  static Serializer<GroupMissionEditIsAcceptedEnum> get serializer => _$groupMissionEditIsAcceptedEnumSerializer;
+
+  const GroupMissionEditIsAcceptedEnum._(String name): super(name);
+
+  static BuiltSet<GroupMissionEditIsAcceptedEnum> get values => _$groupMissionEditIsAcceptedEnumValues;
+  static GroupMissionEditIsAcceptedEnum valueOf(String name) => _$groupMissionEditIsAcceptedEnumValueOf(name);
 }
 

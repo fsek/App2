@@ -24,6 +24,7 @@ import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/album_create.dart';
 import 'package:api_client/src/model/album_photographer_add.dart';
 import 'package:api_client/src/model/album_read.dart';
+import 'package:api_client/src/model/alias_read.dart';
 import 'package:api_client/src/model/bearer_response.dart';
 import 'package:api_client/src/model/body_auth_reset_forgot_password.dart';
 import 'package:api_client/src/model/body_auth_reset_reset_password.dart';
@@ -138,6 +139,7 @@ part 'serializers.g.dart';
   AlbumCreate,
   AlbumPhotographerAdd,
   AlbumRead,
+  AliasRead,
   BearerResponse,
   BodyAuthResetForgotPassword,
   BodyAuthResetResetPassword,
@@ -337,6 +339,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CafeShiftRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AliasRead)]),
+        () => ListBuilder<AliasRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PermissionRead)]),
         () => ListBuilder<PermissionRead>(),
       )
@@ -371,8 +377,8 @@ Serializers serializers = (_$serializers.toBuilder()
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())
       ..add(const DateSerializer())
-      ..add(Iso8601DateTimeSerializer())
-    ).build();
+      ..add(Iso8601DateTimeSerializer()))
+    .build();
 
 Serializers standardSerializers =
     (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -23,7 +23,7 @@ abstract class UserAccessCreate implements Built<UserAccessCreate, UserAccessCre
 
   @BuiltValueField(wireName: r'door')
   UserAccessCreateDoorEnum get door;
-  // enum doorEnum {  LC,  Bunkern,  Syster Kents,  Cafét,  Caféförrådet,  Pubförrådet,  Containern,  Arkivet,  };
+  // enum doorEnum {  Ledningscentralen,  Ambassaden,  Syster Kents,  Hilbert Cafe,  Cafeförrådet,  Pubförrådet,  Sopkomprimatorn,  Arkivet,  };
 
   @BuiltValueField(wireName: r'starttime')
   DateTime get starttime;
@@ -156,20 +156,20 @@ class _$UserAccessCreateSerializer implements PrimitiveSerializer<UserAccessCrea
 
 class UserAccessCreateDoorEnum extends EnumClass {
 
-  @BuiltValueEnumConst(wireName: r'LC')
-  static const UserAccessCreateDoorEnum LC = _$userAccessCreateDoorEnum_LC;
-  @BuiltValueEnumConst(wireName: r'Bunkern')
-  static const UserAccessCreateDoorEnum bunkern = _$userAccessCreateDoorEnum_bunkern;
+  @BuiltValueEnumConst(wireName: r'Ledningscentralen')
+  static const UserAccessCreateDoorEnum ledningscentralen = _$userAccessCreateDoorEnum_ledningscentralen;
+  @BuiltValueEnumConst(wireName: r'Ambassaden')
+  static const UserAccessCreateDoorEnum ambassaden = _$userAccessCreateDoorEnum_ambassaden;
   @BuiltValueEnumConst(wireName: r'Syster Kents')
   static const UserAccessCreateDoorEnum systerKents = _$userAccessCreateDoorEnum_systerKents;
-  @BuiltValueEnumConst(wireName: r'Cafét')
-  static const UserAccessCreateDoorEnum caft = _$userAccessCreateDoorEnum_caft;
-  @BuiltValueEnumConst(wireName: r'Caféförrådet')
-  static const UserAccessCreateDoorEnum caffrrdet = _$userAccessCreateDoorEnum_caffrrdet;
+  @BuiltValueEnumConst(wireName: r'Hilbert Cafe')
+  static const UserAccessCreateDoorEnum hilbertCafe = _$userAccessCreateDoorEnum_hilbertCafe;
+  @BuiltValueEnumConst(wireName: r'Cafeförrådet')
+  static const UserAccessCreateDoorEnum cafefrrdet = _$userAccessCreateDoorEnum_cafefrrdet;
   @BuiltValueEnumConst(wireName: r'Pubförrådet')
   static const UserAccessCreateDoorEnum pubfrrdet = _$userAccessCreateDoorEnum_pubfrrdet;
-  @BuiltValueEnumConst(wireName: r'Containern')
-  static const UserAccessCreateDoorEnum containern = _$userAccessCreateDoorEnum_containern;
+  @BuiltValueEnumConst(wireName: r'Sopkomprimatorn')
+  static const UserAccessCreateDoorEnum sopkomprimatorn = _$userAccessCreateDoorEnum_sopkomprimatorn;
   @BuiltValueEnumConst(wireName: r'Arkivet')
   static const UserAccessCreateDoorEnum arkivet = _$userAccessCreateDoorEnum_arkivet;
 

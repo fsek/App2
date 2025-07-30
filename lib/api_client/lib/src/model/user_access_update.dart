@@ -12,18 +12,14 @@ part 'user_access_update.g.dart';
 /// UserAccessUpdate
 ///
 /// Properties:
-/// * [accessId] 
 /// * [door] 
 /// * [starttime] 
 /// * [endtime] 
 @BuiltValue()
 abstract class UserAccessUpdate implements Built<UserAccessUpdate, UserAccessUpdateBuilder> {
-  @BuiltValueField(wireName: r'access_id')
-  int get accessId;
-
   @BuiltValueField(wireName: r'door')
   UserAccessUpdateDoorEnum? get door;
-  // enum doorEnum {  LC,  Bunkern,  Syster Kents,  Cafét,  Caféförrådet,  Pubförrådet,  Containern,  Arkivet,  };
+  // enum doorEnum {  Ledningscentralen,  Ambassaden,  Syster Kents,  Hilbert Cafe,  Cafeförrådet,  Pubförrådet,  Sopkomprimatorn,  Arkivet,  };
 
   @BuiltValueField(wireName: r'starttime')
   DateTime? get starttime;
@@ -54,11 +50,6 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
     UserAccessUpdate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'access_id';
-    yield serializers.serialize(
-      object.accessId,
-      specifiedType: const FullType(int),
-    );
     if (object.door != null) {
       yield r'door';
       yield serializers.serialize(
@@ -103,13 +94,6 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'access_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.accessId = valueDes;
-          break;
         case r'door':
           final valueDes = serializers.deserialize(
             value,
@@ -165,20 +149,20 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
 
 class UserAccessUpdateDoorEnum extends EnumClass {
 
-  @BuiltValueEnumConst(wireName: r'LC')
-  static const UserAccessUpdateDoorEnum LC = _$userAccessUpdateDoorEnum_LC;
-  @BuiltValueEnumConst(wireName: r'Bunkern')
-  static const UserAccessUpdateDoorEnum bunkern = _$userAccessUpdateDoorEnum_bunkern;
+  @BuiltValueEnumConst(wireName: r'Ledningscentralen')
+  static const UserAccessUpdateDoorEnum ledningscentralen = _$userAccessUpdateDoorEnum_ledningscentralen;
+  @BuiltValueEnumConst(wireName: r'Ambassaden')
+  static const UserAccessUpdateDoorEnum ambassaden = _$userAccessUpdateDoorEnum_ambassaden;
   @BuiltValueEnumConst(wireName: r'Syster Kents')
   static const UserAccessUpdateDoorEnum systerKents = _$userAccessUpdateDoorEnum_systerKents;
-  @BuiltValueEnumConst(wireName: r'Cafét')
-  static const UserAccessUpdateDoorEnum caft = _$userAccessUpdateDoorEnum_caft;
-  @BuiltValueEnumConst(wireName: r'Caféförrådet')
-  static const UserAccessUpdateDoorEnum caffrrdet = _$userAccessUpdateDoorEnum_caffrrdet;
+  @BuiltValueEnumConst(wireName: r'Hilbert Cafe')
+  static const UserAccessUpdateDoorEnum hilbertCafe = _$userAccessUpdateDoorEnum_hilbertCafe;
+  @BuiltValueEnumConst(wireName: r'Cafeförrådet')
+  static const UserAccessUpdateDoorEnum cafefrrdet = _$userAccessUpdateDoorEnum_cafefrrdet;
   @BuiltValueEnumConst(wireName: r'Pubförrådet')
   static const UserAccessUpdateDoorEnum pubfrrdet = _$userAccessUpdateDoorEnum_pubfrrdet;
-  @BuiltValueEnumConst(wireName: r'Containern')
-  static const UserAccessUpdateDoorEnum containern = _$userAccessUpdateDoorEnum_containern;
+  @BuiltValueEnumConst(wireName: r'Sopkomprimatorn')
+  static const UserAccessUpdateDoorEnum sopkomprimatorn = _$userAccessUpdateDoorEnum_sopkomprimatorn;
   @BuiltValueEnumConst(wireName: r'Arkivet')
   static const UserAccessUpdateDoorEnum arkivet = _$userAccessUpdateDoorEnum_arkivet;
 

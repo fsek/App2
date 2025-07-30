@@ -1,4 +1,4 @@
-# api_client.api.UserDoorAccessApi
+# api_client.api.MailAliasApi
 
 ## Load the API package
 ```dart
@@ -9,16 +9,17 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**userDoorAccessDeleteUserAccess**](UserDoorAccessApi.md#userdooraccessdeleteuseraccess) | **DELETE** /user_access/{access_id} | Delete User Access
-[**userDoorAccessGetAllUserAccesses**](UserDoorAccessApi.md#userdooraccessgetalluseraccesses) | **GET** /user_access/ | Get All User Accesses
-[**userDoorAccessPostUserAccess**](UserDoorAccessApi.md#userdooraccesspostuseraccess) | **POST** /user_access/ | Post User Access
-[**userDoorAccessUpdateUserAccess**](UserDoorAccessApi.md#userdooraccessupdateuseraccess) | **PATCH** /user_access/{access_id} | Update User Access
+[**mailAliasAddMember**](MailAliasApi.md#mailaliasaddmember) | **POST** /mail-alias/alias/{alias_email}/add_member | Add Member
+[**mailAliasCreateAlias**](MailAliasApi.md#mailaliascreatealias) | **POST** /mail-alias/alias | Create Alias
+[**mailAliasDeleteAlias**](MailAliasApi.md#mailaliasdeletealias) | **DELETE** /mail-alias/alias/{alias_email} | Delete Alias
+[**mailAliasListAliases**](MailAliasApi.md#mailaliaslistaliases) | **GET** /mail-alias/aliases | List Aliases
+[**mailAliasRemoveMember**](MailAliasApi.md#mailaliasremovemember) | **DELETE** /mail-alias/alias/{alias_email}/remove_member | Remove Member
 
 
-# **userDoorAccessDeleteUserAccess**
-> userDoorAccessDeleteUserAccess(accessId)
+# **mailAliasAddMember**
+> AliasRead mailAliasAddMember(aliasEmail, memberEmail)
 
-Delete User Access
+Add Member
 
 ### Example
 ```dart
@@ -30,13 +31,15 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getUserDoorAccessApi();
-final int accessId = 56; // int | 
+final api = ApiClient().getMailAliasApi();
+final String aliasEmail = aliasEmail_example; // String | 
+final String memberEmail = memberEmail_example; // String | 
 
 try {
-    api.userDoorAccessDeleteUserAccess(accessId);
+    final response = api.mailAliasAddMember(aliasEmail, memberEmail);
+    print(response);
 } catch on DioException (e) {
-    print('Exception when calling UserDoorAccessApi->userDoorAccessDeleteUserAccess: $e\n');
+    print('Exception when calling MailAliasApi->mailAliasAddMember: $e\n');
 }
 ```
 
@@ -44,11 +47,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **accessId** | **int**|  | 
+ **aliasEmail** | **String**|  | 
+ **memberEmail** | **String**|  | 
 
 ### Return type
 
-void (empty response body)
+[**AliasRead**](AliasRead.md)
 
 ### Authorization
 
@@ -61,10 +65,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDoorAccessGetAllUserAccesses**
-> BuiltList<UserAccessRead> userDoorAccessGetAllUserAccesses()
+# **mailAliasCreateAlias**
+> AliasRead mailAliasCreateAlias(alias)
 
-Get All User Accesses
+Create Alias
 
 ### Example
 ```dart
@@ -76,13 +80,107 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getUserDoorAccessApi();
+final api = ApiClient().getMailAliasApi();
+final String alias = alias_example; // String | 
 
 try {
-    final response = api.userDoorAccessGetAllUserAccesses();
+    final response = api.mailAliasCreateAlias(alias);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling UserDoorAccessApi->userDoorAccessGetAllUserAccesses: $e\n');
+    print('Exception when calling MailAliasApi->mailAliasCreateAlias: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **alias** | **String**|  | 
+
+### Return type
+
+[**AliasRead**](AliasRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **mailAliasDeleteAlias**
+> BuiltMap<String, String> mailAliasDeleteAlias(aliasEmail)
+
+Delete Alias
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getMailAliasApi();
+final String aliasEmail = aliasEmail_example; // String | 
+
+try {
+    final response = api.mailAliasDeleteAlias(aliasEmail);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling MailAliasApi->mailAliasDeleteAlias: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **aliasEmail** | **String**|  | 
+
+### Return type
+
+**BuiltMap&lt;String, String&gt;**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **mailAliasListAliases**
+> BuiltList<AliasRead> mailAliasListAliases()
+
+List Aliases
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getMailAliasApi();
+
+try {
+    final response = api.mailAliasListAliases();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling MailAliasApi->mailAliasListAliases: $e\n');
 }
 ```
 
@@ -91,7 +189,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;UserAccessRead&gt;**](UserAccessRead.md)
+[**BuiltList&lt;AliasRead&gt;**](AliasRead.md)
 
 ### Authorization
 
@@ -104,57 +202,10 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDoorAccessPostUserAccess**
-> UserAccessRead userDoorAccessPostUserAccess(userAccessCreate)
+# **mailAliasRemoveMember**
+> AliasRead mailAliasRemoveMember(aliasEmail, memberEmail)
 
-Post User Access
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getUserDoorAccessApi();
-final UserAccessCreate userAccessCreate = ; // UserAccessCreate | 
-
-try {
-    final response = api.userDoorAccessPostUserAccess(userAccessCreate);
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling UserDoorAccessApi->userDoorAccessPostUserAccess: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userAccessCreate** | [**UserAccessCreate**](UserAccessCreate.md)|  | 
-
-### Return type
-
-[**UserAccessRead**](UserAccessRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **userDoorAccessUpdateUserAccess**
-> UserAccessRead userDoorAccessUpdateUserAccess(accessId, userAccessUpdate)
-
-Update User Access
+Remove Member
 
 ### Example
 ```dart
@@ -166,15 +217,15 @@ import 'package:api_client/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
-final api = ApiClient().getUserDoorAccessApi();
-final int accessId = 56; // int | 
-final UserAccessUpdate userAccessUpdate = ; // UserAccessUpdate | 
+final api = ApiClient().getMailAliasApi();
+final String aliasEmail = aliasEmail_example; // String | 
+final String memberEmail = memberEmail_example; // String | 
 
 try {
-    final response = api.userDoorAccessUpdateUserAccess(accessId, userAccessUpdate);
+    final response = api.mailAliasRemoveMember(aliasEmail, memberEmail);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling UserDoorAccessApi->userDoorAccessUpdateUserAccess: $e\n');
+    print('Exception when calling MailAliasApi->mailAliasRemoveMember: $e\n');
 }
 ```
 
@@ -182,12 +233,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **accessId** | **int**|  | 
- **userAccessUpdate** | [**UserAccessUpdate**](UserAccessUpdate.md)|  | 
+ **aliasEmail** | **String**|  | 
+ **memberEmail** | **String**|  | 
 
 ### Return type
 
-[**UserAccessRead**](UserAccessRead.md)
+[**AliasRead**](AliasRead.md)
 
 ### Authorization
 
@@ -195,7 +246,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

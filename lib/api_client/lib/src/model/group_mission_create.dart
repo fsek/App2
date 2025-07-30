@@ -11,13 +11,9 @@ part 'group_mission_create.g.dart';
 /// GroupMissionCreate
 ///
 /// Properties:
-/// * [points] 
 /// * [adventureMissionId] 
 @BuiltValue()
 abstract class GroupMissionCreate implements Built<GroupMissionCreate, GroupMissionCreateBuilder> {
-  @BuiltValueField(wireName: r'points')
-  int get points;
-
   @BuiltValueField(wireName: r'adventure_mission_id')
   int get adventureMissionId;
 
@@ -44,11 +40,6 @@ class _$GroupMissionCreateSerializer implements PrimitiveSerializer<GroupMission
     GroupMissionCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'points';
-    yield serializers.serialize(
-      object.points,
-      specifiedType: const FullType(int),
-    );
     yield r'adventure_mission_id';
     yield serializers.serialize(
       object.adventureMissionId,
@@ -77,13 +68,6 @@ class _$GroupMissionCreateSerializer implements PrimitiveSerializer<GroupMission
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'points':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.points = valueDes;
-          break;
         case r'adventure_mission_id':
           final valueDes = serializers.deserialize(
             value,
