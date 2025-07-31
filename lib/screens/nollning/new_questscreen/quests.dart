@@ -104,60 +104,86 @@ class _QuestScreenState extends State<QuestScreen> {
 
     if(user == null || nollning == null) {
       return Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: Container(
+          height: widget.availableHeight,
+          width: widget.availableWidth,
+          child: Stack(
+            children: [
+              Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill,)),
+              Center(child: CircularProgressIndicator()),
+            ],
+          ),
+        )
       );
     }
 
     return DefaultTabController(
-      length: 5, 
-      child: Column(
+    length: 5,
+    child: Scaffold(
+      body: Column(
         children: [
           Container(
-            //height: ,
-            width: widget.availableWidth - 40,
-            // height: widget.availableHeight / 8,
+            width: widget.availableWidth,
+            height: widget.availableHeight/20,
             child: Stack(
-            children: [
-            // Positioned.fill(child: Image.asset(rubrik, fit: BoxFit.fill)),
-            TabBar(
-            padding: EdgeInsets.only(top: 2),
-            indicatorColor: Color.fromARGB(255, 160, 120, 18),
-            labelColor: Color.fromARGB(255, 160, 120, 18),
-            unselectedLabelColor: const Color.fromARGB(255, 83, 81, 81),
-            tabs: [
-              Tab(
-                text: t.localeName == "sv" ? "V1" : "W1",
-                 // icon: Icon(Icons.group_rounded),
-              ),
-              Tab(
-                text: t.localeName == "sv" ? "V2" : "W2",
-                // icon: Icon(Icons.emoji_events_rounded),
-              ),
-              Tab(
-                text: t.localeName == "sv" ? "V3" : "W3",
-                // icon: Icon(Icons.emoji_events_rounded),
-              ),
-              Tab(
-                text: t.localeName == "sv" ? "V4" : "W4",
-                // icon: Icon(Icons.emoji_events_rounded),
-              ),
-              Tab(
-                text: t.localeName == "sv" ? "V5" : "W5",
-                // icon: Icon(Icons.emoji_events_rounded),
-              )
-            ]
-          )])),
-          SizedBox(height: 20),
-
+              children: [
+                Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill,)),
+                Container(
+                  // height: widget.availableHeight,
+                  width: widget.availableWidth - 40,
+                  child: TabBar(
+                  padding: EdgeInsets.only(top: 2),
+                  indicatorColor: Color.fromARGB(255, 160, 120, 18),
+                  labelColor: Color.fromARGB(255, 160, 120, 18),
+                  unselectedLabelColor: const Color.fromARGB(255, 83, 81, 81),
+                  tabs: [
+                    Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                    Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                    Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                    Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                    Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                  ],
+                ),
+            )],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                _weekTab(1, context),
+                _weekTab(2, context),
+                _weekTab(3, context),
+                _weekTab(4, context),
+                _weekTab(5, context),
+              ],
+            ),
+          ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget createMissionCard(List<dynamic> missionList) {
-    List<Card> missionCardList;
+
+Widget _weekTab(int week, BuildContext context) {
+  return SingleChildScrollView(
+    child: Stack( 
+      children: [ 
+        Image.asset(bakgrund),
+        Column(
+          children: [
+            SizedBox(height: 10,),
+            ...generateWeekMissionCards(missionsMap, groupMissionsMap, week, context),
+          ],
+        ),
+      ]
+    )
+  );
+}
+
+  Widget createMissionCard(dynamic element, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
     
-    missionList.forEach((element) {
       if(element is AdventureMissionRead){
         Container container =
         Container(
@@ -171,48 +197,318 @@ class _QuestScreenState extends State<QuestScreen> {
               onTap: () => (),
               child: Stack(
                 children: [
-                  Positioned.fill(child: Image.asset(start)),
-                  Text(
-                    element.title,
-                  ),
-                  
+                  Positioned.fill(child: Image.asset(start, fit: BoxFit.fill,)),
+                  Column(
+                    children: [
+                      Center(child: 
+                        Text(
+                          textAlign: TextAlign.center,
+                          t.localeName == "sv" ? element.titleSv : element.titleEn,
+                          style: TextStyle(
+                            fontFamily: "MinionPro",
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 30,
+                            color: Color(0xFFFCBD1D)
+                          ),
+                        )),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: widget.availableWidth/10),
+                              child: Container(
+                                child: Text(
+                                  t.localeName == "sv" ? element.descriptionSv : element.descriptionEn,
+                                  style: TextStyle(
+                                    fontFamily: "MinionPro",
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: widget.availableWidth / 30,
+                                    color: Colors.black
+                                  ),
+                                ),
+                              )
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: widget.availableWidth/10),
+                              child: Container(
+                                child: Text(
+                                  element.minPoints == element.maxPoints ? element.maxPoints.toString() : "${element.minPoints} - ${element.maxPoints}",
+                                  style: TextStyle(
+                                    fontFamily: "MinionPro",
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: widget.availableWidth / 30,
+                                    color: Colors.black
+                                  ),
+                                ),
+                              )
+                            )
+                          ],
+                        )
+                    ],
+                  )
                 ],
               ),
             ),
           ),
         );
+        
+        return container;
 
       } else if (element is GroupMissionRead) {
-        
-      } else {}
-    });
+        switch (element.isAccepted){
+          case "Accepted": {
+            Container container =
+              Container(
+                height: widget.availableHeight/8,
+                width: widget.availableWidth-40,
+                child: Card(
+                  shadowColor: Colors.transparent,
+                  color: Colors.transparent,
+                  surfaceTintColor: null,
+                  child: InkWell(
+                    onTap: () => (),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(child: Image.asset(avklarad, fit: BoxFit.fill,)),
+                        Column(
+                          children: [
+                            Center(child: 
+                              Text(
+                                textAlign: TextAlign.center,
+                                t.localeName == "sv" ? element.adventureMission.titleSv : element.adventureMission.titleEn,
+                                style: TextStyle(
+                                  fontFamily: "MinionPro",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: widget.availableWidth / 30,
+                                  color: Color(0xFFFCBD1D)
+                                ),
+                              )),
+                              SizedBox(height: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ? 
+                                          element.adventureMission.maxPoints.toString() : "${element.points} / ${element.adventureMission.maxPoints}",
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  )
+                                ],
+                              )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+              
+              return container;
 
+          }
 
+          case "Failed": {
+            Container container =
+              Container(
+                height: widget.availableHeight/8,
+                width: widget.availableWidth-40,
+                child: Card(
+                  shadowColor: Colors.transparent,
+                  color: Colors.transparent,
+                  surfaceTintColor: null,
+                  child: InkWell(
+                    onTap: () => (),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(child: Image.asset(misslyckad, fit: BoxFit.fill,)),
+                        Column(
+                          children: [
+                            Center(child: 
+                              Text(
+                                textAlign: TextAlign.center,
+                                t.localeName == "sv" ? element.adventureMission.titleSv : element.adventureMission.titleEn,
+                                style: TextStyle(
+                                  fontFamily: "MinionPro",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: widget.availableWidth / 30,
+                                  color: Color(0xFFFCBD1D)
+                                ),
+                              )),
+                              SizedBox(height: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ?
+                                         element.adventureMission.maxPoints.toString() : "0 / ${element.adventureMission.maxPoints}",
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  )
+                                ],
+                              )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+              
+              return container;
 
-    return Card();
+          }
+
+          case "Review": {
+            Container container =
+              Container(
+                height: widget.availableHeight/8,
+                width: widget.availableWidth-40,
+                child: Card(
+                  shadowColor: Colors.transparent,
+                  color: Colors.transparent,
+                  surfaceTintColor: null,
+                  child: InkWell(
+                    onTap: () => (),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(child: Image.asset(bedomning, fit: BoxFit.fill,)),
+                        Column(
+                          children: [
+                            Center(child: 
+                              Text(
+                                textAlign: TextAlign.center,
+                                t.localeName == "sv" ? element.adventureMission.titleSv : element.adventureMission.titleEn,
+                                style: TextStyle(
+                                  fontFamily: "MinionPro",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: widget.availableWidth / 30,
+                                  color: Color(0xFFFCBD1D)
+                                ),
+                              )),
+                              SizedBox(height: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(),
+                                    child: Container(
+                                      child: Text(
+                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ?
+                                         element.adventureMission.maxPoints.toString() : "${element.adventureMission.minPoints} - ${element.adventureMission.maxPoints}",
+                                        style: TextStyle(
+                                          fontFamily: "MinionPro",
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: widget.availableWidth / 30,
+                                          color: Colors.black
+                                        ),
+                                      ),
+                                    )
+                                  )
+                                ],
+                              )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+              return container;
+          }
+        }
+      } 
+      return SizedBox();
   }
 
 
   List<Widget> generateWeekMissionCards(
     Map<int, List<AdventureMissionRead>> missionsMap,
     Map<int, List<GroupMissionRead>> groupMissionsMap,
-    int week) {
+    int week, BuildContext context) {
 
     final missionList = [];
     final allMissions = missionsMap[week];
     final groupMissions = groupMissionsMap[week];
 
-    allMissions?.forEach((mission) {
-      if(groupMissions!.any((groupMission) => groupMission.adventureMission.id == mission.id)) {
+
+    if(groupMissions != null) {
+      allMissions?.forEach((mission) {
+      if(groupMissions.any((groupMission) => groupMission.adventureMission.id == mission.id)) {
         missionList.add(groupMissions.firstWhere((groupMission) => (mission.id == groupMission.adventureMission.id)));
       } else {
         missionList.add(mission);
       }
     });
+    } else {
+      allMissions?.forEach((mission) => missionList.add(mission));
+    }
+
+    List<Widget> list = []; 
+    missionList.forEach((element) => (list.add(createMissionCard(element, context))));
 
 
-
-    return [];
+    return list;
   }
 
 }
