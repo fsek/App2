@@ -145,7 +145,7 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
                     onTap: (index) {
                       if(selectedMission == null) {
                         _tabController.animateTo(index);
-                      }
+                      } 
                     },
                     controller: _tabController,
                   padding: EdgeInsets.only(top: 2),
@@ -180,8 +180,19 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
   );
 }
 
+Widget _missionDetails(dynamic mission, BuildContext context) {
+
+  return SizedBox();
+
+}
+
 
 Widget _weekTab(int week, BuildContext context) {
+
+  if(selectedMission != null) {
+    return _missionDetails(selectedMission, context);
+  }
+
   return SingleChildScrollView(
     child: Stack( 
       children: [ 
@@ -210,7 +221,11 @@ Widget _weekTab(int week, BuildContext context) {
             color: Colors.transparent,
             surfaceTintColor: null,
             child: InkWell(
-              onTap: () => (),
+              onTap: () => (
+                setState(() {
+                  this.selectedMission = element;
+                })
+              ),
               child: Stack(
                 children: [
                   Positioned.fill(child: Image.asset(start, fit: BoxFit.fill,)),
@@ -262,7 +277,11 @@ Widget _weekTab(int week, BuildContext context) {
                   color: Colors.transparent,
                   surfaceTintColor: null,
                   child: InkWell(
-                    onTap: () => (),
+                    onTap: () => (
+                      setState(() {
+                        this.selectedMission = element;
+                      })
+                    ),
                     child: Stack(
                       children: [
                         Positioned.fill(child: Image.asset(avklarad, fit: BoxFit.fill,)),
@@ -314,7 +333,11 @@ Widget _weekTab(int week, BuildContext context) {
                   color: Colors.transparent,
                   surfaceTintColor: null,
                   child: InkWell(
-                    onTap: () => (),
+                    onTap: () => (
+                      setState(() {
+                        this.selectedMission = element;
+                      })
+                    ),
                     child: Stack(
                       children: [
                         Positioned.fill(child: Image.asset(misslyckad, fit: BoxFit.fill,)),
@@ -366,7 +389,11 @@ Widget _weekTab(int week, BuildContext context) {
                   color: Colors.transparent,
                   surfaceTintColor: null,
                   child: InkWell(
-                    onTap: () => (),
+                    onTap: () => (
+                      setState(() {
+                        this.selectedMission = element;
+                      })
+                    ),
                     child: Stack(
                       children: [
                         Positioned.fill(child: Image.asset(bedomning, fit: BoxFit.fill,)),
