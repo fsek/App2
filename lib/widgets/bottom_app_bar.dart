@@ -103,13 +103,13 @@ class FsekAppBarState extends State<FsekAppBar> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => (MooseGamePage())));
         break;
 
-      case "reset score":
-        locator<GameScoreService>().resetScore();
-        break;
+      // case "reset score":
+      //   locator<GameScoreService>().resetScore();
+      //   break;
 
-      case "reset name":
-        locator<GameScoreService>().resetName();
-        break;
+      // case "reset name":
+      //   locator<GameScoreService>().resetName();
+      //   break;
 
       default:
         break;

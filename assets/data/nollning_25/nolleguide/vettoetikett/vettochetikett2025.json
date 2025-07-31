@@ -1,0 +1,126 @@
+{
+    "articles": [
+        {
+            "image": "",
+            "title": {
+                "sv": "Allt du behöver veta om den akademiska kvarten",
+                "en": "How to read time"
+            },
+            "preamble": {
+                "sv": "",
+                "en": ""
+            },
+            "content": {
+                "sv": [
+                    {
+                        "heading": "Vad är Akademisk Kvart?",
+                        "paragraph": "Detta fenomen som till en början kan tyckas ställa till det för dig, men som du snart kommer lära dig att älska, kallas akademisk kvart. Denna uråldriga företeelse härstammar från tiden då klockor var ovanliga hos studenterna. Man förlitade sig på domkyrkans ringningar, och studenterna började gå till föreläsningar då klockorna slog vid hel timme. Efter femton minuter var alla på plats och föreläsningen kunde börja."
+                    },
+                    {
+                        "heading": "Enkel- och dubbelkvart",
+                        "paragraph": "Akademisk kvart finns i två utföranden: enkelkvart och dubbelkvart. Enkelkvart tillämpas alla vardagar från kl 07 till och med kl 17. Dubbelkvart tillämpas alla vardagar från kl 18 till kl 06, samt dygnet runt på helger. Enkelkvart innebär att tidsangivelsen 13 en vardag betyder att tillställningen börjar 13.15. Dubbelkvart innebär att tidsangivelsen 19 betyder att tillställningen börjar 19.30."
+                    },
+                    {
+                        "heading": "Pricksystemet",
+                        "paragraph": "Vid vissa tillfällen kan man önska att tillställningen börjar vid hel timma. Detta kallas i folkmun “prick”. Pricken fungerar sådant att den subtraherar femton minuter från den angivna tiden. Dock kan man inte använda dubbelprick för att upphäva enkelkvart."
+                    },
+                    {
+                        "heading": "Exempel",
+                        "paragraph": "Notera följande exempel:\n- En vardag kl 8 innebär 8:15.\n- En vardag kl 15(.) innebär 15:00.\n- En helgdag kl 15 innebär 15.30.\n- En helgdag kl 15(.) innebär 15:15.\n- En helgdag kl 15(..) innebär 15:00."
+                    },
+                    {
+                        "heading": "Undantag",
+                        "paragraph": "Vill man den akademiska andan till trots inte använda prickar för att upphäva eventuella kvartar, kan man även välja att ange minuter. Tentor, duggor och laborationer börjar nästan alltid på utsatt tid."
+                    }
+                ],
+                "en": [
+                    {
+                        "heading": "What is the Academic 15?",
+                        "paragraph": "This system may seem confusing at first but soon you will learn to love it. It is called the academic 15. This ancient tradition comes from times when watches were rare. Students trusted church bells and started walking to lectures when the bells chimed the hour. After 15 minutes, everyone had arrived and the lecture could begin."
+                    },
+                    {
+                        "heading": "Simple and Double 15",
+                        "paragraph": "The academic 15 comes in two versions: simple 15 and double 15. Simple 15 is applied on weekdays from 7 AM to 5 PM. Double 15 is applied on weekdays from 6 PM to 6 AM and during all hours on weekends. Simple 15 means the event starts 15 minutes past the stated time. Double 15 means it starts 30 minutes after the stated time."
+                    },
+                    {
+                        "heading": "The Prick System",
+                        "paragraph": "Sometimes, you may want an event to start on the exact hour. This is called the 'prick' system. The prick subtracts 15 minutes from the given time. However, you cannot override simple 15 with two pricks."
+                    },
+                    {
+                        "heading": "Examples",
+                        "paragraph": "Take note of the following examples:\n- Weekdays, 8 means 8:15.\n- Weekdays, 15(.) means 15:00.\n- Weekends, 15 means 15:30.\n- Weekends, 15(.) means 15:15.\n- Weekends, 15(..) means 15:00."
+                    },
+                    {
+                        "heading": "Exceptions",
+                        "paragraph": "If you don't want to use pricks, you can specify minutes exactly, like 13:00 or 19:00. Exams and tests almost always start on the given time without the academic 15."
+                    }
+                ]
+            }
+        },
+        {
+            "image": "",
+            "title": {
+                "sv": "Sittningsformalia",
+                "en": "Sittning"
+            },
+            "preamble": {
+                "sv": "",
+                "en": ""
+            },
+            "content": {
+                "sv": [
+                    {
+                        "heading": "",
+                        "paragraph": "När får man brista ut i sång? Vad ska du göra när din bordsgranne hytter vinglaset mot dig med mord i blicken? På vilka sittningar är det acceptabelt att plundra någons tallrik? Här följer lite formalia som råder vid sittningar!"
+                    },
+                    {
+                        "heading": "Olika sittningar och sittningsrelaterade saker",
+                        "paragraph": "Ordet sittning kan betyda flera olika saker men man brukar för enkelhetens skull dela in de olika sittningarna i två områden, fin- och fulsittningar. Finsittningar innebär oftast klädkod kavaj men vid vissa tillfällen även högtidsdräkt. Ett ord för finsittning som ofta används är gasque. Fulsittningar brukar ofta innebära klädkod overall eller enligt sittningens tema och kallas ofta för slasque. Sångboken är ett måste på sittningar, oavsett sort. F-sektionen har en egen sångbok, och andra sektioner kan ha egna eller använda Teknologkårens sångbok. Det är vanligt att fästa en penna vid sångboken. På fulsittningar är det inte ovanligt att gäster ropar ut 'tempo' för mer sång, men detta sker aldrig på finsittningar."
+                    },
+                    {
+                        "heading": "Att föra sig på sittning",
+                        "paragraph": "Vid sittningar där overall råder som klädkod gäller andra regler än vid finsittningar. På slasquesittningar bestäms gränserna av sexmästeriets toleransnivå. På finsittningar förväntas god hyfs och fason. Viktigt att komma ihåg är att 'tempo' inte är tillåtet på finsittningar. Bordsetikett gäller också: bordsdamen sitter till höger om bordsherren."
+                    },
+                    {
+                        "heading": "Skål",
+                        "paragraph": "Skåla bör man göra ofta! Under sittningar kan man skåla med en person, hela bordet (på fulsittningar) eller delta i en gemensam skål som sångförmannen utlyser. Den gemensamma skålen följer ett särskilt mönster. Damer börjar med att skåla till vänster, sedan höger, rakt fram och sedan dricka, följt av samma ordning baklänges. Herrar börjar skåla åt höger."
+                    },
+                    {
+                        "heading": "Gyckel",
+                        "paragraph": "Gyckel är ett kortare (eller ibland längre) uppträdande i två akter. Det är vanligt förekommande och anmäls till sångförmannen. Respekt visas genom att enbart dricka vatten och vara tyst under gycklet. Vissa sektioner kallar det för spex, men det är inte samma sak."
+                    },
+                    {
+                        "heading": "Sittningens förfarande",
+                        "paragraph": "En sittning börjar med fördrink och Måltidssången. Därefter följer förrätt, huvudrätt och efterrätt. Sittningen avslutas med sången 'O Gamla Klang och Jubeltid' där man bankar i bordet. Den sista versen sjungs stående och efteråt är det inte tillåtet att sätta sig igen. Efter sittningen följer oftast mellanfest, eftersläpp och ibland efterfest i annan lokal."
+                    }
+                ],
+                "en": [
+                    {
+                        "heading": "",
+                        "paragraph": "When can you burst into a song? What do you do when your neighbour at the table raises his glass with an expectant look? At what sittning is it acceptable to plunder someone else's plate? Here’s what you need to know!"
+                    },
+                    {
+                        "heading": "Types of sittnings",
+                        "paragraph": "The word sittning can refer to many things but is usually divided into two types: tidy and wild sittnings. Tidy sittnings often require dress code Kavaj or Högtidsdräkt and are sometimes called gasques. Wild sittnings usually require overalls or themed outfits and are called slasque. A songbook is always essential. F-guild has its own, others use Teknologkåren’s songbook. A pen attached to the book is recommended. At wild sittnings, guests may shout 'Tempo!' to request more songs, but this never happens at tidy sittnings."
+                    },
+                    {
+                        "heading": "Behaviour at sittnings",
+                        "paragraph": "Different sittnings have different behavioural expectations. At slasque sittnings, rules are more relaxed, set by the Head of Festivities. At gasques, proper manners are expected. Remember that 'Tempo' is not allowed at gasques. Table seating etiquette also applies: the lady sits to the right of the gentleman."
+                    },
+                    {
+                        "heading": "Cheers",
+                        "paragraph": "Cheering is encouraged! You may cheer with an individual, your whole table (at slasque sittnings) or join in a collective cheer led by the Master of Ceremonies. The formal cheer follows a specific pattern: ladies start to the left, then right, then across, then drink, and repeat in reverse. Gentlemen start to the right."
+                    },
+                    {
+                        "heading": "Gyckel",
+                        "paragraph": "A gyckel is a short (or sometimes too long) performance in two acts. Anyone can perform, but you must register with the Master of Ceremonies. Respect must be shown during gyckel by only drinking water and remaining silent. Some call it 'spex', but it’s not the same thing."
+                    },
+                    {
+                        "heading": "Sittning procedure",
+                        "paragraph": "A sittning begins with a pre-drink and the song 'Måltidssången'. Guests then enjoy appetizers, main course and dessert. The sittning ends with the song 'O Gamla Klang och Jubeltid', where you bang the table at key moments. The last verse is sung standing, and no sitting is allowed afterwards. The evening usually continues with an in-between party, an after-party and sometimes an after-after-party at another venue."
+                    }
+                ]
+            }
+        }
+    ]
+}

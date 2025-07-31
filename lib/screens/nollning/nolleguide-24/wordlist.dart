@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class WordListPage extends StatefulWidget {
+class WordListOldPage extends StatefulWidget {
   @override
   _WordListState createState() => _WordListState();
 }
 
-class _WordListState extends State<WordListPage> {
+class _WordListState extends State<WordListOldPage> {
   List<Word> wordlist = [];
 
   _WordListState() {
