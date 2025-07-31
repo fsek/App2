@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
+[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsRemoveAlbumPhotographer**](doc/AlbumsApi.md#albumsremovealbumphotographer) | **PATCH** /albums/remove_photographer | Remove Album Photographer
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogin**](doc/AuthApi.md#authauthcookielogin) | **POST** /auth/login | Auth:Cookie.Login
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogout**](doc/AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogoutAll**](doc/AuthApi.md#authauthcookielogoutall) | **DELETE** /auth/logout-all | Auth:Cookie.Logout All
@@ -330,6 +331,7 @@ Class | Method | HTTP request | Description
  - [PermissionCreate](doc/PermissionCreate.md)
  - [PermissionRead](doc/PermissionRead.md)
  - [PermissionRemove](doc/PermissionRemove.md)
+ - [PhotographerInAlbumRead](doc/PhotographerInAlbumRead.md)
  - [PostCreate](doc/PostCreate.md)
  - [PostDoorAccessRead](doc/PostDoorAccessRead.md)
  - [PostPermissionRead](doc/PostPermissionRead.md)

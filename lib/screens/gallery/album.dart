@@ -85,8 +85,9 @@ class AlbumPage extends StatelessWidget {
                               color: Theme.of(context).primaryColor),
                           children: [
                         TextSpan(
-                            text: album.photographer != null ? "${album.photographer!.firstName} ${album.photographer!.lastName}" : //.join(", ") ??
-                                t.albumNoPhotographers,
+                            text: album.photographer.isNotEmpty ? 
+                              album.photographer.map((photograper) => "${photograper.user.firstName} ${photograper.user.lastName}").join(", ") :
+                              t.albumNoPhotographers,
                             style: Theme.of(context).textTheme.bodyMedium)
                       ])),
                   SizedBox(

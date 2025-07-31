@@ -87,6 +87,7 @@ import 'package:api_client/src/model/nollning_read.dart';
 import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
 import 'package:api_client/src/model/permission_remove.dart';
+import 'package:api_client/src/model/photographer_in_album_read.dart';
 import 'package:api_client/src/model/post_create.dart';
 import 'package:api_client/src/model/post_door_access_read.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
@@ -202,6 +203,7 @@ part 'serializers.g.dart';
   PermissionCreate,
   PermissionRead,
   PermissionRemove,
+  PhotographerInAlbumRead,
   PostCreate,
   PostDoorAccessRead,
   PostPermissionRead,

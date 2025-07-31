@@ -94,6 +94,7 @@ doc/PermissionCreate.md
 doc/PermissionRead.md
 doc/PermissionRemove.md
 doc/PermissionsApi.md
+doc/PhotographerInAlbumRead.md
 doc/PostCreate.md
 doc/PostDoorAccessRead.md
 doc/PostPermissionRead.md
@@ -249,6 +250,7 @@ lib/src/model/nollning_read.dart
 lib/src/model/permission_create.dart
 lib/src/model/permission_read.dart
 lib/src/model/permission_remove.dart
+lib/src/model/photographer_in_album_read.dart
 lib/src/model/post_create.dart
 lib/src/model/post_door_access_read.dart
 lib/src/model/post_permission_read.dart
@@ -289,3 +291,4 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/photographer_in_album_read_test.dart

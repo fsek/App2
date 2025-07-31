@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **year** | **int** |  | 
 **date** | [**DateTime**](DateTime.md) |  | 
 **location** | **String** |  | 
-**photographer** | [**SimpleUserRead**](SimpleUserRead.md) |  | 
+**photographer** | [**BuiltList&lt;PhotographerInAlbumRead&gt;**](PhotographerInAlbumRead.md) |  | 
 **imgs** | [**BuiltList&lt;ImgInAlbum&gt;**](ImgInAlbum.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
