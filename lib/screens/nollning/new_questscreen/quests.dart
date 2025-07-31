@@ -24,12 +24,14 @@ class QuestScreen extends StatefulWidget {
 
 }
 
-class _QuestScreenState extends State<QuestScreen> {
+class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStateMixin{
   Map<int, List<AdventureMissionRead>> missionsMap = {};
   Map<int, List<GroupMissionRead>> groupMissionsMap = {};
   AdminUserRead? user;
   NollningRead? nollning;
   NollningGroupRead? nollningGroup;
+  dynamic selectedMission;
+  late TabController _tabController;
 
   String bakgrund = "assets/data/nollning_25/uppdrag/bakgrund.png";
   String avklarad = "assets/data/nollning_25/uppdrag/bricka-avklarad.png";
@@ -40,12 +42,22 @@ class _QuestScreenState extends State<QuestScreen> {
   String pelare_right = "assets/data/nollning_25/uppdrag/halvpelare_right.png";
   String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
 
-
+  @override
   void initState() {
     super.initState();
+
+    this._tabController = TabController(
+      length: 5, vsync: this);
+
     _loadInitData();
 
   }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }  
 
   Future<void> _loadInitData() async {
     final user = await ApiService.apiClient.getUsersApi().usersGetMe();
@@ -117,9 +129,7 @@ class _QuestScreenState extends State<QuestScreen> {
       );
     }
 
-    return DefaultTabController(
-    length: 5,
-    child: Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           Container(
@@ -132,6 +142,12 @@ class _QuestScreenState extends State<QuestScreen> {
                   // height: widget.availableHeight,
                   width: widget.availableWidth - 40,
                   child: TabBar(
+                    onTap: (index) {
+                      if(selectedMission == null) {
+                        _tabController.animateTo(index);
+                      }
+                    },
+                    controller: _tabController,
                   padding: EdgeInsets.only(top: 2),
                   indicatorColor: Color.fromARGB(255, 160, 120, 18),
                   labelColor: Color.fromARGB(255, 160, 120, 18),
@@ -149,6 +165,7 @@ class _QuestScreenState extends State<QuestScreen> {
           ),
           Expanded(
             child: TabBarView(
+              controller: _tabController,
               children: [
                 _weekTab(1, context),
                 _weekTab(2, context),
@@ -160,7 +177,6 @@ class _QuestScreenState extends State<QuestScreen> {
           ),
         ],
       ),
-    ),
   );
 }
 
@@ -200,6 +216,7 @@ Widget _weekTab(int week, BuildContext context) {
                   Positioned.fill(child: Image.asset(start, fit: BoxFit.fill,)),
                   Column(
                     children: [
+                      SizedBox(height: widget.availableHeight/50,),
                       Center(child: 
                         Text(
                           textAlign: TextAlign.center,
@@ -207,43 +224,21 @@ Widget _weekTab(int week, BuildContext context) {
                           style: TextStyle(
                             fontFamily: "MinionPro",
                             fontWeight: FontWeight.w600,
-                            fontSize: widget.availableWidth / 30,
+                            fontSize: widget.availableWidth / 20,
                             color: Color(0xFFFCBD1D)
                           ),
                         )),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: widget.availableWidth/10),
-                              child: Container(
-                                child: Text(
-                                  t.localeName == "sv" ? element.descriptionSv : element.descriptionEn,
-                                  style: TextStyle(
+                        SizedBox(height: widget.availableHeight/100,),
+                        Center(
+                          child: Text(
+                            element.minPoints == element.maxPoints ? element.maxPoints.toString() : "${element.minPoints} - ${element.maxPoints} ${t.introductionPoints2}",
+                            style: TextStyle(
                                     fontFamily: "MinionPro",
                                     fontWeight: FontWeight.normal,
-                                    fontSize: widget.availableWidth / 30,
+                                    fontSize: widget.availableWidth / 25,
                                     color: Colors.black
                                   ),
-                                ),
-                              )
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: widget.availableWidth/10),
-                              child: Container(
-                                child: Text(
-                                  element.minPoints == element.maxPoints ? element.maxPoints.toString() : "${element.minPoints} - ${element.maxPoints}",
-                                  style: TextStyle(
-                                    fontFamily: "MinionPro",
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: widget.availableWidth / 30,
-                                    color: Colors.black
-                                  ),
-                                ),
-                              )
-                            )
-                          ],
+                          ),
                         )
                     ],
                   )
@@ -273,6 +268,7 @@ Widget _weekTab(int week, BuildContext context) {
                         Positioned.fill(child: Image.asset(avklarad, fit: BoxFit.fill,)),
                         Column(
                           children: [
+                            SizedBox(height: widget.availableHeight/50,),
                             Center(child: 
                               Text(
                                 textAlign: TextAlign.center,
@@ -280,44 +276,21 @@ Widget _weekTab(int week, BuildContext context) {
                                 style: TextStyle(
                                   fontFamily: "MinionPro",
                                   fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 30,
+                                  fontSize: widget.availableWidth / 20,
                                   color: Color(0xFFFCBD1D)
                                 ),
                               )),
-                              SizedBox(height: 10,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
-                                        style: TextStyle(
+                              SizedBox(height: widget.availableHeight/100,),
+                              Center(
+                                child: Text(
+                                      "${element.points} / ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                  style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
+                                          fontSize: widget.availableWidth / 25,
                                           color: Colors.black
                                         ),
-                                      ),
-                                    )
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ? 
-                                          element.adventureMission.maxPoints.toString() : "${element.points} / ${element.adventureMission.maxPoints}",
-                                        style: TextStyle(
-                                          fontFamily: "MinionPro",
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
-                                          color: Colors.black
-                                        ),
-                                      ),
-                                    )
-                                  )
-                                ],
+                                ),
                               )
                           ],
                         )
@@ -347,6 +320,7 @@ Widget _weekTab(int week, BuildContext context) {
                         Positioned.fill(child: Image.asset(misslyckad, fit: BoxFit.fill,)),
                         Column(
                           children: [
+                            SizedBox(height: widget.availableHeight/50,),
                             Center(child: 
                               Text(
                                 textAlign: TextAlign.center,
@@ -354,44 +328,21 @@ Widget _weekTab(int week, BuildContext context) {
                                 style: TextStyle(
                                   fontFamily: "MinionPro",
                                   fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 30,
+                                  fontSize: widget.availableWidth / 20,
                                   color: Color(0xFFFCBD1D)
                                 ),
                               )),
-                              SizedBox(height: 10,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
-                                        style: TextStyle(
+                              SizedBox(height: widget.availableHeight/100,),
+                              Center(
+                                child: Text(
+                                      "${0} / ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                  style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
+                                          fontSize: widget.availableWidth / 25,
                                           color: Colors.black
                                         ),
-                                      ),
-                                    )
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ?
-                                         element.adventureMission.maxPoints.toString() : "0 / ${element.adventureMission.maxPoints}",
-                                        style: TextStyle(
-                                          fontFamily: "MinionPro",
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
-                                          color: Colors.black
-                                        ),
-                                      ),
-                                    )
-                                  )
-                                ],
+                                ),
                               )
                           ],
                         )
@@ -421,6 +372,7 @@ Widget _weekTab(int week, BuildContext context) {
                         Positioned.fill(child: Image.asset(bedomning, fit: BoxFit.fill,)),
                         Column(
                           children: [
+                            SizedBox(height: widget.availableHeight/50,),
                             Center(child: 
                               Text(
                                 textAlign: TextAlign.center,
@@ -428,44 +380,23 @@ Widget _weekTab(int week, BuildContext context) {
                                 style: TextStyle(
                                   fontFamily: "MinionPro",
                                   fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 30,
+                                  fontSize: widget.availableWidth / 20,
                                   color: Color(0xFFFCBD1D)
                                 ),
                               )),
-                              SizedBox(height: 10,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        t.localeName == "sv" ? element.adventureMission.descriptionSv : element.adventureMission.descriptionEn,
-                                        style: TextStyle(
+                              SizedBox(height: widget.availableHeight/100,),
+                              Center(
+                                child: Text(
+                                  element.adventureMission.minPoints == element.adventureMission.maxPoints ? 
+                                    element.adventureMission.maxPoints.toString() : 
+                                      "${element.adventureMission.maxPoints} - ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                  style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
+                                          fontSize: widget.availableWidth / 25,
                                           color: Colors.black
                                         ),
-                                      ),
-                                    )
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(),
-                                    child: Container(
-                                      child: Text(
-                                        element.adventureMission.minPoints == element.adventureMission.maxPoints ?
-                                         element.adventureMission.maxPoints.toString() : "${element.adventureMission.minPoints} - ${element.adventureMission.maxPoints}",
-                                        style: TextStyle(
-                                          fontFamily: "MinionPro",
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: widget.availableWidth / 30,
-                                          color: Colors.black
-                                        ),
-                                      ),
-                                    )
-                                  )
-                                ],
+                                ),
                               )
                           ],
                         )
