@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
+import 'package:fsek_mobile/screens/nollning/new_questscreen/highscore.dart';
 import 'package:fsek_mobile/screens/nollning/new_questscreen/quests.dart';
 import 'package:fsek_mobile/screens/nollning/questscreen/quests.dart';
 import 'package:fsek_mobile/services/api.service.dart';
@@ -104,7 +105,10 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
                         QuestScreen(
                           availableHeight: screenHeight - (screenHeight / 7) - (screenHeight / 15) - 20, 
                           availableWidth: screenWidth - (screenWidth/8)),
-                        Placeholder()
+                        HighscoreScreen(
+                          availableHeight: screenHeight - (screenHeight / 7) - (screenHeight / 15) - 20, 
+                          availableWidth: screenWidth - (screenWidth/8),
+                        )
                       ]
                     ),
                   ),

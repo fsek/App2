@@ -42,12 +42,35 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
   String pelare_right = "assets/data/nollning_25/uppdrag/halvpelare_right.png";
   String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
 
+  int _numberOfTabs() {
+    if(DateTime.now().isAfter(DateTime(2025, 9, 21))) {
+      return 5;
+    } else if(DateTime.now().isAfter(DateTime(2025, 9, 14)))  {
+      return 4;
+
+    } else if(DateTime.now().isAfter(DateTime(2025, 9, 7))) {
+      return 3;
+
+    } else if(DateTime.now().isAfter(DateTime(2025, 8, 31)))  {
+      return 2;
+
+    } else if(DateTime.now().isAfter(DateTime(2025, 8, 24))) {
+      return 1;
+
+    } else {
+      return 0;
+    }
+
+   
+  }
+
   @override
   void initState() {
     super.initState();
 
+
     this._tabController = TabController(
-      length: 5, vsync: this);
+      length: _numberOfTabs() , vsync: this);
 
     _loadInitData();
 
@@ -129,7 +152,7 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
       );
     }
 
-    return Scaffold(
+    if(_tabController.length != 0) return Scaffold(
       body: Column(
         children: [
           Container(
@@ -153,11 +176,16 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
                   labelColor: Color.fromARGB(255, 160, 120, 18),
                   unselectedLabelColor: const Color.fromARGB(255, 83, 81, 81),
                   tabs: [
-                    Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                    Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                    Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                    Tab(text: t.localeName == "sv" ? "V4" : "W4"),
-                    Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                    // Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                    // Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                    // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                    // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                    // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                    if(DateTime.now().isAfter(DateTime(2025, 8, 24))) Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                    if(DateTime.now().isAfter(DateTime(2025, 8, 31))) Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                    if(DateTime.now().isAfter(DateTime(2025, 9, 7))) Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                    if(DateTime.now().isAfter(DateTime(2025, 9, 14))) Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                    if(DateTime.now().isAfter(DateTime(2025, 9, 21))) Tab(text: t.localeName == "sv" ? "V5" : "W5"),
                   ],
                 ),
             )],
@@ -167,23 +195,216 @@ class _QuestScreenState extends State<QuestScreen> with SingleTickerProviderStat
             child: TabBarView(
               controller: _tabController,
               children: [
-                _weekTab(1, context),
-                _weekTab(2, context),
-                _weekTab(3, context),
-                _weekTab(4, context),
-                _weekTab(5, context),
+                // _weekTab(1, context),
+                // _weekTab(2, context),
+                // _weekTab(3, context),
+                // _weekTab(4, context),
+                // _weekTab(5, context),
+                if(DateTime.now().isAfter(DateTime(2025, 8, 24))) _weekTab(1, context),
+                if(DateTime.now().isAfter(DateTime(2025, 8, 31))) _weekTab(2, context),
+                if(DateTime.now().isAfter(DateTime(2025, 9, 7))) _weekTab(3, context),
+                if(DateTime.now().isAfter(DateTime(2025, 9, 14))) _weekTab(4, context),
+                if(DateTime.now().isAfter(DateTime(2025, 9, 21))) _weekTab(5, context),
               ],
             ),
           ),
         ],
       ),
   );
+
+  return Container(
+    height: widget.availableHeight,
+    width: widget.availableWidth,
+    child: Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill))
+  );
 }
 
+
+String _pointsFromMission(GroupMissionRead mission, BuildContext context) {
+  var t = AppLocalizations.of(context)!;
+  String finalString;
+
+  switch(mission.isAccepted){
+
+    case "Accepted":
+      finalString = "${mission.points} / ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+
+    case "Failed": 
+      finalString = "${0} / ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+
+    case "Review":
+      finalString = mission.adventureMission.minPoints == mission.adventureMission.maxPoints ? mission.adventureMission.maxPoints.toString() 
+        : "${mission.adventureMission.minPoints} - ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+
+    default: 
+      finalString = "";
+  }
+
+  return finalString;
+
+}
+
+
 Widget _missionDetails(dynamic mission, BuildContext context) {
+  var t = AppLocalizations.of(context)!;
+
+  if(mission is AdventureMissionRead) {
+  return Container(
+    height: widget.availableHeight,
+    width: widget.availableWidth,
+    child: Stack(
+      children: [
+        Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)),
+        Padding(
+          padding: EdgeInsets.only(left: 30, right: 30),
+          child: Column(
+            children: [
+              SizedBox(height: 40,),
+              Center(
+                child: Text(
+                  t.localeName == "sv" ? mission.titleSv : mission.titleEn,
+                  style: TextStyle(
+                    fontFamily: "MinionPro",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 10,
+                    color: Colors.black // Color(0xFFFCBD1D)
+                  ),
+                ),
+              ),
+              Text(
+                t.localeName == "sv" ? mission.descriptionSv : mission.descriptionEn,
+                style: TextStyle(
+                  fontFamily: "MinionPro",
+                  fontWeight: FontWeight.normal,
+                  fontSize: widget.availableWidth / 25
+                ),
+              ),
+              Center(
+                child: Text(
+                  mission.minPoints == mission.maxPoints ? mission.maxPoints.toString() : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
+                  style: TextStyle(
+                    fontFamily: "MinionPro",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 22,
+                  ),
+                ),
+              ),
+            ],
+          )
+          ),
+          Center(
+            child: SizedBox(
+              height: widget.availableHeight / 20,
+              width: widget.availableWidth / 5,
+              child: Material(
+                color: Color(0xFFFCBD1D),
+                borderRadius: BorderRadius.circular(12),
+                child: InkWell(
+                  splashColor: Colors.transparent, // Remove splash transparency
+                  highlightColor: Colors.transparent, // Remove highlight transparency
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => setState(() {
+                    this.selectedMission = null;
+                  }),
+                  child: Center(
+                    child: Text(
+                      t.localeName == "sv" ? "Tillbaka" : "Back",
+                      style: TextStyle(
+                        fontFamily: "MinionPro",
+                        fontWeight: FontWeight.w600,
+                        fontSize: widget.availableWidth / 20,
+                        color: Colors.black, // Optional: change to fit your theme
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+      ],
+    ),
+  );
+  }
+
+  if(mission is GroupMissionRead) {
+  return Container(
+    height: widget.availableHeight,
+    width: widget.availableWidth,
+    child: Stack(
+      children: [
+        Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)),
+        Padding(
+          padding: EdgeInsets.only(left: 30, right: 30),
+          child: Column(
+            children: [
+              SizedBox(height: 40,),
+              Center(
+                child: Text(
+                  t.localeName == "sv" ? mission.adventureMission.titleSv : mission.adventureMission.titleEn,
+                  style: TextStyle(
+                    fontFamily: "MinionPro",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 10,
+                    color: Colors.black // Color(0xFFFCBD1D)
+                  ),
+                ),
+              ),
+              Text(
+                t.localeName == "sv" ? mission.adventureMission.descriptionSv : mission.adventureMission.descriptionEn,
+                style: TextStyle(
+                  fontFamily: "MinionPro",
+                  fontWeight: FontWeight.normal,
+                  fontSize: widget.availableWidth / 25
+                ),
+              ),
+              Center(
+                child: Text(
+                  _pointsFromMission(mission, context),
+                  style: TextStyle(
+                    fontFamily: "MinionPro",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 22,
+                  ),
+                ),
+              ),
+              Center(
+                child: SizedBox(
+                  height: widget.availableHeight / 20,
+                  width: widget.availableWidth / 5,
+                  child: Material(
+                    color: Color(0xFFFCBD1D),
+                    borderRadius: BorderRadius.circular(12),
+                    child: InkWell(
+                      splashColor: Colors.transparent, // Remove splash transparency
+                      highlightColor: Colors.transparent, // Remove highlight transparency
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () => setState(() {
+                        this.selectedMission = null;
+                      }),
+                      child: Center(
+                        child: Text(
+                          t.localeName == "sv" ? "Tillbaka" : "Back",
+                          style: TextStyle(
+                            fontFamily: "MinionPro",
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 20,
+                            color: Colors.black, // Optional: change to fit your theme
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )
+          ),
+        ],
+      ),
+    );
+  }
 
   return SizedBox();
-
 }
 
 
@@ -302,7 +523,7 @@ Widget _weekTab(int week, BuildContext context) {
                               SizedBox(height: widget.availableHeight/100,),
                               Center(
                                 child: Text(
-                                      "${element.points} / ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                     _pointsFromMission(element, context),
                                   style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
@@ -358,7 +579,7 @@ Widget _weekTab(int week, BuildContext context) {
                               SizedBox(height: widget.availableHeight/100,),
                               Center(
                                 child: Text(
-                                      "${0} / ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                      _pointsFromMission(element, context),
                                   style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
@@ -414,9 +635,7 @@ Widget _weekTab(int week, BuildContext context) {
                               SizedBox(height: widget.availableHeight/100,),
                               Center(
                                 child: Text(
-                                  element.adventureMission.minPoints == element.adventureMission.maxPoints ? 
-                                    element.adventureMission.maxPoints.toString() : 
-                                      "${element.adventureMission.maxPoints} - ${element.adventureMission.maxPoints} ${t.introductionPoints2}",
+                                  _pointsFromMission(element, context),
                                   style: TextStyle(
                                           fontFamily: "MinionPro",
                                           fontWeight: FontWeight.normal,
