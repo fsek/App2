@@ -194,22 +194,22 @@ class _QuestScreenState extends State<QuestScreen>
                       unselectedLabelColor:
                           const Color.fromARGB(255, 83, 81, 81),
                       tabs: [
-                        // Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                        // Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                        // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                        // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
-                        // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
-                        if (DateTime.now().isAfter(
-                            DateTime(2025, 8, 24))) // This is cursed but i cba
-                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                        if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                          Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                        Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                        Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                        Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                        Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                        // if (DateTime.now().isAfter(
+                        //     DateTime(2025, 8, 24))) // This is cursed but i cba
+                        //   Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        // if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                        //   Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                        // if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                        //   Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                        // if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                        //   Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                        // if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                        //   Tab(text: t.localeName == "sv" ? "V5" : "W5"),
                       ],
                     ),
                   )
@@ -220,21 +220,21 @@ class _QuestScreenState extends State<QuestScreen>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  // _weekTab(1, context),
-                  // _weekTab(2, context),
-                  // _weekTab(3, context),
-                  // _weekTab(4, context),
-                  // _weekTab(5, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
-                    _weekTab(1, context), // This is cursed but i cba
-                  if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                    _weekTab(2, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                    _weekTab(3, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                    _weekTab(4, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                    _weekTab(5, context),
+                  _weekTab(1, context),
+                  _weekTab(2, context),
+                  _weekTab(3, context),
+                  _weekTab(4, context),
+                  _weekTab(5, context),
+                  // if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
+                  //   _weekTab(1, context), // This is cursed but i cba
+                  // if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                  //   _weekTab(2, context),
+                  // if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                  //   _weekTab(3, context),
+                  // if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                  //   _weekTab(4, context),
+                  // if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                  //   _weekTab(5, context),
                 ],
               ),
             ),
@@ -272,6 +272,53 @@ class _QuestScreenState extends State<QuestScreen>
     }
 
     return finalString;
+  }
+
+  void _sendMissionAttempt(int adventureMissionId, BuildContext context) async {
+    var t = AppLocalizations.of(context)!;
+
+    try {
+      final gm =
+          GroupMissionCreate((b) => b..adventureMissionId = adventureMissionId);
+      final response = await ApiService.apiClient
+          .getNollningApi()
+          .nollningAddGroupMission(
+              nollningGroupId: nollningGroup!.id, groupMissionCreate: gm);
+
+      if (mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(t.localeName == "sv" ? "Lyckat!" : "Success!"),
+                  content: Text(t.localeName == "sv"
+                      ? "Uppdragsförsök registerat!"
+                      : "Mission attempt registered"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => setState(() {
+                              selectedMission = null;
+                            }),
+                        child: Text("OK"))
+                  ],
+                ));
+      }
+    } catch (e) {
+      if (mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(t.localeName == "sv" ? "Lyckat!" : "Success!"),
+                  content: Text(t.localeName == "sv"
+                      ? "Uppdragsförsök registerat!"
+                      : "Mission attempt registered"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text("OK"))
+                  ],
+                ));
+      }
+    }
   }
 
   Widget _missionDetails(dynamic mission, BuildContext context) {
@@ -325,40 +372,113 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                     ),
-                  ],
-                )),
-            Center(
-              child: SizedBox(
-                height: widget.availableHeight / 20,
-                width: widget.availableWidth / 5,
-                child: Material(
-                  color: Color(0xFFFCBD1D),
-                  borderRadius: BorderRadius.circular(12),
-                  child: InkWell(
-                    splashColor:
-                        Colors.transparent, // Remove splash transparency
-                    highlightColor:
-                        Colors.transparent, // Remove highlight transparency
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: () => setState(() {
-                      this.selectedMission = null;
-                    }),
-                    child: Center(
-                      child: Text(
-                        t.localeName == "sv" ? "Tillbaka" : "Back",
-                        style: TextStyle(
-                          fontFamily: "MinionPro",
-                          fontWeight: FontWeight.w600,
-                          fontSize: widget.availableWidth / 20,
-                          color: Colors
-                              .black, // Optional: change to fit your theme
-                        ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Container(
+                        height: widget.availableHeight / 15,
+                        width: widget.availableWidth,
+                        child: InkWell(
+                            splashColor: Colors
+                                .transparent, // Remove splash transparency
+                            highlightColor: Colors
+                                .transparent, // Remove highlight transparency
+                            borderRadius: BorderRadius.circular(12),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        content: Text(t.localeName == "sv"
+                                            ? "Registera uppdragsförsök?"
+                                            : "Register mission attempt?"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                _sendMissionAttempt(
+                                                    mission.id, context);
+                                              },
+                                              child: Text(t.eventYes)),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(t.eventNo))
+                                        ],
+                                      ));
+                            },
+                            child: Stack(
+                              children: [
+                                Center(
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Image.asset(
+                                          rubrik,
+                                          fit: BoxFit.fitWidth,
+                                        ))),
+                                Center(
+                                  child: Text(
+                                    t.localeName == "sv"
+                                        ? "Registera försök"
+                                        : "Register attempt",
+                                    style: TextStyle(
+                                      fontFamily: "MinionPro",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: widget.availableWidth / 20,
+                                      color: Colors
+                                          .black, // Optional: change to fit your theme
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            )
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Center(
+                      child: Container(
+                        height: widget.availableHeight / 30,
+                        width: widget.availableWidth / 3,
+                        child: InkWell(
+                            splashColor: Colors
+                                .transparent, // Remove splash transparency
+                            highlightColor: Colors
+                                .transparent, // Remove highlight transparency
+                            borderRadius: BorderRadius.circular(12),
+                            onTap: () => setState(() {
+                                  this.selectedMission = null;
+                                }),
+                            child: Stack(
+                              children: [
+                                Center(
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image.asset(
+                                          rubrik,
+                                          fit: BoxFit.fitHeight,
+                                        ))),
+                                Center(
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    t.localeName == "sv" ? "Tillbaka" : "Back",
+                                    style: TextStyle(
+                                      fontFamily: "MinionPro",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: widget.availableWidth / 20,
+                                      color: Colors
+                                          .black, // Optional: change to fit your theme
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ],
+                )),
           ],
         ),
       );
