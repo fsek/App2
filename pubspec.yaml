@@ -84,6 +84,7 @@ dependencies:
   package_info_plus: ^8.0.1
   connectivity_plus: ^6.1.3
   vector_math: any
+  flutter_linkify: ^6.0.0
 dev_dependencies:
   json_serializable: ^6.7.1 # For Data serialization
   build_runner: ^2.0.5 # For building the JSON data object
@@ -120,7 +121,6 @@ flutter:
     - assets/data/nollning_25/nolleguide/
     - assets/data/nollning_25/nolleguide/kladguide/
     - assets/data/nollning_25/nolleguide/homescreen/
-    - assets/data/nollning_25/nolleguide/vettoetikett/
     - assets/data/nollning_25/uppdrag/
 
   fonts:
