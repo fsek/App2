@@ -73,6 +73,18 @@ class _QuestScreenState extends State<QuestScreen>
     super.dispose();
   }
 
+  void refresh() {
+    setState(() {
+      this.missionsMap = {};
+      this.groupMissionsMap = {};
+      this.user == null;
+      this.nollning = null;
+      this.nollningGroup = null;
+      this.selectedMission = null;
+    });
+    _loadInitData();
+  }
+
   Future<void> _loadInitData() async {
     final user = await ApiService.apiClient.getUsersApi().usersGetMe();
     final userData = user.data;
@@ -103,29 +115,30 @@ class _QuestScreenState extends State<QuestScreen>
             ? groupMissionList = groupmissions.data?.toList()
             : ();
       }
+
+      setState(() {
+        this.user = userData;
+        this.nollning = nollningData;
+        this.nollningGroup = nollningGroupData;
+        missionList != null
+            ? missionList.forEach((mission) {
+                this
+                    .missionsMap
+                    .putIfAbsent(mission.nollningWeek, () => [])
+                    .add(mission);
+              })
+            : ();
+        groupMissionList != null
+            ? groupMissionList.forEach((groupmission) {
+                this
+                    .groupMissionsMap
+                    .putIfAbsent(
+                        groupmission.adventureMission.nollningWeek, () => [])
+                    .add(groupmission);
+              })
+            : ();
+      });
     }
-    setState(() {
-      this.user = userData;
-      this.nollning = nollningData;
-      this.nollningGroup = nollningGroupData;
-      missionList != null
-          ? missionList.forEach((mission) {
-              this
-                  .missionsMap
-                  .putIfAbsent(mission.nollningWeek, () => [])
-                  .add(mission);
-            })
-          : ();
-      groupMissionList != null
-          ? groupMissionList.forEach((groupmission) {
-              this
-                  .groupMissionsMap
-                  .putIfAbsent(
-                      groupmission.adventureMission.nollningWeek, () => [])
-                  .add(groupmission);
-            })
-          : ();
-    });
   }
 
   NollningGroupRead? findUserNollningGroup(NollningRead nollning, int userId) {
@@ -274,16 +287,70 @@ class _QuestScreenState extends State<QuestScreen>
     return finalString;
   }
 
-  void _sendMissionAttempt(int adventureMissionId, BuildContext context) async {
+  Future<void> _removeMissionAttempt(
+      int adventureMissionId, BuildContext context) async {
     var t = AppLocalizations.of(context)!;
 
     try {
-      final gm =
-          GroupMissionCreate((b) => b..adventureMissionId = adventureMissionId);
+      final gmDelete =
+          GroupMissionDelete((b) => b..adventureMissionId = adventureMissionId);
+      final response = await ApiService.apiClient
+          .getNollningApi()
+          .nollningDeleteGroupMission(
+              nollningGroupId: nollningGroup!.id, groupMissionDelete: gmDelete);
+
+      if (mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(t.localeName == "sv" ? "Lyckat!" : "Success!"),
+                  content: Text(t.localeName == "sv"
+                      ? "Uppdragsförsök borttaget!"
+                      : "Mission attempt removed"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => setState(() {
+                              Navigator.of(context).pop();
+                              refresh();
+                            }),
+                        child: Text("OK"))
+                  ],
+                ));
+      }
+    } catch (e) {
+      if (mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title:
+                      Text(t.localeName == "sv" ? "Misslyckat!" : "Failure!"),
+                  content: Text(t.localeName == "sv"
+                      ? "Misslyckad borttagning av försök"
+                      : "Registration removal failed"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text("OK"))
+                  ],
+                ));
+      }
+    }
+  }
+
+  Future<void> _sendMissionAttempt(
+      int adventureMissionId, BuildContext context) async {
+    var t = AppLocalizations.of(context)!;
+
+    try {
+      final gm = GroupMissionCreate((b) {
+        b..adventureMissionId = adventureMissionId;
+        b..isAccepted = null;
+        b..points = null;
+      });
       final response = await ApiService.apiClient
           .getNollningApi()
           .nollningAddGroupMission(
-              nollningGroupId: nollningGroup!.id, groupMissionCreate: gm);
+              groupMissionCreate: gm, nollningGroupId: nollningGroup!.id);
 
       if (mounted) {
         showDialog(
@@ -296,7 +363,8 @@ class _QuestScreenState extends State<QuestScreen>
                   actions: [
                     TextButton(
                         onPressed: () => setState(() {
-                              selectedMission = null;
+                              Navigator.of(context).pop();
+                              refresh();
                             }),
                         child: Text("OK"))
                   ],
@@ -307,10 +375,11 @@ class _QuestScreenState extends State<QuestScreen>
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text(t.localeName == "sv" ? "Lyckat!" : "Success!"),
+                  title:
+                      Text(t.localeName == "sv" ? "Misslyckat!" : "Failure!"),
                   content: Text(t.localeName == "sv"
-                      ? "Uppdragsförsök registerat!"
-                      : "Mission attempt registered"),
+                      ? "Misslyckad registrering"
+                      : "Registration failed"),
                   actions: [
                     TextButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -386,18 +455,20 @@ class _QuestScreenState extends State<QuestScreen>
                                 .transparent, // Remove highlight transparency
                             borderRadius: BorderRadius.circular(12),
                             onTap: () {
+                              final parentContext = context;
                               showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
+                                  context: parentContext,
+                                  builder: (dialogContext) => AlertDialog(
                                         content: Text(t.localeName == "sv"
                                             ? "Registera uppdragsförsök?"
                                             : "Register mission attempt?"),
                                         actions: [
                                           TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                _sendMissionAttempt(
-                                                    mission.id, context);
+                                              onPressed: () async {
+                                                Navigator.of(dialogContext)
+                                                    .pop();
+                                                await _sendMissionAttempt(
+                                                    mission.id, parentContext);
                                               },
                                               child: Text(t.eventYes)),
                                           TextButton(
@@ -420,7 +491,7 @@ class _QuestScreenState extends State<QuestScreen>
                                 Center(
                                   child: Text(
                                     t.localeName == "sv"
-                                        ? "Registera försök"
+                                        ? "Registrera försök"
                                         : "Register attempt",
                                     style: TextStyle(
                                       fontFamily: "MinionPro",
@@ -530,38 +601,52 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Center(child: _missionReview(context, mission)),
+                    SizedBox(
+                      height: 50,
+                    ),
                     Center(
-                      child: SizedBox(
-                        height: widget.availableHeight / 20,
-                        width: widget.availableWidth / 5,
-                        child: Material(
-                          color: Color(0xFFFCBD1D),
-                          borderRadius: BorderRadius.circular(12),
-                          child: InkWell(
+                      child: Container(
+                        height: widget.availableHeight / 30,
+                        width: widget.availableWidth / 3,
+                        child: InkWell(
                             splashColor: Colors
                                 .transparent, // Remove splash transparency
                             highlightColor: Colors
                                 .transparent, // Remove highlight transparency
                             borderRadius: BorderRadius.circular(12),
                             onTap: () => setState(() {
-                              this.selectedMission = null;
-                            }),
-                            child: Center(
-                              child: Text(
-                                t.localeName == "sv" ? "Tillbaka" : "Back",
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors
-                                      .black, // Optional: change to fit your theme
+                                  this.selectedMission = null;
+                                }),
+                            child: Stack(
+                              children: [
+                                Center(
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image.asset(
+                                          rubrik,
+                                          fit: BoxFit.fitHeight,
+                                        ))),
+                                Center(
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    t.localeName == "sv" ? "Tillbaka" : "Back",
+                                    style: TextStyle(
+                                      fontFamily: "MinionPro",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: widget.availableWidth / 20,
+                                      color: Colors
+                                          .black, // Optional: change to fit your theme
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
+                              ],
+                            )),
                       ),
-                    )
+                    ),
                   ],
                 )),
           ],
@@ -840,6 +925,49 @@ class _QuestScreenState extends State<QuestScreen>
     }
     return SizedBox();
   }
+
+  Text _missionReview(BuildContext context, GroupMissionRead gm) {
+    var t = AppLocalizations.of(context)!;
+    switch (gm.isAccepted) {
+      case "Accepted":
+        return Text(
+          t.localeName == "sv" ? "Uppdrag accepterat" : "Mission success",
+          style: TextStyle(color: Colors.green),
+        );
+
+      case "Failed":
+        return Text(
+          t.localeName == "sv" ? "Uppdrag misslyckat" : "Mission failed",
+          style: TextStyle(color: Colors.red),
+        );
+
+      default:
+        return Text(
+          t.localeName == "sv"
+              ? "Uppdrag under granskning"
+              : "Mission under review",
+          style: TextStyle(color: Color(0xFFcfac23)),
+        );
+    }
+  }
+
+  // t.localeName == "sv"
+  //                         ? Text(
+  //                             mission.isAccepted == "Accepted"
+  //                                 ? "Uppdrag accepterat"
+  //                                 : (mission.isAccepted == "Failed"
+  //                                     ? "Uppdrag misslyckat"
+  //                                     : "Uppdrag under granskning"),
+  //                             style: TextStyle(color: Colors.red),
+  //                           )
+  //                         : Text(
+  //                             mission.isAccepted == "Accepted"
+  //                                 ? "Mission accepted"
+  //                                 : (mission.isAccepted == "Failed"
+  //                                     ? "Mission failed"
+  //                                     : "Mission under review"),
+  //                             style: TextStyle(color: Colors.amberAccent),
+  //                           ),
 
   List<Widget> generateWeekMissionCards(
       Map<int, List<AdventureMissionRead>> missionsMap,
