@@ -41,7 +41,7 @@ class _QuestScreenState extends State<QuestScreen>
   String pelare_right = "assets/data/nollning_25/uppdrag/halvpelare_right.png";
   String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
 
-  int _numberOfTabs() {
+  int _checkNollningWeek() {
     if (DateTime.now().isAfter(DateTime(2025, 9, 21))) {
       return 5;
     } else if (DateTime.now().isAfter(DateTime(2025, 9, 14))) {
@@ -61,8 +61,8 @@ class _QuestScreenState extends State<QuestScreen>
   void initState() {
     super.initState();
 
-    this._tabController =
-        TabController(length: 5, vsync: this); //_numberOfTabs()
+    this._tabController = TabController(
+        length: _checkNollningWeek(), vsync: this); //_checkNollningWeek()
 
     _loadInitData();
   }
@@ -104,7 +104,7 @@ class _QuestScreenState extends State<QuestScreen>
       if (missions.data != null) {
         missionList = missions.data!.toList();
       }
-      final nollningGroupData =
+      nollningGroupData =
           await findUserNollningGroup(nollningData, userData.id);
       if (nollningGroupData != null) {
         final groupmissions = await ApiService.apiClient
@@ -207,22 +207,22 @@ class _QuestScreenState extends State<QuestScreen>
                       unselectedLabelColor:
                           const Color.fromARGB(255, 83, 81, 81),
                       tabs: [
-                        Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                        Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                        Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                        Tab(text: t.localeName == "sv" ? "V4" : "W4"),
-                        Tab(text: t.localeName == "sv" ? "V5" : "W5"),
-                        // if (DateTime.now().isAfter(
-                        //     DateTime(2025, 8, 24))) // This is cursed but i cba
-                        //   Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                        // if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                        //   Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                        // if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                        //   Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                        // if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                        //   Tab(text: t.localeName == "sv" ? "V4" : "W4"),
-                        // if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                        //   Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                        // Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        // Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                        // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                        // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                        // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                        if (DateTime.now().isAfter(
+                            DateTime(2025, 8, 24))) // This is cursed but i cba
+                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                        if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                        if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                        if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                          Tab(text: t.localeName == "sv" ? "V5" : "W5"),
                       ],
                     ),
                   )
@@ -233,21 +233,21 @@ class _QuestScreenState extends State<QuestScreen>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  _weekTab(1, context),
-                  _weekTab(2, context),
-                  _weekTab(3, context),
-                  _weekTab(4, context),
-                  _weekTab(5, context),
-                  // if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
-                  //   _weekTab(1, context), // This is cursed but i cba
-                  // if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                  //   _weekTab(2, context),
-                  // if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                  //   _weekTab(3, context),
-                  // if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                  //   _weekTab(4, context),
-                  // if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                  //   _weekTab(5, context),
+                  // _weekTab(1, context),
+                  // _weekTab(2, context),
+                  // _weekTab(3, context),
+                  // _weekTab(4, context),
+                  // _weekTab(5, context),
+                  if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
+                    _weekTab(1, context), // This is cursed but i cba
+                  if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                    _weekTab(2, context),
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                    _weekTab(3, context),
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                    _weekTab(4, context),
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                    _weekTab(5, context),
                 ],
               ),
             ),
@@ -287,6 +287,7 @@ class _QuestScreenState extends State<QuestScreen>
     return finalString;
   }
 
+  // Not used right now, do we want them to be able to cancel attempts here... I dont think so (You would need manage permission anyway so...)
   Future<void> _removeMissionAttempt(
       int adventureMissionId, BuildContext context) async {
     var t = AppLocalizations.of(context)!;
@@ -338,12 +339,28 @@ class _QuestScreenState extends State<QuestScreen>
   }
 
   Future<void> _sendMissionAttempt(
-      int adventureMissionId, BuildContext context) async {
+      AdventureMissionRead adventureMission, BuildContext context) async {
     var t = AppLocalizations.of(context)!;
 
+    if (adventureMission.nollningWeek != _checkNollningWeek()) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(t.localeName == "sv" ? "Misslyckat!" : "Failure!"),
+                content: Text(t.localeName == "sv"
+                    ? "Misslyckad registrering!\nUppdragsregistrering för denna veckan har stängt!"
+                    : "Falied to register mission!\nMission registration for this week has closed!"),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text("OK"))
+                ],
+              ));
+      return;
+    }
     try {
       final gm = GroupMissionCreate((b) {
-        b..adventureMissionId = adventureMissionId;
+        b..adventureMissionId = adventureMission.id;
         b..isAccepted = null;
         b..points = null;
       });
@@ -468,7 +485,7 @@ class _QuestScreenState extends State<QuestScreen>
                                                 Navigator.of(dialogContext)
                                                     .pop();
                                                 await _sendMissionAttempt(
-                                                    mission.id, parentContext);
+                                                    mission, parentContext);
                                               },
                                               child: Text(t.eventYes)),
                                           TextButton(
@@ -950,24 +967,6 @@ class _QuestScreenState extends State<QuestScreen>
         );
     }
   }
-
-  // t.localeName == "sv"
-  //                         ? Text(
-  //                             mission.isAccepted == "Accepted"
-  //                                 ? "Uppdrag accepterat"
-  //                                 : (mission.isAccepted == "Failed"
-  //                                     ? "Uppdrag misslyckat"
-  //                                     : "Uppdrag under granskning"),
-  //                             style: TextStyle(color: Colors.red),
-  //                           )
-  //                         : Text(
-  //                             mission.isAccepted == "Accepted"
-  //                                 ? "Mission accepted"
-  //                                 : (mission.isAccepted == "Failed"
-  //                                     ? "Mission failed"
-  //                                     : "Mission under review"),
-  //                             style: TextStyle(color: Colors.amberAccent),
-  //                           ),
 
   List<Widget> generateWeekMissionCards(
       Map<int, List<AdventureMissionRead>> missionsMap,
