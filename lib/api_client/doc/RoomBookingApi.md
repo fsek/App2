@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **roomBookingCreateRoomBooking**
-> RoomBookingRead roomBookingCreateRoomBooking(roomBookingCreate)
+> BuiltList<RoomBookingRead> roomBookingCreateRoomBooking(roomBookingCreate)
 
 Create Room Booking
 
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RoomBookingRead**](RoomBookingRead.md)
+[**BuiltList&lt;RoomBookingRead&gt;**](RoomBookingRead.md)
 
 ### Authorization
 

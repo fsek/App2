@@ -6,62 +6,51 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'nollning_add_group.g.dart';
+part 'group_mission_delete.g.dart';
 
-/// NollningAddGroup
+/// GroupMissionDelete
 ///
 /// Properties:
-/// * [groupId] 
-/// * [mentorGroupNumber] 
+/// * [adventureMissionId] 
 @BuiltValue()
-abstract class NollningAddGroup implements Built<NollningAddGroup, NollningAddGroupBuilder> {
-  @BuiltValueField(wireName: r'group_id')
-  int get groupId;
+abstract class GroupMissionDelete implements Built<GroupMissionDelete, GroupMissionDeleteBuilder> {
+  @BuiltValueField(wireName: r'adventure_mission_id')
+  int get adventureMissionId;
 
-  @BuiltValueField(wireName: r'mentor_group_number')
-  int? get mentorGroupNumber;
+  GroupMissionDelete._();
 
-  NollningAddGroup._();
-
-  factory NollningAddGroup([void updates(NollningAddGroupBuilder b)]) = _$NollningAddGroup;
+  factory GroupMissionDelete([void updates(GroupMissionDeleteBuilder b)]) = _$GroupMissionDelete;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NollningAddGroupBuilder b) => b;
+  static void _defaults(GroupMissionDeleteBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NollningAddGroup> get serializer => _$NollningAddGroupSerializer();
+  static Serializer<GroupMissionDelete> get serializer => _$GroupMissionDeleteSerializer();
 }
 
-class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGroup> {
+class _$GroupMissionDeleteSerializer implements PrimitiveSerializer<GroupMissionDelete> {
   @override
-  final Iterable<Type> types = const [NollningAddGroup, _$NollningAddGroup];
+  final Iterable<Type> types = const [GroupMissionDelete, _$GroupMissionDelete];
 
   @override
-  final String wireName = r'NollningAddGroup';
+  final String wireName = r'GroupMissionDelete';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    NollningAddGroup object, {
+    GroupMissionDelete object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'group_id';
+    yield r'adventure_mission_id';
     yield serializers.serialize(
-      object.groupId,
+      object.adventureMissionId,
       specifiedType: const FullType(int),
     );
-    if (object.mentorGroupNumber != null) {
-      yield r'mentor_group_number';
-      yield serializers.serialize(
-        object.mentorGroupNumber,
-        specifiedType: const FullType.nullable(int),
-      );
-    }
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    NollningAddGroup object, {
+    GroupMissionDelete object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -72,27 +61,19 @@ class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGro
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required NollningAddGroupBuilder result,
+    required GroupMissionDeleteBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'group_id':
+        case r'adventure_mission_id':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(int),
           ) as int;
-          result.groupId = valueDes;
-          break;
-        case r'mentor_group_number':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.mentorGroupNumber = valueDes;
+          result.adventureMissionId = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -103,12 +84,12 @@ class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGro
   }
 
   @override
-  NollningAddGroup deserialize(
+  GroupMissionDelete deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = NollningAddGroupBuilder();
+    final result = GroupMissionDeleteBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

@@ -15,6 +15,7 @@ part 'nollning_group_read.g.dart';
 /// * [id] 
 /// * [group] 
 /// * [nollningId] 
+/// * [mentorGroupNumber] 
 @BuiltValue()
 abstract class NollningGroupRead implements Built<NollningGroupRead, NollningGroupReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -25,6 +26,9 @@ abstract class NollningGroupRead implements Built<NollningGroupRead, NollningGro
 
   @BuiltValueField(wireName: r'nollning_id')
   int get nollningId;
+
+  @BuiltValueField(wireName: r'mentor_group_number')
+  int? get mentorGroupNumber;
 
   NollningGroupRead._();
 
@@ -64,6 +68,13 @@ class _$NollningGroupReadSerializer implements PrimitiveSerializer<NollningGroup
       object.nollningId,
       specifiedType: const FullType(int),
     );
+    if (object.mentorGroupNumber != null) {
+      yield r'mentor_group_number';
+      yield serializers.serialize(
+        object.mentorGroupNumber,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
   }
 
   @override
@@ -107,6 +118,14 @@ class _$NollningGroupReadSerializer implements PrimitiveSerializer<NollningGroup
             specifiedType: const FullType(int),
           ) as int;
           result.nollningId = valueDes;
+          break;
+        case r'mentor_group_number':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.mentorGroupNumber = valueDes;
           break;
         default:
           unhandled.add(key);

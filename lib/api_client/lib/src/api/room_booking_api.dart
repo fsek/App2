@@ -36,9 +36,9 @@ class RoomBookingApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [RoomBookingRead] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<RoomBookingRead>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RoomBookingRead>> roomBookingCreateRoomBooking({ 
+  Future<Response<BuiltList<RoomBookingRead>>> roomBookingCreateRoomBooking({ 
     required RoomBookingCreate roomBookingCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -98,14 +98,14 @@ class RoomBookingApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    RoomBookingRead? _responseData;
+    BuiltList<RoomBookingRead>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(RoomBookingRead),
-      ) as RoomBookingRead;
+        specifiedType: const FullType(BuiltList, [FullType(RoomBookingRead)]),
+      ) as BuiltList<RoomBookingRead>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -117,7 +117,7 @@ class RoomBookingApi {
       );
     }
 
-    return Response<RoomBookingRead>(
+    return Response<BuiltList<RoomBookingRead>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

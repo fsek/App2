@@ -17,6 +17,8 @@ part 'room_booking_create.g.dart';
 /// * [endTime] 
 /// * [description] 
 /// * [councilId] 
+/// * [recurIntervalDays] 
+/// * [recurUntil] 
 @BuiltValue()
 abstract class RoomBookingCreate implements Built<RoomBookingCreate, RoomBookingCreateBuilder> {
   @BuiltValueField(wireName: r'room')
@@ -34,6 +36,12 @@ abstract class RoomBookingCreate implements Built<RoomBookingCreate, RoomBooking
 
   @BuiltValueField(wireName: r'council_id')
   int get councilId;
+
+  @BuiltValueField(wireName: r'recur_interval_days')
+  int? get recurIntervalDays;
+
+  @BuiltValueField(wireName: r'recur_until')
+  DateTime? get recurUntil;
 
   RoomBookingCreate._();
 
@@ -83,6 +91,20 @@ class _$RoomBookingCreateSerializer implements PrimitiveSerializer<RoomBookingCr
       object.councilId,
       specifiedType: const FullType(int),
     );
+    if (object.recurIntervalDays != null) {
+      yield r'recur_interval_days';
+      yield serializers.serialize(
+        object.recurIntervalDays,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.recurUntil != null) {
+      yield r'recur_until';
+      yield serializers.serialize(
+        object.recurUntil,
+        specifiedType: const FullType.nullable(DateTime),
+      );
+    }
   }
 
   @override
@@ -140,6 +162,22 @@ class _$RoomBookingCreateSerializer implements PrimitiveSerializer<RoomBookingCr
             specifiedType: const FullType(int),
           ) as int;
           result.councilId = valueDes;
+          break;
+        case r'recur_interval_days':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.recurIntervalDays = valueDes;
+          break;
+        case r'recur_until':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(DateTime),
+          ) as DateTime?;
+          if (valueDes == null) continue;
+          result.recurUntil = valueDes;
           break;
         default:
           unhandled.add(key);

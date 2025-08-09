@@ -47,14 +47,14 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import 'package:api_client/api_client.dart';
 
 
-final api = ApiClient().getAdsApi();
-final AdCreate adCreate = ; // AdCreate | 
+final api = ApiClient().getAccessServeApi();
+final String door = door_example; // String | 
 
 try {
-    final response = await api.adsCreateAd(adCreate);
+    final response = await api.accessServeGetAllAccessIds(door);
     print(response);
 } catch on DioException (e) {
-    print("Exception when calling AdsApi->adsCreateAd: $e\n");
+    print("Exception when calling AccessServeApi->accessServeGetAllAccessIds: $e\n");
 }
 
 ```
@@ -65,6 +65,7 @@ All URIs are relative to *http://10.0.2.2:8000*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+[*AccessServeApi*](doc/AccessServeApi.md) | [**accessServeGetAllAccessIds**](doc/AccessServeApi.md#accessservegetallaccessids) | **GET** /access-serve/{door} | Get All Access Ids
 [*AdsApi*](doc/AdsApi.md) | [**adsCreateAd**](doc/AdsApi.md#adscreatead) | **POST** /ad/ | Create Ad
 [*AdsApi*](doc/AdsApi.md) | [**adsGetAdById**](doc/AdsApi.md#adsgetadbyid) | **GET** /ad/{id} | Get Ad By Id
 [*AdsApi*](doc/AdsApi.md) | [**adsGetAdByUser**](doc/AdsApi.md#adsgetadbyuser) | **GET** /ad/username/{username} | Get Ad By User
@@ -80,6 +81,7 @@ Class | Method | HTTP request | Description
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsDeleteOneAlbum**](doc/AlbumsApi.md#albumsdeleteonealbum) | **DELETE** /albums/{album_id} | Delete One Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetAlbums**](doc/AlbumsApi.md#albumsgetalbums) | **GET** /albums/all | Get Albums
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsGetOneAlbum**](doc/AlbumsApi.md#albumsgetonealbum) | **GET** /albums/{album_id} | Get One Album
+[*AlbumsApi*](doc/AlbumsApi.md) | [**albumsPatchAlbum**](doc/AlbumsApi.md#albumspatchalbum) | **PATCH** /albums/{album_id} | Patch Album
 [*AlbumsApi*](doc/AlbumsApi.md) | [**albumsRemoveAlbumPhotographer**](doc/AlbumsApi.md#albumsremovealbumphotographer) | **PATCH** /albums/remove_photographer | Remove Album Photographer
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogin**](doc/AuthApi.md#authauthcookielogin) | **POST** /auth/login | Auth:Cookie.Login
 [*AuthApi*](doc/AuthApi.md) | [**authAuthCookieLogout**](doc/AuthApi.md#authauthcookielogout) | **DELETE** /auth/logout | Auth:Cookie.Logout
@@ -185,7 +187,7 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningAddGroupToNollning**](doc/NollningApi.md#nollningaddgrouptonollning) | **POST** /nollning/add_group/{nollning_id} | Add Group To Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningCreateAdventureMission**](doc/NollningApi.md#nollningcreateadventuremission) | **POST** /nollning/missions/{nollning_id} | Create Adventure Mission
 [*NollningApi*](doc/NollningApi.md) | [**nollningDeleteAdventureMission**](doc/NollningApi.md#nollningdeleteadventuremission) | **DELETE** /nollning/missions/{mission_id} | Delete Adventure Mission
-[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteGroupMission**](doc/NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/delete_group_mission/{nollning_id} | Delete Group Mission
+[*NollningApi*](doc/NollningApi.md) | [**nollningDeleteGroupMission**](doc/NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/groups/missions/{nollning_group_id} | Delete Group Mission
 [*NollningApi*](doc/NollningApi.md) | [**nollningDeleteNollning**](doc/NollningApi.md#nollningdeletenollning) | **DELETE** /nollning/{nollning_id} | Delete Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningEditAdventureMission**](doc/NollningApi.md#nollningeditadventuremission) | **PATCH** /nollning/missions/{mission_id} | Edit Adventure Mission
 [*NollningApi*](doc/NollningApi.md) | [**nollningEditGroupMission**](doc/NollningApi.md#nollningeditgroupmission) | **PATCH** /nollning/groups/missions/{nollning_group_id} | Edit Group Mission
@@ -199,7 +201,6 @@ Class | Method | HTTP request | Description
 [*NollningApi*](doc/NollningApi.md) | [**nollningPatchNollning**](doc/NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/{nollning_id} | Patch Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningPostNollning**](doc/NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
 [*NollningApi*](doc/NollningApi.md) | [**nollningRemoveGroupFromNollning**](doc/NollningApi.md#nollningremovegroupfromnollning) | **DELETE** /nollning/remove_group/{nollning_group_id} | Remove Group From Nollning
-[*NollningApi*](doc/NollningApi.md) | [**nollningRemoveGroupMission**](doc/NollningApi.md#nollningremovegroupmission) | **DELETE** /nollning/groups/missions/{nollning_id} | Remove Group Mission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermission**](doc/PermissionsApi.md#permissionschangepostpermission) | **POST** /permissions/update-permission | Change Post Permission
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsChangePostPermissions**](doc/PermissionsApi.md#permissionschangepostpermissions) | **POST** /permissions/update-permissions | Change Post Permissions
 [*PermissionsApi*](doc/PermissionsApi.md) | [**permissionsCreatePermission**](doc/PermissionsApi.md#permissionscreatepermission) | **POST** /permissions/ | Create Permission
@@ -266,6 +267,7 @@ Class | Method | HTTP request | Description
  - [AdventureMissionCreate](doc/AdventureMissionCreate.md)
  - [AdventureMissionRead](doc/AdventureMissionRead.md)
  - [AlbumCreate](doc/AlbumCreate.md)
+ - [AlbumPatch](doc/AlbumPatch.md)
  - [AlbumPhotographerAdd](doc/AlbumPhotographerAdd.md)
  - [AlbumRead](doc/AlbumRead.md)
  - [AliasRead](doc/AliasRead.md)
@@ -310,6 +312,7 @@ Class | Method | HTTP request | Description
  - [GroupAddUser](doc/GroupAddUser.md)
  - [GroupCreate](doc/GroupCreate.md)
  - [GroupMissionCreate](doc/GroupMissionCreate.md)
+ - [GroupMissionDelete](doc/GroupMissionDelete.md)
  - [GroupMissionEdit](doc/GroupMissionEdit.md)
  - [GroupMissionRead](doc/GroupMissionRead.md)
  - [GroupRead](doc/GroupRead.md)
@@ -325,7 +328,6 @@ Class | Method | HTTP request | Description
  - [NewsUpdate](doc/NewsUpdate.md)
  - [NollningAddGroup](doc/NollningAddGroup.md)
  - [NollningCreate](doc/NollningCreate.md)
- - [NollningDeleteMission](doc/NollningDeleteMission.md)
  - [NollningGroupRead](doc/NollningGroupRead.md)
  - [NollningRead](doc/NollningRead.md)
  - [PermissionCreate](doc/PermissionCreate.md)

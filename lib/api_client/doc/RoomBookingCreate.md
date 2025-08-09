@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **endTime** | [**DateTime**](DateTime.md) |  | 
 **description** | **String** |  | 
 **councilId** | **int** |  | 
+**recurIntervalDays** | **int** |  | [optional] 
+**recurUntil** | [**DateTime**](DateTime.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

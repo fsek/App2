@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**nollningAddGroupToNollning**](NollningApi.md#nollningaddgrouptonollning) | **POST** /nollning/add_group/{nollning_id} | Add Group To Nollning
 [**nollningCreateAdventureMission**](NollningApi.md#nollningcreateadventuremission) | **POST** /nollning/missions/{nollning_id} | Create Adventure Mission
 [**nollningDeleteAdventureMission**](NollningApi.md#nollningdeleteadventuremission) | **DELETE** /nollning/missions/{mission_id} | Delete Adventure Mission
-[**nollningDeleteGroupMission**](NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/delete_group_mission/{nollning_id} | Delete Group Mission
+[**nollningDeleteGroupMission**](NollningApi.md#nollningdeletegroupmission) | **DELETE** /nollning/groups/missions/{nollning_group_id} | Delete Group Mission
 [**nollningDeleteNollning**](NollningApi.md#nollningdeletenollning) | **DELETE** /nollning/{nollning_id} | Delete Nollning
 [**nollningEditAdventureMission**](NollningApi.md#nollningeditadventuremission) | **PATCH** /nollning/missions/{mission_id} | Edit Adventure Mission
 [**nollningEditGroupMission**](NollningApi.md#nollningeditgroupmission) | **PATCH** /nollning/groups/missions/{nollning_group_id} | Edit Group Mission
@@ -27,7 +27,6 @@ Method | HTTP request | Description
 [**nollningPatchNollning**](NollningApi.md#nollningpatchnollning) | **PATCH** /nollning/{nollning_id} | Patch Nollning
 [**nollningPostNollning**](NollningApi.md#nollningpostnollning) | **POST** /nollning/ | Post Nollning
 [**nollningRemoveGroupFromNollning**](NollningApi.md#nollningremovegroupfromnollning) | **DELETE** /nollning/remove_group/{nollning_group_id} | Remove Group From Nollning
-[**nollningRemoveGroupMission**](NollningApi.md#nollningremovegroupmission) | **DELETE** /nollning/groups/missions/{nollning_id} | Remove Group Mission
 
 
 # **nollningAddGroupMission**
@@ -227,7 +226,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **nollningDeleteGroupMission**
-> NollningDeleteMission nollningDeleteGroupMission(nollningId, nollningDeleteMission)
+> GroupMissionRead nollningDeleteGroupMission(nollningGroupId, groupMissionDelete)
 
 Delete Group Mission
 
@@ -242,11 +241,11 @@ import 'package:api_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getNollningApi();
-final int nollningId = 56; // int | 
-final NollningDeleteMission nollningDeleteMission = ; // NollningDeleteMission | 
+final int nollningGroupId = 56; // int | 
+final GroupMissionDelete groupMissionDelete = ; // GroupMissionDelete | 
 
 try {
-    final response = api.nollningDeleteGroupMission(nollningId, nollningDeleteMission);
+    final response = api.nollningDeleteGroupMission(nollningGroupId, groupMissionDelete);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling NollningApi->nollningDeleteGroupMission: $e\n');
@@ -257,12 +256,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nollningId** | **int**|  | 
- **nollningDeleteMission** | [**NollningDeleteMission**](NollningDeleteMission.md)|  | 
+ **nollningGroupId** | **int**|  | 
+ **groupMissionDelete** | [**GroupMissionDelete**](GroupMissionDelete.md)|  | 
 
 ### Return type
 
-[**NollningDeleteMission**](NollningDeleteMission.md)
+[**GroupMissionRead**](GroupMissionRead.md)
 
 ### Authorization
 
@@ -872,54 +871,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **nollningRemoveGroupMission**
-> nollningRemoveGroupMission(nollningId, nollningDeleteMission)
-
-Remove Group Mission
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getNollningApi();
-final int nollningId = 56; // int | 
-final NollningDeleteMission nollningDeleteMission = ; // NollningDeleteMission | 
-
-try {
-    api.nollningRemoveGroupMission(nollningId, nollningDeleteMission);
-} catch on DioException (e) {
-    print('Exception when calling NollningApi->nollningRemoveGroupMission: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nollningId** | **int**|  | 
- **nollningDeleteMission** | [**NollningDeleteMission**](NollningDeleteMission.md)|  | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
