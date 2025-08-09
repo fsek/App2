@@ -96,10 +96,6 @@ class _StodScreenState extends State<StodScreen> {
                                       fontSize: screenWidth / 36,
                                       fontWeight: FontWeight.w600),
                                 ),
-                                // _createClickableStandardText(
-                                //     data["guide"][0][svOrEnContent],
-                                //     screenWidth / 32,
-                                //     FontWeight.w600),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -158,6 +154,7 @@ class _StodScreenState extends State<StodScreen> {
                                 ),
                                 _createClickableStandardText(
                                   data["guide"][3][svOrEnContent] +
+                                      " " +
                                       t.internationalCoordinatorsWebsite,
                                   screenWidth / 36,
                                 ),
@@ -198,7 +195,7 @@ class _StodScreenState extends State<StodScreen> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 _createHeaderText(data["guide"][5][svOrEnTitle],
                                     screenWidth / 25),
@@ -210,7 +207,7 @@ class _StodScreenState extends State<StodScreen> {
                                   screenWidth / 36,
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 _createHeaderText(data["guide"][6][svOrEnTitle],
                                     screenWidth / 25),
@@ -223,7 +220,7 @@ class _StodScreenState extends State<StodScreen> {
                                   screenWidth / 36,
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 40,
                                 ),
                                 _createHeaderText(data["guide"][7][svOrEnTitle],
                                     screenWidth / 25),
@@ -234,6 +231,30 @@ class _StodScreenState extends State<StodScreen> {
                                   data["guide"][7][svOrEnContent],
                                   screenWidth / 36,
                                 ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      height: screenHeight,
+                      width: screenWidth / 1.2,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                              child: Image.asset(
+                            long_marble,
+                            fit: BoxFit.fill,
+                          )),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 40, right: 40, top: 50),
+                            child: Column(
+                              children: [
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -245,6 +266,338 @@ class _StodScreenState extends State<StodScreen> {
                                 _createClickableStandardText(
                                   data["guide"][8][svOrEnContent] +
                                       t.guildAnonContactPage,
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                _createHeaderText(data["guide"][9][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][9][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][10][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][10][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][11][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][11][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      height: screenHeight,
+                      width: screenWidth / 1.2,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                              child: Image.asset(
+                            long_marble,
+                            fit: BoxFit.fill,
+                          )),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 40, right: 40, top: 50),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  data["guide"][12][svOrEnTitle],
+                                  style: TextStyle(
+                                      fontFamily: "MinionPro",
+                                      fontSize: screenWidth / 20,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][13][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][13][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][14][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][14][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][15][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][15][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][16][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][16][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][17][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][17][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      height: screenHeight,
+                      width: screenWidth / 1.2,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                              child: Image.asset(
+                            long_marble,
+                            fit: BoxFit.fill,
+                          )),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 40, right: 40, top: 50),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][18][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][18][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][19][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][19][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][20][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][20][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][21][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][21][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][22][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][22][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][23][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][23][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      height: screenHeight,
+                      width: screenWidth / 1.2,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                              child: Image.asset(
+                            long_marble,
+                            fit: BoxFit.fill,
+                          )),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 40, right: 40, top: 50),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][24][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][24][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][25][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][25][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][26][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][26][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][27][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][27][svOrEnContent],
+                                  screenWidth / 36,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createHeaderText(
+                                    data["guide"][28][svOrEnTitle],
+                                    screenWidth / 25),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                _createClickableStandardText(
+                                  data["guide"][28][svOrEnContent],
                                   screenWidth / 36,
                                 ),
                               ],
@@ -259,7 +612,7 @@ class _StodScreenState extends State<StodScreen> {
 
   Text _createHeaderText(String str, double fontSize) {
     return Text(
-      textAlign: TextAlign.left,
+      textAlign: TextAlign.center,
       str,
       style: TextStyle(
           fontFamily: "MinionPro",
@@ -270,7 +623,7 @@ class _StodScreenState extends State<StodScreen> {
 
   Widget _createClickableStandardText(String str, double fontSize) {
     return Linkify(
-      textAlign: TextAlign.start,
+      textAlign: TextAlign.left,
       text: str,
       linkifiers: [UrlLinkifier(), PhoneNumberLinkifier(), EmailLinkifier()],
       onOpen: (link) async {
