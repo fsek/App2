@@ -40,8 +40,6 @@ class _StodScreenState extends State<StodScreen> {
     String background =
         "assets/data/nollning_25/nolleguide/landskap_bakgrund.png";
 
-    Map<String, dynamic> data = jsonDecode(stodJsonString!);
-
     String svOrEnTitle =
         t.localeName == "sv" ? "titel_svenska" : "titel_engelska";
     String svOrEnContent =
@@ -52,6 +50,8 @@ class _StodScreenState extends State<StodScreen> {
         child: CircularProgressIndicator(),
       );
     }
+
+    Map<String, dynamic> data = jsonDecode(stodJsonString!);
 
     return Scaffold(
         extendBodyBehindAppBar: true,
