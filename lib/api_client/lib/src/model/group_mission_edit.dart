@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -11,19 +12,20 @@ part 'group_mission_edit.g.dart';
 /// GroupMissionEdit
 ///
 /// Properties:
-/// * [points] 
 /// * [adventureMissionId] 
+/// * [points] 
 /// * [isAccepted] 
 @BuiltValue()
 abstract class GroupMissionEdit implements Built<GroupMissionEdit, GroupMissionEditBuilder> {
+  @BuiltValueField(wireName: r'adventure_mission_id')
+  int get adventureMissionId;
+
   @BuiltValueField(wireName: r'points')
   int? get points;
 
-  @BuiltValueField(wireName: r'adventure_mission_id')
-  int? get adventureMissionId;
-
   @BuiltValueField(wireName: r'is_accepted')
-  bool? get isAccepted;
+  GroupMissionEditIsAcceptedEnum? get isAccepted;
+  // enum isAcceptedEnum {  Accepted,  Failed,  Review,  };
 
   GroupMissionEdit._();
 
@@ -48,6 +50,11 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
     GroupMissionEdit object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
+    yield r'adventure_mission_id';
+    yield serializers.serialize(
+      object.adventureMissionId,
+      specifiedType: const FullType(int),
+    );
     if (object.points != null) {
       yield r'points';
       yield serializers.serialize(
@@ -55,18 +62,11 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
         specifiedType: const FullType.nullable(int),
       );
     }
-    if (object.adventureMissionId != null) {
-      yield r'adventure_mission_id';
-      yield serializers.serialize(
-        object.adventureMissionId,
-        specifiedType: const FullType.nullable(int),
-      );
-    }
     if (object.isAccepted != null) {
       yield r'is_accepted';
       yield serializers.serialize(
         object.isAccepted,
-        specifiedType: const FullType.nullable(bool),
+        specifiedType: const FullType.nullable(GroupMissionEditIsAcceptedEnum),
       );
     }
   }
@@ -92,6 +92,13 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'adventure_mission_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.adventureMissionId = valueDes;
+          break;
         case r'points':
           final valueDes = serializers.deserialize(
             value,
@@ -100,19 +107,11 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
           if (valueDes == null) continue;
           result.points = valueDes;
           break;
-        case r'adventure_mission_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.adventureMissionId = valueDes;
-          break;
         case r'is_accepted':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+            specifiedType: const FullType.nullable(GroupMissionEditIsAcceptedEnum),
+          ) as GroupMissionEditIsAcceptedEnum?;
           if (valueDes == null) continue;
           result.isAccepted = valueDes;
           break;
@@ -143,5 +142,22 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
     );
     return result.build();
   }
+}
+
+class GroupMissionEditIsAcceptedEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Accepted')
+  static const GroupMissionEditIsAcceptedEnum accepted = _$groupMissionEditIsAcceptedEnum_accepted;
+  @BuiltValueEnumConst(wireName: r'Failed')
+  static const GroupMissionEditIsAcceptedEnum failed = _$groupMissionEditIsAcceptedEnum_failed;
+  @BuiltValueEnumConst(wireName: r'Review')
+  static const GroupMissionEditIsAcceptedEnum review = _$groupMissionEditIsAcceptedEnum_review;
+
+  static Serializer<GroupMissionEditIsAcceptedEnum> get serializer => _$groupMissionEditIsAcceptedEnumSerializer;
+
+  const GroupMissionEditIsAcceptedEnum._(String name): super(name);
+
+  static BuiltSet<GroupMissionEditIsAcceptedEnum> get values => _$groupMissionEditIsAcceptedEnumValues;
+  static GroupMissionEditIsAcceptedEnum valueOf(String name) => _$groupMissionEditIsAcceptedEnumValueOf(name);
 }
 

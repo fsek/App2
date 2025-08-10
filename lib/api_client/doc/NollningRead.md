@@ -9,6 +9,7 @@ import 'package:api_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** |  | 
+**year** | **int** |  | 
 **description** | **String** |  | 
 **id** | **int** |  | 
 **missions** | [**BuiltList&lt;AdventureMissionRead&gt;**](AdventureMissionRead.md) |  | 

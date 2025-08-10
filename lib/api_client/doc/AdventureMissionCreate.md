@@ -8,8 +8,10 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **String** |  | 
-**description** | **String** |  | 
+**titleSv** | **String** |  | 
+**titleEn** | **String** |  | 
+**descriptionSv** | **String** |  | 
+**descriptionEn** | **String** |  | 
 **maxPoints** | **int** |  | 
 **minPoints** | **int** |  | 
 **nollningWeek** | **int** |  | 

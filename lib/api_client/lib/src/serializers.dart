@@ -22,8 +22,10 @@ import 'package:api_client/src/model/admin_user_read.dart';
 import 'package:api_client/src/model/adventure_mission_create.dart';
 import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/album_create.dart';
+import 'package:api_client/src/model/album_patch.dart';
 import 'package:api_client/src/model/album_photographer_add.dart';
 import 'package:api_client/src/model/album_read.dart';
+import 'package:api_client/src/model/alias_read.dart';
 import 'package:api_client/src/model/bearer_response.dart';
 import 'package:api_client/src/model/body_auth_reset_forgot_password.dart';
 import 'package:api_client/src/model/body_auth_reset_reset_password.dart';
@@ -65,6 +67,7 @@ import 'package:api_client/src/model/event_update.dart';
 import 'package:api_client/src/model/group_add_user.dart';
 import 'package:api_client/src/model/group_create.dart';
 import 'package:api_client/src/model/group_mission_create.dart';
+import 'package:api_client/src/model/group_mission_delete.dart';
 import 'package:api_client/src/model/group_mission_edit.dart';
 import 'package:api_client/src/model/group_mission_read.dart';
 import 'package:api_client/src/model/group_read.dart';
@@ -80,12 +83,12 @@ import 'package:api_client/src/model/news_tag_read.dart';
 import 'package:api_client/src/model/news_update.dart';
 import 'package:api_client/src/model/nollning_add_group.dart';
 import 'package:api_client/src/model/nollning_create.dart';
-import 'package:api_client/src/model/nollning_delete_mission.dart';
 import 'package:api_client/src/model/nollning_group_read.dart';
 import 'package:api_client/src/model/nollning_read.dart';
 import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
 import 'package:api_client/src/model/permission_remove.dart';
+import 'package:api_client/src/model/photographer_in_album_read.dart';
 import 'package:api_client/src/model/post_create.dart';
 import 'package:api_client/src/model/post_door_access_read.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
@@ -136,8 +139,10 @@ part 'serializers.g.dart';
   AdventureMissionCreate,
   AdventureMissionRead,
   AlbumCreate,
+  AlbumPatch,
   AlbumPhotographerAdd,
   AlbumRead,
+  AliasRead,
   BearerResponse,
   BodyAuthResetForgotPassword,
   BodyAuthResetResetPassword,
@@ -179,6 +184,7 @@ part 'serializers.g.dart';
   GroupAddUser,
   GroupCreate,
   GroupMissionCreate,
+  GroupMissionDelete,
   GroupMissionEdit,
   GroupMissionRead,
   GroupRead,
@@ -194,12 +200,12 @@ part 'serializers.g.dart';
   NewsUpdate,
   NollningAddGroup,
   NollningCreate,
-  NollningDeleteMission,
   NollningGroupRead,
   NollningRead,
   PermissionCreate,
   PermissionRead,
   PermissionRemove,
+  PhotographerInAlbumRead,
   PostCreate,
   PostDoorAccessRead,
   PostPermissionRead,
@@ -337,6 +343,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CafeShiftRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AliasRead)]),
+        () => ListBuilder<AliasRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PermissionRead)]),
         () => ListBuilder<PermissionRead>(),
       )
@@ -361,18 +371,18 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<NollningRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DocumentRead)]),
-        () => ListBuilder<DocumentRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(String)]),
         () => ListBuilder<String>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(DocumentRead)]),
+        () => ListBuilder<DocumentRead>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())
       ..add(const DateSerializer())
-      ..add(Iso8601DateTimeSerializer()))
-    .build();
+      ..add(Iso8601DateTimeSerializer())
+    ).build();
 
 Serializers standardSerializers =
     (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

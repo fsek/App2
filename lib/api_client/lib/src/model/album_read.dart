@@ -3,7 +3,7 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:api_client/src/model/simple_user_read.dart';
+import 'package:api_client/src/model/photographer_in_album_read.dart';
 import 'package:api_client/src/model/img_in_album.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -51,7 +51,7 @@ abstract class AlbumRead implements Built<AlbumRead, AlbumReadBuilder> {
   String get location;
 
   @BuiltValueField(wireName: r'photographer')
-  SimpleUserRead? get photographer;
+  BuiltList<PhotographerInAlbumRead> get photographer;
 
   @BuiltValueField(wireName: r'imgs')
   BuiltList<ImgInAlbum> get imgs;
@@ -120,9 +120,9 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
       specifiedType: const FullType(String),
     );
     yield r'photographer';
-    yield object.photographer == null ? null : serializers.serialize(
+    yield serializers.serialize(
       object.photographer,
-      specifiedType: const FullType.nullable(SimpleUserRead),
+      specifiedType: const FullType(BuiltList, [FullType(PhotographerInAlbumRead)]),
     );
     yield r'imgs';
     yield serializers.serialize(
@@ -211,9 +211,8 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
         case r'photographer':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(SimpleUserRead),
-          ) as SimpleUserRead?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(BuiltList, [FullType(PhotographerInAlbumRead)]),
+          ) as BuiltList<PhotographerInAlbumRead>;
           result.photographer.replace(valueDes);
           break;
         case r'imgs':

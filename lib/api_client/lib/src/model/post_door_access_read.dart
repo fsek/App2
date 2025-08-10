@@ -21,7 +21,7 @@ abstract class PostDoorAccessRead implements Built<PostDoorAccessRead, PostDoorA
 
   @BuiltValueField(wireName: r'door')
   PostDoorAccessReadDoorEnum get door;
-  // enum doorEnum {  LC,  Bunkern,  Syster Kents,  Cafét,  Caféförrådet,  Pubförrådet,  Containern,  Arkivet,  };
+  // enum doorEnum {  Ledningscentralen,  Ambassaden,  Syster Kents,  Hilbert Cafe,  Cafeförrådet,  Pubförrådet,  Sopkomprimatorn,  Arkivet,  };
 
   PostDoorAccessRead._();
 
@@ -124,20 +124,20 @@ class _$PostDoorAccessReadSerializer implements PrimitiveSerializer<PostDoorAcce
 
 class PostDoorAccessReadDoorEnum extends EnumClass {
 
-  @BuiltValueEnumConst(wireName: r'LC')
-  static const PostDoorAccessReadDoorEnum LC = _$postDoorAccessReadDoorEnum_LC;
-  @BuiltValueEnumConst(wireName: r'Bunkern')
-  static const PostDoorAccessReadDoorEnum bunkern = _$postDoorAccessReadDoorEnum_bunkern;
+  @BuiltValueEnumConst(wireName: r'Ledningscentralen')
+  static const PostDoorAccessReadDoorEnum ledningscentralen = _$postDoorAccessReadDoorEnum_ledningscentralen;
+  @BuiltValueEnumConst(wireName: r'Ambassaden')
+  static const PostDoorAccessReadDoorEnum ambassaden = _$postDoorAccessReadDoorEnum_ambassaden;
   @BuiltValueEnumConst(wireName: r'Syster Kents')
   static const PostDoorAccessReadDoorEnum systerKents = _$postDoorAccessReadDoorEnum_systerKents;
-  @BuiltValueEnumConst(wireName: r'Cafét')
-  static const PostDoorAccessReadDoorEnum caft = _$postDoorAccessReadDoorEnum_caft;
-  @BuiltValueEnumConst(wireName: r'Caféförrådet')
-  static const PostDoorAccessReadDoorEnum caffrrdet = _$postDoorAccessReadDoorEnum_caffrrdet;
+  @BuiltValueEnumConst(wireName: r'Hilbert Cafe')
+  static const PostDoorAccessReadDoorEnum hilbertCafe = _$postDoorAccessReadDoorEnum_hilbertCafe;
+  @BuiltValueEnumConst(wireName: r'Cafeförrådet')
+  static const PostDoorAccessReadDoorEnum cafefrrdet = _$postDoorAccessReadDoorEnum_cafefrrdet;
   @BuiltValueEnumConst(wireName: r'Pubförrådet')
   static const PostDoorAccessReadDoorEnum pubfrrdet = _$postDoorAccessReadDoorEnum_pubfrrdet;
-  @BuiltValueEnumConst(wireName: r'Containern')
-  static const PostDoorAccessReadDoorEnum containern = _$postDoorAccessReadDoorEnum_containern;
+  @BuiltValueEnumConst(wireName: r'Sopkomprimatorn')
+  static const PostDoorAccessReadDoorEnum sopkomprimatorn = _$postDoorAccessReadDoorEnum_sopkomprimatorn;
   @BuiltValueEnumConst(wireName: r'Arkivet')
   static const PostDoorAccessReadDoorEnum arkivet = _$postDoorAccessReadDoorEnum_arkivet;
 

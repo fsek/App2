@@ -12,8 +12,10 @@ part 'adventure_mission_read.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [title] 
-/// * [description] 
+/// * [titleSv] 
+/// * [titleEn] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
 /// * [maxPoints] 
 /// * [minPoints] 
 /// * [nollningId] 
@@ -24,11 +26,17 @@ abstract class AdventureMissionRead implements Built<AdventureMissionRead, Adven
   @BuiltValueField(wireName: r'id')
   int get id;
 
-  @BuiltValueField(wireName: r'title')
-  String get title;
+  @BuiltValueField(wireName: r'title_sv')
+  String get titleSv;
 
-  @BuiltValueField(wireName: r'description')
-  String get description;
+  @BuiltValueField(wireName: r'title_en')
+  String get titleEn;
+
+  @BuiltValueField(wireName: r'description_sv')
+  String get descriptionSv;
+
+  @BuiltValueField(wireName: r'description_en')
+  String get descriptionEn;
 
   @BuiltValueField(wireName: r'max_points')
   int get maxPoints;
@@ -73,14 +81,24 @@ class _$AdventureMissionReadSerializer implements PrimitiveSerializer<AdventureM
       object.id,
       specifiedType: const FullType(int),
     );
-    yield r'title';
+    yield r'title_sv';
     yield serializers.serialize(
-      object.title,
+      object.titleSv,
       specifiedType: const FullType(String),
     );
-    yield r'description';
+    yield r'title_en';
     yield serializers.serialize(
-      object.description,
+      object.titleEn,
+      specifiedType: const FullType(String),
+    );
+    yield r'description_sv';
+    yield serializers.serialize(
+      object.descriptionSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'description_en';
+    yield serializers.serialize(
+      object.descriptionEn,
       specifiedType: const FullType(String),
     );
     yield r'max_points';
@@ -138,19 +156,33 @@ class _$AdventureMissionReadSerializer implements PrimitiveSerializer<AdventureM
           ) as int;
           result.id = valueDes;
           break;
-        case r'title':
+        case r'title_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.title = valueDes;
+          result.titleSv = valueDes;
           break;
-        case r'description':
+        case r'title_en':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.description = valueDes;
+          result.titleEn = valueDes;
+          break;
+        case r'description_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descriptionSv = valueDes;
+          break;
+        case r'description_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.descriptionEn = valueDes;
           break;
         case r'max_points':
           final valueDes = serializers.deserialize(

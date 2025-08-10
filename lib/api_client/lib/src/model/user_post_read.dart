@@ -12,15 +12,19 @@ part 'user_post_read.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [name] 
+/// * [nameSv] 
+/// * [nameEn] 
 /// * [councilId] 
 @BuiltValue()
 abstract class UserPostRead implements Built<UserPostRead, UserPostReadBuilder> {
   @BuiltValueField(wireName: r'id')
   int get id;
 
-  @BuiltValueField(wireName: r'name')
-  String get name;
+  @BuiltValueField(wireName: r'name_sv')
+  String get nameSv;
+
+  @BuiltValueField(wireName: r'name_en')
+  String get nameEn;
 
   @BuiltValueField(wireName: r'council_id')
   int get councilId;
@@ -53,9 +57,14 @@ class _$UserPostReadSerializer implements PrimitiveSerializer<UserPostRead> {
       object.id,
       specifiedType: const FullType(int),
     );
-    yield r'name';
+    yield r'name_sv';
     yield serializers.serialize(
-      object.name,
+      object.nameSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'name_en';
+    yield serializers.serialize(
+      object.nameEn,
       specifiedType: const FullType(String),
     );
     yield r'council_id';
@@ -93,12 +102,19 @@ class _$UserPostReadSerializer implements PrimitiveSerializer<UserPostRead> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'name':
+        case r'name_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.nameSv = valueDes;
+          break;
+        case r'name_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.nameEn = valueDes;
           break;
         case r'council_id':
           final valueDes = serializers.deserialize(

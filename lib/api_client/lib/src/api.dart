@@ -9,6 +9,7 @@ import 'package:api_client/src/auth/api_key_auth.dart';
 import 'package:api_client/src/auth/basic_auth.dart';
 import 'package:api_client/src/auth/bearer_auth.dart';
 import 'package:api_client/src/auth/oauth.dart';
+import 'package:api_client/src/api/access_serve_api.dart';
 import 'package:api_client/src/api/ads_api.dart';
 import 'package:api_client/src/api/albums_api.dart';
 import 'package:api_client/src/api/auth_api.dart';
@@ -24,6 +25,7 @@ import 'package:api_client/src/api/event_signup_api.dart';
 import 'package:api_client/src/api/events_api.dart';
 import 'package:api_client/src/api/groups_api.dart';
 import 'package:api_client/src/api/img_api.dart';
+import 'package:api_client/src/api/mail_alias_api.dart';
 import 'package:api_client/src/api/moose_game_api.dart';
 import 'package:api_client/src/api/news_api.dart';
 import 'package:api_client/src/api/nollning_api.dart';
@@ -88,6 +90,12 @@ class ApiClient {
     if (this.dio.interceptors.any((i) => i is ApiKeyAuthInterceptor)) {
       (this.dio.interceptors.firstWhere((element) => element is ApiKeyAuthInterceptor) as ApiKeyAuthInterceptor).apiKeys[name] = apiKey;
     }
+  }
+
+  /// Get AccessServeApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AccessServeApi getAccessServeApi() {
+    return AccessServeApi(dio, serializers);
   }
 
   /// Get AdsApi instance, base route and serializer can be overridden by a given but be careful,
@@ -178,6 +186,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   ImgApi getImgApi() {
     return ImgApi(dio, serializers);
+  }
+
+  /// Get MailAliasApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  MailAliasApi getMailAliasApi() {
+    return MailAliasApi(dio, serializers);
   }
 
   /// Get MooseGameApi instance, base route and serializer can be overridden by a given but be careful,

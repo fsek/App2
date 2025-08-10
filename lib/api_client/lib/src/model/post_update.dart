@@ -41,7 +41,7 @@ abstract class PostUpdate implements Built<PostUpdate, PostUpdateBuilder> {
 
   @BuiltValueField(wireName: r'doors')
   BuiltList<PostUpdateDoorsEnum>? get doors;
-  // enum doorsEnum {  LC,  Bunkern,  Syster Kents,  Cafét,  Caféförrådet,  Pubförrådet,  Containern,  Arkivet,  };
+  // enum doorsEnum {  Ledningscentralen,  Ambassaden,  Syster Kents,  Hilbert Cafe,  Cafeförrådet,  Pubförrådet,  Sopkomprimatorn,  Arkivet,  };
 
   PostUpdate._();
 
@@ -225,20 +225,20 @@ class _$PostUpdateSerializer implements PrimitiveSerializer<PostUpdate> {
 
 class PostUpdateDoorsEnum extends EnumClass {
 
-  @BuiltValueEnumConst(wireName: r'LC')
-  static const PostUpdateDoorsEnum LC = _$postUpdateDoorsEnum_LC;
-  @BuiltValueEnumConst(wireName: r'Bunkern')
-  static const PostUpdateDoorsEnum bunkern = _$postUpdateDoorsEnum_bunkern;
+  @BuiltValueEnumConst(wireName: r'Ledningscentralen')
+  static const PostUpdateDoorsEnum ledningscentralen = _$postUpdateDoorsEnum_ledningscentralen;
+  @BuiltValueEnumConst(wireName: r'Ambassaden')
+  static const PostUpdateDoorsEnum ambassaden = _$postUpdateDoorsEnum_ambassaden;
   @BuiltValueEnumConst(wireName: r'Syster Kents')
   static const PostUpdateDoorsEnum systerKents = _$postUpdateDoorsEnum_systerKents;
-  @BuiltValueEnumConst(wireName: r'Cafét')
-  static const PostUpdateDoorsEnum caft = _$postUpdateDoorsEnum_caft;
-  @BuiltValueEnumConst(wireName: r'Caféförrådet')
-  static const PostUpdateDoorsEnum caffrrdet = _$postUpdateDoorsEnum_caffrrdet;
+  @BuiltValueEnumConst(wireName: r'Hilbert Cafe')
+  static const PostUpdateDoorsEnum hilbertCafe = _$postUpdateDoorsEnum_hilbertCafe;
+  @BuiltValueEnumConst(wireName: r'Cafeförrådet')
+  static const PostUpdateDoorsEnum cafefrrdet = _$postUpdateDoorsEnum_cafefrrdet;
   @BuiltValueEnumConst(wireName: r'Pubförrådet')
   static const PostUpdateDoorsEnum pubfrrdet = _$postUpdateDoorsEnum_pubfrrdet;
-  @BuiltValueEnumConst(wireName: r'Containern')
-  static const PostUpdateDoorsEnum containern = _$postUpdateDoorsEnum_containern;
+  @BuiltValueEnumConst(wireName: r'Sopkomprimatorn')
+  static const PostUpdateDoorsEnum sopkomprimatorn = _$postUpdateDoorsEnum_sopkomprimatorn;
   @BuiltValueEnumConst(wireName: r'Arkivet')
   static const PostUpdateDoorsEnum arkivet = _$postUpdateDoorsEnum_arkivet;
 

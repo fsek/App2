@@ -15,6 +15,7 @@ part 'nollning_read.g.dart';
 ///
 /// Properties:
 /// * [name] 
+/// * [year] 
 /// * [description] 
 /// * [id] 
 /// * [missions] 
@@ -23,6 +24,9 @@ part 'nollning_read.g.dart';
 abstract class NollningRead implements Built<NollningRead, NollningReadBuilder> {
   @BuiltValueField(wireName: r'name')
   String get name;
+
+  @BuiltValueField(wireName: r'year')
+  int get year;
 
   @BuiltValueField(wireName: r'description')
   String get description;
@@ -63,6 +67,11 @@ class _$NollningReadSerializer implements PrimitiveSerializer<NollningRead> {
     yield serializers.serialize(
       object.name,
       specifiedType: const FullType(String),
+    );
+    yield r'year';
+    yield serializers.serialize(
+      object.year,
+      specifiedType: const FullType(int),
     );
     yield r'description';
     yield serializers.serialize(
@@ -113,6 +122,13 @@ class _$NollningReadSerializer implements PrimitiveSerializer<NollningRead> {
             specifiedType: const FullType(String),
           ) as String;
           result.name = valueDes;
+          break;
+        case r'year':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.year = valueDes;
           break;
         case r'description':
           final valueDes = serializers.deserialize(

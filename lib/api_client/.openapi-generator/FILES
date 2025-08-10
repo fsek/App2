@@ -1,6 +1,7 @@
 .gitignore
 README.md
 analysis_options.yaml
+doc/AccessServeApi.md
 doc/AdCreate.md
 doc/AdRead.md
 doc/AdUpdate.md
@@ -10,9 +11,11 @@ doc/AdsApi.md
 doc/AdventureMissionCreate.md
 doc/AdventureMissionRead.md
 doc/AlbumCreate.md
+doc/AlbumPatch.md
 doc/AlbumPhotographerAdd.md
 doc/AlbumRead.md
 doc/AlbumsApi.md
+doc/AliasRead.md
 doc/AuthApi.md
 doc/BearerResponse.md
 doc/BodyAuthResetForgotPassword.md
@@ -65,6 +68,7 @@ doc/EventsApi.md
 doc/GroupAddUser.md
 doc/GroupCreate.md
 doc/GroupMissionCreate.md
+doc/GroupMissionDelete.md
 doc/GroupMissionEdit.md
 doc/GroupMissionRead.md
 doc/GroupRead.md
@@ -75,6 +79,7 @@ doc/HTTPValidationError.md
 doc/ImgApi.md
 doc/ImgInAlbum.md
 doc/MEMBERROLES.md
+doc/MailAliasApi.md
 doc/MooseGameApi.md
 doc/MooseGameRead.md
 doc/NewsApi.md
@@ -85,13 +90,13 @@ doc/NewsUpdate.md
 doc/NollningAddGroup.md
 doc/NollningApi.md
 doc/NollningCreate.md
-doc/NollningDeleteMission.md
 doc/NollningGroupRead.md
 doc/NollningRead.md
 doc/PermissionCreate.md
 doc/PermissionRead.md
 doc/PermissionRemove.md
 doc/PermissionsApi.md
+doc/PhotographerInAlbumRead.md
 doc/PostCreate.md
 doc/PostDoorAccessRead.md
 doc/PostPermissionRead.md
@@ -139,6 +144,7 @@ doc/ValidationError.md
 doc/ValidationErrorLocInner.md
 lib/api_client.dart
 lib/src/api.dart
+lib/src/api/access_serve_api.dart
 lib/src/api/ads_api.dart
 lib/src/api/albums_api.dart
 lib/src/api/auth_api.dart
@@ -154,6 +160,7 @@ lib/src/api/event_signup_api.dart
 lib/src/api/events_api.dart
 lib/src/api/groups_api.dart
 lib/src/api/img_api.dart
+lib/src/api/mail_alias_api.dart
 lib/src/api/moose_game_api.dart
 lib/src/api/news_api.dart
 lib/src/api/nollning_api.dart
@@ -180,8 +187,10 @@ lib/src/model/admin_user_read.dart
 lib/src/model/adventure_mission_create.dart
 lib/src/model/adventure_mission_read.dart
 lib/src/model/album_create.dart
+lib/src/model/album_patch.dart
 lib/src/model/album_photographer_add.dart
 lib/src/model/album_read.dart
+lib/src/model/alias_read.dart
 lib/src/model/bearer_response.dart
 lib/src/model/body_auth_reset_forgot_password.dart
 lib/src/model/body_auth_reset_reset_password.dart
@@ -224,6 +233,7 @@ lib/src/model/event_update.dart
 lib/src/model/group_add_user.dart
 lib/src/model/group_create.dart
 lib/src/model/group_mission_create.dart
+lib/src/model/group_mission_delete.dart
 lib/src/model/group_mission_edit.dart
 lib/src/model/group_mission_read.dart
 lib/src/model/group_read.dart
@@ -239,12 +249,12 @@ lib/src/model/news_tag_read.dart
 lib/src/model/news_update.dart
 lib/src/model/nollning_add_group.dart
 lib/src/model/nollning_create.dart
-lib/src/model/nollning_delete_mission.dart
 lib/src/model/nollning_group_read.dart
 lib/src/model/nollning_read.dart
 lib/src/model/permission_create.dart
 lib/src/model/permission_read.dart
 lib/src/model/permission_remove.dart
+lib/src/model/photographer_in_album_read.dart
 lib/src/model/post_create.dart
 lib/src/model/post_door_access_read.dart
 lib/src/model/post_permission_read.dart
@@ -285,4 +295,9 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/post_door_access_read_test.dart
+test/access_serve_api_test.dart
+test/album_patch_test.dart
+test/alias_read_test.dart
+test/group_mission_delete_test.dart
+test/mail_alias_api_test.dart
+test/photographer_in_album_read_test.dart

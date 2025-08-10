@@ -9,8 +9,10 @@ import 'package:api_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**title** | **String** |  | 
-**description** | **String** |  | 
+**titleSv** | **String** |  | 
+**titleEn** | **String** |  | 
+**descriptionSv** | **String** |  | 
+**descriptionEn** | **String** |  | 
 **maxPoints** | **int** |  | 
 **minPoints** | **int** |  | 
 **nollningId** | **int** |  | 

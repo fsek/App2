@@ -3,72 +3,64 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'nollning_create.g.dart';
+part 'alias_read.g.dart';
 
-/// NollningCreate
+/// AliasRead
 ///
 /// Properties:
-/// * [name] 
-/// * [year] 
-/// * [description] 
+/// * [alias] 
+/// * [members] 
 @BuiltValue()
-abstract class NollningCreate implements Built<NollningCreate, NollningCreateBuilder> {
-  @BuiltValueField(wireName: r'name')
-  String get name;
+abstract class AliasRead implements Built<AliasRead, AliasReadBuilder> {
+  @BuiltValueField(wireName: r'alias')
+  String get alias;
 
-  @BuiltValueField(wireName: r'year')
-  int get year;
+  @BuiltValueField(wireName: r'members')
+  BuiltList<String> get members;
 
-  @BuiltValueField(wireName: r'description')
-  String get description;
+  AliasRead._();
 
-  NollningCreate._();
-
-  factory NollningCreate([void updates(NollningCreateBuilder b)]) = _$NollningCreate;
+  factory AliasRead([void updates(AliasReadBuilder b)]) = _$AliasRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NollningCreateBuilder b) => b;
+  static void _defaults(AliasReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NollningCreate> get serializer => _$NollningCreateSerializer();
+  static Serializer<AliasRead> get serializer => _$AliasReadSerializer();
 }
 
-class _$NollningCreateSerializer implements PrimitiveSerializer<NollningCreate> {
+class _$AliasReadSerializer implements PrimitiveSerializer<AliasRead> {
   @override
-  final Iterable<Type> types = const [NollningCreate, _$NollningCreate];
+  final Iterable<Type> types = const [AliasRead, _$AliasRead];
 
   @override
-  final String wireName = r'NollningCreate';
+  final String wireName = r'AliasRead';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    NollningCreate object, {
+    AliasRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'name';
+    yield r'alias';
     yield serializers.serialize(
-      object.name,
+      object.alias,
       specifiedType: const FullType(String),
     );
-    yield r'year';
+    yield r'members';
     yield serializers.serialize(
-      object.year,
-      specifiedType: const FullType(int),
-    );
-    yield r'description';
-    yield serializers.serialize(
-      object.description,
-      specifiedType: const FullType(String),
+      object.members,
+      specifiedType: const FullType(BuiltList, [FullType(String)]),
     );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    NollningCreate object, {
+    AliasRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -79,33 +71,26 @@ class _$NollningCreateSerializer implements PrimitiveSerializer<NollningCreate> 
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required NollningCreateBuilder result,
+    required AliasReadBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'name':
+        case r'alias':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.name = valueDes;
+          result.alias = valueDes;
           break;
-        case r'year':
+        case r'members':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.year = valueDes;
-          break;
-        case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.description = valueDes;
+            specifiedType: const FullType(BuiltList, [FullType(String)]),
+          ) as BuiltList<String>;
+          result.members.replace(valueDes);
           break;
         default:
           unhandled.add(key);
@@ -116,12 +101,12 @@ class _$NollningCreateSerializer implements PrimitiveSerializer<NollningCreate> 
   }
 
   @override
-  NollningCreate deserialize(
+  AliasRead deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = NollningCreateBuilder();
+    final result = AliasReadBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

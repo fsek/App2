@@ -3,65 +3,55 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/simple_user_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'nollning_add_group.g.dart';
+part 'photographer_in_album_read.g.dart';
 
-/// NollningAddGroup
+/// PhotographerInAlbumRead
 ///
 /// Properties:
-/// * [groupId] 
-/// * [mentorGroupNumber] 
+/// * [user] 
 @BuiltValue()
-abstract class NollningAddGroup implements Built<NollningAddGroup, NollningAddGroupBuilder> {
-  @BuiltValueField(wireName: r'group_id')
-  int get groupId;
+abstract class PhotographerInAlbumRead implements Built<PhotographerInAlbumRead, PhotographerInAlbumReadBuilder> {
+  @BuiltValueField(wireName: r'user')
+  SimpleUserRead get user;
 
-  @BuiltValueField(wireName: r'mentor_group_number')
-  int? get mentorGroupNumber;
+  PhotographerInAlbumRead._();
 
-  NollningAddGroup._();
-
-  factory NollningAddGroup([void updates(NollningAddGroupBuilder b)]) = _$NollningAddGroup;
+  factory PhotographerInAlbumRead([void updates(PhotographerInAlbumReadBuilder b)]) = _$PhotographerInAlbumRead;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NollningAddGroupBuilder b) => b;
+  static void _defaults(PhotographerInAlbumReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NollningAddGroup> get serializer => _$NollningAddGroupSerializer();
+  static Serializer<PhotographerInAlbumRead> get serializer => _$PhotographerInAlbumReadSerializer();
 }
 
-class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGroup> {
+class _$PhotographerInAlbumReadSerializer implements PrimitiveSerializer<PhotographerInAlbumRead> {
   @override
-  final Iterable<Type> types = const [NollningAddGroup, _$NollningAddGroup];
+  final Iterable<Type> types = const [PhotographerInAlbumRead, _$PhotographerInAlbumRead];
 
   @override
-  final String wireName = r'NollningAddGroup';
+  final String wireName = r'PhotographerInAlbumRead';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    NollningAddGroup object, {
+    PhotographerInAlbumRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'group_id';
+    yield r'user';
     yield serializers.serialize(
-      object.groupId,
-      specifiedType: const FullType(int),
+      object.user,
+      specifiedType: const FullType(SimpleUserRead),
     );
-    if (object.mentorGroupNumber != null) {
-      yield r'mentor_group_number';
-      yield serializers.serialize(
-        object.mentorGroupNumber,
-        specifiedType: const FullType.nullable(int),
-      );
-    }
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    NollningAddGroup object, {
+    PhotographerInAlbumRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -72,27 +62,19 @@ class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGro
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required NollningAddGroupBuilder result,
+    required PhotographerInAlbumReadBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'group_id':
+        case r'user':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.groupId = valueDes;
-          break;
-        case r'mentor_group_number':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.mentorGroupNumber = valueDes;
+            specifiedType: const FullType(SimpleUserRead),
+          ) as SimpleUserRead;
+          result.user.replace(valueDes);
           break;
         default:
           unhandled.add(key);
@@ -103,12 +85,12 @@ class _$NollningAddGroupSerializer implements PrimitiveSerializer<NollningAddGro
   }
 
   @override
-  NollningAddGroup deserialize(
+  PhotographerInAlbumRead deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = NollningAddGroupBuilder();
+    final result = PhotographerInAlbumReadBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

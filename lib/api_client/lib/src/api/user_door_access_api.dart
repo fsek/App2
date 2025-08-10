@@ -46,7 +46,7 @@ class UserDoorAccessApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/user_access/';
+    final _path = r'/user_access/{access_id}'.replaceAll('{' r'access_id' '}', encodeQueryParameter(_serializers, accessId, const FullType(int)).toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -69,14 +69,9 @@ class UserDoorAccessApi {
       validateStatus: validateStatus,
     );
 
-    final _queryParameters = <String, dynamic>{
-      r'access_id': encodeQueryParameter(_serializers, accessId, const FullType(int)),
-    };
-
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
-      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
@@ -277,6 +272,7 @@ class UserDoorAccessApi {
   /// 
   ///
   /// Parameters:
+  /// * [accessId] 
   /// * [userAccessUpdate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -288,6 +284,7 @@ class UserDoorAccessApi {
   /// Returns a [Future] containing a [Response] with a [UserAccessRead] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<UserAccessRead>> userDoorAccessUpdateUserAccess({ 
+    required int accessId,
     required UserAccessUpdate userAccessUpdate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -296,7 +293,7 @@ class UserDoorAccessApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/user_access/';
+    final _path = r'/user_access/{access_id}'.replaceAll('{' r'access_id' '}', encodeQueryParameter(_serializers, accessId, const FullType(int)).toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
