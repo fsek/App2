@@ -1,0 +1,514 @@
+{
+  "categories": [
+    {
+      "category_name": {
+        "sv": "Organisation",
+        "en": "Organisation"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Ordförande",
+            "en": "President"
+          },
+          "name": {
+            "sv": "Ester Hagberg Kuylenstierna",
+            "en": "Ester Hagberg Kuylenstierna"
+          },
+          "text": {
+            "sv": "Hejhopp allihopa! Det är jag som är Ester, ordförande på sektionen. Först och främst vill jag önska er varmt välkomna till sektionen och LTH! Ni har fantastiska år framför er, och jag hoppas verkligen att ni kommer att trivas här. Oavsett om ni väljer att engagera er i sektionen eller på annat håll vill jag verkligen slå ett slag för Lunds studentliv. Här finns allt från idrott, musik och mat till teknik, media, politik – och mycket mer. Jag är övertygad om att ni alla kan hitta ett sammanhang där ni trivs!\nVad är då min roll här på sektionen? Jag har det yttersta ansvaret för hela sektionen och dess verksamhet. Tillsammans med styrelsen och nämnden arbetar jag för att allt ska rulla på som det ska – både på kort och lång sikt. Utöver att finnas till hands för alla våra fantastiska funktionärer har jag också mycket kontakt med de andra verksamheterna i Mattehuset och med sektionsordföranden på övriga sektioner här på LTH.\nDet viktigaste jag vill att ni tar med er är att det löser sig! I början är det mycket som är nytt och lite rörigt – boende, vänner, studier – men sådant brukar falla på plats efter ett tag. En omtenta är inte hela världen, och många av oss har haft lite konstiga boendesituationer under någon period. Har ni några frågor, stora som små, är ni alltid välkomna att hugga tag i mig i korridoren eller skriva till mig på Mattermost.\nTa hand om er och njut av nollningen!",
+            "en": "Hello everyone! My name is Ester, I am the president of the guild. First of all, I want to wish you a warm welcome to the guild and LTH! You have great years ahead of you, and I really hope you will enjoy your time here. Regardless of whether you choose to get involved in the guild or elsewhere, I really want to strike a blow for Lund's student life. There is everything from sports, music and food to technology, media, politics - and much more. I am convinced that you can all find a context where you thrive!\nSo what is my role here in the guild? I have ultimate responsibility for the whole guild and its activities. Together with the board and the council of executives, I work to ensure that everything runs smoothly - both in the short and long term. In addition to being available for all our fantastic volunteers, I also have a lot of contact with the other organisations in Mattehuset and with the presidents of the other guilds here at LTH.\nThe most important thing I want you to take with you is that it works out! In the beginning, there is a lot that is new and a little messy - accommodation, friends, studies - but things usually fall into place after a while. A retake is not the end of the world, and many of us have had some strange living situations during some period. If you have any questions, big or small, you are always welcome to grab me in the hallway or write to me at Mattermost."
+          },
+          "image": "ordf.jpg"
+        },
+        {
+          "position": {
+            "sv": "Vice ordförande",
+            "en": "Vice President"
+          },
+          "name": {
+            "sv": "Lovisa Werselius",
+            "en": "Lovisa Werselius"
+          },
+          "text": {
+            "sv": "Hejsan nollan!\nMitt namn är Lovisa, och jag sitter som vice ordförande här på F-sektionen. Mitt främsta uppdrag är att vara ordförande Esters högra hand, och tillsammans utgör vi det som kallas presidiet.\nSom vice har jag många olika ansvarsområden. Förutom att stötta Ester i hennes arbete sitter jag som ledamot i styrelsen och jobbar för sektionens långsiktiga och visionära arbete. Jag ansvarar dessutom för sektionens projektverksamhet, och jag är den som leder arbetet i nämnden.\nNi kommer säkert se mig springa runt med solglasögon och klackar i Hilbertkorridorerna, och om har du några frågor om sektionen eller är taggad på att sätta en idé till liv så får du mer än gärna stoppa mig för att snacka! \n\nNjut nu av nollningen och allt som Lund har att erbjuda, så hoppas jag att vi ses!\nKram,\nVice ordförande Lovisa Werselius",
+            "en": "Hello mentee!\nMy name is Lovisa, and I'm the Vice President here at the F-guild. I am President Ester's right hand, and together we form what is called the Presidium.\nAs Vice President, I have many different responsibilities. In addition to supporting Ester in her work, I sit as a member of the board and work for the guild’s long-term and visionary work. I am also responsible for the project activities here at the guild, and I lead the work of the Council of Executives.\nI'm sure you'll see me running around with sunglasses and heels in the Hilbert corridors, and if you have any questions about the guild or are excited to bring an idea to life, you're more than welcome to stop me to chat!\nEnjoy the introduction and everything Lund has to offer, and I hope to see you there!\nHugs,\nVice President Lovisa Werselius"
+          },
+          "image": "viceordf.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Styrelse",
+        "en": "The board"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Styrelsepreses",
+            "en": "Chair of the Board"
+          },
+          "name": {
+            "sv": "Malte Callsen",
+            "en": "Malte Callsen"
+          },
+          "text": {
+            "sv": "Tjenare! Det är jag som är Malte, och jag är styrelsepreses här på sektionen. Det är jag som planerar och leder arbetet i styrelsen, så att ordförande Ester och vice ordförande Lovisa kan fokusera på sitt arbete och resten av sektionen. Jag sammankallar till och leder även  styrelsemötena, som hålls ungefär varannan vecka i vår sektionslokal Ledningscentralen. Dessa möten är öppna för alla medlemmar på F-sektionen, och det är där styrelsen behandlar motioner som skickats in av sektionsmedlemmar. Om ni har några funderingar på hur sektionen fungerar, vad styrelsen håller på med, undrar över ett beslut vi har tagit eller gärna vill förändra något på sektionen, så är det bara att kontakta mig! Ni når mig lättast  eller genom att skriva till mig på Mattermost. Jag hoppas ni kommer att trivas här på sektionen!",
+            "en": "Hey there! I’m Malte, and I’m the chair of the board here at the guild. I’m the one who plans and leads the work of the board, so that President Ester and Vice President Lovisa can focus on their work and the rest of the guild. I also convene and lead the board meetings, which are held roughly every other week in the Lands of Management And Operative. These meetings are open to all members of the F-guild, and it’s where the board handles motions submitted by the guild members. If you have any questions about how the guild works, what the board is up to, are wondering about a decision that we have made, or would like to change something at the guild – don’t hesitate to reach out to me! You can contact me most easily at  or by messaging me on Mattermost. I wish you all the best at the F-guild!"
+          },
+          "image": "preses.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Studierådet",
+        "en": "The Students’ Educational Council"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Utbildningsminister",
+            "en": "Minister of Education"
+          },
+          "name": {
+            "sv": "Mattis Mattsson",
+            "en": "Mattis Mattsson"
+          },
+          "text": {
+            "sv": "Hej! Jag heter Mattis Mattsson och är utbildningsminister på F-sektionen. Det betyder att jag leder studierådet – en grupp engagerade studenter som jobbar för att göra utbildningen och studiemiljön bättre för alla på sektionen. Jag sitter också i ledningen och har ansvar för kontakten mellan studierådet, ledningen och de andra utskotten. Dessutom samarbetar jag med andra sektioners utbildningsbevakare för att vi tillsammans ska kunna driva viktiga frågor på hela LTH.\nUtöver det är jag även studerandeskyddsombud. Det innebär att du kan vända dig till mig om du upplever att något känns fel eller obekvämt i din studiemiljö. Det kan handla om att en lärare beter sig olämpligt, att du blivit orättvist behandlad, eller om andra studenter utsätter dig för något, som till exempel grupparbeten, seminarier eller labbar. Jag har tystnadsplikt enligt lag, så du kan alltid prata med mig i förtroende.\nOavsett om någon har en åsikt om en kurs, behöver hjälp med något som känns jobbigt, eller bara är nyfiken på vad utbildningsbevakning är så går det alltid att höra av sig! Jag finns här för alla studenter och svarar gärna på frågor eller bara lyssnar.",
+            "en": "Hello! My name is Mattis Mattsson and I am the Minister of Education at the F-guild. This means that I lead the Student’s Educational Council - a group of committed students who work to make the education and study environment better for everyone in the guild. I also sit in the the Council of Executives and am responsible for the contact between the Student’s Educational Council, the Council of Executives and the other committees. In addition, I collaborate with other guild's education advocates so that together we can pursue important issues throughout LTH.\nAdditionally, I am also a student protection officer. This means that you can turn to me if you feel that something feels wrong or uncomfortable in your study environment. It may be that a teacher is behaving inappropriately, that you have been treated unfairly, or if other students are exposing you to something, such as group work, seminars or labs. I am bound by law to maintain confidentiality, so you can always talk to me in confidence.\nWhether someone has an opinion about a course, needs help with something that's bothering them, or is just curious about what educational monitoring is, you can always get in touch! I am here for all students and am happy to answer questions or just listen."
+          },
+          "image": "um.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Sexmästeriet",
+        "en": "The Festivities Committee"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Sexmästare",
+            "en": "Head of Festivities"
+          },
+          "name": {
+            "sv": "Ebba Wahlberg",
+            "en": "Ebba Wahlberg"
+          },
+          "text": {
+            "sv": "Tjena! Jag heter Ebba Wahlberg och är sexmästare här på F! Som sexmästare är jag utskottsordförande för sexmästeriet, ett utskott som håller i sittningar, pubar och dansgolv för alla på sektionen!\nFörutom mig finns det sju andra mästare: en vice sexmästare, två pubmästare, två köksmästare och två hofmästare. Tillsammans planerar vi evenemang och ser till att alla utskottets funktionärer har det bra!\nI utskottet finns även en DJ, tre sångförmän och massa sexetjobbare! Sångförmännen är de som står för underhållningen på sittningar, medan DJ:n fixar musiken till dansgolvet. Sexetjobbarna är de som står och svarvar drinkar i baren, hackar lök i köket, dekorerar lokalen och serverar all mat.\nNär vi inte håller i sittningar eller pubar, så ses vi i sexmästeriet även ofta för interna event så som cykelfester, kickoffs eller bara allmänt gött häng! Efter varje avslutad sittning så har vi också en traditionsenlig eftersexa tillsammans för att fira en lyckad (eller olyckad) sittning!\nAtt vara med i sexmästeriet är helt enkelt superskoj! Det är ett härligt sätt att vara engagerad där vi både kan ha kul tillsammans inom utskottet och sprida glädje till våra medstudenter genom olika events och aktiviteter. Det är en chans att vara kreativ, träffa många nya vänner och bidra till en härlig och inkluderande studentmiljö!",
+            "en": "Hi! My name is Ebba Wahlberg and I’m the Head of Festivities here at F! As the Head of Festivities, I am the chairperson of our committee, which organizes banquets, pubs, and dance floors for everyone in the guild.\nBesides me, there are seven others who are responsible for the committee: a Vice Head of the Festivities Committee, two Pub Managers, two Chefs, and two Head Waiters. Together, we plan events and make sure that all the committee’s members are doing well!\nIn the committee, we also have a DJ, three Toastmasters, and lots of Festivities Workers! The Toastmasters are responsible for the entertainment during banquets, while the DJ handles the music for the dance floor! The Festivities Workers are the ones mixing drinks behind the bar, chopping onions in the kitchen, decorating the venue, and serving all the food.\nWhen we’re not hosting banquets or pub nights, we often get together within the committee for internal events like cycling parties, kickoffs, or just some cozy hangouts! After every banquet, we also have a traditional \"eftersexa\" to celebrate a successful (or sometimes not-so-successful) event!\nBeing part of the Festivities Committee is simply so much fun! It's a wonderful way to get involved where we can both have a great time together within the committee and spread joy to our fellow students through different events and activities! It's a chance to be creative, meet lots of new friends, and contribute to a fun and inclusive student environment!"
+          },
+          "image": "sexm.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Sekret Service",
+        "en": "Secrete Service"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Sekreterare",
+            "en": "Secretary"
+          },
+          "name": {
+            "sv": "Hugo Klaesson",
+            "en": "Hugo Klaesson"
+          },
+          "text": {
+            "sv": "Tjo! Mitt namn är Hugo Klaesson och jag är sekreterare här på F-sektionen. Som sekreterare är mitt primära jobb att protokollföra och dokumentera sektionsmötena och styrelsens arbete. Förutom allt skrivande är jag också en aktiv del i styrelsen där jag deltar i diskussioner, arbetar fram beslut och är med bakom kulisserna på sektionens verksamhet. Förutom att sitta som sekreterare är jag även utskottsordförande för utskottet Sekret Service!\nSekret Service är ett väldigt nytt utskott som arbetar mycket i gemenskap med styrelsen för att förbättra sektionens verksamhet. Utskottet ligger under sekreteraren och har ett flertal olika småposter som gör diverse saker, där ibland mycket roliga internevent och häng. Men dess viktigaste uppgift ligger i sektionens försvar. Sekret Service är både sektionens första och sista försvarslinje mot ALLA externa hot!\nInom utskottet har vi bland annat sektionsmötesordförande, som står för att leda sektionsmötena och att arbeta fram en plan tillsammans med styrelsen om hur dessa möten ska gå till. Även har vi representant i TLTHs valnämnd, som är med i valprocessen inom Teknologkåren, och SaFT-blandare, som är ansvariga för att arrangera att landets F-sektioner träffas varje termin någonstans i landet. Sist, men definitivt inte minst, har vi LaBamba, ett team som ansvarar för att kinga käk till hela den demokratiska processen, från intervjuprocessen till sektionsmötet.\nAtt vara med i Sekret Service eller sitta som sekreterare är en otroligt rolig sak och något jag verkligen har tyckt gjort min tid på sektionen mycket bättre! Det är en chans att vara kreativ, träffa många nya vänner och träffa på sektionen!",
+            "en": "Hey! My name is Hugo Klaesson and I'm the Secretary here at the F-guild! As Secretary, my main job is to take notes and document the work of the board and the guild meetings. Besides all the writing, I'm also an active part of the board, taking part in discussions, helping shape decisions, and working behind the scenes of the guild's operations. In addition to being Secretary, I'm also the Head of Sekret Service!\nSekret Service is a very new committee that works closely with the board to improve the guild's operations. The committee falls under the Secretary and consists of several small roles that do various things — including organizing lots of fun internal events and hangouts. But its most important task lies in the defense of the guild. The Sekret Service is both the first and last line of defense against ANY external threat to our guild!\nWithin the committee, we have the Meeting Chair who leads the guild meetings and works together with the board to plan how those meetings should be run. We also have a Representative in TLTH’s Election Committee, who takes part in the election process within the student union, and the SaFT Mixers, who are responsible for helping the board organize a gathering for all of the F-guilds in Sweden every term. Last but definitely not least, we have LaBamba, a team in charge of serving food throughout the democratic process, from guild meetings to interview rounds.\nBeing part of Sekret Service or serving as Secretary is incredibly fun and has definitely made my time in the guild much better. It's a chance to be creative, meet lots of new friends, and experience the guild!"
+          },
+          "image": "sekreterare.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Sanningsministeriet",
+        "en": "Ministry of Truth"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Sanningsminister",
+            "en": "Minister of Truth"
+          },
+          "name": {
+            "sv": "Albin Kårlin",
+            "en": "Albin Kårlin"
+          },
+          "text": {
+            "sv": "Storebror ser dig.\nEller inte! Hallå iallafall, Albin Kårlin heter jag och jag är sektionens Sanningsminister.\nSom ny student tar det lite tid att komma in i lingot och det slängs runt termer hit och dit och man fattar iiiingeenting. Men men, här skall det göras tydligt. F-sektionen är helheten, organisationen som du nu bjuds in till med en massiv verksamhet och otaliga evenemang och händelser. Denna massiva verksamhet anordnas av olika utskott tillhörande sektionen. Du deltar just nu i nollningen och det är en del av sektionens verksamhet, som i detta fall anordnas av nollningsutskottet Föset. Men sektionen gör så mycket mer, och det är där mitt utskott, Sannningsministeriet och alla andra utskott kommer in i bilden!\nSanningsministeriet är ett utskott fokuserat på design och kommunikation. För detta ändamål har vi sanningsspridare (sköter grafisk design), spindelmän (sköter hemsidan och F-appen), sektionsfotografer (fotograferar och redigerar bilder), filmförmän (spelar in och redigerar filmer), arkivarier (sköter sektionens arkiv) och von-Tänen redaktionen som ger ut tidningen von Tänen en gång varje läsperiod.\nSom Sanningsminister leder jag detta utskott på 45 funktionärer (och medstudenter), representerar det i sektionens nämnd (samling av utskottsordförande och styrelserepresentanter) samt är allmänt informationsansvarig för sektionen.\nFör att få koll på vad som händer på sektionen bör du nu:\n- Bekanta dig med hemsidan/Fappen och Mattermost\n- Följa F-sektionen på instagram @fsektionen, TikTok @fsektionen och gilla facebook-sidan F-sektionen inom TLTH",
+            "en": "Big brother is watching you.\nOr not! Anyway, my name is Albin Kårlin and I am the guild's Minister of Truth.\nAs a new student, it takes some time to get into the lingo and terms are thrown around here and there and you get nothing at all. But here I shall make it clear for you! The F-guild is the whole, the organization to which you are now invited with many activities and countless events and happenings. These many activities are organized by various committees belonging to the guild. You are currently participating in the introduction and it is part of the guild's operations, which in this case are organized by the introduction committee Föset. But the guild does so much more, and that's where my committee, the Ministry of Truth and all the other committees come in!\nThe Ministry of Truth is a committee focused on design and communication. To this end, we have Minions Of Truth (managing graphic design), Webmasters (managing the website and the tab), Guild Photographers (photographing and editing images), Cinematographers (shooting and editing films), Archivists (managing the guild's archives), and the von Tänen Editorial Staff, which publishes the von Tänen magazine once every reading period.\nAs Minister of Truth, I lead this committee of 45 volunteers (and fellow students), represent it in the guild's board of operations (gathering of committee chairs and board representatives) and am the general information officer for the guild.\nTo keep track of what is happening in the guild, you should now\n- Familiarize yourself with the website/Fappen and Mattermost\n- Follow the F-guild on instagram and tiktok @fsektionen, and like our facebook-page F-sektionen Inom TLTH"
+          },
+          "image": "sanningsm.jpg"
+        },
+        {
+          "position": {
+            "sv": "Spindelförman",
+            "en": "Head of App and Web development"
+          },
+          "name": {
+            "sv": "Manfred Malmros",
+            "en": "Manfred Malmros"
+          },
+          "text": {
+            "sv": "With great power comes great responsibility\nOch den makten missbrukar vi bara ibland :D\nHej och välkommen till vår app! Jag heter Manfred Malmros och är spindelförman på sektionen. Vi i spindelmännen är en del av utskottet Sanningsministeriet och vårt huvudmål är att utveckla sektionens hemsida och F-appen du använder just nu! Vi sköter också annat smått och gott som sektionens Mattermost (glöm inte att sätta på notiser ;)) och annat roligt vi kommer på.\nSom spindelförman så är jag ansvarig för sektionens spindelnät, internät och nätaggregat. Jag representerar också spindelmännen i nämnden och snackar med andra utskott om hur vi kan introducera dem till det digitala 2000-talet.\nSom sektionsmedlem är det oss spindelmän du ska höra av dig till om du inte kan anmäla dig till event, hemsidan är för ful eller om Mattermost kraschat igen. Skicka då ett mejl till spindelman@fsektionen.se så ska vi göra vårt bästa för att hjälpa dig!\nFör tillfället är det viktigast att se till att du har konto på hemsidan/appen och på Mattermost så att du kan anmäla dig till event.",
+            "en": "With great power comes great responsibility\nA power we only sometimes abuse :D\nHello and welcome to our app! I’m Manfred Malmros and I am the Head of App and Web development. We the Webmasters are a part of the Ministry of Truth and our main responsibility is the development of the guild’s website and the F-app you’re using right now! We also maintain other stuff like the guild’s Mattermost (don’t forget to turn on notifications ;)) and anything else that piques our interest.\nAs Head of App and Web development I am responsible for the guild’s spider-nets, inter-nets and networking (supplies). I represent the Webmasters in the guild’s Board of Operations and help introduce other councils to the digital 21st century.\nAs a guild member its us webmasters you should contact if you can’t register for events, the website is too ugly or Mattermost is down again. Send us an email to spindelman@fsektionen.se and we’ll do our best to help you!\nFor now, the most important part is that you’ve made an account on the webpage/app, on Mattermost and also that you can register for events."
+          },
+          "image": "spindelf.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Samvetet",
+        "en": "Committee of Conscience"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Samvetsmästare",
+            "en": "Master of Conscience"
+          },
+          "name": {
+            "sv": "Alicia Ahlgren",
+            "en": "Alicia Ahlgren"
+          },
+          "text": {
+            "sv": "Hejsan nollan! Mitt namn är Alicia Ahlgren, jag går F23 och är samvetsmästare på sektionen. Min roll innebär dels att leda utskottet samvetet, vilket inkluderar delutskotten likabehandlingsutskottet (LiBU) och hållbarhetssamordnarna. Vidare är jag ansvarig för att främja jämställdhets- och hållbarhetsarbete inom sektionen. Jag representerar också samvetet i ledningen, som består av alla utskottsordföranden och styrelsen. LiBU leder jag tillsammans med sektionens likabehandlingsordförande (LiBO) Hanna, när det gäller just likabehandling har Hanna stenkoll <3\nNär man flyttar hemifrån och börjar universitetet är det inte ovanligt att känna sig på hal is och väldigt ensam. Att arbeta för en välkomnande och trygg miljö är något Hanna och LiBU arbetar mycket med, tillsammans med en mängd andra likabehandlingsrelaterade ämnen. Allt detta gör de parallellt med att planera in roliga och intressanta aktiviteter! Det andra delutskottet, hållbarhetssamordnarna, arbetar utifrån sektionens hållbarhetspolicy och strävar efter att göra sektionen mer miljömässigt och socialt hållbar. Detta gör de bland annat genom att hjälpa sektionens alla utskott att sköta sitt normala arbete på ett lite mer hållbart sätt. Såklart anordnar även hållbarhetssamordnarna lärorika event och lunchföreläsningar!\nNu till mitt viktigaste åliggande som samvetsmästare: studerandeskyddsombud samt likabehandlingsombud. Samvetsmästaren bär huvudansvar för personärenden på sektionen, vilket betyder att om det är något du behöver prata om kan du vända dig till mig. Varesig det handlar om ensamhet, nedstämdhet, någon form av diskriminering, ångest, en vän du är orolig för, ventilering eller om du vill dela med dig av något kul finns jag alltid tillgänglig för att lyssna. Jag är ingen kurator eller psykolog, men jag kan lyssna och hjälpa dig hitta de resurser du behöver. Ordförande Ester, LiBO Hanna och jag agerar konfidentiellt, så ni kan alltid tala med dem också om det känns bättre! Jag vet att de gärna lyssnar.\nDet är en stor livsförändring som ligger framför er, mycket som händer samtidigt. Att lära sig balansera ett helt nytt socialt liv med er utbildning kan vara väldigt svårt, det är du inte ensam i. Du ska aldrig tveka att höra av dig, jag vill inget hellre än att lyssna och förhoppningsvis hjälpa till. Om du är i behov av pedagogiskt stöd, för exempelvis funktionsnedsättningar, kan jag hjälpa dig med det också. I år så är jag fadder också, så om ni ser mig kom gärna och prata!\nSka bli så himla kul att få träffa er och hoppas ni får en fantastisk tid här i Lund och på sektionen!<3",
+            "en": "Hello all new students! My name is Alicia Ahlgren, I'm in F23 and I'm the guild's Master of Conscience. My role involves leading the Committee of Conscience, which includes the subcommittees Committee for Student Equality (LiBU) and the Sustainability Coordinators. Furthermore, I am responsible for promoting gender equality and sustainability work within the guild. I also represent the committee in the Council of Executives, which consists of all committee chairs and the Board. I lead LiBU together with the President of the Committee for Student Equality (LiBO) Hanna, when it comes to equality, Hanna has a keen eye <3\nWhen you move away from home and start university, it is not uncommon to feel like you are on slippery ice and very alone. Working towards a welcoming and safe environment is something Hanna and LiBU work a lot with, along with a variety of other equality-related topics. They do all this in parallel with planning fun and interesting activities! The second sub-committee, the Sustainability Coordinators, works with maintaining the guild's sustainability policy and strives to make the guild more environmentally and socially sustainable. One of the ways they do this is by helping all the guild's committees do their normal work in a slightly more sustainable way. Of course, the sustainability coordinators also organize educational events and lunchtime lectures!\nNow to my most important duty as Master of Conscience: Student Protection Officer and Equal Opportunities Officer. The Master of Conscience has the main responsibility for personal matters in theguild, which means that if there is something you need to talk about, you can turn to me. Whether it's about loneliness, depression, some form of discrimination, anxiety, a friend you're worried about, venting, or if you want to share something funny, I'm always available to listen. I am not a counselor or psychologist, but I can listen and help you find the resources you need. President Ester, LiBO Hanna and I act confidentially, so you can always talk to them too if it makes you feel better! I know they are happy to listen.\nIt's a big life change ahead of you, with a lot happening at once. Learning to balance a whole new social life with your education can be very difficult, and you are not alone. Please don't hesitate to get in touch, I would love nothing more than to listen and hopefully help. If you need educational support, for example because of disabilities, I can help you with that too. This year I am a mentor too, so if you see me, please come and talk!\nIt will be so much fun to meet you and hope you have a great time here in Lund and at the guild!"
+          },
+          "image": "samv.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Prylmästeriet",
+        "en": "The Facilities Committee"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Prylmästare",
+            "en": "Head Of Facilities and Logistics"
+          },
+          "name": {
+            "sv": "Alva Rosberg",
+            "en": "Alva Rosberg"
+          },
+          "text": {
+            "sv": "Hejsan Nollan!\nJag heter Alva och jag är Prylmästare!\nPrylmästaren är utskottsordförande för Prylmästeriet som består av ett härligt gäng fixare, merchansvariga och bilförmän. Vi ansvarar för sektionens verktyg, sektionens bil F-älgen, LTH:s coolaste merch, skåpsuthyrning och våra sektionslokaler.\nDu kommer antagligen se oss en del under nollningen — ofta med orangea hängslen på ovven — när vi hjälper uppdragsgrupper på byggkvällarna och när vi säljer merch.\nSkulle du få punka på cykeln, frukta ej! Det finns verktyg att låna, och vi anordnar cykelfixardagar några gånger per termin där du kan få hjälp av våra otroliga fixare.\nVi hjälper gärna till med allt praktiskt du kan tänka dig! Har du några frågor om vad vi gör eller vad du kan få hjälp med? Hör av dig! Jag sitter oftast i Hilbert Café och svarar gärna på frågor.\nHa det bäst! Kram,\nPrylmästare Alva Rosberg",
+            "en": "Hello all new Students!\nMy name is Alva and I am Head Of Facilities and Logistics!\nThe Head Of Facilities and Logistics is the committee chairman of the Facilities Committee, which consists of a lovely bunch of Caretakers , merch managers and acar supervisors. We are responsible for the guild's tools, the guild's car F-älgen, LTH's coolest merch, locker rentals and our guild rooms.\nYou will probably see us a lot during the introduction- often with orange braces on the top - when we help mission groups on construction nights and when we sell merch.\nShould you get a puncture on your bike, fear not! There are tools to borrow, and we organize bike repair days a few times a semester where you can get help from our Caretakers.\nWe are happy to help with anything practical you can think of! Do you have any questions about what we do or what you can get help with? Get in touch! I'm usually in Hilbert Café and happy to answer questions.\nHave a great time! Love,\nHead Of Facilities and Logistics Alva Rosberg"
+          },
+          "image": "prylm.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Näringslivsutskottet",
+        "en": "The Corporate Relations Committee"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Näringslivsansvarig",
+            "en": "Head Of Corporate Relations"
+          },
+          "name": {
+            "sv": "David Mörtberg",
+            "en": "David Mörtberg"
+          },
+          "text": {
+            "sv": "Hejsan! Jag heter David, går i tvåan på teknisk fysik och sitter som näringslivsansvarig. Det betyder att jag är utskottsordförande för F-sektionens näringslivsutskott (FNU).\nUtskottet ansvarar för sektionens företagssamarbeten, vilket ger studenterna chansen att knyta kontakter med framtida arbetsgivare och se vilka möjligheter som finns under och efter studierna. Vi sköter även sektionens alumniverksamhet och anordnar bland annat lunchföreläsningar och företagspubar. FNU är ett utskott där utskottets medlemmars idéer styr verksamheten. Tveka inte att prata med mig eller någon annan i utskottet om vilka aktiviteter du vill se i framtiden!",
+            "en": "Hi there! My name is David, I'm a second-year student in Engineering Physics and I'm the head of Corporate Relation.\nThis means that I am the chairman of the guild's Corporate Relations Committee (FNU). The committee is responsible for the guild's business partnerships, which give students the chance to make contacts with future employers and see what opportunities are available during and after their studies. We also manage the guild's alumni activities and organize, among other things, lunch lectures and pubs. FNU is a committee where the committee members' ideas guide the activities. Don't hesitate to talk to me or anyone else on the committee about what activities you would like to see in the future!"
+          },
+          "image": "fnu.jpg"
+        },
+        {
+          "position": {
+            "sv": "Projektledare Farad",
+            "en": "Project Manager of FARAD"
+          },
+          "name": {
+            "sv": "Jacob Stelling",
+            "en": "Jacob Stelling"
+          },
+          "text": {
+            "sv": "Hej! Jag heter Jacob, går i tvåan på teknisk fysik och är projektledare för FARAD.\nFARAD är F-sektionens egna arbetsmarknadsmässa. Den sker i början av varje år och är ett utmärkt tillfälle för alla studenter från F-sektionen för att bonda med massor av företag och till och med skaffa sig ett sommarjobb. Såklart driver jag inte allt detta själv utan har en fantastisk projektgrupp med mig! Förutom att planera mässan anordnar vi också flera otroligt roliga event inför mässan. I projektgruppen finns en stor bredd av arbetsuppgifter och en post där passar perfekt som första sektionsengagemang!",
+            "en": "Hi! My name is Jacob, I'm in the second year of engineering physics and I'm the Project Manager of FARAD. FARAD is the F-guild's own career fair. It takes place at the beginning of every year and is a great opportunity for all students from the F-guild to bond with lots of companies and even get a summer job. Of course, I don't run all this by myself but I have a great project team with me! In addition to planning the fair, we also organise several incredibly fun events before the fair. There is a wide range of tasks in the project group and a position that is perfect as a first guild commitment!"
+          },
+          "image": "farad.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Kulturministeriet",
+        "en": "Ministry of Culture"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Kulturminister",
+            "en": "Minister for Culture"
+          },
+          "name": {
+            "sv": "Manne Mönster",
+            "en": "Manne Mönster"
+          },
+          "text": {
+            "sv": "Tjo! Jag heter Manne Mönster och är kulturminister på F-sektionen. Som kulturminister är man utskottsordförande för kulturministeriet - ett helt fantastiskt utskott bestående av många olika delutskott. Till kulturministeriet tillhör reisemeisters och reiseleiters, idrottsförman och atleterna, tandemgeneraler, F-, @1337 (uttalas atleets) och sångarstridsförmän.\nKulturministeriet är ett otroligt brett utskott och tillsammans anordnar vi väldigt många olika typer av aktiviteter och event. Några exempel är sittningar, bussresor, spelkvällar och idrottsaktiviteter såsom racket-fredagar, löpning och fotboll. Vi ser också till att F-sektionen har ett lag i den välkända Tandemstafetten och i Sångarstriden.\nUnder nollningen syns Kulturministeriet ofta en hel del och är med och anordnar event som Ovvelekarna, Tour de Lomma och ett KM-event.\nHar du några frågor eller funderingar kring Kulturministeriet som utskott, någon specifik post eller om du bara vill snacka så får du jättegärna höra av dig! Under nollningen kommer jag ofta att gå runt i frack med ett stort F på ryggen!",
+            "en": "Hello! My name is Manne Mönster and I am the Minister for Culture at the F-guild. As the Minister for Culture, you are the head of the Ministry of Culture - an absolutely fantastic committee consisting of many different subcommittees. The Ministry of Culture includes Reisemeisters and Reiseleiters, a Sports foreman and Athletes, Tandem Generals, F- , @1337 (pronounced atleets) and Song Contest Team Leaders.\nThe Ministry of Culture is an incredibly broad committee and together we organize many different types of activities and events. Some examples are sittings, bus trips, game nights and sports activities such as racket Fridays, running and football. We also ensure that the F-guild has a team in the well-known Tandem Relay and in the Song contest.\nDuring the Introduction, the Ministry of Culture is often seen a lot and is involved in organizing events such as Ovvelekarna, Tour de Lomma and a KM event.\nIf you have any questions or thoughts about the Ministry of Culture as a committee, a specific post or if you just want to chat, you are more than welcome to get in touch with me! During the Introduction, I will often walk around in a tailcoat with a big F on my back!"
+          },
+          "image": "kulturm.jpg"
+        },
+        {
+          "position": {
+            "sv": "Reisemeisters",
+            "en": "Reisemeisters"
+          },
+          "name": {
+            "sv": "Hedda Wallin & Lukas Törngren",
+            "en": "Hedda Wallin & Lukas Törngren"
+          },
+          "text": {
+            "sv": "Hej kära nollor! Vi heter Hedda och Lukas och vi är reisemeisters! Som reisemeister har man hand om sektionens alldeles egna reiseleiteri!!!\nReiseleiteriet anordnar massa roliga event. Det kan vara allt från fulsittningar, bussresor till Danmark, ölmil och släpp, men vår viktigaste arbetsuppgift är att tagga till sektionen inför och under våra event. Vi ser helt enkelt till att studietiden blir lite roligare!\nVåra reiseleiters kommer ni se en hel del av under nollningen och ni känner igen dem på den ikoniska looken med knästrumpor, teknologmössa, frack och pilotglasögon. De finns alltid här för att tagga till och leka med nollorna, men självklart alltid för att svara på frågor eller lyssna på dina besvär! Det enda du behöver komma ihåg är att sjunga Teknisk Fysiks hyllningsvisa varje gång du hör en visselpipa och mata reiseleiters med sin favoritfrukt!\nTack för oss! Vi lär ses en hel del framöver! <3",
+            "en": "Hello dear mentees! We are Lukas and Hedda, and we are your Reisemeisters! As Reisemeisters, we are in charge of the guild’s very own Reiseleiteri!\nThe Reiseleiteri organizes lots of fun events — everything from casual sittings and bus trips to Denmark, to beer miles and after-parties. But our most important job is to hype up the guild before and during our events. In short, we make sure your life gets a little more exciting!\nYou’ll see plenty of our Reiseleiters during the orientation weeks (Nollning), and you’ll recognize them by their iconic look: knee-high socks, the traditional student cap (teknologmössa), tails (frack), and aviator sunglasses.\nThey’re always around to get the energy up and have fun with the mentees, but they’re also here to answer your questions or listen to your concerns! The only thing you need to remember is: sing Teknisk Fysik’s anthem every time you hear a whistle, and feed the Reiseleiters with their favorite fruit!\nThanks from us! We’re sure we’ll see a lot of each other in the coming weeks!<3"
+          },
+          "image": "rm.jpg"
+        },
+        {
+          "position": {
+            "sv": "Idrottsförman",
+            "en": "Sports foreman"
+          },
+          "name": {
+            "sv": "Nina Westling",
+            "en": "Nina Westling"
+          },
+          "text": {
+            "sv": "Halloj! Jag heter Nina Westling och är idrottsförman här på sektionen. Det innebär att jag tillsammans med Kulturminister Manne leder Atleterna och planerar och hjälper till att genomföra alla våra idrottsevenemang på sektionen. Alla är alltid välkomna på våra event!\nUnder nollningen ser ni oss under Tour de Lomma, FWemkampen, volleybollturneringen och tillsammans med hela kulturministeriet. Utöver eventen under nollningen kan man under resten av året testa på en massa olika sporter med atleterna, såsom racketfredag, sporta med E, klättring, frisbee, fotboll, volleyboll, löpning (springa med V) och flertal engångsevenemang. Håll utkik i vår kanal Sports på Mattermost för att få reda på allt vi hittar på och hur man kan vara med! Det går även att se våra event i kalendern i F-appen.\nVi älskar sport och är här för alla som är sugna på att röra sig lite, oavsett tidigare erfarenhet. Vi hoppas att just du vill komma och testa på nya (eller gamla) sporter med oss! Har du några frågor om vad vi gör eller hur du söker till att bli atlet, hör av er till mig eller någon av atleterna!",
+            "en": "Hello there! My name is Nina Westling and I am the Sports foreman here at the guild. This means that I, together with Minister for Culture Manne, lead the Athletes and plan and help to implement all our sports events at the guild. Everyone is always welcome at our events!\nDuring the introduction you will see us during Tour de Lomma, FWemkampen, the volleyball tournament and together with the whole Ministry of Culture. In addition to the events during the introduction, you can try out a lot of different sports with the athletes during the rest of the year, such as racket Friday, sports with E, climbing, frisbee, football, volleyball, running (run with V) and several one-off events. Keep an eye on our Sports channel on Mattermost to find out what we're up to and how you can get involved! You can also see our events in the calendar on the F app.\nWe love sports and are here for anyone who wants to get moving, regardless of previous experience. We hope you'll come and try new (or old) sports with us! If you have any questions about what we do or how to apply to become an athlete, please contact me or one of the athletes!"
+          },
+          "image": "idrottsf.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Cafémästeriet",
+        "en": "Hilbert café"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Cafémästare & Vice cafémästare",
+            "en": "Head of the Café & Deputy head of the Café"
+          },
+          "name": {
+            "sv": "Ellen Boström & Jacob Hoas",
+            "en": "Ellen Boström & Jacob Hoas"
+          },
+          "text": {
+            "sv": "Hilbert vare med er! Vi heter Ellen och Jacob, och det är vi som är cafémästare för F-sektionens helt egna Hilbert Café, strategiskt placerat mitt i Mattehuset. Här kan du hitta kaffe, fika och våra vida kända Hilbertmackor™ – allt en nybliven teknolog behöver för att sluta kostcirkeln. Skulle plugget spåra som en enda divergerande riemannsumma är du välkommen att slå dig till ro vid en av våra många studieplatser och låta femmorna rulla in. Vill du lära känna folk på sektionen och jobba ihop lite gratis mat? Skriv då upp dig på ett jobbarpass i F-appen eller på hemsidan. Inga förkunskaper krävs och alla är välkomna! Vi ses i Hilbert café!",
+            "en": "Hilbert be with you! We’re Ellen and Jacob, and we’re the heads of the F-guild’s very own Hilbert Café, strategically located in the center of the Mathematics Building (MH). Here you’ll find coffee, pastries, and our famously renowned Hilbert Sandwiches™ – everything a new engineering student needs to complete the food cycle. If your studies start spiraling like at diverging Riemann sum, feel free to settle down at one of our many study spots and let the credits roll in. Do you want to meet people from the guild and earn some free food while you´re at it? Sign up for a work shift in the F-app or on the website. No experience needed – everyone is welcome! See you at Hilbert Café!"
+          },
+          "image": "cafem.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Bokförlaget",
+        "en": "The Accounting Department"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Kassör",
+            "en": "Treasurer"
+          },
+          "name": {
+            "sv": "Anton Sundström",
+            "en": "Anton Sundström"
+          },
+          "text": {
+            "sv": "Hejsan! Jag heter Anton och är inne på mitt fjärde år av Teknisk Fysik. Utöver det sitter jag även som kassör, vilket innebär att jag ansvarar för sektionens bokföring, fakturor och att sektionen har en budget att följa.\nJag är även med i styrelsen där jag jobbar med traditionellt styrelsearbete och ser till att styrelsen har koll på sektionens ekonomi. Till min hjälp har jag mitt utskott, bokförlaget, som består av bokförmannen Thea och tre bokförfattare som tillsammans med mig sköter större delen av sektionens bokföring och fakturering. Vi samarbetar också med cofös med bokföringsansvar, cafémästaren, vice cafémästaren och vice sexmästaren, som sköter bokföringen för sina respektive områden. Om du undrar något om sektionens ekonomi eller bara har lust att snacka allmänt så är det bara att leta upp mig på Fsektionen.se eller i MH!",
+            "en": "Hello! My name is Anton and I'm in my fourth year of Engineering Physics. In addition to that, I also sit as Treasurer, which means that I'm responsible for the guild’s bookkeeping, invoicing and that the guild has a budget.\nI’m also a member of the board, where I do traditional board work and make sure that the rest of the board has all the information that they need about the guilds finances. To help me, I have my committee, the Accounting Department, which consists of Thea the Accounting Manager and three Accounting Analysts who, together with me, handle most of the guild’s bookkeeping and invoicing.  We also work together with the Cofös with Accounting Responsibility, the heads of Hilbert café, and the Deputy Head of Festivities, who handle the accounting for their respective committees. If you have any questions about the guild’s finances or just want to chat, just find me on Fsektionen.se or in MH!"
+          },
+          "image": "kassor.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Föset",
+        "en": "The Introduction Committee"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Överfös",
+            "en": "Head of Introduction Committee"
+          },
+          "name": {
+            "sv": "Överfös Victor",
+            "en": "Head of Introduction Committee Victor"
+          },
+          "text": {
+            "sv": "Hejsan, jag heter Victor!\nDet är jag som är Överföset på F-sektionen och därmed huvudansvarig för årets nollning. Jag, tillsammans med mina Cofös -  Tova, Frida, Alma, Erik, Ale och Hannes -  utgör Föset. Föset har tillsammans planerat en nollning som vi hoppas kommer att bli ett minne för livet.\nUnder våren har vi arbetat med att rekrytera nollningsvolontärer, planerat evenemang, hållit i utbildningar, designat samt haft kontakt med sponsorer. Nollningen hade aldrig gått ihop utan alla fantastiska volontärer som bidrar på olika sätt. Nu, efter en lång vår, är allt äntligen på plats och vi är redo att få bjuda med Dig på ett spännande och roligt äventyr!\nNollningen i år är en berättelse som för oss tillbaka till tideräkningens gryning, då romerska legionärer marscherade över Lunds kullerstenar, skålade som Bacchus och grundade imperier i overall. Jag hoppas att Du får en oförglömlig upplevelse och en fantastisk start på Din studieperiod.",
+            "en": "Hi, my name is Victor!\nI'm the Head of the Introduction Committee at the F-guild and thus the main person in charge of this year's introduction. I, together with- Tova, Frida, Alma, Erik, Ale and Hannes - make up the Introduction Committee (Föset). Föset has together planned a nollning we hope will be a memory for life.\nDuring the spring we have worked to recruit introduction volunteers, planned events, held training sessions, designed and been in contact with sponsors. The Introduction would never have been possible without all the fantastic volunteers who contribute in various ways. Now, after a long spring, everything is finally in place and we are ready to invite you on an exciting and fun adventure! This year's introduction is a story that takes us back to the dawn of time, when Roman legionaries marched over the cobblestones of Lund, toasted like Bacchus and founded empires in overalls. I hope you have an unforgettable experience and a great start to your study period."
+          },
+          "image": "overfos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Tova",
+            "en": "Introduction Committee Commissioner Tova"
+          },
+          "text": {
+            "sv": "Halli hallå! Det är jag som är Cofös Tova och det är jag som ser till att allt kring nollningens ekonomi flyter på som den ska! Vi i föset planerar och arrangerar nollningen, en månad av skojigheter för att ni ska få en så bra och rolig första studietid som möjligt! Vårt arbete började redan innan jul och det är så roligt att nollningen äntligen är här:) I föset är mitt främsta ansvar all bokföring och att hålla ett öga på ekonomin för nollningen. Genom detta arbete har jag en del kontakt med andra sektionsmedlemmar, men främst våra kära extrafös och mina bästa föskollegor<33 Nog om det! Har du någon fundering så tveka inte på att komma fram och prata med mig<3 Ta hand om dig så hoppas jag att vi ses på ett nollningsevent eller i korridoren framöver!!",
+            "en": "Hello there! I am Cofös Tova and I am the one who makes sure that everything around the finances of the Introduction runs smoothly! We in the Introduction Committee plan and organize the Introduction, a month of fun events to make sure you have the best and most fun first time at the guild possible! My main responsibility in the Introduction committee is all the bookkeeping and keeping an eye on the finances for the Introduction. Through this work I have some contact with other members of the guild, but mainly our dear extrafös and my best colleagues<33 Enough about that! If you have any questions, do not hesitate to come and talk to me<3 Take care and I hope to see you at an event or in the corridor in the future!"
+          },
+          "image": "bokfos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Frida",
+            "en": "Introduction Committee Commissioner Frida"
+          },
+          "text": {
+            "sv": "Hejsan nollan! Det är jag, Cofös Frida, som skickar ut meddelanden till er varje kväll, där jag berättar om dagen som varit och dagen som komma skall:) Jag är informationsansvarig i föset, så mitt jobb är att se till att alla får den info de behöver. Utöver det ser jag till, med hjälp av mina fantastiska webbfös, att appen fungerar som den ska. Ta hand om dig så ses vi nog snart, på denna resa tillbaka till Romarriket som är nollningen!",
+            "en": "Hello mentee! I, Cofös Frida, am the one who sends out messages to you every night, where I tell you about the day that has been and the day to come. I'm the Introduction Committee Commissioner with Information responsibility, so my job is to make sure everyone gets the information they need. In addition, with the help of my fantastic webfös, I make sure that the app works as it should. Take care and I'll see you soon, on this adventure that is the introduction!"
+          },
+          "image": "infofos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Alma",
+            "en": "Introduction Committee Commissioner Alma"
+          },
+          "text": {
+            "sv": "Hallå där! Jag är Cofös Alma och är eventansvarig inom föset. Min roll innebär att jag har ansvar över eventplanering inför nollningen. Mitt arbete innefattar huvudsakligen schemaläggning och att pyssla med logistiken kring nollningens event. Rollen innebär mycket kontakt och samarbete med alla F-sektionens finfina utskott och eventansvariga på LTH:s övriga sektioner. Har ni frågor om nollningsevent eller andra funderingar är det bara att jaga rätt på mig. Jag hoppas ni får en underbar nollning och en fortsatt härlig tid här på F-sektionen!",
+            "en": "Hello there! I'm Cofös Alma, and I’m the event coordinator within the föset (the Introduction Committee). My role involves being responsible for event planning ahead of the introduction-period (nollning). My work mainly consists of scheduling and handling the logistics around the events. The role includes a lot of communication and collaboration with all the wonderful committees within the F-guild as well as event coordinators from other guilds at LTH. If you have any questions about reception events or anything else, feel free to hunt me down. I hope you have a wonderful reception and continue to enjoy your time here at the F-guild!"
+          },
+          "image": "eventfos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Ale",
+            "en": "Introduction Committee Commissioner Ale"
+          },
+          "text": {
+            "sv": "Tjenixen! Jag är numera Cofös Ale och är Designfös i år. Något annat som jag är i år är 21 år, och så går jag i F3 och sånt där.\nNu kanske man sitter och undrar vad i hela friden designfös är, jo det är en internroll inom Föset som basically går ut på att man designar saker. Typ märken, nollningsväggen och menyer. Sen har jag också ansvar för Fösets filmer som visas lite här och där.\nMan brukar säga att Rom inte byggdes på en dag. Likväl håller nollningen på längre tid än så. Njut av det smörgåsbord av aktiviteter som erbjuds i detta festliga storstadsmyller som är En nollning vid Forum Romanum!",
+            "en": "Hey hey! Nowadays I’m Cofös Ale and responsible for the design. I’m 21 years old, and in class F3 and all that jazz. Now you might be wondering what on Earth do I do? Well, it’s an internal role within the committee that's basically all about designing stuff – for instance badges, the introduction wall, and menus. I’m also responsible for our videos, which pop up here and there. People often say Rome wasn’t built in a day. Likewise, the introduction lasts for a while. So enjoy the smorgasbord of activities offered in this festive urban chaos that is An Introduction at the Forum Romanum!"
+          },
+          "image": "designfos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Erik",
+            "en": "Introduction Committee Commissioner Erik"
+          },
+          "text": {
+            "sv": "Hallå där! Det är jag som är Cofös Erik på snart 22 julianska år och börjar nu mitt tredje år på teknisk fysik. Mitt huvudansvar inom Föset är sponsring och jag håller kontakten med företagen vi samarbetar med. Målet är att du redan nu ska få tidig kontakt med näringslivet! I övrigt hjälper jag till med allt möjligt som behövs. Jag har längtat efter nollningen hela året och är så taggad på att äntligen få träffa dig och dina mednollor! Tveka inte att höra av dig om du har några frågor, eller bara gå fram för lite gött snack! Och framförallt, glöm inte att njuta av tiden du har framför dig:)",
+            "en": "Hello there! I'm Cofös Erik, soon 22 years old, and now starting my third year of engineering physics. My main responsibility within Föset is sponsorship and I keep in touch with the companies we work with. The goal is for you to get early contact with the business community! In addition, I help out with anything else that is needed. I've been looking forward to the Introduction all year and am so excited to finally meet you and your fellow mentees! Don't hesitate to get in touch if you have any questions, or just come up for a chat! And above all, don't forget to enjoy the time you have ahead of you :)"
+          },
+          "image": "sponsfos.jpg"
+        },
+        {
+          "position": {
+            "sv": "Cofös",
+            "en": "Introduction Committee"
+          },
+          "name": {
+            "sv": "Cofös Hannes",
+            "en": "Introduction Committee Commissioner Hannes"
+          },
+          "text": {
+            "sv": "Tjolahoppsan nollan! Jag är Cofös Hannes, och kommer från det pampigaste palatset i Stockholm. Jag inleder nu mitt fjärde år som samlare av visdom på pi-programmet, där jag har stortrivts sedan första dagen. Inom Föset axlar jag manteln som fadder- och intisansvarig, mitt uppdrag är att se till att alla mår bra och känner sig inkluderade. Ni kan alltid komma till mig om det är något!<3 Kriga på säkert mina små romare.",
+            "en": "Heyy mentee! I'm Cofös Hannes, and I come from the grandest palace in Stockholm. I am now starting my fourth year as a collector of wisdom in the Pi program, which I have enjoyed since day one. Within the committee, I take on the mantle of mentor and international students, my mission is to make sure that everyone is happy and feels included. You can always come to me if there's anything! <3 Stay safe my little Romans."
+          },
+          "image": "fadderfos.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Processionen",
+        "en": "The Committee of Medals and Honours"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "Sektionshärold",
+            "en": "Chief Herald"
+          },
+          "name": {
+            "sv": "Aron Allen",
+            "en": "Aron Allen"
+          },
+          "text": {
+            "sv": "Varmt välkommen nollan! Mitt namn är Aron Allen och jag är sektionshärold här på F-sektionen. Tillsammans med mina fenomenala persevanter, trumpetare och fanbärare utgör vi processionen, vilken ansvarar för det ceremoniella här på sektionen där bland annat medaljutdelningen ingår. För oss är högtider, såväl som traditioner, av största vikt och vi arbetar ständigt för att synliggöra dessa för alla sektionens medlemmar. Vår ambition är att ni ska få vara med i att ta del av F-sektionens rika anor på ett elegant och underhållande vis, men likväl ser vi fram emot att få se er sätta er egen prägel på sektionen. Vi är oerhört exalterade inför att få lära känna er och att ni ska få lära känna oss.",
+            "en": "A warm welcome mentee! My name Aron Allen and I am Chief Herald here at the F-guild. Together with my phenomenal Pursuivants, Trumpeters and Standard bearer, we form the Procession, which is responsible for the ceremonial here at the guild, including the medal distribution. For us, holidays, as well as traditions, are of the utmost importance and we are constantly working to make these visible to all members of the guild. Our ambition is for you to take part in the rich history of the F-guild in an elegant and entertaining way, but we also look forward to seeing you put your own stamp on the guild. We are extremely excited to get to know you and for you to get to know us."
+          },
+          "image": "aron.jpg"
+        }
+      ]
+    },
+    {
+      "category_name": {
+        "sv": "Freja",
+        "en": "Freja"
+      },
+      "people": [
+        {
+          "position": {
+            "sv": "FREJA ordförande",
+            "en": "President of FREJA"
+          },
+          "name": {
+            "sv": "Linnea Becker",
+            "en": "Linnea Becker"
+          },
+          "text": {
+            "sv": "Hejhej!\nJag heter Linnea Becker och är ordförande för FREJA. Jag är 21 år och går i tvåan på teknisk fysik, och detta år är jag så taggad på en massa skoj FREJA-events och myskvällar med kompisar. Och att kanske till slut faktiskt börja upptäcka Lund!\nSom ordförande i FREJA har jag det övergripande ansvaret över vår verksamhet, vilket i princip betyder att jag håller i möten och hjälper resten av styrelsen där det behövs.\nTill dig som precis börjat vill jag först säga grattis och varmt välkommen! Du har en magisk tid framför dig, och jag hoppas att du kommer att trivas.\nHa det bäst, vi ses!",
+            "en": "Hi there!\nMy name is Linnea Becker and I am the president of FREJA. I'm 21 years old and in my second year of engineering physics, and this year I'm so excited about a lot of fun FREJA events and cozy evenings with friends. And to maybe finally actually start discovering Lund!\nAs president of FREJA, I have the overall responsibility for our activities, which basically means that I hold meetings and help the rest of the board where needed.\nTo you who have just started, I would first like to say congratulations and a warm welcome! You have a magical time ahead of you, and I hope you will enjoy it.\nHave a great time, see you!"
+          },
+          "image": "freja.jpg"
+        }
+      ]
+    }
+  ]
+}

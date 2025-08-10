@@ -5,6 +5,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/fsek.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/karen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/lund.dart';
@@ -124,7 +125,11 @@ class _StudentlivetHomeState extends State<StudentlivetHome> {
                                                 height: screenHeight / 4,
                                                 width: screenWidth / 2.5,
                                                 child: InkWell(
-                                                  onTap: () => (),
+                                                  onTap: () => (Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              FsekPage()))),
                                                   child: Image.asset(
                                                     fsek,
                                                     fit: BoxFit.fill,
