@@ -295,6 +295,3 @@ lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/access_serve_api_test.dart
-test/album_patch_test.dart
-test/group_mission_delete_test.dart
