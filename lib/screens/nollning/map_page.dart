@@ -37,10 +37,13 @@ class PlaceInfo {
 }
 
 Future<List<PlaceInfo>> loadJson() async {
-  String jsonString = await rootBundle.loadString('assets/data/nollning-24/map_info.json');
+  String jsonString =
+      await rootBundle.loadString('assets/data/nollning-24/map_info.json');
   final jsonResponse = json.decode(jsonString);
 
-  return (jsonResponse as List).map((place) => PlaceInfo.fromJson(place)).toList();
+  return (jsonResponse as List)
+      .map((place) => PlaceInfo.fromJson(place))
+      .toList();
 }
 
 class MapView extends StatefulWidget {
@@ -50,6 +53,7 @@ class MapView extends StatefulWidget {
 
 class _MapViewState extends State<MapView> {
   String baseAssetPath = "assets/img/nollning-24/karta/";
+  // String imagePath = "assets/data/nollning_25/nolleguide/karta.png";
   final String imagePath = "assets/img/nollning-24/karta/mapscreen.png";
   final double pinWidth = 17.0;
   final double pinHeight = 17.0;
@@ -64,7 +68,9 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    double bodyHeight = MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight); // Remove height of AppBar
+    double bodyHeight = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).padding.top +
+            kToolbarHeight); // Remove height of AppBar
     double bodyWidth = MediaQuery.of(context).size.width;
 
     _placePins(context, bodyHeight, bodyWidth).then((value) {
@@ -93,12 +99,15 @@ class _MapViewState extends State<MapView> {
     );
   }
 
-  Future<List<Positioned>> _placePins(BuildContext context, double bodyHeight, double bodyWidth) async {
+  Future<List<Positioned>> _placePins(
+      BuildContext context, double bodyHeight, double bodyWidth) async {
     List<PlaceInfo> placeInfos = await loadJson();
     String locale = Localizations.localeOf(context).toString();
     var pinList = placeInfos
         .map((data) => Positioned(
-              top: bodyHeight / 2 + (data.top - 0.5 * imageHeight) * bodyWidth / imageWidth - pinHeight / 2,
+              top: bodyHeight / 2 +
+                  (data.top - 0.5 * imageHeight) * bodyWidth / imageWidth -
+                  pinHeight / 2,
               left: bodyWidth * data.left / imageWidth - pinWidth / 2,
               child: GestureDetector(
                 onTap: () => _showPOIDialog(
@@ -118,7 +127,8 @@ class _MapViewState extends State<MapView> {
     return pinList;
   }
 
-  void _showPOIDialog(BuildContext context, String title, String description, String? extraAsset) {
+  void _showPOIDialog(BuildContext context, String title, String description,
+      String? extraAsset) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -135,7 +145,9 @@ class _MapViewState extends State<MapView> {
                 description,
                 style: TextStyle(fontFamily: 'Testament'),
               ),
-              (extraAsset != null) ? Image.asset(baseAssetPath + "extraAssets/" + extraAsset) : SizedBox.shrink(),
+              (extraAsset != null)
+                  ? Image.asset(baseAssetPath + "extraAssets/" + extraAsset)
+                  : SizedBox.shrink(),
             ],
           ),
           actions: [
