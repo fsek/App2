@@ -3,12 +3,9 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/environments/environment.dart';
-import 'package:fsek_mobile/models/gallery/album.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_image_gallery_saver/flutter_image_gallery_saver.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
@@ -107,7 +104,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                         backgroundColor:
-                            Theme.of(context).colorScheme.surfaceVariant));
+                            Theme.of(context).colorScheme.surfaceContainerHighest));
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                         content: Text(
@@ -115,7 +112,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                         backgroundColor:
-                            Theme.of(context).colorScheme.surfaceVariant));
+                            Theme.of(context).colorScheme.surfaceContainerHighest));
                   }
                 },
               ),

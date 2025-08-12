@@ -1,15 +1,9 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:fsek_mobile/environments/environment.dart';
-import 'package:fsek_mobile/models/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/gallery/album.dart';
-import 'package:fsek_mobile/services/album.service.dart';
-import 'package:fsek_mobile/services/gallery.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';

@@ -116,7 +116,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
         fontFamily: 'Helvetica Neue', 
         fontSize: 28.0, 
         // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode. 
-        color: locator<ThemeService>().theme.colorScheme.onBackground.withAlpha(170)
+        color: locator<ThemeService>().theme.colorScheme.onSurface.withAlpha(170)
         )
       ),
     ];
@@ -176,7 +176,7 @@ class ThemeSettingsState<ThemeSettingsPage> extends State {
           SizedBox(
             width: double.infinity,
             child: Container(
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
               padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
               child: Text(t.themeSettingsHelp),
             ),

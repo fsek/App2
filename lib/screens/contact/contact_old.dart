@@ -99,7 +99,7 @@ class _ContactPageState extends State<ContactPageOld> {
               ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 8),
                     child: Text(t.contactPerson,
@@ -123,7 +123,7 @@ class _ContactPageState extends State<ContactPageOld> {
               ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
                     child: Text(t.contactDescription,
@@ -137,7 +137,7 @@ class _ContactPageState extends State<ContactPageOld> {
                   ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
                     child: Text(t.contactInfo,
@@ -174,7 +174,7 @@ class _ContactPageState extends State<ContactPageOld> {
               ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
                     child: Text(t.contactMessage,
@@ -197,7 +197,7 @@ class _ContactPageState extends State<ContactPageOld> {
               Container(
                 width: double.infinity,
                 height: 30,
-                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
               ),
               Container(
                   width: double.infinity,
@@ -218,7 +218,7 @@ class _ContactPageState extends State<ContactPageOld> {
               Container(
                 width: double.infinity,
                 height: 30,
-                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
               ),
             ],
           ),
@@ -289,7 +289,7 @@ class _ContactPageState extends State<ContactPageOld> {
             Align(
               alignment: Alignment.bottomRight,
               child: IconButton(
-                  icon: Icon(Icons.check, color: Theme.of(context).colorScheme.onBackground),
+                  icon: Icon(Icons.check, color: Theme.of(context).colorScheme.onSurface),
                   onPressed: () => Navigator.pop(context)),
             )
           ],

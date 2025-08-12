@@ -119,7 +119,7 @@ class _HeaderText extends StatelessWidget {
     fontSize: 25.0,
     color: locator<ThemeService>().theme.textTheme.titleLarge!.color,
   );
-  final Color? color = locator<ThemeService>().theme.colorScheme.surfaceVariant;
+  final Color? color = locator<ThemeService>().theme.colorScheme.surfaceContainerHighest;
 
   Future<void> _launchPhoneNumber(String phoneNumber) async {
     // phoneNumber can safely contain "-", "+" and " "

@@ -3,12 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/widgets/input_dialog.dart';
-import 'package:fsek_mobile/services/game.service.dart';
 import 'package:fsek_mobile/models/moose_game/game_score_entry.dart';
 
 class HighscorePage extends StatefulWidget {

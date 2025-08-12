@@ -8,15 +8,10 @@ import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
 import 'package:fsek_mobile/screens/moose_game/sandwich.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/game.service.dart';
-import 'package:fsek_mobile/services/user.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:vector_math/vector_math.dart';
-import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'moose.dart';
 
@@ -335,7 +330,7 @@ class _MooseGamePageState extends State<MooseGamePage>
                   fontSize: 50,
                   color: Theme.of(context)
                       .colorScheme
-                      .onBackground
+                      .onSurface
                       .withAlpha(sandwichBonusPopupFadeout)),
             ))));
 

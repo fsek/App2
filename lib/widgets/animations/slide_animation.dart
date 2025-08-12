@@ -58,7 +58,7 @@ class SlideAnimation extends StatelessWidget {
                 title: Text("${curveList[index]}"),
                 leading: CircleAvatar(
                   child: Text("${index + 1}"),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                 ),
                 onTap: () {
                   print(curveList.length);

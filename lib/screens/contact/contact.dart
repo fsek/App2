@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/models/contact/contact.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/contact.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/environments/environment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -111,7 +106,7 @@ class _ContactPageState extends State<ContactPage> {
               ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 8),
                     child: Text(t.contactPerson,
@@ -135,7 +130,7 @@ class _ContactPageState extends State<ContactPage> {
               ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
                     child: Text(t.contactDescription,
@@ -148,7 +143,7 @@ class _ContactPageState extends State<ContactPage> {
                   ),
               Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(8, 24, 8, 4),
                     child: Text(t.contactInfo,
@@ -234,7 +229,7 @@ class _ContactPageState extends State<ContactPage> {
               Container(
                 width: double.infinity,
                 height: 30,
-                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
               ),
             ],
           ),

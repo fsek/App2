@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
-import 'package:fsek_mobile/models/cafe/cafe_user.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/cafe.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/time.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
@@ -123,9 +119,9 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
               fontSize: 32, color: Theme.of(context).colorScheme.onError),
         ),
         style: ButtonStyle(
-          fixedSize: MaterialStateProperty.all(Size(300, 75)),
+          fixedSize: WidgetStateProperty.all(Size(300, 75)),
           backgroundColor:
-              MaterialStateProperty.all(Theme.of(context).colorScheme.error),
+              WidgetStateProperty.all(Theme.of(context).colorScheme.error),
         ),
       );
     } else {
@@ -140,7 +136,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
               style: ButtonStyle(
                 backgroundColor:
                     Theme.of(context).textButtonTheme.style!.backgroundColor,
-                fixedSize: MaterialStateProperty.all(Size(300, 75)),
+                fixedSize: WidgetStateProperty.all(Size(300, 75)),
               ),
             )
           : null; // if another person is on the shift, don't show a signup button

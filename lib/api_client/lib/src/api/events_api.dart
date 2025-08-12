@@ -14,10 +14,8 @@ import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
 import 'package:api_client/src/model/event_tag_read.dart';
 import 'package:api_client/src/model/event_update.dart';
-import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/user_read.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 
 class EventsApi {
 

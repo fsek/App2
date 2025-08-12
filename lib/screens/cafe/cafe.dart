@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/screens/cafe/cafe_shift.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/cafe.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
@@ -190,7 +187,7 @@ class _CafePageState extends State<CafePage> {
             TableCalendar(
               calendarStyle: CalendarStyle(
                   markerDecoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                       shape: BoxShape.circle)),
               availableGestures: AvailableGestures.horizontalSwipe,
               locale: locale,

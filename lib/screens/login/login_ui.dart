@@ -159,10 +159,10 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       key: Key("login_forgot_btn"),
       onPressed: () => onForgottenPassword(),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
           Theme.of(context).primaryColorLight,
         ),
-        foregroundColor: MaterialStateProperty.all<Color>(
+        foregroundColor: WidgetStateProperty.all<Color>(
           Theme.of(context).colorScheme.onSecondary
         ),
       ),

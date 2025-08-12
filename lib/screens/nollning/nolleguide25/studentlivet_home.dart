@@ -1,18 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/kladguide.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/stodfunktioner.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/fsek.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/karen.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/lund.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/stod.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/vettoetikett.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/wordlist.dart';
-import 'package:fsek_mobile/services/preload_asset.service.dart';
 
 class StudentlivetHome extends StatefulWidget {
   @override

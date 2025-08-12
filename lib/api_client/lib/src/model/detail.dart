@@ -37,9 +37,7 @@ class _$DetailSerializer implements PrimitiveSerializer<Detail> {
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    Detail object, {
-    FullType specifiedType = FullType.unspecified,
-  }) sync* {
+    Detail object) sync* {
   }
 
   @override

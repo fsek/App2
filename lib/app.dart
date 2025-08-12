@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +17,6 @@ import 'models/destination.dart';
 import 'models/user/user.dart';
 
 import 'services/navigation.service.dart';
-import 'services/notifications.service.dart';
 import 'services/service_locator.dart';
 import 'services/user.service.dart';
 import 'util/authentication/authentication_bloc.dart';

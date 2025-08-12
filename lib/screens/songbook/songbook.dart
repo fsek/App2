@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:fsek_mobile/screens/songbook/hmmm.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/song.service.dart';
-import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/songbook/top_songs.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
@@ -182,7 +178,7 @@ class _SongbookPageState extends State<SongbookPage>
                               initChar = "";
                               songs = allSongs.where((song) {
                                 return searchTerms.every((term) =>
-                                    song.title!.toLowerCase().contains(term));
+                                    song.title.toLowerCase().contains(term));
                               }).toList();
                             });
                           },
@@ -250,11 +246,11 @@ class _SongbookPageState extends State<SongbookPage>
 
   Widget _generateSongTile(SongRead song) {
     List<Widget> index = [];
-    if (song.title![0] != initChar) {
-      initChar = song.title![0];
+    if (song.title[0] != initChar) {
+      initChar = song.title[0];
       index.add(Container(
         decoration:
-            BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+            BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
         child: ListTile(
           title: Text(
             initChar,
@@ -277,7 +273,7 @@ class _SongbookPageState extends State<SongbookPage>
                           .surfaceContainerHighest),
                 )),
                 child: InkWell(
-                  onTap: () => openSong(song.id!),
+                  onTap: () => openSong(song.id),
                   child: ListTile(title: Text(song.title ?? "")),
                 ))
           ],

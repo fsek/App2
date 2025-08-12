@@ -26,7 +26,7 @@ class _MotionCardState extends State<MotionCard> {
       Theme.of(context).colorScheme.surfaceTint;
     Color background_color =
       Theme.of(context).colorScheme.surfaceTint.withOpacity(0.4);
-    Color bottom_color = Theme.of(context).colorScheme.onBackground.withOpacity(0.4);
+    Color bottom_color = Theme.of(context).colorScheme.onSurface.withOpacity(0.4);
     var t = AppLocalizations.of(context)!;
     return widget.motion == null
         ? Container()

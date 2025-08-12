@@ -1,15 +1,7 @@
-import 'package:fsek_mobile/april_fools.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/home/event.dart';
-import 'package:fsek_mobile/models/home/eventuser.dart';
-import 'package:fsek_mobile/models/home/group.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
-import 'package:fsek_mobile/services/event.service.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

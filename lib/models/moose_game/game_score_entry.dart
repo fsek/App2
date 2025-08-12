@@ -1,6 +1,4 @@
-import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 
 
 part 'game_score_entry.g.dart';

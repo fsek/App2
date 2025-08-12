@@ -4,7 +4,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -15,7 +14,6 @@ import 'package:api_client/src/model/group_mission_create.dart';
 import 'package:api_client/src/model/group_mission_delete.dart';
 import 'package:api_client/src/model/group_mission_edit.dart';
 import 'package:api_client/src/model/group_mission_read.dart';
-import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/nollning_add_group.dart';
 import 'package:api_client/src/model/nollning_create.dart';
 import 'package:api_client/src/model/nollning_group_read.dart';

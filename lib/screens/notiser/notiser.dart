@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/models/notiser/notis.dart';
-import 'package:fsek_mobile/screens/event/event.dart';
-import 'package:fsek_mobile/services/notiser.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:intl/intl.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

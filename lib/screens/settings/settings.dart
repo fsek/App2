@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/user/user.dart';
 import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/services/game.service.dart';
 import 'package:intl/intl.dart';
-import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/cafe/cafe_shift.dart';
 
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
@@ -189,13 +183,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 //   (bool? change) => user!.display_phone = change,
                 // ),
                 DropdownButton(
-                  iconEnabledColor: Theme.of(context).colorScheme.onBackground,
-                  iconDisabledColor: Theme.of(context).colorScheme.onBackground,
+                  iconEnabledColor: Theme.of(context).colorScheme.onSurface,
+                  iconDisabledColor: Theme.of(context).colorScheme.onSurface,
                   isExpanded: true,
                   hint: Text(t.settingsFoodPrefs,
                       style: TextStyle(
                           fontSize: 16,
-                          color: Theme.of(context).colorScheme.onBackground)),
+                          color: Theme.of(context).colorScheme.onSurface)),
                   onChanged: (_) {},
                   items: {
                     "Vegetarian": t.vegetarian,
@@ -239,7 +233,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
+                            .onSurface
                             .withAlpha(200),
                       ),
                 )
@@ -343,7 +337,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return SizedBox(
       width: double.infinity,
       child: Container(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
         child: Text(displayText),
       ),

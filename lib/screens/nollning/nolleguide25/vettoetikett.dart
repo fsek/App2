@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:fsek_mobile/models/nollning/nolleguide/article.dart';
 
 class VettOEtikettScreenPage extends StatefulWidget {
   @override

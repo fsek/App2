@@ -4,11 +4,9 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
 import 'package:api_client/src/model/permission_remove.dart';

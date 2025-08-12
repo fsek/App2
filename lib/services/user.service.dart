@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:fsek_mobile/environments/environment.dart';
@@ -22,11 +23,6 @@ class UserService extends AbstractService {
   Future<DeviseToken> sendLogin(
       {required String username, required String pass}) async {
     try {
-      // var response = await http.post(
-      //     Uri.parse(Environment.API_URL + "/api/auth/sign_in"),
-      //     headers: AbstractService.headers,
-      //     body: jsonEncode({"email": email, "password": pass}));
-
       final response = await ApiService.apiClient
           .getAuthApi()
           .authAuthCookieLogin(
@@ -37,26 +33,10 @@ class UserService extends AbstractService {
       if (token != null) {
         storage.write(key: "access_token", value: token);
 
-        // ApiService.apiClient.setBearerAuth('http', token);
-
         ApiService.apiClient.setOAuthToken('OAuth2PasswordBearer', token);
       }
 
       return DeviseToken(accessToken: token);
-
-      // var json = jsonDecode(response.body);
-      // if (json["data"] != null) {
-      //   setCurrentUser(User.fromJson(json["data"]));
-      //   return DeviseToken.getFromHeaders(response.headers);
-      // } else {
-      //   var err = json["errors"] ?? json["error"];
-      //   String? msg;
-
-      //   if (err != null) {
-      //     msg = err[0];
-      //   }
-      //   return DeviseToken(error: msg);
-      // }
     } on UnauthorisedException catch (e) {
       return DeviseToken(error: e.toString());
     }
@@ -64,24 +44,11 @@ class UserService extends AbstractService {
 
   Future<void> signOut() async {
     await ApiService.apiClient.getAuthApi().authAuthCookieLogout();
-    // AbstractService.delete("/auth/sign_out");
-    // clearToken();
   }
 
   Future<DeviseToken> validateToken() async {
     try {
-      // AbstractService.mapAuthHeaders();
-
-      // var response = await http.get(
-      //     Uri.parse(Environment.API_URL + "/api/auth/validate_token"),
-      //     headers: AbstractService.headers);
-
-      // var json = jsonDecode(response.body);
-      // if (json["data"] != null) {
-      //   setCurrentUser(User.fromJson(json["data"]));
-      //   return DeviseToken.getFromHeaders(response.headers);
-
-      final token = await storage.read('accessToken');
+      final token = await storage.read('access_token');
 
       if (token == null) {
         return DeviseToken(error: 'No token found in storage');
@@ -99,18 +66,15 @@ class UserService extends AbstractService {
   }
 
   Future<bool> resetPasswordRequest(String email) async {
-    dynamic ret = await http.post(
-        Uri.parse(
-          Environment.API_URL + "/api/auth/password",
-        ),
-        body: '{"email": "' + email + '", "redirect_url": "/home"}',
-        headers: AbstractService.headers);
-    return true;
-  }
+    try {
+      await ApiService.apiClient.getAuthApi().authResetForgotPassword(
+          bodyAuthResetForgotPassword:
+              BodyAuthResetForgotPassword((b) => b..email = email));
+    } catch (e) {
+      throw AppException('Failed to send password reset request: $e');
+    }
 
-  static Future<String> getApiVersion() async {
-    Map json = await AbstractService.get("/account/apiversion");
-    return json["result"];
+    return true;
   }
 
   Future<User> getUser() async {
@@ -132,9 +96,9 @@ class UserService extends AbstractService {
 
   Future<Map> updateUser(User updatedUser) async {
     try {
-      var response = await AbstractService.put(
-          "/users/" + updatedUser.id!.toString(),
-          mapBody: updatedUser.toJson());
+      var response = await ApiService.apiClient
+          .getUsersApi()
+          .usersUpdateSelf(userUpdate: updatedUser.toJson());
       setCurrentUser(updatedUser);
       return response;
     } catch (error) {

@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
-import 'package:fsek_mobile/screens/guild_meeting/candidacy_poster.dart';
-import 'package:fsek_mobile/screens/guild_meeting/other_documents.dart';
-import 'package:fsek_mobile/screens/guild_meeting/about_guild_meeting.dart';
-import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
-import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
 import 'package:fsek_mobile/screens/nollning/map_page.dart';
 import 'package:fsek_mobile/screens/nollning/new_questscreen/quest_home.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/nolleguidescreen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide25/nolleguide_home.dart';
 import 'package:fsek_mobile/screens/nollning/schedule.dart';
 import 'package:fsek_mobile/screens/placeholder/placeholder.dart';
-import 'package:fsek_mobile/screens/nollning/adventure_missions_new.dart';
 
-import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
 import 'package:fsek_mobile/services/preload_asset.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/document.service.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -317,7 +306,7 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          shadowColor: Theme.of(context).colorScheme.onBackground,
+          shadowColor: Theme.of(context).colorScheme.onSurface,
           elevation: 10,
           minimumSize: Size(MediaQuery.of(context).size.width / 2.4, 80)),
     );
