@@ -124,6 +124,7 @@ flutter:
     - assets/data/nollning_25/uppdrag/
     - assets/data/nollning_25/nolleguide/studentlivet/
     - assets/data/nollning_25/nolleguide/studentlivet/fsek/
+    - assets/data/nollning_25/
 
   fonts:
     - family: Brandon Grotesque
