@@ -31,9 +31,9 @@ class UserService extends AbstractService {
       final token = response.data?.accessToken;
 
       if (token != null) {
-        storage.write(key: "access_token", value: token);
-
-        ApiService.apiClient.setOAuthToken('OAuth2PasswordBearer', token);
+        //storage.write(key: "access_token", value: token);
+        ApiService.access_token = token;
+        //ApiService.apiClient.setOAuthToken('OAuth2PasswordBearer', token);
       }
 
       return DeviseToken(accessToken: token);
@@ -44,6 +44,7 @@ class UserService extends AbstractService {
 
   Future<void> signOut() async {
     await ApiService.apiClient.getAuthApi().authAuthCookieLogout();
+    ApiService.access_token = null;
   }
 
   Future<DeviseToken> validateToken() async {
@@ -94,17 +95,17 @@ class UserService extends AbstractService {
     await getUser();
   }
 
-  Future<Map> updateUser(User updatedUser) async {
-    try {
-      var response = await ApiService.apiClient
-          .getUsersApi()
-          .usersUpdateSelf(userUpdate: updatedUser.toJson());
-      setCurrentUser(updatedUser);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // Future<Map> updateUser(User updatedUser) async {
+  //   try {
+  //     var response = await ApiService.apiClient
+  //         .getUsersApi()
+  //         .usersUpdateSelf(userUpdate: updatedUser.toJson());
+  //     setCurrentUser(updatedUser);
+  //     return response;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   //Token Functions
   void storeToken(DeviseToken token) {
@@ -126,25 +127,10 @@ class UserService extends AbstractService {
   // These two functions are seperated so we can see if a token
   // has expired or just dosent exist
   Future<bool> isAuthenticated() async {
-    var value = AbstractService.token;
-    if (value == null) {
-      DeviseToken token = await DeviseToken.getFromStorage(storage);
-      if (token.accessToken == null) {
-        return false;
-      } else {
-        AbstractService.token = token;
-        return true;
-      }
-    }
-    return false;
+    return ApiService.isValid();
   }
 
   Future<bool> isValid() async {
-    if (AbstractService.token == null) return false;
-
-    DateTime? value = AbstractService.token!.expires;
-    if (value != null && value.compareTo(DateTime.now().toUtc()) > 0)
-      return true;
-    return false;
+    return ApiService.isValid();
   }
 }
