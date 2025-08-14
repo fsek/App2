@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -11,6 +12,7 @@ import 'package:api_client/src/api_util.dart';
 import 'package:api_client/src/model/event_signup_create.dart';
 import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_signup_update.dart';
+import 'package:api_client/src/model/http_validation_error.dart';
 
 class EventSignupApi {
 

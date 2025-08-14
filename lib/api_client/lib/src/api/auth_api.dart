@@ -14,8 +14,11 @@ import 'package:api_client/src/model/body_auth_reset_forgot_password.dart';
 import 'package:api_client/src/model/body_auth_reset_reset_password.dart';
 import 'package:api_client/src/model/body_auth_verify_request_token.dart';
 import 'package:api_client/src/model/body_auth_verify_verify.dart';
+import 'package:api_client/src/model/error_model.dart';
+import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_read.dart';
+import 'package:built_value/json_object.dart';
 
 class AuthApi {
 

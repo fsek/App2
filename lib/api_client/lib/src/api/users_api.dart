@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 
 import 'package:api_client/src/api_util.dart';
 import 'package:api_client/src/model/admin_user_read.dart';
+import 'package:api_client/src/model/http_validation_error.dart';
 import 'package:api_client/src/model/post_read.dart';
 import 'package:api_client/src/model/update_user_member.dart';
 import 'package:api_client/src/model/update_user_member_multiple.dart';
@@ -17,6 +18,7 @@ import 'package:api_client/src/model/update_user_posts.dart';
 import 'package:api_client/src/model/user_read.dart';
 import 'package:api_client/src/model/user_update.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 
 class UsersApi {
 
