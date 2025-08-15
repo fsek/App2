@@ -17,7 +17,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
   @override
   Widget build(BuildContext context) {
     var t =  AppLocalizations.of(context)!;
-    String schemaPath = "assets/img/nollning-24/schema/schedulescreen_${t.localeName}.png";
+    String schemaPath = "assets/data/nollning_25/schema/schedulescreen_${t.localeName}.png";
 
     return Scaffold(
       extendBodyBehindAppBar: true,
