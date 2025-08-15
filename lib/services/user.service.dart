@@ -94,7 +94,7 @@ class UserService extends AbstractService {
     await getUser();
   }
 
-/*   Future<Map> updateUser(User updatedUser) async {
+  Future<Map> updateUser(User updatedUser) async {
     try {
       var response = await ApiService.apiClient
           .getUsersApi()
@@ -104,7 +104,7 @@ class UserService extends AbstractService {
     } catch (error) {
       throw error;
     }
-  } */
+  }
 
   //Token Functions
   void storeToken(DeviseToken token) {
