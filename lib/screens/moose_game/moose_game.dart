@@ -58,7 +58,8 @@ class _MooseGamePageState extends State<MooseGamePage>
   late Ground ground2;
   late Sandwich sandwich;
   late double sandwichOffset;
-  String mooseGameToken = String.fromEnvironment('MOOSE_GAME_SECRET');
+  String mooseGameToken =
+      const String.fromEnvironment('MOOSE_GAME_SECRET', defaultValue: '');
 
   bool isDead = false;
 
@@ -251,7 +252,7 @@ class _MooseGamePageState extends State<MooseGamePage>
           .getMooseGameApi()
           .mooseGameUpdateMouseGameScore(
               score: score.toInt(),
-              headers: {'moose-game-token': "sad_secret_key"});
+              headers: {'moose-game-token': mooseGameToken});
     }
   }
 
