@@ -6,8 +6,8 @@ import 'package:fsek_mobile/screens/gallery/image_browser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-
-
+import 'package:http/http.dart' as http;
+import 'package:fsek_mobile/environments/environment.dart';
 
 class AlbumPage extends StatelessWidget {
   const AlbumPage({Key? key, required this.album}) : super(key: key);
@@ -20,7 +20,9 @@ class AlbumPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(t.localeName == "sv" ? album.titleSv : album.titleEn,),
+          title: Text(
+            t.localeName == "sv" ? album.titleSv : album.titleEn,
+          ),
           actions: [],
         ),
         body: Column(
@@ -30,14 +32,18 @@ class AlbumPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: FutureBuilder<List<Widget>>(
-                  future: generateImages2(context),
-                  builder:(context, snapshot) {
-                    if(snapshot.connectionState == ConnectionState.waiting){
+                  future: generateImages(context),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
-                      return Center(child: Text("Error loading images"),);
+                      return Center(
+                        child: Text("Error loading images"),
+                      );
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text("No images available"),);
+                      return Center(
+                        child: Text("No images available"),
+                      );
                     } else {
                       return GridView.count(
                         crossAxisCount: 4,
@@ -47,13 +53,13 @@ class AlbumPage extends StatelessWidget {
                       );
                     }
                   },
-                
                 ),
               ),
             ),
             Container(
               width: double.infinity,
-              decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
+              decoration:
+                  BoxDecoration(color: Theme.of(context).colorScheme.surface),
               child: ExpansionTile(
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -66,26 +72,30 @@ class AlbumPage extends StatelessWidget {
                     width: double.infinity,
                   ),
                   Text(
-                   t.localeName == "sv" ? album.titleSv : album.titleEn,
+                    t.localeName == "sv" ? album.titleSv : album.titleEn,
                     textAlign: TextAlign.start,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    t.localeName == "sv" ? album.descSv : album.descEn),
+                  Text(t.localeName == "sv" ? album.descSv : album.descEn),
                   SizedBox(height: 10),
                   RichText(
                       text: TextSpan(
                           text: t.albumPhotographers,
-                          style: Theme.of(context).textTheme.bodyMedium?.apply(
-                              color: Theme.of(context).primaryColor),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.apply(color: Theme.of(context).primaryColor),
                           children: [
                         TextSpan(
-                            text: album.photographer.isNotEmpty ? 
-                              album.photographer.map((photograper) => "${photograper.user.firstName} ${photograper.user.lastName}").join(", ") :
-                              t.albumNoPhotographers,
+                            text: album.photographer.isNotEmpty
+                                ? album.photographer
+                                    .map((photograper) =>
+                                        "${photograper.user.firstName} ${photograper.user.lastName}")
+                                    .join(", ")
+                                : t.albumNoPhotographers,
                             style: Theme.of(context).textTheme.bodyMedium)
                       ])),
                   SizedBox(
@@ -102,67 +112,45 @@ class AlbumPage extends StatelessWidget {
     return Container();
   }
 
-
-
-  Future<List<Widget>> generateImages2(BuildContext context) async {
+  Future<List<Widget>> generateImages(BuildContext context) async {
     List<Widget> result = [];
 
-    for(int i = 0; i < album.imgs.length; i++){
-      final image = await fetchImage(album.imgs[i].id);
-      Ink ink = Ink.image(
-        image: image,
-        fit: BoxFit.cover,
-        child: InkWell(
-          onTap: () => openImageBrowser(context, i),
-        )
-      );
-      result.add(ink);
-    }
-    return result;
-  }
-
-  Future<ImageProvider<Object>> fetchImage(int id) async {
-  try {
-    final response = await ApiService.apiClient.dio.get(
-      "/img/$id", 
-      options: Options(responseType: ResponseType.bytes));
-
-    return MemoryImage(Uint8List.fromList(response.data!));
-    
-  } catch (e) {
-    print("Error fetching image: $e");
-    return AssetImage("assets/img/f_logo.png");
-  }
-}
-
-
-  List<Widget> generateImages(BuildContext context) {
-    List<Widget> result = [];
     for (int i = 0; i < album.imgs.length; i++) {
+      final image = await _fetchImage(album.imgs[i].id);
       Ink ink = Ink.image(
-          image: AssetImage("assets/img/f_logo.png"),
+          image: image,
           fit: BoxFit.cover,
           child: InkWell(
             onTap: () => openImageBrowser(context, i),
-          )); //default pic
-
-
-      // if (album.images![i].file!.thumb!["url"] != null) {
-      //   ink = Ink.image(
-      //       image: NetworkImage(
-      //           "${Environment.API_URL}${album.images![i].file!.thumb!["url"]}"),
-      //       fit: BoxFit.cover,
-      //       child: InkWell(
-      //         onTap: () => openImageBrowser(context, i),
-      //       ));
-      // }
+          ));
       result.add(ink);
     }
-
     return result;
   }
 
-  void openImageBrowser2(BuildContext context, int imageIndex) {}
+  Future<ImageProvider<Object>> _fetchImage(int id) async {
+    try {
+      final url = "${Environment.API_URL}/img/$id/small";
+      final response = await http.get(Uri.parse(url),
+          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
+
+      if (response.statusCode != 200) {
+        print("HTTP error: ${response.statusCode}");
+        print("Response body: ${String.fromCharCodes(response.bodyBytes)}");
+        return const AssetImage("assets/img/f_logo.png");
+      }
+
+      if (response.bodyBytes.isEmpty) {
+        print("Received empty response");
+        return const AssetImage("assets/img/f_logo.png");
+      }
+
+      return MemoryImage(response.bodyBytes);
+    } catch (e) {
+      print("Error fetching image: $e");
+      return AssetImage("assets/img/f_logo.png");
+    }
+  }
 
   void openImageBrowser(BuildContext context, int imageIndex) {
     Navigator.push(

@@ -67,9 +67,10 @@ class _MooseGamePageState extends State<MooseGamePage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) {
-      setState(() {
-        gameOver();
-      });
+      if (!isDead)
+        setState(() {
+          gameOver();
+        });
     }
   }
 

@@ -5,6 +5,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:fsek_mobile/util/secure_cookie_storage.dart';
+import 'package:fsek_mobile/environments/environment.dart';
 
 class ApiService {
   static final CookieJar cookieJar = PersistCookieJar(
@@ -23,7 +24,8 @@ class ApiService {
     _access_token = token;
   }
 
-  static final ApiClient apiClient = ApiClient(interceptors: [
+  static final ApiClient apiClient =
+      ApiClient(basePathOverride: Environment.API_URL, interceptors: [
     cookieManager,
     OAuthInterceptor(),
     InterceptorsWrapper(
