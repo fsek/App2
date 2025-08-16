@@ -471,7 +471,7 @@ class DocumentApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/documentpatch_document/{document_id}'.replaceAll('{' r'document_id' '}', encodeQueryParameter(_serializers, documentId, const FullType(int)).toString());
+    final _path = r'/document/patch_document/{document_id}'.replaceAll('{' r'document_id' '}', encodeQueryParameter(_serializers, documentId, const FullType(int)).toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{

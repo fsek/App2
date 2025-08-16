@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**eventsGetAllEventSignups**](EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [**eventsGetAllEvents**](EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [**eventsGetEventCsv**](EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
-[**eventsGetEventImage**](EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image | Get Event Image
+[**eventsGetEventImage**](EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image/{size} | Get Event Image
 [**eventsGetEventImageStream**](EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [**eventsGetEventPriorities**](EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [**eventsGetEventTags**](EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
@@ -397,7 +397,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **eventsGetEventImage**
-> JsonObject eventsGetEventImage(eventId)
+> JsonObject eventsGetEventImage(eventId, size)
 
 Get Event Image
 
@@ -413,9 +413,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getEventsApi();
 final int eventId = 56; // int | 
+final String size = size_example; // String | 
 
 try {
-    final response = api.eventsGetEventImage(eventId);
+    final response = api.eventsGetEventImage(eventId, size);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling EventsApi->eventsGetEventImage: $e\n');
@@ -427,6 +428,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **eventId** | **int**|  | 
+ **size** | **String**|  | 
 
 ### Return type
 

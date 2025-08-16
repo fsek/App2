@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**newsDeleteNews**](NewsApi.md#newsdeletenews) | **DELETE** /news/{news_id} | Delete News
 [**newsGetAllNews**](NewsApi.md#newsgetallnews) | **GET** /news/all | Get All News
 [**newsGetNews**](NewsApi.md#newsgetnews) | **GET** /news/{news_id} | Get News
-[**newsGetNewsImage**](NewsApi.md#newsgetnewsimage) | **GET** /news/{news_id}/image | Get News Image
+[**newsGetNewsImage**](NewsApi.md#newsgetnewsimage) | **GET** /news/{news_id}/image/{size} | Get News Image
 [**newsGetNewsImageStream**](NewsApi.md#newsgetnewsimagestream) | **GET** /news/{news_id}/image/stream | Get News Image Stream
 [**newsGetPaginatedNews**](NewsApi.md#newsgetpaginatednews) | **GET** /news/page/{page_nbr} | Get Paginated News
 [**newsGetPinnedNews**](NewsApi.md#newsgetpinnednews) | **GET** /news/pinned/ | Get Pinned News
@@ -241,7 +241,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **newsGetNewsImage**
-> JsonObject newsGetNewsImage(newsId)
+> JsonObject newsGetNewsImage(newsId, size)
 
 Get News Image
 
@@ -251,9 +251,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getNewsApi();
 final int newsId = 56; // int | 
+final String size = size_example; // String | 
 
 try {
-    final response = api.newsGetNewsImage(newsId);
+    final response = api.newsGetNewsImage(newsId, size);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling NewsApi->newsGetNewsImage: $e\n');
@@ -265,6 +266,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **newsId** | **int**|  | 
+ **size** | **String**|  | 
 
 ### Return type
 

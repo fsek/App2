@@ -424,6 +424,7 @@ class NewsApi {
   ///
   /// Parameters:
   /// * [newsId] 
+  /// * [size] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -435,6 +436,7 @@ class NewsApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<JsonObject>> newsGetNewsImage({ 
     required int newsId,
+    required String size,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -442,7 +444,7 @@ class NewsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/news/{news_id}/image'.replaceAll('{' r'news_id' '}', encodeQueryParameter(_serializers, newsId, const FullType(int)).toString());
+    final _path = r'/news/{news_id}/image/{size}'.replaceAll('{' r'news_id' '}', encodeQueryParameter(_serializers, newsId, const FullType(int)).toString()).replaceAll('{' r'size' '}', encodeQueryParameter(_serializers, size, const FullType(String)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{

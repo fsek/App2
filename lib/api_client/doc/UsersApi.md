@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**usersAdminUpdateUser**](UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [**usersGetMe**](UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [**usersGetUser**](UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
-[**usersGetUserImage**](UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
+[**usersGetUserImage**](UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image/{size} | Get User Image
 [**usersGetUserImageStream**](UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [**usersGetUserPosts**](UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
 [**usersPostUserImage**](UsersApi.md#userspostuserimage) | **POST** /users/image | Post User Image
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersGetUserImage**
-> JsonObject usersGetUserImage(userId)
+> JsonObject usersGetUserImage(userId, size)
 
 Get User Image
 
@@ -271,9 +271,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getUsersApi();
 final int userId = 56; // int | 
+final String size = size_example; // String | 
 
 try {
-    final response = api.usersGetUserImage(userId);
+    final response = api.usersGetUserImage(userId, size);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling UsersApi->usersGetUserImage: $e\n');
@@ -285,6 +286,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **int**|  | 
+ **size** | **String**|  | 
 
 ### Return type
 

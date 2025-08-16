@@ -784,6 +784,7 @@ class EventsApi {
   ///
   /// Parameters:
   /// * [eventId] 
+  /// * [size] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -795,6 +796,7 @@ class EventsApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<JsonObject>> eventsGetEventImage({ 
     required int eventId,
+    required String size,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -802,7 +804,7 @@ class EventsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/events/{event_id}/image'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
+    final _path = r'/events/{event_id}/image/{size}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString()).replaceAll('{' r'size' '}', encodeQueryParameter(_serializers, size, const FullType(String)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{

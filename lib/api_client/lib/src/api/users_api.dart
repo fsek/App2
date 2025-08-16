@@ -476,6 +476,7 @@ class UsersApi {
   ///
   /// Parameters:
   /// * [userId] 
+  /// * [size] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -487,6 +488,7 @@ class UsersApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<JsonObject>> usersGetUserImage({ 
     required int userId,
+    required String size,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -494,7 +496,7 @@ class UsersApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/users/{user_id}/image'.replaceAll('{' r'user_id' '}', encodeQueryParameter(_serializers, userId, const FullType(int)).toString());
+    final _path = r'/users/{user_id}/image/{size}'.replaceAll('{' r'user_id' '}', encodeQueryParameter(_serializers, userId, const FullType(int)).toString()).replaceAll('{' r'size' '}', encodeQueryParameter(_serializers, size, const FullType(String)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{

@@ -127,7 +127,7 @@ Class | Method | HTTP request | Description
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentDataById**](doc/DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFile**](doc/DocumentApi.md#documentgetdocumentfile) | **GET** /document/{document_id} | Get Document File
 [*DocumentApi*](doc/DocumentApi.md) | [**documentGetDocumentFileById**](doc/DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
-[*DocumentApi*](doc/DocumentApi.md) | [**documentUpdateDocument**](doc/DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
+[*DocumentApi*](doc/DocumentApi.md) | [**documentUpdateDocument**](doc/DocumentApi.md#documentupdatedocument) | **PATCH** /document/patch_document/{document_id} | Update Document
 [*DocumentApi*](doc/DocumentApi.md) | [**documentUploadDocument**](doc/DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsAddPostToElection**](doc/ElectionsApi.md#electionsaddposttoelection) | **POST** /election/{election_id} | Add Post To Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsCreateElection**](doc/ElectionsApi.md#electionscreateelection) | **POST** /election/ | Create Election
@@ -146,7 +146,7 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
-[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImage**](doc/EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image | Get Event Image
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImage**](doc/EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image/{size} | Get Event Image
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImageStream**](doc/EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
@@ -161,7 +161,7 @@ Class | Method | HTTP request | Description
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsRemoveUserFromGroup**](doc/GroupsApi.md#groupsremoveuserfromgroup) | **DELETE** /groups/remove_user_from_group/{id} | Remove User From Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsUploadGroup**](doc/GroupsApi.md#groupsuploadgroup) | **POST** /groups/ | Upload Group
 [*ImgApi*](doc/ImgApi.md) | [**imgDeleteImage**](doc/ImgApi.md#imgdeleteimage) | **DELETE** /img/{id} | Delete Image
-[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/{img_id} | Get Image
+[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/{img_id}/{size} | Get Image
 [*ImgApi*](doc/ImgApi.md) | [**imgGetImageStream**](doc/ImgApi.md#imggetimagestream) | **GET** /img/stream/{img_id} | Get Image Stream
 [*ImgApi*](doc/ImgApi.md) | [**imgUploadImage**](doc/ImgApi.md#imguploadimage) | **POST** /img/ | Upload Image
 [*MailAliasApi*](doc/MailAliasApi.md) | [**mailAliasAddMember**](doc/MailAliasApi.md#mailaliasaddmember) | **POST** /mail-alias/alias/{alias_email}/add_member | Add Member
@@ -177,7 +177,7 @@ Class | Method | HTTP request | Description
 [*NewsApi*](doc/NewsApi.md) | [**newsDeleteNews**](doc/NewsApi.md#newsdeletenews) | **DELETE** /news/{news_id} | Delete News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetAllNews**](doc/NewsApi.md#newsgetallnews) | **GET** /news/all | Get All News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetNews**](doc/NewsApi.md#newsgetnews) | **GET** /news/{news_id} | Get News
-[*NewsApi*](doc/NewsApi.md) | [**newsGetNewsImage**](doc/NewsApi.md#newsgetnewsimage) | **GET** /news/{news_id}/image | Get News Image
+[*NewsApi*](doc/NewsApi.md) | [**newsGetNewsImage**](doc/NewsApi.md#newsgetnewsimage) | **GET** /news/{news_id}/image/{size} | Get News Image
 [*NewsApi*](doc/NewsApi.md) | [**newsGetNewsImageStream**](doc/NewsApi.md#newsgetnewsimagestream) | **GET** /news/{news_id}/image/stream | Get News Image Stream
 [*NewsApi*](doc/NewsApi.md) | [**newsGetPaginatedNews**](doc/NewsApi.md#newsgetpaginatednews) | **GET** /news/page/{page_nbr} | Get Paginated News
 [*NewsApi*](doc/NewsApi.md) | [**newsGetPinnedNews**](doc/NewsApi.md#newsgetpinnednews) | **GET** /news/pinned/ | Get Pinned News
@@ -212,7 +212,7 @@ Class | Method | HTTP request | Description
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllPosts**](doc/PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
 [*PostsApi*](doc/PostsApi.md) | [**postsGetAllUsersWithPost**](doc/PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPost**](doc/PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
-[*PostsApi*](doc/PostsApi.md) | [**postsGetPostImage**](doc/PostsApi.md#postsgetpostimage) | **GET** /posts/{post_id}/image | Get Post Image
+[*PostsApi*](doc/PostsApi.md) | [**postsGetPostImage**](doc/PostsApi.md#postsgetpostimage) | **GET** /posts/{post_id}/image/{size} | Get Post Image
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPostImageStream**](doc/PostsApi.md#postsgetpostimagestream) | **GET** /posts/{post_id}/image/stream | Get Post Image Stream
 [*PostsApi*](doc/PostsApi.md) | [**postsPostPostImage**](doc/PostsApi.md#postspostpostimage) | **POST** /posts/{post_id}/image | Post Post Image
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
@@ -246,7 +246,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersAdminUpdateUser**](doc/UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
-[*UsersApi*](doc/UsersApi.md) | [**usersGetUserImage**](doc/UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image | Get User Image
+[*UsersApi*](doc/UsersApi.md) | [**usersGetUserImage**](doc/UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image/{size} | Get User Image
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserImageStream**](doc/UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserPosts**](doc/UsersApi.md#usersgetuserposts) | **GET** /users/posts/{user_id} | Get User Posts
 [*UsersApi*](doc/UsersApi.md) | [**usersPostUserImage**](doc/UsersApi.md#userspostuserimage) | **POST** /users/image | Post User Image

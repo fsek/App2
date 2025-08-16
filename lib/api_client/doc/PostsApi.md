@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**postsGetAllPosts**](PostsApi.md#postsgetallposts) | **GET** /posts/ | Get All Posts
 [**postsGetAllUsersWithPost**](PostsApi.md#postsgetalluserswithpost) | **GET** /posts/users/{post_id} | Get All Users With Post
 [**postsGetPost**](PostsApi.md#postsgetpost) | **GET** /posts/{post_id} | Get Post
-[**postsGetPostImage**](PostsApi.md#postsgetpostimage) | **GET** /posts/{post_id}/image | Get Post Image
+[**postsGetPostImage**](PostsApi.md#postsgetpostimage) | **GET** /posts/{post_id}/image/{size} | Get Post Image
 [**postsGetPostImageStream**](PostsApi.md#postsgetpostimagestream) | **GET** /posts/{post_id}/image/stream | Get Post Image Stream
 [**postsPostPostImage**](PostsApi.md#postspostpostimage) | **POST** /posts/{post_id}/image | Post Post Image
 [**postsUpdatePost**](PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **postsGetPostImage**
-> JsonObject postsGetPostImage(postId)
+> JsonObject postsGetPostImage(postId, size)
 
 Get Post Image
 
@@ -299,9 +299,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getPostsApi();
 final int postId = 56; // int | 
+final String size = size_example; // String | 
 
 try {
-    final response = api.postsGetPostImage(postId);
+    final response = api.postsGetPostImage(postId, size);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling PostsApi->postsGetPostImage: $e\n');
@@ -313,6 +314,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **postId** | **int**|  | 
+ **size** | **String**|  | 
 
 ### Return type
 

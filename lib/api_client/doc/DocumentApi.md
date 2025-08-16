@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**documentGetDocumentDataById**](DocumentApi.md#documentgetdocumentdatabyid) | **GET** /document/document_data/{document_id} | Get Document Data By Id
 [**documentGetDocumentFile**](DocumentApi.md#documentgetdocumentfile) | **GET** /document/{document_id} | Get Document File
 [**documentGetDocumentFileById**](DocumentApi.md#documentgetdocumentfilebyid) | **GET** /document/document_file/{document_id} | Get Document File By Id
-[**documentUpdateDocument**](DocumentApi.md#documentupdatedocument) | **PATCH** /documentpatch_document/{document_id} | Update Document
+[**documentUpdateDocument**](DocumentApi.md#documentupdatedocument) | **PATCH** /document/patch_document/{document_id} | Update Document
 [**documentUploadDocument**](DocumentApi.md#documentuploaddocument) | **POST** /document/ | Upload Document
 
 
