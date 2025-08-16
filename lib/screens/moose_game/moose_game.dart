@@ -58,6 +58,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   late Ground ground2;
   late Sandwich sandwich;
   late double sandwichOffset;
+  String mooseGameToken = String.fromEnvironment('MOOSE_GAME_SECRET');
 
   bool isDead = false;
 
@@ -75,11 +76,11 @@ class _MooseGamePageState extends State<MooseGamePage>
   void initState() {
     super.initState();
 
-
     ApiService.apiClient.getUsersApi().usersGetMe().then((user) => {
-      user.data != null ? highscore = user.data!.mooseGameScore.toDouble() : highscore = 0
-
-    });
+          user.data != null
+              ? highscore = user.data!.mooseGameScore.toDouble()
+              : highscore = 0
+        });
 
     WidgetsBinding.instance.addObserver(this);
 
@@ -230,22 +231,50 @@ class _MooseGamePageState extends State<MooseGamePage>
     });
   }
 
-  void gameOver() {
-    //print(locator<ThemeService>().theme.brightness.toString());
+  void gameOver() async {
     gameAnimController.stop();
     soundtrackPlayer.stop();
     soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
     soundtrackPlayer.play(AssetSource('audio/gameoverfart.mp3'));
-    setState(() async {
+
+    setState(() {
       sandwichBonusPopupFadeout = 0;
-      if (score > highscore) {
-        highscore = score;
-        newHighscore = true;
-        await ApiService.apiClient.getMooseGameApi().mooseGameUpdateMouseGameScore(score: score.toInt());
-      }
       isDead = true;
     });
+
+    if (score > highscore) {
+      highscore = score;
+      setState(() {
+        newHighscore = true;
+      });
+      await ApiService.apiClient
+          .getMooseGameApi()
+          .mooseGameUpdateMouseGameScore(
+              score: score.toInt(),
+              headers: {'moose-game-token': "sad_secret_key"});
+    }
   }
+
+  // void gameOver() {
+  //   //print(locator<ThemeService>().theme.brightness.toString());
+  //   gameAnimController.stop();
+  //   soundtrackPlayer.stop();
+  //   soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
+  //   soundtrackPlayer.play(AssetSource('audio/gameoverfart.mp3'));
+  //   setState(() async {
+  //     sandwichBonusPopupFadeout = 0;
+  //     if (score > highscore) {
+  //       highscore = score;
+  //       newHighscore = true;
+  //       await ApiService.apiClient
+  //           .getMooseGameApi()
+  //           .mooseGameUpdateMouseGameScore(score: score.toInt(), headers: {
+  //         'moose-game-token': "sad_secret_key"
+  //       }); // TODO change sad_secret_key to mooseGameToken
+  //     }
+  //     isDead = true;
+  //   });
+  // }
 
   Rect getGameObjectCameraRect(
       Size screenSize, GameObject gameObject, double deflation) {
@@ -347,7 +376,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     // "Try again" text
     if (isDead) {
       children.add(Positioned.fill(
-          top: 200,
+          top: 0,
           child: Align(
               alignment: Alignment.center,
               child: Text(
