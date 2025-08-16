@@ -30,13 +30,22 @@ class ApiService {
       onError: (error, handler) async {
         if ((error.response?.statusCode == 403 ||
                 error.response?.statusCode == 401) &&
-            !error.requestOptions.path.contains("auth")) {
-          await ApiService.isValid();
-          try {
-            var response = await apiClient.dio.fetch(error.requestOptions);
-            handler.resolve(response);
-          } on DioException catch (e) {
-            handler.next(e);
+            !error.requestOptions.path.contains("auth") &&
+            error.requestOptions.extra["noretry"] != true) {
+          if (await ApiService.isValid()) {
+            try {
+              var requestOptions = error.requestOptions;
+              requestOptions.extra["noretry"] = true;
+              var response = await apiClient.dio.fetch(requestOptions);
+              handler.resolve(response);
+            } on DioException catch (e) {
+              print(e);
+              handler.reject(e);
+            } catch (e) {
+              handler.reject(error);
+            }
+          } else {
+            handler.next(error);
           }
         } else {
           handler.next(error);
@@ -49,8 +58,7 @@ class ApiService {
       try {
         var response =
             await ApiService.apiClient.getAuthApi().authAuthCookieRefresh();
-        if (response.data == null) {
-          print("logged out");
+        if (response.data == null || response.data?.accessToken == null) {
           return false;
         }
         ApiService.access_token = response.data!.accessToken;
@@ -64,9 +72,7 @@ class ApiService {
       var data = base64.normalize(ApiService.access_token!.split(".")[1]);
       token = json.decode(utf8.decode(base64.decode(data)));
     } catch (e) {}
-    print(token);
     DateTime? value = DateTime.fromMillisecondsSinceEpoch(token["exp"] * 1000);
-    print(value);
     if (value.compareTo(DateTime.now().toUtc()) > 0)
       return true;
     else {

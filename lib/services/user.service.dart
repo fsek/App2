@@ -34,6 +34,8 @@ class UserService extends AbstractService {
         //storage.write(key: "access_token", value: token);
         ApiService.access_token = token;
         //ApiService.apiClient.setOAuthToken('OAuth2PasswordBearer', token);
+      } else {
+        return DeviseToken(error: 'No token acquired.');
       }
 
       return DeviseToken(accessToken: token);
