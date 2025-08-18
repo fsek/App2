@@ -105,6 +105,7 @@ class _FsekPageState extends State<FsekPage> {
           scrolledUnderElevation: 0.0,
         ),
         body: InteractiveViewer(
+          panEnabled: true,
             child: SingleChildScrollView(
                 child: Column(children: [
           Container(

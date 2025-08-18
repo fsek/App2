@@ -65,6 +65,7 @@ class _LundPageState extends State<LundPage> {
           scrolledUnderElevation: 0.0,
         ),
         body: InteractiveViewer(
+          panEnabled: true,
             child: SingleChildScrollView(
           child: Column(
             children: [

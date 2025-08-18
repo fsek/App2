@@ -62,6 +62,7 @@ class _KarenPageState extends State<KarenPage> {
           scrolledUnderElevation: 0.0,
         ),
         body: InteractiveViewer(
+          panEnabled: true,
           child: SingleChildScrollView(
               child: Column(
             children: [

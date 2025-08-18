@@ -42,7 +42,8 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
 
   Future<Uint8List> fetchImageBytes(int id) async {
     try {
-      final url = "${Environment.API_URL}/img/images/$id/original";
+      // final url = "${Environment.API_URL}/img/images/$id/original";
+      final url = "https://backend.fsektionen.se/img/images/${id}/original";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 
@@ -180,10 +181,19 @@ class PageViewBuilder extends StatefulWidget {
 
 class _PageViewBuilderState extends State<PageViewBuilder> {
   bool _pagingEnabled = true;
+  late List<Future<ImageProvider<Object>>?> _imageFutures;
+
+  @override
+  void initState() {
+    super.initState();
+    _imageFutures = List.filled(widget.imgIds.length, null);
+  }
+  
 
   Future<ImageProvider<Object>> _fetchImage(int id) async {
     try {
-      final url = "${Environment.API_URL}/img/images/$id/large";
+      // final url = "${Environment.API_URL}/img/images/$id/large";
+      final url = "https://backend.fsektionen.se/img/images/${id}/large";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 
@@ -217,8 +227,10 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
         widget.callback(newIndex);
       },
       itemBuilder: (context, index) {
+        final imageFuture = _imageFutures[index] ??= _fetchImage(widget.imgIds[index]);
+
         final image = FutureBuilder<ImageProvider<Object>>(
-          future: _fetchImage(widget.imgIds[index]),
+          future: imageFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return LoadingWidget();

@@ -205,20 +205,20 @@ class _GalleryPageState extends State<GalleryPage> {
                   SizedBox(
                     height: 3,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(Icons.image,
-                        color: Theme.of(context).colorScheme.primary),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    // Text(
-                    //   elem.imgs.length.toString(),
-                    //   style: Theme.of(context)
-                    //       .textTheme
-                    //       .bodyMedium
-                    //       ?.apply(color: Colors.white),
-                    // ),
-                  ]),
+                  // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  //   Icon(Icons.image,
+                  //       color: Theme.of(context).colorScheme.primary),
+                  //   SizedBox(
+                  //     width: 2,
+                  //   ),
+                  //   // Text(
+                  //   //   elem.imgs.length.toString(),
+                  //   //   style: Theme.of(context)
+                  //   //       .textTheme
+                  //   //       .bodyMedium
+                  //   //       ?.apply(color: Colors.white),
+                  //   // ),
+                  // ]),
                 ],
               ),
             )
@@ -250,7 +250,8 @@ class _GalleryPageState extends State<GalleryPage> {
         return const AssetImage("assets/img/f_logo.png");
       }
 
-      final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
+      // final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
+      final url = "https://backend.fsektionen.se/img/images/${imgs.data!.first}/small";
 
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});

@@ -52,6 +52,7 @@ class _VettOEtikettScreenState extends State<VettOEtikettScreenPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(
+        panEnabled: true,
           child: Container(
         height: screenHeight,
         width: screenWidth,

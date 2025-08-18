@@ -175,7 +175,8 @@ class _AlbumPageState extends State<AlbumPage> {
     }
 
     try {
-      final url = "${Environment.API_URL}/img/images/$id/small";
+      // final url = "${Environment.API_URL}/img/images/$id/small";
+      final url = "https://backend.fsektionen.se/img/images/$id/small";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 

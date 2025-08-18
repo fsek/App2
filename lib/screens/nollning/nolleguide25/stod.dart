@@ -60,6 +60,7 @@ class _StodScreenState extends State<StodScreen> {
           scrolledUnderElevation: 0.0,
         ),
         body: InteractiveViewer(
+          panEnabled: true,
             child: Container(
                 height: screenHeight,
                 width: screenWidth,
