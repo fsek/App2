@@ -17,6 +17,7 @@ part 'user_in_event_read.g.dart';
 /// * [lastName] 
 /// * [standardFoodPreferences] 
 /// * [otherFoodPreferences] 
+/// * [email] 
 @BuiltValue()
 abstract class UserInEventRead implements Built<UserInEventRead, UserInEventReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -33,6 +34,9 @@ abstract class UserInEventRead implements Built<UserInEventRead, UserInEventRead
 
   @BuiltValueField(wireName: r'other_food_preferences')
   String? get otherFoodPreferences;
+
+  @BuiltValueField(wireName: r'email')
+  String get email;
 
   UserInEventRead._();
 
@@ -81,6 +85,11 @@ class _$UserInEventReadSerializer implements PrimitiveSerializer<UserInEventRead
     yield object.otherFoodPreferences == null ? null : serializers.serialize(
       object.otherFoodPreferences,
       specifiedType: const FullType.nullable(String),
+    );
+    yield r'email';
+    yield serializers.serialize(
+      object.email,
+      specifiedType: const FullType(String),
     );
   }
 
@@ -141,6 +150,13 @@ class _$UserInEventReadSerializer implements PrimitiveSerializer<UserInEventRead
           ) as String?;
           if (valueDes == null) continue;
           result.otherFoodPreferences = valueDes;
+          break;
+        case r'email':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.email = valueDes;
           break;
         default:
           unhandled.add(key);
