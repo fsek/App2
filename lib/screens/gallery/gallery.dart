@@ -211,29 +211,20 @@ class _GalleryPageState extends State<GalleryPage> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text(
-                      elem.imgs.length.toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.apply(color: Colors.white),
-                    ),
+                    // Text(
+                    //   elem.imgs.length.toString(),
+                    //   style: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyMedium
+                    //       ?.apply(color: Colors.white),
+                    // ),
                   ]),
                 ],
               ),
             )
           ]),
         ),
-        elem.imgs.isNotEmpty
-            ? buildThumbnailImage(elem)
-            : Ink.image(
-                image: AssetImage("assets/img/f_logo.png"),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-                child: InkWell(
-                  onTap: () => goToAlbum(elem.id),
-                ),
-              )
+            buildThumbnailImage(elem)
       ]));
     }
     return result;
@@ -251,9 +242,15 @@ class _GalleryPageState extends State<GalleryPage> {
     });
   }
 
-  Future<ImageProvider<Object>> _fetchCoverImage(int id) async {
+  Future<ImageProvider<Object>> _fetchCoverImage(int albumId) async {
     try {
-      final url = "${Environment.API_URL}/img/$id/small";
+      final imgs = await ApiService.apiClient.getImgApi().imgGetAlbumImages(albumId: albumId);
+
+      if(imgs.data!.isEmpty) {
+        return const AssetImage("assets/img/f_logo.png");
+      }
+
+      final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
 
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
@@ -290,7 +287,7 @@ class _GalleryPageState extends State<GalleryPage> {
 
   Widget buildThumbnailImage(AlbumRead album) {
     return FutureBuilder<ImageProvider>(
-      future: _fetchCoverImage(album.imgs.first.id),
+      future: _fetchCoverImage(album.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {

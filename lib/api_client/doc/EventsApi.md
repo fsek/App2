@@ -11,7 +11,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**eventsAddTagToEvent**](EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
 [**eventsConfirmEventUsers**](EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
+[**eventsConfirmPlaces**](EventsApi.md#eventsconfirmplaces) | **PATCH** /events/confirmed/{event_id} | Confirm Places
 [**eventsCreateEvent**](EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
+[**eventsCreateEventSignupList**](EventsApi.md#eventscreateeventsignuplist) | **GET** /events/event-signups/{event_id} | Create Event Signup List
 [**eventsEventRemove**](EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [**eventsEventUpdate**](EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [**eventsGetAllEventSignups**](EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
@@ -21,9 +23,9 @@ Method | HTTP request | Description
 [**eventsGetEventImageStream**](EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [**eventsGetEventPriorities**](EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [**eventsGetEventTags**](EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
-[**eventsGetRandomEventSignup**](EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
 [**eventsGetSingleEvent**](EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
 [**eventsPostEventImage**](EventsApi.md#eventsposteventimage) | **POST** /events/{event_id}/image | Post Event Image
+[**eventsUnconfirmEventUsers**](EventsApi.md#eventsunconfirmeventusers) | **PATCH** /events/event-unconfirm-event-users/{event_id} | Unconfirm Event Users
 
 
 # **eventsAddTagToEvent**
@@ -74,7 +76,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **eventsConfirmEventUsers**
-> EventRead eventsConfirmEventUsers(eventId, userRead)
+> EventRead eventsConfirmEventUsers(eventId, requestBody)
 
 Confirm Event Users
 
@@ -90,10 +92,10 @@ import 'package:api_client/api.dart';
 
 final api = ApiClient().getEventsApi();
 final int eventId = 56; // int | 
-final BuiltList<UserRead> userRead = ; // BuiltList<UserRead> | 
+final BuiltList<int> requestBody = ; // BuiltList<int> | 
 
 try {
-    final response = api.eventsConfirmEventUsers(eventId, userRead);
+    final response = api.eventsConfirmEventUsers(eventId, requestBody);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling EventsApi->eventsConfirmEventUsers: $e\n');
@@ -105,7 +107,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **eventId** | **int**|  | 
- **userRead** | [**BuiltList&lt;UserRead&gt;**](UserRead.md)|  | 
+ **requestBody** | [**BuiltList&lt;int&gt;**](int.md)|  | 
 
 ### Return type
 
@@ -118,6 +120,47 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventsConfirmPlaces**
+> EventRead eventsConfirmPlaces(eventId)
+
+Confirm Places
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+
+final api = ApiClient().getEventsApi();
+final int eventId = 56; // int | 
+
+try {
+    final response = api.eventsConfirmPlaces(eventId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling EventsApi->eventsConfirmPlaces: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eventId** | **int**|  | 
+
+### Return type
+
+[**EventRead**](EventRead.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -165,6 +208,53 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventsCreateEventSignupList**
+> BuiltList<EventSignupRead> eventsCreateEventSignupList(eventId)
+
+Create Event Signup List
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getEventsApi();
+final int eventId = 56; // int | 
+
+try {
+    final response = api.eventsCreateEventSignupList(eventId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling EventsApi->eventsCreateEventSignupList: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eventId** | **int**|  | 
+
+### Return type
+
+[**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -266,7 +356,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **eventsGetAllEventSignups**
-> BuiltList<UserRead> eventsGetAllEventSignups(eventId)
+> BuiltList<EventSignupRead> eventsGetAllEventSignups(eventId)
 
 Get All Event Signups
 
@@ -299,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BuiltList&lt;UserRead&gt;**](UserRead.md)
+[**BuiltList&lt;EventSignupRead&gt;**](EventSignupRead.md)
 
 ### Authorization
 
@@ -570,53 +660,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **eventsGetRandomEventSignup**
-> BuiltList<UserRead> eventsGetRandomEventSignup(eventId)
-
-Get Random Event Signup
-
-### Example
-```dart
-import 'package:api_client/api.dart';
-// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
-//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
-// TODO Configure API key authorization: APIKeyCookie
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
-
-final api = ApiClient().getEventsApi();
-final int eventId = 56; // int | 
-
-try {
-    final response = api.eventsGetRandomEventSignup(eventId);
-    print(response);
-} catch on DioException (e) {
-    print('Exception when calling EventsApi->eventsGetRandomEventSignup: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **eventId** | **int**|  | 
-
-### Return type
-
-[**BuiltList&lt;UserRead&gt;**](UserRead.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **eventsGetSingleEvent**
 > EventRead eventsGetSingleEvent(eventId)
 
@@ -703,6 +746,55 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventsUnconfirmEventUsers**
+> EventRead eventsUnconfirmEventUsers(eventId, requestBody)
+
+Unconfirm Event Users
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getEventsApi();
+final int eventId = 56; // int | 
+final BuiltList<int> requestBody = ; // BuiltList<int> | 
+
+try {
+    final response = api.eventsUnconfirmEventUsers(eventId, requestBody);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling EventsApi->eventsUnconfirmEventUsers: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eventId** | **int**|  | 
+ **requestBody** | [**BuiltList&lt;int&gt;**](int.md)|  | 
+
+### Return type
+
+[**EventRead**](EventRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

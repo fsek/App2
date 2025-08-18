@@ -12,10 +12,10 @@ import 'package:api_client/src/api_util.dart';
 import 'package:api_client/src/model/add_event_tag.dart';
 import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
+import 'package:api_client/src/model/event_signup_read.dart';
 import 'package:api_client/src/model/event_tag_read.dart';
 import 'package:api_client/src/model/event_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
-import 'package:api_client/src/model/user_read.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
 
@@ -64,7 +64,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -137,7 +137,7 @@ class EventsApi {
   ///
   /// Parameters:
   /// * [eventId] 
-  /// * [userRead] 
+  /// * [requestBody] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -149,7 +149,7 @@ class EventsApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<EventRead>> eventsConfirmEventUsers({ 
     required int eventId,
-    required BuiltList<UserRead> userRead,
+    required BuiltList<int> requestBody,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -171,7 +171,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -184,8 +184,8 @@ class EventsApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(BuiltList, [FullType(UserRead)]);
-      _bodyData = _serializers.serialize(userRead, specifiedType: _type);
+      const _type = FullType(BuiltList, [FullType(int)]);
+      _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioException(
@@ -202,6 +202,81 @@ class EventsApi {
     final _response = await _dio.request<Object>(
       _path,
       data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    EventRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(EventRead),
+      ) as EventRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<EventRead>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Confirm Places
+  /// 
+  ///
+  /// Parameters:
+  /// * [eventId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [EventRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<EventRead>> eventsConfirmPlaces({ 
+    required int eventId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/events/confirmed/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'PATCH',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
       options: _options,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
@@ -276,7 +351,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -344,6 +419,91 @@ class EventsApi {
     );
   }
 
+  /// Create Event Signup List
+  /// 
+  ///
+  /// Parameters:
+  /// * [eventId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [BuiltList<EventSignupRead>] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<BuiltList<EventSignupRead>>> eventsCreateEventSignupList({ 
+    required int eventId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/events/event-signups/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_stage_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    BuiltList<EventSignupRead>? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(BuiltList, [FullType(EventSignupRead)]),
+      ) as BuiltList<EventSignupRead>;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<BuiltList<EventSignupRead>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
   /// Event Remove
   /// 
   ///
@@ -381,7 +541,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -468,7 +628,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -548,9 +708,9 @@ class EventsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<UserRead>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<EventSignupRead>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<UserRead>>> eventsGetAllEventSignups({ 
+  Future<Response<BuiltList<EventSignupRead>>> eventsGetAllEventSignups({ 
     required int eventId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -573,7 +733,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -590,14 +750,14 @@ class EventsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltList<UserRead>? _responseData;
+    BuiltList<EventSignupRead>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(UserRead)]),
-      ) as BuiltList<UserRead>;
+        specifiedType: const FullType(BuiltList, [FullType(EventSignupRead)]),
+      ) as BuiltList<EventSignupRead>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -609,7 +769,7 @@ class EventsApi {
       );
     }
 
-    return Response<BuiltList<UserRead>>(
+    return Response<BuiltList<EventSignupRead>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -731,7 +891,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -818,7 +978,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -903,7 +1063,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -1099,91 +1259,6 @@ class EventsApi {
     );
   }
 
-  /// Get Random Event Signup
-  /// 
-  ///
-  /// Parameters:
-  /// * [eventId] 
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<UserRead>] as data
-  /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<UserRead>>> eventsGetRandomEventSignup({ 
-    required int eventId,
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/events/event-signups/random/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
-    final _options = Options(
-      method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[
-          {
-            'type': 'oauth2',
-            'name': 'OAuth2PasswordBearer',
-          },{
-            'type': 'apiKey',
-            'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
-            'where': '',
-          },
-        ],
-        ...?extra,
-      },
-      validateStatus: validateStatus,
-    );
-
-    final _response = await _dio.request<Object>(
-      _path,
-      options: _options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    BuiltList<UserRead>? _responseData;
-
-    try {
-      final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(UserRead)]),
-      ) as BuiltList<UserRead>;
-
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return Response<BuiltList<UserRead>>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
   /// Get Single Event
   /// 
   ///
@@ -1298,7 +1373,7 @@ class EventsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -1356,6 +1431,113 @@ class EventsApi {
     }
 
     return Response<JsonObject>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Unconfirm Event Users
+  /// 
+  ///
+  /// Parameters:
+  /// * [eventId] 
+  /// * [requestBody] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [EventRead] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<EventRead>> eventsUnconfirmEventUsers({ 
+    required int eventId,
+    required BuiltList<int> requestBody,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/events/event-unconfirm-event-users/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'PATCH',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_stage_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(BuiltList, [FullType(int)]);
+      _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
+
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    EventRead? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(EventRead),
+      ) as EventRead;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<EventRead>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

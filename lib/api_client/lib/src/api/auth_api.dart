@@ -174,7 +174,7 @@ class AuthApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -257,7 +257,7 @@ class AuthApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -340,7 +340,7 @@ class AuthApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -437,7 +437,7 @@ class AuthApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -561,7 +561,7 @@ class AuthApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],

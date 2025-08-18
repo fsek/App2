@@ -12,11 +12,12 @@ import 'package:fsek_mobile/environments/environment.dart';
 import 'package:http/http.dart' as http;
 
 class ImageBrowserPage extends StatefulWidget {
-  const ImageBrowserPage({Key? key, required this.album, required this.initial})
+  const ImageBrowserPage({Key? key, required this.album, required this.initial, required this.imgIds})
       : super(key: key);
 
   final AlbumRead album;
   final int initial;
+  final List<int> imgIds;
 
   @override
   State<ImageBrowserPage> createState() => _ImageBrowserPageState();
@@ -40,13 +41,21 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
   }
 
   Future<Uint8List> fetchImageBytes(int id) async {
-    final response = await ApiService.apiClient.dio.get("/img/stream/$id",
-        options: Options(
-            responseType: ResponseType.bytes,
-            headers: {"Authorization": "Bearer ${ApiService.access_token}"}));
+    try {
+      final url = "${Environment.API_URL}/img/images/$id/original";
+      final response = await http.get(Uri.parse(url),
+          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 
-    return response.data;
+      if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
+      throw Exception("Failed to load image: HTTP ${response.statusCode}");
+    }
+
+    return response.bodyBytes;
+  } catch (e) {
+    print("Error fetching image: $e");
+    throw Exception("Image fetch failed");
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +88,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     onPressed: () async {
                       try {
                         final imageBytes =
-                            await fetchImageBytes(widget.album.imgs[index].id);
+                            await fetchImageBytes(widget.imgIds[index]);
                         await FlutterImageGallerySaver.saveImage(imageBytes);
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
@@ -99,7 +108,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                 onPressed: () async {
                   try {
                     final imageBytes =
-                        await fetchImageBytes(widget.album.imgs[index].id);
+                        await fetchImageBytes(widget.imgIds[index]);
                     await FlutterImageGallerySaver.saveImage(imageBytes);
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                         content: Text(
@@ -135,6 +144,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
             child: PageViewBuilder(
           initial: widget.initial,
           album: widget.album,
+          imgIds: widget.imgIds,
           callback: indexUpdate,
           pageController: new PageController(initialPage: widget.initial),
         )));
@@ -148,6 +158,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
 class PageViewBuilder extends StatefulWidget {
   final AlbumRead album;
   final int initial;
+  final List<int> imgIds;
   // A function that sets the index in the main widget is passed down the widget-tree.
   // This weird passing-up-and-down of things isn't optimal, but was written to just
   // easily slot into the current image_browser page.
@@ -156,6 +167,7 @@ class PageViewBuilder extends StatefulWidget {
 
   const PageViewBuilder(
       {Key? key,
+      required this.imgIds,
       required this.album,
       required this.initial,
       required this.callback,
@@ -171,7 +183,7 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
 
   Future<ImageProvider<Object>> _fetchImage(int id) async {
     try {
-      final url = "${Environment.API_URL}/img/$id/large";
+      final url = "${Environment.API_URL}/img/images/$id/large";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 
@@ -199,14 +211,14 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
       physics: _pagingEnabled
           ? const PageScrollPhysics()
           : const NeverScrollableScrollPhysics(),
-      itemCount: widget.album.imgs.length,
+      itemCount: widget.imgIds.length,
       controller: widget.pageController,
       onPageChanged: (int newIndex) {
         widget.callback(newIndex);
       },
       itemBuilder: (context, index) {
         final image = FutureBuilder<ImageProvider<Object>>(
-          future: _fetchImage(widget.album.imgs[index].id),
+          future: _fetchImage(widget.imgIds[index]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return LoadingWidget();
@@ -221,6 +233,7 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
           },
         );
         return ImageContainer(
+          imgIds: widget.imgIds,
           image: image,
           album: widget.album,
           index: index,
@@ -239,6 +252,7 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
 class ImageContainer extends StatefulWidget {
   final AlbumRead album;
   final int index;
+  final List<int> imgIds;
   final Widget image;
   final double minScale;
   final double maxScale;
@@ -246,6 +260,7 @@ class ImageContainer extends StatefulWidget {
 
   const ImageContainer({
     Key? key,
+    required this.imgIds,
     required this.image,
     this.minScale = 1.0,
     this.maxScale = 5.0,
@@ -278,7 +293,7 @@ class _ImageContainerState extends State<ImageContainer> {
             widget.image,
             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
             Text(
-              "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.album.imgs.length}",
+              "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.imgIds.length}",
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ]),

@@ -28,6 +28,7 @@ class _EventPageState extends State<EventPage> {
   String? drinkPackageAnswer;
   GroupRead? defaultGroup;
   EventSignupRead? eventSignup;
+  List<String>? priorites = [];
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
@@ -92,11 +93,14 @@ class _EventPageState extends State<EventPage> {
         }
       }
 
+      final prioritesResponse = await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
+
       setState(() {
         this.event = event;
         this.user = user;
         this.eventSignup = eventSignup;
         this.drinkPackageAnswer = drinkPackageAlcohol;
+        this.priorites = prioritesResponse.data!.toList();
         if (user.groups.isNotEmpty) {
           this.defaultGroup = user.groups.first;
           this.group = defaultGroup;
@@ -131,20 +135,20 @@ class _EventPageState extends State<EventPage> {
     if(event.alcoholEventType == "Alcohol-Served") {
       return Row(children: [
         Icon(Icons.wine_bar_rounded),
-        Text(t.eventAlcoholServed)]);
+        Text("  " + t.eventAlcoholServed)]);
     } 
 
     if(event.isNollningEvent && event.alcoholEventType == "Alcohol"){
       return Row(children: [
         Icon(Icons.local_drink_rounded),
-        Text(t.eventAlcohol)
+        Text("  " + t.eventAlcoholMayAppear)
       ]);
     }
 
     if(event.isNollningEvent && event.alcoholEventType == "None") {
       return Row(children: [
         Icon(Icons.no_drinks_rounded),
-        Text(t.eventAlcoholFree)
+        Text("  " + t.eventAlcoholFree)
       ]);
     }
 
@@ -334,7 +338,7 @@ class _EventPageState extends State<EventPage> {
                     ),
                   ),
                 ),
-                // signupInfoWidget(),
+                signupInfoWidget(),
               ],
             ),
           ),
@@ -402,17 +406,13 @@ class _EventPageState extends State<EventPage> {
               });
             },
             items: [
-              // DropdownMenuItem<String?>(
-              //   value: ,
-              //   child: Text(t.eventOther),
-              // ),
               if (event!.priorities.toList().isNotEmpty)
-                ...event!.priorities.map(((PriorityDB prio) {
-                  return DropdownMenuItem<String?>(
-                    value: prio.priority,
-                    child: Text(prio.priority),
-                  );
-                })),
+                ...event!.priorities
+                    .where((prio) => priorites!.contains(prio.priority))
+                    .map((prio) => DropdownMenuItem<String?>(
+                          value: prio.priority,
+                          child: Text(prio.priority),
+                        )),
 
               DropdownMenuItem<String?>(
                 value: null,
@@ -500,7 +500,7 @@ class _EventPageState extends State<EventPage> {
     Widget signup;
     String locale = Localizations.localeOf(context).toString();
     // If no event
-    if (event == null || event!.canSignup == false) {
+    if (event == null) {
       return Container(
         margin: EdgeInsets.all(10),
         child: Column(
@@ -514,8 +514,32 @@ class _EventPageState extends State<EventPage> {
                   color: Colors.blue[300],
                 ),
               ),
-              onTap: () =>
-                  launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+              // onTap: () =>
+              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+            ),
+            Divider(
+              color: null,
+            ),
+          ],
+        ),
+      );
+    }
+    if(!event!.canSignup) {
+      return Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(t.eventNoSignup),
+            InkWell(
+              child: new Text(
+                "spindelmännen",
+                style: TextStyle(
+                  color: Colors.blue[300],
+                ),
+              ),
+              // onTap: () =>
+              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
             ),
             Divider(
               color: null,
@@ -549,8 +573,9 @@ class _EventPageState extends State<EventPage> {
             String? groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
             if (event!.lottery == true) {
-              if (eventSignup!.confirmedStatus == "unconfirmed") {
-                signup = Column(
+              if(event!.eventUsersConfirmed) {
+                if(!eventSignup!.confirmedStatus) {
+                  signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -573,7 +598,7 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-              } else {
+                } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -597,6 +622,31 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
+              }
+              } else {
+                signup = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Text(
+                        t.eventLotterySpot,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                  ..._signupDetails(groupName, userType),
+                ],
+              );
               }
             } else {
               signup = Column(
@@ -664,7 +714,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      t.eventNbrSpots + event!.maxEventUsers.toString(),
+                      t.eventNbrSpots + (event!.maxEventUsers == 0 ? t.unlimited : event!.maxEventUsers.toString()),
                     ),
                   ],
                 ),
@@ -720,8 +770,8 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  onTap: () => launchUrl(Uri.parse(
-                      "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
+                  // onTap: () => launchUrl(Uri.parse(
+                  //     "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
                 ),
                 Divider(
                   color: null,

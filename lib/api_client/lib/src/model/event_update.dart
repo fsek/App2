@@ -4,7 +4,6 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
-import 'package:api_client/src/model/memberroles.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -93,7 +92,7 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   bool? get isNollningEvent;
 
   @BuiltValueField(wireName: r'priorities')
-  BuiltList<MEMBERROLES>? get priorities;
+  BuiltList<String>? get priorities;
 
   @BuiltValueField(wireName: r'alcohol_event_type')
   EventUpdateAlcoholEventTypeEnum? get alcoholEventType;
@@ -262,7 +261,7 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
       yield r'priorities';
       yield serializers.serialize(
         object.priorities,
-        specifiedType: const FullType.nullable(BuiltList, [FullType(MEMBERROLES)]),
+        specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
       );
     }
     if (object.alcoholEventType != null) {
@@ -463,8 +462,8 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         case r'priorities':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(MEMBERROLES)]),
-          ) as BuiltList<MEMBERROLES>?;
+            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
+          ) as BuiltList<String>?;
           if (valueDes == null) continue;
           result.priorities.replace(valueDes);
           break;

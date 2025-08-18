@@ -47,14 +47,15 @@
     "eventPrice": "Price: ",
     "eventCostsMoney": "  Costs money",
     "eventFoodServed": "  Food served",
-    "eventAlcoholServed": "  Alcohol served",
+    "eventAlcoholServed": "Alcohol served",
     "eventDrinkPackage": "What kind of alcohol package do you want?",
     "eventYes": "Yes",
     "eventNo": "No",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
-    "eventAlcohol" : "  Alcohol may be present",
-    "eventAlcoholFree" : "  Alcoholfree",
+    "eventAlcohol": "Alkohol",
+    "eventAlcoholMayAppear" : "Alcohol may be present",
+    "eventAlcoholFree" : "Alcoholfree",
     "eventNoAlcohol" : "None",
 
     "settingsSettings": "Settings",
@@ -514,7 +515,9 @@
     "nationsWebsite": "https://www.studentlund.se",
     "guildsInfo": "Lund University, LU, consists of several faculties among which the engineering faculty, LTH, is the biggest. Every faculty has their own student union and at LTH that is Teknologkåren which is abbreviated TLTH. Teknologkåren is divided into eleven guilds, where each guild represents one or several educational programmes. Every guild is run like a non profit organization by students from the guild’s programmes. You belong to the F-guild that consists of the programmes engineering physics, engineering mathematics and engineering nanotechnology. It is your guild that arranges your introduction. It is also your guild that takes care of all matters that concern your education, as well as contact with the business world, fun activities and anything else that you do during your time at the F-guild. During the introduction it is easy to recognize other guilds on their overalls since the overall is the color of the wearer's guild. The guilds are traditionally presented in the following order (which is the same as the order in which the guilds were created): F E M V A K D DOKT Ing W I.",
     "utskottWebsite": "https://fsektionen.se/en/utskott",
-    "missions": "MISSIONS"
+    "missions": "MISSIONS",
+    "unlimited": "Unlimited",
+    "eventNoSignup": "Ingen anmälan behövs"
 
 
 }

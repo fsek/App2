@@ -58,7 +58,7 @@ class ImgApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -106,6 +106,91 @@ class ImgApi {
     );
   }
 
+  /// Get Album Images
+  /// 
+  ///
+  /// Parameters:
+  /// * [albumId] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [BuiltList<int>] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<BuiltList<int>>> imgGetAlbumImages({ 
+    required int albumId,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/img/album/{album_id}'.replaceAll('{' r'album_id' '}', encodeQueryParameter(_serializers, albumId, const FullType(int)).toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '_fsek_stage_refresh_token',
+            'where': '',
+          },
+        ],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    BuiltList<int>? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null ? null : _serializers.deserialize(
+        rawResponse,
+        specifiedType: const FullType(BuiltList, [FullType(int)]),
+      ) as BuiltList<int>;
+
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<BuiltList<int>>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
   /// Get Image
   /// 
   ///
@@ -131,7 +216,7 @@ class ImgApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/img/{img_id}/{size}'.replaceAll('{' r'img_id' '}', encodeQueryParameter(_serializers, imgId, const FullType(int)).toString()).replaceAll('{' r'size' '}', encodeQueryParameter(_serializers, size, const FullType(String)).toString());
+    final _path = r'/img/images/{img_id}/{size}'.replaceAll('{' r'img_id' '}', encodeQueryParameter(_serializers, imgId, const FullType(int)).toString()).replaceAll('{' r'size' '}', encodeQueryParameter(_serializers, size, const FullType(String)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -145,7 +230,7 @@ class ImgApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -230,7 +315,7 @@ class ImgApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -317,7 +402,7 @@ class ImgApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],

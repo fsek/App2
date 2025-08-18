@@ -32,6 +32,7 @@ import 'package:api_client/src/model/body_auth_reset_reset_password.dart';
 import 'package:api_client/src/model/body_auth_verify_request_token.dart';
 import 'package:api_client/src/model/body_auth_verify_verify.dart';
 import 'package:api_client/src/model/cafe_shift_create.dart';
+import 'package:api_client/src/model/cafe_shift_create_multi.dart';
 import 'package:api_client/src/model/cafe_shift_read.dart';
 import 'package:api_client/src/model/cafe_shift_update.dart';
 import 'package:api_client/src/model/cafe_view_between_dates.dart';
@@ -74,8 +75,6 @@ import 'package:api_client/src/model/group_read.dart';
 import 'package:api_client/src/model/group_remove_user.dart';
 import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
-import 'package:api_client/src/model/img_in_album.dart';
-import 'package:api_client/src/model/memberroles.dart';
 import 'package:api_client/src/model/moose_game_read.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
@@ -149,6 +148,7 @@ part 'serializers.g.dart';
   BodyAuthVerifyRequestToken,
   BodyAuthVerifyVerify,
   CafeShiftCreate,
+  CafeShiftCreateMulti,
   CafeShiftRead,
   CafeShiftUpdate,
   CafeViewBetweenDates,
@@ -191,8 +191,6 @@ part 'serializers.g.dart';
   GroupRemoveUser,
   GroupUserRead,
   HTTPValidationError,
-  ImgInAlbum,
-  MEMBERROLES,
   MooseGameRead,
   NewsCreate,
   NewsRead,
@@ -321,6 +319,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningGroupRead)]),
         () => ListBuilder<NollningGroupRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EventSignupRead)]),
+        () => ListBuilder<EventSignupRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GroupRead)]),

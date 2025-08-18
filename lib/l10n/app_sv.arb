@@ -47,14 +47,15 @@
     "eventPrice": "Pris: ",
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
-    "eventAlcoholServed": "  Alkohol serveras",
+    "eventAlcoholServed": "Alkohol serveras",
     "eventDrinkPackage": "Vilken typ av alkhoholpaket vill du ha?",
     "eventYes": "Ja",
     "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
-    "eventAlcohol" : "  Alkohol kan förekomma",
-    "eventAlcoholFree" : "  Alkoholfritt",
+    "eventAlcohol": "Alkohol",
+    "eventAlcoholMayAppear" : "Alkohol kan förekomma",
+    "eventAlcoholFree" : "Alkoholfritt",
     "eventNoAlcohol" : "Inget",
 
     "settingsSettings": "Inställningar",
@@ -516,6 +517,8 @@
     "nationsWebsite": "https://www.studentlund.se",
     "guildsInfo": "Lunds Universitet, LU, består av flera olika fakulteter bland vilka Lunds tekniska högskola, LTH, är störst. Till varje fakultet hör en kår och för oss på LTH är det Teknologkåren som förkortas TLTH. Teknologkåren är uppdelad i elva så kallade sektioner där varje sektion innefattar ett eller flera utbildningsprogram. Alla sektioner på LTH drivs som ideella föreningar med hjälp av de studenter som studerar på utbildningarna sektionen omfattar. F-sektionen, som du tillhör, innefattar utbildningarna Teknisk Fysik (F), Teknisk Matematik (π) och Teknisk Nanovetenskap (n). Det är din sektion som anordnar din nollning. Det är även den som har hand om alla programspecifika frågor, oavsett om de gäller studier, näringslivskontakt, fritidsaktiviteter eller annat roligt du kan tänka dig att hitta på under din tid på F-sektionen. Under nollningen är det lättast att känna igen andra sektioner på dess overaller då färgen på overallen är samma som sin sektionsfärg. Sektionerna inom TLTH räknas traditionellt upp i kronologisk ordning enligt: F E M V A K D DOKT Ing W I.",
     "utskottWebsite": "https://fsektionen.se/utskott",
-    "missions": "UPPDRAG"
+    "missions": "UPPDRAG",
+    "unlimited": "Oändligt",
+    "eventNoSignup": "No signup required"
 
 }

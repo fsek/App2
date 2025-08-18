@@ -4,7 +4,6 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
-import 'package:api_client/src/model/memberroles.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -73,7 +72,7 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
   int get maxEventUsers;
 
   @BuiltValueField(wireName: r'priorities')
-  BuiltList<MEMBERROLES> get priorities;
+  BuiltList<String> get priorities;
 
   @BuiltValueField(wireName: r'all_day')
   bool get allDay;
@@ -194,7 +193,7 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield r'priorities';
     yield serializers.serialize(
       object.priorities,
-      specifiedType: const FullType(BuiltList, [FullType(MEMBERROLES)]),
+      specifiedType: const FullType(BuiltList, [FullType(String)]),
     );
     yield r'all_day';
     yield serializers.serialize(
@@ -359,8 +358,8 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
         case r'priorities':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(MEMBERROLES)]),
-          ) as BuiltList<MEMBERROLES>;
+            specifiedType: const FullType(BuiltList, [FullType(String)]),
+          ) as BuiltList<String>;
           result.priorities.replace(valueDes);
           break;
         case r'all_day':

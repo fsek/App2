@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cafeCreateMultipleShifts**](CafeApi.md#cafecreatemultipleshifts) | **POST** /cafe-shifts/multi | Create Multiple Shifts
 [**cafeCreateShift**](CafeApi.md#cafecreateshift) | **POST** /cafe-shifts/ | Create Shift
 [**cafeDeleteShift**](CafeApi.md#cafedeleteshift) | **DELETE** /cafe-shifts/{shift_id} | Delete Shift
 [**cafeSignoffFromShift**](CafeApi.md#cafesignofffromshift) | **PATCH** /cafe-shifts/sign-off/{shift_id} | Signoff From Shift
@@ -18,6 +19,53 @@ Method | HTTP request | Description
 [**cafeViewShift**](CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
 [**cafeViewShiftsBetweenDates**](CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
 
+
+# **cafeCreateMultipleShifts**
+> BuiltList<CafeShiftRead> cafeCreateMultipleShifts(cafeShiftCreateMulti)
+
+Create Multiple Shifts
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getCafeApi();
+final CafeShiftCreateMulti cafeShiftCreateMulti = ; // CafeShiftCreateMulti | 
+
+try {
+    final response = api.cafeCreateMultipleShifts(cafeShiftCreateMulti);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling CafeApi->cafeCreateMultipleShifts: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cafeShiftCreateMulti** | [**CafeShiftCreateMulti**](CafeShiftCreateMulti.md)|  | 
+
+### Return type
+
+[**BuiltList&lt;CafeShiftRead&gt;**](CafeShiftRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cafeCreateShift**
 > CafeShiftRead cafeCreateShift(cafeShiftCreate)

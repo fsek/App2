@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **descriptionEn** | **String** |  | 
 **location** | **String** |  | 
 **maxEventUsers** | **int** |  | 
-**priorities** | [**BuiltList&lt;MEMBERROLES&gt;**](MEMBERROLES.md) |  | 
+**priorities** | **BuiltList&lt;String&gt;** |  | 
 **allDay** | **bool** |  | 
 **recurring** | **bool** |  | 
 **food** | **bool** |  | 

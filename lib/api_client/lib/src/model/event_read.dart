@@ -41,6 +41,7 @@ part 'event_read.g.dart';
 /// * [signupCount] 
 /// * [dot] 
 /// * [lottery] 
+/// * [eventUsersConfirmed] 
 @BuiltValue()
 abstract class EventRead implements Built<EventRead, EventReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -123,6 +124,9 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'lottery')
   bool get lottery;
+
+  @BuiltValueField(wireName: r'event_users_confirmed')
+  bool get eventUsersConfirmed;
 
   EventRead._();
 
@@ -280,6 +284,11 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'lottery';
     yield serializers.serialize(
       object.lottery,
+      specifiedType: const FullType(bool),
+    );
+    yield r'event_users_confirmed';
+    yield serializers.serialize(
+      object.eventUsersConfirmed,
       specifiedType: const FullType(bool),
     );
   }
@@ -493,6 +502,13 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
             specifiedType: const FullType(bool),
           ) as bool;
           result.lottery = valueDes;
+          break;
+        case r'event_users_confirmed':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.eventUsersConfirmed = valueDes;
           break;
         default:
           unhandled.add(key);

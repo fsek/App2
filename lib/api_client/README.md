@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**authResetResetPassword**](doc/AuthApi.md#authresetresetpassword) | **POST** /auth/reset-password | Reset:Reset Password
 [*AuthApi*](doc/AuthApi.md) | [**authVerifyRequestToken**](doc/AuthApi.md#authverifyrequesttoken) | **POST** /auth/request-verify-token | Verify:Request-Token
 [*AuthApi*](doc/AuthApi.md) | [**authVerifyVerify**](doc/AuthApi.md#authverifyverify) | **POST** /auth/verify | Verify:Verify
+[*CafeApi*](doc/CafeApi.md) | [**cafeCreateMultipleShifts**](doc/CafeApi.md#cafecreatemultipleshifts) | **POST** /cafe-shifts/multi | Create Multiple Shifts
 [*CafeApi*](doc/CafeApi.md) | [**cafeCreateShift**](doc/CafeApi.md#cafecreateshift) | **POST** /cafe-shifts/ | Create Shift
 [*CafeApi*](doc/CafeApi.md) | [**cafeDeleteShift**](doc/CafeApi.md#cafedeleteshift) | **DELETE** /cafe-shifts/{shift_id} | Delete Shift
 [*CafeApi*](doc/CafeApi.md) | [**cafeSignoffFromShift**](doc/CafeApi.md#cafesignofffromshift) | **PATCH** /cafe-shifts/sign-off/{shift_id} | Signoff From Shift
@@ -140,7 +141,9 @@ Class | Method | HTTP request | Description
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupUpdateEventSignupRoute**](doc/EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 [*EventsApi*](doc/EventsApi.md) | [**eventsAddTagToEvent**](doc/EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsConfirmEventUsers**](doc/EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
+[*EventsApi*](doc/EventsApi.md) | [**eventsConfirmPlaces**](doc/EventsApi.md#eventsconfirmplaces) | **PATCH** /events/confirmed/{event_id} | Confirm Places
 [*EventsApi*](doc/EventsApi.md) | [**eventsCreateEvent**](doc/EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
+[*EventsApi*](doc/EventsApi.md) | [**eventsCreateEventSignupList**](doc/EventsApi.md#eventscreateeventsignuplist) | **GET** /events/event-signups/{event_id} | Create Event Signup List
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventRemove**](doc/EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
@@ -150,9 +153,9 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImageStream**](doc/EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventTags**](doc/EventsApi.md#eventsgeteventtags) | **GET** /events/get-event-tags/{event_id} | Get Event Tags
-[*EventsApi*](doc/EventsApi.md) | [**eventsGetRandomEventSignup**](doc/EventsApi.md#eventsgetrandomeventsignup) | **GET** /events/event-signups/random/{event_id} | Get Random Event Signup
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetSingleEvent**](doc/EventsApi.md#eventsgetsingleevent) | **GET** /events/{eventId} | Get Single Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsPostEventImage**](doc/EventsApi.md#eventsposteventimage) | **POST** /events/{event_id}/image | Post Event Image
+[*EventsApi*](doc/EventsApi.md) | [**eventsUnconfirmEventUsers**](doc/EventsApi.md#eventsunconfirmeventusers) | **PATCH** /events/event-unconfirm-event-users/{event_id} | Unconfirm Event Users
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsAddUserToGroup**](doc/GroupsApi.md#groupsaddusertogroup) | **POST** /groups/add_user/{id} | Add User To Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetGroups**](doc/GroupsApi.md#groupsgetgroups) | **GET** /groups/ | Get Groups
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsGetSingleGroup**](doc/GroupsApi.md#groupsgetsinglegroup) | **GET** /groups/{id} | Get Single Group
@@ -161,7 +164,8 @@ Class | Method | HTTP request | Description
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsRemoveUserFromGroup**](doc/GroupsApi.md#groupsremoveuserfromgroup) | **DELETE** /groups/remove_user_from_group/{id} | Remove User From Group
 [*GroupsApi*](doc/GroupsApi.md) | [**groupsUploadGroup**](doc/GroupsApi.md#groupsuploadgroup) | **POST** /groups/ | Upload Group
 [*ImgApi*](doc/ImgApi.md) | [**imgDeleteImage**](doc/ImgApi.md#imgdeleteimage) | **DELETE** /img/{id} | Delete Image
-[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/{img_id}/{size} | Get Image
+[*ImgApi*](doc/ImgApi.md) | [**imgGetAlbumImages**](doc/ImgApi.md#imggetalbumimages) | **GET** /img/album/{album_id} | Get Album Images
+[*ImgApi*](doc/ImgApi.md) | [**imgGetImage**](doc/ImgApi.md#imggetimage) | **GET** /img/images/{img_id}/{size} | Get Image
 [*ImgApi*](doc/ImgApi.md) | [**imgGetImageStream**](doc/ImgApi.md#imggetimagestream) | **GET** /img/stream/{img_id} | Get Image Stream
 [*ImgApi*](doc/ImgApi.md) | [**imgUploadImage**](doc/ImgApi.md#imguploadimage) | **POST** /img/ | Upload Image
 [*MailAliasApi*](doc/MailAliasApi.md) | [**mailAliasAddMember**](doc/MailAliasApi.md#mailaliasaddmember) | **POST** /mail-alias/alias/{alias_email}/add_member | Add Member
@@ -245,6 +249,7 @@ Class | Method | HTTP request | Description
 [*UsersApi*](doc/UsersApi.md) | [**usersAdminGetUser**](doc/UsersApi.md#usersadmingetuser) | **GET** /users/admin/{user_id} | Admin Get User
 [*UsersApi*](doc/UsersApi.md) | [**usersAdminUpdateUser**](doc/UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetMe**](doc/UsersApi.md#usersgetme) | **GET** /users/me | Get Me
+[*UsersApi*](doc/UsersApi.md) | [**usersGetMyPriorities**](doc/UsersApi.md#usersgetmypriorities) | **GET** /users/user_priorities/me | Get My Priorities
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUser**](doc/UsersApi.md#usersgetuser) | **GET** /users/{user_id} | Get User
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserImage**](doc/UsersApi.md#usersgetuserimage) | **GET** /users/{user_id}/image/{size} | Get User Image
 [*UsersApi*](doc/UsersApi.md) | [**usersGetUserImageStream**](doc/UsersApi.md#usersgetuserimagestream) | **GET** /users/{user_id}/image/stream | Get User Image Stream
@@ -277,6 +282,7 @@ Class | Method | HTTP request | Description
  - [BodyAuthVerifyRequestToken](doc/BodyAuthVerifyRequestToken.md)
  - [BodyAuthVerifyVerify](doc/BodyAuthVerifyVerify.md)
  - [CafeShiftCreate](doc/CafeShiftCreate.md)
+ - [CafeShiftCreateMulti](doc/CafeShiftCreateMulti.md)
  - [CafeShiftRead](doc/CafeShiftRead.md)
  - [CafeShiftUpdate](doc/CafeShiftUpdate.md)
  - [CafeViewBetweenDates](doc/CafeViewBetweenDates.md)
@@ -319,8 +325,6 @@ Class | Method | HTTP request | Description
  - [GroupRemoveUser](doc/GroupRemoveUser.md)
  - [GroupUserRead](doc/GroupUserRead.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
- - [ImgInAlbum](doc/ImgInAlbum.md)
- - [MEMBERROLES](doc/MEMBERROLES.md)
  - [MooseGameRead](doc/MooseGameRead.md)
  - [NewsCreate](doc/NewsCreate.md)
  - [NewsRead](doc/NewsRead.md)
@@ -388,7 +392,7 @@ Authentication schemes defined for the API:
 ### APIKeyCookie
 
 - **Type**: API key
-- **API key parameter name**: __Secure-fsek_refresh_token
+- **API key parameter name**: _fsek_stage_refresh_token
 - **Location**: 
 
 
