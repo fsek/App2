@@ -5,6 +5,10 @@ import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:api_client/api_client.dart';
+import 'package:fsek_mobile/services/api.service.dart';
+
+
 
 class ChantBookPage extends StatefulWidget {
   @override
@@ -159,7 +163,7 @@ class _ChantBookPageState extends State<ChantBookPage> {
   }
 
   void openSong(int id) async {
-    await ApiClient().getSongsApi().songsGetSong(songId: id).then((song) {
+    await ApiService.apiClient.getSongsApi().songsGetSong(songId: id).then((song) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });

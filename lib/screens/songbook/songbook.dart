@@ -4,6 +4,7 @@ import 'package:fsek_mobile/screens/songbook/hmmm.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/songbook/top_songs.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 
 class SongbookPage extends StatefulWidget {
   @override
@@ -56,9 +57,11 @@ class _SongbookPageState extends State<SongbookPage>
   }
 
   void fetchSongs() async {
-    final response = await ApiClient().getSongsApi().songsGetAllSongs();
+    final response = await ApiService.apiClient.getSongsApi().songsGetAllSongs();
     setState(() {
       this.allSongs = response.data!.toList();
+
+      this.allSongs.sort((a, b) => a.title.compareTo(b.title));
       this.songs = this.allSongs;
     });
   }
@@ -281,7 +284,7 @@ class _SongbookPageState extends State<SongbookPage>
   }
 
   void openSong(int id) async {
-    await ApiClient().getSongsApi().songsGetSong(songId: id).then((song) {
+    await ApiService.apiClient.getSongsApi().songsGetSong(songId: id).then((song) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });

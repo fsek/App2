@@ -61,7 +61,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -166,7 +166,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -223,7 +223,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -308,7 +308,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -395,7 +395,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -498,7 +498,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -583,7 +583,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],
@@ -668,7 +668,7 @@ class CafeApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '_fsek_refresh_token',
+            'keyName': '__Secure-fsek_refresh_token',
             'where': '',
           },
         ],

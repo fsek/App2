@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/screens/news/single_news.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/util/time.dart';
@@ -26,12 +27,12 @@ class _NewsPageState extends State<NewsPage> {
   }, fetchPage: (pageKey) async {
     if (pageKey == 0) {
       try {
-        final normalResponse = await ApiClient()
+        final normalResponse = await ApiService.apiClient
             .getNewsApi()
             .newsGetPaginatedNews(pageNbr: pageKey);
 
         final pinnedResponse =
-            await ApiClient().getNewsApi().newsGetPinnedNews();
+            await ApiService.apiClient.getNewsApi().newsGetPinnedNews();
 
         if (normalResponse.data == null) {
           throw Exception("Failed to load news");
@@ -53,7 +54,7 @@ class _NewsPageState extends State<NewsPage> {
       }
     } else {
       try {
-        final response = await ApiClient()
+        final response = await ApiService.apiClient
             .getNewsApi()
             .newsGetPaginatedNews(pageNbr: pageKey);
         if (response.data == null) {

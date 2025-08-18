@@ -61,7 +61,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://10.0.2.2:8000*
+All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -388,7 +388,7 @@ Authentication schemes defined for the API:
 ### APIKeyCookie
 
 - **Type**: API key
-- **API key parameter name**: _fsek_refresh_token
+- **API key parameter name**: __Secure-fsek_refresh_token
 - **Location**: 
 
 
