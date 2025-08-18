@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/user/user.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/services/game.service.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,25 +10,61 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  User? user;
-  
+  AdminUserRead? user;
+  UserUpdateBuilder? userChanges;
+
   static List<int> years =
       List.generate(DateTime.now().year - 1960, (i) => DateTime.now().year - i);
 
   bool extraPref = false;
   bool changedSetting = false;
 
+  String? _selectedProgram;
+  int? _selectedYear;
+
   @override
   void initState() {
-    locator<UserService>().syncUser();
-    locator<UserService>().getUser().then((value) {
-      setState(() {
-        user = value;
-        extraPref = user!.food_custom != "";
-      });
-    });
     super.initState();
+    _loadInitData();
   }
+
+  Future<void> _loadInitData() async {
+    final response = await ApiService.apiClient.getUsersApi().usersGetMe();
+    final response_data = response.data;
+    setState(() {
+      this.user = response_data;
+      this.extraPref = user?.otherFoodPreferences != "";
+      this.userChanges = UserUpdate().toBuilder();
+      this._selectedProgram = enumToProgram[user!.program];
+      this._selectedYear = user!.startYear;
+      this
+          .userChanges!
+          .standardFoodPreferences
+          .addAll(user!.standardFoodPreferences!.toList());
+    });
+
+    // ApiService.apiClient.getUsersApi().usersGetMe().then((value) {
+    //   setState(() {
+    //     user = value.data;
+    //     extraPref = user!.otherFoodPreferences != "";
+    //     userChanges = UserUpdate().toBuilder();
+    //   });
+    // });
+  }
+
+  Map<String, UserUpdateProgramEnum> programToEnum = {
+    "Teknisk Fysik": UserUpdateProgramEnum.F,
+    "Teknisk Matematik": UserUpdateProgramEnum.pi,
+    "Teknisk Nanovetenskap": UserUpdateProgramEnum.N,
+    "Oklart": UserUpdateProgramEnum.oklart
+  };
+
+  Map<AdminUserReadProgramEnum, String> enumToProgram = {
+    AdminUserReadProgramEnum.F: "Teknisk Fysik",
+    AdminUserReadProgramEnum.pi: "Teknisk Matematik",
+    AdminUserReadProgramEnum.N: "Teknisk Nanovetenskap",
+    AdminUserReadProgramEnum.oklart: "Oklart"
+  };
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -46,6 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
       t.nano: "Teknisk Nanovetenskap",
       t.unknown: "Oklart",
     };
+
     if (user == null) {
       return Scaffold(
           appBar: AppBar(title: Text(t.otherAccount)),
@@ -53,11 +88,12 @@ class _SettingsPageState extends State<SettingsPage> {
               child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.primary)));
     }
-    return WillPopScope(
-      onWillPop: () async {
-        if (changedSetting)
+
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (!didPop && changedSetting)
           await showDialog(context: context, builder: _saveOnClosePopup());
-        return true;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -85,81 +121,98 @@ class _SettingsPageState extends State<SettingsPage> {
               _makePadding([
                 _makeTextField(
                   t.settingsFirstName + "*",
-                  user!.firstname,
-                  (input) => user!.firstname = input,
+                  user!.firstName,
+                  (input) {
+                    userChanges!.firstName = input;
+                    changedSetting = true;
+                  },
                 ),
-                _makeTextField( "Game nickname", user!.game_nickname?.replaceAll("\u{200E}", ""),
+                _makeTextField(
+                  t.settingsLastName + "*",
+                  user!.lastName,
+                  (input) {
+                    userChanges!.lastName = input;
+                    changedSetting = true;
+                    } ,
+                ),
+                _makeTextField( "Game nickname", user!.mooseGameName, //replaceAll("\u{200E}", ""),
                   // TODO use translate var
                   (input) {
-
-                    // Version control check
-                    if (user!.game_nickname != null) {
-                      if (!user!.game_nickname!.contains("\u{200E}"))
-                      {
-                        // The user has not updated their nickname since the version control was added
-                        // this means they might have a cheated in score
-                        locator<GameScoreService>().resetScore();
-                      }
-                    }
-                    
-                    changedSetting = true;
-                    if (input == null) user!.game_nickname = input;
-                    // remove version control char if it exists, then add it back at the end
-                    else user!.game_nickname = input.replaceAll("\u{200E}", "") + "\u{200E}";
+                      userChanges!.mooseGameName = input;
+                      changedSetting = true;
                   },
                 ),
                 _makeDropDown<String>(
                   t.settingsProgramme,
                   programs.values.toList(),
-                  programs[user!.program],
-                  (program) => user!.program = reverseProgramsMap[program],
+                  programs[_selectedProgram],
+                  (program) {
+                    setState(() {
+                      _selectedProgram = reverseProgramsMap[program];
+                      userChanges!.program = programToEnum[_selectedProgram];
+                      changedSetting = true;
+                    });
+                  },
                 ),
                 _makeDropDown<int>(
                   t.settingsStartYear,
                   years,
-                  user!.start_year,
-                  (year) => user!.start_year = year,
+                  _selectedYear,
+                  (year) {
+                    setState(() {
+                      _selectedYear = year;
+                      userChanges!.startYear = year;
+                      changedSetting = true;
+                    });
+                  },
                 ),
               ]),
               _makeGrayTextbox(t.settingsParagraph),
               _makePadding([
                 _makeTextField(
                   "LUCAT-id",
-                  user!.student_id,
-                  (input) => user!.student_id = input,
+                  user!.stilId,
+                  (input) => userChanges!.stilId = input,
                 ),
-                _makeTextField(t.settingsPhoneNumber, user!.phone,
-                    (input) => user!.phone = input,
-                    num: true),
-                _makeCheckBox(
-                  t.settingsShowPhoneNumber,
-                  user!.display_phone,
-                  (bool? change) => user!.display_phone = change,
-                ),
+                // _makeTextField(t.settingsPhoneNumber, user!.phone,
+                //     (input) => user!.phone = input,
+                //     num: true),
+                // _makeCheckBox(
+                //   t.settingsShowPhoneNumber,
+                //   user!.display_phone,
+                //   (bool? change) => user!.display_phone = change,
+                // ),
                 DropdownButton(
-                  iconEnabledColor: Theme.of(context).colorScheme.onBackground,
-                  iconDisabledColor: Theme.of(context).colorScheme.onBackground, 
+                  iconEnabledColor: Theme.of(context).colorScheme.onSurface,
+                  iconDisabledColor: Theme.of(context).colorScheme.onSurface,
                   isExpanded: true,
-                  hint: Text(t.settingsFoodPrefs, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground)),
+                  hint: Text(t.settingsFoodPrefs,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onSurface)),
                   onChanged: (_) {},
                   items: {
-                    "vegetarian": t.vegetarian,
-                    "vegan": t.vegan,
-                    "pescetarian": t.pescetarian,
-                    "milk": t.milk,
-                    "gluten": t.gluten
+                    "Vegetarian": t.vegetarian,
+                    "Vegan": t.vegan,
+                    "Pescetarian": t.pescetarian,
+                    "Milk": t.milk,
+                    "Gluten": t.gluten
                   }
                       .entries
                       .map((foodPref) => DropdownMenuItem(
                             value: foodPref.value,
                             child: _makeCheckBox(
                               foodPref.value,
-                              user!.food_preferences!.contains(foodPref.key),
+                              user!.standardFoodPreferences!
+                                  .toList()
+                                  .contains(foodPref.key),
                               (bool? change) {
                                 if (change!)
-                                  user!.food_preferences!.add(foodPref.key);
+                                  userChanges!.standardFoodPreferences
+                                      .add(foodPref.key);
                                 else
-                                  user!.food_preferences!.remove(foodPref.key);
+                                  userChanges!.standardFoodPreferences
+                                      .remove(foodPref.key);
                               },
                             ),
                           ))
@@ -171,34 +224,39 @@ class _SettingsPageState extends State<SettingsPage> {
                     )),
                 ),
                 if (extraPref)
-                  _makeTextField(t.settingsOtherFoodPrefs, user!.food_custom,
-                      (input) => user!.food_custom = input),
+                  _makeTextField(
+                      t.settingsOtherFoodPrefs,
+                      user!.otherFoodPreferences,
+                      (input) => userChanges!.otherFoodPreferences = input),
                 Text(
                   t.settingsFoodPrefsPrivacy,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground.withAlpha(200),
-                  ),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withAlpha(200),
+                      ),
                 )
               ]),
-              _makeGrayTextbox(t.notifications),
-              _makePadding([
-                _makeCheckBox(
-                    t.settingsNotificationsSignUp,
-                    user!.notify_event_users,
-                    (bool? change) => user!.notify_event_users = change),
-                _makeCheckBox(
-                    t.settingsNotificationsMessage,
-                    user!.notify_messages,
-                    (bool? change) => user!.notify_messages = change),
-                _makeCheckBox(
-                    t.settingsNotificationsSignUpClosing,
-                    user!.notify_event_closing,
-                    (bool? change) => user!.notify_event_closing = change),
-                _makeCheckBox(
-                    t.settingsNotificationsSignUpOpening,
-                    user!.notify_event_open,
-                    (bool? change) => user!.notify_event_open = change)
-              ]),
+              // _makeGrayTextbox(t.notifications), // TODO we have no notifications right now
+              // _makePadding([
+              //   _makeCheckBox(
+              //       t.settingsNotificationsSignUp,
+              //       user!.notify_event_users,
+              //       (bool? change) => user!.notify_event_users = change),
+              //   _makeCheckBox(
+              //       t.settingsNotificationsMessage,
+              //       user!.notify_messages,
+              //       (bool? change) => user!.notify_messages = change),
+              //   _makeCheckBox(
+              //       t.settingsNotificationsSignUpClosing,
+              //       user!.notify_event_closing,
+              //       (bool? change) => user!.notify_event_closing = change),
+              //   _makeCheckBox(
+              //       t.settingsNotificationsSignUpOpening,
+              //       user!.notify_event_open,
+              //       (bool? change) => user!.notify_event_open = change)
+              // ]),
               _makeGrayTextbox(t.settingsMemberSince + " " + _makeTimestamp())
             ],
           ),
@@ -231,7 +289,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _makeDropDown<T>(String displayText, List<T> dropDownItems, T? value,
-      void Function(T?) modUser) {
+      void Function(T?) onChange) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Column(
@@ -239,20 +297,14 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           Text(displayText, style: TextStyle(fontSize: 16)),
           DropdownButton<T>(
-            autofocus: false,
-            isExpanded: true,
-            value: value,
-            items: dropDownItems
-                .map((item) =>
-                    DropdownMenuItem(child: Text(item.toString()), value: item))
-                .toList(),
-            onChanged: (T? change) => setState(
-              () {
-                modUser(change);
-                changedSetting = true;
-              },
-            ),
-          ),
+              autofocus: false,
+              isExpanded: true,
+              value: value,
+              items: dropDownItems
+                  .map((item) => DropdownMenuItem(
+                      child: Text(item.toString()), value: item))
+                  .toList(),
+              onChanged: onChange),
         ],
       ),
     );
@@ -285,7 +337,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return SizedBox(
       width: double.infinity,
       child: Container(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         padding: EdgeInsets.fromLTRB(12, 28, 12, 28),
         child: Text(displayText),
       ),
@@ -303,7 +355,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   String _makeTimestamp() {
-    DateTime memberSince = DateTime.parse(user!.member_at!);
+    DateTime memberSince = DateTime.parse(user!.accountCreated.toString());
     String locale = Localizations.localeOf(context).toString();
 
     return DateFormat("HH:mm, d MMM y", locale).format(memberSince);
@@ -388,13 +440,17 @@ class _SettingsPageState extends State<SettingsPage> {
   void _save() async {
     FocusScope.of(context).unfocus();
     showDialog(context: context, builder: _savingPopup());
-    if (!extraPref) user!.food_custom = "";
-    locator<UserService>().updateUser(user!).then((value) {
+    if (!extraPref) userChanges!.otherFoodPreferences = "";
+    ApiService.apiClient
+        .getUsersApi()
+        .usersUpdateSelf(userUpdate: userChanges!.build())
+        .then((value) {
       setState(() {
-        extraPref = user!.food_custom != "";
+        // extraPref = user!.food_custom != "";
         changedSetting = false;
       });
       Navigator.pop(context);
+      _loadInitData();
     }).catchError(
       (error) {
         Navigator.pop(context);

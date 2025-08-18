@@ -198,7 +198,7 @@ Future<void> preloadAssets(BuildContext context, String imageListName) async {
       break;
 
     case "schedulePaths":
-      imagePaths = ["assets/img/nollning-24/schema/schedulescreen_${t.localeName}.png"];
+      imagePaths = ["assets/data/nollning_25/schema/schedulescreen_${t.localeName}.png"];
       break;
 
     case "supportPaths":

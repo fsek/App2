@@ -6,20 +6,19 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/home/nollningHome25.dart';
+import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
-import 'package:fsek_mobile/screens/nollning/messaging/messages.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
-import 'package:fsek_mobile/screens/notiser/notiser.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
-import 'package:fsek_mobile/screens/nollning/chant_book.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/services/navigation.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
@@ -35,14 +34,19 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
+class CustomIcons {
+  static const IconData moose = IconData(0xe900, fontFamily: 'CustomIcons');
+}
+
 void main() async {
   setupLocator();
   var route = locator<NavigationService>();
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
-    Destination(2, Icons.home, HomePage()),
-    Destination(3, Icons.notifications, NotificationsPage()),
+    // Destination(2, Icons.home, HomePage()),
+    Destination(2, Icons.home, NollningHomePage()),
+    Destination(3, CustomIcons.moose, MooseGamePage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 
@@ -50,15 +54,13 @@ void main() async {
   route.routes = {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
-    '/messages': (context) => MessagesPage(),
-    '/chant_book': (context) => ChantBookPage(),
     '/song_book': (context) => SongbookPage(),
     '/homepage': (context) => HomePage(),
     '/nolleguide': (context) => GuidePage(),
     '/manners': (context) => MannersPage(),
     '/people': (context) => PeoplePage(),
-    '/wordlist': (context) => WordListPage(),
-  }; 
+    '/wordlist': (context) => WordListOldPage(),
+  };
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
@@ -78,7 +80,7 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
-  // We load the theme here because async is needed, then we pass it to the app 
+  // We load the theme here because async is needed, then we pass it to the app
   // where ThemeCubit gets initialised with the cached theme
   TokenStorageWrapper? _storage;
   String? cachedTheme = null;
@@ -91,7 +93,8 @@ void main() async {
     cachedTheme = 'themeF';
   }
 
-  locator<ThemeService>().theme = locator<ThemeService>().getThemeData(cachedTheme);
+  locator<ThemeService>().theme =
+      locator<ThemeService>().getThemeData(cachedTheme);
 
   runApp(FsekMobileApp(initialThemeMode: cachedTheme));
 

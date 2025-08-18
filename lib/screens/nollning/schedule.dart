@@ -17,7 +17,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
   @override
   Widget build(BuildContext context) {
     var t =  AppLocalizations.of(context)!;
-    String schemaPath = "assets/img/nollning-24/schema/schedulescreen_${t.localeName}.png";
+    String schemaPath = "assets/data/nollning_25/schema/schedulescreen_${t.localeName}.png";
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -26,7 +26,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
-      body: InteractiveViewer(child: SingleChildScrollView(child: Column(children: [Image.asset(schemaPath, fit: BoxFit.fill)])))
+      body: InteractiveViewer(panEnabled: true, child: SingleChildScrollView(child: Column(children: [Image.asset(schemaPath, fit: BoxFit.fill)])))
     );
   }
 }

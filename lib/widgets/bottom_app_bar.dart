@@ -5,8 +5,6 @@ import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/widgets/easterEgg/animated_nils.dart';
 import 'package:fsek_mobile/widgets/easterEgg/easteregg_code_dialog.dart';
 import 'package:fsek_mobile/widgets/easterEgg/familyGuyFoset.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/game.service.dart';
 
 class FsekAppBarItem {
   FsekAppBarItem({this.iconData, this.text});
@@ -103,13 +101,13 @@ class FsekAppBarState extends State<FsekAppBar> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => (MooseGamePage())));
         break;
 
-      case "reset score":
-        locator<GameScoreService>().resetScore();
-        break;
+      // case "reset score":
+      //   locator<GameScoreService>().resetScore();
+      //   break;
 
-      case "reset name":
-        locator<GameScoreService>().resetName();
-        break;
+      // case "reset name":
+      //   locator<GameScoreService>().resetName();
+      //   break;
 
       default:
         break;

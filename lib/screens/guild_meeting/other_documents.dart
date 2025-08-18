@@ -55,7 +55,7 @@ class _OtherDocumentsPageState extends State<OtherDocumentsPage> {
     return Container(
         decoration: BoxDecoration(
             border: Border(
-          bottom: BorderSide(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4)),
+          bottom: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4)),
         )),
         child: InkWell(
           onTap: () => openDocument(document),

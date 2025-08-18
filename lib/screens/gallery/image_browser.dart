@@ -1,39 +1,71 @@
 import 'dart:async';
+import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/environments/environment.dart';
-import 'package:fsek_mobile/models/gallery/album.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_image_gallery_saver/flutter_image_gallery_saver.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:fsek_mobile/environments/environment.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class ImageBrowserPage extends StatefulWidget {
-  const ImageBrowserPage({Key? key, required this.album, required this.initial}) : super(key: key);
+  const ImageBrowserPage({Key? key, required this.album, required this.initial, required this.imgIds})
+      : super(key: key);
 
-  final Album album;
+  final AlbumRead album;
   final int initial;
+  final List<int> imgIds;
 
   @override
   State<ImageBrowserPage> createState() => _ImageBrowserPageState();
 }
 
 class _ImageBrowserPageState extends State<ImageBrowserPage> {
-  var index;
+  late int index;
   bool smallDownload = false;
   late Timer _timer;
 
-  void indexUpdate(int index) {
-    this.index = index;
+  @override
+  void initState() {
+    super.initState();
+    index = widget.initial;
   }
+
+  void indexUpdate(int newIndex) {
+    setState(() {
+      this.index = newIndex;
+    });
+  }
+
+  Future<Uint8List> fetchImageBytes(int id) async {
+    try {
+      final url = "${Environment.API_URL}/img/images/$id/original";
+      // final url = "https://backend.fsektionen.se/img/images/${id}/original";
+      final response = await http.get(Uri.parse(url),
+          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
+
+      if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
+      throw Exception("Failed to load image: HTTP ${response.statusCode}");
+    }
+
+    return response.bodyBytes;
+  } catch (e) {
+    print("Error fetching image: $e");
+    throw Exception("Image fetch failed");
+  }
+}
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    index = widget.initial;
     return Scaffold(
         appBar: AppBar(
-          title: Text("${widget.album.title!}"),
+          title: Text(t.localeName == "sv"
+              ? widget.album.titleSv
+              : widget.album.titleEn),
           actions: [
             Visibility(
               child: ShaderMask(
@@ -56,10 +88,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     icon: Icon(Icons.download_for_offline_rounded, size: 40),
                     onPressed: () async {
                       try {
-                        http.Response image = await http.get(
-                            Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                        ImageGallerySaver.saveImage(image.bodyBytes,
-                            name: "${widget.album.images![index].filename!}", quality: 1);
+                        final imageBytes =
+                            await fetchImageBytes(widget.imgIds[index]);
+                        await FlutterImageGallerySaver.saveImage(imageBytes);
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                           content: Text("The JPEG god smiles upon you"),
                         ));
@@ -77,19 +108,26 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                 icon: Icon(Icons.download),
                 onPressed: () async {
                   try {
-                    http.Response image = await http
-                        .get(Uri.parse("${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}"));
-                    ImageGallerySaver.saveImage(image.bodyBytes,
-                        name: "${widget.album.images![index].filename!}", quality: 100);
+                    final imageBytes =
+                        await fetchImageBytes(widget.imgIds[index]);
+                    await FlutterImageGallerySaver.saveImage(imageBytes);
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloaded, style: Theme.of(context).textTheme.labelLarge,), 
-                      backgroundColor: Theme.of(context).colorScheme.surfaceVariant
-                    ));
+                        content: Text(
+                          t.galleryImageDownloaded,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest));
                   } on Exception catch (_) {
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                      content: Text(t.galleryImageDownloadError, style: Theme.of(context).textTheme.labelLarge,),
-                      backgroundColor: Theme.of(context).colorScheme.surfaceVariant
-                    ));
+                        content: Text(
+                          t.galleryImageDownloadError,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest));
                   }
                 },
               ),
@@ -107,6 +145,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
             child: PageViewBuilder(
           initial: widget.initial,
           album: widget.album,
+          imgIds: widget.imgIds,
           callback: indexUpdate,
           pageController: new PageController(initialPage: widget.initial),
         )));
@@ -118,8 +157,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
 // Simply put, it disables scrolling between images when the user is zoomed in on an image.
 
 class PageViewBuilder extends StatefulWidget {
-  final Album album;
+  final AlbumRead album;
   final int initial;
+  final List<int> imgIds;
   // A function that sets the index in the main widget is passed down the widget-tree.
   // This weird passing-up-and-down of things isn't optimal, but was written to just
   // easily slot into the current image_browser page.
@@ -127,7 +167,12 @@ class PageViewBuilder extends StatefulWidget {
   final PageController pageController;
 
   const PageViewBuilder(
-      {Key? key, required this.album, required this.initial, required this.callback, required this.pageController})
+      {Key? key,
+      required this.imgIds,
+      required this.album,
+      required this.initial,
+      required this.callback,
+      required this.pageController})
       : super(key: key);
 
   @override
@@ -136,27 +181,71 @@ class PageViewBuilder extends StatefulWidget {
 
 class _PageViewBuilderState extends State<PageViewBuilder> {
   bool _pagingEnabled = true;
-  var index;
+  late List<Future<ImageProvider<Object>>?> _imageFutures;
+
+  @override
+  void initState() {
+    super.initState();
+    _imageFutures = List.filled(widget.imgIds.length, null);
+  }
+  
+
+  Future<ImageProvider<Object>> _fetchImage(int id) async {
+    try {
+      final url = "${Environment.API_URL}/img/images/$id/large";
+      // final url = "https://backend.fsektionen.se/img/images/${id}/large";
+      final response = await http.get(Uri.parse(url),
+          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
+
+      if (response.statusCode != 200) {
+        print("HTTP error: ${response.statusCode}");
+        print("Response body: ${String.fromCharCodes(response.bodyBytes)}");
+        return const AssetImage("assets/img/f_logo.png");
+      }
+
+      if (response.bodyBytes.isEmpty) {
+        print("Received empty response");
+        return const AssetImage("assets/img/f_logo.png");
+      }
+
+      return MemoryImage(response.bodyBytes);
+    } catch (e) {
+      print("Error fetching image: $e");
+      return AssetImage("assets/img/f_logo.png");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: _pagingEnabled ? const PageScrollPhysics() : const NeverScrollableScrollPhysics(),
-      itemCount: widget.album.images!.length,
+      physics: _pagingEnabled
+          ? const PageScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
+      itemCount: widget.imgIds.length,
       controller: widget.pageController,
+      onPageChanged: (int newIndex) {
+        widget.callback(newIndex);
+      },
       itemBuilder: (context, index) {
-        widget.callback(index);
-        final image = Image.network(
-          "${Environment.API_URL}${widget.album.images![index].file!.large!["url"]!}",
-          loadingBuilder: (context, widget, loadingProgress) {
-            this.index = index;
-            if (loadingProgress == null)
-              return widget;
-            else
+        final imageFuture = _imageFutures[index] ??= _fetchImage(widget.imgIds[index]);
+
+        final image = FutureBuilder<ImageProvider<Object>>(
+          future: imageFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return LoadingWidget();
+            } else if (snapshot.hasError || !snapshot.hasData) {
+              return const Center(child: Icon(Icons.broken_image));
+            }
+
+            return Image(
+              image: snapshot.data!,
+              fit: BoxFit.contain,
+            );
           },
         );
         return ImageContainer(
+          imgIds: widget.imgIds,
           image: image,
           album: widget.album,
           index: index,
@@ -173,15 +262,17 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
 }
 
 class ImageContainer extends StatefulWidget {
-  final Album album;
+  final AlbumRead album;
   final int index;
-  final Image image;
+  final List<int> imgIds;
+  final Widget image;
   final double minScale;
   final double maxScale;
   final void Function(double)? onScaleChanged;
 
   const ImageContainer({
     Key? key,
+    required this.imgIds,
     required this.image,
     this.minScale = 1.0,
     this.maxScale = 5.0,
@@ -195,7 +286,8 @@ class ImageContainer extends StatefulWidget {
 }
 
 class _ImageContainerState extends State<ImageContainer> {
-  final TransformationController _transformationController = TransformationController();
+  final TransformationController _transformationController =
+      TransformationController();
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +305,7 @@ class _ImageContainerState extends State<ImageContainer> {
             widget.image,
             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
             Text(
-              "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.album.images!.length}",
+              "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.imgIds.length}",
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ]),

@@ -1,50 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/cafe/cafe_shift.dart';
-import 'package:fsek_mobile/models/cafe/cafe_user.dart';
-import 'package:fsek_mobile/services/cafe.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/util/time.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 class CafeShiftPage extends StatefulWidget {
   final int shiftId;
-  final CafeUser? user;
-  CafeShiftPage({Key? key, required this.shiftId, required this.user})
+  final SimpleUserRead? cafeUser;
+  CafeShiftPage({Key? key, required this.shiftId, required this.cafeUser})
       : super(key: key);
   @override
   _CafeShiftPageState createState() => _CafeShiftPageState();
 }
 
 class _CafeShiftPageState extends State<CafeShiftPage> {
-  CafeShift? shift;
-  CafeUser? user;
+  CafeShiftRead? shift;
+  SimpleUserRead? cafeUser;
+  AdminUserRead? me;
 
   void initState() {
-    user = widget.user;
+    cafeUser = widget.cafeUser;
     _update();
     super.initState();
   }
 
   Future<void> _update() async {
-    locator<CafeService>()
-        .getShift(widget.shiftId)
-        .then((value) => setState(() {
-              this.shift = value;
-            }));
+    final cafeResponse = await ApiService.apiClient
+        .getCafeApi()
+        .cafeViewShift(shiftId: widget.shiftId);
+    final cafeResponseData = cafeResponse.data;
+
+    final meResponse = await ApiService.apiClient.getUsersApi().usersGetMe();
+    final meResponseData = meResponse.data;
+
+    setState(() {
+      this.shift = cafeResponseData;
+      this.me = meResponseData;
+    });
   }
 
-  void signup(CafeShift shift) async {
-    await locator<CafeService>()
-        .cafeShiftSignup(shift)
-        .then((value) => successSignup(), onError: (e) => failSignup());
+  void signup(CafeShiftRead shift) async {
+    await ApiService.apiClient
+        .getCafeApi()
+        .cafeSignupToShift(shiftId: shift.id)
+        .then((response) => successSignup(), onError: (e) => failSignup());
     _update();
   }
 
-  void unsign(CafeShift shift) async {
-    user = null; // bcuz garbage api lul
-    await locator<CafeService>()
-        .cafeShiftUnsign(shift)
-        .then((value) => successUnsign(), onError: (e) => failUnsign());
+  void unsign(CafeShiftRead shift) async {
+    // Dont think we need this anymore?: user = null; // bcuz garbage api lul
+    await ApiService.apiClient
+        .getCafeApi()
+        .cafeSignoffFromShift(shiftId: shift.id)
+        .then((response) => successUnsign(), onError: (e) => failUnsign());
     _update();
   }
 
@@ -101,37 +109,40 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
     // also different button for signup/unsignup
     String headerText = "";
     TextButton? signupButton;
-    if (shift!.isme ?? false) {
+    if (shift!.userId == me!.id) {
       headerText = t.cafeShiftSignedUp;
       signupButton = TextButton(
         onPressed: () => unsign(shift!),
         child: Text(
           t.cafeShiftRemoveSignup,
-          style: TextStyle(fontSize: 32, color: Theme.of(context).colorScheme.onError),
+          style: TextStyle(
+              fontSize: 32, color: Theme.of(context).colorScheme.onError),
         ),
         style: ButtonStyle(
-          fixedSize: MaterialStateProperty.all(Size(300, 75)),
-          backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.error),
+          fixedSize: WidgetStateProperty.all(Size(300, 75)),
+          backgroundColor:
+              WidgetStateProperty.all(Theme.of(context).colorScheme.error),
         ),
       );
     } else {
       // if someone else is on the shift, or if it is an empty shift
-      headerText = (user == null)
+      headerText = (cafeUser == null)
           ? t.cafeShiftSignup2
-          : "${user!.name}\n${t.cafeShiftIsSignedUp} ";
-      signupButton = (user == null)
+          : "${cafeUser!.firstName} ${cafeUser!.lastName}\n${t.cafeShiftIsSignedUp} ";
+      signupButton = (cafeUser == null)
           ? TextButton(
               onPressed: () => signup(shift!),
               child: Text(t.cafeShiftSignMeUp, style: TextStyle(fontSize: 32)),
               style: ButtonStyle(
-                backgroundColor: Theme.of(context).textButtonTheme.style!.backgroundColor,
-                fixedSize: MaterialStateProperty.all(Size(300, 75)),
+                backgroundColor:
+                    Theme.of(context).textButtonTheme.style!.backgroundColor,
+                fixedSize: WidgetStateProperty.all(Size(300, 75)),
               ),
             )
           : null; // if another person is on the shift, don't show a signup button
     }
     headerText +=
-        "${t.cafeShiftForShift}\n${Time.format(shift!.start ?? DateTime.now(), "%D")}${t.cafeShiftClock}${shift!.duration}";
+        "${t.cafeShiftForShift}\n${Time.format(shift!.startsAt, "%D")}${t.cafeShiftClock}${dateTimeToHourAndMinute(shift!.startsAt)}";
     return Scaffold(
       appBar: AppBar(
         title: Text(t.cafeShiftCafeShift),
@@ -157,3 +168,7 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
     );
   }
 }
+
+String dateTimeToHourAndMinute(DateTime date) {
+    return "${date.hour}:${date.minute}";
+  }

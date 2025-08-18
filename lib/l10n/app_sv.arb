@@ -47,13 +47,14 @@
     "eventPrice": "Pris: ",
     "eventCostsMoney": "  Kostar pengar",
     "eventFoodServed": "  Mat serveras",
-    "eventAlcoholServed": "  Alkohol serveras",
+    "eventAlcoholServed": "Alkohol serveras",
     "eventDrinkPackage": "Vilken typ av alkhoholpaket vill du ha?",
     "eventYes": "Ja",
     "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
     "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
-    "eventAlcohol" : "Alkohol",
+    "eventAlcohol": "Alkohol",
+    "eventAlcoholMayAppear" : "Alkohol kan förekomma",
     "eventAlcoholFree" : "Alkoholfritt",
     "eventNoAlcohol" : "Inget",
 
@@ -169,6 +170,8 @@
 
     "messagesMessages": "Meddelanden",
 
+    "nolleguide": "NOLLEGUIDEN",
+
     "nolleguideWeAtFsek": "F-sektionen",
     "nolleguideEtiquette": "Allt du behöver veta",
     "nolleguideWordlist": "Ordlista",
@@ -218,7 +221,7 @@
     "cafeShiftClock": " kl ",
     "cafeShiftShift": " Ledigt pass",
 
-    "mannersEtiquette": "Studentlivet",
+    "mannersEtiquette": "STUDENTLIVET",
 
     "aboutGuildTitle": "Om F-sektionen",
     "aboutGuildGuild": "F-sektionen",
@@ -343,7 +346,7 @@
     "emergencyTitleSeven": " - Krisinformation",
     "emergencyContentSeven": "Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.",
     "emergencyTitleEight": "Föset",
-    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Mattis\n0735171631\n\nCofös Thea\n0727444727 \n\nCofös Lovisa\n0727086597 \n\nCofös Hanne \n0723893333 \n\nCofös Lian\n0766477878 \n\nCofös Albin\n0705190468 \n\nCofös Linnea\n0707431239 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden",
+    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden",
 
     "game": "Moose game",
     "gameDescription":"Kommer snart!",
@@ -513,6 +516,9 @@
     "nationsInfo": "I Lund finns något som kallas Nationer. De är på samma sätt som sektioner föreningar drivna av studenter vid universitetet men till skillnad från sektioner är nationerna inte bundna till en utbildning och står inte under en kår. Många nationer grundades på 1600-talet, den allra senaste grundades 1928. I Lund finns det 13 nationer och man väljer fritt vilken nation man vill gå med i. Nationerna anordnar fester, pubar, lunch och middagsrestaurang och många andra aktiviteter. När man inte har novischförtur längre på AF Bostäder måste man vara medlem i Studentlund och därigenom en Nation för att få bo på AFB. Läs mer på:",
     "nationsWebsite": "https://www.studentlund.se",
     "guildsInfo": "Lunds Universitet, LU, består av flera olika fakulteter bland vilka Lunds tekniska högskola, LTH, är störst. Till varje fakultet hör en kår och för oss på LTH är det Teknologkåren som förkortas TLTH. Teknologkåren är uppdelad i elva så kallade sektioner där varje sektion innefattar ett eller flera utbildningsprogram. Alla sektioner på LTH drivs som ideella föreningar med hjälp av de studenter som studerar på utbildningarna sektionen omfattar. F-sektionen, som du tillhör, innefattar utbildningarna Teknisk Fysik (F), Teknisk Matematik (π) och Teknisk Nanovetenskap (n). Det är din sektion som anordnar din nollning. Det är även den som har hand om alla programspecifika frågor, oavsett om de gäller studier, näringslivskontakt, fritidsaktiviteter eller annat roligt du kan tänka dig att hitta på under din tid på F-sektionen. Under nollningen är det lättast att känna igen andra sektioner på dess overaller då färgen på overallen är samma som sin sektionsfärg. Sektionerna inom TLTH räknas traditionellt upp i kronologisk ordning enligt: F E M V A K D DOKT Ing W I.",
-    "utskottWebsite": "https://fsektionen.se/utskott"
+    "utskottWebsite": "https://fsektionen.se/utskott",
+    "missions": "UPPDRAG",
+    "unlimited": "Oändligt",
+    "eventNoSignup": "Ingen anmälan behövs"
 
 }

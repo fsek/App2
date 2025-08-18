@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/themes.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/storage_wrapper.dart';
-import 'package:provider/provider.dart';
 
 
 class ThemeService {
@@ -53,10 +51,8 @@ class ThemeService {
 
     _storage = locator<TokenStorageWrapper>();
 
-    if (_storage != null) {
-      _storage.write(key: 'cached-theme', value: themeName);
+    _storage.write(key: 'cached-theme', value: themeName);
     }
-  }
 
   Future<String?> loadTheme() async {
     TokenStorageWrapper? _storage;
@@ -64,10 +60,8 @@ class ThemeService {
 
     _storage = locator<TokenStorageWrapper>();
 
-    if (_storage != null) {
-      cachedTheme = _storage.read('cached-theme');
-    }
-
+    cachedTheme = _storage.read('cached-theme');
+  
     return cachedTheme;
   }
 
@@ -101,7 +95,7 @@ class ThemeService {
         fontFamily: 'Helvetica Neue', 
         fontSize: 28.0, 
         // A grey color before the dark mode overhaul. Workaround but it looks fine on light mode. 
-        color: this.theme.colorScheme.onBackground.withAlpha(170)
+        color: this.theme.colorScheme.onSurface.withAlpha(170)
         )
       ),
     ];

@@ -1,16 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/home/event.dart';
-import 'package:fsek_mobile/models/home/eventuser.dart';
-import 'package:fsek_mobile/models/home/group.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
-import 'package:fsek_mobile/services/event.service.dart';
-import 'package:fsek_mobile/services/user.service.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart'; //For the food-prefs link
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -20,20 +16,26 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  Event? event;
+  EventRead? event;
+  AdminUserRead? user;
   String? userType;
-  Group? group;
-  String? answer;
+  GroupRead? group;
+  // String? answer;
   String? customGroup;
-  Map<String, List<String>?> foodPreferences = {};
   String? foodCustom;
+  Map<String, List<String>?> foodPreferences = {};
   bool displayGroupInput = false;
   String? drinkPackageAnswer;
-  Group? defaultGroup;
+  GroupRead? defaultGroup;
+  EventSignupRead? eventSignup;
+  List<String>? priorites = [];
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
-    "p": Style(padding: HtmlPaddings.zero, margin: Margins.zero, lineHeight: LineHeight(1.2)),
+    "p": Style(
+        padding: HtmlPaddings.zero,
+        margin: Margins.zero,
+        lineHeight: LineHeight(1.2)),
   };
 
   static const foodPrefsDisplay = {
@@ -43,93 +45,342 @@ class _EventPageState extends State<EventPage> {
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
   };
-  static const String drinkPackageNone = "Inget";
-  static const String drinkPackageAlcohol = "Alkohol";
-  static const String drinkPackageAlcoholFree = "Alkoholfritt";
+
+  static const String drinkPackageNone = "None";
+  static const String drinkPackageAlcohol = "Alcohol";
+  static const String drinkPackageAlcoholFree = "AlcoholFree";
+
+  static const Map<String, EventSignupCreateDrinkPackageEnum>
+      drinkPackageToEnum = {
+    "None": EventSignupCreateDrinkPackageEnum.none,
+    "Alcohol": EventSignupCreateDrinkPackageEnum.alcohol,
+    "AlcoholFree": EventSignupCreateDrinkPackageEnum.alcoholFree
+  };
 
   void initState() {
-    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
-          this.event = value;
-          if (this.event != null) {
-            this.drinkPackageAnswer = drinkPackageAlcohol;
-            if (event!.groups != null && event!.groups!.isNotEmpty) {
-              this.defaultGroup = event!.groups![0];
-              this.group = defaultGroup;
-            }
-            if (this.group == null) {
-              this.displayGroupInput = true;
-            }
-          }
-        }));
-    locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
-          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
-          this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-            this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
-          }
-        }));
     super.initState();
+    _loadInitData();
+  }
+
+  Future<void> _loadInitData() async {
+    try {
+      final eventResponse = await ApiService.apiClient
+          .getEventsApi()
+          .eventsGetSingleEvent(eventId: widget.eventId);
+
+      final event = eventResponse.data;
+      if (event == null) return;
+
+      final userResponse =
+          await ApiService.apiClient.getUsersApi().usersGetMe();
+
+      final user = userResponse.data;
+      if (user == null) return;
+
+      EventSignupRead? eventSignup = null;
+
+      try {
+        final userSignupResponse = await ApiService.apiClient
+            .getEventSignupApi()
+            .eventSignupGetMeEventSignup(eventId: event.id);
+
+        eventSignup = userSignupResponse.data;
+      } catch (e) {
+        if (e is DioException && e.response!.statusCode == 404) {
+          eventSignup = null;
+        } else {
+          rethrow;
+        }
+      }
+
+      final prioritesResponse = await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
+
+      setState(() {
+        this.event = event;
+        this.user = user;
+        this.eventSignup = eventSignup;
+        this.drinkPackageAnswer = drinkPackageAlcohol;
+        this.priorites = prioritesResponse.data!.toList();
+        if (user.groups.isNotEmpty) {
+          this.defaultGroup = user.groups.first;
+          this.group = defaultGroup;
+        } else {
+          this.displayGroupInput = true;
+        }
+        this.foodPreferences['en'] = [...(user.standardFoodPreferences ?? [])];
+        this.foodPreferences['sv'] = [...(user.standardFoodPreferences ?? [])];
+        this.foodCustom = user.otherFoodPreferences;
+        for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
+          this.foodPreferences['en']![i] =
+              foodPrefsDisplay[this.foodPreferences['en']![i]] ?? "";
+        }
+      });
+    } catch (e) {
+      print("Error loading data: $e");
+    }
   }
 
   void update() {
-    locator<EventService>().getEvent(widget.eventId).then((value) => setState(() {
-          this.event = value;
-          if (event != null) {
-            if (event!.user_types != null) {
-              this.userType = event!.user_types![0][0];
-            } else {
-              this.userType = null;
-            }
-            // when we update (basically undo signup) make sure to go back to normal defaults to avoid weird behaviour
-            this.group = event!.groups![0];
-          } else {
-            this.group = null;
-            this.userType = null;
-          }
-          this.answer = null;
-        }));
-    locator<UserService>().getUser().then((value) => setState(() {
-          this.foodPreferences['en'] = [...(value.food_preferences ?? [])];
-          this.foodPreferences['sv'] = [...(value.food_preferences ?? [])];
-          this.foodCustom = value.food_custom;
-          for (int i = 0; i < (this.foodPreferences['sv']?.length ?? 0); i++) {
-            this.foodPreferences['sv']![i] = foodPrefsDisplay[this.foodPreferences['sv']![i]] ?? "";
-          }
-        }));
+    _loadInitData();
+  }
+
+  Future<void> _onRefresh() async {
+    update();
+  }
+
+
+
+  Widget alcoholEventRow(EventRead event, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    if(event.alcoholEventType == "Alcohol-Served") {
+      return Row(children: [
+        Icon(Icons.wine_bar_rounded),
+        Text("  " + t.eventAlcoholServed)]);
+    } 
+
+    if(event.isNollningEvent && event.alcoholEventType == "Alcohol"){
+      return Row(children: [
+        Icon(Icons.local_drink_rounded),
+        Text("  " + t.eventAlcoholMayAppear)
+      ]);
+    }
+
+    if(event.isNollningEvent && event.alcoholEventType == "None") {
+      return Row(children: [
+        Icon(Icons.no_drinks_rounded),
+        Text("  " + t.eventAlcoholFree)
+      ]);
+    }
+
+    return SizedBox.shrink();
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    String locale = Localizations.localeOf(context).toString();
+    /* Failsafe */
+    if (locale != "sv" && locale != "en") {
+      locale = "en";
+    }
+    if (event == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(t.eventTitle),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(t.eventTitle),
+      ),
+      body: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: RefreshIndicator(
+            onRefresh: () => _onRefresh(),
+            child: ListView(
+              children: [
+                Text(locale == "sv" ? event!.titleSv : event!.titleEn,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontSize: 30,
+                        )),
+                Divider(
+                  color: null,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time_rounded,
+                    ),
+                    Text(
+                      /* better error checking */
+                      "  " +
+                          DateFormat("HH:mm").format(
+                              event?.startsAt.toLocal() ?? DateTime.now()) +
+                          getDots() +
+                          " - " +
+                          DateFormat("HH:mm").format(
+                              event?.endsAt.toLocal() ?? DateTime.now()) +
+                          ", " +
+                          DateFormat("MMMMd", locale).format(
+                              event?.startsAt.toLocal() ?? DateTime.now()),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).textTheme.bodyMedium!.color),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room,
+                    ),
+                    Text(
+                      "  " + (event?.location ?? "intigheten"),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).textTheme.bodyMedium!.color),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: null,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
+                  /* should be parsed html */
+                  child: Html(
+                      data: locale == "sv"
+                          ? event!.descriptionSv
+                          : event!.descriptionEn,
+                      style: _htmlStyle,
+                      onLinkTap: (String? url, Map<String, String> attributes,
+                          element) {
+                        launchUrl(Uri.parse(url!));
+                      }),
+                ),
+                Divider(
+                  color: null,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(children: [
+                        Text(t.eventDressCode + event!.dressCode)
+                      ]),
+                      Visibility(
+                          visible: event!.price <= 0 ? false : true,
+                          child: Text(t.eventPrice +
+                              (event?.price.toString() ?? "") +
+                              " kr")),
+                    ],
+                  ),
+                ),
+                Divider(
+                  color: null,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: event!.price <= 0 ? false : true,
+                        child: Row(
+                          children: [
+                            Icon(Icons.attach_money_rounded),
+                            Text(t.eventCostsMoney)
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: event!.food,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.restaurant_rounded,
+                            ),
+                            Text(t.eventFoodServed)
+                          ],
+                        ),
+                      ),
+                      alcoholEventRow(event!, context),
+                      Visibility(
+                        visible: event!.canSignup,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.event_rounded,
+                            ),
+                            Text(t.eventHasSignup)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: event!.canSignup,
+                  child: Divider(
+                    color: null,
+                  ),
+                ),
+                Visibility(
+                  visible: (!(event!.council == null)),
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          t.eventInCaseOfQuestions,
+                        ),
+                        InkWell(
+                          child: new Text(
+                            t.localeName == "sv" ? event!.council.nameSv : event!.council.nameEn,
+                            style: TextStyle(
+                              color: Colors.blue[300],
+                            ),
+                          ),
+                          // onTap: () => launchUrl(Uri.parse(
+                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), // TODO add the correct URL here
+                          //)),
+                        ),
+                        Divider(
+                          color: null,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                signupInfoWidget(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void sendSignup() async {
-    EventUser eventUser = EventUser(answer, group?.id, customGroup, userType, drinkPackageAnswer);
-    /* just to be sure */
-    if (group?.id != null) {
-      customGroup = null;
-    }
     if (drinkPackageAnswer == null || drinkPackageAnswer == "") {
       setState(() {
         drinkPackageAnswer = drinkPackageNone;
       });
     }
-    int eventId = event?.id ?? -1;
-    Map json =
-        await AbstractService.post("/events/" + eventId.toString() + "/event_users", mapBody: eventUser.toJson());
-    if (!json.containsKey('errors')) {}
+
+    final eventSignupCreate = EventSignupCreate((b) => b
+      ..userId = user!.id
+      ..priority = userType
+      ..groupName = group?.name ?? null
+      ..drinkPackage = drinkPackageToEnum[drinkPackageAnswer]);
+
+    await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(
+        eventId: event!.id, eventSignupCreate: eventSignupCreate);
+
     update();
   }
 
   void removeSignup() async {
-    int userId = event?.event_user?.id ?? -1;
+    int userId = user?.id ?? -1;
     int eventId = event?.id ?? -1;
-    Map json = await AbstractService.delete(
-      "/events/" + eventId.toString() + "/event_users/" + userId.toString(),
-    );
-    if (!json.containsKey('errors')) {}
+
+    await ApiService.apiClient
+        .getEventSignupApi()
+        .eventSignupEventSignoffRoute(eventId: eventId, userId: userId);
     update();
   }
 
   //Bör denna vara async som de andra funktionerna?
   void goToSettings() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage())).then((_) {
+    Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SettingsPage()))
+        .then((_) {
       //uppdaterar sidan så man ser sin ändring
       update();
     });
@@ -155,16 +406,13 @@ class _EventPageState extends State<EventPage> {
               });
             },
             items: [
-              // DropdownMenuItem<String?>(
-              //   value: ,
-              //   child: Text(t.eventOther),
-              // ),
-              ...?event!.user_types?.map(((List<String> ut) {
-                return DropdownMenuItem<String?>(
-                  value: ut[1],
-                  child: Text(ut[0]),
-                );
-              })),
+              if (event!.priorities.toList().isNotEmpty)
+                ...event!.priorities
+                    .where((prio) => priorites!.contains(prio.priority))
+                    .map((prio) => DropdownMenuItem<String?>(
+                          value: prio.priority,
+                          child: Text(prio.priority),
+                        )),
 
               DropdownMenuItem<String?>(
                 value: null,
@@ -179,19 +427,24 @@ class _EventPageState extends State<EventPage> {
 
   Widget groupDropdown() {
     var t = AppLocalizations.of(context)!;
+
+    if (user == null) {
+      return CircularProgressIndicator();
+    }
+
     return Container(
       margin: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(t.eventChooseGroup),
-          DropdownButton<Group?>(
+          DropdownButton<GroupRead?>(
             isExpanded: true,
             value: group,
             icon: const Icon(Icons.arrow_downward),
             iconSize: 24,
             elevation: 16,
-            onChanged: (Group? newValue) {
+            onChanged: (GroupRead? newValue) {
               setState(() {
                 group = newValue;
                 if (newValue == null) {
@@ -202,13 +455,12 @@ class _EventPageState extends State<EventPage> {
               });
             },
             items: [
-              ...?event!.groups?.map(((Group? g) {
-                return DropdownMenuItem<Group?>(
-                  value: g,
-                  child: Text(g!.name!),
-                );
-              })),
-              DropdownMenuItem<Group?>(
+              if (user!.groups.toList().isNotEmpty)
+                ...user!.groups.map(((GroupRead? g) {
+                  return DropdownMenuItem<GroupRead?>(
+                      value: g, child: Text(g!.name));
+                })),
+              DropdownMenuItem<GroupRead?>(
                 value: null,
                 child: Text(t.eventOtherDifferent),
               ),
@@ -232,55 +484,99 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget questionInput() {
-    if (event?.event_signup?.question == null || event?.event_signup?.question == "") {
-      return Container();
+  // This is ugly af but works
+  String isSignupOpen(EventRead event) {
+    if (event.signupStart.toLocal().isBefore(DateTime.now())) {
+      if (event.signupEnd.toLocal().isAfter(DateTime.now())) {
+        return "open";
+      }
+      return "closed";
     }
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(event?.event_signup?.question ?? ""),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              onChanged: (String? newValue) {
-                setState(() {
-                  answer = newValue;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: event?.event_signup?.question,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return "upcoming";
   }
 
   Widget signupInfoWidget() {
     var t = AppLocalizations.of(context)!;
     Widget signup;
     String locale = Localizations.localeOf(context).toString();
-    /* If no event or no event signup recieved */
-    if (event == null || event?.event_signup == null) {
-      return Container();
+    // If no event
+    if (event == null) {
+      return Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(t.eventTechnicalDifficulties),
+            InkWell(
+              child: new Text(
+                "spindelmännen",
+                style: TextStyle(
+                  color: Colors.blue[300],
+                ),
+              ),
+              // onTap: () =>
+              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+            ),
+            Divider(
+              color: null,
+            ),
+          ],
+        ),
+      );
     }
-
-    if (event!.can_signup!) {
-      if (event!.event_signup!.open!)
+    if(!event!.canSignup) {
+      return Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.local_activity_outlined),
+                Text("  " + t.eventNoSignup),
+              ],
+            ),
+            Divider(
+              color: null,
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(t.eventTechnicalDifficulties),
+                  InkWell(
+                    child: new Text(
+                      "spindelmännen",
+                      style: TextStyle(
+                        color: Colors.blue[300],
+                      ),
+                    ),
+                    // onTap: () =>
+                    //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+    }
+    if (event!.canSignup) {
+      if (isSignupOpen(event!) == "open") {
         signup = signupWidget(t);
-      else {
-        if (event!.event_signup!.closed!) {
-          if (event!.event_user == null) {
+      } else {
+        if (isSignupOpen(event!) == "closed") {
+          if (eventSignup == null) {
             signup = Row(
               children: [
                 Icon(
                   Icons.info_outline_rounded,
-                  color: Colors.red[300], // I don't like it, but this hardcoding kinda just works
+                  color: Colors.red[
+                      300], // I don't like it, but this hardcoding kinda just works
                 ),
                 Text(
                   t.eventNotSignedUp,
@@ -291,21 +587,12 @@ class _EventPageState extends State<EventPage> {
               ],
             );
           } else {
-            String groupName = "";
-            if (event!.event_user!.group_id != null) {
-              for (int i = 0; i < event!.groups!.length; i++) {
-                if (event!.groups![i].id == event!.event_user!.group_id) {
-                  groupName = event!.groups![i].name!;
-                  break;
-                }
-              }
-            } else {
-              groupName = event!.event_user!.group_custom ?? "";
-            }
-            String userType = event!.event_user!.user_type ?? t.eventOther;
-            if (!(event!.event_signup!.lottery ?? false)) {
-              if (event!.event_user?.reserve ?? false) {
-                signup = Column(
+            String? groupName = eventSignup!.groupName;
+            String userType = eventSignup!.priority;
+            if (event!.lottery == true) {
+              if(event!.eventUsersConfirmed) {
+                if(!eventSignup!.confirmedStatus) {
+                  signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -328,7 +615,7 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-              } else {
+                } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -341,7 +628,7 @@ class _EventPageState extends State<EventPage> {
                         Text(
                           t.eventGotSpot,
                           style: TextStyle(
-                            color:Colors.green[300],
+                            color: Colors.green[300],
                           ),
                         ),
                       ],
@@ -352,6 +639,31 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
+              }
+              } else {
+                signup = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Text(
+                        t.eventLotterySpot,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                  ..._signupDetails(groupName, userType),
+                ],
+              );
               }
             } else {
               signup = Column(
@@ -384,7 +696,7 @@ class _EventPageState extends State<EventPage> {
         }
       }
     } else {
-      signup = Text("hej");
+      signup = SizedBox.shrink();
     }
 
     return Container(
@@ -409,7 +721,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.person,
                     ),
                     Text(
-                      t.eventNbrSignUps + event!.event_user_count!.toString(),
+                      t.eventNbrSignUps + event!.signupCount.toString(),
                     ),
                   ],
                 ),
@@ -419,7 +731,7 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      t.eventNbrSpots + event!.event_signup!.slots!.toString(),
+                      t.eventNbrSpots + (event!.maxEventUsers == 0 ? t.unlimited : event!.maxEventUsers.toString()),
                     ),
                   ],
                 ),
@@ -430,9 +742,11 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpOpens +
-                          DateFormat("d/M").format(event!.event_signup!.opens!.toLocal()) +
+                          DateFormat("d/M")
+                              .format(event!.signupStart.toLocal()) +
                           " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.opens!.toLocal()),
+                          DateFormat("jm", locale)
+                              .format(event!.signupStart.toLocal()),
                     ),
                   ],
                 ),
@@ -443,9 +757,10 @@ class _EventPageState extends State<EventPage> {
                     ),
                     Text(
                       t.eventSignUpCloses +
-                          DateFormat("d/M").format(event!.event_signup!.closes!.toLocal()) +
+                          DateFormat("d/M").format(event!.signupEnd.toLocal()) +
                           " " +
-                          DateFormat("jm", locale).format(event!.event_signup!.closes!.toLocal()),
+                          DateFormat("jm", locale)
+                              .format(event!.signupEnd.toLocal()),
                     ),
                   ],
                 ),
@@ -472,7 +787,8 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  onTap: () => launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                  // onTap: () => launchUrl(Uri.parse(
+                  //     "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
                 ),
                 Divider(
                   color: null,
@@ -491,11 +807,11 @@ class _EventPageState extends State<EventPage> {
     if (locale != "sv" && locale != "en") {
       locale = "en";
     }
-    if (event == null) {
-      if (event?.can_signup ?? false) return Container();
-    }
+    // if (event == null) {
+    //   if (event?.can_signup ?? false) return Container();
+    // }
     Widget drinkPackageInput = Container();
-    if (event!.drink_package ?? false) {
+    if (!(event!.alcoholEventType == "None")) {
       drinkPackageInput = Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -531,7 +847,7 @@ class _EventPageState extends State<EventPage> {
         ],
       );
     }
-    if (event?.event_user == null) {
+    if (eventSignup == null) {
       return Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
           width: double.infinity,
@@ -540,12 +856,15 @@ class _EventPageState extends State<EventPage> {
             children: [
               groupDropdown(),
               userTypeDropDown(),
-              questionInput(),
+              // questionInput(),
               drinkPackageInput,
               Wrap(
                 children: [
                   Text(t.eventFoodPreferences + " ",
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color:
+                              Theme.of(context).textTheme.bodyMedium!.color)),
                   ...?foodPreferences[locale]
                       ?.where((element) => element.isNotEmpty)
                       .map((foodPreference) => Text(foodPreference + " ")),
@@ -555,7 +874,9 @@ class _EventPageState extends State<EventPage> {
               Wrap(children: [
                 Text(
                   t.eventFoodPrefInfo,
-                  style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).textTheme.bodyMedium!.color),
                 ),
                 GestureDetector(
                   child: Text(t.eventLinkToFoodPrefs,
@@ -581,7 +902,9 @@ class _EventPageState extends State<EventPage> {
                         alignment: Alignment.center,
                         child: Text(
                           t.eventSendSignup,
-                          style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                     ),
@@ -591,18 +914,18 @@ class _EventPageState extends State<EventPage> {
             ],
           ));
     } else {
-      String groupName = "";
-      if (event!.event_user!.group_id != null) {
-        for (int i = 0; i < event!.groups!.length; i++) {
-          if (event!.groups![i].id == event!.event_user!.group_id) {
-            groupName = event!.groups![i].name!;
-            break;
-          }
-        }
-      } else {
-        groupName = event!.event_user!.group_custom ?? "";
-      }
-      String userType = event!.event_user!.user_type ?? t.eventOther;
+      String? groupName = eventSignup!.groupName;
+      // if (eventSignup.groupName != null) {
+      //   for (int i = 0; i < event!.groups!.length; i++) {
+      //     if (event!.groups![i].id == event!.event_user!.group_id) {
+      //       groupName = event!.groups![i].name!;
+      //       break;
+      //     }
+      //   }
+      // } else {
+      //   groupName = event!.event_user!.group_custom ?? "";
+      // }
+      String userType = eventSignup!.priority;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -626,7 +949,9 @@ class _EventPageState extends State<EventPage> {
                     alignment: Alignment.center,
                     child: Text(
                       t.eventDesignup,
-                      style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onError),
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.onError),
                     ),
                   ),
                 ),
@@ -671,20 +996,24 @@ class _EventPageState extends State<EventPage> {
       locale = "en";
     }
     Widget drinkPackage = Container();
-    if (event!.drink_package ?? false) {
-      switch (event!.event_user!.drink_package_answer) {
-        case drinkPackageAlcohol:
-          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcohol);
+    if (event!.drinkPackage) {
+      switch (eventSignup!.drinkPackage.name) {
+        case "alcohol": // Had to hard code this cuz the openapi generator lowered all enums... TODO maybe change this later...
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventAlcohol}");
           break;
-        case drinkPackageAlcoholFree:
-          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventAlcoholFree);
+        case "alcoholFree":
+          drinkPackage = _drinkPackageWidget(
+              t.eventDrinkPackage, " ${t.eventAlcoholFree}");
           break;
-        case drinkPackageNone:
-          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+        case "none":
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
           break;
         default:
           this.drinkPackageAnswer = drinkPackageNone;
-          drinkPackage = _drinkPackageWidget(t.eventDrinkPackage, t.eventNoAlcohol);
+          drinkPackage =
+              _drinkPackageWidget(t.eventDrinkPackage, " ${t.eventNoAlcohol}");
           break;
       }
     }
@@ -692,34 +1021,53 @@ class _EventPageState extends State<EventPage> {
       RichText(
           text: TextSpan(
         text: t.eventGroup,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-        children: [TextSpan(text: groupName, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: " $groupName",
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
       )),
       RichText(
           text: TextSpan(
         text: t.eventPriority2,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-        children: [TextSpan(text: userType, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: userType,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
       )),
-      event!.event_signup!.question != ""
-          ? RichText(
-              text: TextSpan(
-                  text: event!.event_signup!.question!,
-                  children: [
-                    TextSpan(text: " "),
-                    TextSpan(
-                        text: event!.event_user!.answer,
-                        style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
-                  ],
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
-          : Container(),
+      // event!.event_signup!.question != ""
+      //     ? RichText(
+      //         text: TextSpan(
+      //             text: event!.event_signup!.question!,
+      //             children: [
+      //               TextSpan(text: " "),
+      //               TextSpan(
+      //                   text: event!.event_user!.answer,
+      //                   style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))
+      //             ],
+      //             style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color)))
+      //     : Container(),
       drinkPackage,
       Wrap(
         children: [
           RichText(
               text: TextSpan(
-                  text: t.eventFoodPreferences + " ",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),)),
+            text: t.eventFoodPreferences + " ",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.bodyMedium!.color),
+          )),
           ...?foodPreferences[locale]
               ?.where((element) => element.isNotEmpty)
               .map((foodPreferences) => Text(foodPreferences + " ")),
@@ -729,7 +1077,9 @@ class _EventPageState extends State<EventPage> {
       Wrap(children: [
         Text(
           t.eventFoodPrefInfo,
-          style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyMedium!.color),
+          style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).textTheme.bodyMedium!.color),
         ),
         GestureDetector(
           child: Text(t.eventLinkToFoodPrefs,
@@ -746,216 +1096,28 @@ class _EventPageState extends State<EventPage> {
     return RichText(
       text: TextSpan(
         text: drinkPackageText,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyMedium!.color),
-        children: [TextSpan(text: choice, style: TextStyle(fontWeight: FontWeight.normal, color: Theme.of(context).textTheme.bodyMedium!.color))],
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.bodyMedium!.color),
+        children: [
+          TextSpan(
+              text: choice,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).textTheme.bodyMedium!.color))
+        ],
       ),
     );
   }
 
   String getDots() {
     switch (event!.dot) {
-      case "single":
+      case "Single":
         return " (.)";
-      case "double":
+      case "Double":
         return " (..)";
       default:
         return "";
     }
-  }
-
-  Future<void> _onRefresh() async {
-    update();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var t = AppLocalizations.of(context)!;
-    String locale = Localizations.localeOf(context).toString();
-    /* Failsafe */
-    if (locale != "sv" && locale != "en") {
-      locale = "en";
-    }
-    if (event == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(t.eventTitle),
-        ),
-      );
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(t.eventTitle),
-      ),
-      body: Container(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: RefreshIndicator(
-            onRefresh: () => _onRefresh(),
-            child: ListView(
-              children: [
-                Text(
-                  event?.title ?? t.eventNoTitle,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 30,)
-                ),
-                Divider(
-                  color: null,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time_rounded,
-                    ),
-                    Text(
-                      /* better error checking */
-                      "  " +
-                          DateFormat("HH:mm").format(event?.starts_at?.toLocal() ?? DateTime.now()) +
-                          getDots() +
-                          " - " +
-                          DateFormat("HH:mm").format(event?.ends_at?.toLocal() ?? DateTime.now()) +
-                          ", " +
-                          DateFormat("MMMMd", locale).format(event?.starts_at?.toLocal() ?? DateTime.now()),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).textTheme.bodyMedium!.color
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.room,
-                    ),
-                    Text(
-                      "  " + (event?.location ?? "intigheten"),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).textTheme.bodyMedium!.color
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: null,
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
-                  /* should be parsed html */
-                  child: Html(
-                      data: event?.description ?? t.eventNoDescription,
-                      style: _htmlStyle,
-                      onLinkTap: (String? url, Map<String, String> attributes, element) {
-                        launchUrl(Uri.parse(url!));
-                      }),
-                ),
-                Divider(
-                  color: null,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        Text(t.eventDressCode),
-                        ...?event?.dress_code?.map((dressCode) => Text(dressCode + " "))
-                      ]),
-                      Visibility(
-                          visible: event!.cash ?? false,
-                          child: Text(t.eventPrice + (event?.price?.toString() ?? "") + " kr")),
-                    ],
-                  ),
-                ),
-                Divider(
-                  color: null,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                  child: Column(
-                    children: [
-                      Visibility(
-                        visible: event!.cash ?? false,
-                        child: Row(
-                          children: [Icon(Icons.attach_money_rounded), Text(t.eventCostsMoney)],
-                        ),
-                      ),
-                      Visibility(
-                        visible: event!.food ?? false,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.restaurant_rounded,
-                            ),
-                            Text(t.eventFoodServed)
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: event!.drink ?? false,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.wine_bar_rounded,
-                            ),
-                            Text(t.eventAlcoholServed)
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: event!.can_signup ?? false,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.event_rounded,
-                            ),
-                            Text(t.eventHasSignup)
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: event!.can_signup ?? false,
-                  child: Divider(
-                    color: null,
-                  ),
-                ),
-                Visibility(
-                  visible: (!(event!.contact == null)),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          t.eventInCaseOfQuestions,
-                        ),
-                        InkWell(
-                          child: new Text(
-                            event!.contact?.name ?? "",
-                            style: TextStyle(
-                              color: Colors.blue[300],
-                            ),
-                          ),
-                          onTap: () => launchUrl(Uri.parse(
-                            "https://www.fsektionen.se/kontakter/" + (event!.contact?.id ?? 0).toString(),
-                          )),
-                        ),
-                        Divider(
-                          color: null,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                signupInfoWidget(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

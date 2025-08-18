@@ -7,13 +7,10 @@ import 'package:fsek_mobile/screens/moose_game/ground.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
 import 'package:fsek_mobile/screens/moose_game/sandwich.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/game.service.dart';
-import 'package:fsek_mobile/services/user.service.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'package:vector_math/vector_math.dart';
 
 import 'moose.dart';
@@ -61,6 +58,8 @@ class _MooseGamePageState extends State<MooseGamePage>
   late Ground ground2;
   late Sandwich sandwich;
   late double sandwichOffset;
+  String mooseGameToken =
+      const String.fromEnvironment('MOOSE_GAME_SECRET', defaultValue: '');
 
   bool isDead = false;
 
@@ -68,9 +67,10 @@ class _MooseGamePageState extends State<MooseGamePage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) {
-      setState(() {
-        gameOver();
-      });
+      if (!isDead)
+        setState(() {
+          gameOver();
+        });
     }
   }
 
@@ -78,16 +78,28 @@ class _MooseGamePageState extends State<MooseGamePage>
   void initState() {
     super.initState();
 
+    ApiService.apiClient.getUsersApi().usersGetMe().then((user) => {
+          user.data != null
+              ? highscore = user.data!.mooseGameScore.toDouble()
+              : highscore = 0
+        });
+
     WidgetsBinding.instance.addObserver(this);
 
     cameraPos = Vector2.zero();
-    late int tempuserid;
-    locator<UserService>().getUser().then((user) => tempuserid = user.id ?? 0);
-    locator<GameScoreService>().getScores().then((users) => {
-          highscore = (users.firstWhere((gamescore) => gamescore.user?.id == tempuserid).score ?? 0).toDouble()
-        });
 
-    gameAnimController = AnimationController(vsync: this, duration: Duration(days: 6122));
+    // locator<UserService>().getUser().then((user) => tempuserid = user.id ?? 0);
+    // locator<GameScoreService>().getScores().then((users) => {
+    //       highscore = (users
+    //                   .firstWhere(
+    //                       (gamescore) => gamescore.user?.id == tempuserid)
+    //                   .score ??
+    //               0)
+    //           .toDouble()
+    //     });
+
+    gameAnimController =
+        AnimationController(vsync: this, duration: Duration(days: 6122));
     gameAnimController.addListener(update);
 
     initializeGame();
@@ -112,7 +124,9 @@ class _MooseGamePageState extends State<MooseGamePage>
     obstacles.add(Obstacle(gameViewportWidth, floorY));
     double previousPos = gameViewportWidth;
     for (int i = 1; i < obstacleCount; i++) {
-      previousPos += Random().nextDouble() * (maxObstacleDistance - minObstacleDistance) + minObstacleDistance;
+      previousPos +=
+          Random().nextDouble() * (maxObstacleDistance - minObstacleDistance) +
+              minObstacleDistance;
       obstacles.add(Obstacle(previousPos, floorY));
     }
     leftmostObstacleIdx = 0;
@@ -128,10 +142,17 @@ class _MooseGamePageState extends State<MooseGamePage>
 
   void update() {
     // Clamp since restart results in negative elapsed time.
-    double deltaTime = max(0, (gameAnimController.lastElapsedDuration! - lastUpdateTime).inMilliseconds / 1000.0);
+    double deltaTime = max(
+        0,
+        (gameAnimController.lastElapsedDuration! - lastUpdateTime)
+                .inMilliseconds /
+            1000.0);
     Size screenSize = MediaQuery.of(context).size;
     double totalElapsedTime = score / scorePerSecond;
-    gameSpeed = 1 / (1 + exp(-totalElapsedTime * 4 / secondsToReachMaxApprox)) * (maxGameSpeed + startGameSpeed) - startGameSpeed;
+    gameSpeed = 1 /
+            (1 + exp(-totalElapsedTime * 4 / secondsToReachMaxApprox)) *
+            (maxGameSpeed + startGameSpeed) -
+        startGameSpeed;
 
     moose.gameSpeed = gameSpeed;
     moose.update(deltaTime);
@@ -151,10 +172,12 @@ class _MooseGamePageState extends State<MooseGamePage>
       });
     }
 
-    Rect mooseRect = getGameObjectCameraRect(screenSize, moose, 0.45);//.deflate(10);
+    Rect mooseRect =
+        getGameObjectCameraRect(screenSize, moose, 0.45); //.deflate(10);
     for (Obstacle obst in obstacles) {
       obst.position.x -= (gameSpeed + obst.speed) * deltaTime;
-      Rect obstRect = getGameObjectCameraRect(screenSize, obst, 0.45);//.deflate(11);
+      Rect obstRect =
+          getGameObjectCameraRect(screenSize, obst, 0.45); //.deflate(11);
       if (mooseRect.overlaps(obstRect)) {
         gameOver();
         return;
@@ -163,7 +186,12 @@ class _MooseGamePageState extends State<MooseGamePage>
       if (obst.position.x < -gameViewportWidth) {
         setState(() {
           //print(obstacles[(leftmostObstacleIdx - 1) % obstacleCount].position.x);
-          obst.position.x = max(gameViewportWidth, obstacles[(leftmostObstacleIdx - 1) % obstacleCount].position.x + Random().nextDouble() * (maxObstacleDistance - minObstacleDistance) + minObstacleDistance);
+          obst.position.x = max(
+              gameViewportWidth,
+              obstacles[(leftmostObstacleIdx - 1) % obstacleCount].position.x +
+                  Random().nextDouble() *
+                      (maxObstacleDistance - minObstacleDistance) +
+                  minObstacleDistance);
 
           obst.randomize();
           leftmostObstacleIdx = (leftmostObstacleIdx + 1) % obstacleCount;
@@ -177,7 +205,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     sandwich.position.y =
         1.0 + 1.0 * (sin(1.2 * sandwich.position.x + sandwichOffset) + 1.0);
     Rect sandwichRect =
-        getGameObjectCameraRect(screenSize, sandwich, 0.55);//.deflate(10);
+        getGameObjectCameraRect(screenSize, sandwich, 0.55); //.deflate(10);
     if (mooseRect.overlaps(sandwichRect)) {
       setState(() {
         lastSandwichBonus = score * 0.05;
@@ -205,28 +233,59 @@ class _MooseGamePageState extends State<MooseGamePage>
     });
   }
 
-  void gameOver() {
-    //print(locator<ThemeService>().theme.brightness.toString());
+  void gameOver() async {
     gameAnimController.stop();
     soundtrackPlayer.stop();
     soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
     soundtrackPlayer.play(AssetSource('audio/gameoverfart.mp3'));
+
     setState(() {
       sandwichBonusPopupFadeout = 0;
-      if (score > highscore) {
-        highscore = score;
-        newHighscore = true;
-        locator<GameScoreService>().postScore(score: highscore.toInt());
-      }
       isDead = true;
     });
+
+    if (score > highscore) {
+      highscore = score;
+      setState(() {
+        newHighscore = true;
+      });
+      await ApiService.apiClient
+          .getMooseGameApi()
+          .mooseGameUpdateMouseGameScore(
+              score: score.toInt(),
+              headers: {'moose-game-token': mooseGameToken});
+    }
   }
 
-  Rect getGameObjectCameraRect(Size screenSize, GameObject gameObject, double deflation) {
+  // void gameOver() {
+  //   //print(locator<ThemeService>().theme.brightness.toString());
+  //   gameAnimController.stop();
+  //   soundtrackPlayer.stop();
+  //   soundtrackPlayer.setReleaseMode(ReleaseMode.stop);
+  //   soundtrackPlayer.play(AssetSource('audio/gameoverfart.mp3'));
+  //   setState(() async {
+  //     sandwichBonusPopupFadeout = 0;
+  //     if (score > highscore) {
+  //       highscore = score;
+  //       newHighscore = true;
+  //       await ApiService.apiClient
+  //           .getMooseGameApi()
+  //           .mooseGameUpdateMouseGameScore(score: score.toInt(), headers: {
+  //         'moose-game-token': "sad_secret_key"
+  //       }); // TODO change sad_secret_key to mooseGameToken
+  //     }
+  //     isDead = true;
+  //   });
+  // }
+
+  Rect getGameObjectCameraRect(
+      Size screenSize, GameObject gameObject, double deflation) {
     return Rect.fromCenter(
       center: Offset(
-          screenSize.width / 2 + (gameObject.position.x - cameraPos.x) * worldScale * 24,
-          screenSize.height / 2 - (gameObject.position.y + cameraPos.y) * worldScale * 24),
+          screenSize.width / 2 +
+              (gameObject.position.x - cameraPos.x) * worldScale * 24,
+          screenSize.height / 2 -
+              (gameObject.position.y + cameraPos.y) * worldScale * 24),
       width: gameObject.sprite.imageWidth * worldScale * deflation,
       height: gameObject.sprite.imageHeight * worldScale * deflation,
     );
@@ -234,7 +293,12 @@ class _MooseGamePageState extends State<MooseGamePage>
 
   void restart() async {
     ConnectivityResult connectivityResult;
-    connectivityResult = await Connectivity().checkConnectivity();
+    List<ConnectivityResult> connectivityResults =
+        await Connectivity().checkConnectivity();
+    connectivityResult = connectivityResults.isNotEmpty
+        ? connectivityResults.first
+        : ConnectivityResult.none;
+    //connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
     } else {
       setState(() {
@@ -295,7 +359,10 @@ class _MooseGamePageState extends State<MooseGamePage>
               style: new TextStyle(
                   fontFamily: "NF-Pixels",
                   fontSize: 50,
-                  color: Theme.of(context).colorScheme.onBackground.withAlpha(sandwichBonusPopupFadeout)),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withAlpha(sandwichBonusPopupFadeout)),
             ))));
 
     // Highscore counter
@@ -311,7 +378,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     // "Try again" text
     if (isDead) {
       children.add(Positioned.fill(
-          top: 200,
+          top: 0,
           child: Align(
               alignment: Alignment.center,
               child: Text(
@@ -344,7 +411,11 @@ class _MooseGamePageState extends State<MooseGamePage>
         actions: [
           // Add actions here
           IconButton(
-            icon: Icon(soundtrackPlayer.volume == 1 ? Icons.volume_up : Icons.volume_off, color: Theme.of(context).colorScheme.onPrimary), // Mute icon
+            icon: Icon(
+                soundtrackPlayer.volume == 1
+                    ? Icons.volume_up
+                    : Icons.volume_off,
+                color: Theme.of(context).colorScheme.onPrimary), // Mute icon
             onPressed: () {
               if (soundtrackPlayer.volume == 1) {
                 soundtrackPlayer.setVolume(0);
@@ -354,14 +425,14 @@ class _MooseGamePageState extends State<MooseGamePage>
             },
           ),
           IconButton(
-            icon: Icon(Icons.emoji_events, color: Theme.of(context).colorScheme.onPrimary), // Trophy icon
+            icon: Icon(Icons.emoji_events,
+                color: Theme.of(context).colorScheme.onPrimary), // Trophy icon
             onPressed: () {
               gameOver();
               Future.delayed(Duration(milliseconds: 500));
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => HighscorePage()),
+                MaterialPageRoute(builder: (context) => HighscorePage()),
               );
             },
           ),

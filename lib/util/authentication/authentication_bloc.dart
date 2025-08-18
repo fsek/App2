@@ -43,20 +43,11 @@ class AuthenticationBloc
     // On app start check if we have a token already, if not we have to login
     if (event is AppStarted) {
       final bool hasToken = await userService.isAuthenticated();
-      final bool tokenValid = await userService.isValid();
-
-      if (hasToken && tokenValid) {
-        final DeviseToken token = await userService.validateToken();
-        if (token.error != null && token.error!.isNotEmpty) {
-          emit(AuthenticationUnauthenticated());
-        } else {
-          emit(AuthenticationAuthenticated());
-          this.add(Authenticated());
-        }
-      } else if (hasToken && !tokenValid) {
-        this.add(TokenRevoked());
-      } else {
+      if (!hasToken) {
         emit(AuthenticationUnauthenticated());
+      } else {
+        emit(AuthenticationAuthenticated());
+        this.add(Authenticated());
       }
     }
 

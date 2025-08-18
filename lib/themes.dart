@@ -92,8 +92,8 @@ final ThemeData themeFdark = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.orange[700]!),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.orange[700]!),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
 
@@ -175,8 +175,8 @@ final ThemeData themeN = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.green[700]!),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.green[700]!),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
 
@@ -258,8 +258,8 @@ final ThemeData themePi = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 245, 147, 35)),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(Color.fromARGB(255, 245, 147, 35)),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
     ),
   ),
 
@@ -372,8 +372,8 @@ final ThemeData themeF = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.orange[700]!),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.orange[700]!),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
 
@@ -381,8 +381,8 @@ final ThemeData themeF = ThemeData(
   // the theme update. You should probably not copy this to new themes,
   // the standard colors usually look better.
   checkboxTheme: CheckboxThemeData(
-    fillColor: MaterialStateProperty.all<Color>(Colors.orange[800]!),
-    checkColor: MaterialStateProperty.all<Color>(Colors.white),
+    fillColor: WidgetStateProperty.all<Color>(Colors.orange[800]!),
+    checkColor: WidgetStateProperty.all<Color>(Colors.white),
   ),
 
   // Used for log in page (among other places?)
@@ -423,8 +423,8 @@ final ThemeData themeO = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(const Color.fromRGBO(191, 54, 12, 1)),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      backgroundColor: WidgetStateProperty.all<Color>(const Color.fromRGBO(191, 54, 12, 1)),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
 
@@ -478,8 +478,8 @@ final ThemeData themeD = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFF280A1)),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFF280A1)),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
 
@@ -514,8 +514,8 @@ final ThemeData themeV = ThemeData(
   // Used in cafe shift page, required to not crash
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[400]!),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.blue[400]!),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
     ),
   ),
 

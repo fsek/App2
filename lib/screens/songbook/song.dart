@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fsek_mobile/models/songbook/song.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SongPage extends StatelessWidget {
   const SongPage({Key? key, required this.song}) : super(key: key);
 
-  final Song song;
+  final SongRead song;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,15 @@ class SongPage extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceVariant),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest),
             padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 2, 0, 16),
                 child: Text(
-                  song.title!,
+                  song.title,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
@@ -40,7 +41,10 @@ class SongPage extends StatelessWidget {
                                   color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.melody!,
-                              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant))
                         ]),
                       ),
                     )
@@ -56,7 +60,10 @@ class SongPage extends StatelessWidget {
                                   color: Theme.of(context).primaryColor)),
                           TextSpan(
                               text: song.author!,
-                              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant))
                         ]),
                       ),
                     )
@@ -66,7 +73,7 @@ class SongPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(14, 6, 14, 14),
             child: Html(
-              data: song.content!,
+              data: song.content,
               style: {
                 "p": Style(fontSize: FontSize(16), lineHeight: LineHeight(1.5))
               },

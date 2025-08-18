@@ -25,7 +25,7 @@ class _PropositionCardState extends State<PropositionCard> {
       Theme.of(context).colorScheme.surfaceTint;
     Color backgroundColor =
       Theme.of(context).colorScheme.surfaceTint.withOpacity(0.4);
-    Color bottomColor = Theme.of(context).colorScheme.onBackground.withOpacity(0.4);
+    Color bottomColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.4);
 
     var t = AppLocalizations.of(context)!;
     return widget.proposition == null

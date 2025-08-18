@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/models/songbook/songbookEntry.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
-import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/song.service.dart';
-import 'package:fsek_mobile/services/songbook.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/services/api.service.dart';
+
 
 class TopSongsPage extends StatefulWidget {
   @override
   _TopSongsPageState createState() => _TopSongsPageState();
 }
 
-class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMixin {
-  List<SongbookEntry> songs = [];
-  List<SongbookEntry> TopSongs = [];
+class _TopSongsPageState extends State<TopSongsPage>
+    with TickerProviderStateMixin {
+  List<SongRead> songs = [];
+  List<SongRead> topSongs = [];
 
   //bad helpvariables that are most likely unneeded
   bool searchFocus = false;
@@ -26,14 +26,27 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
 
   @override
   void initState() {
-    int num_top_songs = 10;
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 1400));
-    locator<SongbookService>().getTopSongs(num_top_songs).then((value) => setState(() {
-          this.songs = value;
-          TopSongs = List.from(songs);
-        }));
-
     super.initState();
+    
+    animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1400));
+
+    fetchTopSongs();
+  }
+
+
+  void fetchTopSongs() async {
+    int num_top_songs = 10;
+    final response = await ApiService.apiClient.getSongsApi().songsGetAllSongs();
+
+    setState(() {
+      this.topSongs = (response.data!.toList()
+            ..sort((a, b) => a.views.compareTo(b.views)))
+          .take(num_top_songs)
+          .toList();
+      this.songs = this.topSongs;
+    });
+
   }
 
   @override
@@ -42,41 +55,44 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
     super.dispose();
   }
 
-
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     initChar = 1;
-    return TopSongs == []
+    return topSongs == []
         ? Scaffold(
             //change text
             appBar: AppBar(title: Text(t.songbookSongbook)),
-            body: Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor)))
+            body: Center(
+                child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor)))
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-                  appBar: AppBar(
-                    title: Text(t.songbookSongbook),
-                  ),
-                  body: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: songs.isNotEmpty
-                            ? ListView(
-                                children: songs.map((song) => _generateSongTile(song)).toList(),
-                              )
-                            : Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Text(t.songbookNoMatches),
-                              ),
-                      )
-                    ],
-                  ),
-                ),
-              );
+              appBar: AppBar(
+                title: Text(t.songbookSongbook),
+              ),
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: songs.isNotEmpty
+                        ? ListView(
+                            children: songs
+                                .map((song) => _generateSongTile(song))
+                                .toList(),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Text(t.songbookNoMatches),
+                          ),
+                  )
+                ],
+              ),
+            ),
+          );
   }
 
-  Widget _generateSongTile(SongbookEntry song) {
+  Widget _generateSongTile(SongRead song) {
     Color color;
     Color numColor;
 
@@ -89,7 +105,7 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
     else if (initChar == 3)
       color = Color.fromARGB(255, 205, 127, 50);
     else
-      color = Theme.of(context).colorScheme.surfaceVariant;
+      color = Theme.of(context).colorScheme.surfaceContainerHighest;
 
     // Same for the number
     if (initChar <= 3)
@@ -114,19 +130,22 @@ class _TopSongsPageState extends State<TopSongsPage> with TickerProviderStateMix
             Container(
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceVariant),
+                  bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest),
                 )),
                 child: InkWell(
-                  onTap: () => openSong(song.id!),
-                  child: ListTile(title: Text(song.title == null ? "" : song.title!)),
+                  onTap: () => openSong(song.id),
+                  child: ListTile(
+                      title: Text(song.title)),
                 ))
           ],
     );
   }
 
-  void openSong(int id) {
-    locator<SongService>().getSong(id).then((song) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SongPage(song: song)));
+  void openSong(int id) async {
+    await ApiService.apiClient.getSongsApi().songsGetSong(songId: id).then((song) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });
   }
 }

@@ -47,13 +47,14 @@
     "eventPrice": "Price: ",
     "eventCostsMoney": "  Costs money",
     "eventFoodServed": "  Food served",
-    "eventAlcoholServed": "  Alcohol served",
+    "eventAlcoholServed": "Alcohol served",
     "eventDrinkPackage": "What kind of alcohol package do you want?",
     "eventYes": "Yes",
     "eventNo": "No",
     "eventHasSignup": "  Sign-up required",
     "eventInCaseOfQuestions": "In case of questions about the event, ask the event responsible:",
-    "eventAlcohol" : "Alcohol",
+    "eventAlcohol": "Alkohol",
+    "eventAlcoholMayAppear" : "Alcohol may be present",
     "eventAlcoholFree" : "Alcoholfree",
     "eventNoAlcohol" : "None",
 
@@ -169,6 +170,8 @@
 
     "messagesMessages": "Messages",
 
+    "nolleguide": "THE STUDENT GUIDE",
+
     "nolleguideWeAtFsek": "The F-guild",
     "nolleguideEtiquette": "All you need to know",
     "nolleguideWordlist": "Glossary",
@@ -218,7 +221,7 @@
     "cafeShiftClock": " ",
     "cafeShiftShift": " Available shift",
 
-    "mannersEtiquette": "Student life",
+    "mannersEtiquette": "STUDENT LIFE",
 
     "aboutGuildTitle": "About The F-guild",
     "aboutGuildGuild": "The F-guild",
@@ -343,7 +346,7 @@
     "emergencyTitleSeven": " - Information in case of accidents and crises",
     "emergencyContentSeven": "Sweden's national information number. You can call this number to get information in the event of serious accidents and crises in society.",
     "emergencyTitleEight": "Föset",
-    "emergencyContentEight": "If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nÖverfös Mattis\n0735171631\n\nCofös Thea\n0727444727 \n\nCofös Lovisa\n0727086597 \n\nCofös Hanne \n0723893333 \n\nCofös Lian\n0766477878 \n\nCofös Albin\n0705190468 \n\nCofös Linnea\n0707431239 \n\nFind additional contact information in the Nolleguide",
+    "emergencyContentEight": "If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nFind additional contact information in the Nolleguide",
 
     "game": "Moose game",
     "gameDescription":"Coming soon!",
@@ -511,7 +514,10 @@
     "nationsInfo": "In Lund there is also something called Nations. Like guilds they are run by students at the University but they are not bound to a specific education and they do not answer to a Student Union. Many Nations were started in the 17th century, but the newest one was founded in 1928. In Lund there are 13 different nations and you get to choose which nation you want to join. The nations arrange parties, pubs, lunch and dinner servings and many other events. You can read more at:",
     "nationsWebsite": "https://www.studentlund.se",
     "guildsInfo": "Lund University, LU, consists of several faculties among which the engineering faculty, LTH, is the biggest. Every faculty has their own student union and at LTH that is Teknologkåren which is abbreviated TLTH. Teknologkåren is divided into eleven guilds, where each guild represents one or several educational programmes. Every guild is run like a non profit organization by students from the guild’s programmes. You belong to the F-guild that consists of the programmes engineering physics, engineering mathematics and engineering nanotechnology. It is your guild that arranges your introduction. It is also your guild that takes care of all matters that concern your education, as well as contact with the business world, fun activities and anything else that you do during your time at the F-guild. During the introduction it is easy to recognize other guilds on their overalls since the overall is the color of the wearer's guild. The guilds are traditionally presented in the following order (which is the same as the order in which the guilds were created): F E M V A K D DOKT Ing W I.",
-    "utskottWebsite": "https://fsektionen.se/en/utskott"
+    "utskottWebsite": "https://fsektionen.se/en/utskott",
+    "missions": "MISSIONS",
+    "unlimited": "Unlimited",
+    "eventNoSignup": "No signup required"
 
 
 }
