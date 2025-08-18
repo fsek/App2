@@ -250,8 +250,8 @@ class _GalleryPageState extends State<GalleryPage> {
         return const AssetImage("assets/img/f_logo.png");
       }
 
-      // final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
-      final url = "https://backend.fsektionen.se/img/images/${imgs.data!.first}/small";
+      final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
+      // final url = "https://backend.fsektionen.se/img/images/${imgs.data!.first}/small";
 
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});

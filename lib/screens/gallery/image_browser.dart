@@ -42,8 +42,8 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
 
   Future<Uint8List> fetchImageBytes(int id) async {
     try {
-      // final url = "${Environment.API_URL}/img/images/$id/original";
-      final url = "https://backend.fsektionen.se/img/images/${id}/original";
+      final url = "${Environment.API_URL}/img/images/$id/original";
+      // final url = "https://backend.fsektionen.se/img/images/${id}/original";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 
@@ -192,8 +192,8 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
 
   Future<ImageProvider<Object>> _fetchImage(int id) async {
     try {
-      // final url = "${Environment.API_URL}/img/images/$id/large";
-      final url = "https://backend.fsektionen.se/img/images/${id}/large";
+      final url = "${Environment.API_URL}/img/images/$id/large";
+      // final url = "https://backend.fsektionen.se/img/images/${id}/large";
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
 

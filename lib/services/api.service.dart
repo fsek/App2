@@ -27,7 +27,7 @@ class ApiService {
   // Environment.API_URL
 
   static final ApiClient apiClient =
-      ApiClient(basePathOverride: "https://backend.fsektionen.se", interceptors: [
+      ApiClient(basePathOverride: Environment.API_URL, interceptors: [
     cookieManager,
     OAuthInterceptor(),
     InterceptorsWrapper(
