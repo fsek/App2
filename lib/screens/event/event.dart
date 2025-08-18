@@ -530,20 +530,37 @@ class _EventPageState extends State<EventPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(t.eventNoSignup),
-            InkWell(
-              child: new Text(
-                "spindelmännen",
-                style: TextStyle(
-                  color: Colors.blue[300],
-                ),
-              ),
-              // onTap: () =>
-              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+            Row(
+              children: [
+                Icon(Icons.local_activity_outlined),
+                Text("  " + t.eventNoSignup),
+              ],
             ),
             Divider(
               color: null,
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(t.eventTechnicalDifficulties),
+                  InkWell(
+                    child: new Text(
+                      "spindelmännen",
+                      style: TextStyle(
+                        color: Colors.blue[300],
+                      ),
+                    ),
+                    // onTap: () =>
+                    //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                  ),
+                  Divider(
+                    color: null,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       );
