@@ -47,6 +47,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   int sandwichBonusPopupFadeout = 0;
   double gameSpeed = 0;
   bool newHighscore = false;
+  double _volume = 0;
 
   late AnimationController gameAnimController;
   Duration lastUpdateTime = Duration();
@@ -137,6 +138,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     ground2 = Ground(Ground.groundWidth / 2, floorY - 1 / 2);
     soundtrackPlayer.setSource(AssetSource('audio/moosegame.mp3'));
     soundtrackPlayer.setReleaseMode(ReleaseMode.loop);
+    soundtrackPlayer.setVolume(_volume);
     soundtrackPlayer.resume();
   }
 
@@ -411,16 +413,15 @@ class _MooseGamePageState extends State<MooseGamePage>
         actions: [
           // Add actions here
           IconButton(
-            icon: Icon(
-                soundtrackPlayer.volume == 1
-                    ? Icons.volume_up
-                    : Icons.volume_off,
+            icon: Icon(_volume == 1 ? Icons.volume_up : Icons.volume_off,
                 color: Theme.of(context).colorScheme.onPrimary), // Mute icon
             onPressed: () {
-              if (soundtrackPlayer.volume == 1) {
-                soundtrackPlayer.setVolume(0);
+              if (_volume == 1) {
+                _volume = 0;
+                soundtrackPlayer.setVolume(_volume);
               } else {
-                soundtrackPlayer.setVolume(1);
+                _volume = 1;
+                soundtrackPlayer.setVolume(_volume);
               }
             },
           ),
