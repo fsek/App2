@@ -33,28 +33,31 @@ class _ContactPageState extends State<ContactPage> {
     final responseData = response.data;
 
     Map<PostRead, List<SimpleUserRead>> _postUserMap = {};
+    List<PostRead> postList = [];
 
     if (responseData != null) {
-      responseData.toList().sort((a, b) => a.nameSv.compareTo(b.nameSv));
-      for (int i = 0; i < responseData.length; i++) {
+      postList = responseData.toList();
+      postList.removeWhere((post) => post.councilId == 17);
+      postList.sort((a, b) => a.nameSv.compareTo(b.nameSv));
+      for (int i = 0; i < postList.length; i++) {
         final userResponse = await ApiService.apiClient
             .getPostsApi()
-            .postsGetAllUsersWithPost(postId: responseData[i].id);
+            .postsGetAllUsersWithPost(postId: postList[i].id);
         final userResponseData = userResponse.data;
         if (userResponseData != null) {
           _postUserMap
-              .putIfAbsent(responseData[i], () => [])
+              .putIfAbsent(postList[i], () => [])
               .addAll(userResponseData.toList());
         } else {
-          _postUserMap.putIfAbsent(responseData[i], () => []);
+          _postUserMap.putIfAbsent(postList[i], () => []);
         }
       }
     }
 
     setState(() {
       this.postUserMap = _postUserMap;
-      this.posts = responseData != null ? responseData.toList() : [];
-      this.currentPost = (posts != null && posts != [])
+      this.posts = postList;
+      this.currentPost = (posts != null && posts!.isNotEmpty)
           ? (widget.initPostNameSv != null
               ? posts!.firstWhere(
                   (post) => post.nameSv == widget.initPostNameSv,
