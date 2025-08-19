@@ -3,7 +3,7 @@ workflows:
     name: Build Android & iOS Release
     max_build_duration: 60
     environment:
-      flutter: stable
+      flutter: 3.29.2
       xcode: latest
     cache:
       cache_paths:
