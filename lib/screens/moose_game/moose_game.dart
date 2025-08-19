@@ -390,7 +390,7 @@ class _MooseGamePageState extends State<MooseGamePage>
 
       if (newHighscore) {
         children.add(Positioned.fill(
-            top: -570,
+            top: -200,
             child: Align(
                 alignment: Alignment.center,
                 child: Text(
