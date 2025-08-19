@@ -5,6 +5,8 @@ workflows:
     environment:
       flutter: 3.29.2
       xcode: latest
+      vars:
+        MOOSE_GAME_SECRET: $MOOSE_GAME_SECRET
     cache:
       cache_paths:
         - ~/.pub-cache
