@@ -46,6 +46,13 @@ class _EventPageState extends State<EventPage> {
     "gluten": "Gluten",
   };
 
+  static const prioritiesSvToEn = {
+    "Nolla": "Mentee",
+    "Gruppfadder": "Mentor",
+    "Uppdragsfadder": "Mentor",
+    "Fotograf": "Photographer",
+  };
+
   static const String drinkPackageNone = "None";
   static const String drinkPackageAlcohol = "Alcohol";
   static const String drinkPackageAlcoholFree = "AlcoholFree";
@@ -93,7 +100,8 @@ class _EventPageState extends State<EventPage> {
         }
       }
 
-      final prioritesResponse = await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
+      final prioritesResponse =
+          await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
 
       setState(() {
         this.event = event;
@@ -101,6 +109,7 @@ class _EventPageState extends State<EventPage> {
         this.eventSignup = eventSignup;
         this.drinkPackageAnswer = drinkPackageAlcohol;
         this.priorites = prioritesResponse.data!.toList();
+        print(this.priorites);
         if (user.groups.isNotEmpty) {
           this.defaultGroup = user.groups.first;
           this.group = defaultGroup;
@@ -128,24 +137,23 @@ class _EventPageState extends State<EventPage> {
     update();
   }
 
-
-
   Widget alcoholEventRow(EventRead event, BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    if(event.alcoholEventType == "Alcohol-Served") {
+    if (event.alcoholEventType == "Alcohol-Served") {
       return Row(children: [
         Icon(Icons.wine_bar_rounded),
-        Text("  " + t.eventAlcoholServed)]);
-    } 
+        Text("  " + t.eventAlcoholServed)
+      ]);
+    }
 
-    if(event.isNollningEvent && event.alcoholEventType == "Alcohol"){
+    if (event.isNollningEvent && event.alcoholEventType == "Alcohol") {
       return Row(children: [
         Icon(Icons.local_drink_rounded),
         Text("  " + t.eventAlcoholMayAppear)
       ]);
     }
 
-    if(event.isNollningEvent && event.alcoholEventType == "None") {
+    if (event.isNollningEvent && event.alcoholEventType == "None") {
       return Row(children: [
         Icon(Icons.no_drinks_rounded),
         Text("  " + t.eventAlcoholFree)
@@ -154,8 +162,6 @@ class _EventPageState extends State<EventPage> {
 
     return SizedBox.shrink();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -322,7 +328,9 @@ class _EventPageState extends State<EventPage> {
                         ),
                         InkWell(
                           child: new Text(
-                            t.localeName == "sv" ? event!.council.nameSv : event!.council.nameEn,
+                            t.localeName == "sv"
+                                ? event!.council.nameSv
+                                : event!.council.nameEn,
                             style: TextStyle(
                               color: Colors.blue[300],
                             ),
@@ -411,9 +419,11 @@ class _EventPageState extends State<EventPage> {
                     .where((prio) => priorites!.contains(prio.priority))
                     .map((prio) => DropdownMenuItem<String?>(
                           value: prio.priority,
-                          child: Text(prio.priority),
+                          child: Text(t.localeName == "en"
+                              ? (prioritiesSvToEn[prio.priority] ??
+                                  prio.priority)
+                              : prio.priority),
                         )),
-
               DropdownMenuItem<String?>(
                 value: null,
                 child: Text(t.eventOther),
@@ -524,7 +534,7 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    if(!event!.canSignup) {
+    if (!event!.canSignup) {
       return Container(
         margin: EdgeInsets.all(10),
         child: Column(
@@ -590,45 +600,70 @@ class _EventPageState extends State<EventPage> {
             String? groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
             if (event!.lottery == true) {
-              if(event!.eventUsersConfirmed) {
-                if(!eventSignup!.confirmedStatus) {
+              if (event!.eventUsersConfirmed) {
+                if (!eventSignup!.confirmedStatus) {
                   signup = Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.cancel,
-                          color: Colors.red[300],
-                        ),
-                        Text(
-                          t.eventNoSpot,
-                          style: TextStyle(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.cancel,
                             color: Colors.red[300],
                           ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      color: null,
-                    ),
-                    ..._signupDetails(groupName, userType),
-                  ],
-                );
+                          Text(
+                            t.eventNoSpot,
+                            style: TextStyle(
+                              color: Colors.red[300],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: null,
+                      ),
+                      ..._signupDetails(groupName, userType),
+                    ],
+                  );
                 } else {
+                  signup = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: Colors.green[300],
+                          ),
+                          Text(
+                            t.eventGotSpot,
+                            style: TextStyle(
+                              color: Colors.green[300],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: null,
+                      ),
+                      ..._signupDetails(groupName, userType),
+                    ],
+                  );
+                }
+              } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Icon(
-                          Icons.check_circle,
-                          color: Colors.green[300],
+                          Icons.info_outline_rounded,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         Text(
-                          t.eventGotSpot,
+                          t.eventLotterySpot,
                           style: TextStyle(
-                            color: Colors.green[300],
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ],
@@ -639,31 +674,6 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-              }
-              } else {
-                signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info_outline_rounded,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      Text(
-                        t.eventLotterySpot,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: null,
-                  ),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
               }
             } else {
               signup = Column(
@@ -731,7 +741,10 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      t.eventNbrSpots + (event!.maxEventUsers == 0 ? t.unlimited : event!.maxEventUsers.toString()),
+                      t.eventNbrSpots +
+                          (event!.maxEventUsers == 0
+                              ? t.unlimited
+                              : event!.maxEventUsers.toString()),
                     ),
                   ],
                 ),
@@ -1040,7 +1053,9 @@ class _EventPageState extends State<EventPage> {
             color: Theme.of(context).textTheme.bodyMedium!.color),
         children: [
           TextSpan(
-              text: userType,
+              text: t.localeName == "en"
+                  ? (prioritiesSvToEn[userType] ?? userType)
+                  : userType,
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   color: Theme.of(context).textTheme.bodyMedium!.color))
