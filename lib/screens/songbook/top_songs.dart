@@ -43,7 +43,6 @@ class _TopSongsPageState extends State<TopSongsPage>
             ..sort((a, b) => b.views.compareTo(a.views)))
           .take(num_top_songs)
           .toList();
-      print(topSongs);
       this.songs = this.topSongs;
     });
   }
