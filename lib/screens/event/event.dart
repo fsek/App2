@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -109,7 +110,6 @@ class _EventPageState extends State<EventPage> {
         this.eventSignup = eventSignup;
         this.drinkPackageAnswer = drinkPackageAlcohol;
         this.priorites = prioritesResponse.data!.toList();
-        print(this.priorites);
         if (user.groups.isNotEmpty) {
           this.defaultGroup = user.groups.first;
           this.group = defaultGroup;
@@ -335,9 +335,7 @@ class _EventPageState extends State<EventPage> {
                               color: Colors.blue[300],
                             ),
                           ),
-                          // onTap: () => launchUrl(Uri.parse(
-                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), // TODO add the correct URL here
-                          //)),
+                          onTap: () => _goToPostContact(event!.council.nameSv),
                         ),
                         Divider(
                           color: null,
@@ -524,8 +522,7 @@ class _EventPageState extends State<EventPage> {
                   color: Colors.blue[300],
                 ),
               ),
-              // onTap: () =>
-              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+              onTap: () => _goToPostContact("Spindelman"),
             ),
             Divider(
               color: null,
@@ -562,8 +559,7 @@ class _EventPageState extends State<EventPage> {
                         color: Colors.blue[300],
                       ),
                     ),
-                    // onTap: () =>
-                    //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                    onTap: () => _goToPostContact("Spindelman"),
                   ),
                   Divider(
                     color: null,
@@ -800,8 +796,7 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  // onTap: () => launchUrl(Uri.parse(
-                  //     "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
+                  onTap: () => _goToPostContact("Spindelman"),
                 ),
                 Divider(
                   color: null,
@@ -1134,5 +1129,29 @@ class _EventPageState extends State<EventPage> {
       default:
         return "";
     }
+  }
+
+  Map<String, String> _councilPostMap = {
+    "Prylmästeriet": "Prylmästare",
+    "Föset": "Cofös",
+    "Sanningsministeriet": "Sanningsminister",
+    "Bokförlaget": "Kassör",
+    "Cafemästeriet": "Cafemästare",
+    "Externa representanter": "Utbildningsminister",
+    "Studierådet": "Utbildningsminister",
+    "Kulturministeriet": "Kulturminister",
+    "Näringslivsutskottet": "Näringslivsansvarig",
+    "Samvetet": "Samvetesansvarig",
+    "Sekret service": "Sekreterare",
+    "Sexmästeriet": "Sexmästare",
+    "Styrelsen": "Ordförande",
+  };
+
+  void _goToPostContact(String nameSv) {
+    String finalname = _councilPostMap[nameSv] ?? "Spindelman";
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) => ContactPage(initPostNameSv: finalname))));
   }
 }
