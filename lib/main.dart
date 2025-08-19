@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/nollningHome25.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
@@ -76,9 +74,9 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
-  FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
+  // FirebaseMessaging.onBackgroundMessage(_backgroundMessagingHandler);
 
   // We load the theme here because async is needed, then we pass it to the app
   // where ThemeCubit gets initialised with the cached theme
@@ -124,10 +122,10 @@ Future<void> _reportError(dynamic error, dynamic stackTrace) async {
   }
 }
 
-Future<void> _backgroundMessagingHandler(RemoteMessage message) async {
-  print("Handling a background message: ${message.messageId}");
-  print(message.data);
-  print(message.notification);
-  print(message.messageType);
-  print(message.category);
-}
+// Future<void> _backgroundMessagingHandler(RemoteMessage message) async {
+//   print("Handling a background message: ${message.messageId}");
+//   print(message.data);
+//   print(message.notification);
+//   print(message.messageType);
+//   print(message.category);
+// }

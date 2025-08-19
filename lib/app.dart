@@ -5,7 +5,7 @@ import 'package:fsek_mobile/content_wrapper.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/themes.dart';
-import 'package:fsek_mobile/util/PushNotificationsManager.dart';
+//import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
 import 'package:fsek_mobile/util/storage_wrapper.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
@@ -40,7 +40,7 @@ class FsekMobileApp extends StatefulWidget {
 }
 
 class _FsekMobileAppState extends State<FsekMobileApp> {
-  PushNotificationsManager? pushManager;
+  //PushNotificationsManager? pushManager;
   AuthenticationBloc? _authenticationBloc;
   UserService? _userService;
   TokenStorageWrapper? _storage;
@@ -116,18 +116,18 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthenticationBloc>(
-          create: (context) => _authenticationBloc!,
-        ),
-        BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit()..setTheme(locator<ThemeService>().getThemeData(_themeMode)),
-        ),
-      ],
-      child: BlocBuilder<ThemeCubit, ThemeData>(
-        builder: (context, theme) {
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) => _authenticationBloc!,
+          ),
+          BlocProvider<ThemeCubit>(
+            create: (context) => ThemeCubit()
+              ..setTheme(locator<ThemeService>().getThemeData(_themeMode)),
+          ),
+        ],
+        child: BlocBuilder<ThemeCubit, ThemeData>(builder: (context, theme) {
           locator<ThemeService>().changeLogInIcon();
-          
+
           return MaterialApp(
             theme: theme,
             localizationsDelegates: [
@@ -187,16 +187,13 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
                 },
               )
             ]),
-        
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          routes: {
-            // put named routes in main.dart please (add hot restart app if running)
-          }..addAll(locator<NavigationService>().routes),
-        );
-        }
-      )
-    );
+            debugShowCheckedModeBanner: false,
+            initialRoute: '/',
+            routes: {
+              // put named routes in main.dart please (add hot restart app if running)
+            }..addAll(locator<NavigationService>().routes),
+          );
+        }));
   }
 
   Widget? _buildPage(BuildContext context, AuthenticationState state,

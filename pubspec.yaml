@@ -31,8 +31,6 @@ dependencies:
   json_annotation: ^4.9.0 # For json serializing
   flutter_secure_storage: ^10.0.0-beta.4 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
-  firebase_messaging: ^15.1.0 # For Push notifications
-  firebase_core: ^3.4.0
   equatable: ^2.0.3 # For State
   bloc: ^9.0.0 # For State
   flutter_bloc: ^9.1.0 # For State
@@ -58,10 +56,8 @@ dependencies:
   page_transition: ^2.0.9 # For page transitions
   turn_page_transition: ^0.4.0
   audioplayers: ^6.0.0
-  cloud_firestore_web: ^4.2.0
   video_player_web: ^2.0.17
   wakelock_web: ^0.4.0
-  firebase_core_platform_interface: ^5.0.0
   bloc_concurrency: ^0.3.0
   #image_gallery_saver: ^2.0.3
   flutter_image_gallery_saver: ^0.0.2
@@ -74,8 +70,6 @@ dependencies:
 
   # flutter_gen: any
   audioplayers_web: any
-  firebase_core_web: any
-  firebase_messaging_web: any
   flutter_secure_storage_web: any
   shared_preferences_web: any
   url_launcher_web: any
