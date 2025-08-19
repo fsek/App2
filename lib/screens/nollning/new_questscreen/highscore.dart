@@ -46,7 +46,10 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
     final nollningData = nollningResponse.data;
 
     if (nollningData != null) {
-      for (final nollningGroup in nollningData.nollningGroups.toList()) {
+      List<NollningGroupRead> mentorGroups = nollningData.nollningGroups
+          .where((group) => group.group.groupType.name == "mentor")
+          .toList();
+      for (final nollningGroup in mentorGroups) {
         final groupMissions = await ApiService.apiClient
             .getNollningApi()
             .nollningGetGroupMissionsFromNollningGroup(
