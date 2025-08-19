@@ -1,0 +1,38 @@
+workflows:
+  release:
+    name: Build Android & iOS Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
+    scripts:
+      # 1. Generate code in inner package
+      - name: Generate API client
+        script: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+          cd lib/api_client
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          cd ../..
+
+      # 2. Outer app dependencies
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      # 3. Build Android
+      - name: Build Android APK (release)
+        script: flutter build apk --release
+
+      # 4. Build iOS
+      - name: Build iOS (release)
+        script: flutter build ios --release --no-codesign
+
+    artifacts:
+      - bu
