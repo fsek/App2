@@ -22,11 +22,9 @@ workflows:
         - ~/.gradle/wrapper
         - ios/Pods
     scripts:
-      # 1. Get outer app dependencies
       - name: Get Flutter packages
         script: flutter pub get
 
-      # 2. Generate code in inner package
       - name: Generate API client
         script: |
           cd lib/api_client
@@ -34,28 +32,22 @@ workflows:
           flutter pub run build_runner build --delete-conflicting-outputs
           cd ../..
 
-      # 3. iOS dependencies
       - name: Install CocoaPods
         script: |
           cd ios
           pod install --repo-update
           cd ..
 
-      # 4. Increment build number
       - name: Set build number
         script: |
-          # Use Codemagic build number env variable
           flutter pub run flutter_version increment-build-number --build-number $BUILD_NUMBER
 
-      # 5. Build Android AppBundle
       - name: Build Android AppBundle (release)
         script: flutter build appbundle --release --build-number=$BUILD_NUMBER
 
-      # 6. Build Android APK (optional)
       - name: Build Android APK (release)
         script: flutter build apk --release --build-number=$BUILD_NUMBER
 
-      # 7. Build iOS IPA
       - name: Build iOS IPA
         script: flutter build ipa --release --no-codesign --build-number=$BUILD_NUMBER
 
@@ -74,4 +66,4 @@ workflows:
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: false
-        release_type: APP_STORE
+        release_type: AFTER_APPROVAL
