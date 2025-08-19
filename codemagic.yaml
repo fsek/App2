@@ -7,6 +7,13 @@ workflows:
       xcode: latest
       vars:
         MOOSE_GAME_SECRET: $MOOSE_GAME_SECRET
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: production
+          include: true
+          source: true
     cache:
       cache_paths:
         - ~/.pub-cache
