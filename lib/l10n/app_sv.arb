@@ -519,6 +519,7 @@
     "utskottWebsite": "https://fsektionen.se/utskott",
     "missions": "UPPDRAG",
     "unlimited": "Oändligt",
-    "eventNoSignup": "Ingen anmälan behövs"
+    "eventNoSignup": "Ingen anmälan behövs",
+    "eventHasLottery": "Platser lottas"
 
 }

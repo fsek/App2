@@ -308,6 +308,17 @@ class _EventPageState extends State<EventPage> {
                           ],
                         ),
                       ),
+                      Visibility(
+                        visible: event!.lottery,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.casino_outlined,
+                            ),
+                            Text("  " + t.eventHasLottery)
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
