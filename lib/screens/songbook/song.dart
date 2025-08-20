@@ -72,12 +72,16 @@ class SongPage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(14, 6, 14, 14),
-            child: Html(
-              data: song.content,
-              style: {
-                "p": Style(fontSize: FontSize(16), lineHeight: LineHeight(1.5))
-              },
+            child: Text(
+              song.content,
+              style: TextStyle(fontSize: 16, height: 1.5),
             ),
+            // child: Html(
+            //   data: song.content,
+            //   style: {
+            //     "p": Style(fontSize: FontSize(16), lineHeight: LineHeight(1.5))
+            //   },
+            // ),
           )
         ])));
   }
