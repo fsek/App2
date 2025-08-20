@@ -595,57 +595,31 @@ class _EventPageState extends State<EventPage> {
           } else {
             String? groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
-            if (event!.lottery == true) {
-              if (event!.eventUsersConfirmed) {
-                if (!eventSignup!.confirmedStatus) {
-                  signup = Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.cancel,
+            if (event!.eventUsersConfirmed) {
+              if (!eventSignup!.confirmedStatus) {
+                signup = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.cancel,
+                          color: Colors.red[300],
+                        ),
+                        Text(
+                          t.eventNoSpot,
+                          style: TextStyle(
                             color: Colors.red[300],
                           ),
-                          Text(
-                            t.eventNoSpot,
-                            style: TextStyle(
-                              color: Colors.red[300],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: null,
-                      ),
-                      ..._signupDetails(groupName, userType),
-                    ],
-                  );
-                } else {
-                  signup = Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.green[300],
-                          ),
-                          Text(
-                            t.eventGotSpot,
-                            style: TextStyle(
-                              color: Colors.green[300],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: null,
-                      ),
-                      ..._signupDetails(groupName, userType),
-                    ],
-                  );
-                }
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: null,
+                    ),
+                    ..._signupDetails(groupName, userType),
+                  ],
+                );
               } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -653,13 +627,13 @@ class _EventPageState extends State<EventPage> {
                     Row(
                       children: [
                         Icon(
-                          Icons.info_outline_rounded,
-                          color: Theme.of(context).colorScheme.primary,
+                          Icons.check_circle,
+                          color: Colors.green[300],
                         ),
                         Text(
-                          t.eventLotterySpot,
+                          t.eventGotSpot,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Colors.green[300],
                           ),
                         ),
                       ],
@@ -923,16 +897,6 @@ class _EventPageState extends State<EventPage> {
           ));
     } else {
       String? groupName = eventSignup!.groupName;
-      // if (eventSignup.groupName != null) {
-      //   for (int i = 0; i < event!.groups!.length; i++) {
-      //     if (event!.groups![i].id == event!.event_user!.group_id) {
-      //       groupName = event!.groups![i].name!;
-      //       break;
-      //     }
-      //   }
-      // } else {
-      //   groupName = event!.event_user!.group_custom ?? "";
-      // }
       String userType = eventSignup!.priority;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
