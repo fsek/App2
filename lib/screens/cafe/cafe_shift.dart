@@ -6,8 +6,7 @@ import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
 class CafeShiftPage extends StatefulWidget {
   final int shiftId;
-  final SimpleUserRead? cafeUser;
-  CafeShiftPage({Key? key, required this.shiftId, required this.cafeUser})
+  CafeShiftPage({Key? key, required this.shiftId})
       : super(key: key);
   @override
   _CafeShiftPageState createState() => _CafeShiftPageState();
@@ -15,11 +14,9 @@ class CafeShiftPage extends StatefulWidget {
 
 class _CafeShiftPageState extends State<CafeShiftPage> {
   CafeShiftRead? shift;
-  SimpleUserRead? cafeUser;
   AdminUserRead? me;
 
   void initState() {
-    cafeUser = widget.cafeUser;
     _update();
     super.initState();
   }
@@ -126,10 +123,10 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
       );
     } else {
       // if someone else is on the shift, or if it is an empty shift
-      headerText = (cafeUser == null)
+      headerText = (shift!.user == null)
           ? t.cafeShiftSignup2
-          : "${cafeUser!.firstName} ${cafeUser!.lastName}\n${t.cafeShiftIsSignedUp} ";
-      signupButton = (cafeUser == null)
+          : "${shift!.user!.firstName} ${shift!.user!.lastName}\n${t.cafeShiftIsSignedUp} ";
+      signupButton = (shift!.user == null)
           ? TextButton(
               onPressed: () => signup(shift!),
               child: Text(t.cafeShiftSignMeUp, style: TextStyle(fontSize: 32)),
@@ -170,5 +167,6 @@ class _CafeShiftPageState extends State<CafeShiftPage> {
 }
 
 String dateTimeToHourAndMinute(DateTime date) {
-    return "${date.hour}:${date.minute}";
+    final localDate = date.toLocal();
+    return "${localDate.hour.toString().padLeft(2, '0')}:${localDate.minute.toString().padLeft(2, '0')}";
   }
