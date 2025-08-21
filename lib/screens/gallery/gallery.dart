@@ -148,7 +148,9 @@ class _GalleryPageState extends State<GalleryPage> {
       return [];
     }
     List<Widget> result = [];
-    for (AlbumRead elem in selectedGalleries!) {
+    final galleries = selectedGalleries!;
+    galleries.sort((a, b) => a.date.compareTo(b.date));
+    for (AlbumRead elem in galleries) {
       result.add(Stack(children: [
         Padding(
           padding: EdgeInsets.only(top: 16),

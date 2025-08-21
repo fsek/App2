@@ -80,7 +80,8 @@ class _CafePageState extends State<CafePage> {
 
 
   String dateTimeToHourAndMinute(DateTime date) {
-    return "${date.hour}:${date.minute}";
+    final localDate = date.toLocal();
+    return "${localDate.hour.toString().padLeft(2, '0')}:${localDate.minute.toString().padLeft(2, '0')}";
   }
 
   Widget createCafeShiftCard(CafeShiftRead shift) {
@@ -135,7 +136,6 @@ class _CafePageState extends State<CafePage> {
       MaterialPageRoute(
         builder: (context) => CafeShiftPage(
           shiftId: shift.id,
-          cafeUser: shift.user,
         ),
       ),
     ).then((value) =>

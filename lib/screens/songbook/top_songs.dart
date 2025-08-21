@@ -4,7 +4,6 @@ import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 
-
 class TopSongsPage extends StatefulWidget {
   @override
   _TopSongsPageState createState() => _TopSongsPageState();
@@ -27,26 +26,25 @@ class _TopSongsPageState extends State<TopSongsPage>
   @override
   void initState() {
     super.initState();
-    
+
     animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1400));
 
     fetchTopSongs();
   }
 
-
   void fetchTopSongs() async {
     int num_top_songs = 10;
-    final response = await ApiService.apiClient.getSongsApi().songsGetAllSongs();
+    final response =
+        await ApiService.apiClient.getSongsApi().songsGetAllSongs();
 
     setState(() {
       this.topSongs = (response.data!.toList()
-            ..sort((a, b) => a.views.compareTo(b.views)))
+            ..sort((a, b) => b.views.compareTo(a.views)))
           .take(num_top_songs)
           .toList();
       this.songs = this.topSongs;
     });
-
   }
 
   @override
@@ -131,19 +129,23 @@ class _TopSongsPageState extends State<TopSongsPage>
                 decoration: BoxDecoration(
                     border: Border(
                   bottom: BorderSide(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest),
                 )),
                 child: InkWell(
                   onTap: () => openSong(song.id),
-                  child: ListTile(
-                      title: Text(song.title)),
+                  child: ListTile(title: Text(song.title)),
                 ))
           ],
     );
   }
 
   void openSong(int id) async {
-    await ApiService.apiClient.getSongsApi().songsGetSong(songId: id).then((song) {
+    await ApiService.apiClient
+        .getSongsApi()
+        .songsGetSong(songId: id)
+        .then((song) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => SongPage(song: song.data!)));
     });

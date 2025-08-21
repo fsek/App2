@@ -52,7 +52,7 @@
     "eventYes": "Ja",
     "eventNo": "Nej",
     "eventHasSignup": "  Kräver anmälan",
-    "eventInCaseOfQuestions": "Vid frågor om eventet, kontatakta eventansvarig:",
+    "eventInCaseOfQuestions": "Vid frågor om eventet, kontakta eventansvarig:",
     "eventAlcohol": "Alkohol",
     "eventAlcoholMayAppear" : "Alkohol kan förekomma",
     "eventAlcoholFree" : "Alkoholfritt",
@@ -519,6 +519,7 @@
     "utskottWebsite": "https://fsektionen.se/utskott",
     "missions": "UPPDRAG",
     "unlimited": "Oändligt",
-    "eventNoSignup": "Ingen anmälan behövs"
+    "eventNoSignup": "Ingen anmälan behövs",
+    "eventHasLottery": "Platser lottas"
 
 }

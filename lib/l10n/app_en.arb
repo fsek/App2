@@ -517,7 +517,8 @@
     "utskottWebsite": "https://fsektionen.se/en/utskott",
     "missions": "MISSIONS",
     "unlimited": "Unlimited",
-    "eventNoSignup": "No signup required"
+    "eventNoSignup": "No signup required",
+    "eventHasLottery": "Spots decided by lottery"
 
 
 }

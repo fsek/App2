@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,6 +45,13 @@ class _EventPageState extends State<EventPage> {
     "pescetarian": "Pescetarian",
     "milk": "Mjölkallergi",
     "gluten": "Gluten",
+  };
+
+  static const prioritiesSvToEn = {
+    "Nolla": "Mentee",
+    "Gruppfadder": "Mentor",
+    "Uppdragsfadder": "Mentor",
+    "Fotograf": "Photographer",
   };
 
   static const String drinkPackageNone = "None";
@@ -93,7 +101,8 @@ class _EventPageState extends State<EventPage> {
         }
       }
 
-      final prioritesResponse = await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
+      final prioritesResponse =
+          await ApiService.apiClient.getUsersApi().usersGetMyPriorities();
 
       setState(() {
         this.event = event;
@@ -128,24 +137,23 @@ class _EventPageState extends State<EventPage> {
     update();
   }
 
-
-
   Widget alcoholEventRow(EventRead event, BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    if(event.alcoholEventType == "Alcohol-Served") {
+    if (event.alcoholEventType == "Alcohol-Served") {
       return Row(children: [
         Icon(Icons.wine_bar_rounded),
-        Text("  " + t.eventAlcoholServed)]);
-    } 
+        Text("  " + t.eventAlcoholServed)
+      ]);
+    }
 
-    if(event.isNollningEvent && event.alcoholEventType == "Alcohol"){
+    if (event.isNollningEvent && event.alcoholEventType == "Alcohol") {
       return Row(children: [
         Icon(Icons.local_drink_rounded),
         Text("  " + t.eventAlcoholMayAppear)
       ]);
     }
 
-    if(event.isNollningEvent && event.alcoholEventType == "None") {
+    if (event.isNollningEvent && event.alcoholEventType == "None") {
       return Row(children: [
         Icon(Icons.no_drinks_rounded),
         Text("  " + t.eventAlcoholFree)
@@ -154,8 +162,6 @@ class _EventPageState extends State<EventPage> {
 
     return SizedBox.shrink();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -302,6 +308,17 @@ class _EventPageState extends State<EventPage> {
                           ],
                         ),
                       ),
+                      Visibility(
+                        visible: event!.lottery,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.casino_outlined,
+                            ),
+                            Text("  " + t.eventHasLottery)
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -322,14 +339,14 @@ class _EventPageState extends State<EventPage> {
                         ),
                         InkWell(
                           child: new Text(
-                            t.localeName == "sv" ? event!.council.nameSv : event!.council.nameEn,
+                            t.localeName == "sv"
+                                ? event!.council.nameSv
+                                : event!.council.nameEn,
                             style: TextStyle(
                               color: Colors.blue[300],
                             ),
                           ),
-                          // onTap: () => launchUrl(Uri.parse(
-                          //  "https://www.fsektionen.se/kontakter/" + (event!.council.id).toString(), // TODO add the correct URL here
-                          //)),
+                          onTap: () => _goToPostContact(event!.council.nameSv),
                         ),
                         Divider(
                           color: null,
@@ -411,9 +428,11 @@ class _EventPageState extends State<EventPage> {
                     .where((prio) => priorites!.contains(prio.priority))
                     .map((prio) => DropdownMenuItem<String?>(
                           value: prio.priority,
-                          child: Text(prio.priority),
+                          child: Text(t.localeName == "en"
+                              ? (prioritiesSvToEn[prio.priority] ??
+                                  prio.priority)
+                              : prio.priority),
                         )),
-
               DropdownMenuItem<String?>(
                 value: null,
                 child: Text(t.eventOther),
@@ -514,8 +533,7 @@ class _EventPageState extends State<EventPage> {
                   color: Colors.blue[300],
                 ),
               ),
-              // onTap: () =>
-              //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+              onTap: () => _goToPostContact("Spindelman"),
             ),
             Divider(
               color: null,
@@ -524,7 +542,7 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    if(!event!.canSignup) {
+    if (!event!.canSignup) {
       return Container(
         margin: EdgeInsets.all(10),
         child: Column(
@@ -552,8 +570,7 @@ class _EventPageState extends State<EventPage> {
                         color: Colors.blue[300],
                       ),
                     ),
-                    // onTap: () =>
-                    //     launchUrl(Uri.parse("https://www.fsektionen.se/kontakter/1")),
+                    onTap: () => _goToPostContact("Spindelman"),
                   ),
                   Divider(
                     color: null,
@@ -589,10 +606,9 @@ class _EventPageState extends State<EventPage> {
           } else {
             String? groupName = eventSignup!.groupName;
             String userType = eventSignup!.priority;
-            if (event!.lottery == true) {
-              if(event!.eventUsersConfirmed) {
-                if(!eventSignup!.confirmedStatus) {
-                  signup = Column(
+            if (event!.eventUsersConfirmed) {
+              if (!eventSignup!.confirmedStatus) {
+                signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -615,7 +631,7 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-                } else {
+              } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -639,31 +655,6 @@ class _EventPageState extends State<EventPage> {
                     ..._signupDetails(groupName, userType),
                   ],
                 );
-              }
-              } else {
-                signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info_outline_rounded,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      Text(
-                        t.eventLotterySpot,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: null,
-                  ),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
               }
             } else {
               signup = Column(
@@ -731,7 +722,10 @@ class _EventPageState extends State<EventPage> {
                       Icons.people,
                     ),
                     Text(
-                      t.eventNbrSpots + (event!.maxEventUsers == 0 ? t.unlimited : event!.maxEventUsers.toString()),
+                      t.eventNbrSpots +
+                          (event!.maxEventUsers == 0
+                              ? t.unlimited
+                              : event!.maxEventUsers.toString()),
                     ),
                   ],
                 ),
@@ -787,8 +781,7 @@ class _EventPageState extends State<EventPage> {
                       color: Colors.blue[300],
                     ),
                   ),
-                  // onTap: () => launchUrl(Uri.parse(
-                  //     "https://www.fsektionen.se/kontakter/1")), // TODO fixa denna länken
+                  onTap: () => _goToPostContact("Spindelman"),
                 ),
                 Divider(
                   color: null,
@@ -915,16 +908,6 @@ class _EventPageState extends State<EventPage> {
           ));
     } else {
       String? groupName = eventSignup!.groupName;
-      // if (eventSignup.groupName != null) {
-      //   for (int i = 0; i < event!.groups!.length; i++) {
-      //     if (event!.groups![i].id == event!.event_user!.group_id) {
-      //       groupName = event!.groups![i].name!;
-      //       break;
-      //     }
-      //   }
-      // } else {
-      //   groupName = event!.event_user!.group_custom ?? "";
-      // }
       String userType = eventSignup!.priority;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1040,7 +1023,9 @@ class _EventPageState extends State<EventPage> {
             color: Theme.of(context).textTheme.bodyMedium!.color),
         children: [
           TextSpan(
-              text: userType,
+              text: t.localeName == "en"
+                  ? (prioritiesSvToEn[userType] ?? userType)
+                  : userType,
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   color: Theme.of(context).textTheme.bodyMedium!.color))
@@ -1119,5 +1104,29 @@ class _EventPageState extends State<EventPage> {
       default:
         return "";
     }
+  }
+
+  Map<String, String> _councilPostMap = {
+    "Prylmästeriet": "Prylmästare",
+    "Föset": "Cofös",
+    "Sanningsministeriet": "Sanningsminister",
+    "Bokförlaget": "Kassör",
+    "Cafemästeriet": "Cafemästare",
+    "Externa representanter": "Utbildningsminister",
+    "Studierådet": "Utbildningsminister",
+    "Kulturministeriet": "Kulturminister",
+    "Näringslivsutskottet": "Näringslivsansvarig",
+    "Samvetet": "Samvetesansvarig",
+    "Sekret service": "Sekreterare",
+    "Sexmästeriet": "Sexmästare",
+    "Styrelsen": "Ordförande",
+  };
+
+  void _goToPostContact(String nameSv) {
+    String finalname = _councilPostMap[nameSv] ?? "Spindelman";
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) => ContactPage(initPostNameSv: finalname))));
   }
 }
