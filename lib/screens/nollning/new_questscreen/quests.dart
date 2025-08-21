@@ -205,15 +205,15 @@ class _QuestScreenState extends State<QuestScreen>
                         // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
                         if (DateTime.now().isAfter(
                             DateTime(2025, 8, 24))) // This is cursed but i cba
-                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                          Tab(text: t.localeName == "sv" ? "V0" : "W0"),
                         if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                          Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
                       ],
                     ),
                   )
@@ -230,15 +230,15 @@ class _QuestScreenState extends State<QuestScreen>
                   // _weekTab(4, context),
                   // _weekTab(5, context),
                   if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
-                    _weekTab(1, context), // This is cursed but i cba
+                    _weekTab(0, context), // This is cursed but i cba
                   if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                    _weekTab(2, context),
+                    _weekTab(1, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                    _weekTab(3, context),
+                    _weekTab(2, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                    _weekTab(4, context),
+                    _weekTab(3, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                    _weekTab(5, context),
+                    _weekTab(4, context),
                 ],
               ),
             ),
