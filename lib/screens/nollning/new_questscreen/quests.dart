@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -198,7 +199,7 @@ class _QuestScreenState extends State<QuestScreen>
                       unselectedLabelColor:
                           const Color.fromARGB(255, 83, 81, 81),
                       tabs: [
-                        // Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        // Tab(text: t.localeName == "sv" ? "V0" : "W0"),
                         // Tab(text: t.localeName == "sv" ? "V2" : "W2"),
                         // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
                         // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
@@ -247,9 +248,10 @@ class _QuestScreenState extends State<QuestScreen>
       );
 
     return Container(
-        height: widget.availableHeight,
+        height: double.infinity,
         width: widget.availableWidth,
-        child: Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)));
+        color: Color(0xFFe8cfb7));
+    // child: Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)));
   }
 
   String _pointsFromMission(GroupMissionRead mission, BuildContext context) {
@@ -333,7 +335,7 @@ class _QuestScreenState extends State<QuestScreen>
       AdventureMissionRead adventureMission, BuildContext context) async {
     var t = AppLocalizations.of(context)!;
 
-    if (adventureMission.nollningWeek != _checkNollningWeek()) {
+    if (adventureMission.nollningWeek != (_checkNollningWeek() - 1)) {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -671,18 +673,20 @@ class _QuestScreenState extends State<QuestScreen>
     }
 
     return SingleChildScrollView(
-        child: Stack(children: [
-      Image.asset(bakgrund),
-      Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          ...generateWeekMissionCards(
-              missionsMap, groupMissionsMap, week, context),
-        ],
-      ),
-    ]));
+        // Image.asset(bakgrund),
+        child: Container(
+            width: widget.availableWidth,
+            // height: double.infinity,
+            color: Color(0xFFe8cfb7),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                ...generateWeekMissionCards(
+                    missionsMap, groupMissionsMap, week, context),
+              ],
+            )));
   }
 
   Widget createMissionCard(dynamic element, BuildContext context) {
