@@ -31,7 +31,10 @@ class _CalendarState extends State<Calendar> {
         MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
   }
   List<EventRead> _getEventsForDay(DateTime day) {
-    return this._events.where((item) => isSameDay(item.startsAt, day)).toList();
+
+    final events = this._events.where((item) => isSameDay(item.startsAt, day)).toList();
+    events.sort((a, b) => a.startsAt.compareTo(b.startsAt));
+    return events;
   }
   Future<void> _onRefresh() async {
     ApiService.apiClient
