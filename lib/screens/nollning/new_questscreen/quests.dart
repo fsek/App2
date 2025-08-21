@@ -248,10 +248,9 @@ class _QuestScreenState extends State<QuestScreen>
       );
 
     return Container(
-        height: double.infinity,
+        height: widget.availableHeight,
         width: widget.availableWidth,
-        color: Color(0xFFe8cfb7));
-    // child: Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)));
+        child: Image.asset(bakgrund, fit: BoxFit.fill));
   }
 
   String _pointsFromMission(GroupMissionRead mission, BuildContext context) {
@@ -672,21 +671,45 @@ class _QuestScreenState extends State<QuestScreen>
       return _missionDetails(selectedMission, context);
     }
 
-    return SingleChildScrollView(
-        // Image.asset(bakgrund),
-        child: Container(
-            width: widget.availableWidth,
-            // height: double.infinity,
-            color: Color(0xFFe8cfb7),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                ...generateWeekMissionCards(
-                    missionsMap, groupMissionsMap, week, context),
-              ],
-            )));
+    return Container(
+        height: widget.availableHeight,
+        width: widget.availableWidth,
+        child: Stack(
+          children: [
+            Positioned.fill(
+                child: Image.asset(
+              bakgrund,
+              fit: BoxFit.fill,
+            )),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ...generateWeekMissionCards(
+                      missionsMap, groupMissionsMap, week, context)
+                ],
+              ),
+            )
+          ],
+        ));
+
+    // SingleChildScrollView(
+    //   // Image.asset(bakgrund),
+    //   child: Container(
+    //       width: widget.availableWidth,
+    //       // height: double.infinity,
+    //       color: Color(0xFFe8cfb7),
+    //       child: Column(
+    //         children: [
+    //           SizedBox(
+    //             height: 10,
+    //           ),
+    //           ...generateWeekMissionCards(
+    //               missionsMap, groupMissionsMap, week, context),
+    //         ],
+    //       )));
   }
 
   Widget createMissionCard(dynamic element, BuildContext context) {
