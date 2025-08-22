@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -198,22 +199,22 @@ class _QuestScreenState extends State<QuestScreen>
                       unselectedLabelColor:
                           const Color.fromARGB(255, 83, 81, 81),
                       tabs: [
-                        // Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                        // Tab(text: t.localeName == "sv" ? "V0" : "W0"),
                         // Tab(text: t.localeName == "sv" ? "V2" : "W2"),
                         // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
                         // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
                         // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
                         if (DateTime.now().isAfter(
                             DateTime(2025, 8, 24))) // This is cursed but i cba
-                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
+                          Tab(text: t.localeName == "sv" ? "V0" : "W0"),
                         if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
+                          Tab(text: t.localeName == "sv" ? "V1" : "W1"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
+                          Tab(text: t.localeName == "sv" ? "V2" : "W2"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
+                          Tab(text: t.localeName == "sv" ? "V3" : "W3"),
                         if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                          Tab(text: t.localeName == "sv" ? "V5" : "W5"),
+                          Tab(text: t.localeName == "sv" ? "V4" : "W4"),
                       ],
                     ),
                   )
@@ -230,15 +231,15 @@ class _QuestScreenState extends State<QuestScreen>
                   // _weekTab(4, context),
                   // _weekTab(5, context),
                   if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
-                    _weekTab(1, context), // This is cursed but i cba
+                    _weekTab(0, context), // This is cursed but i cba
                   if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
-                    _weekTab(2, context),
+                    _weekTab(1, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
-                    _weekTab(3, context),
+                    _weekTab(2, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
-                    _weekTab(4, context),
+                    _weekTab(3, context),
                   if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
-                    _weekTab(5, context),
+                    _weekTab(4, context),
                 ],
               ),
             ),
@@ -249,7 +250,7 @@ class _QuestScreenState extends State<QuestScreen>
     return Container(
         height: widget.availableHeight,
         width: widget.availableWidth,
-        child: Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)));
+        child: Image.asset(bakgrund, fit: BoxFit.fill));
   }
 
   String _pointsFromMission(GroupMissionRead mission, BuildContext context) {
@@ -333,7 +334,7 @@ class _QuestScreenState extends State<QuestScreen>
       AdventureMissionRead adventureMission, BuildContext context) async {
     var t = AppLocalizations.of(context)!;
 
-    if (adventureMission.nollningWeek != _checkNollningWeek()) {
+    if (adventureMission.nollningWeek != (_checkNollningWeek() - 1)) {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -670,19 +671,45 @@ class _QuestScreenState extends State<QuestScreen>
       return _missionDetails(selectedMission, context);
     }
 
-    return SingleChildScrollView(
-        child: Stack(children: [
-      Image.asset(bakgrund),
-      Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          ...generateWeekMissionCards(
-              missionsMap, groupMissionsMap, week, context),
-        ],
-      ),
-    ]));
+    return Container(
+        height: widget.availableHeight,
+        width: widget.availableWidth,
+        child: Stack(
+          children: [
+            Positioned.fill(
+                child: Image.asset(
+              bakgrund,
+              fit: BoxFit.fill,
+            )),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ...generateWeekMissionCards(
+                      missionsMap, groupMissionsMap, week, context)
+                ],
+              ),
+            )
+          ],
+        ));
+
+    // SingleChildScrollView(
+    //   // Image.asset(bakgrund),
+    //   child: Container(
+    //       width: widget.availableWidth,
+    //       // height: double.infinity,
+    //       color: Color(0xFFe8cfb7),
+    //       child: Column(
+    //         children: [
+    //           SizedBox(
+    //             height: 10,
+    //           ),
+    //           ...generateWeekMissionCards(
+    //               missionsMap, groupMissionsMap, week, context),
+    //         ],
+    //       )));
   }
 
   Widget createMissionCard(dynamic element, BuildContext context) {
