@@ -9,44 +9,42 @@ import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:fsek_mobile/environments/environment.dart';
 
-
-
-
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.album}) : super(key: key);
   final AlbumRead album;
-  
-    @override
-  _AlbumPageState createState() => _AlbumPageState();
 
+  @override
+  _AlbumPageState createState() => _AlbumPageState();
 }
+
 class _AlbumPageState extends State<AlbumPage> {
   List<int>? imgIds;
   Map<int, Uint8List> _imageCache = {};
 
-
-
-  @override 
+  @override
   void initState() {
     super.initState();
     loadImgIds(widget.album.id);
   }
 
   void loadImgIds(int albumId) async {
-    final idList = await ApiService.apiClient.getImgApi().imgGetAlbumImages(albumId: albumId);
+    final idList = await ApiService.apiClient
+        .getImgApi()
+        .imgGetAlbumImages(albumId: albumId);
     setState(() {
       this.imgIds = idList.data!.toList();
     });
-
   }
 
   @override
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
 
-    if(imgIds == null) {
-      return Center(child: CircularProgressIndicator(),);
-    } 
+    if (imgIds == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -113,14 +111,18 @@ class _AlbumPageState extends State<AlbumPage> {
                     width: double.infinity,
                   ),
                   Text(
-                    t.localeName == "sv" ? widget.album.titleSv : widget.album.titleEn,
+                    t.localeName == "sv"
+                        ? widget.album.titleSv
+                        : widget.album.titleEn,
                     textAlign: TextAlign.start,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(t.localeName == "sv" ? widget.album.descSv : widget.album.descEn),
+                  Text(t.localeName == "sv"
+                      ? widget.album.descSv
+                      : widget.album.descEn),
                   SizedBox(height: 10),
                   RichText(
                       text: TextSpan(
@@ -170,7 +172,7 @@ class _AlbumPageState extends State<AlbumPage> {
   }
 
   Future<ImageProvider<Object>> _fetchImage(int id) async {
-    if(_imageCache.containsKey(id)) {
+    if (_imageCache.containsKey(id)) {
       return MemoryImage(_imageCache[id]!);
     }
 

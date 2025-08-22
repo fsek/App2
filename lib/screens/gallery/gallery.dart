@@ -58,10 +58,8 @@ class _GalleryPageState extends State<GalleryPage> {
                 elevation: 2,
                 isExpanded: true,
                 value: selectedYear,
-                items: allGalleries!
-                    .map((item) => item.year)
-                    .toSet()
-                    .toList()
+                items: (allGalleries!.map((item) => item.year).toSet().toList()
+                      ..sort((a, b) => b.compareTo(a)))
                     .map((year) => DropdownMenuItem(
                         child: Text(year.toString(),
                             style: Theme.of(context)
@@ -104,10 +102,8 @@ class _GalleryPageState extends State<GalleryPage> {
                 elevation: 2,
                 isExpanded: true,
                 value: selectedYear,
-                items: allGalleries!
-                    .map((item) => item.year)
-                    .toSet()
-                    .toList()
+                items: (allGalleries!.map((item) => item.year).toSet().toList()
+                      ..sort((a, b) => b.compareTo(a)))
                     .map((year) => DropdownMenuItem(
                         child: Text(year.toString(),
                             style: Theme.of(context)
@@ -226,7 +222,7 @@ class _GalleryPageState extends State<GalleryPage> {
             )
           ]),
         ),
-            buildThumbnailImage(elem)
+        buildThumbnailImage(elem)
       ]));
     }
     return result;
@@ -246,14 +242,17 @@ class _GalleryPageState extends State<GalleryPage> {
 
   Future<ImageProvider<Object>> _fetchCoverImage(int albumId) async {
     try {
-      final imgs = await ApiService.apiClient.getImgApi().imgGetAlbumImages(albumId: albumId);
+      final imgs = await ApiService.apiClient
+          .getImgApi()
+          .imgGetAlbumImages(albumId: albumId);
 
-      if(imgs.data!.isEmpty) {
+      if (imgs.data!.isEmpty) {
         return const AssetImage("assets/img/f_logo.png");
       }
 
       final url = "${Environment.API_URL}/img/images/${imgs.data!.first}/small";
-      // final url = "https://backend.fsektionen.se/img/images/${imgs.data!.first}/small";
+      // final url =
+      // "https://backend.fsektionen.se/img/images/${imgs.data!.first}/small";
 
       final response = await http.get(Uri.parse(url),
           headers: {"Authorization": "Bearer ${ApiService.access_token}"});
