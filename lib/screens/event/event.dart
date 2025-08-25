@@ -241,9 +241,10 @@ class _EventPageState extends State<EventPage> {
                   margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
                   /* should be parsed html */
                   child: Html(
-                      data: locale == "sv"
-                          ? event!.descriptionSv
-                          : event!.descriptionEn,
+                      data: (locale == "sv"
+                              ? event!.descriptionSv
+                              : event!.descriptionEn)
+                          .replaceAll("\n", "<br>"),
                       style: _htmlStyle,
                       onLinkTap: (String? url, Map<String, String> attributes,
                           element) {
