@@ -32,7 +32,7 @@ class _CalendarState extends State<Calendar> {
   }
   List<EventRead> _getEventsForDay(DateTime day) {
 
-    final events = this._events.where((item) => isSameDay(item.startsAt, day)).toList();
+    final events = this._events.where((item) => isSameDay(item.startsAt.toLocal(), day)).toList();
     events.sort((a, b) => a.startsAt.compareTo(b.startsAt));
     return events;
   }
