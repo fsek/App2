@@ -374,7 +374,7 @@ class _EventPageState extends State<EventPage> {
     final eventSignupCreate = EventSignupCreate((b) => b
       ..userId = user!.id
       ..priority = userType
-      ..groupName = group?.name ?? null
+      ..groupName = group?.name ?? customGroup
       ..drinkPackage = drinkPackageToEnum[drinkPackageAnswer]);
 
     await ApiService.apiClient.getEventSignupApi().eventSignupEventSignupRoute(
