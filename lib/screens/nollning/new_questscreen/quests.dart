@@ -34,15 +34,23 @@ class _QuestScreenState extends State<QuestScreen>
   String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
 
   int _checkNollningWeek() {
-    if (DateTime.now().isAfter(DateTime(2025, 9, 21))) {
+    if (DateTime.now().toLocal().isAfter(DateTime(2025, 9, 21, 23, 59, 59))) {
       return 5;
-    } else if (DateTime.now().isAfter(DateTime(2025, 9, 14))) {
+    } else if (DateTime.now()
+        .toLocal()
+        .isAfter(DateTime(2025, 9, 14, 23, 59, 59))) {
       return 4;
-    } else if (DateTime.now().isAfter(DateTime(2025, 9, 7))) {
+    } else if (DateTime.now()
+        .toLocal()
+        .isAfter(DateTime(2025, 9, 7, 23, 59, 59))) {
       return 3;
-    } else if (DateTime.now().isAfter(DateTime(2025, 8, 31))) {
+    } else if (DateTime.now()
+        .toLocal()
+        .isAfter(DateTime(2025, 8, 31, 23, 59, 59))) {
       return 2;
-    } else if (DateTime.now().isAfter(DateTime(2025, 8, 24))) {
+    } else if (DateTime.now()
+        .toLocal()
+        .isAfter(DateTime(2025, 8, 24, 23, 59, 59))) {
       return 1;
     } else {
       return 0;
@@ -69,7 +77,7 @@ class _QuestScreenState extends State<QuestScreen>
     setState(() {
       this.missionsMap = {};
       this.groupMissionsMap = {};
-      this.user == null;
+      this.user = null;
       this.nollning = null;
       this.nollningGroup = null;
       this.selectedMission = null;
@@ -144,6 +152,11 @@ class _QuestScreenState extends State<QuestScreen>
     }
   }
 
+  // bool isSameDay(DateTime a, DateTime b) {
+  //   print((a.year == b.year) && (a.month == b.month) && (a.day == b.day));
+  //   return ((a.year == b.year) && (a.month == b.month) && (a.day == b.day));
+  // }
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
@@ -204,16 +217,21 @@ class _QuestScreenState extends State<QuestScreen>
                         // Tab(text: t.localeName == "sv" ? "V3" : "W3"),
                         // Tab(text: t.localeName == "sv" ? "V4" : "W4"),
                         // Tab(text: t.localeName == "sv" ? "V5" : "W5"),
-                        if (DateTime.now().isAfter(
-                            DateTime(2025, 8, 24))) // This is cursed but i cba
+
+                        if (DateTime.now().isAfter(DateTime(2025, 8, 24, 23, 59,
+                            59))) // This is cursed but i cba
                           Tab(text: t.localeName == "sv" ? "V0" : "W0"),
-                        if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                        if (DateTime.now()
+                            .isAfter(DateTime(2025, 8, 31, 23, 59, 59)))
                           Tab(text: t.localeName == "sv" ? "V1" : "W1"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                        if (DateTime.now()
+                            .isAfter(DateTime(2025, 9, 7, 23, 59, 59)))
                           Tab(text: t.localeName == "sv" ? "V2" : "W2"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                        if (DateTime.now()
+                            .isAfter(DateTime(2025, 9, 14, 23, 59, 59)))
                           Tab(text: t.localeName == "sv" ? "V3" : "W3"),
-                        if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                        if (DateTime.now()
+                            .isAfter(DateTime(2025, 9, 21, 23, 59, 59)))
                           Tab(text: t.localeName == "sv" ? "V4" : "W4"),
                       ],
                     ),
@@ -230,15 +248,15 @@ class _QuestScreenState extends State<QuestScreen>
                   // _weekTab(3, context),
                   // _weekTab(4, context),
                   // _weekTab(5, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 8, 24)))
+                  if (DateTime.now().isAfter(DateTime(2025, 8, 24, 23, 59, 59)))
                     _weekTab(0, context), // This is cursed but i cba
-                  if (DateTime.now().isAfter(DateTime(2025, 8, 31)))
+                  if (DateTime.now().isAfter(DateTime(2025, 8, 31, 23, 59, 59)))
                     _weekTab(1, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 7)))
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 7, 23, 59, 59)))
                     _weekTab(2, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 14)))
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 14, 23, 59, 59)))
                     _weekTab(3, context),
-                  if (DateTime.now().isAfter(DateTime(2025, 9, 21)))
+                  if (DateTime.now().isAfter(DateTime(2025, 9, 21, 23, 59, 59)))
                     _weekTab(4, context),
                 ],
               ),
