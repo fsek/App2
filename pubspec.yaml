@@ -64,6 +64,7 @@ dependencies:
   cached_network_image: ^3.3.0
   dio: ^5.8.0+1
   dio_cookie_manager: ^3.3.0
+  flutter_markdown_plus: ^1.0.2
   api_client:
     path: lib/api_client
 
