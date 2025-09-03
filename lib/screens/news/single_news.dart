@@ -4,6 +4,7 @@ import 'package:fsek_mobile/util/time.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 class SingleNewsPage extends StatelessWidget {
   const SingleNewsPage({Key? key, required this.news}) : super(key: key);
@@ -33,15 +34,24 @@ class SingleNewsPage extends StatelessWidget {
                 ),
                 Container(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                    child: Html(
-                        data: news.contentEn,
-                        style: {"p": Style(lineHeight: LineHeight(1.2))},
-                        onLinkTap: (String? url, Map<String, String> attributes,
-                            element) {
-                          launchUrl(Uri.parse(url!));
-                        }),
-                  ),
+                      padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
+                      child: Markdown(
+                        shrinkWrap: true,
+                        data: news.contentEn.replaceAll("<br />", ""),
+                        onTapLink: (text, href, title) {
+                          if (href != null) {
+                            launchUrl(Uri.parse(href));
+                          }
+                        },
+                        styleSheet:
+                            MarkdownStyleSheet.fromTheme(Theme.of(context))
+                                .copyWith(
+                          p: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(height: 1.2),
+                        ),
+                      )),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -82,15 +92,24 @@ class SingleNewsPage extends StatelessWidget {
               ),
               Container(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
-                  child: Html(
-                      data: news.contentSv,
-                      style: {"p": Style(lineHeight: LineHeight(1.2))},
-                      onLinkTap: (String? url, Map<String, String> attributes,
-                          element) {
-                        launchUrl(Uri.parse(url!));
-                      }),
-                ),
+                    padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
+                    child: Markdown(
+                      shrinkWrap: true,
+                      data: news.contentSv.replaceAll("<br />", ""),
+                      onTapLink: (text, href, title) {
+                        if (href != null) {
+                          launchUrl(Uri.parse(href));
+                        }
+                      },
+                      styleSheet:
+                          MarkdownStyleSheet.fromTheme(Theme.of(context))
+                              .copyWith(
+                        p: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(height: 1.2),
+                      ),
+                    )),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),

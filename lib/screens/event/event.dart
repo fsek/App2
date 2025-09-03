@@ -8,6 +8,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart'; //For the food-prefs link
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 class EventPage extends StatefulWidget {
   final int eventId;
@@ -167,6 +168,10 @@ class _EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     String locale = Localizations.localeOf(context).toString();
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     /* Failsafe */
     if (locale != "sv" && locale != "en") {
       locale = "en";
@@ -238,19 +243,29 @@ class _EventPageState extends State<EventPage> {
                   color: null,
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(3, 15, 0, 15),
-                  /* should be parsed html */
-                  child: Html(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    width: double.infinity,
+                    /* should be parsed html */
+                    child: Markdown(
+                      shrinkWrap: true,
                       data: (locale == "sv"
                               ? event!.descriptionSv
                               : event!.descriptionEn)
-                          .replaceAll("\n", "<br>"),
-                      style: _htmlStyle,
-                      onLinkTap: (String? url, Map<String, String> attributes,
-                          element) {
-                        launchUrl(Uri.parse(url!));
-                      }),
-                ),
+                          .replaceAll("<br />", ""),
+                      onTapLink: (text, href, title) {
+                        if (href != null) {
+                          launchUrl(Uri.parse(href));
+                        }
+                      },
+                      styleSheet:
+                          MarkdownStyleSheet.fromTheme(Theme.of(context))
+                              .copyWith(
+                        p: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(height: 1.2),
+                      ),
+                    )),
                 Divider(
                   color: null,
                 ),
