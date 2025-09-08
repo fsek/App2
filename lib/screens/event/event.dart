@@ -820,7 +820,7 @@ class _EventPageState extends State<EventPage> {
     //   if (event?.can_signup ?? false) return Container();
     // }
     Widget drinkPackageInput = Container();
-    if (!(event!.alcoholEventType == "None")) {
+    if (!(event!.alcoholEventType == "None") & event!.drinkPackage) {
       drinkPackageInput = Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
