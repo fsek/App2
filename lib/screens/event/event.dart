@@ -248,6 +248,7 @@ class _EventPageState extends State<EventPage> {
                     /* should be parsed html */
                     child: Markdown(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       data: (locale == "sv"
                               ? event!.descriptionSv
                               : event!.descriptionEn)
