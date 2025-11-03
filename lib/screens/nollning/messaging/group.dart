@@ -11,7 +11,7 @@
 // import 'package:html/parser.dart';
 // import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 // import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 // // This file is chaos, but it workss... it should probably be made into smaller files
 // class GroupPage extends StatefulWidget {

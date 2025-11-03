@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/themes.dart';

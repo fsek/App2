@@ -6,7 +6,7 @@ import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'dart:convert';
 
 import '../article_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class MannersPage extends StatefulWidget {
   @override

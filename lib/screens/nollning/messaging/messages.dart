@@ -2,7 +2,7 @@
 // import 'package:fsek_mobile/models/messages/messaging_group.dart';
 // import 'package:fsek_mobile/services/messages.service.dart';
 // import 'package:fsek_mobile/services/service_locator.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 // import 'group.dart';
 

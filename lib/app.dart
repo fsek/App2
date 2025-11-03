@@ -25,7 +25,7 @@ import 'util/authentication/authentication_state.dart';
 import 'util/errors/error_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class FsekMobileApp extends StatefulWidget {
   final String initialThemeMode;

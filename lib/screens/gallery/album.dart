@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:http/http.dart' as http;

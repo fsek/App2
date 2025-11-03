@@ -15,7 +15,7 @@ import 'package:fsek_mobile/util/authentication/authentication_event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fap.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class OtherContent extends StatelessWidget {
   //TODO fix this

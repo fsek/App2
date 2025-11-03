@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class FapPage extends StatefulWidget {
   @override

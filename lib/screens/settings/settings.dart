@@ -3,7 +3,7 @@ import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();

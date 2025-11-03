@@ -4,7 +4,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/stodfunktioner.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/org_screen.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/studentvett.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 
 class NolleGuideScreenPage extends StatefulWidget {

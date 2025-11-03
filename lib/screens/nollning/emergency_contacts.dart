@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:linkable/linkable.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //TODO: fixa länkar i texten.

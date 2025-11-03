@@ -3,7 +3,7 @@
 // import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 // import 'package:fsek_mobile/api_client/lib/api_client.dart';
 
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 // class NotificationsPage extends StatefulWidget {
 //   _NotificationsPageState createState() => _NotificationsPageState();
