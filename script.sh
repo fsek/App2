@@ -6,8 +6,13 @@ temp_spec=$(mktemp)
 
 curl http://localhost:8000/openapi.json > "$temp_spec"
 
-# If using openapi generator cli, change to: openapi-generator-cli generate
+# We use openapi-generator if available, otherwise fallback to openapi-generator-cli
 openapi-generator generate \
+  -i "$temp_spec" \
+  -g dart-dio \
+  -o lib/api_client \
+  --additional-properties=pubName=api_client,baseUrl="http://localhost:8000" \
+|| openapi-generator-cli generate \
   -i "$temp_spec" \
   -g dart-dio \
   -o lib/api_client \
