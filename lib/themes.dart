@@ -55,8 +55,8 @@ final ThemeData themeFdark = ThemeData(
   primaryColor: const Color.fromRGBO(235, 113, 37, 1), 
   primaryColorLight: Color.fromRGBO(186, 83, 19, 1), 
 
-  appBarTheme: AppBarTheme(color: Color.fromRGBO(235, 113, 37, 1)), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Color.fromRGBO(235, 113, 37, 1)),
+  appBarTheme: AppBarTheme(backgroundColor: Color.fromRGBO(235, 113, 37, 1)), // Top bar color
+  bottomAppBarTheme: BottomAppBarThemeData(color: Color.fromRGBO(235, 113, 37, 1)),
 
   fontFamily: 'Helvetica Neue',
 
@@ -138,8 +138,8 @@ final ThemeData themeN = ThemeData(
   primaryColor: const Color.fromRGBO(56, 142, 60, 1), // colors.green[700]
   primaryColorLight: Colors.green[800], 
 
-  appBarTheme: AppBarTheme(color: Colors.green[700]), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Colors.green[700]),
+  appBarTheme: AppBarTheme(backgroundColor: Colors.green[700]), // Top bar color
+  bottomAppBarTheme: BottomAppBarThemeData(color: Colors.green[700]),
 
   fontFamily: 'Helvetica Neue',
 
@@ -221,8 +221,8 @@ final ThemeData themePi = ThemeData(
   primaryColor: const Color.fromARGB(255, 179, 179, 179),
   primaryColorLight: Color.fromARGB(255, 197, 197, 197), 
 
-  appBarTheme: AppBarTheme(color: Color.fromARGB(255, 179, 179, 179)), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Color.fromARGB(255, 179, 179, 179)),
+  appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 179, 179, 179)), // Top bar color
+  bottomAppBarTheme: BottomAppBarThemeData(color: Color.fromARGB(255, 179, 179, 179)),
 
   fontFamily: 'Helvetica Neue',
 
@@ -326,9 +326,9 @@ final ThemeData themeF = ThemeData(
   primaryColorLight: const Color.fromRGBO(251, 140, 0, 1), //Colors.orange[600] 
 
   appBarTheme: AppBarTheme(
-    color: Colors.orange[700]
+    backgroundColor: Colors.orange[700]
   ), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Colors.orange[800]), // Bottom bar color
+  bottomAppBarTheme: BottomAppBarThemeData(color: Colors.orange[800]), // Bottom bar color
 
   textTheme: TextTheme(
     displayMedium: const TextStyle(
@@ -461,8 +461,8 @@ final ThemeData themeD = ThemeData(
   primaryColor: Color(0xFFF280A1), 
   primaryColorLight: Color.fromRGBO(236, 143, 170, 1), 
 
-  appBarTheme: AppBarTheme(color: Color(0xFFF280A1)), // Top bar color
-  bottomAppBarTheme: BottomAppBarTheme(color: Color(0xFFF280A1)),
+  appBarTheme: AppBarTheme(backgroundColor: Color(0xFFF280A1)), // Top bar color
+  bottomAppBarTheme: BottomAppBarThemeData(color: Color(0xFFF280A1)),
 
   fontFamily: 'NF-Pixels',
 

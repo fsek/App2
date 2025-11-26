@@ -5,7 +5,7 @@ import 'package:fsek_mobile/services/contact.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/environments/environment.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 
 

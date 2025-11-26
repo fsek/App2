@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class MissionPage extends StatelessWidget {
   const MissionPage({Key? key, required this.mission}) : super(key: key);

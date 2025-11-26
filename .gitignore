@@ -62,3 +62,6 @@ missingTranslations.txt
 android/app/.cxx/Debug/
 openapitools.json
 android/app/.cxx/RelWithDebInfo/
+
+# Ignore node modules
+node_modules/

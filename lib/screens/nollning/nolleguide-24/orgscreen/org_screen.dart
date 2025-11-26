@@ -6,7 +6,7 @@ import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/others.dart
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class OrganizationScreenPage extends StatefulWidget {
   @override

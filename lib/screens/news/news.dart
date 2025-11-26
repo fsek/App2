@@ -3,7 +3,7 @@ import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/screens/news/single_news.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/util/time.dart';
 
 class NewsPage extends StatefulWidget {

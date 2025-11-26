@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'models/destination.dart';
 import 'models/user/user.dart';
 import 'widgets/bottom_app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class ContentWrapper extends StatefulWidget {
