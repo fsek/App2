@@ -5,6 +5,8 @@
         android:label="F-sek-stage"
         android:icon="@mipmap/launcher_icon"
         android:enableOnBackInvokedCallback="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         >
     
         <activity
