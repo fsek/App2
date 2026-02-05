@@ -128,6 +128,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         key: Key("login_email_field"),
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
+          autofillHints: [AutofillHints.email, AutofillHints.username],
           decoration: InputDecoration(
               labelText: 'Email',
               prefixIcon: Icon(Icons.account_circle, color: _emailLabelColor),
@@ -142,6 +143,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
         key: Key("login_password_field"),
         child: TextFormField(
           obscureText: true,
+          autofillHints: [AutofillHints.password],
           decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(
