@@ -63,6 +63,7 @@ class ApiService {
         var response =
             await ApiService.apiClient.getAuthApi().authAuthCookieRefresh();
         if (response.data == null || response.data?.accessToken == null) {
+          cookieJar.deleteAll();
           return false;
         }
         ApiService.access_token = response.data!.accessToken;

@@ -26,8 +26,6 @@ class SecureStorageCookieStorage extends Storage {
 
   @override
   Future<void> deleteAll(List<String> keys) async {
-    for (final k in keys) {
-      await _ss.delete(key: '$_prefix$k');
-    }
+    _ss.deleteAll();
   }
 }
