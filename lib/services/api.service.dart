@@ -69,6 +69,7 @@ class ApiService {
         ApiService.access_token = response.data!.accessToken;
         return true;
       } catch (e) {
+        cookieJar.deleteAll();
         return false;
       }
     }
