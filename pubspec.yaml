@@ -43,7 +43,7 @@ dependencies:
   linkable: ^3.0.1 # For making numbers, emails and links clickable
   flutter_html: ^3.0.0-beta.2 # For rendering HTMLq
   pull_to_refresh: ^2.0.0 # this already exists in flutter
-  flutter_local_notifications: ^19.0.0 # For handling local notifications
+  flutter_local_notifications: ">=19.0.0 <21.0.0" # For handling local notifications
   flutter_math_fork: ^0.7.1
   flutter_localizations:
     sdk: flutter
