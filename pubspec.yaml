@@ -35,7 +35,7 @@ dependencies:
   bloc: ^9.0.0 # For State
   flutter_bloc: ^9.1.0 # For State
   intl: ^0.20.2 # For Internationalization (not used yet)
-  get_it: ^8.0.3 # For singleton service instances
+  get_it: ">=8.0.3 <10.0.0" # For singleton service instances
   table_calendar: ^3.0.1 # For calender
   url_launcher: ^6.0.9 # For memes
   action_cable: ^1.2.0 # For messaging
