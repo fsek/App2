@@ -747,10 +747,10 @@ packages:
     dependency: "direct main"
     description:
       name: linkable
-      sha256: "3cb3ccc83da8b23d27dc66b1421d5b42ed9e6e56ace045121e02a1235ee7a7e0"
+      sha256: "9a9f9b6806e5af7cf46f121caf6faac365813c33c4be07ed972e4198e4417c49"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.2"
+    version: "4.0.0"
   linkify:
     dependency: "direct main"
     description:
@@ -803,10 +803,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   mime:
     dependency: transitive
     description:

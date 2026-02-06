@@ -40,7 +40,7 @@ dependencies:
   url_launcher: ^6.0.9 # For memes
   action_cable: ^1.2.0 # For messaging
   infinite_scroll_pagination: ^5.0.0 # For messaging
-  linkable: ^3.0.1 # For making numbers, emails and links clickable
+  linkable: ">=3.0.1 <5.0.0" # For making numbers, emails and links clickable
   flutter_html: ^3.0.0-beta.2 # For rendering HTMLq
   pull_to_refresh: ^2.0.0 # this already exists in flutter
   flutter_local_notifications: ^19.0.0 # For handling local notifications
