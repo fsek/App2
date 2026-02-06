@@ -1,0 +1,23 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Updates for main packages 
+  - package-ecosystem: "pub" 
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+  # Updates for the api_client
+  - package-ecosystem: "pub" 
+    directory: "/lib/api_client" 
+    schedule:
+      interval: "weekly"
+  # Keep GitHub Actions fresh
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 2
