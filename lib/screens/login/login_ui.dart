@@ -111,6 +111,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       _animationController.forward();
       _emailFocusNode.unfocus();
       _passFocusNode.unfocus();
+      TextInput.finishAutofillContext();
       _loginBloc!.add(LoginButtonPressed(
         username: _emailController.text.trim(),
         password: _passwordController.text,
@@ -135,6 +136,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
               labelStyle: TextStyle(color: _emailLabelColor)),
           focusNode: _emailFocusNode,
           controller: _emailController,
+          textInputAction: TextInputAction.next,
           validator: (String? value) {
             return value!.trim().isEmpty ? 'Required field' : null;
           },
@@ -153,6 +155,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
               labelStyle: TextStyle(color: _passLabelColor)),
           focusNode: _passFocusNode,
           controller: _passwordController,
+          textInputAction: TextInputAction.done,
           validator: (String? value) {
             return value!.isEmpty ? 'Required field' : null;
           },
@@ -176,7 +179,8 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
 
     final form = Form(
         key: _formKey,
-        child: Column(
+        child: AutofillGroup(child:
+          Column(
           children: [
             SizedBox(height: 32.0),
             _emailField,
@@ -184,7 +188,8 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
             _passwordField,
             SizedBox(height: 20.0),
           ],
-        ));
+        ))
+    );
 
     return BlocConsumer<LoginBloc, LoginState>(
       bloc: _loginBloc,
