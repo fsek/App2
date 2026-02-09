@@ -1019,7 +1019,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguide.
   ///
   /// In sv, this message translates to:
-  /// **'NOLLEGUIDEN'**
+  /// **'Nolleguiden'**
   String get nolleguide;
 
   /// No description provided for @nolleguideWeAtFsek.

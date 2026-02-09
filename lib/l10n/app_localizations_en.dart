@@ -490,7 +490,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get messagesMessages => 'Messages';
 
   @override
-  String get nolleguide => 'THE STUDENT GUIDE';
+  String get nolleguide => 'The Student Guide';
 
   @override
   String get nolleguideWeAtFsek => 'The F-guild';
@@ -933,7 +933,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readProposition => 'Read motion from the board';
 
   @override
-  String get emergencyContacts => 'Emergency contact numbers';
+  String get emergencyContacts => 'Emergency Contact Numbers';
 
   @override
   String get emergencyNumOne => '112';

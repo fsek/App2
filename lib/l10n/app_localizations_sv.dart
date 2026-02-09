@@ -488,7 +488,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get messagesMessages => 'Meddelanden';
 
   @override
-  String get nolleguide => 'NOLLEGUIDEN';
+  String get nolleguide => 'Nolleguiden';
 
   @override
   String get nolleguideWeAtFsek => 'F-sektionen';

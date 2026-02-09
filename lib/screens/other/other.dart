@@ -3,6 +3,8 @@ import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
+import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide25/nolleguide_home.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';
@@ -31,8 +33,10 @@ class OtherContent extends StatelessWidget {
     categories = [
       t.otherSongbook,
       t.otherGallery,
-      t.otherCafe
-    ]; // TODO: add this back when moosegame works: "Moose Game"
+      t.otherCafe,
+      t.nolleguide,
+      t.emergencyContacts
+    ];
     about = [t.otherAboutGuild, t.otherFap];
     settings = [t.otherAccount, t.otherLanguage, t.otherTheme];
     support = [t.otherContact, t.otherAnon];
@@ -42,7 +46,10 @@ class OtherContent extends StatelessWidget {
       "Songbook": SongbookPage(),
       "Photo Gallery": GalleryPage(),
       "Hilbert Café": CafePage(),
-      // "Moose Game": MooseGamePage(),
+      "Nolleguiden": NolleGuideHomePage(),
+      "The Student Guide": NolleGuideHomePage(),
+      "Nödkontaktnummer": EmergencyContactsPage(),
+      "Emergency Contact Numbers": EmergencyContactsPage(),
       "The F guild": AboutGuildPage(),
       "The F-app": FapPage(),
       "Account": SettingsPage(),

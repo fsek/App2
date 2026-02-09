@@ -42,8 +42,9 @@ void main() async {
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
-    // Destination(2, Icons.home, HomePage()),
-    Destination(2, Icons.home, NollningHomePage()),
+    // During introduction, modify NollningHomePage() and comment the normal HomePage()
+    // Destination(2, Icons.home, NollningHomePage()),
+    Destination(2, Icons.home, HomePage()),
     Destination(3, CustomIcons.moose, MooseGamePage()),
     Destination(4, Icons.list, OtherContent()),
   ];
