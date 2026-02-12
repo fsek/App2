@@ -4,7 +4,6 @@ import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fsek_mobile/screens/home/nollningHome25.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
