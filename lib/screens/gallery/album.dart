@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
+import 'package:fsek_mobile/screens/gallery/image_tile.dart';
+import 'package:fsek_mobile/screens/gallery/download_button.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
@@ -19,7 +21,10 @@ class AlbumPage extends StatefulWidget {
 
 class _AlbumPageState extends State<AlbumPage> {
   List<int>? imgIds;
+  Map<int, Future<ImageProvider>>? _imageFutures;
   Map<int, Uint8List> _imageCache = {};
+  bool _isSelecting = false;
+  List<int> _selectedImages = [];
 
   @override
   void initState() {
@@ -31,8 +36,14 @@ class _AlbumPageState extends State<AlbumPage> {
     final idList = await ApiService.apiClient
         .getImgApi()
         .imgGetAlbumImages(albumId: albumId);
+    final ids = idList.data!.toList();
+    final futures = {
+      for (final id in ids) id: _fetchImage(id),
+    };
+
     setState(() {
-      this.imgIds = idList.data!.toList();
+      imgIds = ids;
+      _imageFutures = futures;
     });
   }
 
@@ -40,7 +51,7 @@ class _AlbumPageState extends State<AlbumPage> {
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
 
-    if (imgIds == null) {
+    if (imgIds == null || _imageFutures == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -51,7 +62,22 @@ class _AlbumPageState extends State<AlbumPage> {
           title: Text(
             t.localeName == "sv" ? widget.album.titleSv : widget.album.titleEn,
           ),
-          actions: [],
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.transparent,  // can the user tell that this is a button even without this?
+              ),
+              onPressed: () {
+                setState(() {
+                  if (_isSelecting) {
+                    _selectedImages = [];  // could do it always too
+                  }
+                  _isSelecting = !_isSelecting;
+                });
+              },
+              child: Text(!_isSelecting ? t.albumSelect : t.albumCancel),
+            )
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +93,7 @@ class _AlbumPageState extends State<AlbumPage> {
                 itemCount: imgIds!.length,
                 itemBuilder: (context, index) {
                   return FutureBuilder<ImageProvider>(
-                    future: _fetchImage(imgIds![index]),
+                    future: _imageFutures![imgIds![index]],
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Container(
@@ -82,12 +108,21 @@ class _AlbumPageState extends State<AlbumPage> {
                           fit: BoxFit.cover,
                         );
                       } else {
-                        return Ink.image(
-                          image: snapshot.data!,
-                          fit: BoxFit.cover,
-                          child: InkWell(
-                            onTap: () => openImageBrowser(context, index),
-                          ),
+                        return Stack(  // Could try to add scroll to select
+                          children: [
+                            ImageTile(
+                              image: snapshot.data!,
+                              onTap: () => imageTileClicked(snapshot, index)
+                            ),
+
+                            Positioned.fill(
+                              child: AnimatedOpacity(
+                                opacity: _selectedImages.contains(imgIds![index]) ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds: 100),
+                                child: TileSelectionOverlay(),
+                              ),
+                            ),
+                          ],
                         );
                       }
                     },
@@ -95,67 +130,109 @@ class _AlbumPageState extends State<AlbumPage> {
                 },
               ),
             ),
-            Container(
-              width: double.infinity,
-              decoration:
-                  BoxDecoration(color: Theme.of(context).colorScheme.surface),
-              child: ExpansionTile(
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                title: Text(
-                  "Mer info",
+
+            if (_isSelecting)
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: Icon(_selectedImages.length != imgIds!.length ? Icons.select_all : Icons.deselect),
+                          onPressed: () {
+                            setState(() {
+                              if (_selectedImages.length != imgIds!.length) {  // could use ternary
+                                _selectedImages = List.of(imgIds!);  // deep copy
+                              } else {
+                                _selectedImages = [];
+                              }
+                            });
+                          },
+                        ),
+
+                        if (!_selectedImages.isEmpty)
+                          Text("${_selectedImages.length} ${_selectedImages.length == 1 ? t.albumImageSelected : t.albumImagesSelected}"),
+
+                        if (!_selectedImages.isEmpty)
+                          DownloadButton(
+                              imageBytesList: _selectedImages
+                                .where(_imageCache.containsKey)  // shouldn't even be needed
+                                .map((id) => _imageCache[id]!)
+                                .toList()
+                          ),
+                      ],
+                    ),
                 ),
-                children: [
-                  SizedBox(
-                    height: 8,
-                    width: double.infinity,
-                  ),
-                  Text(
-                    t.localeName == "sv"
-                        ? widget.album.titleSv
-                        : widget.album.titleEn,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(t.localeName == "sv"
-                      ? widget.album.descSv
-                      : widget.album.descEn),
-                  SizedBox(height: 10),
-                  RichText(
-                      text: TextSpan(
-                          text: t.albumPhotographers,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.apply(color: Theme.of(context).primaryColor),
-                          children: [
-                        TextSpan(
-                            text: widget.album.photographer.isNotEmpty
-                                ? widget.album.photographer
-                                    .map((photograper) =>
-                                        "${photograper.user.firstName} ${photograper.user.lastName}")
-                                    .join(", ")
-                                : t.albumNoPhotographers,
-                            style: Theme.of(context).textTheme.bodyMedium)
-                      ])),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
               ),
-            ),
+
+            if (!_isSelecting)
+              Container(
+                width: double.infinity,
+                decoration:
+                    BoxDecoration(color: Theme.of(context).colorScheme.surface),
+                child: ExpansionTile(
+                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                  childrenPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                  title: Text(
+                    t.albumMoreInfo
+                  ),
+                  children: [
+                    SizedBox(
+                      height: 8,
+                      width: double.infinity,
+                    ),
+                    Text(
+                      t.localeName == "sv"
+                          ? widget.album.titleSv
+                          : widget.album.titleEn,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(t.localeName == "sv"
+                        ? widget.album.descSv
+                        : widget.album.descEn),
+                    SizedBox(height: 10),
+                    RichText(
+                        text: TextSpan(
+                            text: t.albumPhotographers,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.apply(color: Theme.of(context).primaryColor),
+                            children: [
+                          TextSpan(
+                              text: widget.album.photographer.isNotEmpty
+                                  ? widget.album.photographer
+                                      .map((photograper) =>
+                                          "${photograper.user.firstName} ${photograper.user.lastName}")
+                                      .join(", ")
+                                  : t.albumNoPhotographers,
+                              style: Theme.of(context).textTheme.bodyMedium)
+                        ])),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
           ],
         ));
   }
 
-  Widget generateDiscripton() {
+  Widget generateDiscripton() {  // What?
     return Container();
   }
 
-  Future<List<Widget>> generateImages(BuildContext context) async {
+  Future<List<Widget>> generateImages(BuildContext context) async {  // Never called
     List<Widget> result = [];
 
     for (int i = 0; i < imgIds!.length; i++) {
@@ -199,6 +276,22 @@ class _AlbumPageState extends State<AlbumPage> {
     } catch (e) {
       print("Error fetching image: $e");
       return AssetImage("assets/img/f_logo.png");
+    }
+  }
+
+  void imageTileClicked(snapshot, index) {
+    if (_isSelecting) {
+      var imageId = imgIds![index];
+      var imageIsSelected = _selectedImages.contains(imageId);
+      setState(() {
+        if (imageIsSelected) {
+          _selectedImages.remove(imageId);
+        } else {
+          _selectedImages.add(imageId);
+        }
+      });
+    } else {
+      openImageBrowser(context, index);
     }
   }
 

@@ -149,12 +149,20 @@
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
 
+    "albumMoreInfo": "Mer info",
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
+    "albumSelect": "Markera",
+    "albumCancel": "Avbryt",
+    "albumSelectAll": "Markera alla",
+    "albumDeselectAll": "Avmarkera alla",
+    "albumImageSelected": "bild markerad",
+    "albumImagesSelected": "bilder markerade",
 
     "galleryTitle": "Bildgalleri",
     "galleryOf": "av",
     "galleryImageDownloaded": "Bild sparad",
+    "galleryImagesDownloaded": "Bilder sparade",
     "galleryImageDownloadError": "Ett fel uppstod vid nedladdning",
 
     "homeNoNews": "Inga nyheter tillgänliga",

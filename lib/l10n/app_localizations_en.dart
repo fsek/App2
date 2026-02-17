@@ -439,10 +439,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactEmpty => 'Your message is emtpy. Nothing has been sent.';
 
   @override
+  String get albumMoreInfo => 'More info';
+
+  @override
   String get albumPhotographers => 'Photographers: ';
 
   @override
   String get albumNoPhotographers => 'No photographers';
+
+  @override
+  String get albumSelect => 'Select';
+
+  @override
+  String get albumCancel => 'Cancel';
+
+  @override
+  String get albumSelectAll => 'Select all';
+
+  @override
+  String get albumDeselectAll => 'Deselect All';
+
+  @override
+  String get albumImageSelected => 'image selected';
+
+  @override
+  String get albumImagesSelected => 'images selected';
 
   @override
   String get galleryTitle => 'Photo Gallery';
@@ -452,6 +473,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get galleryImageDownloaded => 'Image downloaded';
+
+  @override
+  String get galleryImagesDownloaded => 'Images downloaded';
 
   @override
   String get galleryImageDownloadError => 'An error occurred while downloading';

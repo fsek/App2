@@ -149,12 +149,20 @@
     "contactHasNotBeenSent": "Your message has not been sent ):\nCheck your connection and try again!.",
     "contactEmpty": "Your message is emtpy. Nothing has been sent.",
 
+    "albumMoreInfo": "More info",
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
+    "albumSelect": "Select",
+    "albumCancel": "Cancel",
+    "albumSelectAll": "Select all",
+    "albumDeselectAll": "Deselect All",
+    "albumImageSelected": "image selected",
+    "albumImagesSelected": "images selected",
 
     "galleryTitle": "Photo Gallery",
     "galleryOf": "of",
     "galleryImageDownloaded": "Image downloaded",
+    "galleryImagesDownloaded": "Images downloaded",
     "galleryImageDownloadError": "An error occurred while downloading",
 
     "homeNoNews": "No news available",

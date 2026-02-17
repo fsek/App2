@@ -437,10 +437,31 @@ class AppLocalizationsSv extends AppLocalizations {
   String get contactEmpty => 'Ditt meddelande är tomt. Inget har skickats.';
 
   @override
+  String get albumMoreInfo => 'Mer info';
+
+  @override
   String get albumPhotographers => 'Fotografer: ';
 
   @override
   String get albumNoPhotographers => 'Inga fotografer';
+
+  @override
+  String get albumSelect => 'Markera';
+
+  @override
+  String get albumCancel => 'Avbryt';
+
+  @override
+  String get albumSelectAll => 'Markera alla';
+
+  @override
+  String get albumDeselectAll => 'Avmarkera alla';
+
+  @override
+  String get albumImageSelected => 'bild markerad';
+
+  @override
+  String get albumImagesSelected => 'bilder markerade';
 
   @override
   String get galleryTitle => 'Bildgalleri';
@@ -450,6 +471,9 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get galleryImageDownloaded => 'Bild sparad';
+
+  @override
+  String get galleryImagesDownloaded => 'Bilder sparade';
 
   @override
   String get galleryImageDownloadError => 'Ett fel uppstod vid nedladdning';
