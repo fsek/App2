@@ -161,9 +161,9 @@ class _AlbumPageState extends State<AlbumPage> {
 
                         if (!_selectedImages.isEmpty)
                           DownloadButton(
-                              imageBytesList: _selectedImages
+                              imageFutures: _selectedImages
                                 .where(_imageCache.containsKey)  // shouldn't even be needed
-                                .map((id) => _imageCache[id]!)
+                                .map((id) => Future(() => _imageCache[id]!))
                                 .toList()
                           ),
                       ],
