@@ -14,6 +14,18 @@
     "other" : "Övrigt",
     "introduction" : "Nollning",
 
+    "loginRequiredField": "Obligatoriskt fält",
+    "loginEmail": "E-postadress",
+    "loginPassword": "Lösenord",
+    "loginForgotPassword": "Glömt lösenord?",
+    "loginLogIn": "Logga in",
+
+    "resetInstruction": "Ange din e-post för att återställa lösenord",
+    "resetEmail": "E-postadress",
+    "resetSubmit": "Skicka",
+    "resetValidate": "Skriv en e-post",
+    "resetDone": "Om din e-post finns så har en återställningslänk skickats till den.",
+
     "eventPriority": "Prioritering:",
     "eventOther": "Övrigt",
     "eventChooseGroup": "Välj grupp:",
@@ -149,12 +161,20 @@
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
 
+    "albumMoreInfo": "Mer info",
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
+    "albumSelect": "Markera",
+    "albumCancel": "Avbryt",
+    "albumSelectAll": "Markera alla",
+    "albumDeselectAll": "Avmarkera alla",
+    "albumImageSelected": "bild markerad",
+    "albumImagesSelected": "bilder markerade",
 
     "galleryTitle": "Bildgalleri",
     "galleryOf": "av",
     "galleryImageDownloaded": "Bild sparad",
+    "galleryImagesDownloaded": "Bilder sparade",
     "galleryImageDownloadError": "Ett fel uppstod vid nedladdning",
 
     "homeNoNews": "Inga nyheter tillgänliga",

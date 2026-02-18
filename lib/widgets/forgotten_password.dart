@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 
+import 'package:fsek_mobile/l10n/app_localizations.dart';
+
 class ForgottenPassword {
   static void openDialog(BuildContext context,
       TextEditingController resetController, UserService? userService) {
+        var t = AppLocalizations.of(context)!;
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          String contentText = "Enter email to reset password";
+          String contentText = t.resetInstruction;
           bool notClicked = true;
           bool loading = false;
           bool validate = false;
@@ -54,10 +58,10 @@ class ForgottenPassword {
                                 key: Key('email_field'),
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  labelText: 'Email',
+                                  labelText: t.resetEmail,
                                   prefixIcon: Icon(Icons.account_circle),
                                   errorText:
-                                      validate ? 'Please input an email' : null,
+                                      validate ? t.resetValidate : null,
                                 ),
                                 controller: resetController,
                               ),
@@ -74,7 +78,7 @@ class ForgottenPassword {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Theme.of(context).colorScheme.primary),
                                   child: Text(
-                                    "SUBMIT",
+                                    t.resetSubmit,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: Theme.of(context).colorScheme.onSecondary,
@@ -95,8 +99,7 @@ class ForgottenPassword {
                                               resetController.text)
                                           .then((success) {});
                                       setState(() {
-                                        contentText =
-                                            "Your password has been reset. An email has been sent with your new password.";
+                                        contentText = t.resetDone;
                                         notClicked = false;
                                         loading = false;
                                         resetController.text = "";

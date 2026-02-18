@@ -14,6 +14,18 @@
     "other" : "Other",
     "introduction" : "Nollning",
 
+    "loginRequiredField": "Required field",
+    "loginEmail": "Email",
+    "loginPassword": "Password",
+    "loginForgotPassword": "Forgot password?",
+    "loginLogIn": "Log in",
+
+    "resetInstruction": "Enter email to reset password",
+    "resetEmail": "Email",
+    "resetSubmit": "Submit",
+    "resetValidate": "Please input an email",
+    "resetDone": "If your email exists, a reset link has been sent.",
+
     "eventPriority": "Priority:",
     "eventOther": "Other",
     "eventChooseGroup": "Choose group:",
@@ -149,12 +161,20 @@
     "contactHasNotBeenSent": "Your message has not been sent ):\nCheck your connection and try again!.",
     "contactEmpty": "Your message is emtpy. Nothing has been sent.",
 
+    "albumMoreInfo": "More info",
     "albumPhotographers": "Photographers: ",
     "albumNoPhotographers": "No photographers",
+    "albumSelect": "Select",
+    "albumCancel": "Cancel",
+    "albumSelectAll": "Select all",
+    "albumDeselectAll": "Deselect All",
+    "albumImageSelected": "image selected",
+    "albumImagesSelected": "images selected",
 
     "galleryTitle": "Photo Gallery",
     "galleryOf": "of",
     "galleryImageDownloaded": "Image downloaded",
+    "galleryImagesDownloaded": "Images downloaded",
     "galleryImageDownloadError": "An error occurred while downloading",
 
     "homeNoNews": "No news available",
