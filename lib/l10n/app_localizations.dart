@@ -173,7 +173,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginEmail.
   ///
   /// In sv, this message translates to:
-  /// **'Email'**
+  /// **'E-postadress'**
   String get loginEmail;
 
   /// No description provided for @loginPassword.
@@ -185,7 +185,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginForgotPassword.
   ///
   /// In sv, this message translates to:
-  /// **'Glömt mitt lösenord'**
+  /// **'Glömt lösenord?'**
   String get loginForgotPassword;
 
   /// No description provided for @loginLogIn.
@@ -197,13 +197,13 @@ abstract class AppLocalizations {
   /// No description provided for @resetInstruction.
   ///
   /// In sv, this message translates to:
-  /// **'Skriv din email för att återställa ditt lösenord'**
+  /// **'Ange din e-post för att återställa lösenord'**
   String get resetInstruction;
 
   /// No description provided for @resetEmail.
   ///
   /// In sv, this message translates to:
-  /// **'Email'**
+  /// **'E-postadress'**
   String get resetEmail;
 
   /// No description provided for @resetSubmit.
@@ -215,13 +215,13 @@ abstract class AppLocalizations {
   /// No description provided for @resetValidate.
   ///
   /// In sv, this message translates to:
-  /// **'Skriv en email'**
+  /// **'Skriv en e-post'**
   String get resetValidate;
 
   /// No description provided for @resetDone.
   ///
   /// In sv, this message translates to:
-  /// **'Ditt lösenord has återställts. Ett mail har skickats med ditt nya lösenord.'**
+  /// **'Om din e-post finns så har en återställningslänk skickats till den.'**
   String get resetDone;
 
   /// No description provided for @eventPriority.

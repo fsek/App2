@@ -51,7 +51,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginPassword => 'Password';
 
   @override
-  String get loginForgotPassword => 'Forgot my password';
+  String get loginForgotPassword => 'Forgot password?';
 
   @override
   String get loginLogIn => 'Log in';
@@ -69,8 +69,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetValidate => 'Please input an email';
 
   @override
-  String get resetDone =>
-      'Your password has been reset. An email has been sent with your new password.';
+  String get resetDone => 'If your email exists, a reset link has been sent.';
 
   @override
   String get eventPriority => 'Priority:';

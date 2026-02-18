@@ -17,14 +17,14 @@
     "loginRequiredField": "Required field",
     "loginEmail": "Email",
     "loginPassword": "Password",
-    "loginForgotPassword": "Forgot my password",
+    "loginForgotPassword": "Forgot password?",
     "loginLogIn": "Log in",
 
     "resetInstruction": "Enter email to reset password",
     "resetEmail": "Email",
     "resetSubmit": "Submit",
     "resetValidate": "Please input an email",
-    "resetDone": "Your password has been reset. An email has been sent with your new password.",
+    "resetDone": "If your email exists, a reset link has been sent.",
 
     "eventPriority": "Priority:",
     "eventOther": "Other",

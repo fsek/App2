@@ -15,16 +15,16 @@
     "introduction" : "Nollning",
 
     "loginRequiredField": "Obligatoriskt fält",
-    "loginEmail": "Email",
+    "loginEmail": "E-postadress",
     "loginPassword": "Lösenord",
-    "loginForgotPassword": "Glömt mitt lösenord",
+    "loginForgotPassword": "Glömt lösenord?",
     "loginLogIn": "Logga in",
 
-    "resetInstruction": "Skriv din email för att återställa ditt lösenord",
-    "resetEmail": "Email",
+    "resetInstruction": "Ange din e-post för att återställa lösenord",
+    "resetEmail": "E-postadress",
     "resetSubmit": "Skicka",
-    "resetValidate": "Skriv en email",
-    "resetDone": "Ditt lösenord has återställts. Ett mail har skickats med ditt nya lösenord.",
+    "resetValidate": "Skriv en e-post",
+    "resetDone": "Om din e-post finns så har en återställningslänk skickats till den.",
 
     "eventPriority": "Prioritering:",
     "eventOther": "Övrigt",
