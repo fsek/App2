@@ -14,6 +14,18 @@
     "other" : "Övrigt",
     "introduction" : "Nollning",
 
+    "loginRequiredField": "Obligatoriskt fält",
+    "loginEmail": "Email",
+    "loginPassword": "Lösenord",
+    "loginForgotPassword": "Glömt mitt lösenord",
+    "loginLogIn": "Logga in",
+
+    "resetInstruction": "Skriv din email för att återställa ditt lösenord",
+    "resetEmail": "Email",
+    "resetSubmit": "Skicka",
+    "resetValidate": "Skriv en email",
+    "resetDone": "Ditt lösenord has återställts. Ett mail har skickats med ditt nya lösenord.",
+
     "eventPriority": "Prioritering:",
     "eventOther": "Övrigt",
     "eventChooseGroup": "Välj grupp:",

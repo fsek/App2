@@ -14,6 +14,18 @@
     "other" : "Other",
     "introduction" : "Nollning",
 
+    "loginRequiredField": "Required field",
+    "loginEmail": "Email",
+    "loginPassword": "Password",
+    "loginForgotPassword": "Forgot my password",
+    "loginLogIn": "Log in",
+
+    "resetInstruction": "Enter email to reset password",
+    "resetEmail": "Email",
+    "resetSubmit": "Submit",
+    "resetValidate": "Please input an email",
+    "resetDone": "Your password has been reset. An email has been sent with your new password.",
+
     "eventPriority": "Priority:",
     "eventOther": "Other",
     "eventChooseGroup": "Choose group:",

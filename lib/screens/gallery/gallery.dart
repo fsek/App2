@@ -139,6 +139,7 @@ class _GalleryPageState extends State<GalleryPage> {
   }
 
   List<Widget> generateAlbumThumbnails() {
+    String locale = Localizations.localeOf(context).toString();
     var t = AppLocalizations.of(context)!;
     if (selectedGalleries == null) {
       return [];
@@ -173,7 +174,7 @@ class _GalleryPageState extends State<GalleryPage> {
                       width: 2,
                     ),
                     Text(
-                      DateFormat('d MMM yyyy').format(elem.date),
+                      DateFormat('d MMM yyyy', locale).format(elem.date),
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge

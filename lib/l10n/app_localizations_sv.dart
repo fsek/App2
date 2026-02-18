@@ -42,6 +42,38 @@ class AppLocalizationsSv extends AppLocalizations {
   String get introduction => 'Nollning';
 
   @override
+  String get loginRequiredField => 'Obligatoriskt fält';
+
+  @override
+  String get loginEmail => 'Email';
+
+  @override
+  String get loginPassword => 'Lösenord';
+
+  @override
+  String get loginForgotPassword => 'Glömt mitt lösenord';
+
+  @override
+  String get loginLogIn => 'Logga in';
+
+  @override
+  String get resetInstruction =>
+      'Skriv din email för att återställa ditt lösenord';
+
+  @override
+  String get resetEmail => 'Email';
+
+  @override
+  String get resetSubmit => 'Skicka';
+
+  @override
+  String get resetValidate => 'Skriv en email';
+
+  @override
+  String get resetDone =>
+      'Ditt lösenord has återställts. Ett mail har skickats med ditt nya lösenord.';
+
+  @override
   String get eventPriority => 'Prioritering:';
 
   @override

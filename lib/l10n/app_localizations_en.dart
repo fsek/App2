@@ -42,6 +42,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get introduction => 'Nollning';
 
   @override
+  String get loginRequiredField => 'Required field';
+
+  @override
+  String get loginEmail => 'Email';
+
+  @override
+  String get loginPassword => 'Password';
+
+  @override
+  String get loginForgotPassword => 'Forgot my password';
+
+  @override
+  String get loginLogIn => 'Log in';
+
+  @override
+  String get resetInstruction => 'Enter email to reset password';
+
+  @override
+  String get resetEmail => 'Email';
+
+  @override
+  String get resetSubmit => 'Submit';
+
+  @override
+  String get resetValidate => 'Please input an email';
+
+  @override
+  String get resetDone =>
+      'Your password has been reset. An email has been sent with your new password.';
+
+  @override
   String get eventPriority => 'Priority:';
 
   @override
