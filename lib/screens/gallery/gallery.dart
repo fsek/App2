@@ -174,7 +174,7 @@ class _GalleryPageState extends State<GalleryPage> {
                       width: 2,
                     ),
                     Text(
-                      DateFormat('d MMM yyyy', locale).format(elem.date),
+                      DateFormat('d MMM yyyy', locale).format(elem.date.toLocal()),
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge
