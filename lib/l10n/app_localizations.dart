@@ -311,7 +311,7 @@ abstract class AppLocalizations {
   /// No description provided for @eventTechnicalDifficulties.
   ///
   /// In sv, this message translates to:
-  /// **' Vid tekniska problem med anmälan, kontakta '**
+  /// **'Vid tekniska problem med anmälan, kontakta '**
   String get eventTechnicalDifficulties;
 
   /// No description provided for @eventWebMasters.
@@ -335,7 +335,7 @@ abstract class AppLocalizations {
   /// No description provided for @eventFoodPrefInfo.
   ///
   /// In sv, this message translates to:
-  /// **'Du kan ändra dessa i Inställningar > matpreferenser'**
+  /// **'Du kan ändra dessa i Inställningar > Matpreferenser.'**
   String get eventFoodPrefInfo;
 
   /// No description provided for @eventLinkToFoodPrefs.
@@ -937,6 +937,12 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Kontaktinformation'**
   String get contactInfo;
+
+  /// No description provided for @contactEmail.
+  ///
+  /// In sv, this message translates to:
+  /// **'E-post'**
+  String get contactEmail;
 
   /// No description provided for @contactHeldBy.
   ///

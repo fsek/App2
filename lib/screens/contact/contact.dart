@@ -133,9 +133,10 @@ class _ContactPageState extends State<ContactPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButton(
-                    autofocus: false,
-                    value: currentPost!,
+                    iconEnabledColor: Theme.of(context).colorScheme.onSurface,
                     isExpanded: true,
+                    menuMaxHeight: MediaQuery.of(context).size.height / 2,
+                    value: currentPost!,
                     onChanged: (PostRead? post) {
                       setState(() {
                         currentPost = post;
@@ -186,7 +187,7 @@ class _ContactPageState extends State<ContactPage> {
                     RichText(
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
-                          text: "Email: ",
+                          text: t.contactEmail,
                           style: Theme.of(context).textTheme.bodyMedium),
                       TextSpan(
                           text: currentPost!.email,
