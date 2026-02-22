@@ -429,11 +429,10 @@ class _EventPageState extends State<EventPage> {
         children: <Widget>[
           Text(t.eventPriority),
           DropdownButton<String?>(
+            iconEnabledColor: Theme.of(context).colorScheme.onSurface,
             isExpanded: true,
+            menuMaxHeight: MediaQuery.of(context).size.height / 2,
             value: userType,
-            icon: const Icon(Icons.arrow_downward),
-            iconSize: 24,
-            elevation: 16,
             onChanged: (String? newValue) {
               setState(() {
                 userType = newValue;
@@ -475,11 +474,10 @@ class _EventPageState extends State<EventPage> {
         children: [
           Text(t.eventChooseGroup),
           DropdownButton<GroupRead?>(
+            iconEnabledColor: Theme.of(context).colorScheme.onSurface,
             isExpanded: true,
+            menuMaxHeight: MediaQuery.of(context).size.height / 2,
             value: group,
-            icon: const Icon(Icons.arrow_downward),
-            iconSize: 24,
-            elevation: 16,
             onChanged: (GroupRead? newValue) {
               setState(() {
                 group = newValue;
@@ -824,16 +822,15 @@ class _EventPageState extends State<EventPage> {
     if (!(event!.alcoholEventType == "None") & event!.drinkPackage) {
       drinkPackageInput = Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
+          children: [
           Text(" ${t.eventDrinkPackage}"),
-          Container(
+            Container(
               height: 50,
               child: DropdownButton<String?>(
+                iconEnabledColor: Theme.of(context).colorScheme.onSurface,
                 isExpanded: false,
+                menuMaxHeight: MediaQuery.of(context).size.height / 2,
                 value: drinkPackageAnswer,
-                icon: const Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
                 onChanged: (String? newValue) {
                   setState(() {
                     drinkPackageAnswer = newValue;
@@ -854,7 +851,7 @@ class _EventPageState extends State<EventPage> {
                   )
                 ],
               )),
-        ],
+          ],
       );
     }
     if (eventSignup == null) {

@@ -52,11 +52,9 @@ class _GalleryPageState extends State<GalleryPage> {
                 BoxDecoration(color: Theme.of(context).colorScheme.surface),
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: DropdownButton(
-                iconDisabledColor: Theme.of(context).colorScheme.surface,
-                iconEnabledColor: Theme.of(context).colorScheme.surface,
-                dropdownColor: Theme.of(context).colorScheme.surface,
-                elevation: 2,
+                iconEnabledColor: Theme.of(context).colorScheme.onSurface,
                 isExpanded: true,
+                menuMaxHeight: MediaQuery.of(context).size.height / 2,
                 value: selectedYear,
                 items: (allGalleries!.map((item) => item.year).toSet().toList()
                       ..sort((a, b) => b.compareTo(a)))
@@ -96,11 +94,9 @@ class _GalleryPageState extends State<GalleryPage> {
                 BoxDecoration(color: Theme.of(context).colorScheme.surface),
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: DropdownButton(
-                iconDisabledColor: Theme.of(context).colorScheme.surface,
-                iconEnabledColor: Theme.of(context).colorScheme.surface,
-                dropdownColor: Theme.of(context).colorScheme.surface,
-                elevation: 2,
+                iconEnabledColor: Theme.of(context).colorScheme.onSurface,
                 isExpanded: true,
+                menuMaxHeight: MediaQuery.of(context).size.height / 2,
                 value: selectedYear,
                 items: (allGalleries!.map((item) => item.year).toSet().toList()
                       ..sort((a, b) => b.compareTo(a)))
@@ -126,7 +122,7 @@ class _GalleryPageState extends State<GalleryPage> {
                   });
                 })),
         Expanded(
-            child: GridView.count(
+          child: GridView.count(
           padding: EdgeInsets.all(12),
           crossAxisCount: 2,
           crossAxisSpacing: 5,
