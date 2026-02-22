@@ -116,7 +116,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventTechnicalDifficulties =>
-      ' Vid tekniska problem med anmälan, kontakta ';
+      'Vid tekniska problem med anmälan, kontakta ';
 
   @override
   String get eventWebMasters => 'spindelmännen';
@@ -129,7 +129,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventFoodPrefInfo =>
-      'Du kan ändra dessa i Inställningar > matpreferenser';
+      'Du kan ändra dessa i Inställningar > Matpreferenser.';
 
   @override
   String get eventLinkToFoodPrefs => 'Genväg till inställningarna';
@@ -444,6 +444,9 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get contactInfo => 'Kontaktinformation';
+
+  @override
+  String get contactEmail => 'E-post';
 
   @override
   String get contactHeldBy => 'Posten innehavs av: ';

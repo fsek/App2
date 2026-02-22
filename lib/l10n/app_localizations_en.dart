@@ -116,7 +116,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventTechnicalDifficulties =>
-      ' In case of technical difficulties, contact ';
+      'In case of technical difficulties, contact ';
 
   @override
   String get eventWebMasters => 'the web masters';
@@ -129,7 +129,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventFoodPrefInfo =>
-      'You can change these in Settings > Food preferences';
+      'You can change these in Settings > Food preferences.';
 
   @override
   String get eventLinkToFoodPrefs => 'Shortcut to the settings';
@@ -194,7 +194,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'In case of questions about the event, ask the event responsible:';
 
   @override
-  String get eventAlcohol => 'Alkohol';
+  String get eventAlcohol => 'Alcohol';
 
   @override
   String get eventAlcoholMayAppear => 'Alcohol may be present';
@@ -445,6 +445,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contactInfo => 'Contact information';
+
+  @override
+  String get contactEmail => 'Email';
 
   @override
   String get contactHeldBy => 'The position is held by: ';

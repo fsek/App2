@@ -187,7 +187,7 @@ class _ContactPageState extends State<ContactPage> {
                     RichText(
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
-                          text: "Email: ",
+                          text: t.contactEmail,
                           style: Theme.of(context).textTheme.bodyMedium),
                       TextSpan(
                           text: currentPost!.email,

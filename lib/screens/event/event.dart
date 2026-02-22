@@ -543,7 +543,7 @@ class _EventPageState extends State<EventPage> {
             Text(t.eventTechnicalDifficulties),
             InkWell(
               child: new Text(
-                "spindelmännen",
+                t.eventWebMasters,
                 style: TextStyle(
                   color: Colors.blue[300],
                 ),
@@ -580,7 +580,7 @@ class _EventPageState extends State<EventPage> {
                   Text(t.eventTechnicalDifficulties),
                   InkWell(
                     child: new Text(
-                      "spindelmännen",
+                      t.eventWebMasters,
                       style: TextStyle(
                         color: Colors.blue[300],
                       ),
@@ -791,7 +791,7 @@ class _EventPageState extends State<EventPage> {
                 Text(t.eventTechnicalDifficulties),
                 InkWell(
                   child: new Text(
-                    "spindelmännen",
+                    t.eventWebMasters,
                     style: TextStyle(
                       color: Colors.blue[300],
                     ),
@@ -820,15 +820,17 @@ class _EventPageState extends State<EventPage> {
     // }
     Widget drinkPackageInput = Container();
     if (!(event!.alcoholEventType == "None") & event!.drinkPackage) {
-      drinkPackageInput = Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+      drinkPackageInput = Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Text(" ${t.eventDrinkPackage}"),
+            Text(t.eventDrinkPackage),
             Container(
               height: 50,
               child: DropdownButton<String?>(
                 iconEnabledColor: Theme.of(context).colorScheme.onSurface,
-                isExpanded: false,
+                isExpanded: true,
                 menuMaxHeight: MediaQuery.of(context).size.height / 2,
                 value: drinkPackageAnswer,
                 onChanged: (String? newValue) {
@@ -850,8 +852,10 @@ class _EventPageState extends State<EventPage> {
                     child: Text(t.eventNoAlcohol),
                   )
                 ],
-              )),
+              )
+            ),
           ],
+        )
       );
     }
     if (eventSignup == null) {
