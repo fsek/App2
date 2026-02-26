@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/songbook/song.dart';
 import 'package:fsek_mobile/screens/songbook/hmmm.dart';
@@ -5,6 +7,8 @@ import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/songbook/top_songs.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/util/storage_wrapper.dart';
 
 class SongbookPage extends StatefulWidget {
   @override
@@ -16,7 +20,8 @@ class _SongbookPageState extends State<SongbookPage>
 
   List<SongRead> allSongs = [];
   List<SongRead> songs = [];
- 
+  List<SongRead> starSongs = [];
+
   bool searchFocus = false;
   String initChar = "";
 
@@ -41,7 +46,8 @@ class _SongbookPageState extends State<SongbookPage>
     //     allSongs = List.from(songs);
     //   });
     //   print("All songs loaded: ${songs.length}");
-    // });
+    // });'
+
     fetchSongs();
     // Fetch top songs
     // int num_songs = 3; // Number of top songs to fetch
@@ -58,12 +64,22 @@ class _SongbookPageState extends State<SongbookPage>
 
   void fetchSongs() async {
     final response = await ApiService.apiClient.getSongsApi().songsGetAllSongs();
+    final starSongsLoad = await loadStarSongs();
     setState(() {
       this.allSongs = response.data!.toList();
 
       this.allSongs.sort((a, b) => a.title.compareTo(b.title));
       this.songs = this.allSongs;
     });
+
+    if(starSongsLoad != null){
+      for(var song in starSongsLoad){
+        var songObject = this.songs.singleWhere((t) => t.title == song);
+        setState(() {
+          this.starSongs.add(songObject);
+        });
+      }
+    }
   }
 
   @override
@@ -223,11 +239,12 @@ class _SongbookPageState extends State<SongbookPage>
                     //       ),
                     //     ),
                     //   ),
-
                     Expanded(
                       child: songs.isNotEmpty
                           ? ListView(
-                              children: songs
+                              children: starSongs.isNotEmpty ? _generateStarSongs(starSongs) + songs
+                                  .map((song) => _generateSongTile(song))
+                                  .toList() : songs
                                   .map((song) => _generateSongTile(song))
                                   .toList(),
                             )
@@ -245,6 +262,26 @@ class _SongbookPageState extends State<SongbookPage>
                   Transform.rotate(angle: animation.value, child: child),
             ),
           );
+  }
+
+  List<Widget> _generateStarSongs(List<SongRead> songs){
+    List<Widget> index = [];
+    index.add(Container(
+      decoration:
+      BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
+      child: ListTile(
+        title: Text(
+          "Stjärnmärkt",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onSurfaceVariant),
+        ),
+      ),
+    ));
+    for(SongRead song in songs) {
+      index.add(_generateSongContainer(song));
+    }
+    return index;
   }
 
   Widget _generateSongTile(SongRead song) {
@@ -267,20 +304,64 @@ class _SongbookPageState extends State<SongbookPage>
     return Column(
       children: index +
           [
-            Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .surfaceContainerHighest),
-                )),
-                child: InkWell(
-                  onTap: () => openSong(song.id),
-                  child: ListTile(title: Text(song.title ?? "")),
-                ))
+            _generateSongContainer(song)
           ],
     );
+  }
+
+  Container _generateSongContainer(SongRead song) {
+    return Container(
+        decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .surfaceContainerHighest),
+            )),
+        child: InkWell(
+          onTap: () => openSong(song.id),
+          child: ListTile(title: Text(song.title ?? ""), trailing: InkWell(onTap: () {
+            if(this.starSongs.contains(song)) {
+              setState(() {
+                this.starSongs.remove(song);
+              });
+              saveStarSongs();
+            }
+            else{
+              setState(() {
+                this.starSongs.add(song);
+              });
+              saveStarSongs();
+            }
+          },
+              child: this.starSongs.contains(song) ? Icon(Icons.star, color: Colors.amber, size: 35,) : Icon(Icons.star_border, size: 35))),
+        ));
+  }
+
+  void saveStarSongs() async {
+    TokenStorageWrapper? _storage;
+
+    _storage = locator<TokenStorageWrapper>();
+    List<String> songs = this.starSongs.map((x) => x.title).toList();
+
+    var jsonSerialized = jsonEncode(songs);
+
+    _storage.write(key: 'cached-songs', value: jsonSerialized);
+  }
+
+  Future<List<String>?> loadStarSongs() async {
+    TokenStorageWrapper? _storage;
+    List<dynamic>? starSongs;
+
+    _storage = locator<TokenStorageWrapper>();
+    String? result = await _storage.read('cached-songs');
+    if(result == null){
+      return null;
+    }
+    starSongs = jsonDecode(result);
+    var foo = starSongs!.map((x) => x.toString()).toList();
+
+    return foo;
   }
 
   void openSong(int id) async {
