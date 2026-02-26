@@ -37,20 +37,21 @@ class _HomePageState extends State<HomePage> {
   bool? election;
 
   void initState() {
-    locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
-      // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
-      if (!listEquals(value, []) && value != null) {
-        this.backgroundDocuments = value;
-        // title cant be empty so it is always a string
-        if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
-          // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
-          this.election = true;
-        } else {
-          this.election = false;
-        }
-        this.backgroundUrl = value.last.url;
-      }
-    }));
+    // This should probably be commented out at least until we get it working properly
+    // locator<DocumentService>().getOthers("Bakgrund").then((value) => setState(() {
+    //   // Value is null if getothers parameter doesnt exist, empty list if it exists but no documents in it.
+    //   if (!listEquals(value, []) && value != null) {
+    //     this.backgroundDocuments = value;
+    //     // title cant be empty so it is always a string
+    //     if (value.last.document_name!.toLowerCase().startsWith("ht") || value.last.document_name!.toLowerCase().startsWith("vt")) {
+    //       // if the pictured background is named ht or vt means we are in ht or vt and should use that button layout
+    //       this.election = true;
+    //     } else {
+    //       this.election = false;
+    //     }
+    //     this.backgroundUrl = value.last.url;
+    //   }
+    // }));
     super.initState();
   }
 
