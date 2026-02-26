@@ -191,7 +191,7 @@
 
     "messagesMessages": "Messages",
 
-    "nolleguide": "THE STUDENT GUIDE",
+    "nolleguide": "The Student Guide",
 
     "nolleguideWeAtFsek": "The F-guild",
     "nolleguideEtiquette": "All you need to know",
@@ -344,7 +344,7 @@
     "readMotionAnswer": "Read motion answer",
     "readProposition": "Read motion from the board",
 
-    "emergencyContacts": "Emergency contact numbers",
+    "emergencyContacts": "Emergency Contact Numbers",
     "emergencyNumOne": "112",
     "emergencyTitleOne": " - Emergency",
     "emergencyContentOne": "In case of emergency, always call 112. This number allows you to reach the police, ambulance, fire brigade etc.",
@@ -366,8 +366,6 @@
     "emergencyNumSeven": "+46 77 33 113 13",
     "emergencyTitleSeven": " - Information in case of accidents and crises",
     "emergencyContentSeven": "Sweden's national information number. You can call this number to get information in the event of serious accidents and crises in society.",
-    "emergencyTitleEight": "Föset",
-    "emergencyContentEight": "If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nFind additional contact information in the Nolleguide",
 
     "game": "Moose game",
     "gameDescription":"Coming soon!",

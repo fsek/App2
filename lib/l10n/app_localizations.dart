@@ -1133,7 +1133,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguide.
   ///
   /// In sv, this message translates to:
-  /// **'NOLLEGUIDEN'**
+  /// **'Nolleguiden'**
   String get nolleguide;
 
   /// No description provided for @nolleguideWeAtFsek.
@@ -2053,18 +2053,6 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.'**
   String get emergencyContentSeven;
-
-  /// No description provided for @emergencyTitleEight.
-  ///
-  /// In sv, this message translates to:
-  /// **'Föset'**
-  String get emergencyTitleEight;
-
-  /// No description provided for @emergencyContentEight.
-  ///
-  /// In sv, this message translates to:
-  /// **'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden'**
-  String get emergencyContentEight;
 
   /// No description provided for @game.
   ///

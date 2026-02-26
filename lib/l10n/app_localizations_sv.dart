@@ -546,7 +546,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get messagesMessages => 'Meddelanden';
 
   @override
-  String get nolleguide => 'NOLLEGUIDEN';
+  String get nolleguide => 'Nolleguiden';
 
   @override
   String get nolleguideWeAtFsek => 'F-sektionen';
@@ -1056,13 +1056,6 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.';
-
-  @override
-  String get emergencyTitleEight => 'Föset';
-
-  @override
-  String get emergencyContentEight =>
-      'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden';
 
   @override
   String get game => 'Moose game';

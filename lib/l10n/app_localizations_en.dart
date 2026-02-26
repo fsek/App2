@@ -547,7 +547,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get messagesMessages => 'Messages';
 
   @override
-  String get nolleguide => 'THE STUDENT GUIDE';
+  String get nolleguide => 'The Student Guide';
 
   @override
   String get nolleguideWeAtFsek => 'The F-guild';
@@ -990,7 +990,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readProposition => 'Read motion from the board';
 
   @override
-  String get emergencyContacts => 'Emergency contact numbers';
+  String get emergencyContacts => 'Emergency Contact Numbers';
 
   @override
   String get emergencyNumOne => '112';
@@ -1063,13 +1063,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sweden\'s national information number. You can call this number to get information in the event of serious accidents and crises in society.';
-
-  @override
-  String get emergencyTitleEight => 'Föset';
-
-  @override
-  String get emergencyContentEight =>
-      'If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nFind additional contact information in the Nolleguide';
 
   @override
   String get game => 'Moose game';
