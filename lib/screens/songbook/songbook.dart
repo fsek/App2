@@ -74,11 +74,19 @@ class _SongbookPageState extends State<SongbookPage>
 
     if(starSongsLoad != null){
       for(var song in starSongsLoad){
-        var songObject = this.songs.singleWhere((t) => t.title == song);
+        SongRead songObject;
+        try{
+          songObject = this.songs.singleWhere((t) => t.title == song);
+        } catch(_){
+          continue;
+        }
         setState(() {
           this.starSongs.add(songObject);
         });
       }
+      // We do this because if we had a case where the song didn't exist and we entered the exception handler,
+      // the song didn't get added to this.starSongs so we save it so that it remains removed.
+      saveStarSongs();
     }
   }
 
@@ -171,8 +179,8 @@ class _SongbookPageState extends State<SongbookPage>
                                     onPressed: () => setState(() {
                                       _controller.clear();
                                       FocusScope.of(context).unfocus();
-                                      songs = List.from(
-                                          allSongs); // Reset songs list
+                                      this.songs = List.from(
+                                          this.allSongs); // Reset songs list
                                     }),
                                   )
                                 : SizedBox.shrink(),
@@ -195,7 +203,7 @@ class _SongbookPageState extends State<SongbookPage>
                                 .split(RegExp(r"\s+"));
                             setState(() {
                               initChar = "";
-                              songs = allSongs.where((song) {
+                              this.songs = this.allSongs.where((song) {
                                 return searchTerms.every((term) =>
                                     song.title.toLowerCase().contains(term));
                               }).toList();
@@ -240,9 +248,9 @@ class _SongbookPageState extends State<SongbookPage>
                     //     ),
                     //   ),
                     Expanded(
-                      child: songs.isNotEmpty
+                      child: this.songs.isNotEmpty
                           ? ListView(
-                              children: starSongs.isNotEmpty ? _generateStarSongs(starSongs) + songs
+                              children: this.starSongs.isNotEmpty ? _generateStarSongs(starSongs) + songs
                                   .map((song) => _generateSongTile(song))
                                   .toList() : songs
                                   .map((song) => _generateSongTile(song))
@@ -265,13 +273,14 @@ class _SongbookPageState extends State<SongbookPage>
   }
 
   List<Widget> _generateStarSongs(List<SongRead> songs){
+    var t = AppLocalizations.of(context)!;
     List<Widget> index = [];
     index.add(Container(
       decoration:
       BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
       child: ListTile(
         title: Text(
-          "Stjärnmärkt",
+          t.songbookStar,
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.onSurfaceVariant),

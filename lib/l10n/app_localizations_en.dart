@@ -354,6 +354,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get songbookAuthor => 'Author';
 
   @override
+  String get songbookStar => 'Favourites';
+
+  @override
   String get otherSongbook => 'Songbook';
 
   @override
