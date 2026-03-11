@@ -4,7 +4,6 @@ import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fsek_mobile/screens/home/nollningHome25.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
@@ -42,8 +41,9 @@ void main() async {
   final List<Destination> navbarDestinations = <Destination>[
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
-    // Destination(2, Icons.home, HomePage()),
-    Destination(2, Icons.home, NollningHomePage()),
+    // During introduction, modify NollningHomePage() and comment the normal HomePage()
+    // Destination(2, Icons.home, NollningHomePage()),
+    Destination(2, Icons.home, HomePage()),
     Destination(3, CustomIcons.moose, MooseGamePage()),
     Destination(4, Icons.list, OtherContent()),
   ];

@@ -42,6 +42,37 @@ class AppLocalizationsSv extends AppLocalizations {
   String get introduction => 'Nollning';
 
   @override
+  String get loginRequiredField => 'Obligatoriskt fält';
+
+  @override
+  String get loginEmail => 'E-postadress';
+
+  @override
+  String get loginPassword => 'Lösenord';
+
+  @override
+  String get loginForgotPassword => 'Glömt lösenord?';
+
+  @override
+  String get loginLogIn => 'Logga in';
+
+  @override
+  String get resetInstruction => 'Ange din e-post för att återställa lösenord';
+
+  @override
+  String get resetEmail => 'E-postadress';
+
+  @override
+  String get resetSubmit => 'Skicka';
+
+  @override
+  String get resetValidate => 'Skriv en e-post';
+
+  @override
+  String get resetDone =>
+      'Om din e-post finns så har en återställningslänk skickats till den.';
+
+  @override
   String get eventPriority => 'Prioritering:';
 
   @override
@@ -85,7 +116,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventTechnicalDifficulties =>
-      ' Vid tekniska problem med anmälan, kontakta ';
+      'Vid tekniska problem med anmälan, kontakta ';
 
   @override
   String get eventWebMasters => 'spindelmännen';
@@ -98,7 +129,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventFoodPrefInfo =>
-      'Du kan ändra dessa i Inställningar > matpreferenser';
+      'Du kan ändra dessa i Inställningar > Matpreferenser.';
 
   @override
   String get eventLinkToFoodPrefs => 'Genväg till inställningarna';
@@ -415,6 +446,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get contactInfo => 'Kontaktinformation';
 
   @override
+  String get contactEmail => 'E-post';
+
+  @override
   String get contactHeldBy => 'Posten innehavs av: ';
 
   @override
@@ -437,10 +471,31 @@ class AppLocalizationsSv extends AppLocalizations {
   String get contactEmpty => 'Ditt meddelande är tomt. Inget har skickats.';
 
   @override
+  String get albumMoreInfo => 'Mer info';
+
+  @override
   String get albumPhotographers => 'Fotografer: ';
 
   @override
   String get albumNoPhotographers => 'Inga fotografer';
+
+  @override
+  String get albumSelect => 'Markera';
+
+  @override
+  String get albumCancel => 'Avbryt';
+
+  @override
+  String get albumSelectAll => 'Markera alla';
+
+  @override
+  String get albumDeselectAll => 'Avmarkera alla';
+
+  @override
+  String get albumImageSelected => 'bild markerad';
+
+  @override
+  String get albumImagesSelected => 'bilder markerade';
 
   @override
   String get galleryTitle => 'Bildgalleri';
@@ -450,6 +505,9 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get galleryImageDownloaded => 'Bild sparad';
+
+  @override
+  String get galleryImagesDownloaded => 'Bilder sparade';
 
   @override
   String get galleryImageDownloadError => 'Ett fel uppstod vid nedladdning';
@@ -488,7 +546,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get messagesMessages => 'Meddelanden';
 
   @override
-  String get nolleguide => 'NOLLEGUIDEN';
+  String get nolleguide => 'Nolleguiden';
 
   @override
   String get nolleguideWeAtFsek => 'F-sektionen';
@@ -998,13 +1056,6 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.';
-
-  @override
-  String get emergencyTitleEight => 'Föset';
-
-  @override
-  String get emergencyContentEight =>
-      'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden';
 
   @override
   String get game => 'Moose game';

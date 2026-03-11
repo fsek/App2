@@ -164,6 +164,66 @@ abstract class AppLocalizations {
   /// **'Nollning'**
   String get introduction;
 
+  /// No description provided for @loginRequiredField.
+  ///
+  /// In sv, this message translates to:
+  /// **'Obligatoriskt fält'**
+  String get loginRequiredField;
+
+  /// No description provided for @loginEmail.
+  ///
+  /// In sv, this message translates to:
+  /// **'E-postadress'**
+  String get loginEmail;
+
+  /// No description provided for @loginPassword.
+  ///
+  /// In sv, this message translates to:
+  /// **'Lösenord'**
+  String get loginPassword;
+
+  /// No description provided for @loginForgotPassword.
+  ///
+  /// In sv, this message translates to:
+  /// **'Glömt lösenord?'**
+  String get loginForgotPassword;
+
+  /// No description provided for @loginLogIn.
+  ///
+  /// In sv, this message translates to:
+  /// **'Logga in'**
+  String get loginLogIn;
+
+  /// No description provided for @resetInstruction.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ange din e-post för att återställa lösenord'**
+  String get resetInstruction;
+
+  /// No description provided for @resetEmail.
+  ///
+  /// In sv, this message translates to:
+  /// **'E-postadress'**
+  String get resetEmail;
+
+  /// No description provided for @resetSubmit.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skicka'**
+  String get resetSubmit;
+
+  /// No description provided for @resetValidate.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skriv en e-post'**
+  String get resetValidate;
+
+  /// No description provided for @resetDone.
+  ///
+  /// In sv, this message translates to:
+  /// **'Om din e-post finns så har en återställningslänk skickats till den.'**
+  String get resetDone;
+
   /// No description provided for @eventPriority.
   ///
   /// In sv, this message translates to:
@@ -251,7 +311,7 @@ abstract class AppLocalizations {
   /// No description provided for @eventTechnicalDifficulties.
   ///
   /// In sv, this message translates to:
-  /// **' Vid tekniska problem med anmälan, kontakta '**
+  /// **'Vid tekniska problem med anmälan, kontakta '**
   String get eventTechnicalDifficulties;
 
   /// No description provided for @eventWebMasters.
@@ -275,7 +335,7 @@ abstract class AppLocalizations {
   /// No description provided for @eventFoodPrefInfo.
   ///
   /// In sv, this message translates to:
-  /// **'Du kan ändra dessa i Inställningar > matpreferenser'**
+  /// **'Du kan ändra dessa i Inställningar > Matpreferenser.'**
   String get eventFoodPrefInfo;
 
   /// No description provided for @eventLinkToFoodPrefs.
@@ -878,6 +938,12 @@ abstract class AppLocalizations {
   /// **'Kontaktinformation'**
   String get contactInfo;
 
+  /// No description provided for @contactEmail.
+  ///
+  /// In sv, this message translates to:
+  /// **'E-post'**
+  String get contactEmail;
+
   /// No description provided for @contactHeldBy.
   ///
   /// In sv, this message translates to:
@@ -920,6 +986,12 @@ abstract class AppLocalizations {
   /// **'Ditt meddelande är tomt. Inget har skickats.'**
   String get contactEmpty;
 
+  /// No description provided for @albumMoreInfo.
+  ///
+  /// In sv, this message translates to:
+  /// **'Mer info'**
+  String get albumMoreInfo;
+
   /// No description provided for @albumPhotographers.
   ///
   /// In sv, this message translates to:
@@ -931,6 +1003,42 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Inga fotografer'**
   String get albumNoPhotographers;
+
+  /// No description provided for @albumSelect.
+  ///
+  /// In sv, this message translates to:
+  /// **'Markera'**
+  String get albumSelect;
+
+  /// No description provided for @albumCancel.
+  ///
+  /// In sv, this message translates to:
+  /// **'Avbryt'**
+  String get albumCancel;
+
+  /// No description provided for @albumSelectAll.
+  ///
+  /// In sv, this message translates to:
+  /// **'Markera alla'**
+  String get albumSelectAll;
+
+  /// No description provided for @albumDeselectAll.
+  ///
+  /// In sv, this message translates to:
+  /// **'Avmarkera alla'**
+  String get albumDeselectAll;
+
+  /// No description provided for @albumImageSelected.
+  ///
+  /// In sv, this message translates to:
+  /// **'bild markerad'**
+  String get albumImageSelected;
+
+  /// No description provided for @albumImagesSelected.
+  ///
+  /// In sv, this message translates to:
+  /// **'bilder markerade'**
+  String get albumImagesSelected;
 
   /// No description provided for @galleryTitle.
   ///
@@ -949,6 +1057,12 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Bild sparad'**
   String get galleryImageDownloaded;
+
+  /// No description provided for @galleryImagesDownloaded.
+  ///
+  /// In sv, this message translates to:
+  /// **'Bilder sparade'**
+  String get galleryImagesDownloaded;
 
   /// No description provided for @galleryImageDownloadError.
   ///
@@ -1019,7 +1133,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguide.
   ///
   /// In sv, this message translates to:
-  /// **'NOLLEGUIDEN'**
+  /// **'Nolleguiden'**
   String get nolleguide;
 
   /// No description provided for @nolleguideWeAtFsek.
@@ -1939,18 +2053,6 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.'**
   String get emergencyContentSeven;
-
-  /// No description provided for @emergencyTitleEight.
-  ///
-  /// In sv, this message translates to:
-  /// **'Föset'**
-  String get emergencyTitleEight;
-
-  /// No description provided for @emergencyContentEight.
-  ///
-  /// In sv, this message translates to:
-  /// **'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden'**
-  String get emergencyContentEight;
 
   /// No description provided for @game.
   ///

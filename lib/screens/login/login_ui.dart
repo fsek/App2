@@ -10,6 +10,9 @@ import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/authentication/login_event.dart';
 import 'package:fsek_mobile/util/authentication/login_state.dart';
 import 'package:fsek_mobile/widgets/forgotten_password.dart';
+import 'package:fsek_mobile/app.dart';
+import 'package:fsek_mobile/services/abstract.service.dart';
+import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class LoginUI extends StatefulWidget {
   final LoginBloc? loginBloc;
@@ -111,6 +114,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       _animationController.forward();
       _emailFocusNode.unfocus();
       _passFocusNode.unfocus();
+      TextInput.finishAutofillContext();
       _loginBloc!.add(LoginButtonPressed(
         username: _emailController.text.trim(),
         password: _passwordController.text,
@@ -124,19 +128,22 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+
     final _emailField = Focus(
         key: Key("login_email_field"),
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           autofillHints: [AutofillHints.email, AutofillHints.username],
           decoration: InputDecoration(
-              labelText: 'Email',
+              labelText: t.loginEmail,
               prefixIcon: Icon(Icons.account_circle, color: _emailLabelColor),
               labelStyle: TextStyle(color: _emailLabelColor)),
           focusNode: _emailFocusNode,
           controller: _emailController,
+          textInputAction: TextInputAction.next,
           validator: (String? value) {
-            return value!.trim().isEmpty ? 'Required field' : null;
+            return value!.trim().isEmpty ? t.loginRequiredField : null;
           },
         ));
     final _passwordField = Focus(
@@ -145,7 +152,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           obscureText: true,
           autofillHints: [AutofillHints.password],
           decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: t.loginPassword,
               prefixIcon: Icon(
                 Icons.lock,
                 color: _passLabelColor,
@@ -153,30 +160,40 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
               labelStyle: TextStyle(color: _passLabelColor)),
           focusNode: _passFocusNode,
           controller: _passwordController,
+          textInputAction: TextInputAction.done,
           validator: (String? value) {
-            return value!.isEmpty ? 'Required field' : null;
+            return value!.isEmpty ? t.loginRequiredField : null;
           },
         ));
     final _forgotPasswordButton = TextButton(
       key: Key("login_forgot_btn"),
       onPressed: () => onForgottenPassword(),
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all<Color>(
-          Theme.of(context).primaryColorLight,
-        ),
-        foregroundColor: WidgetStateProperty.all<Color>(
-          Theme.of(context).colorScheme.onSecondary
-        ),
-      ),
       child: Text(
-        "Forgot my password",
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+        t.loginForgotPassword,
+        // style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSecondary),
       ),
     );
+    final _changeLanguageButton = InkWell(
+      customBorder: const CircleBorder(),
+      onTap: () {
+        String newLocale = t.localeName == "sv" ? "en" : "sv"; 
+        FsekMobileApp.of(context)!.setLocale(newLocale);
+        AbstractService.updateApiUrl(newLocale == "sv");
+      },
+      child: Padding(
+        padding: EdgeInsetsGeometry.all(7),
+        child: Text(
+          style: TextStyle(fontSize: 30),
+          t.localeName == "sv" ? "🇬🇧" : "🇸🇪",
+        ),
+      ),
+    );
+    
 
     final form = Form(
         key: _formKey,
-        child: Column(
+        child: AutofillGroup(child:
+          Column(
           children: [
             SizedBox(height: 32.0),
             _emailField,
@@ -184,7 +201,8 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
             _passwordField,
             SizedBox(height: 20.0),
           ],
-        ));
+        ))
+    );
 
     return BlocConsumer<LoginBloc, LoginState>(
       bloc: _loginBloc,
@@ -201,7 +219,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
                 key: Key("login_btn"),
                 onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
                 child: Text(
-                  "Log in",
+                  t.loginLogIn,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSecondary, 
                     fontSize: 16
@@ -226,7 +244,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
                         children: <Widget>[
                           Row(mainAxisAlignment: MainAxisAlignment.center, children: locator<ThemeService>().loginIcon),
                           form,
-                          Row(mainAxisAlignment: MainAxisAlignment.end, children: [_forgotPasswordButton]),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [_changeLanguageButton, _forgotPasswordButton]),
                           Stack(children: [Center(child: _loginButton), Center(child: _loadingIcon)])
                         ]))));
       },

@@ -42,6 +42,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get introduction => 'Nollning';
 
   @override
+  String get loginRequiredField => 'Required field';
+
+  @override
+  String get loginEmail => 'Email';
+
+  @override
+  String get loginPassword => 'Password';
+
+  @override
+  String get loginForgotPassword => 'Forgot password?';
+
+  @override
+  String get loginLogIn => 'Log in';
+
+  @override
+  String get resetInstruction => 'Enter email to reset password';
+
+  @override
+  String get resetEmail => 'Email';
+
+  @override
+  String get resetSubmit => 'Submit';
+
+  @override
+  String get resetValidate => 'Please input an email';
+
+  @override
+  String get resetDone => 'If your email exists, a reset link has been sent.';
+
+  @override
   String get eventPriority => 'Priority:';
 
   @override
@@ -86,7 +116,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventTechnicalDifficulties =>
-      ' In case of technical difficulties, contact ';
+      'In case of technical difficulties, contact ';
 
   @override
   String get eventWebMasters => 'the web masters';
@@ -99,7 +129,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventFoodPrefInfo =>
-      'You can change these in Settings > Food preferences';
+      'You can change these in Settings > Food preferences.';
 
   @override
   String get eventLinkToFoodPrefs => 'Shortcut to the settings';
@@ -164,7 +194,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'In case of questions about the event, ask the event responsible:';
 
   @override
-  String get eventAlcohol => 'Alkohol';
+  String get eventAlcohol => 'Alcohol';
 
   @override
   String get eventAlcoholMayAppear => 'Alcohol may be present';
@@ -417,6 +447,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactInfo => 'Contact information';
 
   @override
+  String get contactEmail => 'Email';
+
+  @override
   String get contactHeldBy => 'The position is held by: ';
 
   @override
@@ -439,10 +472,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactEmpty => 'Your message is emtpy. Nothing has been sent.';
 
   @override
+  String get albumMoreInfo => 'More info';
+
+  @override
   String get albumPhotographers => 'Photographers: ';
 
   @override
   String get albumNoPhotographers => 'No photographers';
+
+  @override
+  String get albumSelect => 'Select';
+
+  @override
+  String get albumCancel => 'Cancel';
+
+  @override
+  String get albumSelectAll => 'Select all';
+
+  @override
+  String get albumDeselectAll => 'Deselect All';
+
+  @override
+  String get albumImageSelected => 'image selected';
+
+  @override
+  String get albumImagesSelected => 'images selected';
 
   @override
   String get galleryTitle => 'Photo Gallery';
@@ -452,6 +506,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get galleryImageDownloaded => 'Image downloaded';
+
+  @override
+  String get galleryImagesDownloaded => 'Images downloaded';
 
   @override
   String get galleryImageDownloadError => 'An error occurred while downloading';
@@ -490,7 +547,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get messagesMessages => 'Messages';
 
   @override
-  String get nolleguide => 'THE STUDENT GUIDE';
+  String get nolleguide => 'The Student Guide';
 
   @override
   String get nolleguideWeAtFsek => 'The F-guild';
@@ -933,7 +990,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readProposition => 'Read motion from the board';
 
   @override
-  String get emergencyContacts => 'Emergency contact numbers';
+  String get emergencyContacts => 'Emergency Contact Numbers';
 
   @override
   String get emergencyNumOne => '112';
@@ -1006,13 +1063,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sweden\'s national information number. You can call this number to get information in the event of serious accidents and crises in society.';
-
-  @override
-  String get emergencyTitleEight => 'Föset';
-
-  @override
-  String get emergencyContentEight =>
-      'If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nFind additional contact information in the Nolleguide';
 
   @override
   String get game => 'Moose game';

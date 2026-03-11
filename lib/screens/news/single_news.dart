@@ -15,6 +15,7 @@ class SingleNewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
 
+    /*
     if (t.localeName == "en") {
       return Scaffold(
           appBar: AppBar(),
@@ -130,6 +131,68 @@ class SingleNewsPage extends StatelessWidget {
             ],
           ),
         ));
+        */
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+                child: Text(t.localeName == "sv" ? news.titleSv : news.titleEn,
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
+            ),
+            Divider(
+              thickness: 1,
+            ),
+            Container(
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0),
+                  child: Markdown(
+                    shrinkWrap: true,
+                    data: (t.localeName == "sv" ? news.contentSv : news.contentEn).replaceAll("<br />", ""),
+                    onTapLink: (text, href, title) {
+                      if (href != null) {
+                        launchUrl(Uri.parse(href));
+                      }
+                    },
+                    styleSheet:
+                        MarkdownStyleSheet.fromTheme(Theme.of(context))
+                            .copyWith(
+                      p: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(height: 1.2),
+                    ),
+                  )),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${news.author.firstName} ${news.author.lastName}",
+                  ),
+                  Spacer(),
+                  Text(Time.format(news.createdAt, "%d %M %Y %h:%m", locale: t.localeName))
+                ]
+              ),
+            ),
+            // Padding(
+            //   padding: EdgeInsets.all(8),
+            //   child: news.image == null
+            //       ? SizedBox.shrink()
+            //       : Image.network(news.image!),
+            // )
+          ],
+        ),
+      )
+    );
   }
 }
 

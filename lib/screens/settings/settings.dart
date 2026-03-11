@@ -184,8 +184,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 // ),
                 DropdownButton(
                   iconEnabledColor: Theme.of(context).colorScheme.onSurface,
-                  iconDisabledColor: Theme.of(context).colorScheme.onSurface,
                   isExpanded: true,
+                  menuMaxHeight: MediaQuery.of(context).size.height / 2,
                   hint: Text(t.settingsFoodPrefs,
                       style: TextStyle(
                           fontSize: 16,
@@ -297,8 +297,11 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           Text(displayText, style: TextStyle(fontSize: 16)),
           DropdownButton<T>(
+              iconDisabledColor: Theme.of(context).colorScheme.onSurface,
+              iconEnabledColor: Theme.of(context).colorScheme.onSurface,
               autofocus: false,
               isExpanded: true,
+              menuMaxHeight: MediaQuery.of(context).size.height / 2,
               value: value,
               items: dropDownItems
                   .map((item) => DropdownMenuItem(

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fsek_mobile/screens/gallery/download_button.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
@@ -84,53 +85,18 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                       ],
                     ).createShader(bounds);
                   },
-                  child: IconButton(
-                    icon: Icon(Icons.download_for_offline_rounded, size: 40),
-                    onPressed: () async {
-                      try {
-                        final imageBytes =
-                            await fetchImageBytes(widget.imgIds[index]);
-                        await FlutterImageGallerySaver.saveImage(imageBytes);
-                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                          content: Text("The JPEG god smiles upon you"),
-                        ));
-                      } on Exception catch (_) {
-                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                          content: Text("JPEG broke :o"),
-                        ));
-                      }
-                    },
-                  )),
+                  child: DownloadButton(
+                    imageFutures: [fetchImageBytes(widget.imgIds[index])],
+                    icon: Icons.download_for_offline_rounded,
+                    iconSize: 40,
+                    successMessage: "The JPEG god smiles upon you",
+                    errorMessage: "JPEG broke :o",
+                  ),
+                ),
               visible: smallDownload,
             ),
             GestureDetector(
-              child: IconButton(
-                icon: Icon(Icons.download),
-                onPressed: () async {
-                  try {
-                    final imageBytes =
-                        await fetchImageBytes(widget.imgIds[index]);
-                    await FlutterImageGallerySaver.saveImage(imageBytes);
-                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(
-                          t.galleryImageDownloaded,
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest));
-                  } on Exception catch (_) {
-                    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                        content: Text(
-                          t.galleryImageDownloadError,
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest));
-                  }
-                },
-              ),
+              child: DownloadButton(imageFutures: [fetchImageBytes(widget.imgIds[index])]),
               onPanCancel: () => _timer.cancel(),
               onPanDown: (_) => {
                 _timer = Timer(Duration(seconds: 4), () {

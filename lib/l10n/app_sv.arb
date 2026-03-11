@@ -14,6 +14,18 @@
     "other" : "Övrigt",
     "introduction" : "Nollning",
 
+    "loginRequiredField": "Obligatoriskt fält",
+    "loginEmail": "E-postadress",
+    "loginPassword": "Lösenord",
+    "loginForgotPassword": "Glömt lösenord?",
+    "loginLogIn": "Logga in",
+
+    "resetInstruction": "Ange din e-post för att återställa lösenord",
+    "resetEmail": "E-postadress",
+    "resetSubmit": "Skicka",
+    "resetValidate": "Skriv en e-post",
+    "resetDone": "Om din e-post finns så har en återställningslänk skickats till den.",
+
     "eventPriority": "Prioritering:",
     "eventOther": "Övrigt",
     "eventChooseGroup": "Välj grupp:",
@@ -28,11 +40,11 @@
     "eventNbrSpots": " Antal platser: ",
     "eventSignUpOpens": " Anmälan öppnar: ",
     "eventSignUpCloses": " Anmälan stänger: ",
-    "eventTechnicalDifficulties": " Vid tekniska problem med anmälan, kontakta ",
+    "eventTechnicalDifficulties": "Vid tekniska problem med anmälan, kontakta ",
     "eventWebMasters": "spindelmännen",
     "eventFoodPreferences": "Matpreferenser:",
     "eventSendSignup": "Skicka Anmälan",
-    "eventFoodPrefInfo": "Du kan ändra dessa i Inställningar > matpreferenser",
+    "eventFoodPrefInfo": "Du kan ändra dessa i Inställningar > Matpreferenser.",
     "eventLinkToFoodPrefs": "Genväg till inställningarna",
     "eventDesignup": "Avanmäl",
     "eventConfirmCancel": "Är du säker på att du vill avanmäla dig?",
@@ -141,6 +153,7 @@
     "contactPerson": "Kontakt till postinnehavare",
     "contactDescription": "Beskrivning",
     "contactInfo": "Kontaktinformation",
+    "contactEmail": "E-post",
     "contactHeldBy": "Posten innehavs av: ",
     "contactMessage": "Meddelande",
     "contactWriteMessage": "Skriv ditt meddelande här",
@@ -149,12 +162,20 @@
     "contactHasNotBeenSent": "Ditt meddelande kunde inte skickas ):\nKolla om du har täckning och försök igen.",
     "contactEmpty": "Ditt meddelande är tomt. Inget har skickats.",
 
+    "albumMoreInfo": "Mer info",
     "albumPhotographers": "Fotografer: ",
     "albumNoPhotographers": "Inga fotografer",
+    "albumSelect": "Markera",
+    "albumCancel": "Avbryt",
+    "albumSelectAll": "Markera alla",
+    "albumDeselectAll": "Avmarkera alla",
+    "albumImageSelected": "bild markerad",
+    "albumImagesSelected": "bilder markerade",
 
     "galleryTitle": "Bildgalleri",
     "galleryOf": "av",
     "galleryImageDownloaded": "Bild sparad",
+    "galleryImagesDownloaded": "Bilder sparade",
     "galleryImageDownloadError": "Ett fel uppstod vid nedladdning",
 
     "homeNoNews": "Inga nyheter tillgänliga",
@@ -170,7 +191,7 @@
 
     "messagesMessages": "Meddelanden",
 
-    "nolleguide": "NOLLEGUIDEN",
+    "nolleguide": "Nolleguiden",
 
     "nolleguideWeAtFsek": "F-sektionen",
     "nolleguideEtiquette": "Allt du behöver veta",
@@ -345,8 +366,6 @@
     "emergencyNumSeven": "113 13",
     "emergencyTitleSeven": " - Krisinformation",
     "emergencyContentSeven": "Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.",
-    "emergencyTitleEight": "Föset",
-    "emergencyContentEight": "Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nÖverfös Victor\n076195025 \n\nCofös Tova\n0709578852 \n\nCofös Frida\n0723666302 \n\nCofös Alma\n0706364253 \n\nCofös Ale\n0761314477 \n\nCofös Hannes\n0703393493 \n\nCofös Erik\n0723320921 \n\nYtterligare kontaktinformation finns att hitta i Nolleguiden",
 
     "game": "Moose game",
     "gameDescription":"Kommer snart!",
