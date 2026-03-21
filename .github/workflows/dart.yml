@@ -29,7 +29,7 @@ jobs:
       - name: Fetch API
         run: bash ./test-fetch-api.sh
 
-      # infos is generally deprecations, and warnings are generally unused imports which we do not have time to track and fix at the moment.
+      # Infos are generally deprecations, and warnings are generally unused imports which we do not have time to track and fix at the moment.
       # TODO: enable fatal infos and warnings again (yes, I know this will never be done)
       - name: Analyze project source
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
