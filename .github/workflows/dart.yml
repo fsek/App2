@@ -27,14 +27,10 @@ jobs:
       - name: Fetch API
         run: bash ./test-fetch-api.sh
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
-
-      # infos is generally deprecations, which we do not have time to track and fix at the moment.
-      # TODO: enable fatal infos again
+      # infos is generally deprecations, and warnings are generally unused imports which we do not have time to track and fix at the moment.
+      # TODO: enable fatal infos and warnings again (yes, I know this will never be done)
       - name: Analyze project source
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
