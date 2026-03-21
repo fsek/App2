@@ -65,7 +65,8 @@ class _AlbumPageState extends State<AlbumPage> {
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.transparent,  // can the user tell that this is a button even without this?
+                backgroundColor: Colors.transparent,
+                foregroundColor: Theme.of(context).colorScheme.onSurface,
               ),
               onPressed: () {
                 setState(() {
@@ -132,15 +133,14 @@ class _AlbumPageState extends State<AlbumPage> {
             ),
 
             if (_isSelecting)
-              Padding(
-                padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                child: Container(
+              Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                   ),
-                  child:
-                    Row(
+                  child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 8),                  
+                  child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
