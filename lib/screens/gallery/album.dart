@@ -29,16 +29,16 @@ class _AlbumPageState extends State<AlbumPage> {
   @override
   void initState() {
     super.initState();
-    loadImgIds(widget.album.id);
+    loadImgs(widget.album.id);
   }
 
-  void loadImgIds(int albumId) async {
+  void loadImgs(int albumId) async {
     final idList = await ApiService.apiClient
         .getImgApi()
         .imgGetAlbumImages(albumId: albumId);
     final ids = idList.data!.toList();
     final futures = {
-      for (final id in ids) id: _fetchImage(id),
+      for (final id in ids) id: _fetchImage(id),  // consider loading lazily instead (somehow)
     };
 
     setState(() {
@@ -134,40 +134,40 @@ class _AlbumPageState extends State<AlbumPage> {
 
             if (_isSelecting)
               Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  child: Padding(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+                child: Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 8),                  
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: Icon(_selectedImages.length != imgIds!.length ? Icons.select_all : Icons.deselect),
-                          onPressed: () {
-                            setState(() {
-                              if (_selectedImages.length != imgIds!.length) {  // could use ternary
-                                _selectedImages = List.of(imgIds!);  // deep copy
-                              } else {
-                                _selectedImages = [];
-                              }
-                            });
-                          },
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(_selectedImages.length != imgIds!.length ? Icons.select_all : Icons.deselect),
+                        onPressed: () {
+                          setState(() {
+                            if (_selectedImages.length != imgIds!.length) {  // could use ternary
+                              _selectedImages = List.of(imgIds!);  // deep copy
+                            } else {
+                              _selectedImages = [];
+                            }
+                          });
+                        },
+                      ),
+
+                      if (!_selectedImages.isEmpty)
+                        Text("${_selectedImages.length} ${_selectedImages.length == 1 ? t.albumImageSelected : t.albumImagesSelected}"),
+
+                      if (!_selectedImages.isEmpty)
+                        DownloadButton(
+                            imageFutures: _selectedImages
+                              .where(_imageCache.containsKey)  // shouldn't even be needed
+                              .map((id) => Future(() => _imageCache[id]!))
+                              .toList()
                         ),
-
-                        if (!_selectedImages.isEmpty)
-                          Text("${_selectedImages.length} ${_selectedImages.length == 1 ? t.albumImageSelected : t.albumImagesSelected}"),
-
-                        if (!_selectedImages.isEmpty)
-                          DownloadButton(
-                              imageFutures: _selectedImages
-                                .where(_imageCache.containsKey)  // shouldn't even be needed
-                                .map((id) => Future(() => _imageCache[id]!))
-                                .toList()
-                          ),
-                      ],
-                    ),
+                    ],
+                  ),
                 ),
               ),
 
