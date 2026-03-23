@@ -1,0 +1,37 @@
+name: Flutter Code Analysis
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2.21.0
+        with:
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate API client (from production backend)
+        run: bash ./script.sh https://backend.fsektionen.se
+
+      # Infos are generally deprecations, and warnings are generally unused imports which we do not have time to track and fix at the moment.
+      # TODO: enable fatal infos and warnings again (yes, I know this will never be done)
+      - name: Analyze project source
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      # Your project will need to have tests in test/ and a dependency on
+      # package:test for this step to succeed. Note that Flutter projects will
+      # want to change this to 'flutter test'.
+      # TODO: Add proper testing!
+      # - name: Run tests
+      #   run: dart test
