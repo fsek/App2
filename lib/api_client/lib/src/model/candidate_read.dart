@@ -15,17 +15,17 @@ part 'candidate_read.g.dart';
 ///
 /// Properties:
 /// * [candidateId] 
-/// * [electionId] 
+/// * [subElectionId] 
 /// * [userId] 
 /// * [user] 
-/// * [electionPosts] 
+/// * [candidations] 
 @BuiltValue()
 abstract class CandidateRead implements Built<CandidateRead, CandidateReadBuilder> {
   @BuiltValueField(wireName: r'candidate_id')
   int get candidateId;
 
-  @BuiltValueField(wireName: r'election_id')
-  int get electionId;
+  @BuiltValueField(wireName: r'sub_election_id')
+  int get subElectionId;
 
   @BuiltValueField(wireName: r'user_id')
   int get userId;
@@ -33,8 +33,8 @@ abstract class CandidateRead implements Built<CandidateRead, CandidateReadBuilde
   @BuiltValueField(wireName: r'user')
   CandidateUserRead get user;
 
-  @BuiltValueField(wireName: r'election_posts')
-  BuiltList<CandidatePostRead> get electionPosts;
+  @BuiltValueField(wireName: r'candidations')
+  BuiltList<CandidatePostRead> get candidations;
 
   CandidateRead._();
 
@@ -64,9 +64,9 @@ class _$CandidateReadSerializer implements PrimitiveSerializer<CandidateRead> {
       object.candidateId,
       specifiedType: const FullType(int),
     );
-    yield r'election_id';
+    yield r'sub_election_id';
     yield serializers.serialize(
-      object.electionId,
+      object.subElectionId,
       specifiedType: const FullType(int),
     );
     yield r'user_id';
@@ -79,9 +79,9 @@ class _$CandidateReadSerializer implements PrimitiveSerializer<CandidateRead> {
       object.user,
       specifiedType: const FullType(CandidateUserRead),
     );
-    yield r'election_posts';
+    yield r'candidations';
     yield serializers.serialize(
-      object.electionPosts,
+      object.candidations,
       specifiedType: const FullType(BuiltList, [FullType(CandidatePostRead)]),
     );
   }
@@ -114,12 +114,12 @@ class _$CandidateReadSerializer implements PrimitiveSerializer<CandidateRead> {
           ) as int;
           result.candidateId = valueDes;
           break;
-        case r'election_id':
+        case r'sub_election_id':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(int),
           ) as int;
-          result.electionId = valueDes;
+          result.subElectionId = valueDes;
           break;
         case r'user_id':
           final valueDes = serializers.deserialize(
@@ -135,12 +135,12 @@ class _$CandidateReadSerializer implements PrimitiveSerializer<CandidateRead> {
           ) as CandidateUserRead;
           result.user.replace(valueDes);
           break;
-        case r'election_posts':
+        case r'candidations':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(BuiltList, [FullType(CandidatePostRead)]),
           ) as BuiltList<CandidatePostRead>;
-          result.electionPosts.replace(valueDes);
+          result.candidations.replace(valueDes);
           break;
         default:
           unhandled.add(key);

@@ -37,7 +37,7 @@ final int userId = 56; // int |
 try {
     final response = api.eventSignupEventSignoffRoute(eventId, userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventSignupApi->eventSignupEventSignoffRoute: $e\n');
 }
 ```
@@ -86,7 +86,7 @@ final EventSignupCreate eventSignupCreate = ; // EventSignupCreate |
 try {
     final response = api.eventSignupEventSignupRoute(eventId, eventSignupCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventSignupApi->eventSignupEventSignupRoute: $e\n');
 }
 ```
@@ -134,7 +134,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventSignupGetMeEventSignup(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventSignupApi->eventSignupGetMeEventSignup: $e\n');
 }
 ```
@@ -182,7 +182,7 @@ final EventSignupUpdate eventSignupUpdate = ; // EventSignupUpdate |
 try {
     final response = api.eventSignupUpdateEventSignupRoute(eventId, eventSignupUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventSignupApi->eventSignupUpdateEventSignupRoute: $e\n');
 }
 ```

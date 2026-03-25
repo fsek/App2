@@ -42,7 +42,7 @@ final String clientSecret = clientSecret_example; // String |
 try {
     final response = api.authAuthCookieLogin(username, password, grantType, scope, clientId, clientSecret);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieLogin: $e\n');
 }
 ```
@@ -93,7 +93,7 @@ final api = ApiClient().getAuthApi();
 try {
     final response = api.authAuthCookieLogout();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieLogout: $e\n');
 }
 ```
@@ -136,7 +136,7 @@ final api = ApiClient().getAuthApi();
 try {
     final response = api.authAuthCookieLogoutAll();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieLogoutAll: $e\n');
 }
 ```
@@ -179,7 +179,7 @@ final api = ApiClient().getAuthApi();
 try {
     final response = api.authAuthCookieRefresh();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieRefresh: $e\n');
 }
 ```
@@ -229,7 +229,7 @@ final String clientSecret = clientSecret_example; // String |
 try {
     final response = api.authAuthCookieUpdateEmail(newEmail, username, password, grantType, scope, clientId, clientSecret);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieUpdateEmail: $e\n');
 }
 ```
@@ -288,7 +288,7 @@ final String clientSecret = clientSecret_example; // String |
 try {
     final response = api.authAuthCookieUpdatePassword(newPassword, username, password, grantType, scope, clientId, clientSecret);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authAuthCookieUpdatePassword: $e\n');
 }
 ```
@@ -335,7 +335,7 @@ final UserCreate userCreate = ; // UserCreate |
 try {
     final response = api.authRegisterRegister(userCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authRegisterRegister: $e\n');
 }
 ```
@@ -376,7 +376,7 @@ final BodyAuthResetForgotPassword bodyAuthResetForgotPassword = ; // BodyAuthRes
 try {
     final response = api.authResetForgotPassword(bodyAuthResetForgotPassword);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authResetForgotPassword: $e\n');
 }
 ```
@@ -417,7 +417,7 @@ final BodyAuthResetResetPassword bodyAuthResetResetPassword = ; // BodyAuthReset
 try {
     final response = api.authResetResetPassword(bodyAuthResetResetPassword);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authResetResetPassword: $e\n');
 }
 ```
@@ -458,7 +458,7 @@ final BodyAuthVerifyRequestToken bodyAuthVerifyRequestToken = ; // BodyAuthVerif
 try {
     final response = api.authVerifyRequestToken(bodyAuthVerifyRequestToken);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authVerifyRequestToken: $e\n');
 }
 ```
@@ -499,7 +499,7 @@ final BodyAuthVerifyVerify bodyAuthVerifyVerify = ; // BodyAuthVerifyVerify |
 try {
     final response = api.authVerifyVerify(bodyAuthVerifyVerify);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AuthApi->authVerifyVerify: $e\n');
 }
 ```

@@ -11,30 +11,39 @@ part 'election_create.g.dart';
 /// ElectionCreate
 ///
 /// Properties:
-/// * [title] 
+/// * [titleSv] 
+/// * [titleEn] 
 /// * [startTime] 
-/// * [endTime] 
-/// * [description] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
+/// * [visible] 
 @BuiltValue()
 abstract class ElectionCreate implements Built<ElectionCreate, ElectionCreateBuilder> {
-  @BuiltValueField(wireName: r'title')
-  String get title;
+  @BuiltValueField(wireName: r'title_sv')
+  String get titleSv;
+
+  @BuiltValueField(wireName: r'title_en')
+  String get titleEn;
 
   @BuiltValueField(wireName: r'start_time')
   DateTime get startTime;
 
-  @BuiltValueField(wireName: r'end_time')
-  DateTime get endTime;
+  @BuiltValueField(wireName: r'description_sv')
+  String? get descriptionSv;
 
-  @BuiltValueField(wireName: r'description')
-  String get description;
+  @BuiltValueField(wireName: r'description_en')
+  String? get descriptionEn;
+
+  @BuiltValueField(wireName: r'visible')
+  bool? get visible;
 
   ElectionCreate._();
 
   factory ElectionCreate([void updates(ElectionCreateBuilder b)]) = _$ElectionCreate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ElectionCreateBuilder b) => b;
+  static void _defaults(ElectionCreateBuilder b) => b
+      ..visible = false;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ElectionCreate> get serializer => _$ElectionCreateSerializer();
@@ -52,9 +61,14 @@ class _$ElectionCreateSerializer implements PrimitiveSerializer<ElectionCreate> 
     ElectionCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'title';
+    yield r'title_sv';
     yield serializers.serialize(
-      object.title,
+      object.titleSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'title_en';
+    yield serializers.serialize(
+      object.titleEn,
       specifiedType: const FullType(String),
     );
     yield r'start_time';
@@ -62,16 +76,23 @@ class _$ElectionCreateSerializer implements PrimitiveSerializer<ElectionCreate> 
       object.startTime,
       specifiedType: const FullType(DateTime),
     );
-    yield r'end_time';
-    yield serializers.serialize(
-      object.endTime,
-      specifiedType: const FullType(DateTime),
+    yield r'description_sv';
+    yield object.descriptionSv == null ? null : serializers.serialize(
+      object.descriptionSv,
+      specifiedType: const FullType.nullable(String),
     );
-    yield r'description';
-    yield serializers.serialize(
-      object.description,
-      specifiedType: const FullType(String),
+    yield r'description_en';
+    yield object.descriptionEn == null ? null : serializers.serialize(
+      object.descriptionEn,
+      specifiedType: const FullType.nullable(String),
     );
+    if (object.visible != null) {
+      yield r'visible';
+      yield serializers.serialize(
+        object.visible,
+        specifiedType: const FullType(bool),
+      );
+    }
   }
 
   @override
@@ -95,12 +116,19 @@ class _$ElectionCreateSerializer implements PrimitiveSerializer<ElectionCreate> 
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'title':
+        case r'title_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.title = valueDes;
+          result.titleSv = valueDes;
+          break;
+        case r'title_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.titleEn = valueDes;
           break;
         case r'start_time':
           final valueDes = serializers.deserialize(
@@ -109,19 +137,28 @@ class _$ElectionCreateSerializer implements PrimitiveSerializer<ElectionCreate> 
           ) as DateTime;
           result.startTime = valueDes;
           break;
-        case r'end_time':
+        case r'description_sv':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.endTime = valueDes;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionSv = valueDes;
           break;
-        case r'description':
+        case r'description_en':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.description = valueDes;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionEn = valueDes;
+          break;
+        case r'visible':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.visible = valueDes;
           break;
         default:
           unhandled.add(key);

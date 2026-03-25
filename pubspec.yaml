@@ -16,7 +16,7 @@ description: Mobile application for the F-guild
 version: 1.25.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -28,7 +28,7 @@ dependencies:
   #cupertino_icons: ^0.1.2
   provider: ^6.1.4 # For Blocs and more
   http: ^1.1.0 # For Http requests
-  json_annotation: ^4.9.0 # For json serializing
+  json_annotation: ^4.10.0 # For json serializing
   flutter_secure_storage: ^10.0.0-beta.4 # For storing encryption keys for Boxes
   shared_preferences: ^2.0.6 # For web storage as well as small things, such as app theme
   equatable: ^2.0.3 # For State

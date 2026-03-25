@@ -37,7 +37,7 @@ final SongCreate songCreate = ; // SongCreate |
 try {
     final response = api.songsCreateSong(songCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsApi->songsCreateSong: $e\n');
 }
 ```
@@ -84,7 +84,7 @@ final int songId = 56; // int |
 try {
     final response = api.songsDeleteSong(songId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsApi->songsDeleteSong: $e\n');
 }
 ```
@@ -124,7 +124,7 @@ final api = ApiClient().getSongsApi();
 try {
     final response = api.songsGetAllSongs();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsApi->songsGetAllSongs: $e\n');
 }
 ```
@@ -162,7 +162,7 @@ final int songId = 56; // int |
 try {
     final response = api.songsGetSong(songId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsApi->songsGetSong: $e\n');
 }
 ```
@@ -210,7 +210,7 @@ final SongCreate songCreate = ; // SongCreate |
 try {
     final response = api.songsUpdateSong(songId, songCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsApi->songsUpdateSong: $e\n');
 }
 ```

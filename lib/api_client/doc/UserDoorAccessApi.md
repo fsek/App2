@@ -35,7 +35,7 @@ final int accessId = 56; // int |
 
 try {
     api.userDoorAccessDeleteUserAccess(accessId);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UserDoorAccessApi->userDoorAccessDeleteUserAccess: $e\n');
 }
 ```
@@ -81,7 +81,7 @@ final api = ApiClient().getUserDoorAccessApi();
 try {
     final response = api.userDoorAccessGetAllUserAccesses();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UserDoorAccessApi->userDoorAccessGetAllUserAccesses: $e\n');
 }
 ```
@@ -125,7 +125,7 @@ final UserAccessCreate userAccessCreate = ; // UserAccessCreate |
 try {
     final response = api.userDoorAccessPostUserAccess(userAccessCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UserDoorAccessApi->userDoorAccessPostUserAccess: $e\n');
 }
 ```
@@ -173,7 +173,7 @@ final UserAccessUpdate userAccessUpdate = ; // UserAccessUpdate |
 try {
     final response = api.userDoorAccessUpdateUserAccess(accessId, userAccessUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UserDoorAccessApi->userDoorAccessUpdateUserAccess: $e\n');
 }
 ```

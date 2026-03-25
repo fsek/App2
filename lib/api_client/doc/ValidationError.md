@@ -8,7 +8,7 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**loc** | [**BuiltList&lt;ValidationErrorLocInner&gt;**](ValidationErrorLocInner.md) |  | 
+**loc** | [**BuiltList&lt;LocationInner&gt;**](LocationInner.md) |  | 
 **msg** | **String** |  | 
 **type** | **String** |  | 
 

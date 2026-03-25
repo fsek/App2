@@ -51,7 +51,7 @@ final GroupMissionCreate groupMissionCreate = ; // GroupMissionCreate |
 try {
     final response = api.nollningAddGroupMission(nollningGroupId, groupMissionCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningAddGroupMission: $e\n');
 }
 ```
@@ -100,7 +100,7 @@ final NollningAddGroup nollningAddGroup = ; // NollningAddGroup |
 try {
     final response = api.nollningAddGroupToNollning(nollningId, nollningAddGroup);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningAddGroupToNollning: $e\n');
 }
 ```
@@ -149,7 +149,7 @@ final AdventureMissionCreate adventureMissionCreate = ; // AdventureMissionCreat
 try {
     final response = api.nollningCreateAdventureMission(nollningId, adventureMissionCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningCreateAdventureMission: $e\n');
 }
 ```
@@ -198,7 +198,7 @@ final int nollningId = 56; // int |
 try {
     final response = api.nollningDeleteAdventureMission(missionId, nollningId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningDeleteAdventureMission: $e\n');
 }
 ```
@@ -247,7 +247,7 @@ final GroupMissionDelete groupMissionDelete = ; // GroupMissionDelete |
 try {
     final response = api.nollningDeleteGroupMission(nollningGroupId, groupMissionDelete);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningDeleteGroupMission: $e\n');
 }
 ```
@@ -295,7 +295,7 @@ final int nollningId = 56; // int |
 try {
     final response = api.nollningDeleteNollning(nollningId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningDeleteNollning: $e\n');
 }
 ```
@@ -343,7 +343,7 @@ final AdventureMissionCreate adventureMissionCreate = ; // AdventureMissionCreat
 try {
     final response = api.nollningEditAdventureMission(missionId, adventureMissionCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningEditAdventureMission: $e\n');
 }
 ```
@@ -392,7 +392,7 @@ final GroupMissionEdit groupMissionEdit = ; // GroupMissionEdit |
 try {
     final response = api.nollningEditGroupMission(nollningGroupId, groupMissionEdit);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningEditGroupMission: $e\n');
 }
 ```
@@ -434,7 +434,7 @@ final int missionId = 56; // int |
 try {
     final response = api.nollningGetAdventureMission(missionId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetAdventureMission: $e\n');
 }
 ```
@@ -475,7 +475,7 @@ final int nollningId = 56; // int |
 try {
     final response = api.nollningGetAllAdventureMissionsInNollning(nollningId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetAllAdventureMissionsInNollning: $e\n');
 }
 ```
@@ -521,7 +521,7 @@ final api = ApiClient().getNollningApi();
 try {
     final response = api.nollningGetAllNollning();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetAllNollning: $e\n');
 }
 ```
@@ -565,7 +565,7 @@ final int nollningId = 56; // int |
 try {
     final response = api.nollningGetAllNollningGroups(nollningId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetAllNollningGroups: $e\n');
 }
 ```
@@ -612,7 +612,7 @@ final int nollningGroupId = 56; // int |
 try {
     final response = api.nollningGetGroupMissionsFromNollningGroup(nollningGroupId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetGroupMissionsFromNollningGroup: $e\n');
 }
 ```
@@ -659,7 +659,7 @@ final int nollningId = 56; // int |
 try {
     final response = api.nollningGetNollning(nollningId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetNollning: $e\n');
 }
 ```
@@ -706,7 +706,7 @@ final int year = 56; // int |
 try {
     final response = api.nollningGetNollningByYear(year);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningGetNollningByYear: $e\n');
 }
 ```
@@ -754,7 +754,7 @@ final NollningCreate nollningCreate = ; // NollningCreate |
 try {
     final response = api.nollningPatchNollning(nollningId, nollningCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningPatchNollning: $e\n');
 }
 ```
@@ -802,7 +802,7 @@ final NollningCreate nollningCreate = ; // NollningCreate |
 try {
     final response = api.nollningPostNollning(nollningCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningPostNollning: $e\n');
 }
 ```
@@ -849,7 +849,7 @@ final int nollningGroupId = 56; // int |
 try {
     final response = api.nollningRemoveGroupFromNollning(nollningGroupId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NollningApi->nollningRemoveGroupFromNollning: $e\n');
 }
 ```

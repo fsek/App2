@@ -37,7 +37,7 @@ final CouncilCreate councilCreate = ; // CouncilCreate |
 try {
     final response = api.councilCreateCouncil(councilCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CouncilApi->councilCreateCouncil: $e\n');
 }
 ```
@@ -84,7 +84,7 @@ final int councilId = 56; // int |
 try {
     final response = api.councilDeleteCouncil(councilId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CouncilApi->councilDeleteCouncil: $e\n');
 }
 ```
@@ -130,7 +130,7 @@ final api = ApiClient().getCouncilApi();
 try {
     final response = api.councilGetAllCouncils();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CouncilApi->councilGetAllCouncils: $e\n');
 }
 ```
@@ -174,7 +174,7 @@ final int councilId = 56; // int |
 try {
     final response = api.councilGetCouncil(councilId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CouncilApi->councilGetCouncil: $e\n');
 }
 ```
@@ -222,7 +222,7 @@ final CouncilUpdate councilUpdate = ; // CouncilUpdate |
 try {
     final response = api.councilUpdateCouncil(councilId, councilUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CouncilApi->councilUpdateCouncil: $e\n');
 }
 ```

@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**usersAdminDeleteUser**](UsersApi.md#usersadmindeleteuser) | **DELETE** /users/admin/{user_id} | Admin Delete User
 [**usersAdminGetAllUsers**](UsersApi.md#usersadmingetallusers) | **GET** /users/admin/all/ | Admin Get All Users
 [**usersAdminGetUser**](UsersApi.md#usersadmingetuser) | **GET** /users/admin/{user_id} | Admin Get User
 [**usersAdminUpdateUser**](UsersApi.md#usersadminupdateuser) | **PATCH** /users/admin/update/{user_id} | Admin Update User
@@ -25,6 +26,53 @@ Method | HTTP request | Description
 [**usersUpdateUserPosts**](UsersApi.md#usersupdateuserposts) | **PATCH** /users/admin/user-posts/{user_id} | Update User Posts
 [**usersUpdateUserStatus**](UsersApi.md#usersupdateuserstatus) | **PATCH** /users/admin/member-status/{user_id} | Update User Status
 
+
+# **usersAdminDeleteUser**
+> JsonObject usersAdminDeleteUser(userId)
+
+Admin Delete User
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getUsersApi();
+final int userId = 56; // int | 
+
+try {
+    final response = api.usersAdminDeleteUser(userId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling UsersApi->usersAdminDeleteUser: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersAdminGetAllUsers**
 > BuiltList<AdminUserRead> usersAdminGetAllUsers()
@@ -46,7 +94,7 @@ final api = ApiClient().getUsersApi();
 try {
     final response = api.usersAdminGetAllUsers();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersAdminGetAllUsers: $e\n');
 }
 ```
@@ -90,7 +138,7 @@ final int userId = 56; // int |
 try {
     final response = api.usersAdminGetUser(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersAdminGetUser: $e\n');
 }
 ```
@@ -138,7 +186,7 @@ final UserUpdate userUpdate = ; // UserUpdate |
 try {
     final response = api.usersAdminUpdateUser(userId, userUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersAdminUpdateUser: $e\n');
 }
 ```
@@ -185,7 +233,7 @@ final api = ApiClient().getUsersApi();
 try {
     final response = api.usersGetMe();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetMe: $e\n');
 }
 ```
@@ -228,7 +276,7 @@ final api = ApiClient().getUsersApi();
 try {
     final response = api.usersGetMyPriorities();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetMyPriorities: $e\n');
 }
 ```
@@ -272,7 +320,7 @@ final int userId = 56; // int |
 try {
     final response = api.usersGetUser(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetUser: $e\n');
 }
 ```
@@ -320,7 +368,7 @@ final String size = size_example; // String |
 try {
     final response = api.usersGetUserImage(userId, size);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetUserImage: $e\n');
 }
 ```
@@ -368,7 +416,7 @@ final int userId = 56; // int |
 try {
     final response = api.usersGetUserImageStream(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetUserImageStream: $e\n');
 }
 ```
@@ -415,7 +463,7 @@ final int userId = 56; // int |
 try {
     final response = api.usersGetUserPosts(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersGetUserPosts: $e\n');
 }
 ```
@@ -462,7 +510,7 @@ final MultipartFile image = BINARY_DATA_HERE; // MultipartFile |
 try {
     final response = api.usersPostUserImage(image);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersPostUserImage: $e\n');
 }
 ```
@@ -514,7 +562,7 @@ final int offset = 56; // int |
 try {
     final response = api.usersSearchUsers(name, program, startYear, excludeIds, limit, offset);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersSearchUsers: $e\n');
 }
 ```
@@ -566,7 +614,7 @@ final BuiltList<UpdateUserMemberMultiple> updateUserMemberMultiple = ; // BuiltL
 try {
     final response = api.usersUpdateMultipleUsersStatus(updateUserMemberMultiple);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersUpdateMultipleUsersStatus: $e\n');
 }
 ```
@@ -613,7 +661,7 @@ final UserUpdate userUpdate = ; // UserUpdate |
 try {
     final response = api.usersUpdateSelf(userUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersUpdateSelf: $e\n');
 }
 ```
@@ -661,7 +709,7 @@ final UpdateUserPosts updateUserPosts = ; // UpdateUserPosts |
 try {
     final response = api.usersUpdateUserPosts(userId, updateUserPosts);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersUpdateUserPosts: $e\n');
 }
 ```
@@ -710,7 +758,7 @@ final UpdateUserMember updateUserMember = ; // UpdateUserMember |
 try {
     final response = api.usersUpdateUserStatus(userId, updateUserMember);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling UsersApi->usersUpdateUserStatus: $e\n');
 }
 ```

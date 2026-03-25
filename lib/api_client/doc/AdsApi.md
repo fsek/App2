@@ -35,7 +35,7 @@ final AdCreate adCreate = ; // AdCreate |
 try {
     final response = api.adsCreateAd(adCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsCreateAd: $e\n');
 }
 ```
@@ -76,7 +76,7 @@ final int id = 56; // int |
 try {
     final response = api.adsGetAdById(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsGetAdById: $e\n');
 }
 ```
@@ -117,7 +117,7 @@ final String username = username_example; // String |
 try {
     final response = api.adsGetAdByUser(username);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsGetAdByUser: $e\n');
 }
 ```
@@ -157,7 +157,7 @@ final api = ApiClient().getAdsApi();
 try {
     final response = api.adsGetAllAds();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsGetAllAds: $e\n');
 }
 ```
@@ -195,7 +195,7 @@ final String authorname = authorname_example; // String |
 try {
     final response = api.adsGetBookAdByAuthor(authorname);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsGetBookAdByAuthor: $e\n');
 }
 ```
@@ -236,7 +236,7 @@ final String stitle = stitle_example; // String |
 try {
     final response = api.adsGetBookAdByTitle(stitle);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsGetBookAdByTitle: $e\n');
 }
 ```
@@ -283,7 +283,7 @@ final int id = 56; // int |
 try {
     final response = api.adsRemoveAd(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsRemoveAd: $e\n');
 }
 ```
@@ -330,7 +330,7 @@ final int id = 56; // int |
 try {
     final response = api.adsRemoveAdSuperUser(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsRemoveAdSuperUser: $e\n');
 }
 ```
@@ -378,7 +378,7 @@ final AdUpdate adUpdate = ; // AdUpdate |
 try {
     final response = api.adsUpdateAd(adId, adUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AdsApi->adsUpdateAd: $e\n');
 }
 ```

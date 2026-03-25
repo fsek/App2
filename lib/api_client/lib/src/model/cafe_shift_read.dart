@@ -14,9 +14,9 @@ part 'cafe_shift_read.g.dart';
 /// Properties:
 /// * [id] 
 /// * [userId] 
-/// * [user] 
 /// * [startsAt] 
 /// * [endsAt] 
+/// * [user] 
 @BuiltValue()
 abstract class CafeShiftRead implements Built<CafeShiftRead, CafeShiftReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -25,14 +25,14 @@ abstract class CafeShiftRead implements Built<CafeShiftRead, CafeShiftReadBuilde
   @BuiltValueField(wireName: r'user_id')
   int? get userId;
 
-  @BuiltValueField(wireName: r'user')
-  SimpleUserRead? get user;
-
   @BuiltValueField(wireName: r'starts_at')
   DateTime get startsAt;
 
   @BuiltValueField(wireName: r'ends_at')
   DateTime get endsAt;
+
+  @BuiltValueField(wireName: r'user')
+  SimpleUserRead? get user;
 
   CafeShiftRead._();
 
@@ -67,11 +67,6 @@ class _$CafeShiftReadSerializer implements PrimitiveSerializer<CafeShiftRead> {
       object.userId,
       specifiedType: const FullType.nullable(int),
     );
-    yield r'user';
-    yield object.user == null ? null : serializers.serialize(
-      object.user,
-      specifiedType: const FullType.nullable(SimpleUserRead),
-    );
     yield r'starts_at';
     yield serializers.serialize(
       object.startsAt,
@@ -81,6 +76,11 @@ class _$CafeShiftReadSerializer implements PrimitiveSerializer<CafeShiftRead> {
     yield serializers.serialize(
       object.endsAt,
       specifiedType: const FullType(DateTime),
+    );
+    yield r'user';
+    yield object.user == null ? null : serializers.serialize(
+      object.user,
+      specifiedType: const FullType.nullable(SimpleUserRead),
     );
   }
 
@@ -120,14 +120,6 @@ class _$CafeShiftReadSerializer implements PrimitiveSerializer<CafeShiftRead> {
           if (valueDes == null) continue;
           result.userId = valueDes;
           break;
-        case r'user':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleUserRead),
-          ) as SimpleUserRead?;
-          if (valueDes == null) continue;
-          result.user.replace(valueDes);
-          break;
         case r'starts_at':
           final valueDes = serializers.deserialize(
             value,
@@ -141,6 +133,14 @@ class _$CafeShiftReadSerializer implements PrimitiveSerializer<CafeShiftRead> {
             specifiedType: const FullType(DateTime),
           ) as DateTime;
           result.endsAt = valueDes;
+          break;
+        case r'user':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(SimpleUserRead),
+          ) as SimpleUserRead?;
+          if (valueDes == null) continue;
+          result.user.replace(valueDes);
           break;
         default:
           unhandled.add(key);

@@ -36,7 +36,7 @@ final int tagId = 56; // int |
 try {
     final response = api.tagsDeleteTag(tagId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling TagsApi->tagsDeleteTag: $e\n');
 }
 ```
@@ -83,7 +83,7 @@ final TagEdit tagEdit = ; // TagEdit |
 try {
     final response = api.tagsEditTag(tagEdit);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling TagsApi->tagsEditTag: $e\n');
 }
 ```
@@ -123,7 +123,7 @@ final api = ApiClient().getTagsApi();
 try {
     final response = api.tagsGetTags();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling TagsApi->tagsGetTags: $e\n');
 }
 ```
@@ -167,7 +167,7 @@ final TagCreate tagCreate = ; // TagCreate |
 try {
     final response = api.tagsPostTag(tagCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling TagsApi->tagsPostTag: $e\n');
 }
 ```

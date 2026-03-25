@@ -9,10 +9,10 @@ import 'package:api_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **candidateId** | **int** |  | 
-**electionId** | **int** |  | 
+**subElectionId** | **int** |  | 
 **userId** | **int** |  | 
 **user** | [**CandidateUserRead**](CandidateUserRead.md) |  | 
-**electionPosts** | [**BuiltList&lt;CandidatePostRead&gt;**](CandidatePostRead.md) |  | 
+**candidations** | [**BuiltList&lt;CandidatePostRead&gt;**](CandidatePostRead.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

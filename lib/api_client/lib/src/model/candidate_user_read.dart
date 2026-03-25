@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -15,9 +16,9 @@ part 'candidate_user_read.g.dart';
 /// * [lastName] 
 /// * [email] 
 /// * [telephoneNumber] 
+/// * [stilId] 
 /// * [startYear] 
-/// * [accountCreated] 
-/// * [wantNotifications] 
+/// * [program] 
 @BuiltValue()
 abstract class CandidateUserRead implements Built<CandidateUserRead, CandidateUserReadBuilder> {
   @BuiltValueField(wireName: r'first_name')
@@ -32,14 +33,15 @@ abstract class CandidateUserRead implements Built<CandidateUserRead, CandidateUs
   @BuiltValueField(wireName: r'telephone_number')
   String get telephoneNumber;
 
+  @BuiltValueField(wireName: r'stil_id')
+  String? get stilId;
+
   @BuiltValueField(wireName: r'start_year')
   int get startYear;
 
-  @BuiltValueField(wireName: r'account_created')
-  DateTime get accountCreated;
-
-  @BuiltValueField(wireName: r'want_notifications')
-  bool get wantNotifications;
+  @BuiltValueField(wireName: r'program')
+  CandidateUserReadProgramEnum get program;
+  // enum programEnum {  Oklart,  F,  Pi,  N,  };
 
   CandidateUserRead._();
 
@@ -84,20 +86,20 @@ class _$CandidateUserReadSerializer implements PrimitiveSerializer<CandidateUser
       object.telephoneNumber,
       specifiedType: const FullType(String),
     );
+    yield r'stil_id';
+    yield object.stilId == null ? null : serializers.serialize(
+      object.stilId,
+      specifiedType: const FullType.nullable(String),
+    );
     yield r'start_year';
     yield serializers.serialize(
       object.startYear,
       specifiedType: const FullType(int),
     );
-    yield r'account_created';
+    yield r'program';
     yield serializers.serialize(
-      object.accountCreated,
-      specifiedType: const FullType(DateTime),
-    );
-    yield r'want_notifications';
-    yield serializers.serialize(
-      object.wantNotifications,
-      specifiedType: const FullType(bool),
+      object.program,
+      specifiedType: const FullType(CandidateUserReadProgramEnum),
     );
   }
 
@@ -150,6 +152,14 @@ class _$CandidateUserReadSerializer implements PrimitiveSerializer<CandidateUser
           ) as String;
           result.telephoneNumber = valueDes;
           break;
+        case r'stil_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.stilId = valueDes;
+          break;
         case r'start_year':
           final valueDes = serializers.deserialize(
             value,
@@ -157,19 +167,12 @@ class _$CandidateUserReadSerializer implements PrimitiveSerializer<CandidateUser
           ) as int;
           result.startYear = valueDes;
           break;
-        case r'account_created':
+        case r'program':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.accountCreated = valueDes;
-          break;
-        case r'want_notifications':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.wantNotifications = valueDes;
+            specifiedType: const FullType(CandidateUserReadProgramEnum),
+          ) as CandidateUserReadProgramEnum;
+          result.program = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -198,5 +201,24 @@ class _$CandidateUserReadSerializer implements PrimitiveSerializer<CandidateUser
     );
     return result.build();
   }
+}
+
+class CandidateUserReadProgramEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Oklart')
+  static const CandidateUserReadProgramEnum oklart = _$candidateUserReadProgramEnum_oklart;
+  @BuiltValueEnumConst(wireName: r'F')
+  static const CandidateUserReadProgramEnum F = _$candidateUserReadProgramEnum_F;
+  @BuiltValueEnumConst(wireName: r'Pi')
+  static const CandidateUserReadProgramEnum pi = _$candidateUserReadProgramEnum_pi;
+  @BuiltValueEnumConst(wireName: r'N')
+  static const CandidateUserReadProgramEnum N = _$candidateUserReadProgramEnum_N;
+
+  static Serializer<CandidateUserReadProgramEnum> get serializer => _$candidateUserReadProgramEnumSerializer;
+
+  const CandidateUserReadProgramEnum._(String name): super(name);
+
+  static BuiltSet<CandidateUserReadProgramEnum> get values => _$candidateUserReadProgramEnumValues;
+  static CandidateUserReadProgramEnum valueOf(String name) => _$candidateUserReadProgramEnumValueOf(name);
 }
 

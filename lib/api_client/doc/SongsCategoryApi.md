@@ -37,7 +37,7 @@ final SongCategoryCreate songCategoryCreate = ; // SongCategoryCreate |
 try {
     final response = api.songsCategoryCreateSongCategory(songCategoryCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsCategoryApi->songsCategoryCreateSongCategory: $e\n');
 }
 ```
@@ -84,7 +84,7 @@ final int categoryId = 56; // int |
 try {
     final response = api.songsCategoryDeleteSongCategory(categoryId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsCategoryApi->songsCategoryDeleteSongCategory: $e\n');
 }
 ```
@@ -124,7 +124,7 @@ final api = ApiClient().getSongsCategoryApi();
 try {
     final response = api.songsCategoryGetAllSongCategories();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsCategoryApi->songsCategoryGetAllSongCategories: $e\n');
 }
 ```
@@ -162,7 +162,7 @@ final int categoryId = 56; // int |
 try {
     final response = api.songsCategoryGetSongCategory(categoryId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsCategoryApi->songsCategoryGetSongCategory: $e\n');
 }
 ```
@@ -210,7 +210,7 @@ final SongCategoryCreate songCategoryCreate = ; // SongCategoryCreate |
 try {
     final response = api.songsCategoryUpdateSongCategory(categoryId, songCategoryCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling SongsCategoryApi->songsCategoryUpdateSongCategory: $e\n');
 }
 ```

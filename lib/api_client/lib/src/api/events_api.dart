@@ -444,7 +444,7 @@ class EventsApi {
   }) async {
     final _path = r'/events/event-signups/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
     final _options = Options(
-      method: r'GET',
+      method: r'POST',
       headers: <String, dynamic>{
         ...?headers,
       },

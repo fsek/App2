@@ -8,7 +8,7 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **int** |  | [optional] 
+**userId** | **int** |  | 
 **priority** | **String** |  | [optional] 
 **groupName** | **String** |  | [optional] 
 **drinkPackage** | **String** |  | [optional] 

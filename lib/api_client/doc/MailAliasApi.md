@@ -38,7 +38,7 @@ final String memberEmail = memberEmail_example; // String |
 try {
     final response = api.mailAliasAddMember(aliasEmail, memberEmail);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MailAliasApi->mailAliasAddMember: $e\n');
 }
 ```
@@ -86,7 +86,7 @@ final String alias = alias_example; // String |
 try {
     final response = api.mailAliasCreateAlias(alias);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MailAliasApi->mailAliasCreateAlias: $e\n');
 }
 ```
@@ -133,7 +133,7 @@ final String aliasEmail = aliasEmail_example; // String |
 try {
     final response = api.mailAliasDeleteAlias(aliasEmail);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MailAliasApi->mailAliasDeleteAlias: $e\n');
 }
 ```
@@ -179,7 +179,7 @@ final api = ApiClient().getMailAliasApi();
 try {
     final response = api.mailAliasListAliases();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MailAliasApi->mailAliasListAliases: $e\n');
 }
 ```
@@ -224,7 +224,7 @@ final String memberEmail = memberEmail_example; // String |
 try {
     final response = api.mailAliasRemoveMember(aliasEmail, memberEmail);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MailAliasApi->mailAliasRemoveMember: $e\n');
 }
 ```

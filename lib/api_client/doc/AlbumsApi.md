@@ -40,7 +40,7 @@ final AlbumPhotographerAdd albumPhotographerAdd = ; // AlbumPhotographerAdd |
 try {
     final response = api.albumsAddAlbumPhotographer(albumPhotographerAdd);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsAddAlbumPhotographer: $e\n');
 }
 ```
@@ -87,7 +87,7 @@ final AlbumCreate albumCreate = ; // AlbumCreate |
 try {
     final response = api.albumsCreateAlbum(albumCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsCreateAlbum: $e\n');
 }
 ```
@@ -134,7 +134,7 @@ final int year = 56; // int |
 try {
     final response = api.albumsDeleteAlbumYear(year);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsDeleteAlbumYear: $e\n');
 }
 ```
@@ -181,7 +181,7 @@ final int albumId = 56; // int |
 try {
     final response = api.albumsDeleteOneAlbum(albumId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsDeleteOneAlbum: $e\n');
 }
 ```
@@ -227,7 +227,7 @@ final api = ApiClient().getAlbumsApi();
 try {
     final response = api.albumsGetAlbums();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsGetAlbums: $e\n');
 }
 ```
@@ -271,7 +271,7 @@ final int albumId = 56; // int |
 try {
     final response = api.albumsGetOneAlbum(albumId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsGetOneAlbum: $e\n');
 }
 ```
@@ -319,7 +319,7 @@ final AlbumPatch albumPatch = ; // AlbumPatch |
 try {
     final response = api.albumsPatchAlbum(albumId, albumPatch);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsPatchAlbum: $e\n');
 }
 ```
@@ -367,7 +367,7 @@ final AlbumPhotographerAdd albumPhotographerAdd = ; // AlbumPhotographerAdd |
 try {
     final response = api.albumsRemoveAlbumPhotographer(albumPhotographerAdd);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AlbumsApi->albumsRemoveAlbumPhotographer: $e\n');
 }
 ```

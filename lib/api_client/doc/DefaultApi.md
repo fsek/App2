@@ -29,7 +29,7 @@ final api = ApiClient().getDefaultApi();
 try {
     final response = api.helloRoute();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DefaultApi->helloRoute: $e\n');
 }
 ```
@@ -72,7 +72,7 @@ final api = ApiClient().getDefaultApi();
 try {
     final response = api.manageEventOnlypermissionRoute();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DefaultApi->manageEventOnlypermissionRoute: $e\n');
 }
 ```
@@ -115,7 +115,7 @@ final api = ApiClient().getDefaultApi();
 try {
     final response = api.memberOnlymemberOnly();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DefaultApi->memberOnlymemberOnly: $e\n');
 }
 ```
@@ -158,7 +158,7 @@ final api = ApiClient().getDefaultApi();
 try {
     final response = api.userOnlyuserOnly();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DefaultApi->userOnlyuserOnly: $e\n');
 }
 ```
