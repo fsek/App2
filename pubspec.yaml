@@ -60,7 +60,7 @@ dependencies:
   wakelock_web: ^0.4.0
   bloc_concurrency: ^0.3.0
   #image_gallery_saver: ^2.0.3
-  flutter_image_gallery_saver: ^0.0.2
+  flutter_image_gallery_saver: ">=0.0.2 <2.0.0"
   cached_network_image: ^3.3.0
   dio: ^5.8.0+1
   dio_cookie_manager: ^3.3.0
