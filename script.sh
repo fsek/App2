@@ -29,12 +29,10 @@ echo "Fixing SDK version in lib/pubspec.yaml..."
 # Because for some stupid reason the sed command works different on macOS we need to check if we are running mac
 # when running the version fix command.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  SED_INPLACE=("sed" "-i" "")
+  sed -i "" "/^environment:/,/^[^[:space:]]/ s/^\([[:space:]]*sdk:[[:space:]]*\).*/\1'>=3.8.0 <4.0.0'/" lib/api_client/pubspec.yaml
 else
-  SED_INPLACE=("sed" "-i" "")
+  sed -i "/^environment:/,/^[^[:space:]]/ s/^\([[:space:]]*sdk:[[:space:]]*\).*/\1'>=3.8.0 <4.0.0'/" lib/api_client/pubspec.yaml
 fi
-
-"${SED_INPLACE[@]}" "/^environment:/,/^[^[:space:]]/ s/^\([[:space:]]*sdk:[[:space:]]*\).*/\1'>=3.8.0 <4.0.0'/" lib/api_client/pubspec.yaml
 
 echo "Done!"
 
