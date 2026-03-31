@@ -16,7 +16,7 @@ description: Mobile application for the F-guild
 version: 1.25.6122+1 #buildnumber incremented automatically in codemagic
 
 environment:
-  sdk: '>=3.8.0 <4.0.0'
+  sdk: '>=3.10.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -40,7 +40,7 @@ dependencies:
   url_launcher: ^6.0.9 # For memes
   action_cable: ^1.2.0 # For messaging
   infinite_scroll_pagination: ^5.0.0 # For messaging
-  linkable: ^3.0.1 # For making numbers, emails and links clickable
+  linkable: ^4.0.0 # For making numbers, emails and links clickable
   flutter_html: ^3.0.0-beta.2 # For rendering HTMLq
   pull_to_refresh: ^2.0.0 # this already exists in flutter
   flutter_local_notifications: ^19.0.0 # For handling local notifications
