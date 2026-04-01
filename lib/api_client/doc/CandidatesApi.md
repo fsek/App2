@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**candidatesDeleteCandidation**](CandidatesApi.md#candidatesdeletecandidation) | **DELETE** /candidate/ | Delete Candidation
 [**candidatesGetAllElectionCandidates**](CandidatesApi.md#candidatesgetallelectioncandidates) | **GET** /candidate/election/{election_id} | Get All Election Candidates
 [**candidatesGetAllSubElectionCandidates**](CandidatesApi.md#candidatesgetallsubelectioncandidates) | **GET** /candidate/sub-election/{sub_election_id} | Get All Sub Election Candidates
+[**candidatesGetAllSubElectionCandidationsCsv**](CandidatesApi.md#candidatesgetallsubelectioncandidationscsv) | **GET** /candidate/sub-election/{sub_election_id}/csv | Get All Sub Election Candidations Csv
 [**candidatesGetCandidate**](CandidatesApi.md#candidatesgetcandidate) | **GET** /candidate/{candidate_id} | Get Candidate
 [**candidatesGetMyCandidations**](CandidatesApi.md#candidatesgetmycandidations) | **GET** /candidate/my-candidations/{election_id} | Get My Candidations
 
@@ -247,6 +248,53 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BuiltList&lt;CandidateRead&gt;**](CandidateRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **candidatesGetAllSubElectionCandidationsCsv**
+> JsonObject candidatesGetAllSubElectionCandidationsCsv(subElectionId)
+
+Get All Sub Election Candidations Csv
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getCandidatesApi();
+final int subElectionId = 56; // int | 
+
+try {
+    final response = api.candidatesGetAllSubElectionCandidationsCsv(subElectionId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling CandidatesApi->candidatesGetAllSubElectionCandidationsCsv: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subElectionId** | **int**|  | 
+
+### Return type
+
+[**JsonObject**](JsonObject.md)
 
 ### Authorization
 

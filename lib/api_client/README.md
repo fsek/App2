@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesDeleteCandidation**](doc/CandidatesApi.md#candidatesdeletecandidation) | **DELETE** /candidate/ | Delete Candidation
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllElectionCandidates**](doc/CandidatesApi.md#candidatesgetallelectioncandidates) | **GET** /candidate/election/{election_id} | Get All Election Candidates
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllSubElectionCandidates**](doc/CandidatesApi.md#candidatesgetallsubelectioncandidates) | **GET** /candidate/sub-election/{sub_election_id} | Get All Sub Election Candidates
+[*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetAllSubElectionCandidationsCsv**](doc/CandidatesApi.md#candidatesgetallsubelectioncandidationscsv) | **GET** /candidate/sub-election/{sub_election_id}/csv | Get All Sub Election Candidations Csv
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetCandidate**](doc/CandidatesApi.md#candidatesgetcandidate) | **GET** /candidate/{candidate_id} | Get Candidate
 [*CandidatesApi*](doc/CandidatesApi.md) | [**candidatesGetMyCandidations**](doc/CandidatesApi.md#candidatesgetmycandidations) | **GET** /candidate/my-candidations/{election_id} | Get My Candidations
 [*CarBlockingApi*](doc/CarBlockingApi.md) | [**carBlockingBlockUserFromCarBooking**](doc/CarBlockingApi.md#carblockingblockuserfromcarbooking) | **POST** /car/block/ | Block User From Car Booking
@@ -158,7 +159,7 @@ Class | Method | HTTP request | Description
 [*EventsApi*](doc/EventsApi.md) | [**eventsEventUpdate**](doc/EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEventSignups**](doc/EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetAllEvents**](doc/EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
-[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
+[*EventsApi*](doc/EventsApi.md) | [**eventsGetEventCsv**](doc/EventsApi.md#eventsgeteventcsv) | **GET** /events/event-signups/confirmed/{event_id}/csv | Get Event Csv
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImage**](doc/EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image/{size} | Get Event Image
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventImageStream**](doc/EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [*EventsApi*](doc/EventsApi.md) | [**eventsGetEventPriorities**](doc/EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities

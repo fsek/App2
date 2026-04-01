@@ -877,7 +877,7 @@ class EventsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/events/get-event-csv/{event_id}'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
+    final _path = r'/events/event-signups/confirmed/{event_id}/csv'.replaceAll('{' r'event_id' '}', encodeQueryParameter(_serializers, eventId, const FullType(int)).toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
