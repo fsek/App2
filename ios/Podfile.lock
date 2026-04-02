@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_image_compress_common: 1697a328fd72bfb335507c6bca1a65fa5ad87df1
   flutter_image_gallery_saver: 0453c83412e9691abef94c04c8d180724f5083a8
-  flutter_local_notifications: a5a732f069baa862e728d839dd2ebb904737effb
+  flutter_local_notifications: 643a3eda1ce1c0599413ca31672536d423dee214
   flutter_pdfview: 32bf27bda6fd85b9dd2c09628a824df5081246cf
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
