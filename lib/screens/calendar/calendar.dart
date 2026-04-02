@@ -246,7 +246,7 @@ class _CalendarState extends State<Calendar> {
     }
     return Container(
       height: MediaQuery.of(context).size.height,
-      color: Theme.of(context).colorScheme.onSecondary,
+      color: Theme.of(context).colorScheme.surface,
       child: RefreshIndicator(
         onRefresh: () => _onRefresh(),
         child: ListView(

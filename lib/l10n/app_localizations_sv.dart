@@ -383,6 +383,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get songbookAuthor => 'Författare';
 
   @override
+  String get songbookStar => 'Stjärnmärkt';
+
+  @override
   String get otherSongbook => 'Sångbok';
 
   @override
