@@ -29,7 +29,7 @@ class DownloadButton extends StatelessWidget {
       onPressed: () async {
         try {
           for (final imageFuture in imageFutures) {
-            imageFuture.then((imageBytes) async => await FlutterImageGallerySaver.saveImage(imageBytes));
+            imageFuture.then((imageBytes) async => await ImageGallerySaver().saveImage(imageBytes));
           }
 
           ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
