@@ -29,7 +29,7 @@ final String door = door_example; // String |
 try {
     final response = api.accessServeGetAllAccessIds(door);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling AccessServeApi->accessServeGetAllAccessIds: $e\n');
 }
 ```

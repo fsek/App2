@@ -37,7 +37,7 @@ final int id = 56; // int |
 try {
     final response = api.imgDeleteImage(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling ImgApi->imgDeleteImage: $e\n');
 }
 ```
@@ -84,7 +84,7 @@ final int albumId = 56; // int |
 try {
     final response = api.imgGetAlbumImages(albumId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling ImgApi->imgGetAlbumImages: $e\n');
 }
 ```
@@ -132,7 +132,7 @@ final String size = size_example; // String |
 try {
     final response = api.imgGetImage(imgId, size);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling ImgApi->imgGetImage: $e\n');
 }
 ```
@@ -180,7 +180,7 @@ final int imgId = 56; // int |
 try {
     final response = api.imgGetImageStream(imgId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling ImgApi->imgGetImageStream: $e\n');
 }
 ```
@@ -228,7 +228,7 @@ final MultipartFile file = BINARY_DATA_HERE; // MultipartFile |
 try {
     final response = api.imgUploadImage(albumId, file);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling ImgApi->imgUploadImage: $e\n');
 }
 ```

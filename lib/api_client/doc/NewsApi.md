@@ -43,7 +43,7 @@ final int newsId = 56; // int |
 try {
     final response = api.newsBumpNews(newsId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsBumpNews: $e\n');
 }
 ```
@@ -90,7 +90,7 @@ final NewsCreate newsCreate = ; // NewsCreate |
 try {
     final response = api.newsCreateNews(newsCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsCreateNews: $e\n');
 }
 ```
@@ -136,7 +136,7 @@ final int newsId = 56; // int |
 
 try {
     api.newsDeleteNews(newsId);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsDeleteNews: $e\n');
 }
 ```
@@ -176,7 +176,7 @@ final api = ApiClient().getNewsApi();
 try {
     final response = api.newsGetAllNews();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetAllNews: $e\n');
 }
 ```
@@ -214,7 +214,7 @@ final int newsId = 56; // int |
 try {
     final response = api.newsGetNews(newsId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetNews: $e\n');
 }
 ```
@@ -256,7 +256,7 @@ final String size = size_example; // String |
 try {
     final response = api.newsGetNewsImage(newsId, size);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetNewsImage: $e\n');
 }
 ```
@@ -298,7 +298,7 @@ final int newsId = 56; // int |
 try {
     final response = api.newsGetNewsImageStream(newsId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetNewsImageStream: $e\n');
 }
 ```
@@ -339,7 +339,7 @@ final int pageNbr = 56; // int |
 try {
     final response = api.newsGetPaginatedNews(pageNbr);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetPaginatedNews: $e\n');
 }
 ```
@@ -379,7 +379,7 @@ final api = ApiClient().getNewsApi();
 try {
     final response = api.newsGetPinnedNews();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsGetPinnedNews: $e\n');
 }
 ```
@@ -424,7 +424,7 @@ final MultipartFile image = BINARY_DATA_HERE; // MultipartFile |
 try {
     final response = api.newsPostNewsImage(newsId, image);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsPostNewsImage: $e\n');
 }
 ```
@@ -473,7 +473,7 @@ final NewsUpdate newsUpdate = ; // NewsUpdate |
 try {
     final response = api.newsUpdateNews(newsId, newsUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling NewsApi->newsUpdateNews: $e\n');
 }
 ```

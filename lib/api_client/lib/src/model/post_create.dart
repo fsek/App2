@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,6 +18,10 @@ part 'post_create.g.dart';
 /// * [email] 
 /// * [descriptionSv] 
 /// * [descriptionEn] 
+/// * [electedAtSemester] 
+/// * [electedBy] 
+/// * [electedUserRecommendedLimit] 
+/// * [electedUserMaxLimit] 
 @BuiltValue()
 abstract class PostCreate implements Built<PostCreate, PostCreateBuilder> {
   @BuiltValueField(wireName: r'name_sv')
@@ -36,6 +41,20 @@ abstract class PostCreate implements Built<PostCreate, PostCreateBuilder> {
 
   @BuiltValueField(wireName: r'description_en')
   String get descriptionEn;
+
+  @BuiltValueField(wireName: r'elected_at_semester')
+  PostCreateElectedAtSemesterEnum get electedAtSemester;
+  // enum electedAtSemesterEnum {  HT,  VT,  HT and VT,  Other,  };
+
+  @BuiltValueField(wireName: r'elected_by')
+  PostCreateElectedByEnum get electedBy;
+  // enum electedByEnum {  Guild,  Board,  Educational Council,  Board Intermediate,  Other,  };
+
+  @BuiltValueField(wireName: r'elected_user_recommended_limit')
+  int get electedUserRecommendedLimit;
+
+  @BuiltValueField(wireName: r'elected_user_max_limit')
+  int get electedUserMaxLimit;
 
   PostCreate._();
 
@@ -89,6 +108,26 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
     yield serializers.serialize(
       object.descriptionEn,
       specifiedType: const FullType(String),
+    );
+    yield r'elected_at_semester';
+    yield serializers.serialize(
+      object.electedAtSemester,
+      specifiedType: const FullType(PostCreateElectedAtSemesterEnum),
+    );
+    yield r'elected_by';
+    yield serializers.serialize(
+      object.electedBy,
+      specifiedType: const FullType(PostCreateElectedByEnum),
+    );
+    yield r'elected_user_recommended_limit';
+    yield serializers.serialize(
+      object.electedUserRecommendedLimit,
+      specifiedType: const FullType(int),
+    );
+    yield r'elected_user_max_limit';
+    yield serializers.serialize(
+      object.electedUserMaxLimit,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -155,6 +194,34 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
           ) as String;
           result.descriptionEn = valueDes;
           break;
+        case r'elected_at_semester':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(PostCreateElectedAtSemesterEnum),
+          ) as PostCreateElectedAtSemesterEnum;
+          result.electedAtSemester = valueDes;
+          break;
+        case r'elected_by':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(PostCreateElectedByEnum),
+          ) as PostCreateElectedByEnum;
+          result.electedBy = valueDes;
+          break;
+        case r'elected_user_recommended_limit':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.electedUserRecommendedLimit = valueDes;
+          break;
+        case r'elected_user_max_limit':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.electedUserMaxLimit = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -182,5 +249,45 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
     );
     return result.build();
   }
+}
+
+class PostCreateElectedAtSemesterEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'HT')
+  static const PostCreateElectedAtSemesterEnum HT = _$postCreateElectedAtSemesterEnum_HT;
+  @BuiltValueEnumConst(wireName: r'VT')
+  static const PostCreateElectedAtSemesterEnum VT = _$postCreateElectedAtSemesterEnum_VT;
+  @BuiltValueEnumConst(wireName: r'HT and VT')
+  static const PostCreateElectedAtSemesterEnum hTAndVT = _$postCreateElectedAtSemesterEnum_hTAndVT;
+  @BuiltValueEnumConst(wireName: r'Other')
+  static const PostCreateElectedAtSemesterEnum other = _$postCreateElectedAtSemesterEnum_other;
+
+  static Serializer<PostCreateElectedAtSemesterEnum> get serializer => _$postCreateElectedAtSemesterEnumSerializer;
+
+  const PostCreateElectedAtSemesterEnum._(String name): super(name);
+
+  static BuiltSet<PostCreateElectedAtSemesterEnum> get values => _$postCreateElectedAtSemesterEnumValues;
+  static PostCreateElectedAtSemesterEnum valueOf(String name) => _$postCreateElectedAtSemesterEnumValueOf(name);
+}
+
+class PostCreateElectedByEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Guild')
+  static const PostCreateElectedByEnum guild = _$postCreateElectedByEnum_guild;
+  @BuiltValueEnumConst(wireName: r'Board')
+  static const PostCreateElectedByEnum board = _$postCreateElectedByEnum_board;
+  @BuiltValueEnumConst(wireName: r'Educational Council')
+  static const PostCreateElectedByEnum educationalCouncil = _$postCreateElectedByEnum_educationalCouncil;
+  @BuiltValueEnumConst(wireName: r'Board Intermediate')
+  static const PostCreateElectedByEnum boardIntermediate = _$postCreateElectedByEnum_boardIntermediate;
+  @BuiltValueEnumConst(wireName: r'Other')
+  static const PostCreateElectedByEnum other = _$postCreateElectedByEnum_other;
+
+  static Serializer<PostCreateElectedByEnum> get serializer => _$postCreateElectedByEnumSerializer;
+
+  const PostCreateElectedByEnum._(String name): super(name);
+
+  static BuiltSet<PostCreateElectedByEnum> get values => _$postCreateElectedByEnumValues;
+  static PostCreateElectedByEnum valueOf(String name) => _$postCreateElectedByEnumValueOf(name);
 }
 

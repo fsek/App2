@@ -9,12 +9,13 @@ import 'package:api_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **electionId** | **int** |  | 
-**title** | **String** |  | 
+**titleSv** | **String** |  | 
+**titleEn** | **String** |  | 
 **startTime** | [**DateTime**](DateTime.md) |  | 
-**endTime** | [**DateTime**](DateTime.md) |  | 
-**description** | **String** |  | 
-**posts** | [**BuiltList&lt;ElectionPostRead&gt;**](ElectionPostRead.md) |  | 
-**candidates** | [**BuiltList&lt;CandidateElectionRead&gt;**](CandidateElectionRead.md) |  | 
+**descriptionSv** | **String** |  | 
+**descriptionEn** | **String** |  | 
+**visible** | **bool** |  | 
+**subElections** | [**BuiltList&lt;SubElectionRead&gt;**](SubElectionRead.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

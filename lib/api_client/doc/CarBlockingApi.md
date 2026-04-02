@@ -35,7 +35,7 @@ final CarBlockCreate carBlockCreate = ; // CarBlockCreate |
 try {
     final response = api.carBlockingBlockUserFromCarBooking(carBlockCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CarBlockingApi->carBlockingBlockUserFromCarBooking: $e\n');
 }
 ```
@@ -81,7 +81,7 @@ final api = ApiClient().getCarBlockingApi();
 try {
     final response = api.carBlockingGetAllCarBookingBlocks();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CarBlockingApi->carBlockingGetAllCarBookingBlocks: $e\n');
 }
 ```
@@ -125,7 +125,7 @@ final int userId = 56; // int |
 try {
     final response = api.carBlockingUnblockUserFromCarBooking(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CarBlockingApi->carBlockingUnblockUserFromCarBooking: $e\n');
 }
 ```

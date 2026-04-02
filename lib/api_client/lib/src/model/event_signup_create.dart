@@ -19,7 +19,7 @@ part 'event_signup_create.g.dart';
 @BuiltValue()
 abstract class EventSignupCreate implements Built<EventSignupCreate, EventSignupCreateBuilder> {
   @BuiltValueField(wireName: r'user_id')
-  int? get userId;
+  int get userId;
 
   @BuiltValueField(wireName: r'priority')
   String? get priority;
@@ -54,13 +54,11 @@ class _$EventSignupCreateSerializer implements PrimitiveSerializer<EventSignupCr
     EventSignupCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    if (object.userId != null) {
-      yield r'user_id';
-      yield serializers.serialize(
-        object.userId,
-        specifiedType: const FullType.nullable(int),
-      );
-    }
+    yield r'user_id';
+    yield serializers.serialize(
+      object.userId,
+      specifiedType: const FullType(int),
+    );
     if (object.priority != null) {
       yield r'priority';
       yield serializers.serialize(
@@ -108,9 +106,8 @@ class _$EventSignupCreateSerializer implements PrimitiveSerializer<EventSignupCr
         case r'user_id':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(int),
+          ) as int;
           result.userId = valueDes;
           break;
         case r'priority':

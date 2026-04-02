@@ -19,6 +19,7 @@ part 'event_signup_read.g.dart';
 /// * [groupName] 
 /// * [drinkPackage] 
 /// * [confirmedStatus] 
+/// * [createdAt] 
 @BuiltValue()
 abstract class EventSignupRead implements Built<EventSignupRead, EventSignupReadBuilder> {
   @BuiltValueField(wireName: r'user')
@@ -39,6 +40,9 @@ abstract class EventSignupRead implements Built<EventSignupRead, EventSignupRead
 
   @BuiltValueField(wireName: r'confirmed_status')
   bool get confirmedStatus;
+
+  @BuiltValueField(wireName: r'created_at')
+  DateTime get createdAt;
 
   EventSignupRead._();
 
@@ -92,6 +96,11 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
     yield serializers.serialize(
       object.confirmedStatus,
       specifiedType: const FullType(bool),
+    );
+    yield r'created_at';
+    yield serializers.serialize(
+      object.createdAt,
+      specifiedType: const FullType(DateTime),
     );
   }
 
@@ -158,6 +167,13 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
             specifiedType: const FullType(bool),
           ) as bool;
           result.confirmedStatus = valueDes;
+          break;
+        case r'created_at':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(DateTime),
+          ) as DateTime;
+          result.createdAt = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -23,6 +23,10 @@ part 'post_read.g.dart';
 /// * [descriptionEn] 
 /// * [email] 
 /// * [postDoorAccesses] 
+/// * [electedAtSemester] 
+/// * [electedBy] 
+/// * [electedUserRecommendedLimit] 
+/// * [electedUserMaxLimit] 
 @BuiltValue()
 abstract class PostRead implements Built<PostRead, PostReadBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -51,6 +55,20 @@ abstract class PostRead implements Built<PostRead, PostReadBuilder> {
 
   @BuiltValueField(wireName: r'post_door_accesses')
   BuiltList<PostDoorAccessRead> get postDoorAccesses;
+
+  @BuiltValueField(wireName: r'elected_at_semester')
+  PostReadElectedAtSemesterEnum? get electedAtSemester;
+  // enum electedAtSemesterEnum {  HT,  VT,  HT and VT,  Other,  };
+
+  @BuiltValueField(wireName: r'elected_by')
+  PostReadElectedByEnum? get electedBy;
+  // enum electedByEnum {  Guild,  Board,  Educational Council,  Board Intermediate,  Other,  };
+
+  @BuiltValueField(wireName: r'elected_user_recommended_limit')
+  int get electedUserRecommendedLimit;
+
+  @BuiltValueField(wireName: r'elected_user_max_limit')
+  int get electedUserMaxLimit;
 
   PostRead._();
 
@@ -119,6 +137,26 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
     yield serializers.serialize(
       object.postDoorAccesses,
       specifiedType: const FullType(BuiltList, [FullType(PostDoorAccessRead)]),
+    );
+    yield r'elected_at_semester';
+    yield object.electedAtSemester == null ? null : serializers.serialize(
+      object.electedAtSemester,
+      specifiedType: const FullType.nullable(PostReadElectedAtSemesterEnum),
+    );
+    yield r'elected_by';
+    yield object.electedBy == null ? null : serializers.serialize(
+      object.electedBy,
+      specifiedType: const FullType.nullable(PostReadElectedByEnum),
+    );
+    yield r'elected_user_recommended_limit';
+    yield serializers.serialize(
+      object.electedUserRecommendedLimit,
+      specifiedType: const FullType(int),
+    );
+    yield r'elected_user_max_limit';
+    yield serializers.serialize(
+      object.electedUserMaxLimit,
+      specifiedType: const FullType(int),
     );
   }
 
@@ -206,6 +244,36 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
           ) as BuiltList<PostDoorAccessRead>;
           result.postDoorAccesses.replace(valueDes);
           break;
+        case r'elected_at_semester':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(PostReadElectedAtSemesterEnum),
+          ) as PostReadElectedAtSemesterEnum?;
+          if (valueDes == null) continue;
+          result.electedAtSemester = valueDes;
+          break;
+        case r'elected_by':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(PostReadElectedByEnum),
+          ) as PostReadElectedByEnum?;
+          if (valueDes == null) continue;
+          result.electedBy = valueDes;
+          break;
+        case r'elected_user_recommended_limit':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.electedUserRecommendedLimit = valueDes;
+          break;
+        case r'elected_user_max_limit':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.electedUserMaxLimit = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -233,5 +301,45 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
     );
     return result.build();
   }
+}
+
+class PostReadElectedAtSemesterEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'HT')
+  static const PostReadElectedAtSemesterEnum HT = _$postReadElectedAtSemesterEnum_HT;
+  @BuiltValueEnumConst(wireName: r'VT')
+  static const PostReadElectedAtSemesterEnum VT = _$postReadElectedAtSemesterEnum_VT;
+  @BuiltValueEnumConst(wireName: r'HT and VT')
+  static const PostReadElectedAtSemesterEnum hTAndVT = _$postReadElectedAtSemesterEnum_hTAndVT;
+  @BuiltValueEnumConst(wireName: r'Other')
+  static const PostReadElectedAtSemesterEnum other = _$postReadElectedAtSemesterEnum_other;
+
+  static Serializer<PostReadElectedAtSemesterEnum> get serializer => _$postReadElectedAtSemesterEnumSerializer;
+
+  const PostReadElectedAtSemesterEnum._(String name): super(name);
+
+  static BuiltSet<PostReadElectedAtSemesterEnum> get values => _$postReadElectedAtSemesterEnumValues;
+  static PostReadElectedAtSemesterEnum valueOf(String name) => _$postReadElectedAtSemesterEnumValueOf(name);
+}
+
+class PostReadElectedByEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Guild')
+  static const PostReadElectedByEnum guild = _$postReadElectedByEnum_guild;
+  @BuiltValueEnumConst(wireName: r'Board')
+  static const PostReadElectedByEnum board = _$postReadElectedByEnum_board;
+  @BuiltValueEnumConst(wireName: r'Educational Council')
+  static const PostReadElectedByEnum educationalCouncil = _$postReadElectedByEnum_educationalCouncil;
+  @BuiltValueEnumConst(wireName: r'Board Intermediate')
+  static const PostReadElectedByEnum boardIntermediate = _$postReadElectedByEnum_boardIntermediate;
+  @BuiltValueEnumConst(wireName: r'Other')
+  static const PostReadElectedByEnum other = _$postReadElectedByEnum_other;
+
+  static Serializer<PostReadElectedByEnum> get serializer => _$postReadElectedByEnumSerializer;
+
+  const PostReadElectedByEnum._(String name): super(name);
+
+  static BuiltSet<PostReadElectedByEnum> get values => _$postReadElectedByEnumValues;
+  static PostReadElectedByEnum valueOf(String name) => _$postReadElectedByEnumValueOf(name);
 }
 

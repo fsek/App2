@@ -22,7 +22,7 @@ abstract class PermissionCreate implements Built<PermissionCreate, PermissionCre
 
   @BuiltValueField(wireName: r'target')
   PermissionCreateTargetEnum get target;
-  // enum targetEnum {  Event,  Document,  User,  Post,  UserPost,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  MailAlias,  };
+  // enum targetEnum {  Event,  Document,  User,  Post,  UserPost,  Permission,  News,  Song,  Ads,  Gallery,  Car,  Cafe,  Election,  Groups,  AdventureMissions,  Nollning,  UserDoorAccess,  Tags,  Council,  RoomBookings,  Moosegame,  MailAlias,  GuildMeeting,  };
 
   PermissionCreate._();
 
@@ -186,6 +186,8 @@ class PermissionCreateTargetEnum extends EnumClass {
   static const PermissionCreateTargetEnum moosegame = _$permissionCreateTargetEnum_moosegame;
   @BuiltValueEnumConst(wireName: r'MailAlias')
   static const PermissionCreateTargetEnum mailAlias = _$permissionCreateTargetEnum_mailAlias;
+  @BuiltValueEnumConst(wireName: r'GuildMeeting')
+  static const PermissionCreateTargetEnum guildMeeting = _$permissionCreateTargetEnum_guildMeeting;
 
   static Serializer<PermissionCreateTargetEnum> get serializer => _$permissionCreateTargetEnumSerializer;
 

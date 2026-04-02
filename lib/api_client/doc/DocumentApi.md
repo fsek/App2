@@ -39,7 +39,7 @@ final int documentId = 56; // int |
 try {
     final response = api.documentDeleteDocument(documentId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentDeleteDocument: $e\n');
 }
 ```
@@ -85,7 +85,7 @@ final api = ApiClient().getDocumentApi();
 try {
     final response = api.documentGetAllDocuments();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentGetAllDocuments: $e\n');
 }
 ```
@@ -129,7 +129,7 @@ final int documentId = 56; // int |
 try {
     final response = api.documentGetDocumentDataById(documentId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentGetDocumentDataById: $e\n');
 }
 ```
@@ -176,7 +176,7 @@ final int documentId = 56; // int |
 try {
     final response = api.documentGetDocumentFile(documentId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentGetDocumentFile: $e\n');
 }
 ```
@@ -223,7 +223,7 @@ final int documentId = 56; // int |
 try {
     final response = api.documentGetDocumentFileById(documentId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentGetDocumentFileById: $e\n');
 }
 ```
@@ -271,7 +271,7 @@ final DocumentUpdate documentUpdate = ; // DocumentUpdate |
 try {
     final response = api.documentUpdateDocument(documentId, documentUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentUpdateDocument: $e\n');
 }
 ```
@@ -322,7 +322,7 @@ final bool isPrivate = true; // bool |
 try {
     final response = api.documentUploadDocument(file, title, category, isPrivate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling DocumentApi->documentUploadDocument: $e\n');
 }
 ```

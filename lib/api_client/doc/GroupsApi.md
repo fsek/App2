@@ -40,7 +40,7 @@ final GroupAddUser groupAddUser = ; // GroupAddUser |
 try {
     final response = api.groupsAddUserToGroup(id, groupAddUser);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsAddUserToGroup: $e\n');
 }
 ```
@@ -88,7 +88,7 @@ final String groupType = groupType_example; // String |
 try {
     final response = api.groupsGetGroups(groupType);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsGetGroups: $e\n');
 }
 ```
@@ -135,7 +135,7 @@ final int id = 56; // int |
 try {
     final response = api.groupsGetSingleGroup(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsGetSingleGroup: $e\n');
 }
 ```
@@ -183,7 +183,7 @@ final GroupCreate groupCreate = ; // GroupCreate |
 try {
     final response = api.groupsPatchGroup(id, groupCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsPatchGroup: $e\n');
 }
 ```
@@ -231,7 +231,7 @@ final int id = 56; // int |
 try {
     final response = api.groupsRemoveGroup(id);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsRemoveGroup: $e\n');
 }
 ```
@@ -279,7 +279,7 @@ final GroupRemoveUser groupRemoveUser = ; // GroupRemoveUser |
 try {
     final response = api.groupsRemoveUserFromGroup(id, groupRemoveUser);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsRemoveUserFromGroup: $e\n');
 }
 ```
@@ -327,7 +327,7 @@ final GroupCreate groupCreate = ; // GroupCreate |
 try {
     final response = api.groupsUploadGroup(groupCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling GroupsApi->groupsUploadGroup: $e\n');
 }
 ```

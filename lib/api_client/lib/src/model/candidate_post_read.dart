@@ -11,15 +11,27 @@ part 'candidate_post_read.g.dart';
 /// CandidatePostRead
 ///
 /// Properties:
+/// * [candidateId] 
 /// * [postId] 
 /// * [electionPostId] 
+/// * [subElectionId] 
+/// * [createdAt] 
 @BuiltValue()
 abstract class CandidatePostRead implements Built<CandidatePostRead, CandidatePostReadBuilder> {
+  @BuiltValueField(wireName: r'candidate_id')
+  int get candidateId;
+
   @BuiltValueField(wireName: r'post_id')
   int get postId;
 
   @BuiltValueField(wireName: r'election_post_id')
   int get electionPostId;
+
+  @BuiltValueField(wireName: r'sub_election_id')
+  int get subElectionId;
+
+  @BuiltValueField(wireName: r'created_at')
+  DateTime get createdAt;
 
   CandidatePostRead._();
 
@@ -44,6 +56,11 @@ class _$CandidatePostReadSerializer implements PrimitiveSerializer<CandidatePost
     CandidatePostRead object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
+    yield r'candidate_id';
+    yield serializers.serialize(
+      object.candidateId,
+      specifiedType: const FullType(int),
+    );
     yield r'post_id';
     yield serializers.serialize(
       object.postId,
@@ -53,6 +70,16 @@ class _$CandidatePostReadSerializer implements PrimitiveSerializer<CandidatePost
     yield serializers.serialize(
       object.electionPostId,
       specifiedType: const FullType(int),
+    );
+    yield r'sub_election_id';
+    yield serializers.serialize(
+      object.subElectionId,
+      specifiedType: const FullType(int),
+    );
+    yield r'created_at';
+    yield serializers.serialize(
+      object.createdAt,
+      specifiedType: const FullType(DateTime),
     );
   }
 
@@ -77,6 +104,13 @@ class _$CandidatePostReadSerializer implements PrimitiveSerializer<CandidatePost
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'candidate_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.candidateId = valueDes;
+          break;
         case r'post_id':
           final valueDes = serializers.deserialize(
             value,
@@ -90,6 +124,20 @@ class _$CandidatePostReadSerializer implements PrimitiveSerializer<CandidatePost
             specifiedType: const FullType(int),
           ) as int;
           result.electionPostId = valueDes;
+          break;
+        case r'sub_election_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.subElectionId = valueDes;
+          break;
+        case r'created_at':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(DateTime),
+          ) as DateTime;
+          result.createdAt = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -39,7 +39,7 @@ final RoomBookingCreate roomBookingCreate = ; // RoomBookingCreate |
 try {
     final response = api.roomBookingCreateRoomBooking(roomBookingCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingCreateRoomBooking: $e\n');
 }
 ```
@@ -85,7 +85,7 @@ final api = ApiClient().getRoomBookingApi();
 try {
     final response = api.roomBookingGetAllRoomBookings();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingGetAllRoomBookings: $e\n');
 }
 ```
@@ -129,7 +129,7 @@ final String room = room_example; // String |
 try {
     final response = api.roomBookingGetBookingsByRoom(room);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingGetBookingsByRoom: $e\n');
 }
 ```
@@ -176,7 +176,7 @@ final int bookingId = 56; // int |
 try {
     final response = api.roomBookingGetRoomBooking(bookingId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingGetRoomBooking: $e\n');
 }
 ```
@@ -223,7 +223,7 @@ final RoomBookingsBetweenDates roomBookingsBetweenDates = ; // RoomBookingsBetwe
 try {
     final response = api.roomBookingGetRoomBookingsBetweenTimes(roomBookingsBetweenDates);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingGetRoomBookingsBetweenTimes: $e\n');
 }
 ```
@@ -270,7 +270,7 @@ final int bookingId = 56; // int |
 try {
     final response = api.roomBookingRemoveRoomBooking(bookingId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingRemoveRoomBooking: $e\n');
 }
 ```
@@ -318,7 +318,7 @@ final RoomBookingUpdate roomBookingUpdate = ; // RoomBookingUpdate |
 try {
     final response = api.roomBookingUpdateRoomBooking(bookingId, roomBookingUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling RoomBookingApi->roomBookingUpdateRoomBooking: $e\n');
 }
 ```

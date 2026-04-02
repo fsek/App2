@@ -23,7 +23,7 @@ part 'room_booking_create.g.dart';
 abstract class RoomBookingCreate implements Built<RoomBookingCreate, RoomBookingCreateBuilder> {
   @BuiltValueField(wireName: r'room')
   RoomBookingCreateRoomEnum get room;
-  // enum roomEnum {  LC,  Alumni,  SK,  };
+  // enum roomEnum {  LC,  Alumni,  SK,  Hilbert Cafe,  };
 
   @BuiltValueField(wireName: r'start_time')
   DateTime get startTime;
@@ -216,6 +216,8 @@ class RoomBookingCreateRoomEnum extends EnumClass {
   static const RoomBookingCreateRoomEnum alumni = _$roomBookingCreateRoomEnum_alumni;
   @BuiltValueEnumConst(wireName: r'SK')
   static const RoomBookingCreateRoomEnum SK = _$roomBookingCreateRoomEnum_SK;
+  @BuiltValueEnumConst(wireName: r'Hilbert Cafe')
+  static const RoomBookingCreateRoomEnum hilbertCafe = _$roomBookingCreateRoomEnum_hilbertCafe;
 
   static Serializer<RoomBookingCreateRoomEnum> get serializer => _$roomBookingCreateRoomEnumSerializer;
 

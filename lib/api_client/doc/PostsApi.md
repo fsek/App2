@@ -42,7 +42,7 @@ final PostCreate postCreate = ; // PostCreate |
 try {
     final response = api.postsCreatePost(postCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsCreatePost: $e\n');
 }
 ```
@@ -88,7 +88,7 @@ final int postId = 56; // int |
 
 try {
     api.postsDeletePost(postId);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsDeletePost: $e\n');
 }
 ```
@@ -134,7 +134,7 @@ final api = ApiClient().getPostsApi();
 try {
     final response = api.postsGetAllDoors();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetAllDoors: $e\n');
 }
 ```
@@ -165,13 +165,19 @@ Get All Posts
 ### Example
 ```dart
 import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
 
 final api = ApiClient().getPostsApi();
 
 try {
     final response = api.postsGetAllPosts();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetAllPosts: $e\n');
 }
 ```
@@ -185,7 +191,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
 
 ### HTTP request headers
 
@@ -209,7 +215,7 @@ final int postId = 56; // int |
 try {
     final response = api.postsGetAllUsersWithPost(postId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetAllUsersWithPost: $e\n');
 }
 ```
@@ -256,7 +262,7 @@ final int postId = 56; // int |
 try {
     final response = api.postsGetPost(postId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetPost: $e\n');
 }
 ```
@@ -304,7 +310,7 @@ final String size = size_example; // String |
 try {
     final response = api.postsGetPostImage(postId, size);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetPostImage: $e\n');
 }
 ```
@@ -352,7 +358,7 @@ final int postId = 56; // int |
 try {
     final response = api.postsGetPostImageStream(postId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsGetPostImageStream: $e\n');
 }
 ```
@@ -400,7 +406,7 @@ final MultipartFile image = BINARY_DATA_HERE; // MultipartFile |
 try {
     final response = api.postsPostPostImage(postId, image);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsPostPostImage: $e\n');
 }
 ```
@@ -449,7 +455,7 @@ final PostUpdate postUpdate = ; // PostUpdate |
 try {
     final response = api.postsUpdatePost(postId, postUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PostsApi->postsUpdatePost: $e\n');
 }
 ```

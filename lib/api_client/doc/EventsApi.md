@@ -13,12 +13,12 @@ Method | HTTP request | Description
 [**eventsConfirmEventUsers**](EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
 [**eventsConfirmPlaces**](EventsApi.md#eventsconfirmplaces) | **PATCH** /events/confirmed/{event_id} | Confirm Places
 [**eventsCreateEvent**](EventsApi.md#eventscreateevent) | **POST** /events/ | Create Event
-[**eventsCreateEventSignupList**](EventsApi.md#eventscreateeventsignuplist) | **GET** /events/event-signups/{event_id} | Create Event Signup List
+[**eventsCreateEventSignupList**](EventsApi.md#eventscreateeventsignuplist) | **POST** /events/event-signups/{event_id} | Create Event Signup List
 [**eventsEventRemove**](EventsApi.md#eventseventremove) | **DELETE** /events/{event_id} | Event Remove
 [**eventsEventUpdate**](EventsApi.md#eventseventupdate) | **PATCH** /events/{event_id} | Event Update
 [**eventsGetAllEventSignups**](EventsApi.md#eventsgetalleventsignups) | **GET** /events/event-signups/all/{event_id} | Get All Event Signups
 [**eventsGetAllEvents**](EventsApi.md#eventsgetallevents) | **GET** /events/ | Get All Events
-[**eventsGetEventCsv**](EventsApi.md#eventsgeteventcsv) | **GET** /events/get-event-csv/{event_id} | Get Event Csv
+[**eventsGetEventCsv**](EventsApi.md#eventsgeteventcsv) | **GET** /events/event-signups/confirmed/{event_id}/csv | Get Event Csv
 [**eventsGetEventImage**](EventsApi.md#eventsgeteventimage) | **GET** /events/{event_id}/image/{size} | Get Event Image
 [**eventsGetEventImageStream**](EventsApi.md#eventsgeteventimagestream) | **GET** /events/{event_id}/image/stream | Get Event Image Stream
 [**eventsGetEventPriorities**](EventsApi.md#eventsgeteventpriorities) | **GET** /events/priorities | Get Event Priorities
@@ -49,7 +49,7 @@ final AddEventTag addEventTag = ; // AddEventTag |
 try {
     final response = api.eventsAddTagToEvent(addEventTag);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsAddTagToEvent: $e\n');
 }
 ```
@@ -97,7 +97,7 @@ final BuiltList<int> requestBody = ; // BuiltList<int> |
 try {
     final response = api.eventsConfirmEventUsers(eventId, requestBody);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsConfirmEventUsers: $e\n');
 }
 ```
@@ -139,7 +139,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsConfirmPlaces(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsConfirmPlaces: $e\n');
 }
 ```
@@ -186,7 +186,7 @@ final EventCreate eventCreate = ; // EventCreate |
 try {
     final response = api.eventsCreateEvent(eventCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsCreateEvent: $e\n');
 }
 ```
@@ -233,7 +233,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsCreateEventSignupList(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsCreateEventSignupList: $e\n');
 }
 ```
@@ -280,7 +280,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsEventRemove(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsEventRemove: $e\n');
 }
 ```
@@ -328,7 +328,7 @@ final EventUpdate eventUpdate = ; // EventUpdate |
 try {
     final response = api.eventsEventUpdate(eventId, eventUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsEventUpdate: $e\n');
 }
 ```
@@ -376,7 +376,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsGetAllEventSignups(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetAllEventSignups: $e\n');
 }
 ```
@@ -416,7 +416,7 @@ final api = ApiClient().getEventsApi();
 try {
     final response = api.eventsGetAllEvents();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetAllEvents: $e\n');
 }
 ```
@@ -460,7 +460,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsGetEventCsv(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetEventCsv: $e\n');
 }
 ```
@@ -508,7 +508,7 @@ final String size = size_example; // String |
 try {
     final response = api.eventsGetEventImage(eventId, size);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetEventImage: $e\n');
 }
 ```
@@ -556,7 +556,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsGetEventImageStream(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetEventImageStream: $e\n');
 }
 ```
@@ -596,7 +596,7 @@ final api = ApiClient().getEventsApi();
 try {
     final response = api.eventsGetEventPriorities();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetEventPriorities: $e\n');
 }
 ```
@@ -634,7 +634,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsGetEventTags(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetEventTags: $e\n');
 }
 ```
@@ -675,7 +675,7 @@ final int eventId = 56; // int |
 try {
     final response = api.eventsGetSingleEvent(eventId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsGetSingleEvent: $e\n');
 }
 ```
@@ -723,7 +723,7 @@ final MultipartFile image = BINARY_DATA_HERE; // MultipartFile |
 try {
     final response = api.eventsPostEventImage(eventId, image);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsPostEventImage: $e\n');
 }
 ```
@@ -772,7 +772,7 @@ final BuiltList<int> requestBody = ; // BuiltList<int> |
 try {
     final response = api.eventsUnconfirmEventUsers(eventId, requestBody);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling EventsApi->eventsUnconfirmEventUsers: $e\n');
 }
 ```

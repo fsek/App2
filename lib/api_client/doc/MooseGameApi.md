@@ -34,7 +34,7 @@ final api = ApiClient().getMooseGameApi();
 try {
     final response = api.mooseGameGetAllScores();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MooseGameApi->mooseGameGetAllScores: $e\n');
 }
 ```
@@ -78,7 +78,7 @@ final int userId = 56; // int |
 try {
     final response = api.mooseGameRemoveMouseGameScore(userId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MooseGameApi->mooseGameRemoveMouseGameScore: $e\n');
 }
 ```
@@ -125,7 +125,7 @@ final int score = 56; // int |
 try {
     final response = api.mooseGameUpdateMouseGameScore(score);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling MooseGameApi->mooseGameUpdateMouseGameScore: $e\n');
 }
 ```

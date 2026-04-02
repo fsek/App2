@@ -24,16 +24,19 @@ import 'package:api_client/src/api/elections_api.dart';
 import 'package:api_client/src/api/event_signup_api.dart';
 import 'package:api_client/src/api/events_api.dart';
 import 'package:api_client/src/api/groups_api.dart';
+import 'package:api_client/src/api/guild_meeting_api.dart';
 import 'package:api_client/src/api/img_api.dart';
 import 'package:api_client/src/api/mail_alias_api.dart';
 import 'package:api_client/src/api/moose_game_api.dart';
 import 'package:api_client/src/api/news_api.dart';
 import 'package:api_client/src/api/nollning_api.dart';
+import 'package:api_client/src/api/nominations_api.dart';
 import 'package:api_client/src/api/permissions_api.dart';
 import 'package:api_client/src/api/posts_api.dart';
 import 'package:api_client/src/api/room_booking_api.dart';
 import 'package:api_client/src/api/songs_api.dart';
 import 'package:api_client/src/api/songs_category_api.dart';
+import 'package:api_client/src/api/sub_elections_api.dart';
 import 'package:api_client/src/api/tags_api.dart';
 import 'package:api_client/src/api/user_door_access_api.dart';
 import 'package:api_client/src/api/users_api.dart';
@@ -182,6 +185,12 @@ class ApiClient {
     return GroupsApi(dio, serializers);
   }
 
+  /// Get GuildMeetingApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  GuildMeetingApi getGuildMeetingApi() {
+    return GuildMeetingApi(dio, serializers);
+  }
+
   /// Get ImgApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   ImgApi getImgApi() {
@@ -212,6 +221,12 @@ class ApiClient {
     return NollningApi(dio, serializers);
   }
 
+  /// Get NominationsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  NominationsApi getNominationsApi() {
+    return NominationsApi(dio, serializers);
+  }
+
   /// Get PermissionsApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   PermissionsApi getPermissionsApi() {
@@ -240,6 +255,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   SongsCategoryApi getSongsCategoryApi() {
     return SongsCategoryApi(dio, serializers);
+  }
+
+  /// Get SubElectionsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  SubElectionsApi getSubElectionsApi() {
+    return SubElectionsApi(dio, serializers);
   }
 
   /// Get TagsApi instance, base route and serializer can be overridden by a given but be careful,

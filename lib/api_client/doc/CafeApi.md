@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cafeAdminViewShift**](CafeApi.md#cafeadminviewshift) | **GET** /cafe-shifts/admin/{shift_id} | Admin View Shift
 [**cafeCreateMultipleShifts**](CafeApi.md#cafecreatemultipleshifts) | **POST** /cafe-shifts/multi | Create Multiple Shifts
 [**cafeCreateShift**](CafeApi.md#cafecreateshift) | **POST** /cafe-shifts/ | Create Shift
 [**cafeDeleteShift**](CafeApi.md#cafedeleteshift) | **DELETE** /cafe-shifts/{shift_id} | Delete Shift
@@ -19,6 +20,53 @@ Method | HTTP request | Description
 [**cafeViewShift**](CafeApi.md#cafeviewshift) | **GET** /cafe-shifts/{shift_id} | View Shift
 [**cafeViewShiftsBetweenDates**](CafeApi.md#cafeviewshiftsbetweendates) | **POST** /cafe-shifts/view-between-dates | View Shifts Between Dates
 
+
+# **cafeAdminViewShift**
+> AdminCafeShiftRead cafeAdminViewShift(shiftId)
+
+Admin View Shift
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getCafeApi();
+final int shiftId = 56; // int | 
+
+try {
+    final response = api.cafeAdminViewShift(shiftId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling CafeApi->cafeAdminViewShift: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shiftId** | **int**|  | 
+
+### Return type
+
+[**AdminCafeShiftRead**](AdminCafeShiftRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cafeCreateMultipleShifts**
 > BuiltList<CafeShiftRead> cafeCreateMultipleShifts(cafeShiftCreateMulti)
@@ -41,7 +89,7 @@ final CafeShiftCreateMulti cafeShiftCreateMulti = ; // CafeShiftCreateMulti |
 try {
     final response = api.cafeCreateMultipleShifts(cafeShiftCreateMulti);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeCreateMultipleShifts: $e\n');
 }
 ```
@@ -88,7 +136,7 @@ final CafeShiftCreate cafeShiftCreate = ; // CafeShiftCreate |
 try {
     final response = api.cafeCreateShift(cafeShiftCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeCreateShift: $e\n');
 }
 ```
@@ -134,7 +182,7 @@ final int shiftId = 56; // int |
 
 try {
     api.cafeDeleteShift(shiftId);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeDeleteShift: $e\n');
 }
 ```
@@ -181,7 +229,7 @@ final int shiftId = 56; // int |
 try {
     final response = api.cafeSignoffFromShift(shiftId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeSignoffFromShift: $e\n');
 }
 ```
@@ -228,7 +276,7 @@ final int shiftId = 56; // int |
 try {
     final response = api.cafeSignupToShift(shiftId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeSignupToShift: $e\n');
 }
 ```
@@ -276,7 +324,7 @@ final CafeShiftUpdate cafeShiftUpdate = ; // CafeShiftUpdate |
 try {
     final response = api.cafeUpdateShift(shiftId, cafeShiftUpdate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeUpdateShift: $e\n');
 }
 ```
@@ -323,7 +371,7 @@ final api = ApiClient().getCafeApi();
 try {
     final response = api.cafeViewAllShifts();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeViewAllShifts: $e\n');
 }
 ```
@@ -367,7 +415,7 @@ final int shiftId = 56; // int |
 try {
     final response = api.cafeViewShift(shiftId);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeViewShift: $e\n');
 }
 ```
@@ -414,7 +462,7 @@ final CafeViewBetweenDates cafeViewBetweenDates = ; // CafeViewBetweenDates |
 try {
     final response = api.cafeViewShiftsBetweenDates(cafeViewBetweenDates);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling CafeApi->cafeViewShiftsBetweenDates: $e\n');
 }
 ```

@@ -15,6 +15,10 @@ Name | Type | Description | Notes
 **descriptionEn** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
 **doors** | **BuiltList&lt;String&gt;** |  | [optional] 
+**electedAtSemester** | **String** |  | [optional] 
+**electedBy** | **String** |  | [optional] 
+**electedUserRecommendedLimit** | **int** |  | [optional] 
+**electedUserMaxLimit** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

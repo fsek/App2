@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **lastName** | **String** |  | 
 **email** | **String** |  | 
 **telephoneNumber** | **String** |  | 
+**stilId** | **String** |  | 
 **startYear** | **int** |  | 
-**accountCreated** | [**DateTime**](DateTime.md) |  | 
-**wantNotifications** | **bool** |  | 
+**program** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

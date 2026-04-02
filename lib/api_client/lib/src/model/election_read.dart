@@ -3,9 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:api_client/src/model/sub_election_read.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:api_client/src/model/election_post_read.dart';
-import 'package:api_client/src/model/candidate_election_read.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -15,34 +14,38 @@ part 'election_read.g.dart';
 ///
 /// Properties:
 /// * [electionId] 
-/// * [title] 
+/// * [titleSv] 
+/// * [titleEn] 
 /// * [startTime] 
-/// * [endTime] 
-/// * [description] 
-/// * [posts] 
-/// * [candidates] 
+/// * [descriptionSv] 
+/// * [descriptionEn] 
+/// * [visible] 
+/// * [subElections] 
 @BuiltValue()
 abstract class ElectionRead implements Built<ElectionRead, ElectionReadBuilder> {
   @BuiltValueField(wireName: r'election_id')
   int get electionId;
 
-  @BuiltValueField(wireName: r'title')
-  String get title;
+  @BuiltValueField(wireName: r'title_sv')
+  String get titleSv;
+
+  @BuiltValueField(wireName: r'title_en')
+  String get titleEn;
 
   @BuiltValueField(wireName: r'start_time')
   DateTime get startTime;
 
-  @BuiltValueField(wireName: r'end_time')
-  DateTime get endTime;
+  @BuiltValueField(wireName: r'description_sv')
+  String? get descriptionSv;
 
-  @BuiltValueField(wireName: r'description')
-  String? get description;
+  @BuiltValueField(wireName: r'description_en')
+  String? get descriptionEn;
 
-  @BuiltValueField(wireName: r'posts')
-  BuiltList<ElectionPostRead> get posts;
+  @BuiltValueField(wireName: r'visible')
+  bool get visible;
 
-  @BuiltValueField(wireName: r'candidates')
-  BuiltList<CandidateElectionRead> get candidates;
+  @BuiltValueField(wireName: r'sub_elections')
+  BuiltList<SubElectionRead> get subElections;
 
   ElectionRead._();
 
@@ -72,9 +75,14 @@ class _$ElectionReadSerializer implements PrimitiveSerializer<ElectionRead> {
       object.electionId,
       specifiedType: const FullType(int),
     );
-    yield r'title';
+    yield r'title_sv';
     yield serializers.serialize(
-      object.title,
+      object.titleSv,
+      specifiedType: const FullType(String),
+    );
+    yield r'title_en';
+    yield serializers.serialize(
+      object.titleEn,
       specifiedType: const FullType(String),
     );
     yield r'start_time';
@@ -82,25 +90,25 @@ class _$ElectionReadSerializer implements PrimitiveSerializer<ElectionRead> {
       object.startTime,
       specifiedType: const FullType(DateTime),
     );
-    yield r'end_time';
-    yield serializers.serialize(
-      object.endTime,
-      specifiedType: const FullType(DateTime),
-    );
-    yield r'description';
-    yield object.description == null ? null : serializers.serialize(
-      object.description,
+    yield r'description_sv';
+    yield object.descriptionSv == null ? null : serializers.serialize(
+      object.descriptionSv,
       specifiedType: const FullType.nullable(String),
     );
-    yield r'posts';
-    yield serializers.serialize(
-      object.posts,
-      specifiedType: const FullType(BuiltList, [FullType(ElectionPostRead)]),
+    yield r'description_en';
+    yield object.descriptionEn == null ? null : serializers.serialize(
+      object.descriptionEn,
+      specifiedType: const FullType.nullable(String),
     );
-    yield r'candidates';
+    yield r'visible';
     yield serializers.serialize(
-      object.candidates,
-      specifiedType: const FullType(BuiltList, [FullType(CandidateElectionRead)]),
+      object.visible,
+      specifiedType: const FullType(bool),
+    );
+    yield r'sub_elections';
+    yield serializers.serialize(
+      object.subElections,
+      specifiedType: const FullType(BuiltList, [FullType(SubElectionRead)]),
     );
   }
 
@@ -132,12 +140,19 @@ class _$ElectionReadSerializer implements PrimitiveSerializer<ElectionRead> {
           ) as int;
           result.electionId = valueDes;
           break;
-        case r'title':
+        case r'title_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.title = valueDes;
+          result.titleSv = valueDes;
+          break;
+        case r'title_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.titleEn = valueDes;
           break;
         case r'start_time':
           final valueDes = serializers.deserialize(
@@ -146,34 +161,35 @@ class _$ElectionReadSerializer implements PrimitiveSerializer<ElectionRead> {
           ) as DateTime;
           result.startTime = valueDes;
           break;
-        case r'end_time':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.endTime = valueDes;
-          break;
-        case r'description':
+        case r'description_sv':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(String),
           ) as String?;
           if (valueDes == null) continue;
-          result.description = valueDes;
+          result.descriptionSv = valueDes;
           break;
-        case r'posts':
+        case r'description_en':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(ElectionPostRead)]),
-          ) as BuiltList<ElectionPostRead>;
-          result.posts.replace(valueDes);
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.descriptionEn = valueDes;
           break;
-        case r'candidates':
+        case r'visible':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(CandidateElectionRead)]),
-          ) as BuiltList<CandidateElectionRead>;
-          result.candidates.replace(valueDes);
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.visible = valueDes;
+          break;
+        case r'sub_elections':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(SubElectionRead)]),
+          ) as BuiltList<SubElectionRead>;
+          result.subElections.replace(valueDes);
           break;
         default:
           unhandled.add(key);

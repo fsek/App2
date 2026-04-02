@@ -18,7 +18,11 @@ import 'package:api_client/src/model/ad_create.dart';
 import 'package:api_client/src/model/ad_read.dart';
 import 'package:api_client/src/model/ad_update.dart';
 import 'package:api_client/src/model/add_event_tag.dart';
+import 'package:api_client/src/model/admin_cafe_shift_read.dart';
+import 'package:api_client/src/model/admin_car_booking_read.dart';
 import 'package:api_client/src/model/admin_user_read.dart';
+import 'package:api_client/src/model/admin_user_read_for_cafe_shifts.dart';
+import 'package:api_client/src/model/admin_user_read_for_car_bookings.dart';
 import 'package:api_client/src/model/adventure_mission_create.dart';
 import 'package:api_client/src/model/adventure_mission_read.dart';
 import 'package:api_client/src/model/album_create.dart';
@@ -36,8 +40,6 @@ import 'package:api_client/src/model/cafe_shift_create_multi.dart';
 import 'package:api_client/src/model/cafe_shift_read.dart';
 import 'package:api_client/src/model/cafe_shift_update.dart';
 import 'package:api_client/src/model/cafe_view_between_dates.dart';
-import 'package:api_client/src/model/candidate_election_create.dart';
-import 'package:api_client/src/model/candidate_election_read.dart';
 import 'package:api_client/src/model/candidate_post_read.dart';
 import 'package:api_client/src/model/candidate_read.dart';
 import 'package:api_client/src/model/candidate_user_read.dart';
@@ -52,11 +54,12 @@ import 'package:api_client/src/model/council_update.dart';
 import 'package:api_client/src/model/detail.dart';
 import 'package:api_client/src/model/document_read.dart';
 import 'package:api_client/src/model/document_update.dart';
-import 'package:api_client/src/model/election_add_posts.dart';
 import 'package:api_client/src/model/election_create.dart';
-import 'package:api_client/src/model/election_post_create.dart';
+import 'package:api_client/src/model/election_member_read.dart';
+import 'package:api_client/src/model/election_populate.dart';
 import 'package:api_client/src/model/election_post_read.dart';
 import 'package:api_client/src/model/election_read.dart';
+import 'package:api_client/src/model/election_update.dart';
 import 'package:api_client/src/model/error_model.dart';
 import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
@@ -74,8 +77,12 @@ import 'package:api_client/src/model/group_mission_read.dart';
 import 'package:api_client/src/model/group_read.dart';
 import 'package:api_client/src/model/group_remove_user.dart';
 import 'package:api_client/src/model/group_user_read.dart';
+import 'package:api_client/src/model/guild_meeting_read.dart';
+import 'package:api_client/src/model/guild_meeting_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
+import 'package:api_client/src/model/location_inner.dart';
 import 'package:api_client/src/model/moose_game_read.dart';
+import 'package:api_client/src/model/move_post_request.dart';
 import 'package:api_client/src/model/news_create.dart';
 import 'package:api_client/src/model/news_read.dart';
 import 'package:api_client/src/model/news_tag_read.dart';
@@ -84,6 +91,8 @@ import 'package:api_client/src/model/nollning_add_group.dart';
 import 'package:api_client/src/model/nollning_create.dart';
 import 'package:api_client/src/model/nollning_group_read.dart';
 import 'package:api_client/src/model/nollning_read.dart';
+import 'package:api_client/src/model/nomination_create.dart';
+import 'package:api_client/src/model/nomination_read.dart';
 import 'package:api_client/src/model/permission_create.dart';
 import 'package:api_client/src/model/permission_read.dart';
 import 'package:api_client/src/model/permission_remove.dart';
@@ -105,6 +114,10 @@ import 'package:api_client/src/model/song_category_create.dart';
 import 'package:api_client/src/model/song_category_read.dart';
 import 'package:api_client/src/model/song_create.dart';
 import 'package:api_client/src/model/song_read.dart';
+import 'package:api_client/src/model/sub_election_create.dart';
+import 'package:api_client/src/model/sub_election_member_read.dart';
+import 'package:api_client/src/model/sub_election_read.dart';
+import 'package:api_client/src/model/sub_election_update.dart';
 import 'package:api_client/src/model/tag_create.dart';
 import 'package:api_client/src/model/tag_edit.dart';
 import 'package:api_client/src/model/tag_read.dart';
@@ -125,7 +138,6 @@ import 'package:api_client/src/model/user_post_read.dart';
 import 'package:api_client/src/model/user_read.dart';
 import 'package:api_client/src/model/user_update.dart';
 import 'package:api_client/src/model/validation_error.dart';
-import 'package:api_client/src/model/validation_error_loc_inner.dart';
 
 part 'serializers.g.dart';
 
@@ -134,7 +146,11 @@ part 'serializers.g.dart';
   AdRead,
   AdUpdate,
   AddEventTag,
+  AdminCafeShiftRead,
+  AdminCarBookingRead,
   AdminUserRead,
+  AdminUserReadForCafeShifts,
+  AdminUserReadForCarBookings,
   AdventureMissionCreate,
   AdventureMissionRead,
   AlbumCreate,
@@ -152,8 +168,6 @@ part 'serializers.g.dart';
   CafeShiftRead,
   CafeShiftUpdate,
   CafeViewBetweenDates,
-  CandidateElectionCreate,
-  CandidateElectionRead,
   CandidatePostRead,
   CandidateRead,
   CandidateUserRead,
@@ -168,11 +182,12 @@ part 'serializers.g.dart';
   Detail,
   DocumentRead,
   DocumentUpdate,
-  ElectionAddPosts,
   ElectionCreate,
-  ElectionPostCreate,
+  ElectionMemberRead,
+  ElectionPopulate,
   ElectionPostRead,
   ElectionRead,
+  ElectionUpdate,
   ErrorModel,
   EventCreate,
   EventRead,
@@ -190,8 +205,12 @@ part 'serializers.g.dart';
   GroupRead,
   GroupRemoveUser,
   GroupUserRead,
+  GuildMeetingRead,
+  GuildMeetingUpdate,
   HTTPValidationError,
+  LocationInner,
   MooseGameRead,
+  MovePostRequest,
   NewsCreate,
   NewsRead,
   NewsTagRead,
@@ -200,6 +219,8 @@ part 'serializers.g.dart';
   NollningCreate,
   NollningGroupRead,
   NollningRead,
+  NominationCreate,
+  NominationRead,
   PermissionCreate,
   PermissionRead,
   PermissionRemove,
@@ -221,6 +242,10 @@ part 'serializers.g.dart';
   SongCategoryRead,
   SongCreate,
   SongRead,
+  SubElectionCreate,
+  SubElectionMemberRead,
+  SubElectionRead,
+  SubElectionUpdate,
   TagCreate,
   TagEdit,
   TagRead,
@@ -241,7 +266,6 @@ part 'serializers.g.dart';
   UserRead,
   UserUpdate,
   ValidationError,
-  ValidationErrorLocInner,
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
@@ -273,6 +297,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<UpdateUserMemberMultiple>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(ElectionMemberRead)]),
+        () => ListBuilder<ElectionMemberRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(SimpleUserRead)]),
         () => ListBuilder<SimpleUserRead>(),
       )
@@ -295,6 +323,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(UserAccessRead)]),
         () => ListBuilder<UserAccessRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CandidatePostRead)]),
+        () => ListBuilder<CandidatePostRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(EventTagRead)]),
@@ -339,6 +371,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdminUserRead)]),
         () => ListBuilder<AdminUserRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NominationRead)]),
+        () => ListBuilder<NominationRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CafeShiftRead)]),

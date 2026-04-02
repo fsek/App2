@@ -37,7 +37,7 @@ final UpdatePermission updatePermission = ; // UpdatePermission |
 try {
     final response = api.permissionsChangePostPermission(updatePermission);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PermissionsApi->permissionsChangePostPermission: $e\n');
 }
 ```
@@ -84,7 +84,7 @@ final UpdatePermissions updatePermissions = ; // UpdatePermissions |
 try {
     final response = api.permissionsChangePostPermissions(updatePermissions);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PermissionsApi->permissionsChangePostPermissions: $e\n');
 }
 ```
@@ -131,7 +131,7 @@ final PermissionCreate permissionCreate = ; // PermissionCreate |
 try {
     final response = api.permissionsCreatePermission(permissionCreate);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PermissionsApi->permissionsCreatePermission: $e\n');
 }
 ```
@@ -177,7 +177,7 @@ final api = ApiClient().getPermissionsApi();
 try {
     final response = api.permissionsGetAllPermissions();
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PermissionsApi->permissionsGetAllPermissions: $e\n');
 }
 ```
@@ -221,7 +221,7 @@ final PermissionRemove permissionRemove = ; // PermissionRemove |
 try {
     final response = api.permissionsRemovePermission(permissionRemove);
     print(response);
-} catch on DioException (e) {
+} on DioException catch (e) {
     print('Exception when calling PermissionsApi->permissionsRemovePermission: $e\n');
 }
 ```

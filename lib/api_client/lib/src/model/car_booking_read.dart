@@ -14,7 +14,6 @@ part 'car_booking_read.g.dart';
 ///
 /// Properties:
 /// * [bookingId] 
-/// * [user] 
 /// * [description] 
 /// * [startTime] 
 /// * [endTime] 
@@ -22,13 +21,11 @@ part 'car_booking_read.g.dart';
 /// * [personal] 
 /// * [councilId] 
 /// * [council] 
+/// * [user] 
 @BuiltValue()
 abstract class CarBookingRead implements Built<CarBookingRead, CarBookingReadBuilder> {
   @BuiltValueField(wireName: r'booking_id')
   int get bookingId;
-
-  @BuiltValueField(wireName: r'user')
-  SimpleUserRead get user;
 
   @BuiltValueField(wireName: r'description')
   String get description;
@@ -50,6 +47,9 @@ abstract class CarBookingRead implements Built<CarBookingRead, CarBookingReadBui
 
   @BuiltValueField(wireName: r'council')
   SimpleCouncilRead? get council;
+
+  @BuiltValueField(wireName: r'user')
+  SimpleUserRead get user;
 
   CarBookingRead._();
 
@@ -78,11 +78,6 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
     yield serializers.serialize(
       object.bookingId,
       specifiedType: const FullType(int),
-    );
-    yield r'user';
-    yield serializers.serialize(
-      object.user,
-      specifiedType: const FullType(SimpleUserRead),
     );
     yield r'description';
     yield serializers.serialize(
@@ -123,6 +118,11 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
         specifiedType: const FullType.nullable(SimpleCouncilRead),
       );
     }
+    yield r'user';
+    yield serializers.serialize(
+      object.user,
+      specifiedType: const FullType(SimpleUserRead),
+    );
   }
 
   @override
@@ -152,13 +152,6 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
             specifiedType: const FullType(int),
           ) as int;
           result.bookingId = valueDes;
-          break;
-        case r'user':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SimpleUserRead),
-          ) as SimpleUserRead;
-          result.user.replace(valueDes);
           break;
         case r'description':
           final valueDes = serializers.deserialize(
@@ -210,6 +203,13 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
           ) as SimpleCouncilRead?;
           if (valueDes == null) continue;
           result.council.replace(valueDes);
+          break;
+        case r'user':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(SimpleUserRead),
+          ) as SimpleUserRead;
+          result.user.replace(valueDes);
           break;
         default:
           unhandled.add(key);
