@@ -1,5 +1,5 @@
 class Environment {
-  static const String API_URL = "https://backend.fsektionen.se";
+  static const String API_URL = "https://stage.backend.fsektionen.se";
 
   static const String LOCAL_API_URL = "http://localhost:8000";
   //static const String API_URL = "https://fsektionen.se";
