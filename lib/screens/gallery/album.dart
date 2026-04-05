@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/image_browser.dart';
 import 'package:fsek_mobile/screens/gallery/image_tile.dart';
@@ -8,8 +5,8 @@ import 'package:fsek_mobile/screens/gallery/download_button.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:http/http.dart' as http;
-import 'package:fsek_mobile/environments/environment.dart';
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/images.service.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.album}) : super(key: key);
@@ -21,29 +18,22 @@ class AlbumPage extends StatefulWidget {
 
 class _AlbumPageState extends State<AlbumPage> {
   List<int>? imgIds;
-  Map<int, Future<ImageProvider>>? _imageFutures;
-  Map<int, Uint8List> _imageCache = {};
   bool _isSelecting = false;
   List<int> _selectedImages = [];
 
   @override
   void initState() {
     super.initState();
-    loadImgs(widget.album.id);
+    loadImgIds(widget.album.id);
   }
 
-  void loadImgs(int albumId) async {
+  void loadImgIds(int albumId) async {
     final idList = await ApiService.apiClient
         .getImgApi()
         .imgGetAlbumImages(albumId: albumId);
     final ids = idList.data!.toList();
-    final futures = {
-      for (final id in ids) id: _fetchImage(id),  // consider loading lazily instead (somehow)
-    };
-
     setState(() {
       imgIds = ids;
-      _imageFutures = futures;
     });
   }
 
@@ -51,7 +41,7 @@ class _AlbumPageState extends State<AlbumPage> {
   build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
 
-    if (imgIds == null || _imageFutures == null) {
+    if (imgIds == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -93,40 +83,29 @@ class _AlbumPageState extends State<AlbumPage> {
                 ),
                 itemCount: imgIds!.length,
                 itemBuilder: (context, index) {
-                  return FutureBuilder<ImageProvider>(
-                    future: _imageFutures![imgIds![index]],
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Container(
-                          color: Colors.grey[300],
-                          child: Center(
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          ),
-                        );
-                      } else if (snapshot.hasError || !snapshot.hasData) {
-                        return const Image(
-                          image: AssetImage("assets/img/f_logo.png"),
-                          fit: BoxFit.cover,
-                        );
-                      } else {
-                        return Stack(  // Could try to add scroll to select
-                          children: [
-                            ImageTile(
-                              image: snapshot.data!,
-                              onTap: () => imageTileClicked(snapshot, index)
-                            ),
+                  if (imgIds == null) {
+                    return const Image(
+                      image: AssetImage("assets/img/f_logo.png"),
+                      fit: BoxFit.cover,
+                    );
+                  }
 
-                            Positioned.fill(
-                              child: AnimatedOpacity(
-                                opacity: _selectedImages.contains(imgIds![index]) ? 1.0 : 0.0,
-                                duration: const Duration(milliseconds: 100),
-                                child: TileSelectionOverlay(),
-                              ),
-                            ),
-                          ],
-                        );
-                      }
-                    },
+                  final thumbnailProvider = locator<ImagesService>().fetchImage(imgIds![index], isThumbnail: true);
+                  return Stack(  // Could try to add scroll to select
+                    children: [
+                      ImageTile(
+                        image: thumbnailProvider,
+                        onTap: () => imageTileClicked(index)
+                      ),
+
+                      Positioned.fill(
+                        child: AnimatedOpacity(
+                          opacity: _selectedImages.contains(imgIds![index]) ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 100),
+                          child: TileSelectionOverlay(),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -162,8 +141,7 @@ class _AlbumPageState extends State<AlbumPage> {
                       if (!_selectedImages.isEmpty)
                         DownloadButton(
                             imageFutures: _selectedImages
-                              .where(_imageCache.containsKey)  // shouldn't even be needed
-                              .map((id) => Future(() => _imageCache[id]!))
+                              .map((id) => locator<ImagesService>().fetchImageBytes(id))
                               .toList()
                         ),
                     ],
@@ -232,11 +210,12 @@ class _AlbumPageState extends State<AlbumPage> {
     return Container();
   }
 
-  Future<List<Widget>> generateImages(BuildContext context) async {  // Never called
+  /*  // Never called
+  Future<List<Widget>> generateImages(BuildContext context) async {
     List<Widget> result = [];
 
     for (int i = 0; i < imgIds!.length; i++) {
-      final image = await _fetchImage(imgIds![i]);
+      final image = await locator<ImagesService>().fetchImage((imgIds![i]), isThumbnail: true);
       Ink ink = Ink.image(
           image: image,
           fit: BoxFit.cover,
@@ -247,39 +226,9 @@ class _AlbumPageState extends State<AlbumPage> {
     }
     return result;
   }
+  */
 
-  Future<ImageProvider<Object>> _fetchImage(int id) async {
-    if (_imageCache.containsKey(id)) {
-      return MemoryImage(_imageCache[id]!);
-    }
-
-    try {
-      final url = "${Environment.API_URL}/img/images/$id/small";
-      // final url = "https://backend.fsektionen.se/img/images/$id/small";
-      final response = await http.get(Uri.parse(url),
-          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
-
-      if (response.statusCode != 200) {
-        print("HTTP error: ${response.statusCode}");
-        print("Response body: ${String.fromCharCodes(response.bodyBytes)}");
-        return const AssetImage("assets/img/f_logo.png");
-      }
-
-      if (response.bodyBytes.isEmpty) {
-        print("Received empty response");
-        return const AssetImage("assets/img/f_logo.png");
-      }
-
-      _imageCache[id] = response.bodyBytes;
-
-      return MemoryImage(response.bodyBytes);
-    } catch (e) {
-      print("Error fetching image: $e");
-      return AssetImage("assets/img/f_logo.png");
-    }
-  }
-
-  void imageTileClicked(snapshot, index) {
+  void imageTileClicked(index) {
     if (_isSelecting) {
       var imageId = imgIds![index];
       var imageIsSelected = _selectedImages.contains(imageId);
