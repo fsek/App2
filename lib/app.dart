@@ -7,6 +7,7 @@ import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/themes.dart';
 //import 'package:fsek_mobile/util/PushNotificationsManager.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
+import 'package:fsek_mobile/util/app_version.dart';
 import 'package:fsek_mobile/util/storage_wrapper.dart';
 import 'package:fsek_mobile/widgets/loading_widget.dart';
 
@@ -108,6 +109,9 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
           break;
         }
       }
+    });
+    AppVersionHelper.init(() {
+      setState(() {});
     });
     super.initState();
   }

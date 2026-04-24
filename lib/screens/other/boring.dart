@@ -12,7 +12,7 @@ class _BoringPageState extends State<BoringPage> {
   bool buttonPressed = false;
   bool correctAnswer = false;
 
-
+// Used in a gyckel on skiftesgasque 2026!
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;

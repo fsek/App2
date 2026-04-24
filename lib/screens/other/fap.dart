@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/foundation.dart';
+import 'package:fsek_mobile/util/app_version.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/other/boring.dart';
 import 'package:fsek_mobile/services/fredmansky.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,6 +20,7 @@ class _FapPageState extends State<FapPage> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
     List<String> knackare = [
       "Ludwig Linder, ${t.fapSuper} 2021",
       "Lukas Gustavsson, ${t.fapSpiderMaster} 20/21",
@@ -51,64 +54,72 @@ class _FapPageState extends State<FapPage> {
       appBar: AppBar(
         title: Text(t.fapAbout),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              t.fapFap,
-              style: Theme.of(context).textTheme.headlineMedium?.apply(
-                  color:Theme.of(context).colorScheme.primary),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(t.fapVersion),
-            SizedBox(
-              height: 10,
-            ),
-            Text(t.fapPower),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              t.fapConstructed,
-              style: Theme.of(context).textTheme.bodyLarge?.apply(
-                  color:Theme.of(context).primaryColor),
-            ),
-            ...(knackare.map((e) => Text(e)).toList()),
-            SizedBox(
-              height: 20,
-            ),
-            RichText(
-              text: TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
-                children: <TextSpan>[
-                  TextSpan(text: t.fapInspired),
-                  TextSpan(
-                    text: t.fapDev,
-                    recognizer: fredmansTap,
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.bodyMedium!.color!.withAlpha(200)
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                t.fapFap,
+                style: Theme.of(context).textTheme.headlineMedium?.apply(
+                    color:Theme.of(context).colorScheme.primary),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Version: " + AppVersionHelper.buildName),
+              SizedBox(
+                height: 10,
+              ),
+              Text(t.fapPower),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                t.fapConstructed,
+                style: Theme.of(context).textTheme.bodyLarge?.apply(
+                    color:Theme.of(context).primaryColor),
+              ),
+              ...(knackare.map((e) => Text(e)).toList()),
+              SizedBox(
+                height: 20,
+              ),
+              RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  children: <TextSpan>[
+                    TextSpan(text: t.fapInspired),
+                    TextSpan(
+                      text: t.fapDev,
+                      recognizer: fredmansTap,
+                      style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyMedium!.color!.withAlpha(200)
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              ...(inspiration
+                  .map((e) => TextButton(
+                  onPressed: () => launchUrl(Uri.parse(e)),
+                  child: Text("Link " + inspiration.indexOf(e).toString())))
+                  .toList()),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 10,
                   ),
+                  _fredmansBeerButton()
                 ],
               ),
-            ),
-            ...(inspiration
-                .map((e) => TextButton(
-                    onPressed: () => launchUrl(Uri.parse(e)),
-                    child: Text("Link " + inspiration.indexOf(e).toString())))
-                .toList()),
-            IconButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => BoringPage())),
-                icon: Icon(Icons.train),
-                style: IconButton.styleFrom(backgroundColor:Theme.of(context).colorScheme.primary)
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 
