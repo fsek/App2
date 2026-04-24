@@ -812,6 +812,12 @@ abstract class AppLocalizations {
   /// **'Författare'**
   String get songbookAuthor;
 
+  /// No description provided for @songbookStar.
+  ///
+  /// In sv, this message translates to:
+  /// **'Stjärnmärkt'**
+  String get songbookStar;
+
   /// No description provided for @otherSongbook.
   ///
   /// In sv, this message translates to:

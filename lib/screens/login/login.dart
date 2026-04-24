@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/util/app_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:fsek_mobile/services/user.service.dart';
 import 'package:fsek_mobile/util/authentication/authentication_bloc.dart';
@@ -22,27 +23,17 @@ class _LoginPageState extends State<LoginPage> {
   //ignore: close_sinks
   AuthenticationBloc? _authenticationBloc;
 
-  String buildName = "x.x.x";
-
   @override
   void initState() {
     _userService = widget.userService;
     _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     _loginBloc = LoginBloc(authenticationBloc: _authenticationBloc!, userService: _userService!);
-
-    if (!kIsWeb) {
-      PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-        setState(() {
-          buildName = packageInfo.version;
-        });
-      });
-    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var _versionText = Text("F-appen Version: " + buildName, style: Theme.of(context).textTheme.bodyLarge);
+    var _versionText = Text("F-appen Version: " + AppVersionHelper.buildName, style: Theme.of(context).textTheme.bodyLarge);
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(children: [
