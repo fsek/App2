@@ -90,15 +90,27 @@ class _SettingsPageState extends State<SettingsPage> {
     }
 
     return PopScope(
-      canPop: true,
+      canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
-        if (!didPop && changedSetting)
+        if (!didPop && changedSetting) {
           await showDialog(context: context, builder: _saveOnClosePopup());
+        }
+
+        Navigator.pop(context);
       },
       child: Scaffold(
         appBar: AppBar(
           title: Text(t.otherAccount),
           actions: [
+            TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
+                ),
+                onPressed: _save,
+                child: Text(t.settingsSave),
+              )
+            /*
             Padding(
               padding: EdgeInsets.only(right: 16),
               child: Center(
@@ -111,6 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            */
           ],
         ), //Alot of the code here is duplicate. could be made much more compact
         // Now it is a bit less bad

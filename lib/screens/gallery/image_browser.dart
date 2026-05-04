@@ -1,20 +1,19 @@
 import 'dart:async';
-import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/gallery/download_button.dart';
-import 'package:fsek_mobile/services/api.service.dart';
-import 'package:fsek_mobile/widgets/loading_widget.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:flutter_image_gallery_saver/flutter_image_gallery_saver.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:fsek_mobile/environments/environment.dart';
-import 'package:http/http.dart' as http;
+import 'package:fsek_mobile/services/service_locator.dart';
+import 'package:fsek_mobile/services/images.service.dart';
 
 class ImageBrowserPage extends StatefulWidget {
-  const ImageBrowserPage({Key? key, required this.album, required this.initial, required this.imgIds})
-      : super(key: key);
+  const ImageBrowserPage(
+    {Key? key,
+    required this.album,
+    required this.initial,
+    required this.imgIds})
+    : super(key: key);
 
   final AlbumRead album;
   final int initial;
@@ -40,24 +39,6 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
       this.index = newIndex;
     });
   }
-
-  Future<Uint8List> fetchImageBytes(int id) async {
-    try {
-      final url = "${Environment.API_URL}/img/images/$id/original";
-      // final url = "https://backend.fsektionen.se/img/images/${id}/original";
-      final response = await http.get(Uri.parse(url),
-          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
-
-      if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
-      throw Exception("Failed to load image: HTTP ${response.statusCode}");
-    }
-
-    return response.bodyBytes;
-  } catch (e) {
-    print("Error fetching image: $e");
-    throw Exception("Image fetch failed");
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +67,7 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
                     ).createShader(bounds);
                   },
                   child: DownloadButton(
-                    imageFutures: [fetchImageBytes(widget.imgIds[index])],
+                    imageFutures: [locator<ImagesService>().fetchImageBytes(widget.imgIds[index])],
                     icon: Icons.download_for_offline_rounded,
                     iconSize: 40,
                     successMessage: "The JPEG god smiles upon you",
@@ -96,7 +77,9 @@ class _ImageBrowserPageState extends State<ImageBrowserPage> {
               visible: smallDownload,
             ),
             GestureDetector(
-              child: DownloadButton(imageFutures: [fetchImageBytes(widget.imgIds[index])]),
+              child: DownloadButton(
+                imageFutures: [locator<ImagesService>().fetchImageBytes(widget.imgIds[index])]
+              ),
               onPanCancel: () => _timer.cancel(),
               onPanDown: (_) => {
                 _timer = Timer(Duration(seconds: 4), () {
@@ -131,7 +114,6 @@ class PageViewBuilder extends StatefulWidget {
   // easily slot into the current image_browser page.
   final Function(int) callback;
   final PageController pageController;
-
   const PageViewBuilder(
       {Key? key,
       required this.imgIds,
@@ -147,38 +129,10 @@ class PageViewBuilder extends StatefulWidget {
 
 class _PageViewBuilderState extends State<PageViewBuilder> {
   bool _pagingEnabled = true;
-  late List<Future<ImageProvider<Object>>?> _imageFutures;
 
   @override
   void initState() {
     super.initState();
-    _imageFutures = List.filled(widget.imgIds.length, null);
-  }
-  
-
-  Future<ImageProvider<Object>> _fetchImage(int id) async {
-    try {
-      final url = "${Environment.API_URL}/img/images/$id/large";
-      // final url = "https://backend.fsektionen.se/img/images/${id}/large";
-      final response = await http.get(Uri.parse(url),
-          headers: {"Authorization": "Bearer ${ApiService.access_token}"});
-
-      if (response.statusCode != 200) {
-        print("HTTP error: ${response.statusCode}");
-        print("Response body: ${String.fromCharCodes(response.bodyBytes)}");
-        return const AssetImage("assets/img/f_logo.png");
-      }
-
-      if (response.bodyBytes.isEmpty) {
-        print("Received empty response");
-        return const AssetImage("assets/img/f_logo.png");
-      }
-
-      return MemoryImage(response.bodyBytes);
-    } catch (e) {
-      print("Error fetching image: $e");
-      return AssetImage("assets/img/f_logo.png");
-    }
   }
 
   @override
@@ -192,27 +146,15 @@ class _PageViewBuilderState extends State<PageViewBuilder> {
       onPageChanged: (int newIndex) {
         widget.callback(newIndex);
       },
+      allowImplicitScrolling: true,
       itemBuilder: (context, index) {
-        final imageFuture = _imageFutures[index] ??= _fetchImage(widget.imgIds[index]);
+        final imageProvider = locator<ImagesService>().fetchImage(widget.imgIds[index]);
+        final thumbnailProvider = locator<ImagesService>().fetchImage(widget.imgIds[index], isThumbnail: true);
 
-        final image = FutureBuilder<ImageProvider<Object>>(
-          future: imageFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return LoadingWidget();
-            } else if (snapshot.hasError || !snapshot.hasData) {
-              return const Center(child: Icon(Icons.broken_image));
-            }
-
-            return Image(
-              image: snapshot.data!,
-              fit: BoxFit.contain,
-            );
-          },
-        );
         return ImageContainer(
           imgIds: widget.imgIds,
-          image: image,
+          image: imageProvider,
+          thumbnail: thumbnailProvider,
           album: widget.album,
           index: index,
           onScaleChanged: (scale) {
@@ -231,7 +173,8 @@ class ImageContainer extends StatefulWidget {
   final AlbumRead album;
   final int index;
   final List<int> imgIds;
-  final Widget image;
+  final ImageProvider image;
+  final ImageProvider? thumbnail;
   final double minScale;
   final double maxScale;
   final void Function(double)? onScaleChanged;
@@ -240,6 +183,7 @@ class ImageContainer extends StatefulWidget {
     Key? key,
     required this.imgIds,
     required this.image,
+    this.thumbnail,
     this.minScale = 1.0,
     this.maxScale = 5.0,
     this.onScaleChanged,
@@ -251,36 +195,80 @@ class ImageContainer extends StatefulWidget {
   _ImageContainerState createState() => _ImageContainerState();
 }
 
-class _ImageContainerState extends State<ImageContainer> {
+class _ImageContainerState extends State<ImageContainer> with AutomaticKeepAliveClientMixin {
   final TransformationController _transformationController =
       TransformationController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);  // needed because of AutomaticKeepAliveClientMixin
+
     var t = AppLocalizations.of(context)!;
-    return SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: InteractiveViewer(
-          clipBehavior: Clip.none,
-          transformationController: _transformationController,
-          minScale: widget.minScale,
-          maxScale: widget.maxScale,
-          child: Column(children: [
-            Padding(padding: EdgeInsets.fromLTRB(0, 45, 0, 45)),
-            widget.image,
-            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
-            Text(
-              "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.imgIds.length}",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ]),
-          onInteractionEnd: (scaleEndDetails) {
-            double scale = _transformationController.value.getMaxScaleOnAxis();
-            if (widget.onScaleChanged != null) {
-              widget.onScaleChanged!(scale);
-            }
-          },
-        ));
+    return InteractiveViewer(
+      clipBehavior: Clip.none,
+      transformationController: _transformationController,
+      minScale: widget.minScale,
+      maxScale: widget.maxScale,
+      child: Column(
+        children: [
+          Spacer(flex: 1),
+
+          Image(
+            image: widget.image,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.contain,
+            gaplessPlayback: true,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;  // done loading
+              }
+
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (widget.thumbnail != null)
+                    Image(
+                      image: widget.thumbnail!,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.contain,
+                      gaplessPlayback: true,
+                    ),
+
+                  CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                      : null,
+                  ),
+                ]
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Image(
+                image: const AssetImage("assets/img/f_logo.png"),
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.contain,
+                gaplessPlayback: true,
+              );
+            },
+          ),
+
+          Spacer(flex: 1),
+          Text(
+            "${t.galleryTitle} ${widget.index + 1} ${t.galleryOf} ${widget.imgIds.length}",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 45)),
+        ]
+      ),
+      onInteractionEnd: (scaleEndDetails) {
+        double scale = _transformationController.value.getMaxScaleOnAxis();
+        if (widget.onScaleChanged != null) {
+          widget.onScaleChanged!(scale);
+        }
+      },
+    );
   }
 }
