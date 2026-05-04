@@ -90,10 +90,13 @@ class _SettingsPageState extends State<SettingsPage> {
     }
 
     return PopScope(
-      canPop: true,
+      canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
-        if (!didPop && changedSetting)
+        if (!didPop && changedSetting) {
           await showDialog(context: context, builder: _saveOnClosePopup());
+        }
+
+        Navigator.pop(context);
       },
       child: Scaffold(
         appBar: AppBar(
