@@ -92,7 +92,9 @@ class _SettingsPageState extends State<SettingsPage> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
-        if (!didPop && changedSetting) {
+        if (didPop) return;
+
+        if (changedSetting) {
           await showDialog(context: context, builder: _saveOnClosePopup());
         }
 
