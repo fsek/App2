@@ -57,6 +57,19 @@ class AppLocalizationsSv extends AppLocalizations {
   String get loginLogIn => 'Logga in';
 
   @override
+  String get loginWrongEmailOrPassword =>
+      'E-post och lösenord matchar inte, vänligen försök igen.';
+
+  @override
+  String get loginTryAgain => 'Försök igen';
+
+  @override
+  String get loginShowError => 'Visa felkod';
+
+  @override
+  String get loginHideError => 'Dölj felkod';
+
+  @override
   String get resetInstruction => 'Ange din e-post för att återställa lösenord';
 
   @override

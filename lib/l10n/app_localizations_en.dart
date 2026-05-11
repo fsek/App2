@@ -57,6 +57,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginLogIn => 'Log in';
 
   @override
+  String get loginWrongEmailOrPassword =>
+      'Email and password don\'t match, please try again.';
+
+  @override
+  String get loginTryAgain => 'Try again';
+
+  @override
+  String get loginShowError => 'Show error';
+
+  @override
+  String get loginHideError => 'Hide error';
+
+  @override
   String get resetInstruction => 'Enter email to reset password';
 
   @override

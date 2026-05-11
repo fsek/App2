@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/content_wrapper.dart';
+import 'package:fsek_mobile/screens/login/login_error.dart';
 import 'package:fsek_mobile/services/abstract.service.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/themes.dart';
@@ -172,7 +173,7 @@ class _FsekMobileAppState extends State<FsekMobileApp> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ErrorPage(
+                            builder: (context) => LoginError(
                                 authenticationBloc: _authenticationBloc,
                                 text: state.error)));
                   }

@@ -19,6 +19,10 @@
     "loginPassword": "Password",
     "loginForgotPassword": "Forgot password?",
     "loginLogIn": "Log in",
+    "loginWrongEmailOrPassword": "Email and password don't match, please try again.",
+    "loginTryAgain": "Try again",
+    "loginShowError": "Show error",
+    "loginHideError": "Hide error",
 
     "resetInstruction": "Enter email to reset password",
     "resetEmail": "Email",

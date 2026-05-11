@@ -19,6 +19,10 @@
     "loginPassword": "Lösenord",
     "loginForgotPassword": "Glömt lösenord?",
     "loginLogIn": "Logga in",
+    "loginWrongEmailOrPassword": "E-post och lösenord matchar inte, vänligen försök igen.",
+    "loginTryAgain": "Försök igen",
+    "loginShowError": "Visa felkod",
+    "loginHideError": "Dölj felkod",
 
     "resetInstruction": "Ange din e-post för att återställa lösenord",
     "resetEmail": "E-postadress",
