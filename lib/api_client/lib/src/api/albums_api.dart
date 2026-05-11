@@ -61,7 +61,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -166,7 +166,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -271,7 +271,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -356,7 +356,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -439,7 +439,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -524,7 +524,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -611,7 +611,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],
@@ -716,7 +716,7 @@ class AlbumsApi {
           },{
             'type': 'apiKey',
             'name': 'APIKeyCookie',
-            'keyName': '__Secure-fsek_refresh_token',
+            'keyName': '_fsek_stage_refresh_token',
             'where': '',
           },
         ],

@@ -26,6 +26,7 @@ import 'package:api_client/src/api/events_api.dart';
 import 'package:api_client/src/api/groups_api.dart';
 import 'package:api_client/src/api/guild_meeting_api.dart';
 import 'package:api_client/src/api/img_api.dart';
+import 'package:api_client/src/api/keyvals_api.dart';
 import 'package:api_client/src/api/mail_alias_api.dart';
 import 'package:api_client/src/api/moose_game_api.dart';
 import 'package:api_client/src/api/news_api.dart';
@@ -77,9 +78,29 @@ class ApiClient {
     }
   }
 
+  /// Removes the OAuth token associated with the given [name].
+  ///
+  /// If no [OAuthInterceptor] is registered or no token exists for the given
+  /// [name], this method has no effect.
+  void removeOAuthToken(String name) {
+    if (this.dio.interceptors.any((i) => i is OAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is OAuthInterceptor) as OAuthInterceptor).tokens.remove(name);
+    }
+  }
+
   void setBearerAuth(String name, String token) {
     if (this.dio.interceptors.any((i) => i is BearerAuthInterceptor)) {
       (this.dio.interceptors.firstWhere((i) => i is BearerAuthInterceptor) as BearerAuthInterceptor).tokens[name] = token;
+    }
+  }
+
+  /// Removes the bearer authentication token associated with the given [name].
+  ///
+  /// If no [BearerAuthInterceptor] is registered or no token exists for the
+  /// given [name], this method has no effect.
+  void removeBearerAuth(String name) {
+    if (this.dio.interceptors.any((i) => i is BearerAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BearerAuthInterceptor) as BearerAuthInterceptor).tokens.remove(name);
     }
   }
 
@@ -89,9 +110,29 @@ class ApiClient {
     }
   }
 
+  /// Removes the basic authentication credentials associated with the given [name].
+  ///
+  /// If no [BasicAuthInterceptor] is registered or no credentials exist for the
+  /// given [name], this method has no effect.
+  void removeBasicAuth(String name) {
+    if (this.dio.interceptors.any((i) => i is BasicAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BasicAuthInterceptor) as BasicAuthInterceptor).authInfo.remove(name);
+    }
+  }
+
   void setApiKey(String name, String apiKey) {
     if (this.dio.interceptors.any((i) => i is ApiKeyAuthInterceptor)) {
       (this.dio.interceptors.firstWhere((element) => element is ApiKeyAuthInterceptor) as ApiKeyAuthInterceptor).apiKeys[name] = apiKey;
+    }
+  }
+
+  /// Removes the API key associated with the given [name].
+  ///
+  /// If no [ApiKeyAuthInterceptor] is registered or no API key exists for the
+  /// given [name], this method has no effect.
+  void removeApiKey(String name) {
+    if (this.dio.interceptors.any((i) => i is ApiKeyAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((element) => element is ApiKeyAuthInterceptor) as ApiKeyAuthInterceptor).apiKeys.remove(name);
     }
   }
 
@@ -195,6 +236,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   ImgApi getImgApi() {
     return ImgApi(dio, serializers);
+  }
+
+  /// Get KeyvalsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  KeyvalsApi getKeyvalsApi() {
+    return KeyvalsApi(dio, serializers);
   }
 
   /// Get MailAliasApi instance, base route and serializer can be overridden by a given but be careful,

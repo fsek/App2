@@ -84,6 +84,10 @@ doc/GuildMeetingRead.md
 doc/GuildMeetingUpdate.md
 doc/HTTPValidationError.md
 doc/ImgApi.md
+doc/KeyvalCreate.md
+doc/KeyvalRead.md
+doc/KeyvalUpdate.md
+doc/KeyvalsApi.md
 doc/LocationInner.md
 doc/MailAliasApi.md
 doc/MooseGameApi.md
@@ -175,6 +179,7 @@ lib/src/api/events_api.dart
 lib/src/api/groups_api.dart
 lib/src/api/guild_meeting_api.dart
 lib/src/api/img_api.dart
+lib/src/api/keyvals_api.dart
 lib/src/api/mail_alias_api.dart
 lib/src/api/moose_game_api.dart
 lib/src/api/news_api.dart
@@ -263,6 +268,9 @@ lib/src/model/group_user_read.dart
 lib/src/model/guild_meeting_read.dart
 lib/src/model/guild_meeting_update.dart
 lib/src/model/http_validation_error.dart
+lib/src/model/keyval_create.dart
+lib/src/model/keyval_read.dart
+lib/src/model/keyval_update.dart
 lib/src/model/location_inner.dart
 lib/src/model/moose_game_read.dart
 lib/src/model/move_post_request.dart
@@ -323,3 +331,7 @@ lib/src/model/user_update.dart
 lib/src/model/validation_error.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/keyval_create_test.dart
+test/keyval_read_test.dart
+test/keyval_update_test.dart
+test/keyvals_api_test.dart

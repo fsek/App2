@@ -1,26 +1,39 @@
-echo "Cleaning project."
-# Clean up old builds
+#!/bin/bash
+set -euo pipefail
+
+# Prepares the project for running. After this script completes, run: flutter run
+
+# ── Clean ────────────────────────────────────────────────────────────────────
+
+echo "Cleaning main project..."
 flutter clean
 echo "Done!"
 
-echo "Cleaning api_client."
-cd lib/api_client/
-flutter clean 
+echo "Cleaning api_client..."
+(cd lib/api_client && flutter clean)
 echo "Done!"
 
-# Build the main project
-echo "Building main"
-cd ../..
-flutter pub get
+# ── Build main project ───────────────────────────────────────────────────────
+
+echo "Building main project..."
+if ! flutter pub get; then
+	echo "ERROR: flutter pub get failed in main project."
+	exit 1
+fi
 dart run build_runner build --delete-conflicting-outputs
 echo "Done!"
 
-# We build the api_client separately.
-echo "Building api_client"
-cd lib/api_client/
-flutter pub get
-dart run build_runner build --delete-conflicting-outputs
+# ── Build api_client ─────────────────────────────────────────────────────────
+
+echo "Building api_client..."
+if ! (cd lib/api_client && flutter pub get); then
+	echo "ERROR: flutter pub get failed in lib/api_client."
+	exit 1
+fi
+(cd lib/api_client && dart run build_runner build --delete-conflicting-outputs)
 echo "Done!"
 
-cd ../..
-echo "All done! You can now run the project with 'flutter run'."
+# ─────────────────────────────────────────────────────────────────────────────
+
+echo ""
+echo "All done! Run the project with: flutter run"

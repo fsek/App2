@@ -80,6 +80,9 @@ import 'package:api_client/src/model/group_user_read.dart';
 import 'package:api_client/src/model/guild_meeting_read.dart';
 import 'package:api_client/src/model/guild_meeting_update.dart';
 import 'package:api_client/src/model/http_validation_error.dart';
+import 'package:api_client/src/model/keyval_create.dart';
+import 'package:api_client/src/model/keyval_read.dart';
+import 'package:api_client/src/model/keyval_update.dart';
 import 'package:api_client/src/model/location_inner.dart';
 import 'package:api_client/src/model/moose_game_read.dart';
 import 'package:api_client/src/model/move_post_request.dart';
@@ -208,6 +211,9 @@ part 'serializers.g.dart';
   GuildMeetingRead,
   GuildMeetingUpdate,
   HTTPValidationError,
+  KeyvalCreate,
+  KeyvalRead,
+  KeyvalUpdate,
   LocationInner,
   MooseGameRead,
   MovePostRequest,
@@ -403,6 +409,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PostRead)]),
         () => ListBuilder<PostRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(KeyvalRead)]),
+        () => ListBuilder<KeyvalRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(NollningRead)]),
