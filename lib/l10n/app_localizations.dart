@@ -194,6 +194,30 @@ abstract class AppLocalizations {
   /// **'Logga in'**
   String get loginLogIn;
 
+  /// No description provided for @loginWrongEmailOrPassword.
+  ///
+  /// In sv, this message translates to:
+  /// **'E-post och lösenord matchar inte, vänligen försök igen.'**
+  String get loginWrongEmailOrPassword;
+
+  /// No description provided for @loginTryAgain.
+  ///
+  /// In sv, this message translates to:
+  /// **'Försök igen'**
+  String get loginTryAgain;
+
+  /// No description provided for @loginShowError.
+  ///
+  /// In sv, this message translates to:
+  /// **'Visa felkod'**
+  String get loginShowError;
+
+  /// No description provided for @loginHideError.
+  ///
+  /// In sv, this message translates to:
+  /// **'Dölj felkod'**
+  String get loginHideError;
+
   /// No description provided for @resetInstruction.
   ///
   /// In sv, this message translates to:
