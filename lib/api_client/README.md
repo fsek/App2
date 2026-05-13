@@ -435,7 +435,7 @@ Authentication schemes defined for the API:
 ### APIKeyCookie
 
 - **Type**: API key
-- **API key parameter name**: _fsek_stage_refresh_token
+- **API key parameter name**: __Secure-fsek_refresh_token
 - **Location**: 
 
 

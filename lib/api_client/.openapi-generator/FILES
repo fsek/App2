@@ -331,7 +331,3 @@ lib/src/model/user_update.dart
 lib/src/model/validation_error.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/keyval_create_test.dart
-test/keyval_read_test.dart
-test/keyval_update_test.dart
-test/keyvals_api_test.dart
