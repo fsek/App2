@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:fsek_mobile/l10n/app_localizations.dart";
-import "package:fsek_mobile/screens/nollning/questscreen/goodbyePaperPage.dart";
+import "package:fsek_mobile/screens/nollning/questscreen_24/goodbyePaperPage.dart";
 
 //behöver vecka, synas eller inte, klarade,total
 

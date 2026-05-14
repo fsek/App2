@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/nollning/new_questscreen/highscore.dart';
-import 'package:fsek_mobile/screens/nollning/new_questscreen/quests.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen_25/highscore.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen_25/quests.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class QuestHomeScreen extends StatefulWidget {

@@ -4,17 +4,14 @@ import 'package:fsek_mobile/app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fsek_mobile/screens/home/nollningHome26.dart';
 import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/manners.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/people.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/wordlist.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
 import 'package:fsek_mobile/models/destination.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide/nolleguide.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
 import 'package:fsek_mobile/screens/home/home.dart';
 import 'package:fsek_mobile/services/navigation.service.dart';
@@ -42,8 +39,8 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     // During introduction, modify NollningHomePage() and comment the normal HomePage()
-    // Destination(2, Icons.home, NollningHomePage()),
-    Destination(2, Icons.home, HomePage()),
+    Destination(2, Icons.home, NollningHomePage()),
+    // Destination(2, Icons.home, HomePage()),
     Destination(3, CustomIcons.moose, MooseGamePage()),
     Destination(4, Icons.list, OtherContent()),
   ];
@@ -53,11 +50,7 @@ void main() async {
     '/adventure_missions': (context) => AdventureMissionsPage(),
     '/emergency_contacts': (context) => EmergencyContactsPage(),
     '/song_book': (context) => SongbookPage(),
-    '/homepage': (context) => HomePage(),
-    '/nolleguide': (context) => GuidePage(),
-    '/manners': (context) => MannersPage(),
-    '/people': (context) => PeoplePage(),
-    '/wordlist': (context) => WordListOldPage(),
+    '/homepage': (context) => HomePage()
   };
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) {
