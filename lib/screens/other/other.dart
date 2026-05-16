@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/contact/contact.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
 import 'package:fsek_mobile/screens/nollning/emergency_contacts.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/nolleguide_home.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/nolleguide_home.dart';
 import 'package:fsek_mobile/screens/other/aboutGuild.dart';
 import 'package:fsek_mobile/screens/settings/language_settings.dart';
 import 'package:fsek_mobile/screens/settings/settings.dart';

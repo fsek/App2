@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/fsek.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/karen.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/lund.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/fsek.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/karen.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/lund.dart';
 
 class StudentlivetHome extends StatefulWidget {
   @override

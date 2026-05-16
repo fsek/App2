@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/kladguide.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/stod.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/studentlivet_home.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/vettoetikett.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide25/wordlist.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/kladguide.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/stod.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/studentlivet_home.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/vettoetikett.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_25/wordlist.dart';
 
 class NolleGuideHomePage extends StatefulWidget {
   @override
