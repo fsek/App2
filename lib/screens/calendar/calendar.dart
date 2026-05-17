@@ -46,19 +46,28 @@ class _CalendarState extends State<Calendar> {
             }));
   }
 
-  Widget checkAlcoholEventType(String alcType){
-    final String alcServed = "assets/data/nollning_25/calendar/alkfullImg.png";
+  Widget checkAlcoholEventType(String alcType, {bool isIcon = false}){
+    final String alcServed = "assets/data/nollning_25/calendar/alkfull.png";
     final String noAlc = "assets/data/nollning_25/calendar/alkfriImg.png";
     final String byob = "assets/data/nollning_25/calendar/byobImg.png";
+    final String alcServedIcon = "assets/data/nollning_25/calendar/alkfullIcon.png";
+    final String noAlcIcon = "assets/data/nollning_25/calendar/alkfriIcon.png";
+    final String byobIcon = "assets/data/nollning_25/calendar/byobIcon.png";
 
     switch (alcType) {
       case "Alcohol-Served":
+        if (isIcon) return Image.asset(alcServedIcon, fit: BoxFit.fill);
+
         return Image.asset(alcServed, fit: BoxFit.fill);
 
       case "Alcohol":
+        if (isIcon) return Image.asset(byobIcon, fit: BoxFit.fill);
+
         return Image.asset(byob, fit: BoxFit.fill);
 
       default:
+        if (isIcon) return Image.asset(noAlcIcon, fit: BoxFit.fill);
+
         return Image.asset(noAlc, fit: BoxFit.fill);
     }
   }
@@ -284,6 +293,37 @@ class _CalendarState extends State<Calendar> {
                   eventLoader: (day) {
                     return _getEventsForDay(day);
                   },
+                  calendarBuilders: CalendarBuilders<EventRead>(
+                    markerBuilder: (context, day, events) {
+                      if (events.isEmpty) return null;
+
+                      final defaultMarkerAnon = (Color color) => Container(
+                        width: 8,
+                        height: 8,
+                        margin: const EdgeInsets.all(1),
+                        decoration: BoxDecoration(
+                          color: color,
+                          shape: BoxShape.circle,
+                        ),
+                      );
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: events.map((event) {
+                          if (!event.isNollningEvent) {
+                            return defaultMarkerAnon(Theme.of(context).colorScheme.inverseSurface);
+                          }
+
+                          return Container(
+                            width: 13,
+                            height: 13,
+                            margin: EdgeInsets.all(1),
+                            child: checkAlcoholEventType(event.alcoholEventType, isIcon: true),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
