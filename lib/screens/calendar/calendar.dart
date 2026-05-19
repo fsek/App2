@@ -47,7 +47,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   Widget checkAlcoholEventType(String alcType, {bool isIcon = false}){
-    final String alcServed = "assets/data/nollning_25/calendar/alkfull.png";
+    final String alcServed = "assets/data/nollning_25/calendar/alkfullImg.png";
     final String noAlc = "assets/data/nollning_25/calendar/alkfriImg.png";
     final String byob = "assets/data/nollning_25/calendar/byobImg.png";
     final String alcServedIcon = "assets/data/nollning_25/calendar/alkfullIcon.png";
