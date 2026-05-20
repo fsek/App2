@@ -195,17 +195,12 @@ class ImageContainer extends StatefulWidget {
   _ImageContainerState createState() => _ImageContainerState();
 }
 
-class _ImageContainerState extends State<ImageContainer> with AutomaticKeepAliveClientMixin {
+class _ImageContainerState extends State<ImageContainer> {
   final TransformationController _transformationController =
       TransformationController();
 
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);  // needed because of AutomaticKeepAliveClientMixin
-
     var t = AppLocalizations.of(context)!;
     return InteractiveViewer(
       clipBehavior: Clip.none,
