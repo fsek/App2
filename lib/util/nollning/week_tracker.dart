@@ -36,7 +36,7 @@ class WeekTracker {
     }
 
     // If it for some reason doesn't find one I guess default to week 0 for no spoilers?
-    // or 5 for generic stuff, like coloring in with orange
+    // or 4 for generic stuff, like coloring in with orange
     if (differentPreIntroduction)
       return 4;
     else
