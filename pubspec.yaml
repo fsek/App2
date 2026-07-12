@@ -125,7 +125,9 @@ flutter:
     - assets/data/nollning_25/
     - assets/data/nollning_25/schema/
     - assets/data/nollning_25/homescreen/
-    - assets/data/nollning_26/homescreen/
+    - assets/data/nollning_26/homescreen/lvl_0/
+    - assets/data/nollning_26/homescreen/lvl_1/
+    - assets/data/nollning_26/homescreen/lvl_2/
 
   fonts:
     - family: Brandon Grotesque
