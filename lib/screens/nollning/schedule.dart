@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -9,7 +11,9 @@ class ScheduleScreenPage extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreenPage> {
-  var state = WeekTracker.determineWeek();
+  var state = -1;
+  var image_loaded = false;
+
   @override
   void initState(){
     super.initState();
@@ -22,17 +26,15 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
     var screen_width = MediaQuery.of(context).size.width;
     var screen_height = MediaQuery.of(context).size.height;
 
-    const img_width = 2718;
-    const img_height = 22622;
-    final double render_image_width = screen_width * 1.02; // Magic number because the schema image's border looks a bit wierd so we make it a bit wider to not include the edges.
+    const img_width = 1628;
+    const img_height = 21225;
+    final double render_image_width = screen_width * 1.03; // Magic number because the schema image's border looks a bit wierd so we make it a bit wider to not include the edges.
     final double render_image_height = render_image_width * (img_height / img_width);
 
     final schema_Path = "assets/data/nollning_26/schema/schema_${t.localeName}.png";
 
-    // var state = WeekTracker.determineWeek();
-    // var state = 0;
-
     return Scaffold(
+      backgroundColor: new Color.fromRGBO(134, 187, 230, 1),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -68,12 +70,27 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
                   minWidth: render_image_width,
                   maxHeight: render_image_height,
                   minHeight: render_image_height,
-                  alignment: const Alignment(1, 0),
+                  alignment: const Alignment(0.6, 0),
                   child: Image.asset(
                     schema_Path,
                     fit: BoxFit.fill,
-                    cacheHeight: 10000,
-                    cacheWidth: 1000,
+                    frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                      if (wasSynchronouslyLoaded || frame != null) {
+                        if (!image_loaded) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (mounted) {
+                              var week = WeekTracker.determineWeek();
+                              setState(() {
+                                image_loaded = true;
+                                state = week;
+                              });
+                            }
+                          });
+                        }
+                        return child;
+                      }
+                      return const SizedBox.shrink(); // invisible while loading
+                    },
                   ),
                 ),
               ),
@@ -86,16 +103,18 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
 
   static double screenPosition(double render_image_height, int state){
     switch(state){
-      case 0:
-        return -render_image_height * 0.78;
-      case 1:
-        return -render_image_height * 0.6;
-      case 2:
-        return -render_image_height * 0.4;
-      case 3:
-        return -render_image_height * 0.19;
-      case 4:
-        return -render_image_height * 0.01;
+      case -1: // Image not loaded
+        return -render_image_height;
+      case 0: // Week 0
+        return -render_image_height * 0.835;
+      case 1: // Week 1
+        return -render_image_height * 0.62;
+      case 2: // Week 2
+        return -render_image_height * 0.395;
+      case 3: // Week 3
+        return -render_image_height * 0.2;
+      case 4: // Week 4
+        return -1;
       default:
         throw new InvalidInputException("Unexpected state: " + state.toString());
     }
