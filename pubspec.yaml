@@ -128,6 +128,8 @@ flutter:
     - assets/data/nollning_26/homescreen/lvl_0/
     - assets/data/nollning_26/homescreen/lvl_1/
     - assets/data/nollning_26/homescreen/lvl_2/
+    - assets/data/nollning_26/homescreen/lvl_3/
+    - assets/data/nollning_26/homescreen/lvl_4/
 
   fonts:
     - family: Brandon Grotesque

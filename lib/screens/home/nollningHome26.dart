@@ -43,12 +43,12 @@ class _NollningHomePageState extends State<NollningHomePage> {
         buttonSize = 3.2;
         buttonSpace = 15;
         bottomMargin = 30;
-      case 3:
       case 4:
-        // Not implemented yet
         buttonSize = 4;
         buttonSpace = 30;
         bottomMargin = 30;
+      case 3:
+        // not implemented yet
       default:
         throw new InvalidInputException("Unexpected week: ${week}");
     }
@@ -65,7 +65,7 @@ class _NollningHomePageState extends State<NollningHomePage> {
 
     return Container(
       child: Stack(children: [
-        Positioned.fill(child: Image.asset(backgroundImage, fit: BoxFit.fill, cacheWidth: 1000, cacheHeight: 1000,)),
+        Positioned.fill(child: Image.asset(backgroundImage, fit: BoxFit.fill, cacheWidth: 1000, cacheHeight: 1000)),
         Align(alignment: Alignment.bottomCenter, child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -145,19 +145,6 @@ class _NollningHomePageState extends State<NollningHomePage> {
           ],
         ),)
       ],),
-    );
-  }
-
-  Widget generateButton(String imagePath, String text) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset(imagePath),
-        Text(
-          text,
-          style: TextStyle(color: Colors.black),
-        )
-      ],
     );
   }
 }
