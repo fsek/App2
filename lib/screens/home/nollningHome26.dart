@@ -43,12 +43,14 @@ class _NollningHomePageState extends State<NollningHomePage> {
         buttonSize = 3.2;
         buttonSpace = 15;
         bottomMargin = 30;
+      case 3:
+        buttonSize = 3.5;
+        buttonSpace = 25;
+        bottomMargin = 35;
       case 4:
         buttonSize = 4;
         buttonSpace = 30;
         bottomMargin = 30;
-      case 3:
-        // not implemented yet
       default:
         throw new InvalidInputException("Unexpected week: ${week}");
     }
