@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide_26/karen.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/faculty.dart';
 
 class NolleGuideHomePage extends StatefulWidget {
   @override
@@ -142,6 +142,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
           left: isSwedish ? screenWidth * 0.23 : screenWidth * 0.35,
           asset: karenAsset,
           width: isSwedish ? 0.75 : 0.6,
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FacultyPage()))
       ),
       generateItem(
           screenWidth: screenWidth,

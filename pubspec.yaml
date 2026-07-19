@@ -128,6 +128,8 @@ flutter:
     - assets/data/nollning_26/homescreen/
     - assets/data/nollning_26/nolleguide/homescreen/
     - assets/data/nollning_26/nolleguide/studentlife/
+    - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
+    - assets/data/nollning_26/nolleguide/studentlife/faculty/
     - assets/data/nollning_26/nolleguide/
 
   fonts:
