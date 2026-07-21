@@ -16,7 +16,7 @@ description: Mobile application for the F-guild
 version: 1.27.6122+1
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
+  sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -67,7 +67,6 @@ dependencies:
   flutter_markdown_plus: ^1.0.2
   api_client:
     path: lib/api_client
-
 
   # flutter_gen: any
   audioplayers_web: any
@@ -126,6 +125,7 @@ flutter:
     - assets/data/nollning_25/schema/
     - assets/data/nollning_25/homescreen/
     - assets/data/nollning_26/homescreen/
+    - assets/data/nollning_26/uppdrag/
 
   fonts:
     - family: Brandon Grotesque
@@ -141,7 +141,7 @@ flutter:
       fonts:
         - asset: assets/fonts/icomoon.ttf
     - family: MinionPro
-      fonts: 
+      fonts:
         - asset: assets/fonts/MinionPro-Regular.otf
           weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
