@@ -5,11 +5,11 @@ class WallFactory {
 
   static const wallEdge = "$path/wall_edge.png";
   static const wallBackground = "$path/wall_background.png";
+  static const background = "$path/background.png";
   static const edgeWidth = 40.0; // Magic number is the width of the pillars.
 
   static Widget generateWall({
     required List<Widget> children,
-    required String background,
     required double screenHeight
   }){
     return SingleChildScrollView(

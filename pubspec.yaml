@@ -130,6 +130,7 @@ flutter:
     - assets/data/nollning_26/nolleguide/studentlife/
     - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
     - assets/data/nollning_26/nolleguide/studentlife/faculty/
+    - assets/data/nollning_26/nolleguide/studentlife/guild/
     - assets/data/nollning_26/nolleguide/
 
   fonts:

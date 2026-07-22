@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitFactory.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wallFactory.dart';
 
 class FacultyPage extends StatefulWidget {
@@ -15,11 +16,9 @@ class _FacultyPageState extends State<FacultyPage> {
     var t = AppLocalizations.of(context)!;
     final double screenHeight = MediaQuery.of(context).size.height;
 
-    const background = "assets/data/nollning_26/homescreen/background.png";
-
-
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: new Color.fromRGBO(41, 171, 226, 1),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -27,7 +26,6 @@ class _FacultyPageState extends State<FacultyPage> {
       ),
       body: WallFactory.generateWall(
           children: generateWallContent(locale: t.localeName),
-          background: background,
           screenHeight: screenHeight)
     );
   }
@@ -36,32 +34,19 @@ class _FacultyPageState extends State<FacultyPage> {
     required String locale
   }) {
     final String title = "$path/title_${locale}.png";
-    final String frame = "$path/frame_big.png";
+    final String frame = "$path/frame.png";
+    final String president = "$path/president_${locale}.png";
+    final String officers = "$path/officers_${locale}.png";
+    final String nollu = "$path/nollu.png";
 
-    return [
+
+    return PortraitFactory.addSpacing(space: 24, items: [
       Image.asset(title),
-      const SizedBox(height: 24),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-      generatePortrait(locale: locale, imagePath: frame, size: 4),
-    ];
-  }
+      PortraitFactory.generatePortrait(imagePath: president, size: 5),
+      PortraitFactory.generatePortrait(imagePath: officers, size: 2),
+      PortraitFactory.generatePortrait(imagePath: frame, size: 5), //TODO: Nollegeneral Norea
+      PortraitFactory.generatePortrait(imagePath: nollu, size: 2),
+    ]);
 
-  Widget generatePortrait({
-    required String locale,
-    required String imagePath,
-    required int size,
-    VoidCallbackAction? onTap
-  }){
-    return Row(
-      children: [
-        const Expanded(flex: 1, child: SizedBox()),
-        Expanded(flex: size, child: Image.asset(imagePath, fit: BoxFit.fitWidth)),
-        const Expanded(flex: 1, child: SizedBox())
-      ],
-    );
   }
 }

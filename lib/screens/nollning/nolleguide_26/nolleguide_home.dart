@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/faculty.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/guild.dart';
 
 class NolleGuideHomePage extends StatefulWidget {
   @override
@@ -135,6 +136,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
           left: 0,
           asset: sektionenAsset,
           width: 0.75,
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => GuildPage()))
       ),
       generateItem(
           screenWidth: screenWidth,
@@ -154,9 +156,9 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
       generateItem(
           screenWidth: screenWidth,
           top: screenHeight * 0.6,
-          left: screenWidth * 0.6,
+          left: isSwedish ? screenWidth * 0.5 : screenWidth * 0.6,
           asset: backAsset,
-          width: 0.3,
+          width: isSwedish ? 0.4 : 0.3,
           onTap: () => setState(() {
             this.currentState = HomePageState.home;
           })
@@ -186,7 +188,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     final sektionen = "${path}/studentlife/sektionen_${t.localeName}.png";
     final karen = "${path}/studentlife/karen_${t.localeName}.png";
     final lund = "${path}/studentlife/lund.png";
-    final back = "${path}/studentlife/back.png";
+    final back = "${path}/studentlife/back_${t.localeName}.png";
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -194,6 +196,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
+        iconTheme: const IconThemeData(color: Colors.red),
       ),
       body: InteractiveViewer(
         panEnabled: true,
