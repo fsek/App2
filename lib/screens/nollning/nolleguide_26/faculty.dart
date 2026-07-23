@@ -24,9 +24,10 @@ class _FacultyPageState extends State<FacultyPage> {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
-      body: WallFactory.generateWall(
-          children: generateWallContent(locale: t.localeName),
-          screenHeight: screenHeight)
+      body: InteractiveViewer(panEnabled: true,
+          child: WallFactory.generateWall(
+              children: generateWallContent(locale: t.localeName),
+              screenHeight: screenHeight))
     );
   }
 
