@@ -15,9 +15,6 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
 
   static const String path = "assets/data/nollning_26/nolleguide";
 
-  static const double zoomX = 2.2; // We need to do this terribleness to make the arcade machine
-  static const double zoomY = 3;   // fit the screen...
-
   Widget generateItem({
     required double screenWidth,
     required double top,
@@ -166,6 +163,10 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     ];
 }
 
+  static const Color backButtonColor = Color.fromRGBO(0, 72, 123, 1);
+  static const double zoomX = 2.2; // We need to do this terribleness to make the arcade machine
+  static const double zoomY = 3;   // fit the screen...
+
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     final isSwedish = t.localeName == "sv";;
@@ -196,7 +197,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.red),
+        iconTheme: const IconThemeData(color: backButtonColor),
       ),
       body: InteractiveViewer(
         panEnabled: true,
