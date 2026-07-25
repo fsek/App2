@@ -35,6 +35,8 @@ part 'event_read.g.dart';
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [mentorGroupTypes] 
+/// * [allowOtherMentors] 
 /// * [alcoholEventType] 
 /// * [dressCode] 
 /// * [price] 
@@ -106,6 +108,13 @@ abstract class EventRead implements Built<EventRead, EventReadBuilder> {
 
   @BuiltValueField(wireName: r'is_nollning_event')
   bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'mentor_group_types')
+  BuiltList<EventReadMentorGroupTypesEnum> get mentorGroupTypes;
+  // enum mentorGroupTypesEnum {  Mentor,  Mission,  Default,  Committee,  };
+
+  @BuiltValueField(wireName: r'allow_other_mentors')
+  bool get allowOtherMentors;
 
   @BuiltValueField(wireName: r'alcohol_event_type')
   String get alcoholEventType;
@@ -254,6 +263,16 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     yield r'is_nollning_event';
     yield serializers.serialize(
       object.isNollningEvent,
+      specifiedType: const FullType(bool),
+    );
+    yield r'mentor_group_types';
+    yield serializers.serialize(
+      object.mentorGroupTypes,
+      specifiedType: const FullType(BuiltList, [FullType(EventReadMentorGroupTypesEnum)]),
+    );
+    yield r'allow_other_mentors';
+    yield serializers.serialize(
+      object.allowOtherMentors,
       specifiedType: const FullType(bool),
     );
     yield r'alcohol_event_type';
@@ -461,6 +480,20 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
           ) as bool;
           result.isNollningEvent = valueDes;
           break;
+        case r'mentor_group_types':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(EventReadMentorGroupTypesEnum)]),
+          ) as BuiltList<EventReadMentorGroupTypesEnum>;
+          result.mentorGroupTypes.replace(valueDes);
+          break;
+        case r'allow_other_mentors':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.allowOtherMentors = valueDes;
+          break;
         case r'alcohol_event_type':
           final valueDes = serializers.deserialize(
             value,
@@ -537,5 +570,24 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
     );
     return result.build();
   }
+}
+
+class EventReadMentorGroupTypesEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Mentor')
+  static const EventReadMentorGroupTypesEnum mentor = _$eventReadMentorGroupTypesEnum_mentor;
+  @BuiltValueEnumConst(wireName: r'Mission')
+  static const EventReadMentorGroupTypesEnum mission = _$eventReadMentorGroupTypesEnum_mission;
+  @BuiltValueEnumConst(wireName: r'Default')
+  static const EventReadMentorGroupTypesEnum default_ = _$eventReadMentorGroupTypesEnum_default_;
+  @BuiltValueEnumConst(wireName: r'Committee')
+  static const EventReadMentorGroupTypesEnum committee = _$eventReadMentorGroupTypesEnum_committee;
+
+  static Serializer<EventReadMentorGroupTypesEnum> get serializer => _$eventReadMentorGroupTypesEnumSerializer;
+
+  const EventReadMentorGroupTypesEnum._(String name): super(name);
+
+  static BuiltSet<EventReadMentorGroupTypesEnum> get values => _$eventReadMentorGroupTypesEnumValues;
+  static EventReadMentorGroupTypesEnum valueOf(String name) => _$eventReadMentorGroupTypesEnumValueOf(name);
 }
 

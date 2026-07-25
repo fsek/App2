@@ -141,6 +141,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eventSendSignup => 'Submit';
 
   @override
+  String get eventSignupErrorTitle => 'Signup failed';
+
+  @override
+  String get eventSignupErrorInvalidGroup =>
+      'You cannot sign up with this group!';
+
+  @override
+  String get eventSignupErrorDeadlinePassed =>
+      'Signup deadline for this event has passed!';
+
+  @override
+  String get eventSignupErrorClose => 'Stäng';
+
+  @override
   String get eventFoodPrefInfo =>
       'You can change these in Settings > Food preferences.';
 
@@ -217,6 +231,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventNoAlcohol => 'None';
+
+  @override
+  String get eventNollning => 'Introduction event';
+
+  @override
+  String get eventNollningMentor =>
+      'Introduction event (with your mentor group)';
+
+  @override
+  String get eventNollningMission =>
+      'Introduction event (with your mission group)';
 
   @override
   String get settingsSettings => 'Settings';

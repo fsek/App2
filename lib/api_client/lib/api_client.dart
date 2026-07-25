@@ -164,6 +164,7 @@ export 'package:api_client/src/model/user_access_read.dart';
 export 'package:api_client/src/model/user_access_update.dart';
 export 'package:api_client/src/model/user_create.dart';
 export 'package:api_client/src/model/user_event_read.dart';
+export 'package:api_client/src/model/user_for_event_signup_read.dart';
 export 'package:api_client/src/model/user_in_event_read.dart';
 export 'package:api_client/src/model/user_in_group_read.dart';
 export 'package:api_client/src/model/user_post_read.dart';
