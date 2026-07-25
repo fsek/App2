@@ -113,7 +113,7 @@ class _GuildPageState extends State<GuildPage> {
       PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize), //TODO: sekret service
       Image.asset(truthTitle),
       PortraitFactory.generatePortrait(imagePath: truthPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: jubileePortrait, size: smallPortraitSize), //TODO: Spindelförman
+      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize), //TODO: Spindelförman
       Image.asset(samvetetTitle),
       PortraitFactory.generatePortrait(imagePath: samvetetPortrait, size: largePortraitSize),
       Image.asset(libuTitle),
