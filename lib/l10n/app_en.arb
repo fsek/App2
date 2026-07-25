@@ -12,7 +12,7 @@
     "calendar" : "Calendar",
     "notifications" : "Notifications",
     "other" : "Other",
-    "introduction" : "Nollning",
+    "introduction" : "Introduction",
 
     "loginRequiredField": "Required field",
     "loginEmail": "Email",
@@ -51,7 +51,7 @@
 	"eventSignupErrorTitle": "Signup failed",
 	"eventSignupErrorInvalidGroup": "You cannot sign up with this group!",
 	"eventSignupErrorDeadlinePassed": "Signup deadline for this event has passed!",
-	"eventSignupErrorClose": "Stäng",
+	"eventSignupErrorClose": "Close",
     "eventFoodPrefInfo": "You can change these in Settings > Food preferences.",
     "eventLinkToFoodPrefs": "Shortcut to the settings",
     "eventDesignup": "Remove sign-up",

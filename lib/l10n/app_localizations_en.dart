@@ -39,7 +39,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get other => 'Other';
 
   @override
-  String get introduction => 'Nollning';
+  String get introduction => 'Introduction';
 
   @override
   String get loginRequiredField => 'Required field';
@@ -152,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Signup deadline for this event has passed!';
 
   @override
-  String get eventSignupErrorClose => 'Stäng';
+  String get eventSignupErrorClose => 'Close';
 
   @override
   String get eventFoodPrefInfo =>
