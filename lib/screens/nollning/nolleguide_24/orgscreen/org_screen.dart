@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/nations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/committee_page.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/spex.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/others.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_24/orgscreen/nations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_24/orgscreen/committee_page.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_24/orgscreen/spex.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_24/orgscreen/others.dart';
 import 'package:fsek_mobile/services/preload_asset.service.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide-24/orgscreen/guilds.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_24/orgscreen/guilds.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class OrganizationScreenPage extends StatefulWidget {

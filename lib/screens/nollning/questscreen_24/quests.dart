@@ -4,8 +4,8 @@ import 'package:fsek_mobile/services/nollning.service.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 import 'package:fsek_mobile/models/nollning/adventure_mission_week.dart';
-import 'package:fsek_mobile/screens/nollning/questscreen/paperWidget.dart';
-import 'package:fsek_mobile/screens/nollning/questscreen/finishedMissions.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen_24/paperWidget.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen_24/finishedMissions.dart';
 
 class QuestPage extends StatefulWidget {
   @override

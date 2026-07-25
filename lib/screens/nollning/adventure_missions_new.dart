@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/nollning/adventure_missions_tab_new.dart';
 import 'package:fsek_mobile/screens/nollning/highscore_tab_new.dart';
-import 'package:fsek_mobile/screens/nollning/questscreen/quests.dart';
+import 'package:fsek_mobile/screens/nollning/questscreen_24/quests.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class AdventureMissionsPageNew extends StatefulWidget {
