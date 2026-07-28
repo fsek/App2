@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitFactory.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wallFactory.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/overlay.dart';
+
 
 class GuildPage extends StatefulWidget {
   @override
@@ -10,10 +15,35 @@ class GuildPage extends StatefulWidget {
 
 class _GuildPageState extends State<GuildPage> {
   static const path = "assets/data/nollning_26/nolleguide/studentlife/guild";
+  bool isTextOverlayVisible = false;
+
+  String? jsonString;
+
+  Future<void> loadGuildJson() async {
+    final jsonString = await rootBundle.loadString("$path/data_guild.json");
+    setState(() {
+      this.jsonString = jsonString;
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    loadGuildJson();
+  }
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
+    if(this.jsonString == null){
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    final Map<String, dynamic> data = jsonDecode(this.jsonString!);
+
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -25,14 +55,16 @@ class _GuildPageState extends State<GuildPage> {
         scrolledUnderElevation: 0.0,
       ),
       body: InteractiveViewer(panEnabled: true,
-          child: WallFactory.generateWall(
-              children: generateWallContent(locale: t.localeName),
-              screenHeight: screenHeight))
+              child: WallFactory.generateWall(
+                  children: generateWallContent(locale: t.localeName, data: data),
+                  screenHeight: screenHeight)
+          )
     );
   }
 
   List<Widget> generateWallContent({
-    required String locale
+    required String locale,
+    required Map<String, dynamic> data
   }) {
     String title(String name, {bool isLocale = true}) {
       if(!isLocale) return "$path/title_${name}.png";
@@ -89,52 +121,87 @@ class _GuildPageState extends State<GuildPage> {
     const smallPortraitSize = 2;
     const doublePortraitSize = 10;
 
+    void pushNavigator({required int index, required String imagePath}) => Navigator.push(context, TextOverlayRoute(
+        portrait: imagePath,
+        text: data["people"][index]["text"][locale]));
+
     return PortraitFactory.addSpacing(space: 24, items: [
       Image.asset(fosetTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize), //TODO: FÖSET
+      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 0, imagePath: frame)), //TODO: FÖSET
+      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
+          leftOnTap: () => pushNavigator(index: 1, imagePath: frame),
+          rightOnTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: FÖSET
+      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
+          leftOnTap: () => pushNavigator(index: 3, imagePath: frame),
+          rightOnTap: () => pushNavigator(index: 4, imagePath: frame)), //TODO: FÖSET
+      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
+          leftOnTap: () => pushNavigator(index: 5, imagePath: frame),
+          rightOnTap: () => pushNavigator(index: 6, imagePath: frame)), //TODO: FÖSET
       Image.asset(organisationTitle),
-      PortraitFactory.generatePortrait(imagePath: presidentPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: vpPortrait, size: smallPortraitSize),
+      PortraitFactory.generatePortrait(imagePath: presidentPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 7, imagePath: presidentPortrait)),
+      PortraitFactory.generatePortrait(imagePath: vpPortrait, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 8, imagePath: vpPortrait)),
       Image.asset(boardTitle),
-      PortraitFactory.generatePortrait(imagePath: boardPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize), //TODO: Ledamöter
+      PortraitFactory.generatePortrait(imagePath: boardPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 9, imagePath: boardPortrait)),
+      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 10, imagePath: frame)), //TODO: Ledamöter
       Image.asset(studentcouncilTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize), //TODO: utbildningsminister
+      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 11, imagePath: frame)), //TODO: utbildningsminister
       Image.asset(sexTitle),
-      PortraitFactory.generatePortrait(imagePath: sexPortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: sexPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 12, imagePath: sexPortrait)),
       Image.asset(tavernTitle),
-      PortraitFactory.generatePortrait(imagePath: tavernPortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: tavernPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 13, imagePath: tavernPortrait)),
       Image.asset(jubileeTitle),
-      PortraitFactory.generatePortrait(imagePath: jubileePortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: jubileePortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 14, imagePath: jubileePortrait)),
       Image.asset(serviceTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize), //TODO: sekret service
+      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 15, imagePath: frame)), //TODO: Sekreterare
       Image.asset(truthTitle),
-      PortraitFactory.generatePortrait(imagePath: truthPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize), //TODO: Spindelförman
+      PortraitFactory.generatePortrait(imagePath: truthPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 16, imagePath: truthPortrait)),
+      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 17, imagePath: frame)), //TODO: Spindelförman
       Image.asset(samvetetTitle),
-      PortraitFactory.generatePortrait(imagePath: samvetetPortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: samvetetPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 18, imagePath: samvetetPortrait)),
       Image.asset(libuTitle),
-      PortraitFactory.generatePortrait(imagePath: libuPortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: libuPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 19, imagePath: libuPortrait)),
       Image.asset(facilitiesTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize), //TODO: Prylmästare
+      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 20, imagePath: frame)), //TODO: Prylmästare
       Image.asset(crTitle),
-      PortraitFactory.generatePortrait(imagePath: crPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: faradPortrait, size: smallPortraitSize),
+      PortraitFactory.generatePortrait(imagePath: crPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 21, imagePath: crPortrait)),
+      PortraitFactory.generatePortrait(imagePath: faradPortrait, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 22, imagePath: faradPortrait)),
       Image.asset(cultureTitle),
-      PortraitFactory.generatePortrait(imagePath: culturePortrait, size: largePortraitSize),
-      PortraitFactory.generateDoublePortrait(leftImagePath: reisemeisterPortrait, rightImagePath: sportPortrait, size: doublePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: culturePortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 23, imagePath: culturePortrait)),
+      PortraitFactory.generateDoublePortrait(leftImagePath: reisemeisterPortrait, rightImagePath: sportPortrait, size: doublePortraitSize,
+          leftOnTap: () => pushNavigator(index: 24, imagePath: reisemeisterPortrait),
+          rightOnTap: () => pushNavigator(index: 25, imagePath: sportPortrait)),
       Image.asset(frejaTitle),
-      PortraitFactory.generatePortrait(imagePath: frejaPortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: frejaPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 26, imagePath: frejaPortrait)),
       Image.asset(accountingTitle),
-      PortraitFactory.generatePortrait(imagePath: treasurerPortrait, size: largePortraitSize),
-      PortraitFactory.generatePortrait(imagePath: bookPortrait, size: smallPortraitSize),
+      PortraitFactory.generatePortrait(imagePath: treasurerPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 27, imagePath: treasurerPortrait)),
+      PortraitFactory.generatePortrait(imagePath: bookPortrait, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 28, imagePath: bookPortrait)),
       Image.asset(cafeTitle),
-      PortraitFactory.generatePortrait(imagePath: cafePortrait, size: largePortraitSize),
+      PortraitFactory.generatePortrait(imagePath: cafePortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 29, imagePath: cafePortrait)),
       Image.asset(processionTitle),
-      PortraitFactory.generatePortrait(imagePath: heraldPortrait, size: largePortraitSize)
+      PortraitFactory.generatePortrait(imagePath: heraldPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 30, imagePath: heraldPortrait))
     ]);
   }
 }

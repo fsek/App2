@@ -40,7 +40,6 @@ class _FacultyPageState extends State<FacultyPage> {
     final String officers = "$path/officers_${locale}.png";
     final String nollu = "$path/nollu.png";
 
-
     return PortraitFactory.addSpacing(space: 24, items: [
       Image.asset(title),
       PortraitFactory.generatePortrait(imagePath: president, size: 5),

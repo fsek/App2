@@ -34,7 +34,6 @@ class PortraitFactory {
     );
   }
 
-
   static List<Widget> addSpacing({
     required double space,
     required List<Widget> items,
