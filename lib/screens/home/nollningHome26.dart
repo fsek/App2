@@ -27,7 +27,6 @@ class _NollningHomePageState extends State<NollningHomePage> {
     var week = WeekTracker.determineWeek();
 
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
 
     final double buttonSize; // The higher the number the smaller the button because yes
     final double buttonSpace; // The space between the buttons
