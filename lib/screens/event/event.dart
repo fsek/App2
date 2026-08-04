@@ -420,7 +420,6 @@ class _EventPageState extends State<EventPage> {
       if (e is DioException &&
           e.response!.statusCode! >= 400 &&
           e.response!.statusCode! < 500) {
-            
         String? detail = e.response!.data["detail"];
         return showSignupError(detail);
       }
@@ -446,7 +445,8 @@ class _EventPageState extends State<EventPage> {
 
     String? detailText;
 
-    switch (detail!.toLowerCase()) { // TODO: this could probably be improved if all response details came as an enum
+    switch (detail!.toLowerCase()) {
+      // TODO: this could probably be improved if all response details came as an enum
       case "user cannot sign up with this group":
         detailText = t.eventSignupErrorInvalidGroup;
         break;
@@ -565,10 +565,11 @@ class _EventPageState extends State<EventPage> {
                     child: Text(g!.name),
                   );
                 })),
-              DropdownMenuItem<GroupRead?>(
-                value: null,
-                child: Text(t.eventOtherDifferent),
-              ),
+              if (!event!.isNollningEvent)
+                DropdownMenuItem<GroupRead?>(
+                  value: null,
+                  child: Text(t.eventOtherDifferent),
+                ),
             ],
           ),
           Visibility(
