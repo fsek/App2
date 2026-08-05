@@ -8,6 +8,7 @@ workflows:
       cocoapods: default
       vars:
         MOOSE_GAME_SECRET: $MOOSE_GAME_SECRET
+        ENCLOSE_MOOSE_SECRET: $ENCLOSE_MOOSE_SECRET
     triggering:
       events:
         - push
