@@ -230,15 +230,15 @@ class _MooseGamePageState extends State<MooseGamePage>
     lastUpdateTime = gameAnimController.lastElapsedDuration!;
   }
 
-  /// Seconds until an obstacle reaches the moose, or null if it has already passed
+  /// Seconds until an obstacle reaches the moose
   double? timeToMoose(Obstacle obst) {
     double closingSpeed = gameSpeed + obst.speed;
     if (closingSpeed <= 0) return null;
     return (obst.position.x - moose.position.x) / closingSpeed;
   }
 
-  /// Called for each new obstacle, and checks if they could form a wall with 
-  /// another obstacle which is impossible to both jump over (regular obstacle) 
+  /// Called for each new obstacle, and checks if they could form a wall with
+  /// another obstacle which is impossible to both jump over (regular obstacle)
   /// and run under (ufo). If so, push it out of the way.
   void separateFromWall(Obstacle obst) {
     double closingSpeed = gameSpeed + obst.speed;
@@ -246,7 +246,7 @@ class _MooseGamePageState extends State<MooseGamePage>
     for (int pass = 0; pass < 4; pass++) { // 4 tries at pushing it out of the way
       bool moved = false;
       for (Obstacle other in obstacles) {
-        if (other.flying == obst.flying) continue;
+        if (identical(other, obst) || other.flying == obst.flying) continue;
         double? arrival = timeToMoose(obst);
         double? otherArrival = timeToMoose(other);
         if (arrival == null || otherArrival == null) continue; // Already passed
@@ -255,7 +255,17 @@ class _MooseGamePageState extends State<MooseGamePage>
             moose.position.x + (otherArrival + wallGuardSeconds) * closingSpeed;
         moved = true;
       }
-      if (!moved) return; // No more collisions, we're done
+      if (!moved) break; // No more walls, we're done
+    }
+
+    // Overlap check. We don't want overlapping obstacles, so pop it off the
+    // left edge. update() recycles anything past there, so it gets a
+    // fresh position and type on one of the next frames.
+    for (Obstacle other in obstacles) {
+      if (identical(other, obst) || other.flying != obst.flying) continue;
+      if ((other.position.x - obst.position.x).abs() < minObstacleDistance) {
+        obst.position.x = -gameViewportWidth - 1;
+      }
     }
   }
 
@@ -320,7 +330,9 @@ class _MooseGamePageState extends State<MooseGamePage>
           screenSize.width / 2 +
               (gameObject.position.x - cameraPos.x) * worldScale * 24,
           screenSize.height / 2 -
-              (gameObject.position.y + cameraPos.y) * worldScale * 24),
+              (gameObject.position.y + cameraPos.y) * worldScale * 24 +
+              // Screen y grows downwards, so a positive nudge is added here.
+              gameObject.sprite.yOffset * worldScale),
       width: gameObject.sprite.imageWidth * worldScale * deflation,
       height: gameObject.sprite.imageHeight * worldScale * deflation,
     );

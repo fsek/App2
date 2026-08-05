@@ -18,11 +18,11 @@ Color? get backgroundColor =>
 
 /// How high above the ground the flying obstacles (the UFOs) hover.
 /// Very specific number to give a tiny window for a jump to pass over the UFO.
-const double flyingObstacleHeight = 1.98;
+const double flyingObstacleHeight = 1.89;
 
 /// Wall guard protects against a stack of a ground obstacle and a flying obstacle
 /// this double is the smallest arrival time difference between the two which is allowed
-const double wallGuardSeconds = 0.5;
+const double wallGuardSeconds = 0.4;
 
 /// Native pixel size of each space moose frame. These have to match the actual
 /// PNGs; see [_spaceMoose] for why they can't all just be 24x24.
@@ -41,12 +41,16 @@ const Map<String, List<double>> _spaceMooseFrames = {
 /// frames or jump and fall.
 const double _mooseFrameScale = 24 / 27; // the run frames are 27px wide
 
+/// Nudge in pixelart pixels, centers the moose head and body when jumping
+const Map<String, double> _spaceMooseNudge = {"hilbert_space_jump": 2};
+
 Sprite _spaceMoose(String name) {
   final List<double> size = _spaceMooseFrames[name]!;
   return Sprite(
     "$_dir$name.png",
     size[0] * _mooseFrameScale,
     size[1] * _mooseFrameScale,
+    (_spaceMooseNudge[name] ?? 0) * _mooseFrameScale,
   );
 }
 
@@ -85,7 +89,7 @@ Sprite get mooseFallSprite => spaceTheme
       );
 
 Sprite get pickupSprite => spaceTheme
-    ? Sprite(_themed("${_dir}o2_bottle.png", "${_dir}o2_bottle_d.png"), 10, 24)
+    ? Sprite("${_dir}o2_bottle.png", 10, 24)
     : Sprite(
         _themed("${_dir}hilbert_sandwich.png", "${_dir}hilbert_sandwich_d.png"),
         24,
@@ -94,52 +98,13 @@ Sprite get pickupSprite => spaceTheme
 
 List<ObstacleDef> buildObstacles() => spaceTheme
     ? [
-        ObstacleDef(
-          Sprite(_themed("${_dir}galaxy.png", "${_dir}galaxy_d.png"), 24, 24),
-          1.0,
-        ),
-        ObstacleDef(
-          Sprite(_themed("${_dir}rocket.png", "${_dir}rocket_d.png"), 21, 24),
-          1.0,
-        ),
-        ObstacleDef(
-          Sprite(_themed("${_dir}antenna.png", "${_dir}antenna_d.png"), 24, 24),
-          1.0,
-        ),
-        ObstacleDef(
-          Sprite(
-            _themed("${_dir}alien_voi_l.png", "${_dir}alien_voi_l_d.png"),
-            15,
-            24,
-          ),
-          0.4,
-          1.0,
-          2.0,
-        ),
-        ObstacleDef(
-          Sprite(
-            _themed("${_dir}alien_voi_r.png", "${_dir}alien_voi_r_d.png"),
-            15,
-            24,
-          ),
-          0.2,
-          -1.0,
-          -2.0,
-        ),
-        ObstacleDef(
-          Sprite(_themed("${_dir}ufo_l.png", "${_dir}ufo_l_d.png"), 24, 24),
-          0.1,
-          2.0,
-          4.0,
-          true,
-        ),
-        ObstacleDef(
-          Sprite(_themed("${_dir}ufo_r.png", "${_dir}ufo_r_d.png"), 24, 24),
-          0.05,
-          -2.0,
-          -4.0,
-          true,
-        ),
+        ObstacleDef(Sprite("${_dir}galaxy.png", 19, 18, 2), 1.0),
+        ObstacleDef(Sprite("${_dir}rocket.png", 21, 24), 1.0),
+        ObstacleDef(Sprite("${_dir}antenna.png", 24, 24), 1.0),
+        ObstacleDef(Sprite("${_dir}alien_voi_l.png", 15, 24), 0.4, 1.0, 2.0),
+        ObstacleDef(Sprite("${_dir}alien_voi_r.png", 15, 24), 0.2, -1.0, -2.0),
+        ObstacleDef(Sprite("${_dir}ufo_l.png", 24, 24), 0.2, 2.0, 4.0, true),
+        ObstacleDef(Sprite("${_dir}ufo_r.png", 24, 24), 0.1, -2.0, -4.0, true),
       ]
     : [
         ObstacleDef(
