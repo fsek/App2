@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/englishSchedule.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
@@ -23,15 +22,26 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
   Widget build(BuildContext context) {
     var t =  AppLocalizations.of(context)!;
 
+    switch(t.localeName){
+      case "sv":
+        return _swedishSchema(context);
+      case "en":
+        return EnglishSchedulePage();
+      default:
+        throw new InvalidInputException("Invalid locale: ${t.localeName}");
+    }
+  }
+
+  Widget _swedishSchema(BuildContext context) {
     var screen_width = MediaQuery.of(context).size.width;
     var screen_height = MediaQuery.of(context).size.height;
 
-    const img_width = 1628;
-    const img_height = 21225;
+    const img_width = 1581;
+    const img_height = 22108;
     final double render_image_width = screen_width * 1.03; // Magic number because the schema image's border looks a bit wierd so we make it a bit wider to not include the edges.
     final double render_image_height = render_image_width * (img_height / img_width);
 
-    final schema_Path = "assets/data/nollning_26/schema/schema_${t.localeName}.png";
+    final schema_Path = "assets/data/nollning_26/schema/schema_sv.png";
 
     return Scaffold(
       backgroundColor: new Color.fromRGBO(134, 187, 230, 1),
@@ -61,7 +71,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
             AnimatedPositioned(
               width: screen_width,
               height: render_image_height,
-              top: screenPosition(render_image_height, state),
+              top: _screenPosition(render_image_height, state),
               duration: const Duration(seconds: 2),
               curve: Curves.fastOutSlowIn,
               child: ClipRect(
@@ -70,7 +80,6 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
                   minWidth: render_image_width,
                   maxHeight: render_image_height,
                   minHeight: render_image_height,
-                  alignment: const Alignment(0.6, 0),
                   child: Image.asset(
                     schema_Path,
                     fit: BoxFit.fill,
@@ -101,18 +110,18 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
     );
   }
 
-  static double screenPosition(double render_image_height, int state){
+  static double _screenPosition(double render_image_height, int state){
     switch(state){
       case -1: // Image not loaded
         return -render_image_height;
       case 0: // Week 0
-        return -render_image_height * 0.835;
+        return -render_image_height * 0.847;
       case 1: // Week 1
-        return -render_image_height * 0.62;
+        return -render_image_height * 0.64;
       case 2: // Week 2
-        return -render_image_height * 0.395;
+        return -render_image_height * 0.43;
       case 3: // Week 3
-        return -render_image_height * 0.2;
+        return -render_image_height * 0.23;
       case 4: // Week 4
         return -1;
       default:
