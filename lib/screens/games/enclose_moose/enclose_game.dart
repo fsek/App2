@@ -520,20 +520,19 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                     )
                                   ),
 
-                                if (_grid.escapePath != null)
-                                  Positioned(
-                                    left: (mooseColumn + 1) * cellSize - thoughtCloudWidth / 2,
-                                    right: (_grid.gridWidth - mooseColumn - 1) * cellSize - thoughtCloudWidth / 2,
-                                    bottom: (_grid.gridHeight - mooseRow) * cellSize + 20,
-                                    child: IgnorePointer(
-                                      child: AnimatedThoughtBubble(
-                                        isVisible: (_openCallCounter["escape"] ?? 0) != 0,
-                                        text: _mooseThought,
-                                        color: Colors.white.withAlpha(180),
-                                        idleController: _idleController
-                                      ),
+                                Positioned(
+                                  left: (mooseColumn + 1) * cellSize - thoughtCloudWidth / 2,
+                                  right: (_grid.gridWidth - mooseColumn - 1) * cellSize - thoughtCloudWidth / 2,
+                                  bottom: (_grid.gridHeight - mooseRow) * cellSize + 20,
+                                  child: IgnorePointer(
+                                    child: AnimatedThoughtBubble(
+                                      isVisible: (_openCallCounter["thinking"] ?? 0) != 0,
+                                      text: _mooseThought,
+                                      color: Colors.white.withAlpha(180),
+                                      idleController: _idleController
                                     )
-                                  ),
+                                  )
+                                ),
                               ]
                             )
                           );
@@ -776,21 +775,22 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
     if (gridCell == EncloseGridCellType.moose) {
       if (_grid.escapePath != null) {
         _incrementCallCounter(_openCallCounter, "escape", duration: const Duration(seconds: 5));
-
-        const mooseThoughts = [
-          "I can go thiiiis way \n *neigh*",
-          "moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
-        ];
-        const mooseThoughtSounds = [
-          "audio/moose.mp4",
-          "audio/moose2.mp4"
-        ];
-
-        final mooseThoughtIndex = _mooseThoughtRandom.nextInt(mooseThoughts.length);
-        _mooseThought = mooseThoughts[mooseThoughtIndex];
-        final mooseThoughtSound = mooseThoughtSounds[mooseThoughtIndex];
-        _audioPlayer.play(AssetSource(mooseThoughtSound));
       }
+
+      _incrementCallCounter(_openCallCounter, "thinking", duration: const Duration(seconds: 5));
+
+      const freeMooseThoughts = [
+        ("audio/moose.mp4", "I can go thiiiis way \n *neigh*"),
+        ("audio/moose2.mp4", "moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+      ];
+      const enclosedMooseThoughts = [
+        ("audio/moose.mp4", "I don't wanna be enclosed ):")
+      ];
+
+      final possibleThoughts = _grid.escapePath != null ? freeMooseThoughts : enclosedMooseThoughts;
+      final mooseThoughtIndex = _mooseThoughtRandom.nextInt(possibleThoughts.length);
+      _mooseThought = possibleThoughts[mooseThoughtIndex].$2;
+      _audioPlayer.play(AssetSource(possibleThoughts[mooseThoughtIndex].$1));
     }
 
     final bonusScore = gridCell.getBonusScore();
