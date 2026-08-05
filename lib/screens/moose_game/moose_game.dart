@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
+import 'package:fsek_mobile/screens/moose_game/game_theme.dart';
 import 'package:fsek_mobile/screens/moose_game/ground.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
@@ -122,6 +123,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   }
 
   void initializeGame() {
+    gameSpeed = startGameSpeed.toDouble();
     obstacles.add(Obstacle(gameViewportWidth, floorY));
     double previousPos = gameViewportWidth;
     for (int i = 1; i < obstacleCount; i++) {
@@ -129,6 +131,7 @@ class _MooseGamePageState extends State<MooseGamePage>
           Random().nextDouble() * (maxObstacleDistance - minObstacleDistance) +
               minObstacleDistance;
       obstacles.add(Obstacle(previousPos, floorY));
+      separateFromWall(obstacles.last);
     }
     leftmostObstacleIdx = 0;
     sandwich = Sandwich(0.0, 1.0);
@@ -196,6 +199,7 @@ class _MooseGamePageState extends State<MooseGamePage>
                   minObstacleDistance);
 
           obst.randomize();
+          separateFromWall(obst);
           leftmostObstacleIdx = (leftmostObstacleIdx + 1) % obstacleCount;
         });
       }
@@ -224,6 +228,35 @@ class _MooseGamePageState extends State<MooseGamePage>
       score += deltaTime * scorePerSecond;
     });
     lastUpdateTime = gameAnimController.lastElapsedDuration!;
+  }
+
+  /// Seconds until an obstacle reaches the moose, or null if it has already passed
+  double? timeToMoose(Obstacle obst) {
+    double closingSpeed = gameSpeed + obst.speed;
+    if (closingSpeed <= 0) return null;
+    return (obst.position.x - moose.position.x) / closingSpeed;
+  }
+
+  /// Called for each new obstacle, and checks if they could form a wall with 
+  /// another obstacle which is impossible to both jump over (regular obstacle) 
+  /// and run under (ufo). If so, push it out of the way.
+  void separateFromWall(Obstacle obst) {
+    double closingSpeed = gameSpeed + obst.speed;
+    if (closingSpeed <= 0) return;
+    for (int pass = 0; pass < 4; pass++) { // 4 tries at pushing it out of the way
+      bool moved = false;
+      for (Obstacle other in obstacles) {
+        if (other.flying == obst.flying) continue;
+        double? arrival = timeToMoose(obst);
+        double? otherArrival = timeToMoose(other);
+        if (arrival == null || otherArrival == null) continue; // Already passed
+        if ((arrival - otherArrival).abs() >= wallGuardSeconds) continue;
+        obst.position.x =
+            moose.position.x + (otherArrival + wallGuardSeconds) * closingSpeed;
+        moved = true;
+      }
+      if (!moved) return; // No more collisions, we're done
+    }
   }
 
   void updateSandwich() {
@@ -454,10 +487,15 @@ class _MooseGamePageState extends State<MooseGamePage>
             moose.triggerFall();
           }
         },
-        child: Stack(
-          alignment: Alignment.center,
-          children: children,
-        ),
+        child: Container(
+          color: backgroundColor,
+          width: double.infinity,
+          height: double.infinity,
+          child: Stack(
+            alignment: Alignment.center,
+            children: children,
+          ),
+        )
       ),
     );
   }
