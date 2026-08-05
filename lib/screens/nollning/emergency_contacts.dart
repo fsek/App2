@@ -72,6 +72,12 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
             headerPhoneNumber: t.emergencyNumSeven,
             headerText: t.emergencyTitleSeven,
             bodyText: t.emergencyContentSeven,
+          ),
+          _EmergencyText(
+            // Dummy number because this title is different
+            headerPhoneNumber: "",
+            headerText: t.emergencyTitleEight,
+            bodyText: t.emergencyContentEight,
           )
         ],
       ),
