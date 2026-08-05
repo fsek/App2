@@ -100,15 +100,18 @@ class _GuildPageState extends State<GuildPage> {
     final String cafePortrait = portrait("cafe");
     final String crPortrait = portrait("cr");
     final String culturePortrait = portrait("culture");
+    final String eduPortrait = portrait("edu");
     final String faradPortrait = portrait("farad");
     final String frejaPortrait = portrait("freja");
     final String heraldPortrait = portrait("herald");
     final String jubileePortrait = portrait("jubilee");
     final String libuPortrait = portrait("libu", isLocale: false);
     final String presidentPortrait = portrait("president");
+    final String prylPortrait = portrait("pryl");
     final String reisemeisterPortrait = portrait("reisemeister", isLocale: false);
     final String samvetetPortrait = portrait("samvetet");
     final String sexPortrait = portrait("sex");
+    final String spiderPortrait = portrait("spider");
     final String sportPortrait = portrait("sport");
     final String tavernPortrait = portrait("tavern");
     final String treasurerPortrait = portrait("treasurer");
@@ -149,8 +152,8 @@ class _GuildPageState extends State<GuildPage> {
       PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize,
           onTap: () => pushNavigator(index: 10, imagePath: frame)), //TODO: Ledamöter
       Image.asset(studentcouncilTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 11, imagePath: frame)), //TODO: utbildningsminister
+      PortraitFactory.generatePortrait(imagePath: eduPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 11, imagePath: eduPortrait)),
       Image.asset(sexTitle),
       PortraitFactory.generatePortrait(imagePath: sexPortrait, size: largePortraitSize,
           onTap: () => pushNavigator(index: 12, imagePath: sexPortrait)),
@@ -166,8 +169,8 @@ class _GuildPageState extends State<GuildPage> {
       Image.asset(truthTitle),
       PortraitFactory.generatePortrait(imagePath: truthPortrait, size: largePortraitSize,
           onTap: () => pushNavigator(index: 16, imagePath: truthPortrait)),
-      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 17, imagePath: frame)), //TODO: Spindelförman
+      PortraitFactory.generatePortrait(imagePath: spiderPortrait, size: smallPortraitSize,
+          onTap: () => pushNavigator(index: 17, imagePath: spiderPortrait)),
       Image.asset(samvetetTitle),
       PortraitFactory.generatePortrait(imagePath: samvetetPortrait, size: largePortraitSize,
           onTap: () => pushNavigator(index: 18, imagePath: samvetetPortrait)),
@@ -175,8 +178,8 @@ class _GuildPageState extends State<GuildPage> {
       PortraitFactory.generatePortrait(imagePath: libuPortrait, size: largePortraitSize,
           onTap: () => pushNavigator(index: 19, imagePath: libuPortrait)),
       Image.asset(facilitiesTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 20, imagePath: frame)), //TODO: Prylmästare
+      PortraitFactory.generatePortrait(imagePath: prylPortrait, size: largePortraitSize,
+          onTap: () => pushNavigator(index: 20, imagePath: prylPortrait)),
       Image.asset(crTitle),
       PortraitFactory.generatePortrait(imagePath: crPortrait, size: largePortraitSize,
           onTap: () => pushNavigator(index: 21, imagePath: crPortrait)),

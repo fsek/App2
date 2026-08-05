@@ -1,0 +1,318 @@
+[
+  {
+    "type": "title",
+    "title":{
+      "sv": "Stödfunktioner",
+      "en": "Support functions"
+    },
+    "text":{
+      "sv": "Hejsan nollan!\nSom ny student på LTH är det lätt att känna sig förvirrad eller bara frågvis. Som tur är finns det gott om folk som har stenkoll på precis det du behöver veta, eller som är där för dig om du behöver prata. På F-sektionen är vi dedikerade till att främja en inkluderande och stödjande miljö för alla studenter.\n\nVi prioriterar våra medlemmars psykosociala välbefinnande och har en nolltoleranspolicy mot alla former av diskriminering eller trakasserier. Om du någonsin känner dig hotad, illa till mods eller illa behandlad, kom ihåg att du har tillgång till olika resurser både inom och utanför vår organisation.",
+      "en": "Hello, new student!\nAs a new student at LTH, it is easy to feel confused or simply inquisitive. Fortunately, there are plenty of people who are well-informed about exactly what you need to know, or who are there for you if you need to talk. At the F-guild, we are dedicated to promoting an inclusive and supportive environment for all students.\n\nWe prioritize the psychosocial well-being of our members and have a zero-tolerance policy towards all forms of discrimination or harassment. If you ever feel threatened, uncomfortable, or mistreated, remember that you have access to various resources both within and outside our organization."
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Hjälp och viktiga kontakter",
+      "en": "Help and important contacts"
+    },
+    "text":{
+      "sv": "Via telefon-ikonen i appen hittar du en lista på viktiga nödnummer för akuta situationer; bland annat till sjukvård, polis, brandkår, universitetet, psykiatrisk akutmottagning, självmordslinjen, och nummer till Föset. Vid livsfara, våld eller hot om våld, ring alltid 112!",
+      "en": "Via the phone icon in the app, you will find a list of important emergency numbers for urgent situations, including healthcare, police, fire department, university, psychiatric emergency room, suicide hotline, and Föset. In case of life-threatening situations, violence, or threats of violence, always call 112!"
+    }
+  },
+  {
+    "type": "stud",
+    "title":{
+      "sv": "Studie och karriärvägledning",
+      "en": "Study and career guidance"
+    },
+    "texts":{
+      "sv": [
+        "Här kommer en hälsning från studie- och karriärvägledarna:\n\nVi är din professionella samtalspartner och har ett samlat ansvar för all studie-och karriärvägledning på Teknisk fysik (F), Teknisk matematik (Pi) och Teknisk nanovetenskap (N).\n\nVi har tystnadsplikt och är ditt bollplank och ditt stöd som du kan prata med när du har frågor och funderingar kring dina studier.\n\nDu hittar oss på våning 5 i E-huset.\n\nDrop in läsvecka 1–6:\nF och Pi: Hilbert café, torsdagar 9–11.\nN: KC, ingång C måndagar 11–12\n\nTa tillfället i akt att komma förbi, säga hej eller ställa frågor!\n\nTeknisk Fysik\nPetra Parmvi\npetra.parmvi@lth.lu.se",
+        "Teknisk Nanovetenskap\nFreja Heu\nFreja.heu@lth.lu.se",
+        "Teknisk Matematik\nKarin Cherfils-Karlsson\nKarin.cherfils-karlsson@lth.lu.se"
+      ],
+      "en":[
+        "Here’s a message from the academic and career advisors:\n\nWe are your professional advisors and are collectively responsible for all study and career counseling in Engineering Physics (F), Engineering Mathematics (Pi), and Engineering Nanoscience (N).\n\nWe are bound by confidentiality and serve as your sounding board and support—we’re here to talk to whenever you have questions or concerns about your studies.\n\nYou can find us on the 5th floor of the E Building.\n\nDrop-in hours, weeks 1–6:\nF and Pi: Hilbert Café, Thursdays 9–11 a.m.\nN: KC, Entrance C, Mondays 11 a.m.–12 p.m.\n\nTake the opportunity to stop by, say hello, or ask questions!\n\nEngineering Physics\nPetra Parmvi\npetra.parmvi@lth.lu.se",
+        "Engineering Nanoscience\nFreja Heu\nFreja.heu@lth.lu.se",
+        "Engineering Mathematics\nKarin Cherfils-Karlsson\nKarin.cherfils-karlsson@lth.lu.se"
+      ]
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Internationell koordinator (för internationella studenter)",
+      "en": "International Coordinator (for international students)"
+    },
+    "text":{
+      "sv": "Kontakter för internationella studenter kan hittas på Studentwebben LTH: https://www.student.lth.se/english/contact/international-coordinators/",
+      "en": "Contact details for international students can be found on the LTH Student Web: https://www.student.lth.se/english/contact/international-coordinators/"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Kurator",
+      "en": "Counselor"
+    },
+    "text":{
+      "sv": "Om man har personliga bekymmer, har hamnat i någon form av kris eller bara vill prata med någon kan man vända sig till studiekuratorn för F, n och π. Du bokar ett möte via mail, och du hittar hennes kontor mitt i E-huset högst upp på våning 5. Hon är utbildad socionom, och har naturligtvis tystnadsplikt.\n\nStudiekurator F, N, och π\nIsa Andersson\nisa.andersson@lth.lu.se",
+      "en": "If you have personal concerns, are experiencing some kind of crisis, or just want to talk to someone, you can contact the study counselor for F, n, and π. You can book an appointment by email, and her office is located in the middle of the E building on the top floor (5). She is a trained social worker and is, of course, bound by professional confidentiality.\n\nStudiekurator F, N, och π\nIsa Andersson\nisa.andersson@lth.lu.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Studenthälsan",
+      "en": "Student Health"
+    },
+    "text":{
+      "sv": "Här arbetar bland annat kuratorer, sjuksköterskor, psykologer och psykiatriker. Hit kan alla studenter vid Lunds Universitet vända sig. Alla besök ska tidsbokas och besöken är gratis. Studenthälsan fungerar som ett komplement till vårdcentralen, och personalen har naturligtvis tystnadsplikt.\n\nTel: 046 222 43 77\nSandgatan 3\nwww.lu.se/student/studenthaelsan",
+      "en": "Here you will find counselors, nurses, psychologists, and psychiatrists, among others. All students at Lund University can turn to them for help. All visits must be booked in advance and are free of charge. Student Health serves as a complement to the health center, and the staff is, of course, bound by confidentiality.\n\nTel: 046 222 43 77\nSandgatan 3\nwww.lu.se/student/studenthaelsan"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Hjälp finns att få!",
+      "en": "Help is available!"
+    },
+    "text":{
+      "sv": "Om du någon gång upplever att du känner dig orättvist behandlad i dina studier eller på andra arrangemang som du besöker under din studietid så har Teknologkåren ett anonymt formulär för att ge feedback och kritik genom. Formuläret nås på www.tlth.se/klaga",
+      "en": "If you ever feel that you have been treated unfairly in your studies or at other events you attend during your studies, the TLTH has an anonymous form for providing feedback and criticism. The form can be accessed at www.tlth.se/klaga"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Likabehandlingsutskottet",
+      "en": "Committee for Student Equality"
+    },
+    "text":{
+      "sv": "Känner du dig otrygg i sektionens sociala miljö? Har du märkt av exkluderande normer, taskig jargong, eller upprepade situationer som gör att du eller andra inte känner er välkomna? Då kan du vända dig till sektionens likabehandlingsutskott, LiBU.\n\nLiBU arbetar med långsiktiga frågor för att göra sektionen trygg, inkluderande och trivsam för alla medlemmar.\n\nDet är likabehandlingsordförande Viggo och samvetsmästare Linnea som leder LiBU. Kontakta någon av dem om du vill prata eller lyfta något som behöver förändras!\n\nLikabehandlingsordförande Viggo Broman\nTel: 073 268 93 94 \nlibo@fsektionen.se\n\nSamvetsmästare Linnea Lundevall\nTel: 072 548 03 22\nsamvetsmastare@fsektionen.se\n\nLikabehandlingsutskottet\nlikabehandlingsutskottet@fsektionen.se",
+      "en": "Do you feel unsafe in the guild's social environment? Have you noticed exclusionary norms, offensive jargon, or repeated situations that make you or others feel unwelcome? If so, you can contact the guild's committee for Student Equality, LiBU.\n\nLiBU works with long-term issues to make the guild safe, inclusive, and pleasant for all members.\n\nLiBU is led by the President of the Committee for Student Equality Viggo and Master of Conscience Linnea. Contact either of them if you want to talk or raise something that needs to be changed!\n\nPresident of the Committee for Student Equality Viggo Broman\nTel: 073 268 93 94\nlibo@fsektionen.se\n\nMaster of Conscience Linnea Lundevall\nTel: 072 548 03 22\nsamvetsmastare@fsektionen.se\n\nCommittee for Student Equality\nlikabehandlingsutskottet@fsektionen.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Sektionens anonyma kontaktformulär",
+      "en": "The guild's anonymous contact form"
+    },
+    "text":{
+      "sv": "Via sektionens anonyma kontaktformulär kan du nå samvetsmästare och likabehandlingsordförande på ett anonymt sätt\n\nhttps://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform",
+      "en": "You can contact the conscience master and equal treatment chair anonymously via the guild's anonymous contact form.\n\nhttps://docs.google.com/forms/d/e/1FAIpQLSdZdPl14DkdlZCKS3jzO59-FvVi2ug9nYer1jhYgERanbwHoQ/viewform"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Samvetsmästare",
+      "en": "Master of Conscience"
+    },
+    "text":{
+      "sv": "Om du har varit med om något obehagligt eller allvarligt, till exempel under ett event, i samband med sektionsverksamhet, eller i kontakt med andra medlemmar så kan du prata med vår samvetsmästare Linnea. Hon är likabehandlingsombud och lyssnar och agerar alltid konfidentiellt. Det innebär att det du berättar inte förs vidare utan ditt godkännande.\n\nSamvetsmästare Linnea Lundevall\nTel: 072 548 03 22\nsamvetsmastare@fsektionen.se",
+      "en": "If you have experienced something unpleasant or serious, for example during an event, in connection with guild activities, or in contact with other members, you can talk to our Master of Conscience Linnea. She is an equal opportunities commissioner and always listens and acts confidentially. This means that what you say will not be passed on without your approval.\n\nMaster of Conscience Linnea Lundevall\nTel: 072 548 03 22\nsamvetsmastare@fsektionen.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Studierådet",
+      "en": "The Students’ Educational Council"
+    },
+    "text":{
+      "sv": "Har du synpunkter på din utbildning, finns det problem med kursupplägg, en lärare som inte lyssnar, eller en deadline som känns orimlig? Då är Studierådet rätt instans.\n\nStudierådet samlar studenternas röster och driver frågor som rör utbildningskvalitet, schema, kursutvärderingar med mera.\n\nstudieradet@fsektionen.se",
+      "en": "Do you have any comments about your education, problems with course structure, a teacher who does not listen, or a deadline that seems unreasonable? Then the Students’ Educational Council is the right place for you.\n\nThe Students’ Educational Council gathers students' opinions and addresses issues related to educational quality, schedules, course evaluations, and more.\n\nstudieradet@fsektionen.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Utbildningsminister",
+      "en": "Minister for Education"
+    },
+    "text":{
+      "sv": "Om du råkat ut för något allvarligt kopplat till din studiemiljö, till exempel blivit illa behandlad av en lärare eller annan student, så kan du kontakta sektionens utbildningsminister Mattis Mattsson. Mattis är en av sektionens studerandeskyddsombud, vilket innebär att han har lagstadgad tystnadsplikt gällande studierelaterade ärenden. Även samvetsmästare Linnea och ordförande Algot är studernadeskyddsombud.\n\nUtbildningsminister Mattis Mattsson\num@fsektionen.se\nTel: 073 517 16 31",
+      "en": "If you have experienced something serious related to your study environment, such as being mistreated by a teacher or another student, you can contact the guilds's Minister for Education, Mattis Mattsson. Mattis is one of the guild's student welfare officers, which means that he has a legal duty of confidentiality regarding study-related matters. Master of Conscience Linnea and President of the guild Algot are also student welfare officers.\n\nMinister of Education Mattis Mattsson\num@fsektionen.se\nTel: 073 517 16 31"
+    }
+  },
+  {
+    "type": "title",
+    "title": {
+      "sv": "Ett urval stödfunktioner för Lundastudenter",
+      "en": "A selection of support functions for Lund students"
+    },
+    "text": {
+      "sv": "",
+      "en": ""
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "UMO",
+      "en": "UMO"
+    },
+    "text":{
+      "sv": "UMO finns där för dig som är upp till 23 år. De jobbar med frågor som bland annat sex och relationer samt ångesthantering och samtalsstöd. Bokning via telefon eller via deras onlinemottagning.\n\nTel: 077 025 25 00",
+      "en": "UMO is available for individuals up to 23 years of age. They address issues such as sex and relationships, anxiety management, and counseling support. Appointments can be made by phone or via their online reception.\n\nTel: 077 025 25 00"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Vårdcentral",
+      "en": "Health center"
+    },
+    "text":{
+      "sv": "Din vårdcentral kan också erbjuda samtalsstöd, hjälp vid ångest och oro eller depression. Ring din vårdcentral och förklara din situation så guidar de dig vidare. Vet du inte vilken din vårdcentral är? Du kan alltid ringa till någon som är nära dig och lista dig där, då blir det din vårdcentral.",
+      "en": "Your health center can also offer counseling, help with anxiety and worry, or depression. Call your health center and explain your situation, and they will guide you further. Not sure which health center you belong to? You can always call one near you and register there, and it will become your health center."
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Unga vuxna Lund",
+      "en": "Young adults Lund"
+    },
+    "text":{
+      "sv": "Erbjuder stöd och hjälp till dig mellan 16 och 29 år. Det kan handla om personliga problem, relationer eller frågor kring fysisk och psykisk hälsa. Nås på telefon eller kan kontaktas via 1177.\n\nTel: 046 359 80 93",
+      "en": "Offers support and help to people between the ages of 16 and 29. This can be for personal problems, relationships, or questions about physical and mental health. Can be reached by phone or contacted via 1177.\n\nTel: 046 359 80 93"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Studentprästerna",
+      "en": "Student priests"
+    },
+    "text":{
+      "sv": "Studentprästerna erbjuder samtal om stort och smått, oavsett tro eller livsåskådning. De har även tystnadsplikt.\n\nTel: 046 718735\nstudentpresterna.lund@svenskakyrkan.se",
+      "en": "The student priests offer conversations about big and small issues, regardless of faith or worldview. They are also bound by confidentiality.\n\nTel: 046 718735\nstudentpresterna.lund@svenskakyrkan.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Tjej- och transjouren i Lund",
+      "en": "The Women's and Transgender Hotline in Lund"
+    },
+    "text":{
+      "sv": "Stöttar dig via chatt, telefon eller mail. Du kan vända dig hit om du har varit utsatt för våld eller har frågor kring sex, relationer, psykisk ohälsa, kropp och mycket mer.\n\nwww.tjejochtransjourenilund.se",
+      "en": "Provides support via chat, telephone, or email. You can contact them if you have been subjected to violence or have questions about sex, relationships, mental health, body image, and much more.\n\nwww.tjejochtransjourenilund.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Kvinnojouren i Lund",
+      "en": "Women's Shelter in Lund"
+    },
+    "text":{
+      "sv": "Kvinnojouren Lund erbjuder stöd till män, kvinnor och transpersoner som är eller har blivit utsatta för våld i en nära relation. Alla samtal är anonyma.\n\nTel: 020 21 29 60\nstod@kvinnojourenlund.se\nwww.kvinnojourenlund.se",
+      "en": "The Women's Shelter in Lund offers support to men, women, and transgender people who are or have been subjected to violence in a close relationship. All calls are anonymous.\n\nTel: 020 21 29 60\nstod@kvinnojourenlund.se\nwww.kvinnojourenlund.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Mansjouren",
+      "en": "Men's Shelter"
+    },
+    "text":{
+      "sv": "Erbjuder samtalsstöd via telefon, genom enskilda möten eller i grupp, till män som behöver prata med någon.\n\nTel: 08 30 30 20\nwww.mansjouren.se",
+      "en": "Offers counseling support by phone, through individual meetings, or in groups, to men who need to talk to someone.\n\nTel: 08 30 30 20\nwww.mansjouren.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Akutmottagning vuxenpsykiatri",
+      "en": "Adult Psychiatry Emergency Room"
+    },
+    "text":{
+      "sv": "Kontakta vid akuta psykiatriska besvär.\n\nTel: 046 17 41 00",
+      "en": "For acute psychiatric problems.\n\nTel: 046 17 41 00"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Mind självmordslinjen",
+      "en": "Mind Suicide Hotline"
+    },
+    "text":{
+      "sv": "Självmordslinjen är till för dig som har tankar på att ta ditt liv eller har en närstående med sådana tankar. De har öppet dygnet runt, varje dag. Vid akut självmordsrisk bör du ringa 112.\n\nTel: 901 01",
+      "en": "The Suicide Hotline is for those who are thinking about taking their own life or have a loved one with such thoughts. They are open 24 hours a day, every day. In case of acute suicide risk, you should call 112.\n\nTel: 901 01"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Jourhavande medmänniska",
+      "en": "On-call fellow human being"
+    },
+    "text":{
+      "sv": "Anonyma samtal om stort och smått. Telefontid kvälls- och nattetid på följande nummer.\n\nTel: 08 702 16 80",
+      "en": "Anonymous conversations about big and small issues. Telephone hours in the evening and at night on the following number.\n\nTel: 08 702 16 80"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Jourhavande präst",
+      "en": "On-call priest"
+    },
+    "text":{
+      "sv": "Samtals- och krisstöd. Du når dem på telefon via 112 samt kvällsöppen chatt. De har tystnadsplikt.",
+      "en": "Conversation and crisis support. You can reach them by telephone via 112 and via evening chat. They are bound by confidentiality."
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Mottagning Maria",
+      "en": "Maria Reception"
+    },
+    "text":{
+      "sv": "För dig under 24 år som har problem med alkohol och andra droger.\n\nTel: 046 17 40 99\nwww.vard.skane.se",
+      "en": "For those under 24 who have problems with alcohol and other drugs.\n\nTel: 046 17 40 99\nwww.vard.skane.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Triangeln beroendemottagning",
+      "en": "Triangeln Addiction Reception"
+    },
+    "text":{
+      "sv": "Specialiserade på behov av kortare stödinsatser för alkoholproblem och för dig som inte tidigare sökt specialistvård.\n\nTel: 040 33 15 86\nwww.vard.skane.se",
+      "en": "Specializes in shorter support interventions for alcohol problems and for those who have not previously sought specialist care.\n\nTel: 040 33 15 86\nwww.vard.skane.se"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Polisen",
+      "en": "The police"
+    },
+    "text":{
+      "sv": "Arbetar förebyggande genom projektet Trygg krog i syfte att förekomma brottslighet som exempelvis sexuella trakasserier i krogmiljö. Ger information och hjälp om hur det går till när man anmäler att någon utsatt en för sexuella trakasserier. Kontaktas på 114 14 vid akut hjälp.",
+      "en": "Work preventively through the Trygg krog (Safe Pub) project with the aim of preventing crimes such as sexual harassment in pubs. Provide information and assistance on how to report someone who has subjected you to sexual harassment. Contact 114 14 for emergency assistance.\n"
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
+      "sv": "Vi finns här för dig!",
+      "en": "We are here for you!"
+    },
+    "text":{
+      "sv": "Förutom de personer vi har presenterat för dig ovan kan du naturligtvis vända dig till oss i Föset eller dina faddrar.\n\nOm du eller någon annan har blivit illa behandlad eller känt sig obekväm under en nollningsaktivitet, säg då till. Berätta för en fadder eller någon i Föset. Vi tar din upplevelse på största allvar och ska se till att du kan känna dig trygg i alla nollningssituationer. Nollningen ska vara en säker och trygg plats för alla.\n\nVåra nummer hittar du om du klickar på telefon-ikonen som finns i appen. Du kan även nå oss via mail.\n\nTa hand om dig! <3\n\noverfos@fsektionen.se\nfoset@fsektionen.se",
+      "en": "In addition to the people we have introduced to you above, you can of course turn to us in Föset or your mentors.\n\nIf you or someone else has been mistreated or felt uncomfortable during an initiation activity, please let us know. Tell a mentor or someone in Föset. We take your experience very seriously and will make sure that you can feel safe in all initiation situations. The introduction should be a safe and secure place for everyone.\n\nYou can find our numbers by clicking on the phone icon in the app. You can also reach us by email.\n\nTake care! <3\noverfos@fsektionen.se\nfoset@fsektionen.se"
+    }
+  }
+]

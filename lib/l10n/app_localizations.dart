@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguideEtiquette.
   ///
   /// In sv, this message translates to:
-  /// **'Allt du behöver veta'**
+  /// **'Vett och Etikett'**
   String get nolleguideEtiquette;
 
   /// No description provided for @nolleguideWordlist.

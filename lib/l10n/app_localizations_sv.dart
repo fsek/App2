@@ -568,7 +568,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get nolleguideWeAtFsek => 'F-sektionen';
 
   @override
-  String get nolleguideEtiquette => 'Allt du behöver veta';
+  String get nolleguideEtiquette => 'Vett och Etikett';
 
   @override
   String get nolleguideWordlist => 'Ordlista';

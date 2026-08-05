@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/etiquette.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/poweredBy.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/wordlist.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/dressCode.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/lund.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/faculty.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/guild.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/stod.dart';
 
 class NolleGuideHomePage extends StatefulWidget {
   @override
@@ -74,6 +80,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         left: isSwedish ? screenWidth * 0.31 : screenWidth * 0.26,
         asset: stodAsset,
         width: 0.9,
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => StodPage()))
       ),
       generateItem(
         screenWidth: screenWidth,
@@ -81,6 +88,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         left: isSwedish ? screenWidth * -0.14 : screenWidth * -0.13,
         asset: kladkodAsset,
         width: 0.9,
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => DressCodePage()))
       ),
       generateItem(
         screenWidth: screenWidth,
@@ -88,6 +96,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         left: isSwedish ? screenWidth * 0.25 : screenWidth * 0.22,
         asset: ordlistaAsset,
         width: 0.9,
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WordListPage()))
       ),
       generateItem(
         screenWidth: screenWidth,
@@ -95,6 +104,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         left: isSwedish ? screenWidth * -0.09 : screenWidth * -0.13,
         asset: etiquetteAsset,
         width: 0.9,
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EtiquettePage()))
       ),
       generateItem(
         screenWidth: screenWidth,
@@ -102,6 +112,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         left: screenWidth * 0.46,
         asset: poweredByAsset,
         width: 0.4,
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PoweredByPage()))
       ),
     ];
   }
@@ -149,6 +160,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
           left: isSwedish ? screenWidth * 0.05 : screenWidth * 0.04,
           asset: lundAsset,
           width: 0.75,
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LundPage()))
       ),
       generateItem(
           screenWidth: screenWidth,

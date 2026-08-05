@@ -131,7 +131,9 @@ flutter:
     - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
     - assets/data/nollning_26/nolleguide/studentlife/faculty/
     - assets/data/nollning_26/nolleguide/studentlife/guild/
+    - assets/data/nollning_26/nolleguide/studentlife/lund/
     - assets/data/nollning_26/nolleguide/
+    - assets/data/nollning_26/nolleguide/dresscode/
 
   fonts:
     - family: Brandon Grotesque
@@ -152,6 +154,9 @@ flutter:
           weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
           weight: 900
+    - family: Consolas
+      fonts:
+        - asset: assets/fonts/Consolas-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
