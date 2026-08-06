@@ -83,6 +83,7 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
                   child: Image.asset(
                     schema_Path,
                     fit: BoxFit.fill,
+                    cacheHeight: 5000,
                     frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                       if (wasSynchronouslyLoaded || frame != null) {
                         if (!image_loaded) {
