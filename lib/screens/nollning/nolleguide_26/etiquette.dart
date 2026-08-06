@@ -45,7 +45,7 @@ class _EtiquettePageState extends State<EtiquettePage> {
 
   List<ContentBlock> _generateContent(dynamic item, String locale) {
     final result = <ContentBlock>[];
-    result.add(ContentBlock.title(item["title"][locale]));
+    result.add(ContentBlock.subheading(item["title"][locale]));
     final content = item["content"][locale];
     for(final subItem in content) {
       if(subItem["heading"] != "") result.add(ContentBlock.subheading(subItem["heading"]));

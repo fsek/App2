@@ -19,7 +19,7 @@ class _StodPageState extends State<StodPage> {
 
   String? jsonString;
 
-  Future<void> loadStodJson() async {
+  Future<void> _loadJson() async {
     final jsonString = await rootBundle.loadString("$path/data_stod.json");
     setState(() {
       this.jsonString = jsonString;
@@ -29,7 +29,7 @@ class _StodPageState extends State<StodPage> {
   @override
   void initState() {
     super.initState();
-    loadStodJson();
+    _loadJson();
   }
 
   @override

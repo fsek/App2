@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitFactory.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitSpacing.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitBuilder.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wallFactory.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/overlay.dart';
 
@@ -19,7 +20,7 @@ class _GuildPageState extends State<GuildPage> {
 
   String? jsonString;
 
-  Future<void> loadGuildJson() async {
+  Future<void> _loadJson() async {
     final jsonString = await rootBundle.loadString("$path/data_guild.json");
     setState(() {
       this.jsonString = jsonString;
@@ -29,7 +30,7 @@ class _GuildPageState extends State<GuildPage> {
   @override
   void initState(){
     super.initState();
-    loadGuildJson();
+    _loadJson();
   }
 
   @override
@@ -120,91 +121,150 @@ class _GuildPageState extends State<GuildPage> {
 
     final String frame = "$path/frame.png";
 
-    const largePortraitSize = 5;
-    const smallPortraitSize = 2;
-    const doublePortraitSize = 10;
+    const largePortraitFlex = 5;
+    const smallPortraitFlex = 2;
+    const doublePortraitFlex = 10;
 
-    void pushNavigator({required int index, required String imagePath}) => Navigator.push(context, TextOverlayRoute(
-        portrait: imagePath,
-        text: data["people"][index]["text"][locale]));
+    void pushNavigator({required int index, required String imagePath}) =>
+        Navigator.push(context, TextOverlayRoute(
+            portrait: imagePath,
+            text: data["people"][index]["text"][locale]));
 
-    return PortraitFactory.addSpacing(space: 24, items: [
+    return [
       Image.asset(fosetTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 0, imagePath: frame)), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
-          leftOnTap: () => pushNavigator(index: 1, imagePath: frame),
-          rightOnTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
-          leftOnTap: () => pushNavigator(index: 3, imagePath: frame),
-          rightOnTap: () => pushNavigator(index: 4, imagePath: frame)), //TODO: FÖSET
-      PortraitFactory.generateDoublePortrait(leftImagePath: frame, rightImagePath: frame, size: doublePortraitSize,
-          leftOnTap: () => pushNavigator(index: 5, imagePath: frame),
-          rightOnTap: () => pushNavigator(index: 6, imagePath: frame)), //TODO: FÖSET
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 0, imagePath: frame)), //TODO: FÖSET
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 1, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: FÖSET
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 3, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 4, imagePath: frame)), //TODO: FÖSET
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 5, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: frame, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 6, imagePath: frame)), //TODO: FÖSET
+      ]),
       Image.asset(organisationTitle),
-      PortraitFactory.generatePortrait(imagePath: presidentPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 7, imagePath: presidentPortrait)),
-      PortraitFactory.generatePortrait(imagePath: vpPortrait, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 8, imagePath: vpPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: presidentPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 7, imagePath: presidentPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: vpPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 8, imagePath: vpPortrait)),
+      ]),
       Image.asset(boardTitle),
-      PortraitFactory.generatePortrait(imagePath: boardPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 9, imagePath: boardPortrait)),
-      PortraitFactory.generatePortrait(imagePath: frame, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 10, imagePath: frame)), //TODO: Ledamöter
+      PortraitRow(portraits: [
+        PortraitData(imagePath: boardPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 9, imagePath: boardPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: frame)), //TODO: Ledamöter
+      ]),
       Image.asset(studentcouncilTitle),
-      PortraitFactory.generatePortrait(imagePath: eduPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 11, imagePath: eduPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: eduPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 11, imagePath: eduPortrait)),
+      ]),
       Image.asset(sexTitle),
-      PortraitFactory.generatePortrait(imagePath: sexPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 12, imagePath: sexPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: sexPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 12, imagePath: sexPortrait)),
+      ]),
       Image.asset(tavernTitle),
-      PortraitFactory.generatePortrait(imagePath: tavernPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 13, imagePath: tavernPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: tavernPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 13, imagePath: tavernPortrait)),
+      ]),
       Image.asset(jubileeTitle),
-      PortraitFactory.generatePortrait(imagePath: jubileePortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 14, imagePath: jubileePortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: jubileePortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 14, imagePath: jubileePortrait)),
+      ]),
       Image.asset(serviceTitle),
-      PortraitFactory.generatePortrait(imagePath: frame, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 15, imagePath: frame)), //TODO: Sekreterare
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 15, imagePath: frame)), //TODO: Sekreterare
+      ]),
       Image.asset(truthTitle),
-      PortraitFactory.generatePortrait(imagePath: truthPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 16, imagePath: truthPortrait)),
-      PortraitFactory.generatePortrait(imagePath: spiderPortrait, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 17, imagePath: spiderPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: truthPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 16, imagePath: truthPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: spiderPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 17, imagePath: spiderPortrait)),
+      ]),
       Image.asset(samvetetTitle),
-      PortraitFactory.generatePortrait(imagePath: samvetetPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 18, imagePath: samvetetPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: samvetetPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 18, imagePath: samvetetPortrait)),
+      ]),
       Image.asset(libuTitle),
-      PortraitFactory.generatePortrait(imagePath: libuPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 19, imagePath: libuPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: libuPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 19, imagePath: libuPortrait)),
+      ]),
       Image.asset(facilitiesTitle),
-      PortraitFactory.generatePortrait(imagePath: prylPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 20, imagePath: prylPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: prylPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 20, imagePath: prylPortrait)),
+      ]),
       Image.asset(crTitle),
-      PortraitFactory.generatePortrait(imagePath: crPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 21, imagePath: crPortrait)),
-      PortraitFactory.generatePortrait(imagePath: faradPortrait, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 22, imagePath: faradPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: crPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 21, imagePath: crPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: faradPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 22, imagePath: faradPortrait)),
+      ]),
       Image.asset(cultureTitle),
-      PortraitFactory.generatePortrait(imagePath: culturePortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 23, imagePath: culturePortrait)),
-      PortraitFactory.generateDoublePortrait(leftImagePath: reisemeisterPortrait, rightImagePath: sportPortrait, size: doublePortraitSize,
-          leftOnTap: () => pushNavigator(index: 24, imagePath: reisemeisterPortrait),
-          rightOnTap: () => pushNavigator(index: 25, imagePath: sportPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: culturePortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 23, imagePath: culturePortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: reisemeisterPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 24, imagePath: reisemeisterPortrait)),
+        PortraitData(imagePath: sportPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 25, imagePath: sportPortrait)),
+      ]),
       Image.asset(frejaTitle),
-      PortraitFactory.generatePortrait(imagePath: frejaPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 26, imagePath: frejaPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frejaPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 26, imagePath: frejaPortrait)),
+      ]),
       Image.asset(accountingTitle),
-      PortraitFactory.generatePortrait(imagePath: treasurerPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 27, imagePath: treasurerPortrait)),
-      PortraitFactory.generatePortrait(imagePath: bookPortrait, size: smallPortraitSize,
-          onTap: () => pushNavigator(index: 28, imagePath: bookPortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: treasurerPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 27, imagePath: treasurerPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: bookPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 28, imagePath: bookPortrait)),
+      ]),
       Image.asset(cafeTitle),
-      PortraitFactory.generatePortrait(imagePath: cafePortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 29, imagePath: cafePortrait)),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: cafePortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 29, imagePath: cafePortrait)),
+      ]),
       Image.asset(processionTitle),
-      PortraitFactory.generatePortrait(imagePath: heraldPortrait, size: largePortraitSize,
-          onTap: () => pushNavigator(index: 30, imagePath: heraldPortrait))
-    ]);
+      PortraitRow(portraits: [
+        PortraitData(imagePath: heraldPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 30, imagePath: heraldPortrait)),
+      ]),
+    ].withSpacing(24);
   }
 }

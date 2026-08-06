@@ -18,7 +18,7 @@ class _LundPageState extends State<LundPage> {
 
   String? jsonString;
 
-  Future<void> loadLundJson() async {
+  Future<void> _loadJson() async {
     final jsonString = await rootBundle.loadString("$path/data_lund.json");
     setState(() {
       this.jsonString = jsonString;
@@ -28,7 +28,7 @@ class _LundPageState extends State<LundPage> {
   @override
   void initState() {
     super.initState();
-    loadLundJson();
+    _loadJson();
   }
 
   @override

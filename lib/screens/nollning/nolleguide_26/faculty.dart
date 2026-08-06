@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitSpacing.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/overlay.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitFactory.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitBuilder.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wallFactory.dart';
 
 class FacultyPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _FacultyPageState extends State<FacultyPage> {
 
   String? jsonString;
 
-  Future<void> loadFacultyJson() async {
+  Future<void> _loadJson() async {
     final jsonString = await rootBundle.loadString("$path/data_faculty.json");
     setState(() {
       this.jsonString = jsonString;
@@ -27,7 +28,7 @@ class _FacultyPageState extends State<FacultyPage> {
   @override
   void initState(){
     super.initState();
-    loadFacultyJson();
+    _loadJson();
   }
 
   @override
@@ -68,21 +69,30 @@ class _FacultyPageState extends State<FacultyPage> {
     final String officers = "$path/officers_${locale}.png";
     final String nollu = "$path/nollu.png";
 
-    void pushNavigator({required int index, required String imagePath}) => Navigator.push(context, TextOverlayRoute(
-        portrait: imagePath,
-        text: data["people"][index]["text"][locale]));
+    void pushNavigator({required int index, required String imagePath}) =>
+        Navigator.push(context, TextOverlayRoute(
+            portrait: imagePath,
+            text: data["people"][index]["text"][locale]));
 
-    return PortraitFactory.addSpacing(space: 24, items: [
+    return [
       Image.asset(title),
-      PortraitFactory.generatePortrait(imagePath: president, size: 5,
-          onTap: () => pushNavigator(index: 0, imagePath: president)),
-      PortraitFactory.generatePortrait(imagePath: officers, size: 2,
-          onTap: () => pushNavigator(index: 1, imagePath: officers)),
-      PortraitFactory.generatePortrait(imagePath: frame, size: 5,
-          onTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: Nollegeneral Norea
-      PortraitFactory.generatePortrait(imagePath: nollu, size: 2,
-          onTap: () => pushNavigator(index: 3, imagePath: nollu)),
-    ]);
+      PortraitRow(portraits: [
+        PortraitData(imagePath: president, flex: 5,
+            onTap: () => pushNavigator(index: 0, imagePath: president)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: officers, flex: 2,
+            onTap: () => pushNavigator(index: 1, imagePath: officers)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: frame, flex: 5,
+            onTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: Nollegeneral Norea
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: nollu, flex: 2,
+            onTap: () => pushNavigator(index: 3, imagePath: nollu)),
+      ]),
+    ].withSpacing(24);
 
   }
 }
