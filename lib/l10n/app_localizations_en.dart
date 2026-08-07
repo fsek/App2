@@ -1081,6 +1081,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Sweden\'s national information number. You can call this number to get information in the event of serious accidents and crises in society.';
 
   @override
+  String get emergencyTitleEight => 'Föset';
+
+  @override
+  String get emergencyContentEight =>
+      'If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nElina Kazemi-Esfeh\n+46737725955 \n\nEdith Fållsten\n+46768717087 \n\nAda Parén\n+46760470583 \n\nAlice Önnerheim\n+46709221301 \n\nLinnea Becker\n+46761399402 \n\nManne Mönster\n+46709487839 \n\nHarald Barck-Holst\n+46763193169 \n\nYou can find contact information for other parts of the guild on the website contact page: https://fsektionen.se/contact/.';
+
+  @override
   String get game => 'Moose game';
 
   @override
