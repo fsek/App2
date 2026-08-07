@@ -1085,7 +1085,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emergencyContentEight =>
-      'If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nElina Kazemi-Esfeh\n073 772 5955 \n\nEdith Fållsten\n076 871 7087 \n\nAda Parén\n076 047 0583 \n\nAlice Önnerheim\n070 922 1301 \n\nLinnea Becker\n076 139 9402 \n\nManne Mönster\n070 948 7839 \n\nHarald Barck-Holst\n076 319 3169 \n\nYou can find contact information for other parts of the guild on the website contact page: https://fsektionen.se/contact/.';
+      'If you need to get in touch with a member of the Fös quickly, you can call us on the following numbers. \n\nElina Kazemi-Esfeh\n+46737725955 \n\nEdith Fållsten\n+46768717087 \n\nAda Parén\n+46760470583 \n\nAlice Önnerheim\n+46709221301 \n\nLinnea Becker\n+46761399402 \n\nManne Mönster\n+46709487839 \n\nHarald Barck-Holst\n+46763193169 \n\nYou can find contact information for other parts of the guild on the website contact page: https://fsektionen.se/contact/.';
 
   @override
   String get game => 'Moose game';
