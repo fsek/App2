@@ -28,7 +28,7 @@ class _CalendarState extends State<Calendar> {
   }
   void openEventPage(EventRead event) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
+        MaterialPageRoute(builder: (context) => EventPage(event: event, eventId: event.id)));
   }
   List<EventRead> _getEventsForDay(DateTime day) {
 
@@ -46,203 +46,159 @@ class _CalendarState extends State<Calendar> {
             }));
   }
 
-  Widget checkAlcoholEventType(String alcType, {bool isIcon = false}){
-    final String alcServed = "assets/data/nollning_25/calendar/alkfullImg.png";
-    final String noAlc = "assets/data/nollning_25/calendar/alkfriImg.png";
-    final String byob = "assets/data/nollning_25/calendar/byobImg.png";
-    final String alcServedIcon = "assets/data/nollning_25/calendar/alkfullIcon.png";
-    final String noAlcIcon = "assets/data/nollning_25/calendar/alkfriIcon.png";
-    final String byobIcon = "assets/data/nollning_25/calendar/byobIcon.png";
-
+  Widget? checkAlcoholEventType(String alcType, {bool isNollning = false}){
     switch (alcType) {
       case "Alcohol-Served":
-        if (isIcon) return Image.asset(alcServedIcon, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/alcfull_icon.png");
+        }
 
-        return Image.asset(alcServed, fit: BoxFit.fill);
+        return Icon(Icons.wine_bar_rounded);
 
       case "Alcohol":
-        if (isIcon) return Image.asset(byobIcon, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/byob_icon.png");
+        }
 
-        return Image.asset(byob, fit: BoxFit.fill);
+        return null;
 
       default:
-        if (isIcon) return Image.asset(noAlcIcon, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/alcfree_icon.png");
+        }
 
-        return Image.asset(noAlc, fit: BoxFit.fill);
+        return null;
     }
   }
 
   Widget createEventCard(EventRead event) {
     String locale = Localizations.localeOf(context).toString();
     var t = AppLocalizations.of(context)!;
-    if(event.isNollningEvent) {
-      return Container(
-        child: Card(
-          shadowColor: Colors.transparent,
-          color: Colors.transparent,
-          surfaceTintColor: null,
-          child: InkWell(
-            onTap: () => openEventPage(event),
-            child: Container(
-              margin: EdgeInsets.zero,
-              child: Stack(
-                children: [
-                  Positioned.fill(child: checkAlcoholEventType(event.alcoholEventType)),
-                  Container(child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(padding: EdgeInsets.only(top: 5)),
-                      Container(
-                    margin: EdgeInsets.only(bottom: 7, left: 30),
-                    child: Text(
-                      t.localeName == "en" ? event.titleEn : event.titleSv,
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xFFFCBD1D)
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.only(left: 30)),
-                      Icon(
-                        Icons.access_time_rounded,
-                        size: 20,
-                      ),
-                      Text(
-                        /* better error checking */
-                        "  " +
-                            DateFormat("HH:mm")
-                                .format(event.startsAt.toLocal()) +
-                            " - " +
-                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
-                            ", " +
-                            DateFormat("MMMMd", locale)
-                                .format(event.startsAt.toLocal()),
-                        style: TextStyle(
-                          fontFamily: "MinionPro",
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.only(left: 30)),
-                      Icon(
-                        Icons.room,
-                        size: 20,
-                      ),
-                      Text(
-                        "  " +
-                            event.location,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                    Padding(padding: EdgeInsets.only(bottom: 10))
-                    ]))
-                ],
-              ),
-            ),
-          )));
 
-    } else {
+    final formattedStartTime = DateFormat("HH:mm").format(event.startsAt.toLocal());
+    final formattedEndTime = DateFormat("HH:mm").format(event.endsAt.toLocal());
+    final formattedDay = DateFormat("MMMMd", locale).format(event.startsAt.toLocal());
 
-    return Container(
-      child: Card(
-        shadowColor: null,
-        color: null,
-        child: InkWell(
-          onTap: () => openEventPage(event),
-          child: Container(
-            margin: EdgeInsets.zero,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 7),
-                    child: Text(
-                      t.localeName == "en" ? event.titleEn : event.titleSv,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.access_time_rounded,
-                        size: 20,
-                      ),
-                      Text(
-                        /* better error checking */
-                        "  " +
-                            DateFormat("HH:mm")
-                                .format(event.startsAt.toLocal()) +
-                            " - " +
-                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
-                            ", " +
-                            DateFormat("MMMMd", locale)
-                                .format(event.startsAt.toLocal()),
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            // Alcohol is served
-                            if (event.alcoholEventType == "Alcohol-Served")
-                              Icon(Icons.wine_bar_rounded, size: 20),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.room,
-                        size: 20,
-                      ),
-                      Text(
-                        "  " +
-                            event.location,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              margin: EdgeInsets.all(10),
-            ),
+    final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
+
+    return Card(
+      elevation: 5,
+      shadowColor: null,
+      color: null,
+      margin: const EdgeInsets.all(5),
+      child: InkWell(
+        onTap: () => openEventPage(event),
+        child: Container(
+          padding: event.isNollningEvent ? const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40) : const EdgeInsets.all(10),
+          decoration: !event.isNollningEvent ? null : const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
+              centerSlice: Rect.fromLTWH(32, 49, 364, 1)  // To hide stretching
+              // fit: BoxFit.fill
+            )
           ),
-        ),
-        // Introduction events background needs access to entire card
-        margin: EdgeInsets.all(4),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 7),
+                      child: Text(
+                        t.localeName == "en" ? event.titleEn : event.titleSv,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        // overflow: TextOverflow.ellipsis
+                      )
+                    ),
+
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.access_time_rounded,
+                          size: 20
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            /* better error checking */
+                            "$formattedStartTime - $formattedEndTime, $formattedDay",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            )
+                          )
+                        ),
+                      ]
+                    ),
+
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.room,
+                          size: 20,
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            event.location,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            )
+                          )
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ),
+
+              if (alcPolicyImage != null)
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: alcPolicyImage
+                ),
+            ]
+          )
+        )
       ),
     );
-    }
+  }
+
+  Widget? _getMarkers(List<EventRead> events) {
+    if (events.isEmpty) return null;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: events.map((event) {
+        final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
+
+        if (!event.isNollningEvent || alcPolicyImage == null) {
+          return Container(
+            width: 8,
+            height: 8,
+            margin: const EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.inverseSurface,
+              shape: BoxShape.circle
+            )
+          );
+        }
+
+        return Container(
+          width: 13,
+          height: 13,
+          margin: EdgeInsets.all(1),
+          child: alcPolicyImage
+        );
+      }).toList(),
+    );
   }
 
   @override
@@ -294,35 +250,7 @@ class _CalendarState extends State<Calendar> {
                     return _getEventsForDay(day);
                   },
                   calendarBuilders: CalendarBuilders<EventRead>(
-                    markerBuilder: (context, day, events) {
-                      if (events.isEmpty) return null;
-
-                      final defaultMarkerAnon = (Color color) => Container(
-                        width: 8,
-                        height: 8,
-                        margin: const EdgeInsets.all(1),
-                        decoration: BoxDecoration(
-                          color: color,
-                          shape: BoxShape.circle,
-                        ),
-                      );
-
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: events.map((event) {
-                          if (!event.isNollningEvent) {
-                            return defaultMarkerAnon(Theme.of(context).colorScheme.inverseSurface);
-                          }
-
-                          return Container(
-                            width: 13,
-                            height: 13,
-                            margin: EdgeInsets.all(1),
-                            child: checkAlcoholEventType(event.alcoholEventType, isIcon: true),
-                          );
-                        }).toList(),
-                      );
-                    },
+                    markerBuilder: (context, day, events) => _getMarkers(events)
                   ),
                 ),
                 Container(
