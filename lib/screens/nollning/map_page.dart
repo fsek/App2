@@ -1,48 +1,49 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class PlaceInfo {
-  // final String title;
-  // final String description_en;
-  // final String description_sv;
-  // final int top;
-  // final int left;
+  final String title;
+  final String description_en;
+  final String description_sv;
+  final List<String>? descriptionAssets;
+  final Rect box;
   // final String asset;
-  // final String? extraAsset;
 
-  // PlaceInfo({
-  //   required this.title,
-  //   required this.description_en,
-  //   required this.description_sv,
-  //   required this.top,
-  //   required this.left,
-  //   required this.asset,
-  //   required this.extraAsset,
-  // });
+  PlaceInfo({
+    required this.title,
+    required this.description_en,
+    required this.description_sv,
+    this.descriptionAssets,
+    required this.box,
+    // required this.asset,
+  });
 
-  // factory PlaceInfo.fromJson(Map<String, dynamic> json) {
-  //   return PlaceInfo(
-  //     title: json['title'],
-  //     description_en: json['description']['en'],
-  //     description_sv: json['description']['sv'],
-  //     top: json['top'],
-  //     left: json['left'],
-  //     asset: json['asset'],
-  //     extraAsset: json['extraAsset'],
-  //   );
-  // }
+  factory PlaceInfo.fromJson(Map<String, dynamic> json) {
+    return PlaceInfo(
+      title: json['title'],
+      description_en: json['description']['en'],
+      description_sv: json['description']['sv'],
+      descriptionAssets: List<String>.from(json["descriptionAssets"]),
+      box: Rect.fromLTRB(
+        json["box"]["left"], json["box"]["top"], json["box"]["right"], json["box"]["bottom"]
+      ),
+      // asset: json['asset'],
+    );
+  }
 }
 
-// Future<List<PlaceInfo>> loadJson() async {
-//   String jsonString =
-//       await rootBundle.loadString('assets/data/nollning-24/map_info.json');
-//   final jsonResponse = json.decode(jsonString);
+Future<List<PlaceInfo>> loadJson() async {
+  String jsonString = await rootBundle.loadString(
+    'assets/data/nollning_26/map/map_info.json');
+  final jsonResponse = json.decode(jsonString);
 
-//   return (jsonResponse as List)
-//       .map((place) => PlaceInfo.fromJson(place))
-//       .toList();
-// }
+  return (jsonResponse as List)
+      .map((place) => PlaceInfo.fromJson(place))
+      .toList();
+}
 
 class MapView extends StatefulWidget {
   @override
@@ -50,13 +51,9 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  // String baseAssetPath = "assets/img/nollning-24/karta/";
-  // String imagePath = "assets/data/nollning_25/nolleguide/karta.png";
   final String imagePath = "assets/data/nollning_25/karta.png";
-  // final double pinWidth = 17.0;
-  // final double pinHeight = 17.0;
-  // final int imageWidth = 2900;
-  // final int imageHeight = 2480;
+  final int imageWidth = 3000;
+  final int imageHeight = 4218;
 
   List? pins;
 
@@ -66,15 +63,11 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    double bodyHeight = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).padding.top +
-            kToolbarHeight); // Remove height of AppBar
-    double bodyWidth = MediaQuery.of(context).size.width;
+    _placePins(context).then((value) {
+      pins = value;
+      setState(() {});
+    });
 
-    // _placePins(context, bodyHeight, bodyWidth).then((value) {
-    //   pins = value;
-    //   setState(() {});
-    // });
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.introductionMap),
@@ -83,85 +76,146 @@ class _MapViewState extends State<MapView> {
         child: PhotoView.customChild(
           initialScale: 2.0,
           backgroundDecoration: BoxDecoration(color: Color(0xff2c2724)),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(imagePath), // Your map image
-              // ...?pins,
-            ],
+          child: SizedBox(
+            width: imageWidth.toDouble(),
+            height: imageHeight.toDouble(),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(imagePath),
+                ...?pins,
+              ],
+            ),
           ),
           minScale: 1.0,
           maxScale: 6.0,
-        ),
+        )
       ),
     );
   }
 
-  // Future<List<Positioned>> _placePins(
-  //     BuildContext context, double bodyHeight, double bodyWidth) async {
-  //   List<PlaceInfo> placeInfos = await loadJson();
-  //   String locale = Localizations.localeOf(context).toString();
-  //   var pinList = placeInfos
-  //       .map((data) => Positioned(
-  //             top: bodyHeight / 2 +
-  //                 (data.top - 0.5 * imageHeight) * bodyWidth / imageWidth -
-  //                 pinHeight / 2,
-  //             left: bodyWidth * data.left / imageWidth - pinWidth / 2,
-  //             child: GestureDetector(
-  //               onTap: () => _showPOIDialog(
-  //                 context,
-  //                 data.title,
-  //                 (locale == "sv") ? data.description_sv : data.description_en,
-  //                 data.extraAsset,
-  //               ),
-  //               child: Image.asset(
-  //                 baseAssetPath + data.asset,
-  //                 height: pinHeight,
-  //                 width: pinWidth,
-  //               ),
-  //             ),
-  //           ))
-  //       .toList();
-  //   return pinList;
-  // }
+  Future<List<Positioned>> _placePins(
+      BuildContext context) async {
+    List<PlaceInfo> placeInfos = await loadJson();
+    String locale = Localizations.localeOf(context).toString();
 
-  // void _showPOIDialog(BuildContext context, String title, String description,
-  //     String? extraAsset) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         backgroundColor: const Color(0xffdcc394),
-  //         title: Text(
-  //           title,
-  //           style: TextStyle(fontFamily: 'Testament'),
-  //         ),
-  //         content: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Text(
-  //               description,
-  //               style: TextStyle(fontFamily: 'Testament'),
-  //             ),
-  //             (extraAsset != null)
-  //                 ? Image.asset(baseAssetPath + "extraAssets/" + extraAsset)
-  //                 : SizedBox.shrink(),
-  //           ],
-  //         ),
-  //         actions: [
-  //           TextButton(
-  //             style: TextButton.styleFrom(backgroundColor: Color(0xff630b0b)),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //             child: Text(
-  //               AppLocalizations.of(context)!.introductionMapClose,
-  //               style: TextStyle(fontFamily: 'Testament'),
-  //             ),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+    final bodyHeight = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).padding.top +
+            kToolbarHeight); // Remove height of AppBar
+    final bodyWidth = MediaQuery.of(context).size.width;
+
+    final imgAspectRatio = imageWidth / imageHeight;
+    final displayHeight = bodyWidth / imgAspectRatio;
+    final yOffset = (bodyHeight - displayHeight) / 2;
+
+    var pinList = placeInfos
+        .map((data) => 
+            Positioned.fromRect(
+              rect: data.box.scale(bodyWidth, displayHeight).translate(0, yOffset),
+              child: GestureDetector(
+                onTap: () => _showPOIDialog(
+                  context,
+                  data.title,
+                  (locale == "sv") ? data.description_sv : data.description_en,
+                  data.descriptionAssets,
+                ),
+                child: Stack(
+                  children: [
+                    // Image.asset(
+                    //   data.asset,
+                    //   height: pinHeight,
+                    //   width: pinWidth,
+                    // ),
+
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: BoxBorder.all(color: Colors.red),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     blurRadius: 5,
+                          //     spreadRadius: 0,
+                          //     blurStyle: BlurStyle.outer
+                          //   )
+                          // ]
+                        ),
+                      )
+                    )
+                  ]
+                )
+              ),
+            ))
+        .toList();
+    return pinList;
+  }
+
+  void _showPOIDialog(BuildContext context, String title, String description,
+      List<String>? descriptionAssets) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xffdcc394),
+          title: Text(
+            title,
+            style: TextStyle(fontFamily: 'Testament'),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                description,
+                style: TextStyle(fontFamily: 'Testament'),
+              ),
+
+              Image.asset(descriptionAssets![0], fit: BoxFit.contain,),
+
+              Image.asset(descriptionAssets[1], fit: BoxFit.contain,),
+
+              // FittedBox(
+              //   child: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: [
+              //       Image.asset(descriptionAssets![0], fit: BoxFit.contain,),
+              //       Spacer(),
+              //       Image.asset(descriptionAssets[1], fit: BoxFit.contain,)
+              //     ],
+              //   )
+              // )
+              
+              // if (descriptionAssets != null)
+                // Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: descriptionAssets!.map((asset) => Image.asset(asset, fit: BoxFit.contain,)).toList()
+                // ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(backgroundColor: Color(0xff630b0b)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                AppLocalizations.of(context)!.introductionMapClose,
+                style: TextStyle(fontFamily: 'Testament'),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+extension RectScaling on Rect {  // Where should this be?
+  Rect scale(double scaleX, double scaleY) {
+    return Rect.fromLTRB(
+      left * scaleX,
+      top * scaleY,
+      right * scaleX,
+      bottom * scaleY
+    );
+  }
 }

@@ -1,0 +1,19 @@
+[
+   {
+    "title": "Kemicentrum",
+    "description": {
+        "sv": "På KC bedrivs världsledande forskning och utbildning inom kemi. Här hittar du dessutom sektionerna K och W. 10 minuter från MH.",
+        "en": "The Chemistry Center conducts world-leading research and education in chemistry. At KC you will also find the guilds K and W. 10 minutes from MH."
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 0.512,
+        "top": 0.338,
+        "right": 0.683,
+        "bottom": 0.357
+    },
+    "asset": "kc.png"
+   }
+]
