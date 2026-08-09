@@ -1,19 +1,116 @@
 [
    {
-    "title": "Kemicentrum",
+    "title": {
+        "sv": "Kemicentrum",
+        "en": "The Chemistry Centre"
+    },
     "description": {
-        "sv": "På KC bedrivs världsledande forskning och utbildning inom kemi. Här hittar du dessutom sektionerna K och W. 10 minuter från MH.",
-        "en": "The Chemistry Center conducts world-leading research and education in chemistry. At KC you will also find the guilds K and W. 10 minutes from MH."
+        "sv": "Längst bort från trygga hemvisten hittar vi Kemicentrum! I dess korridorer rör sig K-pHøs och W-Phøs. Packa matsäck och kaffe för vägen hit tar hela 9 minuter av vandring.",
+        "en": "Furthest away from our familiar home base, we find the Chemistry Centre! K-pHøs and W-Phøs roam its corridors. Pack a packed lunch and some coffee, because the walk here takes a whole 9 minutes."
     },
     "descriptionAssets": [
         "assets/data/nollning_26/map/pin_media/kc.gif"
     ],
     "box": {
-        "left": 0.512,
-        "top": 0.338,
-        "right": 0.683,
-        "bottom": 0.357
+        "left": 1489.2,
+        "top": 1081.3,
+        "width": 729.6,
+        "height": 277.1
+    }
+   },
+   {
+    "title": {
+        "sv": "A-huset",
+        "en": "The A-building"
     },
-    "asset": "kc.png"
+    "description": {
+        "sv": "Bland glitter och glamour träder A-Phøs fram. Man finner dem här, i A-huset. Resan hit tar 8 minuter från Mattehuset.",
+        "en": "Amidst the glitz and glamour, A-Phøs steps into the spotlight. You can find them here, in the A-building. The journey here takes 8 minutes from the Math Building."
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 2095.3,
+        "top": 1534.3,
+        "width": 277.8,
+        "height": 423.7
+    }
+   },
+   {
+    "title": {
+        "sv": "V-huset",
+        "en": "The V-building"
+    },
+    "description": {
+        "sv": "Slå upp dörrarna in till V-huset och V-Phøs du skall finna! Expeditionen hit tar hela 6 minuter och ska man ta sig så långt från Mattehuset bör riskerna beaktas.",
+        "en": "Throw open the doors to the V-building, and you shall find V-Phøs! The trek here takes a full six minutes, and venturing that far from the Math Building means the risks should be considered."
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 1926.4,
+        "top": 1964.2,
+        "width": 274.6,
+        "height": 436.5
+    }
+   },
+   {
+    "title": {
+        "sv": "E-huset",
+        "en": "The E-building"
+    },
+    "description": {
+        "sv": "Välkommen in i värmen av E-huset. I denna byggnad finner vi E-Phøs och D-stab. Färden hit tar er 3 minuter från Mattehuset.",
+        "en": "Welcome into the warmth of the E-building. This building houses E-Phøs and D-stab. The journey here takes three minutes from the Math Building."
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 1833.9,
+        "top": 2419.1,
+        "width": 256.8,
+        "height": 400.1
+    }
+   },
+   {
+    "title": {
+        "sv": "M-huset",
+        "en": "The M-building"
+    },
+    "description": {
+        "sv": "Hej och välkomna till M-huset! I denna byggnaden hittar ni M-Phøs och I-Phøs. Ska ni bege er hit från Mattehuset tar det er ungefär 4 minuter att gå.",
+        "en": "Hello and welcome to the M-building! In this building, you will find M-Phøs and I-Phøs. If you are coming here from the Math Building, it takes about four minutes to walk."
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 1781.4,
+        "top": 2879.1,
+        "width": 239.9,
+        "height": 434.3
+    }
+   },
+   {
+    "title": {
+        "sv": "Mattehuset",
+        "en": "The Math Building"
+    },
+    "description": {
+        "sv": "Så du har hittat hem, det glädjer mig! I denna byggnaden hänger F-fös och du kan känna dig som hemma dina kommande år på LTH. Käka en macka från Hilbert Café, stämpla en kopp nybryggt guld från ditt kaffekort och njut, du är precis där du ska vara! <3",
+        "en": "So you’ve found your way home—I’m so glad! This is the building where the F-fös hang out, and you can truly feel at home here during your coming years at LTH. Grab a sandwich from Hilbert Café, stamp your coffee card for a cup of freshly brewed liquid gold, and just enjoy—you’re exactly where you’re meant to be! <3"
+    },
+    "descriptionAssets": [
+        "assets/data/nollning_26/map/pin_media/kc.gif"
+    ],
+    "box": {
+        "left": 1067.4,
+        "top": 2558.0,
+        "width": 316.7,
+        "height": 460.6
+    }
    }
 ]

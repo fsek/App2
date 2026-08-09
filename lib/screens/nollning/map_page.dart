@@ -1,19 +1,20 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class PlaceInfo {
-  final String title;
+  final String title_sv;
+  final String title_en;
   final String description_en;
   final String description_sv;
   final List<String>? descriptionAssets;
   final Rect box;
   // final String asset;
 
-  PlaceInfo({
-    required this.title,
+  const PlaceInfo({
+    required this.title_sv,
+    required this.title_en,
     required this.description_en,
     required this.description_sv,
     this.descriptionAssets,
@@ -23,21 +24,21 @@ class PlaceInfo {
 
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
     return PlaceInfo(
-      title: json['title'],
-      description_en: json['description']['en'],
-      description_sv: json['description']['sv'],
+      title_sv: json["title"]["sv"],
+      title_en: json["title"]["en"],
+      description_en: json["description"]["en"],
+      description_sv: json["description"]["sv"],
       descriptionAssets: List<String>.from(json["descriptionAssets"]),
-      box: Rect.fromLTRB(
-        json["box"]["left"], json["box"]["top"], json["box"]["right"], json["box"]["bottom"]
+      box: Rect.fromLTWH(
+        json["box"]["left"], json["box"]["top"], json["box"]["width"], json["box"]["height"]
       ),
-      // asset: json['asset'],
+      // asset: json["asset"],
     );
   }
 }
 
 Future<List<PlaceInfo>> loadJson() async {
-  String jsonString = await rootBundle.loadString(
-    'assets/data/nollning_26/map/map_info.json');
+  String jsonString = await rootBundle.loadString("assets/data/nollning_26/map/map_info.json");
   final jsonResponse = json.decode(jsonString);
 
   return (jsonResponse as List)
@@ -51,166 +52,209 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  final String imagePath = "assets/data/nollning_25/karta.png";
-  final int imageWidth = 3000;
-  final int imageHeight = 4218;
+  final String _imagePath = "assets/data/nollning_26/map/map.png";
+  final int _imageWidth = 3050;
+  final int _imageHeight = 4062;
 
-  List? pins;
+  double get _bodyHeight => MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight); // Remove height of AppBar
+  double get _bodyWidth => MediaQuery.of(context).size.width;
+  double get displayHeight => _bodyWidth * _imageHeight / _imageWidth;
 
-  void initState() {
-    super.initState();
+  final TransformationController _transformationController = TransformationController();
+
+  List<Widget>? pins;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _placePins(context);
+    _applyInitialZoom();
+  }
+
+  void _applyInitialZoom() {
+    final zoomFactor = _bodyHeight / displayHeight;
+
+    _transformationController.value.setEntry(0, 0, zoomFactor);
+    _transformationController.value.setEntry(1, 1, zoomFactor);
+    _transformationController.value.setEntry(2, 2, zoomFactor);
+
+    final xOffset = _bodyWidth * (1 - zoomFactor) / 2;
+    final yOffset = _bodyHeight * (1 - zoomFactor) / 2;
+    _transformationController.value.setEntry(0, 3, xOffset);
+    _transformationController.value.setEntry(1, 3, yOffset);
+  }
+
+  Future<void> _placePins(BuildContext context) async {
+    List<PlaceInfo> placeInfos = await loadJson();
+    String locale = Localizations.localeOf(context).toString();
+
+    final yOffset = (_bodyHeight - displayHeight) / 2;
+    final pinList = placeInfos.map((data) => Positioned.fromRect(
+      rect: data.box.scale(_bodyWidth / _imageWidth, displayHeight / _imageHeight).translate(0, yOffset),  // boxes are in (image-)absolute coordinates
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => showDialog(
+          context: context,
+          builder: _buildPOIDialog(
+            locale == "sv" ? data.title_sv : data.title_en,
+            locale == "sv" ? data.description_sv : data.description_en,
+            data.descriptionAssets,
+          )
+        ),
+        child: Container(
+          color: Colors.transparent
+          // decoration: BoxDecoration(
+          //   color: Colors.red.withAlpha(128),
+          //   border: Border.all(color: Colors.red),
+          // )
+        )
+      ),
+    )).toList();
+
+    // var pinList = placeInfos.map((data) => Positioned.fromRect(
+    //   rect: data.box,
+    //   child: GestureDetector(
+    //     onTap: () => _showPOIDialog(
+    //       context,
+    //       data.title,
+    //       (locale == "sv") ? data.description_sv : data.description_en,
+    //       data.descriptionAssets,
+    //     ),
+    //     child: Container(
+    //       decoration: BoxDecoration(
+    //         color: Colors.red.withAlpha(128),
+    //         border: BoxBorder.all(color: Colors.red),
+    //       ),
+    //     )
+    //   ),
+    // )).toList();
+
+    setState(() {
+      pins = pinList;
+    });
+  }
+
+  Widget Function(BuildContext) _buildPOIDialog(String title, String description,
+      List<String>? descriptionAssets) {
+    return (BuildContext context) => AlertDialog(
+      backgroundColor: const Color(0xFFFF00FF),
+      contentPadding: const EdgeInsets.all(20),
+      content: Container(
+        padding: const EdgeInsets.all(0),
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(10))
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            spacing: 10,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: FittedBox(
+                      // fit: BoxFit.contain,
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "NF-Pixels",
+                          fontSize: 30
+                        )
+                      )
+                    )
+                  ),
+
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.close),
+                    color: Colors.white
+                  )
+                ]
+              ),
+
+              if (descriptionAssets != null)
+                ...descriptionAssets.map((asset) => Image.asset(
+                  asset,
+                  fit: BoxFit.contain
+                )),
+
+              Text(
+                description,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: "NF-Pixels",
+                  fontSize: 20
+                ),
+              )
+            ]
+          )
+        )
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _placePins(context).then((value) {
-      pins = value;
-      setState(() {});
-    });
-
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.introductionMap),
       ),
+      // body: PhotoView.customChild(
+      //   backgroundDecoration: BoxDecoration(color: Color(0xff2c2724)),
+      //   childSize: Size(
+      //     _imageWidth.toDouble(),
+      //     _imageHeight.toDouble(),
+      //   ),
+      //   initialScale: PhotoViewComputedScale.covered,
+      //   // minScale: PhotoViewComputedScale.contained,
+      //   // maxScale: PhotoViewComputedScale.covered * 6,
+      //   gestureDetectorBehavior: HitTestBehavior.translucent,
+      //   child: SizedBox(  // Probably not neded but
+      //     width: _imageWidth.toDouble(),
+      //     height: _imageHeight.toDouble(),
+      //     child: Stack(
+      //       alignment: Alignment.center,
+      //       children: [
+      //         Image.asset(_imagePath),
+      //         ...?pins,
+      //       ],
+      //     )
+      //   )
+      // )
+
       body: Container(
-        child: PhotoView.customChild(
-          initialScale: 2.0,
-          backgroundDecoration: BoxDecoration(color: Color(0xff2c2724)),
+        color: const Color(0xff2c2724),
+        child: InteractiveViewer(
+          transformationController: _transformationController,
+          minScale: 1.0,
+          maxScale: 6.0,
           child: SizedBox(
-            width: imageWidth.toDouble(),
-            height: imageHeight.toDouble(),
+            width: _imageWidth.toDouble(),
+            height: _imageHeight.toDouble(),
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset(imagePath),
+                Image.asset(_imagePath),
+
                 ...?pins,
-              ],
-            ),
-          ),
-          minScale: 1.0,
-          maxScale: 6.0,
+              ]
+            )
+          )
         )
-      ),
-    );
-  }
-
-  Future<List<Positioned>> _placePins(
-      BuildContext context) async {
-    List<PlaceInfo> placeInfos = await loadJson();
-    String locale = Localizations.localeOf(context).toString();
-
-    final bodyHeight = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).padding.top +
-            kToolbarHeight); // Remove height of AppBar
-    final bodyWidth = MediaQuery.of(context).size.width;
-
-    final imgAspectRatio = imageWidth / imageHeight;
-    final displayHeight = bodyWidth / imgAspectRatio;
-    final yOffset = (bodyHeight - displayHeight) / 2;
-
-    var pinList = placeInfos
-        .map((data) => 
-            Positioned.fromRect(
-              rect: data.box.scale(bodyWidth, displayHeight).translate(0, yOffset),
-              child: GestureDetector(
-                onTap: () => _showPOIDialog(
-                  context,
-                  data.title,
-                  (locale == "sv") ? data.description_sv : data.description_en,
-                  data.descriptionAssets,
-                ),
-                child: Stack(
-                  children: [
-                    // Image.asset(
-                    //   data.asset,
-                    //   height: pinHeight,
-                    //   width: pinWidth,
-                    // ),
-
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: BoxBorder.all(color: Colors.red),
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     blurRadius: 5,
-                          //     spreadRadius: 0,
-                          //     blurStyle: BlurStyle.outer
-                          //   )
-                          // ]
-                        ),
-                      )
-                    )
-                  ]
-                )
-              ),
-            ))
-        .toList();
-    return pinList;
-  }
-
-  void _showPOIDialog(BuildContext context, String title, String description,
-      List<String>? descriptionAssets) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xffdcc394),
-          title: Text(
-            title,
-            style: TextStyle(fontFamily: 'Testament'),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                description,
-                style: TextStyle(fontFamily: 'Testament'),
-              ),
-
-              Image.asset(descriptionAssets![0], fit: BoxFit.contain,),
-
-              Image.asset(descriptionAssets[1], fit: BoxFit.contain,),
-
-              // FittedBox(
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.min,
-              //     children: [
-              //       Image.asset(descriptionAssets![0], fit: BoxFit.contain,),
-              //       Spacer(),
-              //       Image.asset(descriptionAssets[1], fit: BoxFit.contain,)
-              //     ],
-              //   )
-              // )
-              
-              // if (descriptionAssets != null)
-                // Row(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: descriptionAssets!.map((asset) => Image.asset(asset, fit: BoxFit.contain,)).toList()
-                // ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              style: TextButton.styleFrom(backgroundColor: Color(0xff630b0b)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                AppLocalizations.of(context)!.introductionMapClose,
-                style: TextStyle(fontFamily: 'Testament'),
-              ),
-            ),
-          ],
-        );
-      },
+      )
     );
   }
 }
 
 extension RectScaling on Rect {  // Where should this be?
-  Rect scale(double scaleX, double scaleY) {
+  Rect scale(num scaleX, num scaleY) {
     return Rect.fromLTRB(
       left * scaleX,
       top * scaleY,
