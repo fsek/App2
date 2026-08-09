@@ -569,7 +569,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nolleguideWeAtFsek => 'The F-guild';
 
   @override
-  String get nolleguideEtiquette => 'All you need to know';
+  String get nolleguideEtiquette => 'Etiquette';
 
   @override
   String get nolleguideWordlist => 'Glossary';
