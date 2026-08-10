@@ -8,12 +8,12 @@ import 'package:vector_math/vector_math.dart';
 enum MooseState { running, jumping, ducking, falling }
 
 class Moose extends GameObject {
-  Sprite mooseRun1 = mooseRunSprite(1);
-  Sprite mooseRun2 = mooseRunSprite(2);
-  Sprite mooseRun3 = mooseRunSprite(3);
-  Sprite mooseRun4 = mooseRunSprite(4);
-  Sprite mooseJump = mooseJumpSprite;
-  Sprite mooseFall = mooseFallSprite;
+  Sprite get mooseRun1 => mooseRunSprite(1);
+  Sprite get mooseRun2 => mooseRunSprite(2);
+  Sprite get mooseRun3 => mooseRunSprite(3);
+  Sprite get mooseRun4 => mooseRunSprite(4);
+  Sprite get mooseJump => mooseJumpSprite;
+  Sprite get mooseFall => mooseFallSprite;
 
   double yVelocity = 0;
   final double jumpForce = 20;
