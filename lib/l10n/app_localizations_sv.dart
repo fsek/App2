@@ -568,7 +568,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get nolleguideWeAtFsek => 'F-sektionen';
 
   @override
-  String get nolleguideEtiquette => 'Allt du behöver veta';
+  String get nolleguideEtiquette => 'Vett och Etikett';
 
   @override
   String get nolleguideWordlist => 'Ordlista';
@@ -1072,6 +1072,13 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.';
+
+  @override
+  String get emergencyTitleEight => 'Föset';
+
+  @override
+  String get emergencyContentEight =>
+      'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nElina Kazemi-Esfeh\n073 772 5955 \n\nEdith Fållsten\n076 871 7087 \n\nAda Parén\n076 047 0583 \n\nAlice Önnerheim\n070 922 1301 \n\nLinnea Becker\n076 139 9402 \n\nManne Mönster\n070 948 7839 \n\nHarald Barck-Holst\n076 319 3169 \n\nKontaktinformation till andra delar av sektionen kan du hitta på hemsidans kontakt-sida: https://fsektionen.se/contact/.';
 
   @override
   String get game => 'Moose game';

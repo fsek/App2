@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguideEtiquette.
   ///
   /// In sv, this message translates to:
-  /// **'Allt du behöver veta'**
+  /// **'Vett och Etikett'**
   String get nolleguideEtiquette;
 
   /// No description provided for @nolleguideWordlist.
@@ -2083,6 +2083,18 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.'**
   String get emergencyContentSeven;
+
+  /// No description provided for @emergencyTitleEight.
+  ///
+  /// In sv, this message translates to:
+  /// **'Föset'**
+  String get emergencyTitleEight;
+
+  /// No description provided for @emergencyContentEight.
+  ///
+  /// In sv, this message translates to:
+  /// **'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nElina Kazemi-Esfeh\n073 772 5955 \n\nEdith Fållsten\n076 871 7087 \n\nAda Parén\n076 047 0583 \n\nAlice Önnerheim\n070 922 1301 \n\nLinnea Becker\n076 139 9402 \n\nManne Mönster\n070 948 7839 \n\nHarald Barck-Holst\n076 319 3169 \n\nKontaktinformation till andra delar av sektionen kan du hitta på hemsidans kontakt-sida: https://fsektionen.se/contact/.'**
+  String get emergencyContentEight;
 
   /// No description provided for @game.
   ///

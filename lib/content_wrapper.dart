@@ -26,7 +26,7 @@ class _ContentWrapperState extends State<ContentWrapper>
     with TickerProviderStateMixin<ContentWrapper> {
   late List<Key> _destinationKeys;
   late List<AnimationController> _faders;
-  int _currentIndex = 0;
+  int _currentIndex = 2; // We set this to 2 so that the startup page is the home page.
   int _soundCounter = 0;
 
   // Time that the F-logo was first pressed, used to reset counter after a while
