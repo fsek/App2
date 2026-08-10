@@ -393,7 +393,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               score.toInt().toString(),
-              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 60),
+              style: TextStyle(
+                  fontFamily: "NF-Pixels",
+                  fontSize: 60,
+                  color: gameTextColor(context)),
             ))));
 
     // Sandwhich bonus popup
@@ -403,12 +406,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               "+" + lastSandwichBonus.toInt().toString(),
-              style: new TextStyle(
+              style: TextStyle(
                   fontFamily: "NF-Pixels",
                   fontSize: 50,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
+                  color: gameTextColor(context)
                       .withAlpha(sandwichBonusPopupFadeout)),
             ))));
 
@@ -419,7 +420,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               "Highscore: " + highscore.toInt().toString(),
-              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+              style: TextStyle(
+                  fontFamily: "NF-Pixels",
+                  fontSize: 40,
+                  color: gameTextColor(context)),
             ))));
 
     // "Try again" text
@@ -430,7 +434,10 @@ class _MooseGamePageState extends State<MooseGamePage>
               alignment: Alignment.center,
               child: Text(
                 "Touch to try again",
-                style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+                style: TextStyle(
+                    fontFamily: "NF-Pixels",
+                    fontSize: 40,
+                    color: gameTextColor(context)),
               ))));
 
       if (newHighscore) {
@@ -440,7 +447,10 @@ class _MooseGamePageState extends State<MooseGamePage>
                 alignment: Alignment.center,
                 child: Text(
                   "New Highscore",
-                  style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 50),
+                  style: TextStyle(
+                      fontFamily: "NF-Pixels",
+                      fontSize: 50,
+                      color: gameTextColor(context)),
                 ))));
       }
     }

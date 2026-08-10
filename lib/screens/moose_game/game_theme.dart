@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
+import 'package:fsek_mobile/themes.dart';
 
 import 'obstacle_def.dart';
 import 'sprite.dart';
@@ -14,7 +15,13 @@ String _themed(String light, String dark) =>
     locator<ThemeService>().theme.brightness == Brightness.light ? light : dark;
 
 Color? get backgroundColor =>
-    spaceTheme ? const Color.fromRGBO(95, 84, 159, 1.0) : null;
+    spaceTheme ? const Color.fromARGB(255, 55, 44, 117) : null;
+
+/// Force a specific theme for the game text in space theme,
+/// since we use a custom background color.
+Color gameTextColor(BuildContext context) => spaceTheme
+    ? themeFdark.colorScheme.onSurface
+    : Theme.of(context).colorScheme.onSurface;
 
 /// How high above the ground the flying obstacles (the UFOs) hover.
 /// Very specific number to give a tiny window for a jump to pass over the UFO.
@@ -95,6 +102,10 @@ Sprite get pickupSprite => spaceTheme
         24,
         24,
       );
+
+Sprite get groundSprite => spaceTheme
+    ? Sprite("${_dir}ground_d.png", 240, 48)
+    : Sprite(_themed("${_dir}ground.png", "${_dir}ground_d.png"), 240, 48);
 
 List<ObstacleDef> buildObstacles() => spaceTheme
     ? [
