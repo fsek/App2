@@ -114,6 +114,7 @@ flutter:
     - assets/audio/gameoverfart.mp3
     - assets/img/
     - assets/img/moose_game/
+    - assets/img/enclose_moose/
     - assets/img/enclose_moose/grass/
     - assets/img/enclose_moose/wheat/
     - assets/img/enclose_moose/wheat/

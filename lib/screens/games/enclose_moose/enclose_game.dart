@@ -118,22 +118,25 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
             )
           ),
 
-          title: Text.rich(
-            TextSpan(
-              children: "enclose.moose".characters.map((char) => WidgetSpan(
-                child: WigglingWidget(
-                  controller: _idleController,
-                  child: OutlinedText(
-                    text: char,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 45,
-                      fontFamily: "Schoolbell"
+          title: WigglingWidget(
+            controller: _idleController,
+            child: Text.rich(
+              TextSpan(
+                children: "enclose.moose".characters.map((char) => WidgetSpan(
+                  child: WigglingWidget(
+                    controller: _idleController,
+                    child: OutlinedText(
+                      text: char,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 45,
+                        fontFamily: "Schoolbell"
+                      )
                     )
                   )
-                )
-              )).toList()
-            ),
+                )).toList()
+              )
+            )
           )
         ),
         body: Stack(
@@ -410,7 +413,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
                                             if (_tooltipTexts.containsKey(flatIndex))
                                               Positioned(
-                                                top: -15,
+                                                top: -25,
                                                 child: AnimatedOpacity(
                                                   opacity: _shownTooltipCalls[flatIndex] != 0 ? 1 : 0,
                                                   duration: const Duration(milliseconds: 150),
@@ -425,7 +428,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                                       text: _tooltipTexts[flatIndex]!,
                                                       style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 12,
+                                                        fontSize: 18,
                                                         fontFamily: "Schoolbell"
                                                       )
                                                     )
@@ -621,12 +624,12 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                               maintainSize: true,
                               child: WigglingWidget(
                                 controller: _idleController,
-                                child: ElevatedButton.icon(
+                                child: OutlinedButton.icon(
                                   onPressed: () {
                                     _changeToSolution(_usedLevel.optimalSolution!);
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
+                                  style: OutlinedButton.styleFrom(
+                                    backgroundColor: Colors.black.withAlpha(55),
                                     visualDensity: VisualDensity.compact
                                   ),
                                   label: OutlinedText(
@@ -649,12 +652,12 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                               maintainSize: true,
                               child: WigglingWidget(
                                 controller: _idleController,
-                                child: ElevatedButton.icon(
+                                child: OutlinedButton.icon(
                                   onPressed: () {
                                     _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
+                                  style: OutlinedButton.styleFrom(
+                                    backgroundColor: Colors.black.withAlpha(55),
                                     visualDensity: VisualDensity.compact
                                   ),
                                   label: OutlinedText(
