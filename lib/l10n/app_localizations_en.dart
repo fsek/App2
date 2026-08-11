@@ -152,6 +152,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Signup deadline for this event has passed!';
 
   @override
+  String get eventSignupErrorNoGroupNoPriority =>
+      'You are not a member of any group and have not selected a priority, so you cannot sign up for this event. You are probably simply not a part of the introduction, or event admins have not added your priority group.';
+
+  @override
   String get eventSignupErrorClose => 'Close';
 
   @override

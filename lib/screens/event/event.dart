@@ -417,10 +417,9 @@ class _EventPageState extends State<EventPage> {
             eventSignupCreate: eventSignupCreate,
           );
     } catch (e) {
-      if (e is DioException &&
-          e.response!.statusCode! >= 400 &&
-          e.response!.statusCode! < 500) {
-        String? detail = e.response!.data["detail"];
+      final int? statusCode = e is DioException ? e.response?.statusCode : null;
+      if (statusCode != null && statusCode >= 400 && statusCode < 500) {
+        String? detail = (e as DioException).response!.data["detail"];
         return showSignupError(detail);
       }
       throw e;
@@ -441,21 +440,32 @@ class _EventPageState extends State<EventPage> {
   }
 
   Future<void> showSignupError(String? detail) async {
+    if (!mounted) return;
     var t = AppLocalizations.of(context)!;
 
     String? detailText;
 
-    switch (detail!.toLowerCase()) {
-      // TODO: this could probably be improved if all response details came as an enum
-      case "user cannot sign up with this group":
-        detailText = t.eventSignupErrorInvalidGroup;
-        break;
-      case "event signup deadline is passed":
-        detailText = t.eventSignupErrorDeadlinePassed;
-        break;
-      default:
-        detailText = detail;
-        break;
+    // Reject users with no priority and no group with more helpful error message
+    final bool hasNoGroup =
+        (user?.groups.isEmpty ?? true) &&
+        (customGroup == null || customGroup!.isEmpty);
+    final bool hasNoPriority = userType == null || userType!.isEmpty;
+
+    if (hasNoGroup && hasNoPriority) {
+      detailText = t.eventSignupErrorNoGroupNoPriority;
+    } else if (detail != null) {
+      switch (detail.toLowerCase()) {
+        // TODO: this could probably be improved if all response details came as an enum
+        case "user cannot sign up with this group":
+          detailText = t.eventSignupErrorInvalidGroup;
+          break;
+        case "event signup deadline is passed":
+          detailText = t.eventSignupErrorDeadlinePassed;
+          break;
+        default:
+          detailText = detail;
+          break;
+      }
     }
 
     return showDialog(
@@ -541,39 +551,47 @@ class _EventPageState extends State<EventPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(t.eventChooseGroup),
-          DropdownButton<GroupRead?>(
-            iconEnabledColor: Theme.of(context).colorScheme.onSurface,
-            isExpanded: true,
-            menuMaxHeight: MediaQuery.of(context).size.height / 2,
-            value: group,
-            onChanged: (GroupRead? newValue) {
-              setState(() {
-                group = newValue;
-                if (newValue == null) {
-                  displayGroupInput = true;
-                } else {
-                  displayGroupInput = false;
-                }
-              });
-            },
-            items: [
-              if (user!.groups.toList().isNotEmpty)
-                ...user!.groups.map(((GroupRead? g) {
-                  return DropdownMenuItem<GroupRead?>(
-                    value: g,
-                    child: Text(g!.name),
-                  );
-                })),
-              if (!event!.isNollningEvent)
-                DropdownMenuItem<GroupRead?>(
-                  value: null,
-                  child: Text(t.eventOtherDifferent),
+          Visibility(
+            visible: !(event!.isNollningEvent && user!.groups.toList().isEmpty),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t.eventChooseGroup),
+                DropdownButton<GroupRead?>(
+                  iconEnabledColor: Theme.of(context).colorScheme.onSurface,
+                  isExpanded: true,
+                  menuMaxHeight: MediaQuery.of(context).size.height / 2,
+                  value: group,
+                  onChanged: (GroupRead? newValue) {
+                    setState(() {
+                      group = newValue;
+                      if (newValue == null) {
+                        displayGroupInput = true;
+                      } else {
+                        displayGroupInput = false;
+                      }
+                    });
+                  },
+                  items: [
+                    if (user!.groups.toList().isNotEmpty)
+                      ...user!.groups.map(((GroupRead? g) {
+                        return DropdownMenuItem<GroupRead?>(
+                          value: g,
+                          child: Text(g!.name),
+                        );
+                      })),
+                    if (!event!.isNollningEvent)
+                      DropdownMenuItem<GroupRead?>(
+                        value: null,
+                        child: Text(t.eventOtherDifferent),
+                      ),
+                  ],
                 ),
-            ],
+              ],
+            ),
           ),
           Visibility(
-            visible: displayGroupInput,
+            visible: displayGroupInput && !event!.isNollningEvent,
             child: TextField(
               onChanged: (String? newValue) {
                 setState(() {

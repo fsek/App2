@@ -152,6 +152,10 @@ class AppLocalizationsSv extends AppLocalizations {
       'Anmälningsperioden för det här eventet är slut!';
 
   @override
+  String get eventSignupErrorNoGroupNoPriority =>
+      'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.';
+
+  @override
   String get eventSignupErrorClose => 'Stäng';
 
   @override

@@ -374,6 +374,12 @@ abstract class AppLocalizations {
   /// **'Anmälningsperioden för det här eventet är slut!'**
   String get eventSignupErrorDeadlinePassed;
 
+  /// No description provided for @eventSignupErrorNoGroupNoPriority.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.'**
+  String get eventSignupErrorNoGroupNoPriority;
+
   /// No description provided for @eventSignupErrorClose.
   ///
   /// In sv, this message translates to:
