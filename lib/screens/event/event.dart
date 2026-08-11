@@ -203,199 +203,214 @@ class _EventPageState extends State<EventPage> {
         onRefresh: () => _onRefresh(),
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height - kToolbarHeight - MediaQuery.of(context).padding.top,
-            ),
-            decoration: !event!.isNollningEvent ? null : const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/data/nollning_26/calendar/event_background.png"),
-                centerSlice: Rect.fromLTRB(50, 50, 529, 950)  // To hide stretching
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                  Text(locale == "sv" ? event!.titleSv : event!.titleEn,
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            fontSize: 30,
-                          )),
-                  Divider(
-                    color: null,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              const imageWidth = 579;
+              final scale = imageWidth / constraints.maxWidth;  // Maybe a bit overkill but just to make sure the decorationimage doesn't fail
+
+              return Container(
+                padding: const EdgeInsets.all(16.0),
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height - kToolbarHeight - MediaQuery.of(context).padding.top,
+                ),
+                decoration: !event!.isNollningEvent ? null : BoxDecoration(
+                  image: DecorationImage(
+                    scale: scale,
+                    image: AssetImage("assets/data/nollning_26/calendar/event_background.png"),
+                    invertColors: Theme.of(context).brightness == Brightness.dark,  // is this the correct way to do this?
+                    centerSlice: Rect.fromLTWH(50 / scale, 50 / scale, 479 / scale, 900 / scale)  // To hide stretching
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.access_time_rounded,
-                      ),
-                      Text(
-                        /* better error checking */
-                        "  " +
-                            DateFormat("HH:mm").format(
-                                event?.startsAt.toLocal() ?? DateTime.now()) +
-                            getDots() +
-                            " - " +
-                            DateFormat("HH:mm").format(
-                                event?.endsAt.toLocal() ?? DateTime.now()) +
-                            ", " +
-                            DateFormat("MMMMd", locale).format(
-                                event?.startsAt.toLocal() ?? DateTime.now()),
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).textTheme.bodyMedium!.color),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.room,
-                      ),
-                      Text(
-                        "  " + (event?.location ?? "intigheten"),
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).textTheme.bodyMedium!.color),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: null,
-                  ),
-                  Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      width: double.infinity,
-                      /* should be parsed html */
-                      child: Markdown(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        data: (locale == "sv"
-                                ? event!.descriptionSv
-                                : event!.descriptionEn)
-                            .replaceAll("<br />", ""),
-                        onTapLink: (text, href, title) {
-                          if (href != null) {
-                            launchUrl(Uri.parse(href));
-                          }
-                        },
-                        styleSheet:
-                            MarkdownStyleSheet.fromTheme(Theme.of(context))
-                                .copyWith(
-                          p: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(height: 1.2),
+                ),
+                child: Column(
+                  crossAxisAlignment: event!.isNollningEvent ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: event!.isNollningEvent ? EdgeInsets.symmetric(horizontal: 25) : EdgeInsets.zero,  // padding is not actually constant (depends on scale) but not too important
+                      child: Text(
+                        locale == "sv" ? event!.titleSv : event!.titleEn,
+                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontSize: 30,
                         ),
-                      )),
-                  Divider(
-                    color: null,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Text(t.eventDressCode + event!.dressCode)
-                        ]),
-                        Visibility(
-                            visible: event!.price <= 0 ? false : true,
-                            child: Text(t.eventPrice +
-                                (event?.price.toString() ?? "") +
-                                " kr")),
-                      ],
+                        textAlign: event!.isNollningEvent ? TextAlign.center : TextAlign.start
+                      )
                     ),
-                  ),
-                  Divider(
-                    color: null,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                    child: Column(
-                      children: [
-                        Visibility(
-                          visible: event!.price <= 0 ? false : true,
-                          child: Row(
-                            children: [
-                              Icon(Icons.attach_money_rounded),
-                              Text(t.eventCostsMoney)
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: event!.food,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.restaurant_rounded,
-                              ),
-                              Text(t.eventFoodServed)
-                            ],
-                          ),
-                        ),
-                        alcoholEventRow(event!, context),
-                        Visibility(
-                          visible: event!.canSignup,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.event_rounded,
-                              ),
-                              Text(t.eventHasSignup)
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: event!.lottery,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.casino_outlined,
-                              ),
-                              Text("  " + t.eventHasLottery)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Visibility(
-                    visible: event!.canSignup,
-                    child: Divider(
-                      color: null,
-                    ),
-                  ),
-                  Visibility(
-                    visible: (!(event!.council == null)),
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Divider(
+                        color: null,
+                      ),
+                      Row(
                         children: [
+                          Icon(
+                            Icons.access_time_rounded,
+                          ),
                           Text(
-                            t.eventInCaseOfQuestions,
-                          ),
-                          InkWell(
-                            child: new Text(
-                              t.localeName == "sv"
-                                  ? event!.council.nameSv
-                                  : event!.council.nameEn,
-                              style: TextStyle(
-                                color: Colors.blue[300],
-                              ),
-                            ),
-                            onTap: () => _goToPostContact(event!.council.nameSv),
-                          ),
-                          Divider(
-                            color: null,
+                            /* better error checking */
+                            "  " +
+                                DateFormat("HH:mm").format(
+                                    event?.startsAt.toLocal() ?? DateTime.now()) +
+                                getDots() +
+                                " - " +
+                                DateFormat("HH:mm").format(
+                                    event?.endsAt.toLocal() ?? DateTime.now()) +
+                                ", " +
+                                DateFormat("MMMMd", locale).format(
+                                    event?.startsAt.toLocal() ?? DateTime.now()),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).textTheme.bodyMedium!.color),
                           ),
                         ],
                       ),
-                    ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.room,
+                          ),
+                          Text(
+                            "  " + (event?.location ?? "intigheten"),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).textTheme.bodyMedium!.color),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: null,
+                      ),
+                      Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          width: double.infinity,
+                          /* should be parsed html */
+                          child: Markdown(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            data: (locale == "sv"
+                                    ? event!.descriptionSv
+                                    : event!.descriptionEn)
+                                .replaceAll("<br />", ""),
+                            onTapLink: (text, href, title) {
+                              if (href != null) {
+                                launchUrl(Uri.parse(href));
+                              }
+                            },
+                            styleSheet:
+                                MarkdownStyleSheet.fromTheme(Theme.of(context))
+                                    .copyWith(
+                              p: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(height: 1.2),
+                            ),
+                          )),
+                      Divider(
+                        color: null,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(children: [
+                              Text(t.eventDressCode + event!.dressCode)
+                            ]),
+                            Visibility(
+                                visible: event!.price <= 0 ? false : true,
+                                child: Text(t.eventPrice +
+                                    (event?.price.toString() ?? "") +
+                                    " kr")),
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: null,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                        child: Column(
+                          children: [
+                            Visibility(
+                              visible: event!.price <= 0 ? false : true,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.attach_money_rounded),
+                                  Text(t.eventCostsMoney)
+                                ],
+                              ),
+                            ),
+                            Visibility(
+                              visible: event!.food,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.restaurant_rounded,
+                                  ),
+                                  Text(t.eventFoodServed)
+                                ],
+                              ),
+                            ),
+                            alcoholEventRow(event!, context),
+                            Visibility(
+                              visible: event!.canSignup,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.event_rounded,
+                                  ),
+                                  Text(t.eventHasSignup)
+                                ],
+                              ),
+                            ),
+                            Visibility(
+                              visible: event!.lottery,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.casino_outlined,
+                                  ),
+                                  Text("  " + t.eventHasLottery)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: event!.canSignup,
+                        child: Divider(
+                          color: null,
+                        ),
+                      ),
+                      Visibility(
+                        visible: (!(event!.council == null)),
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                t.eventInCaseOfQuestions,
+                              ),
+                              InkWell(
+                                child: new Text(
+                                  t.localeName == "sv"
+                                      ? event!.council.nameSv
+                                      : event!.council.nameEn,
+                                  style: TextStyle(
+                                    color: Colors.blue[300],
+                                  ),
+                                ),
+                                onTap: () => _goToPostContact(event!.council.nameSv),
+                              ),
+                              Divider(
+                                color: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      signupInfoWidget(),
+                    ],
                   ),
-                  signupInfoWidget(),
-                ],
-              ),
+              );
+            }
           )
         ),
       ),

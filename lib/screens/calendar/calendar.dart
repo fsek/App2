@@ -88,86 +88,95 @@ class _CalendarState extends State<Calendar> {
       margin: const EdgeInsets.all(5),
       child: InkWell(
         onTap: () => openEventPage(event),
-        child: Container(
-          padding: event.isNollningEvent ? const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40) : const EdgeInsets.all(10),
-          decoration: !event.isNollningEvent ? null : const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
-              centerSlice: Rect.fromLTWH(32, 49, 364, 1)  // To hide stretching
-              // fit: BoxFit.fill
-            )
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 7),
-                      child: Text(
-                        t.localeName == "en" ? event.titleEn : event.titleSv,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        // overflow: TextOverflow.ellipsis
-                      )
-                    ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            const imageWidth = 940;
+            final scale = imageWidth / constraints.maxWidth;  // Maybe a bit overkill but just to make sure the decorationimage doesn't fail
 
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.access_time_rounded,
-                          size: 20
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            /* better error checking */
-                            "$formattedStartTime - $formattedEndTime, $formattedDay",
-                            style: const TextStyle(
-                              fontSize: 14,
-                            )
-                          )
-                        ),
-                      ]
-                    ),
-
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.room,
-                          size: 20,
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            event.location,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            )
-                          )
-                        ),
-                      ],
-                    ),
-                  ],
+            return Container(
+              padding: event.isNollningEvent ? const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40) : const EdgeInsets.all(10),
+              decoration: !event.isNollningEvent ? null : BoxDecoration(
+                image: DecorationImage(
+                  scale: scale,
+                  image: AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
+                  invertColors: Theme.of(context).brightness == Brightness.dark,  // is this the correct way to do this?
+                  centerSlice: Rect.fromLTWH(70 / scale, 108 / scale, 800 / scale, 1 / scale)  // To hide stretching
+                  // fit: BoxFit.fill
                 )
               ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 7),
+                          child: Text(
+                            t.localeName == "en" ? event.titleEn : event.titleSv,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            // overflow: TextOverflow.ellipsis
+                          )
+                        ),
 
-              if (alcPolicyImage != null)
-                SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: alcPolicyImage
-                ),
-            ]
-          )
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.access_time_rounded,
+                              size: 20
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                /* better error checking */
+                                "$formattedStartTime - $formattedEndTime, $formattedDay",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                )
+                              )
+                            ),
+                          ]
+                        ),
+
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.room,
+                              size: 20,
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                event.location,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                )
+                              )
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ),
+
+                  if (alcPolicyImage != null)
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: alcPolicyImage
+                    ),
+                ]
+              )
+            );
+          }
         )
-      ),
+      )
     );
   }
 
