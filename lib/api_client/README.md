@@ -149,6 +149,7 @@ Class | Method | HTTP request | Description
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignoffRoute**](doc/EventSignupApi.md#eventsignupeventsignoffroute) | **DELETE** /event-signup/{event_id} | Event Signoff Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignupRoute**](doc/EventSignupApi.md#eventsignupeventsignuproute) | **POST** /event-signup/{event_id} | Event Signup Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeEventSignup**](doc/EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
+[*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeForEventSignup**](doc/EventSignupApi.md#eventsignupgetmeforeventsignup) | **GET** /event-signup/me/{event_id} | Get Me For Event Signup
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupUpdateEventSignupRoute**](doc/EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 [*EventsApi*](doc/EventsApi.md) | [**eventsAddTagToEvent**](doc/EventsApi.md#eventsaddtagtoevent) | **POST** /events/add-tag | Add Tag To Event
 [*EventsApi*](doc/EventsApi.md) | [**eventsConfirmEventUsers**](doc/EventsApi.md#eventsconfirmeventusers) | **PATCH** /events/event-confirm-event-users/{event_id} | Confirm Event Users
@@ -413,6 +414,7 @@ Class | Method | HTTP request | Description
  - [UserAccessUpdate](doc/UserAccessUpdate.md)
  - [UserCreate](doc/UserCreate.md)
  - [UserEventRead](doc/UserEventRead.md)
+ - [UserForEventSignupRead](doc/UserForEventSignupRead.md)
  - [UserInEventRead](doc/UserInEventRead.md)
  - [UserInGroupRead](doc/UserInGroupRead.md)
  - [UserPostRead](doc/UserPostRead.md)

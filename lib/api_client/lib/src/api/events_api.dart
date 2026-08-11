@@ -269,7 +269,17 @@ class EventsApi {
         ...?headers,
       },
       extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },{
+            'type': 'apiKey',
+            'name': 'APIKeyCookie',
+            'keyName': '__Secure-fsek_refresh_token',
+            'where': '',
+          },
+        ],
         ...?extra,
       },
       validateStatus: validateStatus,

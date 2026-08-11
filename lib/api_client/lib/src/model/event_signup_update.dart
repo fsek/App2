@@ -9,7 +9,7 @@ import 'package:built_value/serializer.dart';
 
 part 'event_signup_update.g.dart';
 
-/// EventSignupUpdate
+/// This schema uses partial updates, any field not sent to backend will be ignored and not updated.
 ///
 /// Properties:
 /// * [userId] 

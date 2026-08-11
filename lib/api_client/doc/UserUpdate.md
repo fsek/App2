@@ -8,12 +8,12 @@ import 'package:api_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**stilId** | **String** |  | [optional] 
 **firstName** | **String** |  | [optional] 
 **lastName** | **String** |  | [optional] 
 **startYear** | **int** |  | [optional] 
 **program** | **String** |  | [optional] 
 **notifications** | **bool** |  | [optional] 
-**stilId** | **String** |  | [optional] 
 **standardFoodPreferences** | **BuiltList&lt;String&gt;** |  | [optional] 
 **otherFoodPreferences** | **String** |  | [optional] 
 **telephoneNumber** | **String** |  | [optional] 
