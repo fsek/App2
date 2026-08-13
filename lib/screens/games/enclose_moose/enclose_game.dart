@@ -90,6 +90,136 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   Widget build(BuildContext context) {
     const backgroundImage = "assets/img/enclose_moose/grass/0_idle0.png";
 
+    final topBar = Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              WigglingWidget(
+                controller: _idleController,
+                child: IconButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: _buildDayChooserDialog());
+                  },
+                  icon: const Icon(Icons.calendar_month_rounded),
+                  color: Colors.white
+                )
+              ),
+              
+              Visibility(
+                visible: _hasSubmitted,
+                maintainState: true,
+                maintainAnimation: true,
+                maintainSize: true,
+                child: WigglingWidget(
+                  controller: _idleController,
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(context: context, builder: _buildSubmitDialog());
+                    },
+                    icon: const Icon(Icons.leaderboard_outlined),
+                    color: Colors.white
+                  )
+                )
+              ),
+
+              const Spacer(),
+
+              Row(
+                children: [
+                  Visibility(
+                    visible: widget.availableLevels.first != _usedLevel,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: IconButton(
+                        onPressed: () {
+                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
+                        },
+                        icon: const Icon(Icons.chevron_left),
+                        color: Colors.white
+                      )
+                    )
+                  ),
+
+                  WigglingWidget(
+                    controller: _idleController,
+                    child: OutlinedText(
+                      text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Extra",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontFamily: "Schoolbell"
+                      )
+                    )
+                  ),
+
+                  Visibility(
+                    visible: widget.availableLevels.last != _usedLevel,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: IconButton(
+                        onPressed: () {
+                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
+                        },
+                        icon: const Icon(Icons.chevron_right),
+                        color: Colors.white
+                      )
+                    )
+                  ),
+                ]
+              ),
+
+              Spacer(),
+
+              WigglingWidget(
+                controller: _idleController,
+                child: IconButton(
+                  onPressed: () {
+                    _grid.reset();
+                  },
+                  icon: const Icon(Icons.restart_alt_outlined),
+                  color: Colors.white
+                )
+              ),
+
+              WigglingWidget(
+                controller: _idleController,
+                  child: IconButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: _buildHelpDialog());
+                  },
+                  icon: const Icon(Icons.question_mark_outlined),
+                  color: Colors.white
+                )
+              ),
+            ]
+          ),
+
+          WigglingWidget(
+            controller: _idleController,
+            child: OutlinedText(
+              text: _usedLevel.name,
+              style: TextStyle(
+                color: Colors.yellow,
+                fontSize: 20,
+                fontFamily: "Schoolbell"
+              ),
+              textAlign: TextAlign.center,
+            )
+          ),
+        ]
+      )
+    );
+
     return Scaffold(
         appBar: AppBar(
           leading: WigglingWidget(
@@ -131,139 +261,18 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          WigglingWidget(
-                            controller: _idleController,
-                            child: IconButton(
-                              onPressed: () {
-                                showDialog(context: context, builder: _buildDayChooserDialog());
-                              },
-                              icon: const Icon(Icons.calendar_month_rounded),
-                              color: Colors.white
-                            )
-                          ),
-                          
-                          Visibility(
-                            visible: _hasSubmitted,
-                            maintainState: true,
-                            maintainAnimation: true,
-                            maintainSize: true,
-                            child: WigglingWidget(
-                              controller: _idleController,
-                              child: IconButton(
-                                onPressed: () {
-                                  showDialog(context: context, builder: _buildSubmitDialog());
-                                },
-                                icon: const Icon(Icons.leaderboard_outlined),
-                                color: Colors.white
-                              )
-                            )
-                          ),
-
-                          const Spacer(),
-
-                          Row(
-                            children: [
-                              Visibility(
-                                visible: widget.availableLevels.first != _usedLevel,
-                                maintainState: true,
-                                maintainAnimation: true,
-                                maintainSize: true,
-                                child: WigglingWidget(
-                                  controller: _idleController,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
-                                    },
-                                    icon: const Icon(Icons.chevron_left),
-                                    color: Colors.white
-                                  )
-                                )
-                              ),
-
-                              WigglingWidget(
-                                controller: _idleController,
-                                child: OutlinedText(
-                                  text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Extra",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontFamily: "Schoolbell"
-                                  )
-                                )
-                              ),
-
-                              Visibility(
-                                visible: widget.availableLevels.last != _usedLevel,
-                                maintainState: true,
-                                maintainAnimation: true,
-                                maintainSize: true,
-                                child: WigglingWidget(
-                                  controller: _idleController,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
-                                    },
-                                    icon: const Icon(Icons.chevron_right),
-                                    color: Colors.white
-                                  )
-                                )
-                              ),
-                            ]
-                          ),
-
-                          Spacer(),
-
-                          WigglingWidget(
-                            controller: _idleController,
-                            child: IconButton(
-                              onPressed: () {
-                                _grid.reset();
-                              },
-                              icon: const Icon(Icons.restart_alt_outlined),
-                              color: Colors.white
-                            )
-                          ),
-
-                          WigglingWidget(
-                            controller: _idleController,
-                              child: IconButton(
-                              onPressed: () {
-                                showDialog(context: context, builder: _buildHelpDialog());
-                              },
-                              icon: const Icon(Icons.question_mark_outlined),
-                              color: Colors.white
-                            )
-                          ),
-                        ]
-                      ),
-
-                      WigglingWidget(
-                        controller: _idleController,
-                        child: OutlinedText(
-                          text: _usedLevel.name,
-                          style: TextStyle(
-                            color: Colors.yellow,
-                            fontSize: 20,
-                            fontFamily: "Schoolbell"
-                          ),
-                          textAlign: TextAlign.center,
-                        )
-                      ),
-                    ]
-                  )
+                Visibility(
+                  visible: false,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  maintainSize: true,
+                  maintainInteractivity: false,
+                  child: topBar
                 ),
 
                 Expanded(
                   child: InteractiveViewer(
-                    // clipBehavior: Clip.none,  // pretty cool! maybe not good though
+                    clipBehavior: Clip.none,  // pretty cool! maybe not good though
                     child: Center(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
@@ -542,7 +551,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                         _changeToSolution(_usedLevel.optimalSolution!);
                                       },
                                       style: OutlinedButton.styleFrom(
-                                        backgroundColor: Colors.black.withAlpha(55),
+                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
                                         visualDensity: VisualDensity.compact
                                       ),
                                       label: OutlinedText(
@@ -570,7 +579,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                         _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
                                       },
                                       style: OutlinedButton.styleFrom(
-                                        backgroundColor: Colors.black.withAlpha(55),
+                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
                                         visualDensity: VisualDensity.compact
                                       ),
                                       label: OutlinedText(
@@ -594,7 +603,9 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                   }
                 )
               ]
-            )
+            ),
+
+            topBar,
           ]
         )
     );
@@ -688,7 +699,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
     }
 
     if (tile.isBonus) {
-      final bonusScore = tile.type.getBonusScore();
+      final bonusScore = tile.bonusScore;
       if (bonusScore != 0) {
         _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore if enclosed");
       }
@@ -746,7 +757,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   Widget Function(BuildContext) _buildDayChooserDialog() {
     return (context) => AlertDialog(
       contentPadding: const EdgeInsets.all(16),
-      constraints: BoxConstraints(maxHeight: 400),
+      constraints: BoxConstraints(maxHeight: 400, minWidth: MediaQuery.of(context).size.width),
       scrollable: true,
       content:
         Column(
@@ -754,16 +765,18 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
           children: [
             Column(
               children: [
-                const Text(
-                  "Previous days",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "Schoolbell"
-                  )
-                ),
+                if (_dailies.isNotEmpty)
+                  const Text(
+                    "Previous days",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: "Schoolbell"
+                    )
+                  ),
 
                 ..._dailies.map((level) => Card.outlined(
+                  color: level.levelId != _usedLevel.levelId ? null : Colors.amber.withAlpha(100),
                   child: ListTile(
                     onTap: () {
                       widget.pageController.jumpToPage(widget.availableLevels.indexOf(level));
@@ -802,16 +815,18 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
             Column(
               children: [
-                const Text(
-                  "Extras",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "Schoolbell"
-                  )
-                ),
+                if (_nonDailies.isNotEmpty)
+                  const Text(
+                    "Extras",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: "Schoolbell"
+                    )
+                  ),
 
                 ..._nonDailies.map((level) => Card.outlined(
+                  color: level.levelId != _usedLevel.levelId ? null : Colors.amber.withAlpha(100),
                   child: ListTile(
                     onTap: () {
                       widget.pageController.jumpToPage(widget.availableLevels.indexOf(level));

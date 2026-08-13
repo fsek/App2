@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
-import "enclose_grid_tile.dart";
+import "asset_handler.dart";
 import "enclose_game_placeholder.dart";
 import "enclose_game.dart";
 
@@ -27,25 +27,7 @@ class _EncloseMooseState extends State<EncloseMoosePage> with TickerProviderStat
   }
 
   void _precacheAllAssets() {
-    for (final encloseGridCellType in EncloseGridCellType.values) {
-      for (final frame in encloseGridCellType.getAnimationFrames(returnAll: true)) {
-        precacheImage(AssetImage(frame), context);
-      }
-
-      for (final frame in encloseGridCellType.getIdleFrames(returnAll: true)) {
-        precacheImage(AssetImage(frame), context);
-      }
-    }
-
-    for (final frame in EncloseGridCellType.animationWheatFrames) {
-      precacheImage(AssetImage(frame), context);
-    }
-
-    for (final frame in EncloseGridCellType.idleWheatFrames) {
-      precacheImage(AssetImage(frame), context);
-    }
-
-    for (final frame in EncloseGridCellType.emptyWheatFrames) {
+    for (final frame in AssetHandler.getAllFrames()) {
       precacheImage(AssetImage(frame), context);
     }
   }

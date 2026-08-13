@@ -19,6 +19,12 @@ class EncloseGrid extends ChangeNotifier {
   EncloseGrid(String encodedGrid, this.wallBudget) {
     wallsLeft = wallBudget;
 
+    const bonusScoreDict = {
+      EncloseGridCellType.cherry: 3,
+      EncloseGridCellType.apple: 10,
+      EncloseGridCellType.bees: -5
+    };
+
     final gridString = encodedGrid.replaceAll("\n", "");
     gridWidth = encodedGrid.indexOf("\n");
     gridHeight = gridString.length ~/ gridWidth;
@@ -36,6 +42,7 @@ class EncloseGrid extends ChangeNotifier {
         rowIndex: flatIndex ~/ gridWidth,
         columnIndex: flatIndex % gridWidth,
         type: type ?? EncloseGridCellType.grass,
+        bonusScore: bonusScoreDict[type] ?? 0,
         portalIndex: portalIndex
       );
       flatGrid.add(tile);
@@ -182,8 +189,8 @@ class EncloseGrid extends ChangeNotifier {
           for (final EncloseGridTile tile in oldEnclosure ?? {}) {
             tile.update(
               newIsEnclosed: false,
-              newWaitTime: null,
-              newReverseWaitTime: null
+              newWaitFrames: null,
+              newReverseWaitFrames: null
             );
           }
           notifyListeners();
@@ -205,7 +212,7 @@ class EncloseGrid extends ChangeNotifier {
 
     var currentScore = enclosure.length;
     for (final tile in enclosure) {
-      currentScore += tile.type.getBonusScore();
+      currentScore += tile.bonusScore;
     }
     score = currentScore;
 
@@ -235,8 +242,8 @@ class EncloseGrid extends ChangeNotifier {
 
       tile.update(
         newIsEnclosed: enclosure.contains(tile),
-        newWaitTime: expandDistance == null ? null : EncloseGridCellType.wheatFrameDuration * expandDistance,
-        newReverseWaitTime: distance == null ? null : EncloseGridCellType.wheatFrameDuration * (maxDistance - distance)
+        newWaitFrames: expandDistance == null ? null : expandDistance,
+        newReverseWaitFrames: distance == null ? null : (maxDistance - distance)
       );
     }
 
