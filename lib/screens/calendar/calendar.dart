@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
@@ -210,14 +212,19 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
+  Future<void> openExportCalendarLink() async {
+  final uri = Uri.parse("https://fsektionen.se/calendar/subscribe");
+
+  await launchUrl(
+    uri,
+    mode: LaunchMode.externalApplication  // for some reason it gives a PlatformError when not having this
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     String locale = Localizations.localeOf(context).toString();
-    if (locale == "sv") {
-      DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay);
-    } else {
-      DateFormat("MMMMEEEEd", "en_US").format(_selectedDay);
-    }
+
     return Container(
       height: MediaQuery.of(context).size.height,
       color: Theme.of(context).colorScheme.surface,
@@ -258,9 +265,39 @@ class _CalendarState extends State<Calendar> {
                   eventLoader: (day) {
                     return _getEventsForDay(day);
                   },
-                  calendarBuilders: CalendarBuilders<EventRead>(
-                    markerBuilder: (context, day, events) => _getMarkers(events)
+                  headerStyle: HeaderStyle(
+                    leftChevronIcon: Icon(
+                      color: Theme.of(context).primaryColor,
+                      Icons.chevron_left,
+                      size: 25
+                    ),
+
+                    rightChevronIcon: Icon(
+                      color: Theme.of(context).primaryColor,
+                      Icons.chevron_right,
+                      size: 25
+                    )
                   ),
+                  calendarBuilders: CalendarBuilders<EventRead>(
+                    markerBuilder: (context, day, events) => _getMarkers(events),
+                    headerTitleBuilder: (context, day) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          DateFormat("MMMM yyyy", locale).format(day),
+                          style: const TextStyle(
+                            fontSize: 18
+                          )
+                        ),
+
+                        IconButton(
+                          icon: const Icon(Icons.open_in_browser_rounded),
+                          color: Theme.of(context).primaryColor,
+                          onPressed: openExportCalendarLink
+                        ),
+                      ]
+                    )
+                  )
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
