@@ -9,7 +9,7 @@ class PlaceInfo {
   final String description_en;
   final String description_sv;
   final List<String> descriptionAssets;
-  final Rect box;
+  final List<Rect> boxes;
   // final String asset;
 
   const PlaceInfo({
@@ -18,7 +18,7 @@ class PlaceInfo {
     required this.description_en,
     required this.description_sv,
     required this.descriptionAssets,
-    required this.box,
+    required this.boxes,
     // required this.asset,
   });
 
@@ -29,9 +29,9 @@ class PlaceInfo {
       description_en: json["description"]["en"],
       description_sv: json["description"]["sv"],
       descriptionAssets: List<String>.from(json["descriptionAssets"]),
-      box: Rect.fromLTWH(
-        json["box"]["left"], json["box"]["top"], json["box"]["width"], json["box"]["height"]
-      ),
+      boxes: (json["boxes"] as List<dynamic>).map((box) => Rect.fromLTWH(
+        box["left"], box["top"], box["width"], box["height"]
+      )).toList(),
       // asset: json["asset"],
     );
   }
@@ -96,27 +96,33 @@ class _MapViewState extends State<MapView> {
     String locale = Localizations.localeOf(context).toString();
 
     final yOffset = (_bodyHeight - displayHeight) / 2;
-    final pinList = placeInfos.map((data) => Positioned.fromRect(
-      rect: data.box.scale(_bodyWidth / _imageWidth, displayHeight / _imageHeight).translate(0, yOffset),  // boxes are in (image-)absolute coordinates
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => showDialog(
-          context: context,
-          builder: _buildPOIDialog(
-            locale == "sv" ? data.title_sv : data.title_en,
-            locale == "sv" ? data.description_sv : data.description_en,
-            data.descriptionAssets,
-          )
-        ),
-        child: Container(
-          color: Colors.transparent
-          // decoration: BoxDecoration(
-          //   color: Colors.red.withAlpha(128),
-          //   border: Border.all(color: Colors.red),
-          // )
-        )
-      ),
-    )).toList();
+
+    List<Widget> pinList = [];
+    for (final placeInfo in placeInfos) {
+      for (final box in placeInfo.boxes) {
+        pinList.add(Positioned.fromRect(
+          rect: box.scale(_bodyWidth / _imageWidth, displayHeight / _imageHeight).translate(0, yOffset),  // boxes are in (image-)absolute coordinates
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => showDialog(
+              context: context,
+              builder: _buildPOIDialog(
+                locale == "sv" ? placeInfo.title_sv : placeInfo.title_en,
+                locale == "sv" ? placeInfo.description_sv : placeInfo.description_en,
+                placeInfo.descriptionAssets,
+              )
+            ),
+            child: Container(
+              color: Colors.transparent
+              // decoration: BoxDecoration(
+              //   color: Colors.red.withAlpha(128),
+              //   border: Border.all(color: Colors.red),
+              // )
+            )
+          ),
+        ));
+      }
+    }
 
     // var pinList = placeInfos.map((data) => Positioned.fromRect(
     //   rect: data.box,
