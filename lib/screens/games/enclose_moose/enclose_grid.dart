@@ -1,320 +1,142 @@
 import "dart:collection";
 import "dart:math";
 import "package:flutter/material.dart";
+import "enclose_grid_tile.dart";
 
-enum EncloseGridCellType {
-  grass,
-  water,
-  wall,
-  portal,
-  cherry,
-  apple,
-  bees,
-  moose;
-
-  static const _decodingDict = {
-    ".": grass,
-    "~": water,
-    "C": cherry,
-    "G": apple,
-    "S": bees,
-    "H": moose
-  };
-
-  static EncloseGridCellType? fromString(String character) {
-    final digitRegExp = RegExp(r"\d");
-    if (digitRegExp.hasMatch(character)) {
-      return portal;
-    }
-
-    return _decodingDict[character];
-  }
-
-  /*
-  String getImageName() {
-    final basePath = "assets/img/enclose_moose/";
-
-    switch (this) {
-      case grass:
-        return basePath + "grass.png";
-      case water:
-        return basePath + "water.png";
-      case wall:
-        return basePath + "wall/wall.png";
-      case portal:
-        return basePath + "portal.png";
-      case cherry:
-        return basePath + "cherry.png";
-      case apple:
-        return basePath + "apple.png";
-      case bees:
-        return basePath + "bees.png";
-      case moose:
-        return basePath + "moose.png";
-    }
-  }
-  */
-
-  static final animationWheatFrames = List.generate(5, (frameIndex) => "assets/img/enclose_moose/wheat/animation${frameIndex}.png");
-  static final idleWheatFrames = List.generate(4, (frameIndex) => "assets/img/enclose_moose/wheat/idle${frameIndex}.png");
-  static final emptyWheatFrames = List.generate(5, (frameIndex) => "assets/img/enclose_moose/wheat/animation_empty.png");
-
-  List<String> getAnimationFrames({Random? random, bool returnAll = false}) {
-    const basePath = "assets/img/enclose_moose/";
-
-    switch (this) {
-      case grass:
-        return const [basePath + "grass/0_idle0.png"];
-      case water:
-        return const [basePath + "water/00000_idle0.png"];
-      case wall:
-        return List.generate(5, (frameIndex) => basePath + "wall/animation${frameIndex}.png");
-      case portal:
-        return const [basePath + "portal/idle0.png"];
-      case cherry:
-        return const [basePath + "cherry/idle0.png"];
-      case apple:
-        return List.generate(5, (frameIndex) => basePath + "apple/animation${frameIndex}.png");
-      case bees:
-        return const [basePath + "bees/idle0.png"];
-      case moose:
-        return const [basePath + "moose/idle0.png"];
-    }
-  }
-
-  List<String> getIdleFrames({Random? random, bool returnAll = false, dynamic extra}) {
-    final usedRandom = random ?? Random();
-    const basePath = "assets/img/enclose_moose/";
-
-    switch (this) {
-      case grass:
-        if (returnAll) {  // for preloading
-          return const [
-            basePath + "grass/0_idle0.png",
-            basePath + "grass/1_idle0.png", basePath + "grass/1_idle1.png",
-            basePath + "grass/2_idle0.png", basePath + "grass/2_idle1.png"
-          ];
-        }
-
-        if (usedRandom.nextDouble() < 0.01) {
-          return const [basePath + "grass/2_idle0.png", basePath + "grass/2_idle1.png"];
-        }
-
-        const grasses = [
-          [basePath + "grass/0_idle0.png"],
-          [basePath + "grass/1_idle0.png", basePath + "grass/1_idle1.png"]
-        ];
-        final grassFrames = grasses[usedRandom.nextInt(grasses.length)];
-
-        return grassFrames;
-      case water:
-        if (returnAll) {
-          List<String> waters = [];
-          for (final i in List.generate(16, (index) => index)) {
-            String binaryString = i.toRadixString(2);
-            binaryString += List.generate(4 - binaryString.length, (i) => "0").join("");
-
-            if (binaryString == "0000") {
-              waters.addAll([
-                basePath + "water/${binaryString}0_idle0.png",
-                basePath + "water/${binaryString}1_idle0.png",
-                basePath + "water/${binaryString}1_idle1.png",
-                basePath + "water/${binaryString}2_idle0.png",
-                basePath + "water/${binaryString}2_idle1.png"
-              ]);
-            } else {
-              waters.addAll([
-                basePath + "water/${binaryString}_idle0.png",
-                basePath + "water/${binaryString}_idle1.png"
-              ]);
-            }
-          }
-
-          return waters;
-        }
-
-        final extraString = (extra as List<bool>).map((val) => val ? "1" : "0").join("");
-        if (extraString == "0000") {
-          if (usedRandom.nextDouble() < 0.01) {
-            return [basePath + "water/${extraString}2_idle0.png", basePath + "water/${extraString}2_idle1.png"];
-          }
-
-          final waters = [
-            [basePath + "water/${extraString}0_idle0.png"],
-            [basePath + "water/${extraString}1_idle0.png", basePath + "water/${extraString}1_idle1.png"]
-          ];
-          return waters[usedRandom.nextInt(waters.length)];
-        }
-
-        return [
-          basePath + "water/${extraString}_idle0.png",
-          basePath + "water/${extraString}_idle1.png"
-        ];
-      case wall:
-        return List.generate(2, (frameIndex) => basePath + "wall/idle${frameIndex}.png");
-      case portal:
-        return List.generate(4, (frameIndex) => basePath + "portal/idle${frameIndex}.png");
-      case cherry:
-        return List.generate(2, (frameIndex) => basePath + "cherry/idle${frameIndex}.png");
-      case apple:
-        return List.generate(2, (frameIndex) => basePath + "apple/idle${frameIndex}.png");
-      case bees:
-        return List.generate(2, (frameIndex) => basePath + "bees/idle${frameIndex}.png");
-      case moose:
-        return List.generate(2, (frameIndex) => basePath + "moose/idle${frameIndex}.png");
-    }
-  }
-
-  int getBonusScore() {
-    switch (this) {
-      case cherry:
-        return 3;
-      case apple:
-        return 10;
-      case bees:
-        return -5;
-      default:
-        return 0;
-    }
-  }
-}
-
-class EncloseGrid {
+class EncloseGrid extends ChangeNotifier {
   final int wallBudget;
-  late List<List<EncloseGridCellType>> fullGrid;
-  late List<EncloseGridCellType> flatGrid;
-  late final List<EncloseGridCellType> originalFlatGrid;
-  late final Map<int, List<int>> portals;
+  late List<EncloseGridTile> flatGrid;
+  late final Map<int, List<EncloseGridTile>> portals;
   late final int gridWidth;
   late final int gridHeight;
-  late final int mooseIndex;
+  late final EncloseGridTile mooseTile;
 
   int wallsLeft = 0;
-  Set<int>? enclosure;
-  Map<int, int>? enclosureDistances;
-  Map<int, int>? expandDistances;
-  List<int>? escapePath;
+  int? score;
+  List<EncloseGridTile>? escapePath;
   AxisDirection? escapeDirection;
-  int? get score {
-    if (enclosure == null) return null;
-
-    var currentScore = enclosure!.length;
-    for (final flatIndex in enclosure!) {
-      currentScore += flatGrid[flatIndex].getBonusScore();
-    }
-
-    return currentScore;
-  }
 
   EncloseGrid(String encodedGrid, this.wallBudget) {
     wallsLeft = wallBudget;
 
-    fullGrid = [[]];
-    flatGrid = [];
+    final gridString = encodedGrid.replaceAll("\n", "");
+    gridWidth = encodedGrid.indexOf("\n");
+    gridHeight = gridString.length ~/ gridWidth;
 
+    // fullGrid = [[]];
+    flatGrid = [];
     portals = {};
-    for (final character in encodedGrid.characters) {
+    for (final character in gridString.characters) {
       final flatIndex = flatGrid.length;
 
-      if (character == "\n") {
-        fullGrid.add([]);
-
-        continue;
-      }
-
       final type = EncloseGridCellType.fromString(character);
-      fullGrid.last.add(type!);
-      flatGrid.add(type);
+      final portalIndex = type != EncloseGridCellType.portal ? null : int.parse(character);
+      final tile = EncloseGridTile(
+        index: flatIndex,
+        rowIndex: flatIndex ~/ gridWidth,
+        columnIndex: flatIndex % gridWidth,
+        type: type ?? EncloseGridCellType.grass,
+        portalIndex: portalIndex
+      );
+      flatGrid.add(tile);
 
       if (type == EncloseGridCellType.portal) {
-        final portalNumber = int.parse(character);
-        if (!portals.containsKey(portalNumber)) {
-          portals[portalNumber] = [];
+        if (!portals.containsKey(portalIndex!)) {
+          portals[portalIndex] = [];
         }
-        portals[portalNumber]!.add(flatIndex);
-
-        // if (currentPortals.containsKey(portalNumber)) {
-        //   portals[currentPortals[portalNumber]!] = flatIndex;
-        //   portals[flatIndex] = currentPortals[portalNumber]!;
-        // }
-        // currentPortals[portalNumber] = flatIndex;
+        portals[portalIndex]!.add(tile);
       }
       if (type == EncloseGridCellType.moose) {
-        mooseIndex = flatIndex;
+        mooseTile = tile;
       }
     }
-
-    originalFlatGrid = flatGrid;
-    gridWidth = fullGrid[0].length;
-    gridHeight = fullGrid.length;
 
     updateEnclosure();
   }
 
-  void reset({bool doUpdate = true}) {
-    for (final indexedGridCell in flatGrid.indexed) {
-      if (indexedGridCell.$2 == EncloseGridCellType.wall) {
-        toggleWall(indexedGridCell.$1, doUpdate: false);
-      }
-    }
+  void toggleWall(EncloseGridTile tile, {bool doUpdate = true}) {
+    if (!tile.canToggleWall) return;
 
-    if (doUpdate) {
-      updateEnclosure();
-    }
-  }
+    if (tile.isGrass) {
+      if (wallsLeft == 0) return;
 
-  bool toggleWall(int flatIndex, {bool doUpdate = true}) {
-    if (flatGrid[flatIndex] != EncloseGridCellType.grass && flatGrid[flatIndex] != EncloseGridCellType.wall) return false;
-    // final toggleResult = fullGrid[rowIndex][columnIndex] == EncloseGridCellType.wall ? EncloseGridCellType.grass : EncloseGridCellType.wall;
-
-    // fullGrid[rowIndex][columnIndex] = toggleResult;
-    // flatGrid[rowIndex * gridWidth + columnIndex] = toggleResult;
-    EncloseGridCellType toggleResult;
-    if (flatGrid[flatIndex] == EncloseGridCellType.grass) {
-      if (wallsLeft <= 0) return false;
-
-      wallsLeft--;
-      toggleResult = EncloseGridCellType.wall;
+      tile.toggleWall();
+      wallsLeft -= 1;
     } else {
-      wallsLeft++;
-      toggleResult = EncloseGridCellType.grass;
+      tile.toggleWall();
+      wallsLeft += 1;
     }
-
-    fullGrid[flatIndex ~/ gridWidth][flatIndex % gridWidth] = toggleResult;
-    flatGrid[flatIndex] = toggleResult;
 
     if (doUpdate) {
       updateEnclosure();
     }
-
-    return true;
   }
 
-  bool isOpen(int flatIndex) => flatGrid[flatIndex] != EncloseGridCellType.water && flatGrid[flatIndex] != EncloseGridCellType.wall;
+  void reset({bool doUpdate = true}) {
+    wallsLeft = wallBudget;
 
-  List<int> _getNeighbors(int flatIndex) {
-    final rowIndex = flatIndex ~/ gridWidth;
-    final columnIndex = flatIndex % gridWidth;
-
-    List<int> neighbors = [];
-    if (columnIndex != 0) {
-      neighbors.add(flatIndex - 1);
-    }
-    if (columnIndex != gridWidth - 1) {
-      neighbors.add(flatIndex + 1);
-    }
-    if (rowIndex != 0) {
-      neighbors.add(flatIndex - gridWidth);
-    }
-    if (rowIndex != gridWidth - 1) {
-      neighbors.add(flatIndex + gridWidth);
+    for (final wallIndex in getWallIndices()) {
+      final tile = flatGrid[wallIndex];
+      tile.toggleWall();
     }
 
-    final portalNumber = getPortalIndex(flatIndex);
-    if (portalNumber != null) {
-      for (final index in portals[portalNumber]!) {
-        if (index != flatIndex) {
-          neighbors.add(index);
+    if (doUpdate) {
+      updateEnclosure();
+    }
+  }
+
+  Set<AxisDirection> getEscapeDirections(EncloseGridTile tile) {
+    final Set<AxisDirection> escapeDirections = {};
+    if (tile.columnIndex == 0) {
+      escapeDirections.add(AxisDirection.left);
+    }
+    if (tile.rowIndex == 0) {
+      escapeDirections.add(AxisDirection.up);
+    }
+    if (tile.columnIndex == gridWidth - 1) {
+      escapeDirections.add(AxisDirection.right);
+    }
+    if (tile.rowIndex == gridHeight - 1) {
+      escapeDirections.add(AxisDirection.down);
+    }
+
+    return escapeDirections;
+  }
+
+  EncloseGridTile? getDirectionalNeighbor(EncloseGridTile tile, AxisDirection direction) {
+    final escapeDirections = getEscapeDirections(tile);
+    if (escapeDirections.contains(direction)) {
+      return null;
+    }
+
+    if (direction == AxisDirection.left) {
+      return flatGrid[tile.index - 1];
+    }
+    if (direction == AxisDirection.up) {
+      return flatGrid[tile.index - gridWidth];
+    }
+    if (direction == AxisDirection.right) {
+      return flatGrid[tile.index + 1];
+    }
+    if (direction == AxisDirection.down) {
+      return flatGrid[tile.index + gridWidth];
+    }
+
+    return null;
+  }
+
+  Set<EncloseGridTile> getNeighbors(EncloseGridTile tile) {
+    final Set<EncloseGridTile> neighbors = {
+      getDirectionalNeighbor(tile, AxisDirection.left),
+      getDirectionalNeighbor(tile, AxisDirection.up),
+      getDirectionalNeighbor(tile, AxisDirection.right),
+      getDirectionalNeighbor(tile, AxisDirection.down)
+    }.nonNulls.toSet();
+
+    if (tile.isPortal) {
+      for (final portalTile in portals[tile.portalIndex!]!) {
+        if (portalTile.index != tile.index) {
+          neighbors.add(portalTile);
         }
       }
     }
@@ -325,43 +147,46 @@ class EncloseGrid {
   void updateEnclosure() {
     // BFS from moosey.
 
-    final Queue<int> queue = Queue();
-    final Map<int, int> visited = {};
-    final Map<int, int?> parentMap = {};
+    final oldEnclosure = getEnclosure();
 
-    queue.add(mooseIndex);
-    visited[mooseIndex] = 0;
-    parentMap[mooseIndex] = null;
+    final Queue<EncloseGridTile> queue = Queue();
+    final Map<EncloseGridTile, int> visited = {};
+    final Map<EncloseGridTile, EncloseGridTile?> parentMap = {};
+
+    queue.add(mooseTile);
+    visited[mooseTile] = 0;
+    parentMap[mooseTile] = null;
 
     while (queue.isNotEmpty) {
       final current = queue.removeFirst();
 
-      for (final neighbor in _getNeighbors(current)) {
+      for (final neighbor in getNeighbors(current)) {
         final isVisited = visited.containsKey(neighbor);
-        final isBlocked = flatGrid[neighbor] == EncloseGridCellType.water || flatGrid[neighbor] == EncloseGridCellType.wall;
-        if (isVisited || isBlocked) continue;
+        if (isVisited || !neighbor.isOpen) continue;
 
         parentMap[neighbor] = current;
         visited[neighbor] = visited[current]! + 1;
 
-        final rowIndex = neighbor ~/ gridWidth;
-        final columnIndex = neighbor % gridWidth;
-
-        final isEscapedDirectional = [rowIndex == 0, rowIndex == gridHeight - 1, columnIndex == 0, columnIndex == gridWidth - 1];
-        final escapeDirectionIndex = isEscapedDirectional.indexOf(true);
-        if (escapeDirectionIndex != -1) {
-          List<int> backtrackPath = [];
-          int? currentNode = neighbor;
+        final neighborEscapeDirections = getEscapeDirections(neighbor);
+        if (neighborEscapeDirections.isNotEmpty) {
+          List<EncloseGridTile> backtrackPath = [];
+          EncloseGridTile? currentNode = neighbor;
           while (currentNode != null) {
             backtrackPath.add(currentNode);
             currentNode = parentMap[currentNode];
           }
 
-          enclosure = null;
-          enclosureDistances = null;
           escapePath = backtrackPath.reversed.toList();
-          escapeDirection = [AxisDirection.up, AxisDirection.down, AxisDirection.left, AxisDirection.right][escapeDirectionIndex];
-          expandDistances = null;
+          escapeDirection = neighborEscapeDirections.first;
+          score = null;
+          for (final EncloseGridTile tile in oldEnclosure ?? {}) {
+            tile.update(
+              newIsEnclosed: false,
+              newWaitTime: null,
+              newReverseWaitTime: null
+            );
+          }
+          notifyListeners();
 
           return;
         }
@@ -370,61 +195,66 @@ class EncloseGrid {
       }
     }
 
-    final oldEnclosure = enclosure;
-
-    enclosure = visited.keys.toSet();
-    enclosureDistances = {
-      for (final key in enclosure!) key: visited[key]!
+    final enclosure = visited.keys.toSet();
+    final enclosureDistances = {
+      for (final key in enclosure) key: visited[key]!
     };
+
     escapePath = null;
     escapeDirection = null;
 
-    // final enclosureDifference = enclosure!.difference(oldEnclosure ?? {});
+    var currentScore = enclosure.length;
+    for (final tile in enclosure) {
+      currentScore += tile.type.getBonusScore();
+    }
+    score = currentScore;
+
+    Map<EncloseGridTile, int>? expandDistances;
     if (oldEnclosure != null) {
       // Special case if the enclosure is expanded to make wheat start growing immediately (instead of waiting {distance to moose} frames to start)
       expandDistances = {};
-      for (final key in enclosure!) {
+      for (final key in enclosure) {
         if (oldEnclosure.contains(key)) {
-          expandDistances![key] = visited[key]!;
+          expandDistances[key] = visited[key]!;
         } else {
-          expandDistances![key] = 0;
-          int currentNode = key;
+          expandDistances[key] = 0;
+          EncloseGridTile currentNode = key;
           while (!oldEnclosure.contains(currentNode)) {
-            expandDistances![key] = expandDistances![key]! + 1;
+            expandDistances[key] = expandDistances[key]! + 1;
             currentNode = parentMap[currentNode]!;
           }
         }
       }
     }
-  }
 
-  int? getDistance(int flatIndex, {bool includeExpand = true}) {
-    if (includeExpand) {
-      return expandDistances?[flatIndex] ?? enclosureDistances?[flatIndex];
+    final maxDistance = enclosureDistances.values.reduce(max);
+    final affectedTiles = enclosure.difference(oldEnclosure ?? {}).union(oldEnclosure?.difference(enclosure) ?? {});
+    for (final tile in affectedTiles) {
+      final distance = enclosureDistances[tile];
+      final expandDistance = expandDistances?[tile] ?? distance;
+
+      tile.update(
+        newIsEnclosed: enclosure.contains(tile),
+        newWaitTime: expandDistance == null ? null : EncloseGridCellType.wheatFrameDuration * expandDistance,
+        newReverseWaitTime: distance == null ? null : EncloseGridCellType.wheatFrameDuration * (maxDistance - distance)
+      );
     }
 
-    return enclosureDistances?[flatIndex];
-    // final signedRowDistance = (mooseIndex % gridWidth - flatIndex % gridWidth);
-    // final signedColumnDistance = ((mooseIndex - flatIndex) / gridWidth).toInt();
-
-    // return signedRowDistance.abs() + signedColumnDistance.abs();
-  }
-
-  int? getMaxDistance() {
-    return enclosureDistances?.values.reduce(max);
-  }
-
-  int? getPortalIndex(int flatIndex) {
-    final portalIndex = portals.entries.firstWhere((e) => e.value.contains(flatIndex), orElse:() => MapEntry(-1, [])).key;
-    if (portalIndex == -1) return null;
-
-    return portalIndex;
+    notifyListeners();
   }
 
   Set<int> getWallIndices() {
-    return flatGrid.indexed
-      .where((indexedCell) => indexedCell.$2 == EncloseGridCellType.wall)
-      .map((indexedCell) => indexedCell.$1)
+    return flatGrid
+      .where((tile) => tile.isWall)
+      .map((tile) => tile.index)
+      .toSet();
+  }
+
+  Set<EncloseGridTile>? getEnclosure() {
+    if (escapePath != null || score == null) return null;
+
+    return flatGrid
+      .where((tile) => tile.isEnclosed)
       .toSet();
   }
 

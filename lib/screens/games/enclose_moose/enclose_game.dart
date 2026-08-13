@@ -1,14 +1,16 @@
 import "dart:math" as math;
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-import "package:api_client/api_client.dart";
-import "package:fsek_mobile/services/api.service.dart";
-import "package:dio/dio.dart";
+import "package:built_collection/built_collection.dart";
 import "package:audioplayers/audioplayers.dart";
 import "package:syncfusion_flutter_charts/charts.dart";
-import "package:built_collection/built_collection.dart";
+import "package:dio/dio.dart";
+import "package:api_client/api_client.dart";
+import "package:fsek_mobile/services/api.service.dart";
 import "enclose_grid.dart";
-import "helper_widgets/animated_moose_grid_image.dart";
+import "enclose_grid_tile.dart";
+import "call_counter.dart";
+import "tile_widget.dart";
 import "helper_widgets/wiggling_widget.dart";
 import "helper_widgets/outlined_text.dart";
 import "helper_widgets/highlighted_text.dart";
@@ -36,26 +38,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   late EncloseMooseLevelRead _usedLevel = widget.level;
 
   late final _grid = EncloseGrid(_usedLevel.encodedGrid, _usedLevel.wallBudget);
-  late final _levelRandom = math.Random(_usedLevel.levelId.hashCode);
-  late final _staticIdleFrames = _grid.flatGrid.indexed.map((indexedGridCell) {
-    final index = indexedGridCell.$1;
-    final gridCell = indexedGridCell.$2;
-
-    if (gridCell == EncloseGridCellType.water) {
-      final row = (index / _grid.gridWidth).toInt();
-      final col = index % _grid.gridWidth;
-      List<bool> neighborNonWater = [];
-      neighborNonWater.add(col != 0 ? _grid.flatGrid[index - 1] != EncloseGridCellType.water : true);
-      neighborNonWater.add(row != 0 ? _grid.flatGrid[index - _grid.gridWidth] != EncloseGridCellType.water : true);
-      neighborNonWater.add(col != _grid.gridWidth - 1 ? _grid.flatGrid[index + 1] != EncloseGridCellType.water : true);
-      neighborNonWater.add(row != _grid.gridHeight - 1 ? _grid.flatGrid[index + _grid.gridWidth] != EncloseGridCellType.water : true);
-
-      return gridCell.getIdleFrames(random: _levelRandom, extra: neighborNonWater);
-    }
-
-    return gridCell.getIdleFrames(random: _levelRandom);
-  }).toList();
-  late final _portalOffset = _levelRandom.nextDouble() * 360;
+  late final _portalOffset = math.Random(_usedLevel.levelId.hashCode).nextDouble() * 360;
 
   late List<EncloseMooseLevelRead> _dailies = widget.availableLevels.where((level) => level.dayIndex != null).toList();
   late List<EncloseMooseLevelRead> _nonDailies = widget.availableLevels.where((level) => level.dayIndex == null).toList();
@@ -70,18 +53,13 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
       period: _idleDuration
     );
 
-  final Map<String, int> _openCallCounter = {};
+  final CallCounter<String, int> _openCallCounter = CallCounter();
+  final CallCounter<EncloseGridTile, String> _tooltipCallCounter = CallCounter();
+  final CallCounter<int, List<int>> _portalCallCounter = CallCounter();
 
-  final Map<int, int> _shownTooltipCalls = {};
-  final Map<int, String> _tooltipTexts = {};
-
-  final Map<int, int> _shownPortalCalls = {};
-  final Set<List<int>> _shownPortalConnections = {};
   late final Map<int, ColorFilter> _portalFilters = Map.fromIterables(_grid.portals.keys, _grid.portals.keys.map(
     (portalIndex) => ColorFilter.matrix(_hueRotationMatrix(_portalOffset + 360 * portalIndex / _grid.portals.length))
-  ));  // Precompute these
-
-  // final List<Future> _callCounterFutures = [];  // Could have one for each call counter to have better control
+  ));  // Precompute these for performance
 
   // bool panPlacesWalls = true;
 
@@ -90,12 +68,20 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
+  void initState() {
+    super.initState();
+
+    updateScore(null);  // kind of only needed if level is enclosed from start
+  }
+
+  @override
   void dispose() {
-    // for (final callCounterFuture in _callCounterFutures) {
-    //   callCounterFuture.ignore();
-    // }
     _idleController.dispose();
     _audioPlayer.dispose();
+
+    _openCallCounter.dispose();
+    _tooltipCallCounter.dispose();
+    _portalCallCounter.dispose();
 
     super.dispose();
   }
@@ -103,11 +89,6 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   @override
   Widget build(BuildContext context) {
     const backgroundImage = "assets/img/enclose_moose/grass/0_idle0.png";
-
-    final maxOffset = _grid.getMaxDistance() ?? 0;
-
-    final isCurrentBest = _bestSolutionScore == _grid.score || _bestSolution == null;
-    final isNotShowingYours = _hasSubmitted && !setEquals(_grid.getWallIndices(), _usedLevel.playerSubmission!.playerSolution.toSet());
 
     return Scaffold(
         appBar: AppBar(
@@ -122,7 +103,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
             controller: _idleController,
             child: Text.rich(
               TextSpan(
-                children: "enclose.moose".characters.map((char) => WidgetSpan(
+                children: "enclose.moose".characters.map((char) => WidgetSpan(  // Could consider making all text like this
                   child: WigglingWidget(
                     controller: _idleController,
                     child: OutlinedText(
@@ -244,9 +225,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                             controller: _idleController,
                             child: IconButton(
                               onPressed: () {
-                                setState(() {
-                                  _grid.reset();
-                                });
+                                _grid.reset();
                               },
                               icon: const Icon(Icons.restart_alt_outlined),
                               color: Colors.white
@@ -284,158 +263,61 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
                 Expanded(
                   child: InteractiveViewer(
+                    // clipBehavior: Clip.none,  // pretty cool! maybe not good though
                     child: Center(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
-                        final boardWidth = constraints.maxWidth;
-                        final boardHeight = constraints.maxHeight;
+                          final boardWidth = constraints.maxWidth;
+                          final boardHeight = constraints.maxHeight;
 
-                        final cellSize = math.min(
-                          boardWidth / _grid.gridWidth,
-                          boardHeight / _grid.gridHeight,
-                        );
+                          final cellSize = math.min(
+                            boardWidth / _grid.gridWidth,
+                            boardHeight / _grid.gridHeight,
+                          );
 
-                        final mooseRow = _grid.mooseIndex ~/ _grid.gridWidth;
-                        final mooseColumn = _grid.mooseIndex % _grid.gridWidth;
+                          return SizedBox(
+                            width: _grid.gridWidth * cellSize,
+                            height: _grid.gridHeight * cellSize + 0.0001,  // for some reason adding a small number allows the walls on the top row to overflow
+                            child: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                GridView.count(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  crossAxisCount: _grid.gridWidth,
+                                  children: _grid.flatGrid.map((tile) {
+                                    // final isEnclosed = _grid.enclosure?.contains(tile) ?? false;
 
-                        const thoughtCloudWidth = 200;
+                                    // const wheatFrameDuration = Duration(milliseconds: 40);
+                                    // final frameOffset = _grid.getDistance(tile);
+                                    // final waitTime = frameOffset == null ? null : wheatFrameDuration * frameOffset;
+                                    // final reverseFramOffset = frameOffset == null ? null : maxOffset - _grid.getDistance(tile, includeExpand: false)!;
+                                    // final reverseWaitTime = reverseFramOffset == null ? null : wheatFrameDuration * reverseFramOffset;
 
-                        return SizedBox(
-                          width: _grid.gridWidth * cellSize,
-                          height: _grid.gridHeight * cellSize + 0.0001,  // for some reason adding a small number allows the walls on the top row to overflow
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              GridView.count(
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: _grid.gridWidth,
-                                children: _grid.flatGrid.indexed.map((indexedGridCell) {
-                                  final flatIndex = indexedGridCell.$1;
-                                  final gridCell = indexedGridCell.$2;
-                                  
-                                  final isEnclosed = _grid.enclosure?.contains(flatIndex) ?? false;
+                                    final neighboringWater = !tile.isWater ? null : [AxisDirection.left, AxisDirection.up, AxisDirection.right, AxisDirection.down].map(
+                                      (direction) => !(_grid.getDirectionalNeighbor(tile, direction)?.isWater ?? false)
+                                    ).toList();
 
-                                  const wheatFrameDuration = Duration(milliseconds: 40);
-                                  final frameOffset = _grid.getDistance(flatIndex);
-                                  final waitTime = frameOffset == null ? null : wheatFrameDuration * frameOffset;
-                                  final reverseFramOffset = frameOffset == null ? null : maxOffset - _grid.getDistance(flatIndex, includeExpand: false)!;
-                                  final reverseWaitTime = reverseFramOffset == null ? null : wheatFrameDuration * reverseFramOffset;
-
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                        width: cellSize / 300,
-                                      )
-                                    ),
-                                    child: OverflowBox(
-                                      maxHeight: double.infinity,
-                                      alignment: Alignment.bottomCenter,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          _tapTile(flatIndex, gridCell);
-                                        },
-                                        child: Stack(
-                                          alignment: Alignment.bottomCenter,
-                                          clipBehavior: Clip.none,
-                                          fit: StackFit.passthrough,
-                                          children: [
-                                            if (gridCell != EncloseGridCellType.water) ...[
-                                              AnimatedMooseGridImage(
-                                                frames: EncloseGridCellType.grass.getAnimationFrames(random: _levelRandom),
-                                                frameDuration: wheatFrameDuration,
-                                                vsync: this,
-                                                idleFrames: _staticIdleFrames[flatIndex],
-                                                idleController: _idleController
-                                              ),
-
-                                              AnimatedMooseGridImage(
-                                                // key: Key(EncloseGridCellType.wheatFrames.toString() + flatIndex.toString()),
-                                                isVisible: isEnclosed,
-                                                frames: gridCell == EncloseGridCellType.moose ? EncloseGridCellType.emptyWheatFrames : EncloseGridCellType.animationWheatFrames,  // Would rather not animate emptyWheatFrames
-                                                vsync: this,
-                                                waitTime: waitTime,
-                                                reverseWaitTime: reverseWaitTime,
-                                                idleFrames: gridCell == EncloseGridCellType.moose ? [] : EncloseGridCellType.idleWheatFrames,
-                                                idleController: _idleController
-                                              ),
-                                            ],
-
-                                            AnimatedMooseGridImage(
-                                              isVisible: gridCell == EncloseGridCellType.wall,
-                                              frames: EncloseGridCellType.wall.getAnimationFrames(random: _levelRandom),
-                                              vsync: this,
-                                              reverseFrameDuration: const Duration(milliseconds: 20),
-                                              idleFrames: EncloseGridCellType.wall.getIdleFrames(random: _levelRandom),  // can"t use _staticIdleFrames
-                                              idleController: _idleController
-                                            ),
-
-                                            // Text(flatIndex.toString(), style: TextStyle(fontSize: 10)),
-
-                                            // Text((_grid.getDistance(flatIndex) ?? -1).toString()),
-
-                                            if (gridCell == EncloseGridCellType.portal)
-                                              ColorFiltered(
-                                                colorFilter: _portalFilters[_grid.getPortalIndex(flatIndex)!]!,
-                                                child: AnimatedMooseGridImage(
-                                                  frames: gridCell.getAnimationFrames(random: _levelRandom),
-                                                  vsync: this,
-                                                  idleFrames: _staticIdleFrames[flatIndex],
-                                                  idleController: _idleController
-                                                )
-                                              ),
-
-                                            if (gridCell == EncloseGridCellType.apple)
-                                              AnimatedMooseGridImage(
-                                                frames: gridCell.getAnimationFrames(random: _levelRandom),
-                                                isVisible: isEnclosed,
-                                                vsync: this,
-                                                frameDuration: wheatFrameDuration,  // To simplify, this is chosen so that the total duration is the same as for wheat
-                                                waitTime: waitTime,
-                                                reverseWaitTime: reverseWaitTime,
-                                                idleFrames: _staticIdleFrames[flatIndex],
-                                                idleController: _idleController
-                                              ),
-
-                                            if (gridCell != EncloseGridCellType.grass && gridCell != EncloseGridCellType.wall && gridCell != EncloseGridCellType.portal && gridCell != EncloseGridCellType.apple)
-                                              AnimatedMooseGridImage(
-                                                frames: gridCell.getAnimationFrames(random: _levelRandom),
-                                                vsync: this,
-                                                idleFrames: _staticIdleFrames[flatIndex],
-                                                idleController: _idleController
-                                              ),
-                                              // SlideShowImage(
-                                              //   key: Key(frames.toString()),
-                                              //   frames: frames,
-                                              //   fit: BoxFit.fill,
-                                              //   filterQuality: FilterQuality.none
-                                              // )
-
-                                            if (_tooltipTexts.containsKey(flatIndex))
-                                              Positioned(
-                                                top: -25,
-                                                child: AnimatedOpacity(
-                                                  opacity: _shownTooltipCalls[flatIndex] != 0 ? 1 : 0,
-                                                  duration: const Duration(milliseconds: 150),
-                                                  onEnd: () {
-                                                    setState(() {
-                                                      _tooltipTexts.remove(flatIndex);  // not really needed, just to avoid unnecessary wiggling computation. this removes fade-in but fade-in kinda sucks anyway
-                                                    });
-                                                  },
-                                                  child: WigglingWidget(
-                                                    controller: _idleController,
-                                                    child: OutlinedText(
-                                                      text: _tooltipTexts[flatIndex]!,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 18,
-                                                        fontFamily: "Schoolbell"
-                                                      )
-                                                    )
-                                                  )
-                                                )
-                                              ),
-                                            ]
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                          width: cellSize / 300,
+                                        )
+                                      ),
+                                      child: OverflowBox(
+                                        maxHeight: double.infinity,
+                                        alignment: Alignment.bottomCenter,
+                                        child: TileWidget(
+                                          tile: tile,
+                                          vsync: this,
+                                          idleController: _idleController,
+                                          tileRandom: math.Random(_usedLevel.levelId.hashCode + tile.index.hashCode),
+                                          onTap: () => _tapTile(tile),
+                                          portalFilter: _portalFilters[tile.portalIndex],
+                                          neighboringWater: neighboringWater,
+                                          tooltipCallCounter: RestrictedCallCounter(
+                                            callCounter: _tooltipCallCounter,
+                                            key: tile
                                           )
                                         )
                                       )
@@ -477,65 +359,88 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                   }
                                 ),
                                 */
+                                
+                                ListenableBuilder(
+                                  listenable: _portalCallCounter,
+                                  builder: (context, child) => Stack(
+                                    clipBehavior: Clip.none,
+                                    children: List.generate(_grid.portals.length, (index) => index).map((portalIndex) {
+                                      final portalConnection = _portalCallCounter.getValue(portalIndex);
+                                      const defaultPortalColor = Color.fromRGBO(74, 187, 234, 255);
 
-                                ..._shownPortalConnections.map((portalConnection) {
-                                  final portalIndex = _grid.getPortalIndex(portalConnection[0])!;
-                                  const defaultPortalColor = Color.fromRGBO(74, 187, 234, 255);  // HSLColor.fromAHSL(1, 196, 0.67, 0.45);  // approximate average of portal image
+                                      if (portalConnection == null) {
+                                        return null;
+                                      }
 
-                                  return ColorFiltered(
-                                    key: Key(portalConnection.toString()),  // to keep from restarting animation when other portals change
-                                    colorFilter: _portalFilters[portalIndex]!,
-                                    child: IgnorePointer(
-                                      child: AnimatedSmoothArrow(
-                                        isVisible: _shownPortalCalls[portalConnection[0]] != 0,
-                                        onDisappear: () {
-                                          setState(() {
-                                            // _shownFlatIndexPortalColors.removeWhere((key, val) => orderedPortal.contains(key));  // need to remove both to avoid some weird bugs since opposite portals can be clicked but won"t show
-                                            _shownPortalConnections.remove(portalConnection);
-                                          });
-                                        },
-                                        vsync: this,
-                                        flatIndices: portalConnection,
-                                        gridWidth: _grid.gridWidth,
-                                        cellSize: cellSize,
-                                        lineColor: defaultPortalColor,
-                                        showArrowHead: false,
-                                        idleController: _idleController,
-                                        frequency: 2
-                                      )
-                                    )
-                                  );
-                                }).toList(),
-
-                                if (_grid.escapePath != null)
-                                  IgnorePointer(
-                                    child: AnimatedSmoothArrow(
-                                      isVisible: (_openCallCounter["escape"] ?? 0) != 0,
-                                      vsync: this,
-                                      flatIndices: _grid.escapePath!,
-                                      gridWidth: _grid.gridWidth,
-                                      cellSize: cellSize,
-                                      extraLength: cellSize,
-                                      extraDirection: _grid.escapeDirection,
-                                      lineColor: Colors.white.withAlpha(200),
-                                      idleController: _idleController,
-                                      frequency: 2
-                                    )
-                                  ),
-
-                                Positioned(
-                                  left: (mooseColumn + 1) * cellSize - thoughtCloudWidth / 2,
-                                  right: (_grid.gridWidth - mooseColumn - 1) * cellSize - thoughtCloudWidth / 2,
-                                  bottom: (_grid.gridHeight - mooseRow) * cellSize + 20,
-                                  child: IgnorePointer(
-                                    child: AnimatedThoughtBubble(
-                                      isVisible: (_openCallCounter["thinking"] ?? 0) != 0,
-                                      text: _mooseThought,
-                                      color: Colors.white.withAlpha(180),
-                                      idleController: _idleController
-                                    )
+                                      return ColorFiltered(
+                                        key: Key(portalConnection.toString()),  // to keep from restarting animation when other portals change
+                                        colorFilter: _portalFilters[portalIndex]!,
+                                        child: IgnorePointer(
+                                          child: AnimatedSmoothArrow(
+                                            isVisible: _portalCallCounter.isNotEmpty(portalIndex),
+                                            onDisappear: () {
+                                              _portalCallCounter.remove(portalIndex);
+                                            },
+                                            vsync: this,
+                                            flatIndices: portalConnection,
+                                            gridWidth: _grid.gridWidth,
+                                            cellSize: cellSize,
+                                            lineColor: defaultPortalColor,
+                                            showArrowHead: false,
+                                            idleController: _idleController,
+                                            frequency: 2
+                                          )
+                                        )
+                                      );
+                                    }).nonNulls.toList()
                                   )
                                 ),
+
+                                ListenableBuilder(
+                                  listenable: Listenable.merge([
+                                    _grid,
+                                    _openCallCounter
+                                  ]),
+                                  builder: (context, child) {
+                                    const thoughtCloudWidth = 200;
+
+                                    return Stack(
+                                      clipBehavior: Clip.none,
+                                      fit: StackFit.expand,
+                                      children: [
+                                        if (_grid.escapePath != null)
+                                          IgnorePointer(
+                                            child: AnimatedSmoothArrow(
+                                              isVisible: (_openCallCounter.getCount("escape") ?? 0) != 0,
+                                              vsync: this,
+                                              flatIndices: _grid.escapePath!.map((tile) => tile.index).toList(),
+                                              gridWidth: _grid.gridWidth,
+                                              cellSize: cellSize,
+                                              extraLength: cellSize,
+                                              extraDirection: _grid.escapeDirection,
+                                              lineColor: Colors.white.withAlpha(200),
+                                              idleController: _idleController,
+                                              frequency: 2
+                                            )
+                                          ),
+
+                                        Positioned(
+                                          left: (_grid.mooseTile.columnIndex + 1) * cellSize - thoughtCloudWidth / 2,
+                                          right: (_grid.gridWidth - _grid.mooseTile.columnIndex - 1) * cellSize - thoughtCloudWidth / 2,
+                                          bottom: (_grid.gridHeight - _grid.mooseTile.rowIndex) * cellSize + 20,
+                                          child: IgnorePointer(
+                                            child: AnimatedThoughtBubble(
+                                              isVisible: (_openCallCounter.getCount("thinking") ?? 0) != 0,
+                                              text: _mooseThought,
+                                              color: Colors.white.withAlpha(180),
+                                              idleController: _idleController
+                                            )
+                                          )
+                                        ),
+                                      ]
+                                    );
+                                  }
+                                )
                               ]
                             )
                           );
@@ -545,138 +450,148 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                   )
                 ),
 
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ListenableBuilder(
+                  listenable: Listenable.merge([
+                    _grid,
+                    _openCallCounter
+                  ]),
+                  builder: (context, child) {
+                    final isCurrentBest = _bestSolutionScore == _grid.score || _bestSolution == null;
+                    final isNotShowingYours = _hasSubmitted && !setEquals(_grid.getWallIndices(), _usedLevel.playerSubmission!.playerSolution.toSet());
+
+                    return SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+                        child: Column(
                           children: [
-                            WigglingWidget(
-                              controller: _idleController,
-                              child: HighlightedText(
-                                showHighlight: (_openCallCounter["walls"] ?? 0) != 0,
-                                child: OutlinedText(
-                                  text: "Walls: ${_grid.wallsLeft}/${_grid.wallBudget}",
-                                  style: const TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: "Schoolbell"
-                                  )
-                                )
-                              )
-                            ),
-
-                            Spacer(),
-
-                            Visibility(
-                              visible: !_hasSubmitted && _grid.enclosure != null,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              maintainSize: true,
-                              child: WigglingWidget(
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    overlayColor: Colors.black
-                                  ),
-                                  onPressed: _submitSolution,
-                                  child: const OutlinedText(
-                                    text: "Submit",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontFamily: "Schoolbell"
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                WigglingWidget(
+                                  controller: _idleController,
+                                  child: HighlightedText(
+                                    showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
+                                    child: OutlinedText(
+                                      text: "Walls: ${_grid.wallsLeft}/${_grid.wallBudget}",
+                                      style: const TextStyle(
+                                        fontSize: 25,
+                                        fontFamily: "Schoolbell"
+                                      )
                                     )
                                   )
                                 ),
-                                controller: _idleController
-                              )
-                            ),
 
-                            Spacer(),
+                                Spacer(),
 
-                            WigglingWidget(
-                              controller: _idleController,
-                              child: HighlightedText(
-                                showHighlight: (_openCallCounter["score"] ?? 0) != 0,
-                                child: OutlinedText(
-                                  text: "Score: ${_grid.score ?? "N/A"}",
-                                  style: const TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: "Schoolbell"
+                                Visibility(
+                                  visible: !_hasSubmitted && _grid.escapePath == null,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  maintainSize: true,
+                                  child: WigglingWidget(
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5),
+                                        )
+                                      ),
+                                      onPressed: _submitSolution,
+                                      child: const OutlinedText(
+                                        text: "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontFamily: "Schoolbell"
+                                        )
+                                      )
+                                    ),
+                                    controller: _idleController
                                   )
-                                )
-                              )
-                            ),
-                          ]
-                        ),
+                                ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Visibility(
-                              visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              maintainSize: true,
-                              child: WigglingWidget(
-                                controller: _idleController,
-                                child: OutlinedButton.icon(
-                                  onPressed: () {
-                                    _changeToSolution(_usedLevel.optimalSolution!);
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.black.withAlpha(55),
-                                    visualDensity: VisualDensity.compact
-                                  ),
-                                  label: OutlinedText(
-                                    text: "Optimal: ${_usedLevel.optimalScore}",
-                                    style: const TextStyle(
-                                      // color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily: "Schoolbell"
+                                Spacer(),
+
+                                WigglingWidget(
+                                  controller: _idleController,
+                                  child: HighlightedText(
+                                    showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
+                                    child: OutlinedText(
+                                      text: "Score: ${_grid.score ?? "N/A"}",
+                                      style: const TextStyle(
+                                        fontSize: 25,
+                                        fontFamily: "Schoolbell"
+                                      )
                                     )
-                                  ),
-                                  icon: const Icon(Icons.star_sharp)
-                                )
-                              )
+                                  )
+                                ),
+                              ]
                             ),
 
-                            Visibility(
-                              visible: isNotShowingYours || !isCurrentBest,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              maintainSize: true,
-                              child: WigglingWidget(
-                                controller: _idleController,
-                                child: OutlinedButton.icon(
-                                  onPressed: () {
-                                    _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.black.withAlpha(55),
-                                    visualDensity: VisualDensity.compact
-                                  ),
-                                  label: OutlinedText(
-                                    text: _hasSubmitted ? "Your solution: ${_usedLevel.playerSubmission!.playerScore}" : "Your best: $_bestSolutionScore",
-                                    style: const TextStyle(
-                                      // color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily: "Schoolbell"
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Visibility(
+                                  visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  maintainSize: true,
+                                  child: WigglingWidget(
+                                    controller: _idleController,
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        _changeToSolution(_usedLevel.optimalSolution!);
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Colors.black.withAlpha(55),
+                                        visualDensity: VisualDensity.compact
+                                      ),
+                                      label: OutlinedText(
+                                        text: "Optimal: ${_usedLevel.optimalScore}",
+                                        style: const TextStyle(
+                                          // color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "Schoolbell"
+                                        )
+                                      ),
+                                      icon: const Icon(Icons.star_sharp)
                                     )
-                                  ),
-                                  icon: const Icon(Icons.keyboard_return_outlined)
-                                )
-                              )
+                                  )
+                                ),
+
+                                Visibility(
+                                  visible: isNotShowingYours || !isCurrentBest,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  maintainSize: true,
+                                  child: WigglingWidget(
+                                    controller: _idleController,
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Colors.black.withAlpha(55),
+                                        visualDensity: VisualDensity.compact
+                                      ),
+                                      label: OutlinedText(
+                                        text: _hasSubmitted ? "Your solution: ${_usedLevel.playerSubmission!.playerScore}" : "Your best: $_bestSolutionScore",
+                                        style: const TextStyle(
+                                          // color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "Schoolbell"
+                                        )
+                                      ),
+                                      icon: const Icon(Icons.keyboard_return_outlined)
+                                    )
+                                  )
+                                ),
+                              ]
                             ),
                           ]
-                        ),
-                      ]
-                    )
-                  )
+                        )
+                      )
+                    );
+                  }
                 )
               ]
             )
@@ -685,28 +600,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
     );
   }
 
-  void _incrementCallCounter<T>(Map<T, int> callCounter, T key, {Duration duration = const Duration(seconds: 4)}) {
-    setState(() {
-      callCounter[key] = (callCounter[key] ?? 0) + 1;
-    });
-
-    Future.delayed(duration, () {
-      if (!mounted) return;
-
-      if (callCounter[key] == 1) {
-        setState(() {
-          callCounter[key] = callCounter[key]! - 1;
-        });
-      } else {
-        callCounter[key] = callCounter[key]! - 1;
-      }
-
-      // _callCounterFutures.removeAt(0);
-    });
-    // _callCounterFutures.add(callCounterFuture);
-  }
-
-  List<double> _hueRotationMatrix(double angleDeg) { // random matrix!
+  List<double> _hueRotationMatrix(double angleDeg) {  // random matrix!
     final angleRad = angleDeg * math.pi / 180;
     final cosA = math.cos(angleRad);
     final sinA = math.sin(angleRad);
@@ -735,52 +629,49 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
     ];
   }
 
-  void _tapTile(int flatIndex, EncloseGridCellType gridCell) {
-    if (_grid.wallsLeft == 0 && gridCell == EncloseGridCellType.grass) {
-      _incrementCallCounter(_openCallCounter, "walls", duration: const Duration(seconds: 1));
-    }
+  void updateScore(int? oldScore) {
+    if (_grid.score == null) return;
 
-    final oldEnclosure = _grid.enclosure;
-    final toggleWallResult = _grid.toggleWall(flatIndex);
-    if (toggleWallResult) {
-      setState(() {});
+    if (_grid.score! != oldScore) {
+      _openCallCounter.increment("score", 0, duration: const Duration(seconds: 1));
 
-      final recentlyEnclosed = oldEnclosure == null && _grid.enclosure != null;
-      final isDifferentEnclosure = oldEnclosure != null && _grid.enclosure != null && !setEquals(oldEnclosure, _grid.enclosure);
-      if (recentlyEnclosed || isDifferentEnclosure) {
-        _incrementCallCounter(_openCallCounter, "score", duration: const Duration(seconds: 1));
-
-        if (_bestSolutionScore == null || _grid.score! > _bestSolutionScore!) {
-          _bestSolutionScore = _grid.score!;
-          _bestSolution = _grid.getWallIndices();
-        }
+      if (_bestSolutionScore == null || _grid.score! > _bestSolutionScore!) {
+        _bestSolutionScore = _grid.score!;
+        _bestSolution = _grid.getWallIndices();
       }
     }
+  }
 
-    if (gridCell == EncloseGridCellType.portal) {
-      final portalIndex = _grid.getPortalIndex(flatIndex)!;
-      for (final index in _grid.portals[portalIndex]!) {
-        if (index == flatIndex) {
+  void _tapTile(EncloseGridTile tile) {
+    if (_grid.wallsLeft == 0 && tile.isGrass) {
+      _openCallCounter.increment("walls", 0, duration: const Duration(seconds: 1));
+    } else if (tile.canToggleWall) {
+      final oldScore = _grid.score;
+      _grid.toggleWall(tile);
+
+      updateScore(oldScore);
+    }
+
+    if (tile.isPortal) {
+      // final portalIndex = _grid.getPortalIndex(flatIndex)!;
+      final portalIndex = tile.portalIndex!;
+      for (final otherTile in _grid.portals[portalIndex]!) {
+        final shownPortal = _portalCallCounter.getValue(portalIndex);
+        final isOtherPortalShown = shownPortal != null && shownPortal[0] != tile.index;
+        if (otherTile.index == tile.index || isOtherPortalShown) {
           continue;
         }
 
-        final possiblePortalConnection = Set.of([index, flatIndex]);
-        final alreadyShown = _shownPortalConnections.any(
-          (portalConnection) => setEquals(Set.of(portalConnection), possiblePortalConnection)
-        );
-        if (!alreadyShown) {
-          _shownPortalConnections.add([flatIndex, index]);
-        }
+        _portalCallCounter.increment(portalIndex, [tile.index, otherTile.index]);
       }
-      _incrementCallCounter(_shownPortalCalls, flatIndex);
     }
 
-    if (gridCell == EncloseGridCellType.moose) {
+    if (tile.isMoose) {
       if (_grid.escapePath != null) {
-        _incrementCallCounter(_openCallCounter, "escape", duration: const Duration(seconds: 5));
+        _openCallCounter.increment("escape", 0, duration: const Duration(seconds: 5));
       }
 
-      _incrementCallCounter(_openCallCounter, "thinking", duration: const Duration(seconds: 5));
+      _openCallCounter.increment("thinking", 0, duration: const Duration(seconds: 5));
 
       const freeMooseThoughts = [
         ("audio/moose.mp4", "I can go thiiiis way \n *neigh*"),
@@ -796,16 +687,18 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
       _audioPlayer.play(AssetSource(possibleThoughts[mooseThoughtIndex].$1));
     }
 
-    final bonusScore = gridCell.getBonusScore();
-    if (bonusScore != 0) {
-      _tooltipTexts[flatIndex] = (bonusScore > 0 ? "+" : "") + "$bonusScore if enclosed";
-
-      _incrementCallCounter(_shownTooltipCalls, flatIndex);
+    if (tile.isBonus) {
+      final bonusScore = tile.type.getBonusScore();
+      if (bonusScore != 0) {
+        _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore if enclosed");
+      }
     }
   }
 
   Future<void> _submitSolution() async {
-    _changeToSolution(_bestSolution!);
+    if (_bestSolution != null) {
+      _changeToSolution(_bestSolution!);
+    }
 
     final solution = _grid.getWallIndices();
     final submission = EncloseMooseSubmissionCreate(
@@ -814,7 +707,6 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
     );
 
     const encloseMooseToken = String.fromEnvironment("ENCLOSE_MOOSE_SECRET", defaultValue: "");
-
     try {
       final response = await ApiService.apiClient
         .getEncloseMooseApi()
@@ -841,15 +733,14 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   }
 
   void _changeToSolution(Iterable<int> solution) {
-    setState(() {
-      _grid.reset(doUpdate: false);
+    _grid.reset(doUpdate: false);
 
-      for (final flatIndex in solution) {
-        _grid.toggleWall(flatIndex, doUpdate: false);
-      }
+    for (final flatIndex in solution) {
+      final tile = _grid.flatGrid[flatIndex];
+      _grid.toggleWall(tile, doUpdate: false);
+    }
 
-      _grid.updateEnclosure();
-    });
+    _grid.updateEnclosure();
   }
 
   Widget Function(BuildContext) _buildDayChooserDialog() {
@@ -886,7 +777,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                           ),
 
                           TextSpan(
-                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y")})",
+                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y", locale: "en")})",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor
                             )
@@ -899,7 +790,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                       )
                     ),
                     trailing: level.playerSubmission == null ? null : Text(
-                      level.playerSubmission!.playerScore == level.optimalScore ? "💎" : "✅",  // This is so scuffed
+                      level.playerSubmission!.playerScore == level.optimalScore ? "💎" : "✅",
                       style: const TextStyle(
                         fontSize: 18
                       )
@@ -934,7 +825,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                       )
                     ),
                     trailing: level.playerSubmission == null ? null : Text(
-                      level.playerSubmission!.playerScore == level.optimalScore ? "💎" : "✅",  // This is so scuffed
+                      level.playerSubmission!.playerScore == level.optimalScore ? "💎" : "✅",
                       style: const TextStyle(
                         fontSize: 18
                       )

@@ -3,8 +3,9 @@ import "package:flutter/material.dart";
 class AnimatedMooseGridImage extends StatefulWidget {
   const AnimatedMooseGridImage({
     super.key,
-    this.isVisible = true,
+    this.shouldAnimate = true,
     required this.frames,
+    this.isAlwaysVisible = false,
     this.vsync,
     this.frameDuration,
     this.reverseFrameDuration,
@@ -16,9 +17,10 @@ class AnimatedMooseGridImage extends StatefulWidget {
     this.idleController
   });
 
-  final bool isVisible;
+  final bool shouldAnimate;
   final List<String> frames;
   final TickerProvider? vsync;
+  final bool isAlwaysVisible;
   final Duration? frameDuration;
   final Duration? reverseFrameDuration;
   final double? waitFrames;
@@ -40,7 +42,7 @@ class _AnimatedMooseGridImageState extends State<AnimatedMooseGridImage> with Si
   void initState() {
     super.initState();
 
-    if (widget.isVisible) {
+    if (widget.shouldAnimate) {
       _animate(widget, reverse: false);
     }
   }
@@ -49,9 +51,9 @@ class _AnimatedMooseGridImageState extends State<AnimatedMooseGridImage> with Si
   void didUpdateWidget(covariant AnimatedMooseGridImage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (!oldWidget.isVisible && widget.isVisible) {
+    if (!oldWidget.shouldAnimate && widget.shouldAnimate) {
       _animate(widget, reverse: false);
-    } else if (oldWidget.isVisible && !widget.isVisible) {
+    } else if (oldWidget.shouldAnimate && !widget.shouldAnimate) {
       _animate(oldWidget, reverse: true);
     }
   }
@@ -94,9 +96,9 @@ class _AnimatedMooseGridImageState extends State<AnimatedMooseGridImage> with Si
       animation: _frameAnimation,
       builder: (context, child) {
         final frame = _frameAnimation.value;
-        if (frame < 0 || (frame == 0 && !widget.isVisible)) return const SizedBox.shrink();
+        if (!widget.isAlwaysVisible && (frame < 0 || (frame == 0 && !widget.shouldAnimate))) return const SizedBox.shrink();
 
-        if (widget.idleFrames != null && widget.idleController != null && widget.idleFrames!.length > 0 && frame >= widget.frames.length - 1) {  // && _frameAnimation.isCompleted) {
+        if (widget.idleFrames != null && widget.idleController != null && widget.idleFrames!.length > 0 && (frame >= widget.frames.length - 1 || (frame <= 0 && widget.isAlwaysVisible))) {  // && _frameAnimation.isCompleted) {
           return AnimatedBuilder(
             animation: widget.idleController!,
             builder: (context, child) {

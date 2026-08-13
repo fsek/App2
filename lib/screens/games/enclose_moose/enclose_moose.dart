@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
-import "enclose_grid.dart";
+import "enclose_grid_tile.dart";
 import "enclose_game_placeholder.dart";
 import "enclose_game.dart";
 
