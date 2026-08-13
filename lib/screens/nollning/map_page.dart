@@ -8,7 +8,7 @@ class PlaceInfo {
   final String title_en;
   final String description_en;
   final String description_sv;
-  final List<String>? descriptionAssets;
+  final List<String> descriptionAssets;
   final Rect box;
   // final String asset;
 
@@ -17,7 +17,7 @@ class PlaceInfo {
     required this.title_en,
     required this.description_en,
     required this.description_sv,
-    this.descriptionAssets,
+    required this.descriptionAssets,
     required this.box,
     // required this.asset,
   });
@@ -68,8 +68,8 @@ class _MapViewState extends State<MapView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _placePins(context);
     _applyInitialZoom();
+    _placePins(context);
   }
 
   void _applyInitialZoom() {
@@ -87,6 +87,12 @@ class _MapViewState extends State<MapView> {
 
   Future<void> _placePins(BuildContext context) async {
     List<PlaceInfo> placeInfos = await loadJson();
+    for (final placeInfo in placeInfos) {
+      for (final asset in placeInfo.descriptionAssets) {
+        precacheImage(AssetImage(asset), context);
+      }
+    }
+
     String locale = Localizations.localeOf(context).toString();
 
     final yOffset = (_bodyHeight - displayHeight) / 2;
@@ -138,6 +144,9 @@ class _MapViewState extends State<MapView> {
   Widget Function(BuildContext) _buildPOIDialog(String title, String description,
       List<String>? descriptionAssets) {
     return (BuildContext context) => AlertDialog(
+      // constraints: BoxConstraints(
+      //   minWidth: MediaQuery.of(context).size.width
+      // ),
       backgroundColor: const Color(0xFFFF00FF),
       contentPadding: const EdgeInsets.all(20),
       content: Container(
@@ -180,9 +189,13 @@ class _MapViewState extends State<MapView> {
               ),
 
               if (descriptionAssets != null)
-                ...descriptionAssets.map((asset) => Image.asset(
-                  asset,
-                  fit: BoxFit.contain
+                ...descriptionAssets.map((asset) => InteractiveViewer(
+                  minScale: 1,
+                  maxScale: 5,
+                  child: Image.asset(
+                    asset,
+                    fit: BoxFit.contain
+                  )
                 )),
 
               Text(
