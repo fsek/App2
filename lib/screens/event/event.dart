@@ -30,7 +30,7 @@ class _EventPageState extends State<EventPage> {
   String? drinkPackageAnswer;
   GroupRead? defaultGroup;
   EventSignupRead? eventSignup;
-  List<String>? priorites = [];
+  List<String>? priorities = [];
 
   final Map<String, Style> _htmlStyle = {
     "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
@@ -104,7 +104,7 @@ class _EventPageState extends State<EventPage> {
         }
       }
 
-      final prioritesResponse = await ApiService.apiClient
+      final prioritiesResponse = await ApiService.apiClient
           .getUsersApi()
           .usersGetMyPriorities();
 
@@ -113,7 +113,7 @@ class _EventPageState extends State<EventPage> {
         this.user = user;
         this.eventSignup = eventSignup;
         this.drinkPackageAnswer = drinkPackageAlcohol;
-        this.priorites = prioritesResponse.data!.toList().cast<String>();
+        this.priorities = prioritiesResponse.data!.toList().cast<String>();
         if (user.groups.isNotEmpty) {
           this.defaultGroup = user.groups.first;
           this.group = defaultGroup;
@@ -519,7 +519,7 @@ class _EventPageState extends State<EventPage> {
             items: [
               if (event!.priorities.toList().isNotEmpty)
                 ...event!.priorities
-                    .where((prio) => priorites!.contains(prio.priority))
+                    .where((prio) => priorities!.contains(prio.priority))
                     .map(
                       (prio) => DropdownMenuItem<String?>(
                         value: prio.priority,
