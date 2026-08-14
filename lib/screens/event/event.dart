@@ -206,7 +206,18 @@ class _EventPageState extends State<EventPage> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               const imageWidth = 579;
-              final scale = imageWidth / constraints.maxWidth;  // Maybe a bit overkill but just to make sure the decorationimage doesn't fail
+              const imageHeight = 1000;
+
+              final scale = imageWidth / constraints.maxWidth;
+
+              const horizontalSlice = 50.0;
+              const verticalSlice = 50.0;
+              final scaledCenterSlice = Rect.fromLTWH(
+                horizontalSlice / scale,
+                verticalSlice / scale,
+                (imageWidth - 2 * horizontalSlice) / scale,
+                (imageHeight - 2 * verticalSlice) / scale
+              );
 
               return Container(
                 padding: const EdgeInsets.all(16.0),
@@ -215,10 +226,12 @@ class _EventPageState extends State<EventPage> {
                 ),
                 decoration: !event!.isNollningEvent ? null : BoxDecoration(
                   image: DecorationImage(
-                    scale: scale,
-                    image: AssetImage("assets/data/nollning_26/calendar/event_background.png"),
+                    image: ResizeImage(  // Can not just use scale in DecorationImage because it is prone to floating point errors
+                      AssetImage("assets/data/nollning_26/calendar/event_background.png"),
+                      width: constraints.maxWidth.toInt()  // imageWidth / scale
+                    ),
                     invertColors: Theme.of(context).brightness == Brightness.dark,  // is this the correct way to do this?
-                    centerSlice: Rect.fromLTWH(50 / scale, 50 / scale, 479 / scale, 900 / scale)  // To hide stretching
+                    centerSlice: scaledCenterSlice, // To hide stretching
                   ),
                 ),
                 child: Column(

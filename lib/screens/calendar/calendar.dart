@@ -93,17 +93,30 @@ class _CalendarState extends State<Calendar> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             const imageWidth = 940;
-            final scale = imageWidth / constraints.maxWidth;  // Maybe a bit overkill but just to make sure the decorationimage doesn't fail
+            // const imageHeight = 280;
+
+            final scale = imageWidth / constraints.maxWidth;
+
+            const horizontalSlice = 70.0;
+            const verticalSlice = 108.5;
+            final scaledCenterSlice = Rect.fromLTWH(
+              horizontalSlice / scale,
+              verticalSlice / scale,
+              (imageWidth - 2 * horizontalSlice) / scale,
+              1 / scale
+            );
 
             return Container(
               padding: event.isNollningEvent ? const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40) : const EdgeInsets.all(10),
               decoration: !event.isNollningEvent ? null : BoxDecoration(
                 image: DecorationImage(
-                  scale: scale,
-                  image: AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
+                  image: ResizeImage(  // Can not just use scale in DecorationImage because it is prone to floating point errors
+                    AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
+                    width: constraints.maxWidth.toInt()  // imageWidth / scale
+                    // height: (constraints.maxWidth * imageHeight / imageWidth).toInt()  // imageHeight / scale
+                  ),
                   invertColors: Theme.of(context).brightness == Brightness.dark,  // is this the correct way to do this?
-                  centerSlice: Rect.fromLTWH(70 / scale, 108 / scale, 800 / scale, 1 / scale)  // To hide stretching
-                  // fit: BoxFit.fill
+                  centerSlice: scaledCenterSlice  // To hide stretching
                 )
               ),
               child: Row(
