@@ -4,19 +4,19 @@ import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
 class PlaceInfo {
-  final String title_sv;
-  final String title_en;
-  final String description_en;
-  final String description_sv;
+  final String titleSv;
+  final String titleEn;
+  final String descriptionSv;
+  final String descriptionEn;
   final List<String> descriptionAssets;
   final List<Rect> boxes;
   // final String asset;
 
   const PlaceInfo({
-    required this.title_sv,
-    required this.title_en,
-    required this.description_en,
-    required this.description_sv,
+    required this.titleSv,
+    required this.titleEn,
+    required this.descriptionSv,
+    required this.descriptionEn,
     required this.descriptionAssets,
     required this.boxes,
     // required this.asset,
@@ -24,10 +24,10 @@ class PlaceInfo {
 
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
     return PlaceInfo(
-      title_sv: json["title"]["sv"],
-      title_en: json["title"]["en"],
-      description_en: json["description"]["en"],
-      description_sv: json["description"]["sv"],
+      titleSv: json["title"]["sv"],
+      titleEn: json["title"]["en"],
+      descriptionSv: json["description"]["sv"],
+      descriptionEn: json["description"]["en"],
       descriptionAssets: List<String>.from(json["descriptionAssets"]),
       boxes: (json["boxes"] as List<dynamic>).map((box) => Rect.fromLTWH(
         box["left"], box["top"], box["width"], box["height"]
@@ -38,7 +38,7 @@ class PlaceInfo {
 }
 
 Future<List<PlaceInfo>> loadJson() async {
-  String jsonString = await rootBundle.loadString("assets/data/nollning_26/map/map_info.json");
+  final jsonString = await rootBundle.loadString("assets/data/nollning_26/map/map_info.json");
   final jsonResponse = json.decode(jsonString);
 
   return (jsonResponse as List)
@@ -52,15 +52,15 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  final String _imagePath = "assets/data/nollning_26/map/map.png";
-  final int _imageWidth = 3050;
-  final int _imageHeight = 4062;
+  final _imagePath = "assets/data/nollning_26/map/map.png";
+  final _imageWidth = 3050;
+  final _imageHeight = 4062;
 
   double get _bodyHeight => MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight); // Remove height of AppBar
   double get _bodyWidth => MediaQuery.of(context).size.width;
   double get displayHeight => _bodyWidth * _imageHeight / _imageWidth;
 
-  final TransformationController _transformationController = TransformationController();
+  final _transformationController = TransformationController();
 
   List<Widget>? pins;
 
@@ -86,29 +86,30 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _placePins(BuildContext context) async {
-    List<PlaceInfo> placeInfos = await loadJson();
+    final placeInfos = await loadJson();
     for (final placeInfo in placeInfos) {
       for (final asset in placeInfo.descriptionAssets) {
         precacheImage(AssetImage(asset), context);
       }
     }
 
-    String locale = Localizations.localeOf(context).toString();
+    final locale = Localizations.localeOf(context).toString();
 
+    final scale = _bodyWidth / _imageWidth;
     final yOffset = (_bodyHeight - displayHeight) / 2;
 
     List<Widget> pinList = [];
     for (final placeInfo in placeInfos) {
       for (final box in placeInfo.boxes) {
         pinList.add(Positioned.fromRect(
-          rect: box.scale(_bodyWidth / _imageWidth, displayHeight / _imageHeight).translate(0, yOffset),  // boxes are in (image-)absolute coordinates
+          rect: Rect.fromLTWH(box.left * scale, box.top * scale, box.width * scale, box.height * scale).translate(0, yOffset),  // boxes are in (image-)absolute coordinates
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => showDialog(
               context: context,
               builder: _buildPOIDialog(
-                locale == "sv" ? placeInfo.title_sv : placeInfo.title_en,
-                locale == "sv" ? placeInfo.description_sv : placeInfo.description_en,
+                locale == "sv" ? placeInfo.titleSv : placeInfo.titleEn,
+                locale == "sv" ? placeInfo.descriptionSv : placeInfo.descriptionEn,
                 placeInfo.descriptionAssets,
               )
             ),
@@ -130,7 +131,7 @@ class _MapViewState extends State<MapView> {
     //     onTap: () => _showPOIDialog(
     //       context,
     //       data.title,
-    //       (locale == "sv") ? data.description_sv : data.description_en,
+    //       (locale == "sv") ? data.descriptionSv : data.descriptionEn,
     //       data.descriptionAssets,
     //     ),
     //     child: Container(
@@ -268,17 +269,6 @@ class _MapViewState extends State<MapView> {
           )
         )
       )
-    );
-  }
-}
-
-extension RectScaling on Rect {  // Where should this be?
-  Rect scale(num scaleX, num scaleY) {
-    return Rect.fromLTRB(
-      left * scaleX,
-      top * scaleY,
-      right * scaleX,
-      bottom * scaleY
     );
   }
 }
