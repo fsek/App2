@@ -198,30 +198,32 @@ class _CalendarState extends State<Calendar> {
   Widget? _getMarkers(List<EventRead> events) {
     if (events.isEmpty) return null;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: events.map((event) {
-        final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
+    return FittedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: events.map((event) {
+          final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
 
-        if (!event.isNollningEvent || alcPolicyImage == null) {
+          if (!event.isNollningEvent || alcPolicyImage == null) {
+            return Container(
+              width: 8,
+              height: 8,
+              margin: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inverseSurface,
+                shape: BoxShape.circle
+              )
+            );
+          }
+
           return Container(
-            width: 8,
-            height: 8,
+            width: 13,
+            height: 13,
             margin: const EdgeInsets.all(1),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.inverseSurface,
-              shape: BoxShape.circle
-            )
+            child: alcPolicyImage
           );
-        }
-
-        return Container(
-          width: 13,
-          height: 13,
-          margin: EdgeInsets.all(1),
-          child: alcPolicyImage
-        );
-      }).toList(),
+        }).toList()
+      )
     );
   }
 
