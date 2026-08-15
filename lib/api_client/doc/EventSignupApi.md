@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**eventSignupEventSignoffRoute**](EventSignupApi.md#eventsignupeventsignoffroute) | **DELETE** /event-signup/{event_id} | Event Signoff Route
 [**eventSignupEventSignupRoute**](EventSignupApi.md#eventsignupeventsignuproute) | **POST** /event-signup/{event_id} | Event Signup Route
 [**eventSignupGetMeEventSignup**](EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
+[**eventSignupGetMeForEventSignup**](EventSignupApi.md#eventsignupgetmeforeventsignup) | **GET** /event-signup/me/{event_id} | Get Me For Event Signup
 [**eventSignupUpdateEventSignupRoute**](EventSignupApi.md#eventsignupupdateeventsignuproute) | **PATCH** /event-signup/{event_id} | Update Event Signup Route
 
 
@@ -148,6 +149,53 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EventSignupRead**](EventSignupRead.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [APIKeyCookie](../README.md#APIKeyCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventSignupGetMeForEventSignup**
+> UserForEventSignupRead eventSignupGetMeForEventSignup(eventId)
+
+Get Me For Event Signup
+
+### Example
+```dart
+import 'package:api_client/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure API key authorization: APIKeyCookie
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('APIKeyCookie').apiKeyPrefix = 'Bearer';
+
+final api = ApiClient().getEventSignupApi();
+final int eventId = 56; // int | 
+
+try {
+    final response = api.eventSignupGetMeForEventSignup(eventId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling EventSignupApi->eventSignupGetMeForEventSignup: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eventId** | **int**|  | 
+
+### Return type
+
+[**UserForEventSignupRead**](UserForEventSignupRead.md)
 
 ### Authorization
 

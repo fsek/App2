@@ -39,7 +39,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get other => 'Other';
 
   @override
-  String get introduction => 'Nollning';
+  String get introduction => 'Introduction';
 
   @override
   String get loginRequiredField => 'Required field';
@@ -141,6 +141,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eventSendSignup => 'Submit';
 
   @override
+  String get eventSignupErrorTitle => 'Signup failed';
+
+  @override
+  String get eventSignupErrorInvalidGroup =>
+      'You cannot sign up with this group!';
+
+  @override
+  String get eventSignupErrorDeadlinePassed =>
+      'Signup deadline for this event has passed!';
+
+  @override
+  String get eventSignupErrorNoGroupNoPriority =>
+      'You are not a member of any group and have not selected a priority, so you cannot sign up for this event. You are probably simply not a part of the introduction, or event admins have not added your priority group.';
+
+  @override
+  String get eventSignupErrorClose => 'Close';
+
+  @override
   String get eventFoodPrefInfo =>
       'You can change these in Settings > Food preferences.';
 
@@ -217,6 +235,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventNoAlcohol => 'None';
+
+  @override
+  String get eventNollning => 'Introduction event';
+
+  @override
+  String get eventNollningMentor =>
+      'Introduction event (with your mentor group)';
+
+  @override
+  String get eventNollningMission =>
+      'Introduction event (with your mission group)';
 
   @override
   String get settingsSettings => 'Settings';

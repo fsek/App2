@@ -26,11 +26,14 @@ Name | Type | Description | Notes
 **canSignup** | **bool** |  | [optional] 
 **drinkPackage** | **bool** |  | [optional] 
 **isNollningEvent** | **bool** |  | [optional] 
+**mentorGroupTypes** | **BuiltList&lt;String&gt;** |  | [optional] 
+**allowOtherMentors** | **bool** |  | [optional] 
 **priorities** | **BuiltList&lt;String&gt;** |  | [optional] 
 **alcoholEventType** | **String** |  | [optional] 
 **dressCode** | **String** |  | [optional] 
 **price** | **int** |  | [optional] 
 **dot** | **String** |  | [optional] 
+**lottery** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

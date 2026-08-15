@@ -153,6 +153,7 @@ doc/UserAccessUpdate.md
 doc/UserCreate.md
 doc/UserDoorAccessApi.md
 doc/UserEventRead.md
+doc/UserForEventSignupRead.md
 doc/UserInEventRead.md
 doc/UserInGroupRead.md
 doc/UserPostRead.md
@@ -323,6 +324,7 @@ lib/src/model/user_access_read.dart
 lib/src/model/user_access_update.dart
 lib/src/model/user_create.dart
 lib/src/model/user_event_read.dart
+lib/src/model/user_for_event_signup_read.dart
 lib/src/model/user_in_event_read.dart
 lib/src/model/user_in_group_read.dart
 lib/src/model/user_post_read.dart

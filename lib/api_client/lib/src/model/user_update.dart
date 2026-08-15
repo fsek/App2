@@ -12,18 +12,21 @@ part 'user_update.g.dart';
 /// UserUpdate
 ///
 /// Properties:
+/// * [stilId] 
 /// * [firstName] 
 /// * [lastName] 
 /// * [startYear] 
 /// * [program] 
 /// * [notifications] 
-/// * [stilId] 
 /// * [standardFoodPreferences] 
 /// * [otherFoodPreferences] 
 /// * [telephoneNumber] 
 /// * [mooseGameName] 
 @BuiltValue()
 abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
+  @BuiltValueField(wireName: r'stil_id')
+  String? get stilId;
+
   @BuiltValueField(wireName: r'first_name')
   String? get firstName;
 
@@ -39,9 +42,6 @@ abstract class UserUpdate implements Built<UserUpdate, UserUpdateBuilder> {
 
   @BuiltValueField(wireName: r'notifications')
   bool? get notifications;
-
-  @BuiltValueField(wireName: r'stil_id')
-  String? get stilId;
 
   @BuiltValueField(wireName: r'standard_food_preferences')
   BuiltList<String>? get standardFoodPreferences;
@@ -78,6 +78,13 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
     UserUpdate object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
+    if (object.stilId != null) {
+      yield r'stil_id';
+      yield serializers.serialize(
+        object.stilId,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     if (object.firstName != null) {
       yield r'first_name';
       yield serializers.serialize(
@@ -111,13 +118,6 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
       yield serializers.serialize(
         object.notifications,
         specifiedType: const FullType.nullable(bool),
-      );
-    }
-    if (object.stilId != null) {
-      yield r'stil_id';
-      yield serializers.serialize(
-        object.stilId,
-        specifiedType: const FullType.nullable(String),
       );
     }
     if (object.standardFoodPreferences != null) {
@@ -171,6 +171,14 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'stil_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.stilId = valueDes;
+          break;
         case r'first_name':
           final valueDes = serializers.deserialize(
             value,
@@ -210,14 +218,6 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
           ) as bool?;
           if (valueDes == null) continue;
           result.notifications = valueDes;
-          break;
-        case r'stil_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.stilId = valueDes;
           break;
         case r'standard_food_preferences':
           final valueDes = serializers.deserialize(
