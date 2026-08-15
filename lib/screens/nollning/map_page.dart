@@ -37,15 +37,6 @@ class PlaceInfo {
   }
 }
 
-Future<List<PlaceInfo>> loadJson() async {
-  final jsonString = await rootBundle.loadString("assets/data/nollning_26/map/map_info.json");
-  final jsonResponse = json.decode(jsonString);
-
-  return (jsonResponse as List)
-      .map((place) => PlaceInfo.fromJson(place))
-      .toList();
-}
-
 class MapView extends StatefulWidget {
   @override
   _MapViewState createState() => _MapViewState();
@@ -58,7 +49,7 @@ class _MapViewState extends State<MapView> {
 
   double get _bodyHeight => MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight); // Remove height of AppBar
   double get _bodyWidth => MediaQuery.of(context).size.width;
-  double get displayHeight => _bodyWidth * _imageHeight / _imageWidth;
+  double get _displayHeight => _bodyWidth * _imageHeight / _imageWidth;
 
   final _transformationController = TransformationController();
 
@@ -73,7 +64,7 @@ class _MapViewState extends State<MapView> {
   }
 
   void _applyInitialZoom() {
-    final zoomFactor = _bodyHeight / displayHeight;
+    final zoomFactor = _bodyHeight / _displayHeight;
 
     _transformationController.value.setEntry(0, 0, zoomFactor);
     _transformationController.value.setEntry(1, 1, zoomFactor);
@@ -83,6 +74,15 @@ class _MapViewState extends State<MapView> {
     final yOffset = _bodyHeight * (1 - zoomFactor) / 2;
     _transformationController.value.setEntry(0, 3, xOffset);
     _transformationController.value.setEntry(1, 3, yOffset);
+  }
+
+  Future<Iterable<PlaceInfo>> loadJson() async {
+    const mapInfoPath = "assets/data/nollning_26/map/map_info.json";
+    final jsonString = await rootBundle.loadString(mapInfoPath);
+    final jsonResponse = json.decode(jsonString);
+
+    return (jsonResponse as List)
+        .map((place) => PlaceInfo.fromJson(place));
   }
 
   Future<void> _placePins(BuildContext context) async {
@@ -96,7 +96,7 @@ class _MapViewState extends State<MapView> {
     final locale = Localizations.localeOf(context).toString();
 
     final scale = _bodyWidth / _imageWidth;
-    final yOffset = (_bodyHeight - displayHeight) / 2;
+    final yOffset = (_bodyHeight - _displayHeight) / 2;
 
     List<Widget> pinList = [];
     for (final placeInfo in placeInfos) {
@@ -124,24 +124,6 @@ class _MapViewState extends State<MapView> {
         ));
       }
     }
-
-    // var pinList = placeInfos.map((data) => Positioned.fromRect(
-    //   rect: data.box,
-    //   child: GestureDetector(
-    //     onTap: () => _showPOIDialog(
-    //       context,
-    //       data.title,
-    //       (locale == "sv") ? data.descriptionSv : data.descriptionEn,
-    //       data.descriptionAssets,
-    //     ),
-    //     child: Container(
-    //       decoration: BoxDecoration(
-    //         color: Colors.red.withAlpha(128),
-    //         border: BoxBorder.all(color: Colors.red),
-    //       ),
-    //     )
-    //   ),
-    // )).toList();
 
     setState(() {
       pins = pinList;
