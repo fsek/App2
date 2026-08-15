@@ -11,10 +11,10 @@
         "descriptionAssets": [],
         "boxes": [
             {
-                "left": 1489.2,
-                "top": 1081.3,
-                "width": 729.6,
-                "height": 277.1
+                "left": 1489.0,
+                "top": 1081.0,
+                "width": 730.0,
+                "height": 277.0
             }
         ]
     },
@@ -30,10 +30,10 @@
         "descriptionAssets": [],
         "boxes": [
             {
-                "left": 2095.3,
-                "top": 1534.3,
-                "width": 277.8,
-                "height": 423.7
+                "left": 2095.0,
+                "top": 1534.0,
+                "width": 278.0,
+                "height": 424.0
             }
         ]
     },
@@ -49,10 +49,10 @@
         "descriptionAssets": [],
         "boxes": [
             {
-                "left": 1926.4,
-                "top": 1964.2,
-                "width": 274.6,
-                "height": 436.5
+                "left": 1926.0,
+                "top": 1964.0,
+                "width": 274.0,
+                "height": 437.0
             }
         ]
     },
@@ -68,10 +68,10 @@
         "descriptionAssets": [],
         "boxes": [
             {
-                "left": 1833.9,
-                "top": 2419.1,
-                "width": 256.8,
-                "height": 400.1
+                "left": 1834.0,
+                "top": 2419.0,
+                "width": 257.0,
+                "height": 400.0
             }
         ]
     },
@@ -89,10 +89,10 @@
         ],
         "boxes": [
             {
-                "left": 1781.4,
-                "top": 2879.1,
-                "width": 239.9,
-                "height": 434.3
+                "left": 1781.0,
+                "top": 2879.0,
+                "width": 240.0,
+                "height": 434.0
             }
         ]
     },
@@ -108,10 +108,10 @@
         "descriptionAssets": [],
         "boxes": [
             {
-                "left": 1067.4,
+                "left": 1067.0,
                 "top": 2558.0,
-                "width": 316.7,
-                "height": 460.6
+                "width": 317.0,
+                "height": 461.0
             }
         ]
     },
@@ -130,63 +130,63 @@
         "boxes": [
             {
                 "left": 0.0,
-                "top": 3482.2,
-                "width": 3043.4,
-                "height": 579.8
+                "top": 3482.0,
+                "width": 2559.0,
+                "height": 580.0
             },
             {
-                "left": 2558.4,
-                "top": 547.2,
-                "width": 491.6,
-                "height": 2940.0
+                "left": 2558.0,
+                "top": 485.0,
+                "width": 491.0,
+                "height": 3577.0
             },
             {
                 "left": 0.0,
                 "top": 0.0,
-                "width": 938.4,
+                "width": 938.0,
                 "height": 2160.0
             },
             {
-                "left": 938.4,
+                "left": 938.0,
                 "top": 0.0,
-                "width": 2111.6,
+                "width": 2112.0,
                 "height": 485.0
             },
             {
                 "left": 0.0,
-                "top": 2217.2,
-                "width": 388.4,
-                "height": 1280.0
+                "top": 2160.0,
+                "width": 388.0,
+                "height": 1322.0
             },
             {
-                "left": 943.4,
-                "top": 542.2,
-                "width": 530.0,
-                "height": 300.0
+                "left": 938.0,
+                "top": 485.0,
+                "width": 610.0,
+                "height": 355.0
             },
             {
-                "left": 943.4,
-                "top": 848.3,
-                "width": 300.8,
-                "height": 593.9
+                "left": 938.0,
+                "top": 840.0,
+                "width": 301.0,
+                "height": 594.0
             },
             {
-                "left": 386.9,
-                "top": 3090.1,
-                "width": 282.4,
-                "height": 401.4
+                "left": 388.0,
+                "top": 3081.0,
+                "width": 282.0,
+                "height": 401.0
             },
             {
-                "left": 675.6,
-                "top": 3287.7,
-                "width": 400.4,
-                "height": 193.6
+                "left": 670.0,
+                "top": 3287.0,
+                "width": 400.0,
+                "height": 195.0
             },
             {
-                "left": 2318.1,
-                "top": 2461.6,
-                "width": 242.8,
-                "height": 1021.3
+                "left": 2318.0,
+                "top": 2461.0,
+                "width": 243.0,
+                "height": 1021.0
             }
         ]
     }
