@@ -206,9 +206,9 @@ class _CalendarState extends State<Calendar> {
 
           if (!event.isNollningEvent || alcPolicyImage == null) {
             return Container(
-              width: 8,
-              height: 8,
-              margin: const EdgeInsets.all(1),
+              width: 10,
+              height: 10,
+              margin: const EdgeInsets.symmetric(horizontal: 1),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.inverseSurface,
                 shape: BoxShape.circle
@@ -217,9 +217,9 @@ class _CalendarState extends State<Calendar> {
           }
 
           return Container(
-            width: 13,
-            height: 13,
-            margin: const EdgeInsets.all(1),
+            width: 16,
+            height: 16,
+            margin: const EdgeInsets.symmetric(horizontal: 1),
             child: alcPolicyImage
           );
         }).toList()
