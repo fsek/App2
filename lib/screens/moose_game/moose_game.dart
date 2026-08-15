@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
+import 'package:fsek_mobile/screens/moose_game/game_theme.dart';
 import 'package:fsek_mobile/screens/moose_game/ground.dart';
 import 'package:fsek_mobile/screens/moose_game/highscore.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle.dart';
@@ -122,6 +123,7 @@ class _MooseGamePageState extends State<MooseGamePage>
   }
 
   void initializeGame() {
+    gameSpeed = startGameSpeed.toDouble();
     obstacles.add(Obstacle(gameViewportWidth, floorY));
     double previousPos = gameViewportWidth;
     for (int i = 1; i < obstacleCount; i++) {
@@ -129,6 +131,7 @@ class _MooseGamePageState extends State<MooseGamePage>
           Random().nextDouble() * (maxObstacleDistance - minObstacleDistance) +
               minObstacleDistance;
       obstacles.add(Obstacle(previousPos, floorY));
+      separateFromWall(obstacles.last);
     }
     leftmostObstacleIdx = 0;
     sandwich = Sandwich(0.0, 1.0);
@@ -196,6 +199,7 @@ class _MooseGamePageState extends State<MooseGamePage>
                   minObstacleDistance);
 
           obst.randomize();
+          separateFromWall(obst);
           leftmostObstacleIdx = (leftmostObstacleIdx + 1) % obstacleCount;
         });
       }
@@ -224,6 +228,45 @@ class _MooseGamePageState extends State<MooseGamePage>
       score += deltaTime * scorePerSecond;
     });
     lastUpdateTime = gameAnimController.lastElapsedDuration!;
+  }
+
+  /// Seconds until an obstacle reaches the moose
+  double? timeToMoose(Obstacle obst) {
+    double closingSpeed = gameSpeed + obst.speed;
+    if (closingSpeed <= 0) return null;
+    return (obst.position.x - moose.position.x) / closingSpeed;
+  }
+
+  /// Called for each new obstacle, and checks if they could form a wall with
+  /// another obstacle which is impossible to both jump over (regular obstacle)
+  /// and run under (ufo). If so, push it out of the way.
+  void separateFromWall(Obstacle obst) {
+    double closingSpeed = gameSpeed + obst.speed;
+    if (closingSpeed <= 0) return;
+    for (int pass = 0; pass < 4; pass++) { // 4 tries at pushing it out of the way
+      bool moved = false;
+      for (Obstacle other in obstacles) {
+        if (identical(other, obst) || other.flying == obst.flying) continue;
+        double? arrival = timeToMoose(obst);
+        double? otherArrival = timeToMoose(other);
+        if (arrival == null || otherArrival == null) continue; // Already passed
+        if ((arrival - otherArrival).abs() >= wallGuardSeconds) continue;
+        obst.position.x =
+            moose.position.x + (otherArrival + wallGuardSeconds) * closingSpeed;
+        moved = true;
+      }
+      if (!moved) break; // No more walls, we're done
+    }
+
+    // Overlap check. We don't want overlapping obstacles, so pop it off the
+    // left edge. update() recycles anything past there, so it gets a
+    // fresh position and type on one of the next frames.
+    for (Obstacle other in obstacles) {
+      if (identical(other, obst) || other.flying != obst.flying) continue;
+      if ((other.position.x - obst.position.x).abs() < minObstacleDistance) {
+        obst.position.x = -gameViewportWidth - 1;
+      }
+    }
   }
 
   void updateSandwich() {
@@ -287,7 +330,9 @@ class _MooseGamePageState extends State<MooseGamePage>
           screenSize.width / 2 +
               (gameObject.position.x - cameraPos.x) * worldScale * 24,
           screenSize.height / 2 -
-              (gameObject.position.y + cameraPos.y) * worldScale * 24),
+              (gameObject.position.y + cameraPos.y) * worldScale * 24 +
+              // Screen y grows downwards, so a positive nudge is added here.
+              gameObject.sprite.yOffset * worldScale),
       width: gameObject.sprite.imageWidth * worldScale * deflation,
       height: gameObject.sprite.imageHeight * worldScale * deflation,
     );
@@ -348,7 +393,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               score.toInt().toString(),
-              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 60),
+              style: TextStyle(
+                  fontFamily: "NF-Pixels",
+                  fontSize: 60,
+                  color: gameTextColor(context)),
             ))));
 
     // Sandwhich bonus popup
@@ -358,12 +406,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               "+" + lastSandwichBonus.toInt().toString(),
-              style: new TextStyle(
+              style: TextStyle(
                   fontFamily: "NF-Pixels",
                   fontSize: 50,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
+                  color: gameTextColor(context)
                       .withAlpha(sandwichBonusPopupFadeout)),
             ))));
 
@@ -374,7 +420,10 @@ class _MooseGamePageState extends State<MooseGamePage>
             alignment: Alignment.center,
             child: Text(
               "Highscore: " + highscore.toInt().toString(),
-              style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+              style: TextStyle(
+                  fontFamily: "NF-Pixels",
+                  fontSize: 40,
+                  color: gameTextColor(context)),
             ))));
 
     // "Try again" text
@@ -385,7 +434,10 @@ class _MooseGamePageState extends State<MooseGamePage>
               alignment: Alignment.center,
               child: Text(
                 "Touch to try again",
-                style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 40),
+                style: TextStyle(
+                    fontFamily: "NF-Pixels",
+                    fontSize: 40,
+                    color: gameTextColor(context)),
               ))));
 
       if (newHighscore) {
@@ -395,7 +447,10 @@ class _MooseGamePageState extends State<MooseGamePage>
                 alignment: Alignment.center,
                 child: Text(
                   "New Highscore",
-                  style: const TextStyle(fontFamily: "NF-Pixels", fontSize: 50),
+                  style: TextStyle(
+                      fontFamily: "NF-Pixels",
+                      fontSize: 50,
+                      color: gameTextColor(context)),
                 ))));
       }
     }
@@ -454,10 +509,15 @@ class _MooseGamePageState extends State<MooseGamePage>
             moose.triggerFall();
           }
         },
-        child: Stack(
-          alignment: Alignment.center,
-          children: children,
-        ),
+        child: Container(
+          color: backgroundColor,
+          width: double.infinity,
+          height: double.infinity,
+          child: Stack(
+            alignment: Alignment.center,
+            children: children,
+          ),
+        )
       ),
     );
   }

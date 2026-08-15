@@ -125,6 +125,7 @@ flutter:
     - assets/data/nollning_25/schema/
     - assets/data/nollning_25/homescreen/
     - assets/data/nollning_26/homescreen/
+    - assets/data/nollning_26/schema/
     - assets/data/nollning_26/nolleguide/homescreen/
     - assets/data/nollning_26/nolleguide/studentlife/
     - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
