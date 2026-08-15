@@ -16,6 +16,7 @@ part 'user_create.g.dart';
 /// * [isActive] 
 /// * [isSuperuser] 
 /// * [isVerified] 
+/// * [stilId] 
 /// * [firstName] 
 /// * [lastName] 
 /// * [telephoneNumber] 
@@ -36,6 +37,9 @@ abstract class UserCreate implements Built<UserCreate, UserCreateBuilder> {
 
   @BuiltValueField(wireName: r'is_verified')
   bool? get isVerified;
+
+  @BuiltValueField(wireName: r'stil_id')
+  String? get stilId;
 
   @BuiltValueField(wireName: r'first_name')
   String get firstName;
@@ -101,6 +105,13 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
       yield serializers.serialize(
         object.isVerified,
         specifiedType: const FullType.nullable(bool),
+      );
+    }
+    if (object.stilId != null) {
+      yield r'stil_id';
+      yield serializers.serialize(
+        object.stilId,
+        specifiedType: const FullType.nullable(String),
       );
     }
     yield r'first_name';
@@ -185,6 +196,14 @@ class _$UserCreateSerializer implements PrimitiveSerializer<UserCreate> {
           ) as bool?;
           if (valueDes == null) continue;
           result.isVerified = valueDes;
+          break;
+        case r'stil_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.stilId = valueDes;
           break;
         case r'first_name':
           final valueDes = serializers.deserialize(

@@ -353,8 +353,38 @@ abstract class AppLocalizations {
   /// No description provided for @eventSendSignup.
   ///
   /// In sv, this message translates to:
-  /// **'Skicka Anmälan'**
+  /// **'Skicka anmälan'**
   String get eventSendSignup;
+
+  /// No description provided for @eventSignupErrorTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'Anmälan misslyckades'**
+  String get eventSignupErrorTitle;
+
+  /// No description provided for @eventSignupErrorInvalidGroup.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du kan inte anmäla dig med den här gruppen!'**
+  String get eventSignupErrorInvalidGroup;
+
+  /// No description provided for @eventSignupErrorDeadlinePassed.
+  ///
+  /// In sv, this message translates to:
+  /// **'Anmälningsperioden för det här eventet är slut!'**
+  String get eventSignupErrorDeadlinePassed;
+
+  /// No description provided for @eventSignupErrorNoGroupNoPriority.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.'**
+  String get eventSignupErrorNoGroupNoPriority;
+
+  /// No description provided for @eventSignupErrorClose.
+  ///
+  /// In sv, this message translates to:
+  /// **'Stäng'**
+  String get eventSignupErrorClose;
 
   /// No description provided for @eventFoodPrefInfo.
   ///
@@ -505,6 +535,24 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Inget'**
   String get eventNoAlcohol;
+
+  /// No description provided for @eventNollning.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent'**
+  String get eventNollning;
+
+  /// No description provided for @eventNollningMentor.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent (med faddergruppen)'**
+  String get eventNollningMentor;
+
+  /// No description provided for @eventNollningMission.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent (med uppdragsgruppen)'**
+  String get eventNollningMission;
 
   /// No description provided for @settingsSettings.
   ///

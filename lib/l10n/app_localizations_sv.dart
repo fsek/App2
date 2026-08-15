@@ -138,7 +138,25 @@ class AppLocalizationsSv extends AppLocalizations {
   String get eventFoodPreferences => 'Matpreferenser:';
 
   @override
-  String get eventSendSignup => 'Skicka Anmälan';
+  String get eventSendSignup => 'Skicka anmälan';
+
+  @override
+  String get eventSignupErrorTitle => 'Anmälan misslyckades';
+
+  @override
+  String get eventSignupErrorInvalidGroup =>
+      'Du kan inte anmäla dig med den här gruppen!';
+
+  @override
+  String get eventSignupErrorDeadlinePassed =>
+      'Anmälningsperioden för det här eventet är slut!';
+
+  @override
+  String get eventSignupErrorNoGroupNoPriority =>
+      'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.';
+
+  @override
+  String get eventSignupErrorClose => 'Stäng';
 
   @override
   String get eventFoodPrefInfo =>
@@ -216,6 +234,15 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventNoAlcohol => 'Inget';
+
+  @override
+  String get eventNollning => 'Nollningsevent';
+
+  @override
+  String get eventNollningMentor => 'Nollningsevent (med faddergruppen)';
+
+  @override
+  String get eventNollningMission => 'Nollningsevent (med uppdragsgruppen)';
 
   @override
   String get settingsSettings => 'Inställningar';
