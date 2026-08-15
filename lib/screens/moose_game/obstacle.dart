@@ -3,82 +3,31 @@ import 'dart:ui';
 import 'package:vector_math/vector_math.dart';
 
 import 'package:fsek_mobile/screens/moose_game/game_object.dart';
+import 'package:fsek_mobile/screens/moose_game/game_theme.dart';
 import 'package:fsek_mobile/services/service_locator.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 import 'package:fsek_mobile/screens/moose_game/obstacle_def.dart';
 
-import 'sprite.dart';
-
-List<ObstacleDef> obstacles = [
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/kiosk.png" :
-    "assets/img/moose_game/kiosk_d.png", 24, 24), 1.0),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/v_nails.png" :
-    "assets/img/moose_game/v_nails_d.png", 24, 24), 1.0),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/f_rubik_2.png" :
-    "assets/img/moose_game/f_rubik_2_d.png", 24, 24), 1.0),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/bike_l.png" :
-    "assets/img/moose_game/bike_l_d.png", 24, 24), 0.4, 1.0, 2.0,
-  ),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/bike_r.png" :
-    "assets/img/moose_game/bike_r_d.png", 24, 24), 0.2, -1.0, -2.0,
-  ),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/scooter_l.png" :
-    "assets/img/moose_game/scooter_l_d.png", 24, 24), 0.4, 1.0, 2.0,
-  ),
-  ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-    "assets/img/moose_game/scooter_r.png" :
-    "assets/img/moose_game/scooter_r_d.png", 24, 24), 0.2, -1.0, -2.0,
-  ),
-];
+List<ObstacleDef> obstacles = buildObstacles();
 
 Brightness savedBrightness = locator<ThemeService>().theme.brightness;
 
 class Obstacle extends GameObject {
   double movementSpeed = 0.0;
+  bool flying = false;
+  final double floorY;
 
   double get speed {
     return movementSpeed;
   }
 
-  Obstacle(double xPosition, double floorY)
+  Obstacle(double xPosition, this.floorY)
       : super(Vector2(xPosition, floorY)) {
     randomize();
   }
 
   void reloadSprites() {
-    obstacles = [
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/kiosk.png" :
-        "assets/img/moose_game/kiosk_d.png", 24, 24), 1.0),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/v_nails.png" :
-        "assets/img/moose_game/v_nails_d.png", 24, 24), 1.0),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/f_rubik_2.png" :
-        "assets/img/moose_game/f_rubik_2_d.png", 24, 24), 1.0),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/bike_l.png" :
-        "assets/img/moose_game/bike_l_d.png", 24, 24), 0.4, 1.0, 2.0,
-      ),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/bike_r.png" :
-        "assets/img/moose_game/bike_r_d.png", 24, 24), 0.2, -1.0, -2.0,
-      ),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/scooter_l.png" :
-        "assets/img/moose_game/scooter_l_d.png", 24, 24), 0.4, 1.0, 2.0,
-      ),
-      ObstacleDef(Sprite(locator<ThemeService>().theme.brightness == Brightness.light ? 
-        "assets/img/moose_game/scooter_r.png" :
-        "assets/img/moose_game/scooter_r_d.png", 24, 24), 0.2, -1.0, -2.0,
-      ),
-    ];
+    obstacles = buildObstacles();
   }
 
   void randomize() {
@@ -104,6 +53,9 @@ class Obstacle extends GameObject {
       }
     }
     sprite = def.sprite;
+    flying = def.flying;
+    // Flying obstacles hover just above the running moose
+    position.y = def.flying ? flyingObstacleHeight : floorY;
     movementSpeed =
         lerpDouble(def.minSpeed, def.maxSpeed, Random().nextDouble())!;
   }

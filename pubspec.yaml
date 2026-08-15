@@ -126,6 +126,20 @@ flutter:
     - assets/data/nollning_25/schema/
     - assets/data/nollning_25/homescreen/
     - assets/data/nollning_26/homescreen/
+    - assets/data/nollning_26/schema/
+    - assets/data/nollning_26/nolleguide/homescreen/
+    - assets/data/nollning_26/nolleguide/studentlife/
+    - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
+    - assets/data/nollning_26/nolleguide/studentlife/faculty/
+    - assets/data/nollning_26/nolleguide/studentlife/guild/
+    - assets/data/nollning_26/nolleguide/studentlife/lund/
+    - assets/data/nollning_26/nolleguide/
+    - assets/data/nollning_26/nolleguide/dresscode/
+    - assets/data/nollning_26/homescreen/lvl_0/
+    - assets/data/nollning_26/homescreen/lvl_1/
+    - assets/data/nollning_26/homescreen/lvl_2/
+    - assets/data/nollning_26/homescreen/lvl_3/
+    - assets/data/nollning_26/homescreen/lvl_4/
     - assets/data/nollning_26/calendar/
 
   fonts:
@@ -147,6 +161,9 @@ flutter:
           weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
           weight: 900
+    - family: Consolas
+      fonts:
+        - asset: assets/fonts/Consolas-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
