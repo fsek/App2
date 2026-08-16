@@ -37,20 +37,22 @@ class _CalendarState extends State<Calendar> {
   }
 
   List<EventRead> _getEventsForDay(DateTime day) {
-
     final events = this._events.where((item) => isSameDay(item.startsAt.toLocal(), day)).toList();
     events.sort((a, b) => a.startsAt.compareTo(b.startsAt));
     return events;
   }
 
   Future<void> _onRefresh() async {
-    ApiService.apiClient
+    return ApiService.apiClient
         .getEventsApi()
         .eventsGetAllEvents()
-        .then((value) => setState(() {
-              this._events = value.data!.toList();
-              _selectedEvents = _getEventsForDay(_selectedDay);
-            }));
+        .then((value) {
+          if(!mounted) return; // We don't want to do a setstate when the state is no longer active.
+          setState(() {
+            this._events = value.data!.toList();
+            _selectedEvents = _getEventsForDay(_selectedDay);
+          });
+        });
   }
 
   Widget? checkAlcoholEventType(String alcType, {bool isNollning = false}){
