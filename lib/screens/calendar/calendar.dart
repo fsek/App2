@@ -235,7 +235,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   Future<void> openExportCalendarLink() async {
-  final uri = Uri.parse("https://fsektionen.se/calendar/subscribe");
+  final uri = Uri.parse("https://fsektionen.se/calendar#subscribe");
 
   await launchUrl(
     uri,
