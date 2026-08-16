@@ -74,6 +74,7 @@ class _EventPageState extends State<EventPage> {
     "AlcoholFree": EventSignupCreateDrinkPackageEnum.alcoholFree,
   };
 
+  @override
   void initState() {
     super.initState();
     _loadInitData();

@@ -17,7 +17,10 @@ class _CalendarState extends State<Calendar> {
   DateTime _selectedDay = DateTime.now().toLocal();
   List<EventRead> _selectedEvents = [];
   List<EventRead> _events = [];
+
+  @override
   void initState() {
+    super.initState();
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
     ApiService.apiClient
         .getEventsApi()
@@ -26,18 +29,20 @@ class _CalendarState extends State<Calendar> {
               this._events = value.data!.toList();
               _selectedEvents = _getEventsForDay(_selectedDay);
             }));
-    super.initState();
   }
+
   void openEventPage(EventRead event) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => EventPage(event: event, eventId: event.id)));
   }
+
   List<EventRead> _getEventsForDay(DateTime day) {
 
     final events = this._events.where((item) => isSameDay(item.startsAt.toLocal(), day)).toList();
     events.sort((a, b) => a.startsAt.compareTo(b.startsAt));
     return events;
   }
+
   Future<void> _onRefresh() async {
     ApiService.apiClient
         .getEventsApi()
