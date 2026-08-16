@@ -1,7 +1,7 @@
 import "dart:math";
 import "package:flutter/material.dart";
 import "enclose_grid_tile.dart";
-import "helper_widgets/animated_moose_grid_image.dart";
+import "helper_widgets/animated_sprite.dart";
 import "helper_widgets/wiggling_widget.dart";
 import "helper_widgets/outlined_text.dart";
 import "call_counter.dart";
@@ -34,12 +34,12 @@ class TileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final waitTime = tile.waitFrames == null ? null : wheatFrameDuration * tile.waitFrames!;
-    final reverseWaitTime = tile.reverseWaitFrames == null ? null : wheatFrameDuration * tile.reverseWaitFrames!;
-
     return ListenableBuilder(
       listenable: tile,
       builder: (context, child) {
+        final waitTime = tile.waitFrames == null ? null : wheatFrameDuration * tile.waitFrames!;
+        final reverseWaitTime = tile.reverseWaitFrames == null ? null : wheatFrameDuration * tile.reverseWaitFrames!;
+
         return GestureDetector(
           onTap: onTap,
           child: Stack(
@@ -49,10 +49,8 @@ class TileWidget extends StatelessWidget {
             children: [
               if (tile.isGrass)
                 // Grass
-                AnimatedMooseGridImage(
+                AnimatedSprite(
                   key: Key("grass"),  // keys needed because otherwise it would sometimes confuse them, leading to incorrect didUpdateWidget calls
-                  frames: AssetHandler.getAnimationFrames(tile.type),
-                  frameDuration: wheatFrameDuration,
                   vsync: vsync,
                   idleFrames: idleFrames,
                   idleController: idleController
@@ -60,35 +58,34 @@ class TileWidget extends StatelessWidget {
 
               if (!tile.isWater)
                 // Wheat
-                AnimatedMooseGridImage(
+                AnimatedSprite(
                   key: Key("wheat"),
-                  shouldAnimate: tile.isEnclosed,
-                  frames: tile.isGrass ? AssetHandler.animationWheatFrames : AssetHandler.emptyWheatFrames,  // Would rather not animate emptyWheatFrames
                   vsync: vsync,
-                  waitTime: waitTime,
-                  reverseWaitTime: reverseWaitTime,
-                  idleFrames: tile.isGrass ? AssetHandler.idleWheatFrames : AssetHandler.emptyWheatFrames,
+                  shouldAnimate: tile.isEnclosed,
+                  animationFrames: tile.isGrass ? AssetHandler.animationWheatFrames : AssetHandler.emptyWheatFrames,  // Would rather not animate emptyWheatFrames
+                  animationFrameDuration: wheatFrameDuration,
+                  animationWaitTime: waitTime,
+                  animationReverseWaitTime: reverseWaitTime,
+                  endIdleFrames: tile.isGrass ? AssetHandler.idleWheatFrames : AssetHandler.emptyWheatFrames,
                   idleController: idleController
                 )
               else
                 // Water
-                AnimatedMooseGridImage(
+                AnimatedSprite(
                   key: Key("water"),
-                  frames: AssetHandler.getAnimationFrames(tile.type),
-                  frameDuration: wheatFrameDuration,
                   vsync: vsync,
                   idleFrames: idleFrames,
                   idleController: idleController
                 ),
 
               // Wall
-              AnimatedMooseGridImage(
+              AnimatedSprite(
                 key: Key("wall"),
-                shouldAnimate: tile.type == EncloseGridCellType.wall,
-                frames: AssetHandler.getAnimationFrames(EncloseGridCellType.wall),
                 vsync: vsync,
-                reverseFrameDuration: const Duration(milliseconds: 20),
-                idleFrames: AssetHandler.getIdleFrames(EncloseGridCellType.wall),
+                shouldAnimate: tile.type == EncloseGridCellType.wall,
+                animationFrames: AssetHandler.getAnimationFrames(EncloseGridCellType.wall),
+                animationReverseFrameDuration: const Duration(milliseconds: 20),
+                endIdleFrames: AssetHandler.getIdleFrames(EncloseGridCellType.wall),
                 idleController: idleController
               ),
 
@@ -97,8 +94,9 @@ class TileWidget extends StatelessWidget {
               // Text((_grid.getDistance(flatIndex) ?? -1).toString()),
 
               // Text(
-              //   "${(tile.waitTime?.inMilliseconds ?? -1) ~/ 40}, ${(tile.reverseWaitTime?.inMilliseconds ?? -1) ~/ 40}",
+              //   "${tile.waitFrames}, ${tile.reverseWaitFrames}",
               //   style: TextStyle(
+              //     color: Colors.white,
               //     fontSize: 10
               //   )
               // ),
@@ -107,9 +105,8 @@ class TileWidget extends StatelessWidget {
               if (tile.isPortal && portalFilter != null)
                 ColorFiltered(
                   colorFilter: portalFilter!,
-                  child: AnimatedMooseGridImage(
+                  child: AnimatedSprite(
                     key: Key("portal"),
-                    frames: AssetHandler.getAnimationFrames(tile.type),
                     vsync: vsync,
                     idleFrames: idleFrames,
                     idleController: idleController
@@ -118,31 +115,29 @@ class TileWidget extends StatelessWidget {
 
               // Bonus (cherry, apple, bees)
               if (tile.isBonus)
-                AnimatedMooseGridImage(
+                AnimatedSprite(
                   key: Key("bonus"),
-                  frames: AssetHandler.getAnimationFrames(tile.type),
-                  shouldAnimate: tile.isEnclosed,
                   vsync: vsync,
-                  isAlwaysVisible: true,
-                  frameDuration: wheatFrameDuration,  // To simplify, this is chosen so that the total duration is the same as for wheat
-                  waitTime: waitTime,
-                  reverseWaitTime: reverseWaitTime,
-                  idleFrames: idleFrames,
+                  animationFrames: AssetHandler.getAnimationFrames(tile.type),
+                  shouldAnimate: tile.isEnclosed,
+                  animationFrameDuration: const Duration(milliseconds: 100),  // This means the total animation time is way longer than for wheat, which can lead to some weird looking behavior but worth it
+                  animationWaitTime: waitTime,
+                  animationReverseWaitTime: reverseWaitTime,
+                  startIdleFrames: idleFrames,
+                  endIdleFrames: AssetHandler.getAnimationFrames(.apple),
                   idleController: idleController
                 ),
 
               if (tile.isMoose)
-                AnimatedMooseGridImage(
+                AnimatedSprite(
                   key: Key("moose"),
-                  frames: AssetHandler.getAnimationFrames(tile.type),
-                  frameDuration: wheatFrameDuration,
                   vsync: vsync,
                   idleFrames: idleFrames,
                   idleController: idleController
                 ),
 
               // if (gridCell != EncloseGridCellType.grass && gridCell != EncloseGridCellType.wall && gridCell != EncloseGridCellType.portal && gridCell != EncloseGridCellType.apple)
-              //   AnimatedMooseGridImage(
+              //   AnimatedSprite(
               //     frames: gridCell.getAnimationFrames(random: frameRandom),
               //     vsync: vsync,
               //     idleFrames: idleFrames,

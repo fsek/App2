@@ -7,6 +7,7 @@ import "package:syncfusion_flutter_charts/charts.dart";
 import "package:dio/dio.dart";
 import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
+import "package:fsek_mobile/l10n/app_localizations.dart";
 import "enclose_grid.dart";
 import "enclose_grid_tile.dart";
 import "call_counter.dart";
@@ -18,8 +19,8 @@ import "helper_widgets/animated_smooth_arrow.dart";
 import "helper_widgets/animated_thought_bubble.dart";
 import "../../../util/time.dart";
 
-class EncloseMooseGamePage extends StatefulWidget {
-  const EncloseMooseGamePage({
+class EncloseMooseLevelPage extends StatefulWidget {
+  const EncloseMooseLevelPage({
     required this.pageController,
     required this.level,
     required this.availableLevels
@@ -30,10 +31,10 @@ class EncloseMooseGamePage extends StatefulWidget {
   final List<EncloseMooseLevelRead> availableLevels;
 
   @override
-  _EncloseMooseGameState createState() => _EncloseMooseGameState();
+  _EncloseMooseLevelState createState() => _EncloseMooseLevelState();
 }
 
-class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProviderStateMixin {
+class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerProviderStateMixin {
   late bool _hasSubmitted = _usedLevel.playerSubmission != null;
   late EncloseMooseLevelRead _usedLevel = widget.level;
 
@@ -88,11 +89,14 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
   @override
   Widget build(BuildContext context) {
-    const backgroundImage = "assets/img/enclose_moose/grass/0_idle0.png";
+    // const backgroundImage = "assets/img/enclose_moose/grass/0_idle0.png";
+    final t = AppLocalizations.of(context)!;
 
     final topBar = Padding(
+      // color: Colors.black.withAlpha(50),
       padding: const EdgeInsets.all(5),
       child: Column(
+        mainAxisSize: .min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
@@ -207,7 +211,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
           WigglingWidget(
             controller: _idleController,
             child: OutlinedText(
-              text: _usedLevel.name,
+              text: t.localeName == "sv" ? _usedLevel.nameSv : _usedLevel.nameEn,
               style: TextStyle(
                 color: Colors.yellow,
                 fontSize: 20,
@@ -253,9 +257,12 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
         body: Stack(
           children: [
             SizedBox.expand(
-              child: Image.asset(
-                backgroundImage,
-                fit: BoxFit.fill
+              // child: Image.asset(
+              //   backgroundImage,
+              //   fit: BoxFit.fill
+              // )
+              child: Container(
+                color: Color(0xFF014421)
               )
             ),
 
@@ -286,7 +293,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
 
                           return SizedBox(
                             width: _grid.gridWidth * cellSize,
-                            height: _grid.gridHeight * cellSize + 0.0001,  // for some reason adding a small number allows the walls on the top row to overflow
+                            height: _grid.gridHeight * cellSize,
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -309,8 +316,8 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                                     return Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: Colors.grey,
-                                          width: cellSize / 300,
+                                          color: Colors.green[900]!,
+                                          width: 0  // as thin as possible
                                         )
                                       ),
                                       child: OverflowBox(
@@ -468,6 +475,11 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                     final isCurrentBest = _bestSolutionScore == _grid.score || _bestSolution == null;
                     final isNotShowingYours = _hasSubmitted && !setEquals(_grid.getWallIndices(), _usedLevel.playerSubmission!.playerSolution.toSet());
 
+                    /*  // Is pretty good to show what parts of the screen are clickable but feels restrictive as a user
+                    return Container(
+                      // color: Colors.black.withAlpha(50),
+                      child: SafeArea(
+                    */
                     return SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
@@ -755,6 +767,8 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
   }
 
   Widget Function(BuildContext) _buildDayChooserDialog() {
+    final t = AppLocalizations.of(context)!;
+
     return (context) => AlertDialog(
       contentPadding: const EdgeInsets.all(16),
       constraints: BoxConstraints(maxHeight: 400, minWidth: MediaQuery.of(context).size.width),
@@ -833,7 +847,7 @@ class _EncloseMooseGameState extends State<EncloseMooseGamePage> with TickerProv
                       Navigator.of(context).pop();
                     },
                     title: Text(
-                      level.name,
+                      t.localeName == "sv" ? level.nameSv : level.nameEn,
                       style: const TextStyle( 
                         fontSize: 18,
                         fontFamily: "Schoolbell"

@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "wiggling_widget.dart";
-import "thought_bubble_painter.dart";
+import "cloud_painter.dart";
 
 class AnimatedThoughtBubble extends StatefulWidget {
   final String text;
@@ -11,7 +11,7 @@ class AnimatedThoughtBubble extends StatefulWidget {
     this.onDisappear,
     this.vsync,
     this.duration = const Duration(milliseconds: 500),
-    this.curve = Curves.linear,
+    this.curve = Curves.easeOutBack,
     required this.text,
     this.minPuffs = 7,
     this.puffVariance = 5,
@@ -52,15 +52,15 @@ class _AnimatedThoughtBubbleState extends State<AnimatedThoughtBubble> with Sing
   );
   late Animation<double> _dot1Anim = CurvedAnimation(
     parent: _controller, 
-    curve: const Interval(0.0, 0.3, curve: Curves.easeOutBack)
+    curve: Interval(0.0, 0.3, curve: widget.curve)
   );
   late Animation<double> _dot2Anim = CurvedAnimation(
     parent: _controller, 
-    curve: const Interval(0.3, 0.6, curve: Curves.easeOutBack)
+    curve: Interval(0.3, 0.6, curve: widget.curve)
   );
   late Animation<double> _cloudAnim = CurvedAnimation(
     parent: _controller, 
-    curve: const Interval(0.6, 1.0, curve: Curves.easeOutBack)
+    curve: Interval(0.6, 1.0, curve: widget.curve)
   );
 
   @override

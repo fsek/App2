@@ -50,13 +50,13 @@ class EncloseGridTile extends ChangeNotifier {
   bool _isEnclosed = false;
   // int? distance;
   // int? expandDistance;
-  int? _waitFrames;  // Don't really like these being properties of tile since they are really UI things
-  int? _reverseWaitFrames;
+  double? _waitFrames;  // Don't really like these being properties of tile since they are really UI things
+  double? _reverseWaitFrames;
 
   EncloseGridCellType get type => _type;
   bool get isEnclosed => _isEnclosed;
-  int? get waitFrames => _waitFrames;
-  int? get reverseWaitFrames => _reverseWaitFrames;
+  double? get waitFrames => _waitFrames;
+  double? get reverseWaitFrames => _reverseWaitFrames;
 
   bool get isWall => _type == EncloseGridCellType.wall;
   bool get isWater => _type == EncloseGridCellType.water;
@@ -67,7 +67,6 @@ class EncloseGridTile extends ChangeNotifier {
   bool get isOpen => !(isWater || isWall);
   bool get canToggleWall => isGrass || isWall;
 
-  /// Toggles wall/grass state directly on the tile object.
   void toggleWall({bool doUpdate = true}) {
     if (!canToggleWall) return;
 
@@ -77,7 +76,7 @@ class EncloseGridTile extends ChangeNotifier {
     }
   }
 
-  void update({EncloseGridCellType? newType, bool? newIsEnclosed, int? newWaitFrames, int? newReverseWaitFrames}) {
+  void update({EncloseGridCellType? newType, bool? newIsEnclosed, double? newWaitFrames, double? newReverseWaitFrames}) {
     bool hasChanged = false;
 
     if (newType != null && newType != _type) {
@@ -101,7 +100,7 @@ class EncloseGridTile extends ChangeNotifier {
     }
 
     if (hasChanged) {
-      notifyListeners(); // Triggers only the attached TileWidget!
+      notifyListeners();
     }
   }
 }

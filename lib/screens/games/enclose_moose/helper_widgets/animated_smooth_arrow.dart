@@ -8,7 +8,7 @@ class AnimatedSmoothArrow extends StatefulWidget {
     this.onDisappear,
     this.vsync,
     this.duration = const Duration(milliseconds: 500),
-    this.curve = Curves.linear,
+    this.curve = Curves.easeInOut,
     required this.flatIndices,
     required this.gridWidth,
     required this.cellSize,

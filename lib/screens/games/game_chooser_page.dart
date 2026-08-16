@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "moose_game/moose_game.dart";
-import "enclose_moose/enclose_moose.dart";
+import "enclose_moose/enclose_moose_page.dart";
 import "enclose_moose/helper_widgets/wiggling_widget.dart";
 import "enclose_moose/helper_widgets/outlined_text.dart";
 

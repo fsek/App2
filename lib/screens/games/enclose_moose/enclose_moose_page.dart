@@ -3,7 +3,7 @@ import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
 import "asset_handler.dart";
 import "enclose_game_placeholder.dart";
-import "enclose_game.dart";
+import "enclose_moose_level_page.dart";
 
 class EncloseMoosePage extends StatefulWidget {
   @override
@@ -125,12 +125,13 @@ class _EncloseMooseState extends State<EncloseMoosePage> with TickerProviderStat
     return PageView.builder(
       controller: _pageController!,
       allowImplicitScrolling: true,
+      physics: const NeverScrollableScrollPhysics(),
       // scrollCacheExtent: ScrollCacheExtent.viewport(_levels.length.toDouble()),  // keeps all pages alive. Too expensive, consider only saving game state (sharedPreferences) and then using that
       itemCount: _levels!.length,
       itemBuilder: (context, index) {
         final level = _levels![index];
 
-        return EncloseMooseGamePage(
+        return EncloseMooseLevelPage(
           pageController: _pageController,
           level: level,
           availableLevels: _levels!

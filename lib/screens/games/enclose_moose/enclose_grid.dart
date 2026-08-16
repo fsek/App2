@@ -242,8 +242,8 @@ class EncloseGrid extends ChangeNotifier {
 
       tile.update(
         newIsEnclosed: enclosure.contains(tile),
-        newWaitFrames: expandDistance == null ? null : expandDistance,
-        newReverseWaitFrames: distance == null ? null : (maxDistance - distance)
+        newWaitFrames: expandDistance == null ? null : expandDistance.toDouble(),  // Could multiply these to change spread speed
+        newReverseWaitFrames: distance == null ? null : (maxDistance - distance).toDouble()
       );
     }
 
