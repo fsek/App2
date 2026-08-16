@@ -76,7 +76,6 @@ dependencies:
   url_launcher_web: any
   # flutter_web_plugins: any
   html: any
-  photo_view: ^0.15.0
   package_info_plus: ^9.0.0
   connectivity_plus: ^7.0.0
   vector_math: any
@@ -140,6 +139,8 @@ flutter:
     - assets/data/nollning_26/homescreen/lvl_2/
     - assets/data/nollning_26/homescreen/lvl_3/
     - assets/data/nollning_26/homescreen/lvl_4/
+    - assets/data/nollning_26/map/
+    - assets/data/nollning_26/map/pin_media/
 
   fonts:
     - family: Brandon Grotesque
