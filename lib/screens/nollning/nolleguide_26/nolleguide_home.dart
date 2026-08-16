@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/etiquette.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/poweredBy.dart';
-import 'package:fsek_mobile/screens/nollning/nolleguide_26/wordlist.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/wordList.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/dressCode.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/lund.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/faculty.dart';
