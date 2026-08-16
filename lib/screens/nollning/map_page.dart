@@ -63,6 +63,13 @@ class _MapViewState extends State<MapView> {
     _placePins(context);
   }
 
+  @override
+  void dispose() {
+    _transformationController.dispose();
+
+    super.dispose();
+  }
+
   void _applyInitialZoom() {
     final zoomFactor = _bodyHeight / _displayHeight;
 
