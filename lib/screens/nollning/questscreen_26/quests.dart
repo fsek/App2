@@ -52,6 +52,7 @@ class _QuestScreenState extends State<QuestScreen>
       "assets/data/nollning_26/uppdrag/pixelart_tävling.png";
   String pixelart_alg = "assets/data/nollning_26/uppdrag/pixelart_älg.png";
   String poke_kort = "assets/data/nollning_26/uppdrag/pokekort_exkl.png";
+  String clouds = "assets/data/nollning_26/uppdrag/clouds.png";
 
   /*int _checkNollningWeek() {
     if (DateTime.now().toLocal().isAfter(DateTime(2026, 9, 20, 23, 59, 59))) {
@@ -248,6 +249,7 @@ class _QuestScreenState extends State<QuestScreen>
                                       color: isSelected
                                           ? Colors.orange
                                           : Colors.blue,
+                                      fontFamily: "Consolas",
                                     ),
                                   ),
                                 ),
@@ -747,6 +749,7 @@ class _QuestScreenState extends State<QuestScreen>
                   completedQuestsTab,
                   context,
                 ),
+                if (completedQuestsTab == null) ...[Image.asset(clouds)],
               ],
             ),
           ),
@@ -776,13 +779,24 @@ class _QuestScreenState extends State<QuestScreen>
                   child: Image.asset(_buttonArt(element), fit: BoxFit.fill),
                 ),
                 Positioned(
-                  left: widget.availableHeight / 6 * 0.1,
+                  left: widget.availableHeight / 6 * 0.08,
                   top: widget.availableHeight / 6 * 0.1,
-                  child: Image.asset(
-                    _pixelArt(element),
-                    width: widget.availableHeight / 6 * 0.7,
-                    height: widget.availableHeight / 6 * 0.7,
-                    fit: BoxFit.contain,
+                  child: SizedBox(
+                    width: widget.availableHeight / 6 * 0.73,
+                    height: widget.availableHeight / 6 * 0.73,
+                    child: Stack(
+                      children: [
+                        Image.asset(pixelart_placeholder, fit: BoxFit.contain),
+                        Positioned.fill(
+                          child: Center(
+                            child: Image.asset(
+                              _pixelArt(element),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Positioned.fill(
@@ -800,7 +814,7 @@ class _QuestScreenState extends State<QuestScreen>
                             ? element.titleSv
                             : element.titleEn,
                         style: TextStyle(
-                          fontFamily: "VT323",
+                          fontFamily: "LoRes12OT",
                           fontWeight: FontWeight.w600,
                           fontSize: widget.availableWidth / 20,
                           color: Colors.white,
@@ -821,7 +835,7 @@ class _QuestScreenState extends State<QuestScreen>
         case "Accepted":
           {
             Container container = Container(
-              height: widget.availableHeight / 8,
+              height: widget.availableHeight / 6,
               width: widget.availableWidth - 40,
               child: Card(
                 shadowColor: Colors.transparent,
@@ -840,16 +854,20 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                       Positioned(
-                        left: widget.availableHeight / 8 * 0.1,
-                        top: widget.availableHeight / 8 * 0.1,
+                        left: widget.availableHeight / 6 * 0.08,
+                        top: widget.availableHeight / 6 * 0.1,
                         child: SizedBox(
-                          width: widget.availableHeight / 8 * 0.7,
-                          height: widget.availableHeight / 8 * 0.7,
+                          width: widget.availableHeight / 6 * 0.73,
+                          height: widget.availableHeight / 6 * 0.73,
                           child: Stack(
                             children: [
-                              Image.asset(
-                                _pixelArt(element),
-                                fit: BoxFit.contain,
+                              Positioned.fill(
+                                child: Center(
+                                  child: Image.asset(
+                                    _pixelArt(element),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
                               ),
                               Image.asset(
                                 done_pixelart_placeholder,
@@ -860,38 +878,33 @@ class _QuestScreenState extends State<QuestScreen>
                           ),
                         ),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(height: widget.availableHeight / 50),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left:
-                                  widget.availableHeight /
-                                      8 *
-                                      0.1 + // left margin
-                                  widget.availableHeight /
-                                      8 *
-                                      0.7 + // image width
-                                  20,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                t.localeName == "sv"
-                                    ? element.adventureMission.titleSv
-                                    : element.adventureMission.titleEn,
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors.white,
-                                ),
+                      Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left:
+                                widget.availableHeight /
+                                    6 *
+                                    0.1 + // left margin
+                                widget.availableHeight /
+                                    6 *
+                                    0.7 + // image width
+                                20,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              t.localeName == "sv"
+                                  ? element.adventureMission.titleSv
+                                  : element.adventureMission.titleEn,
+                              style: TextStyle(
+                                fontFamily: "LoRes12OT",
+                                fontWeight: FontWeight.w600,
+                                fontSize: widget.availableWidth / 20,
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                          SizedBox(height: widget.availableHeight / 100),
-                        ],
+                        ),
                       ),
                     ],
                   ),
@@ -905,7 +918,7 @@ class _QuestScreenState extends State<QuestScreen>
         case "Failed":
           {
             Container container = Container(
-              height: widget.availableHeight / 8,
+              height: widget.availableHeight / 6,
               width: widget.availableWidth - 40,
               child: Card(
                 shadowColor: Colors.transparent,
@@ -924,16 +937,20 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                       Positioned(
-                        left: widget.availableHeight / 8 * 0.1,
-                        top: widget.availableHeight / 8 * 0.1,
+                        left: widget.availableHeight / 6 * 0.08,
+                        top: widget.availableHeight / 6 * 0.1,
                         child: SizedBox(
-                          width: widget.availableHeight / 8 * 0.7,
-                          height: widget.availableHeight / 8 * 0.7,
+                          width: widget.availableHeight / 6 * 0.73,
+                          height: widget.availableHeight / 6 * 0.73,
                           child: Stack(
                             children: [
-                              Image.asset(
-                                _pixelArt(element),
-                                fit: BoxFit.contain,
+                              Positioned.fill(
+                                child: Center(
+                                  child: Image.asset(
+                                    _pixelArt(element),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
                               ),
                               Image.asset(
                                 done_pixelart_placeholder,
@@ -943,38 +960,33 @@ class _QuestScreenState extends State<QuestScreen>
                           ),
                         ),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(height: widget.availableHeight / 50),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left:
-                                  widget.availableHeight /
-                                      8 *
-                                      0.1 + // left margin
-                                  widget.availableHeight /
-                                      8 *
-                                      0.7 + // image width
-                                  20,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                t.localeName == "sv"
-                                    ? element.adventureMission.titleSv
-                                    : element.adventureMission.titleEn,
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors.white,
-                                ),
+                      Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left:
+                                widget.availableHeight /
+                                    6 *
+                                    0.1 + // left margin
+                                widget.availableHeight /
+                                    6 *
+                                    0.7 + // image width
+                                20,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              t.localeName == "sv"
+                                  ? element.adventureMission.titleSv
+                                  : element.adventureMission.titleEn,
+                              style: TextStyle(
+                                fontFamily: "LoRes12OT",
+                                fontWeight: FontWeight.w600,
+                                fontSize: widget.availableWidth / 20,
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                          SizedBox(height: widget.availableHeight / 100),
-                        ],
+                        ),
                       ),
                     ],
                   ),
@@ -988,7 +1000,7 @@ class _QuestScreenState extends State<QuestScreen>
         case "Review":
           {
             Container container = Container(
-              height: widget.availableHeight / 8,
+              height: widget.availableHeight / 6,
               width: widget.availableWidth - 40,
               child: Card(
                 shadowColor: Colors.transparent,
@@ -1007,16 +1019,24 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                       Positioned(
-                        left: widget.availableHeight / 8 * 0.1,
-                        top: widget.availableHeight / 8 * 0.1,
+                        left: widget.availableHeight / 6 * 0.08,
+                        top: widget.availableHeight / 6 * 0.1,
                         child: SizedBox(
-                          width: widget.availableHeight / 8 * 0.7,
-                          height: widget.availableHeight / 8 * 0.7,
+                          width: widget.availableHeight / 6 * 0.73,
+                          height: widget.availableHeight / 6 * 0.73,
                           child: Stack(
                             children: [
                               Image.asset(
-                                _pixelArt(element),
+                                pixelart_placeholder,
                                 fit: BoxFit.contain,
+                              ),
+                              Positioned.fill(
+                                child: Center(
+                                  child: Image.asset(
+                                    _pixelArt(element),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
                               ),
                               Image.asset(
                                 done_pixelart_placeholder,
@@ -1026,38 +1046,33 @@ class _QuestScreenState extends State<QuestScreen>
                           ),
                         ),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(height: widget.availableHeight / 50),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left:
-                                  widget.availableHeight /
-                                      8 *
-                                      0.1 + // left margin
-                                  widget.availableHeight /
-                                      8 *
-                                      0.7 + // image width
-                                  20,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                t.localeName == "sv"
-                                    ? element.adventureMission.titleSv
-                                    : element.adventureMission.titleEn,
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors.white,
-                                ),
+                      Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left:
+                                widget.availableHeight /
+                                    6 *
+                                    0.1 + // left margin
+                                widget.availableHeight /
+                                    6 *
+                                    0.7 + // image width
+                                20,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              t.localeName == "sv"
+                                  ? element.adventureMission.titleSv
+                                  : element.adventureMission.titleEn,
+                              style: TextStyle(
+                                fontFamily: "LoRes12OT",
+                                fontWeight: FontWeight.w600,
+                                fontSize: widget.availableWidth / 20,
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                          SizedBox(height: widget.availableHeight / 100),
-                        ],
+                        ),
                       ),
                     ],
                   ),

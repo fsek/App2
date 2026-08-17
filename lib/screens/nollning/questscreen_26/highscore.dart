@@ -114,7 +114,7 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
                       position.toString(),
                       style: TextStyle(
                         color: _getPositionColor(position),
-                        fontFamily: "VT323",
+                        fontFamily: "LoRes12OT",
                         fontWeight: FontWeight.w800,
                         fontSize: widget.availableWidth / 15,
                       ),
@@ -130,7 +130,7 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
                             ? group.group.name
                             : group.group.name.substring(0, 20) + "...",
                         style: TextStyle(
-                          fontFamily: "VT323",
+                          fontFamily: "LoRes12OT",
                           fontWeight: FontWeight.w600,
                           fontSize: group.group.name.length <= 10
                               ? widget.availableWidth / 15
@@ -146,7 +146,7 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
                     child: Text(
                       _pointsToString(points),
                       style: TextStyle(
-                        fontFamily: "VT323",
+                        fontFamily: "LoRes12OT",
                         fontWeight: FontWeight.normal,
                         fontSize: widget.availableWidth / 15,
                         color: _getPositionColor(position),
@@ -183,7 +183,7 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
                   child: Text(
                     "HIGH SCORES",
                     style: TextStyle(
-                      fontFamily: "VT323",
+                      fontFamily: "LoRes12OT",
                       fontSize: widget.availableWidth / 10,
                       color: Colors.white, // justera efter din bakgrund
                     ),
