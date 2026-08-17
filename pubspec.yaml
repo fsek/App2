@@ -147,12 +147,12 @@ flutter:
           weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
           weight: 900
-    - family: PressStart2P
+    - family: LoRes12OT
       fonts:
-        - asset: assets/fonts/PressStart2P-Regular.ttf
-    - family: VT323
+        - asset: assets/fonts/LoRes12OT-Regular.ttf
+    - family: Consolas
       fonts:
-        - asset: assets/fonts/VT323-Regular.ttf
+        - asset: assets/fonts/consolas.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
