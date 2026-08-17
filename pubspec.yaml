@@ -133,6 +133,7 @@ flutter:
     - assets/data/nollning_26/calendar/
     - assets/data/nollning_26/map/
     - assets/data/nollning_26/map/pin_media/
+    - assets/data/nollning_26/uppdrag/
 
   fonts:
     - family: Brandon Grotesque
@@ -156,6 +157,12 @@ flutter:
     - family: Consolas
       fonts:
         - asset: assets/fonts/Consolas-Regular.ttf
+    - family: PressStart2P
+      fonts:
+        - asset: assets/fonts/PressStart2P-Regular.ttf
+    - family: VT323
+      fonts:
+        - asset: assets/fonts/VT323-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
