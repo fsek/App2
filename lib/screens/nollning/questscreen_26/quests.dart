@@ -789,13 +789,12 @@ class _QuestScreenState extends State<QuestScreen>
                   child: Padding(
                     padding: EdgeInsets.only(
                       left:
-                          widget.availableHeight / 6 * 0.1 + //vänstermarginal
-                          widget.availableHeight / 6 * 0.7 + //bildbredd
+                          widget.availableHeight / 6 * 0.1 + // left margin
+                          widget.availableHeight / 6 * 0.7 + // image width
                           20,
                     ),
                     child: Align(
-                      alignment: Alignment
-                          .centerLeft, // centrerar vertikalt OCH vänsterjusterar horisontellt
+                      alignment: Alignment.centerLeft,
                       child: Text(
                         t.localeName == "sv"
                             ? element.titleSv
@@ -840,23 +839,25 @@ class _QuestScreenState extends State<QuestScreen>
                           fit: BoxFit.fill,
                         ),
                       ),
-                      Positioned.fill(
-                        child: Image.asset(
-                          done_pixelart_placeholder,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Image.asset(done_check, fit: BoxFit.fill),
-                      ),
                       Positioned(
                         left: widget.availableHeight / 8 * 0.1,
                         top: widget.availableHeight / 8 * 0.1,
-                        child: Image.asset(
-                          _pixelArt(element),
+                        child: SizedBox(
                           width: widget.availableHeight / 8 * 0.7,
                           height: widget.availableHeight / 8 * 0.7,
-                          fit: BoxFit.contain,
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                _pixelArt(element),
+                                fit: BoxFit.contain,
+                              ),
+                              Image.asset(
+                                done_pixelart_placeholder,
+                                fit: BoxFit.contain,
+                              ),
+                              Image.asset(done_check, fit: BoxFit.contain),
+                            ],
+                          ),
                         ),
                       ),
                       Column(
@@ -867,8 +868,10 @@ class _QuestScreenState extends State<QuestScreen>
                               left:
                                   widget.availableHeight /
                                       8 *
-                                      0.1 + //vänstermarginal
-                                  widget.availableHeight / 8 * 0.7 + //bildbredd
+                                      0.1 + // left margin
+                                  widget.availableHeight /
+                                      8 *
+                                      0.7 + // image width
                                   20,
                             ),
                             child: Align(
@@ -920,20 +923,24 @@ class _QuestScreenState extends State<QuestScreen>
                           fit: BoxFit.fill,
                         ),
                       ),
-                      Positioned.fill(
-                        child: Image.asset(
-                          done_pixelart_placeholder,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
                       Positioned(
                         left: widget.availableHeight / 8 * 0.1,
                         top: widget.availableHeight / 8 * 0.1,
-                        child: Image.asset(
-                          _pixelArt(element),
+                        child: SizedBox(
                           width: widget.availableHeight / 8 * 0.7,
                           height: widget.availableHeight / 8 * 0.7,
-                          fit: BoxFit.contain,
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                _pixelArt(element),
+                                fit: BoxFit.contain,
+                              ),
+                              Image.asset(
+                                done_pixelart_placeholder,
+                                fit: BoxFit.contain,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Column(
@@ -944,8 +951,10 @@ class _QuestScreenState extends State<QuestScreen>
                               left:
                                   widget.availableHeight /
                                       8 *
-                                      0.1 + //vänstermarginal
-                                  widget.availableHeight / 8 * 0.7 + //bildbredd
+                                      0.1 + // left margin
+                                  widget.availableHeight /
+                                      8 *
+                                      0.7 + // image width
                                   20,
                             ),
                             child: Align(
@@ -997,20 +1006,24 @@ class _QuestScreenState extends State<QuestScreen>
                           fit: BoxFit.fill,
                         ),
                       ),
-                      Positioned.fill(
-                        child: Image.asset(
-                          done_pixelart_placeholder,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
                       Positioned(
                         left: widget.availableHeight / 8 * 0.1,
                         top: widget.availableHeight / 8 * 0.1,
-                        child: Image.asset(
-                          _pixelArt(element),
+                        child: SizedBox(
                           width: widget.availableHeight / 8 * 0.7,
                           height: widget.availableHeight / 8 * 0.7,
-                          fit: BoxFit.contain,
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                _pixelArt(element),
+                                fit: BoxFit.contain,
+                              ),
+                              Image.asset(
+                                done_pixelart_placeholder,
+                                fit: BoxFit.contain,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Column(
@@ -1021,8 +1034,10 @@ class _QuestScreenState extends State<QuestScreen>
                               left:
                                   widget.availableHeight /
                                       8 *
-                                      0.1 + //vänstermarginal
-                                  widget.availableHeight / 8 * 0.7 + //bildbredd
+                                      0.1 + // left margin
+                                  widget.availableHeight /
+                                      8 *
+                                      0.7 + // image width
                                   20,
                             ),
                             child: Align(
