@@ -59,6 +59,12 @@ doc/ElectionPostRead.md
 doc/ElectionRead.md
 doc/ElectionUpdate.md
 doc/ElectionsApi.md
+doc/EncloseMooseApi.md
+doc/EncloseMooseLevelCreate.md
+doc/EncloseMooseLevelRead.md
+doc/EncloseMooseLevelUpdate.md
+doc/EncloseMooseSubmissionCreate.md
+doc/EncloseMooseSubmissionRead.md
 doc/ErrorModel.md
 doc/EventCreate.md
 doc/EventRead.md
@@ -117,6 +123,10 @@ doc/PostPermissionRead.md
 doc/PostRead.md
 doc/PostUpdate.md
 doc/PostsApi.md
+doc/PreregMemberCreate.md
+doc/PreregMemberRead.md
+doc/PreregMemberUpdate.md
+doc/PreregMembersApi.md
 doc/PriorityDB.md
 doc/RoomBookingApi.md
 doc/RoomBookingCreate.md
@@ -175,6 +185,7 @@ lib/src/api/council_api.dart
 lib/src/api/default_api.dart
 lib/src/api/document_api.dart
 lib/src/api/elections_api.dart
+lib/src/api/enclose_moose_api.dart
 lib/src/api/event_signup_api.dart
 lib/src/api/events_api.dart
 lib/src/api/groups_api.dart
@@ -188,6 +199,7 @@ lib/src/api/nollning_api.dart
 lib/src/api/nominations_api.dart
 lib/src/api/permissions_api.dart
 lib/src/api/posts_api.dart
+lib/src/api/prereg_members_api.dart
 lib/src/api/room_booking_api.dart
 lib/src/api/songs_api.dart
 lib/src/api/songs_category_api.dart
@@ -249,6 +261,11 @@ lib/src/model/election_populate.dart
 lib/src/model/election_post_read.dart
 lib/src/model/election_read.dart
 lib/src/model/election_update.dart
+lib/src/model/enclose_moose_level_create.dart
+lib/src/model/enclose_moose_level_read.dart
+lib/src/model/enclose_moose_level_update.dart
+lib/src/model/enclose_moose_submission_create.dart
+lib/src/model/enclose_moose_submission_read.dart
 lib/src/model/error_model.dart
 lib/src/model/event_create.dart
 lib/src/model/event_read.dart
@@ -294,6 +311,9 @@ lib/src/model/post_door_access_read.dart
 lib/src/model/post_permission_read.dart
 lib/src/model/post_read.dart
 lib/src/model/post_update.dart
+lib/src/model/prereg_member_create.dart
+lib/src/model/prereg_member_read.dart
+lib/src/model/prereg_member_update.dart
 lib/src/model/priority_db.dart
 lib/src/model/room_booking_create.dart
 lib/src/model/room_booking_read.dart
@@ -333,3 +353,13 @@ lib/src/model/user_update.dart
 lib/src/model/validation_error.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/enclose_moose_api_test.dart
+test/enclose_moose_level_create_test.dart
+test/enclose_moose_level_read_test.dart
+test/enclose_moose_level_update_test.dart
+test/enclose_moose_submission_create_test.dart
+test/enclose_moose_submission_read_test.dart
+test/prereg_member_create_test.dart
+test/prereg_member_read_test.dart
+test/prereg_member_update_test.dart
+test/prereg_members_api_test.dart

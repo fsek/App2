@@ -20,6 +20,10 @@ part 'adventure_mission_read.g.dart';
 /// * [minPoints] 
 /// * [nollningId] 
 /// * [nollningWeek] 
+/// * [missionCategory] 
+/// * [unlockCode] 
+/// * [unlockHintSv] 
+/// * [unlockHintEn] 
 /// * [createdAt] 
 @BuiltValue()
 abstract class AdventureMissionRead implements Built<AdventureMissionRead, AdventureMissionReadBuilder> {
@@ -49,6 +53,18 @@ abstract class AdventureMissionRead implements Built<AdventureMissionRead, Adven
 
   @BuiltValueField(wireName: r'nollning_week')
   int get nollningWeek;
+
+  @BuiltValueField(wireName: r'mission_category')
+  String get missionCategory;
+
+  @BuiltValueField(wireName: r'unlock_code')
+  String? get unlockCode;
+
+  @BuiltValueField(wireName: r'unlock_hint_sv')
+  String? get unlockHintSv;
+
+  @BuiltValueField(wireName: r'unlock_hint_en')
+  String? get unlockHintEn;
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;
@@ -121,6 +137,32 @@ class _$AdventureMissionReadSerializer implements PrimitiveSerializer<AdventureM
       object.nollningWeek,
       specifiedType: const FullType(int),
     );
+    yield r'mission_category';
+    yield serializers.serialize(
+      object.missionCategory,
+      specifiedType: const FullType(String),
+    );
+    if (object.unlockCode != null) {
+      yield r'unlock_code';
+      yield serializers.serialize(
+        object.unlockCode,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.unlockHintSv != null) {
+      yield r'unlock_hint_sv';
+      yield serializers.serialize(
+        object.unlockHintSv,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.unlockHintEn != null) {
+      yield r'unlock_hint_en';
+      yield serializers.serialize(
+        object.unlockHintEn,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     yield r'created_at';
     yield serializers.serialize(
       object.createdAt,
@@ -211,6 +253,37 @@ class _$AdventureMissionReadSerializer implements PrimitiveSerializer<AdventureM
             specifiedType: const FullType(int),
           ) as int;
           result.nollningWeek = valueDes;
+          break;
+        case r'mission_category':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.missionCategory = valueDes;
+          break;
+        case r'unlock_code':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.unlockCode = valueDes;
+          break;
+        case r'unlock_hint_sv':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.unlockHintSv = valueDes;
+          break;
+        case r'unlock_hint_en':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.unlockHintEn = valueDes;
           break;
         case r'created_at':
           final valueDes = serializers.deserialize(

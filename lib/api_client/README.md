@@ -146,6 +146,17 @@ Class | Method | HTTP request | Description
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsGetVisibleElection**](doc/ElectionsApi.md#electionsgetvisibleelection) | **GET** /election/visible | Get Visible Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsPopulateElection**](doc/ElectionsApi.md#electionspopulateelection) | **POST** /election/{election_id}/populate | Populate Election
 [*ElectionsApi*](doc/ElectionsApi.md) | [**electionsUpdateElection**](doc/ElectionsApi.md#electionsupdateelection) | **PATCH** /election/{election_id} | Update Election
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminCreateLevel**](doc/EncloseMooseApi.md#enclosemooseadmincreatelevel) | **POST** /enclose-moose/admin/levels | Admin Create Level
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminDeleteLevel**](doc/EncloseMooseApi.md#enclosemooseadmindeletelevel) | **DELETE** /enclose-moose/admin/levels/{level_id} | Admin Delete Level
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminGetAllLevelSubmissions**](doc/EncloseMooseApi.md#enclosemooseadmingetalllevelsubmissions) | **GET** /enclose-moose/admin/submissions/{level_id} | Admin Get All Level Submissions
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminGetAllLevels**](doc/EncloseMooseApi.md#enclosemooseadmingetalllevels) | **GET** /enclose-moose/admin/levels | Admin Get All Levels
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminGetLevel**](doc/EncloseMooseApi.md#enclosemooseadmingetlevel) | **GET** /enclose-moose/admin/levels/{level_id} | Admin Get Level
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseAdminUpdateLevel**](doc/EncloseMooseApi.md#enclosemooseadminupdatelevel) | **PATCH** /enclose-moose/admin/levels/{level_id} | Admin Update Level
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseGetAllLevels**](doc/EncloseMooseApi.md#enclosemoosegetalllevels) | **GET** /enclose-moose/levels | Get All Levels
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseGetAllSubmissions**](doc/EncloseMooseApi.md#enclosemoosegetallsubmissions) | **GET** /enclose-moose/submissions | Get All Submissions
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseGetLevel**](doc/EncloseMooseApi.md#enclosemoosegetlevel) | **GET** /enclose-moose/levels/{level_id} | Get Level
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseGetSubmission**](doc/EncloseMooseApi.md#enclosemoosegetsubmission) | **GET** /enclose-moose/submissions/{level_id} | Get Submission
+[*EncloseMooseApi*](doc/EncloseMooseApi.md) | [**encloseMooseSubmitSolution**](doc/EncloseMooseApi.md#enclosemoosesubmitsolution) | **POST** /enclose-moose/submissions/{level_id} | Submit Solution
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignoffRoute**](doc/EventSignupApi.md#eventsignupeventsignoffroute) | **DELETE** /event-signup/{event_id} | Event Signoff Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupEventSignupRoute**](doc/EventSignupApi.md#eventsignupeventsignuproute) | **POST** /event-signup/{event_id} | Event Signup Route
 [*EventSignupApi*](doc/EventSignupApi.md) | [**eventSignupGetMeEventSignup**](doc/EventSignupApi.md#eventsignupgetmeeventsignup) | **GET** /event-signup/me-signup/{event_id} | Get Me Event Signup
@@ -243,6 +254,13 @@ Class | Method | HTTP request | Description
 [*PostsApi*](doc/PostsApi.md) | [**postsGetPostImageStream**](doc/PostsApi.md#postsgetpostimagestream) | **GET** /posts/{post_id}/image/stream | Get Post Image Stream
 [*PostsApi*](doc/PostsApi.md) | [**postsPostPostImage**](doc/PostsApi.md#postspostpostimage) | **POST** /posts/{post_id}/image | Post Post Image
 [*PostsApi*](doc/PostsApi.md) | [**postsUpdatePost**](doc/PostsApi.md#postsupdatepost) | **PATCH** /posts/{post_id} | Update Post
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersCreateMultiplePreregMembers**](doc/PreregMembersApi.md#preregmemberscreatemultiplepreregmembers) | **POST** /prereg-members/multiple | Create Multiple Prereg Members
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersCreatePreregMember**](doc/PreregMembersApi.md#preregmemberscreatepreregmember) | **POST** /prereg-members/ | Create Prereg Member
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersDeleteMultiplePreregMembers**](doc/PreregMembersApi.md#preregmembersdeletemultiplepreregmembers) | **DELETE** /prereg-members/multiple | Delete Multiple Prereg Members
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersDeletePreregMember**](doc/PreregMembersApi.md#preregmembersdeletepreregmember) | **DELETE** /prereg-members/{prereg_member_id} | Delete Prereg Member
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersGetAllPreregMemberInfo**](doc/PreregMembersApi.md#preregmembersgetallpreregmemberinfo) | **GET** /prereg-members/ | Get All Prereg Member Info
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersGetPreregMemberInfo**](doc/PreregMembersApi.md#preregmembersgetpreregmemberinfo) | **GET** /prereg-members/{prereg_member_id} | Get Prereg Member Info
+[*PreregMembersApi*](doc/PreregMembersApi.md) | [**preregMembersUpdatePreregMember**](doc/PreregMembersApi.md#preregmembersupdatepreregmember) | **PATCH** /prereg-members/{prereg_member_id} | Update Prereg Member
 [*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingCreateRoomBooking**](doc/RoomBookingApi.md#roombookingcreateroombooking) | **POST** /rooms/ | Create Room Booking
 [*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetAllRoomBookings**](doc/RoomBookingApi.md#roombookinggetallroombookings) | **GET** /rooms/get_all | Get All Room Bookings
 [*RoomBookingApi*](doc/RoomBookingApi.md) | [**roomBookingGetBookingsByRoom**](doc/RoomBookingApi.md#roombookinggetbookingsbyroom) | **GET** /rooms/get_by_room/ | Get Bookings By Room
@@ -339,6 +357,11 @@ Class | Method | HTTP request | Description
  - [ElectionPostRead](doc/ElectionPostRead.md)
  - [ElectionRead](doc/ElectionRead.md)
  - [ElectionUpdate](doc/ElectionUpdate.md)
+ - [EncloseMooseLevelCreate](doc/EncloseMooseLevelCreate.md)
+ - [EncloseMooseLevelRead](doc/EncloseMooseLevelRead.md)
+ - [EncloseMooseLevelUpdate](doc/EncloseMooseLevelUpdate.md)
+ - [EncloseMooseSubmissionCreate](doc/EncloseMooseSubmissionCreate.md)
+ - [EncloseMooseSubmissionRead](doc/EncloseMooseSubmissionRead.md)
  - [ErrorModel](doc/ErrorModel.md)
  - [EventCreate](doc/EventCreate.md)
  - [EventRead](doc/EventRead.md)
@@ -384,6 +407,9 @@ Class | Method | HTTP request | Description
  - [PostPermissionRead](doc/PostPermissionRead.md)
  - [PostRead](doc/PostRead.md)
  - [PostUpdate](doc/PostUpdate.md)
+ - [PreregMemberCreate](doc/PreregMemberCreate.md)
+ - [PreregMemberRead](doc/PreregMemberRead.md)
+ - [PreregMemberUpdate](doc/PreregMemberUpdate.md)
  - [PriorityDB](doc/PriorityDB.md)
  - [RoomBookingCreate](doc/RoomBookingCreate.md)
  - [RoomBookingRead](doc/RoomBookingRead.md)
