@@ -2,14 +2,24 @@ import "package:flutter/material.dart";
 import "helper_widgets/wiggling_widget.dart";
 import "helper_widgets/outlined_text.dart";
 import "helper_widgets/highlighted_text.dart";
+import "helper_widgets/animated_thought_bubble.dart";
+import "helper_widgets/animated_sprite.dart";
+import "asset_handler.dart";
+import "enclose_grid_tile.dart";
+
+enum EncloseMoosePlaceholderReason {
+  loading,
+  noLevels,
+  connectionError
+}
 
 class EncloseMooseGamePlaceholderPage extends StatefulWidget {
   const EncloseMooseGamePlaceholderPage({
     super.key,
-    required this.noLevels
+    required this.reason
   });
 
-  final bool noLevels;
+  final EncloseMoosePlaceholderReason reason;
 
   @override
   _EncloseMooseGamePlaceholderState createState() => _EncloseMooseGamePlaceholderState();
@@ -32,8 +42,6 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
 
   @override
   Widget build(BuildContext context) {
-    const backgroundImage = "assets/img/enclose_moose/grass/0_idle0.png";
-
     return Scaffold(
         appBar: AppBar(
           leading: WigglingWidget(
@@ -64,9 +72,12 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
         body: Stack(
           children: [
             SizedBox.expand(
-              child: Image.asset(
-                backgroundImage,
-                fit: BoxFit.fill
+              // child: Image.asset(
+              //   backgroundImage,
+              //   fit: BoxFit.fill
+              // )
+              child: Container(
+                color: Color(0xFF014421)
               )
             ),
 
@@ -76,6 +87,7 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
@@ -89,10 +101,17 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
                               disabledColor: Colors.white
                             )
                           ),
-                          
-                          const SizedBox(  // Counterweight to get the "day" text centered.
-                            width: 40,
-                            height: 40
+
+                          Visibility(
+                            visible: false,
+                            maintainState: true,
+                            maintainAnimation: true,
+                            maintainSize: true,
+                            child: IconButton(
+                              onPressed: null,
+                              icon: const Icon(Icons.leaderboard_outlined),
+                              color: Colors.white
+                            )
                           ),
 
                           const Spacer(),
@@ -154,31 +173,77 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
                           ),
                         ]
                       ),
+
+                      WigglingWidget(
+                        controller: _idleController,
+                        child: OutlinedText(
+                          text: "???",
+                          style: const TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 20,
+                            fontFamily: "Schoolbell"
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      ),
                     ]
                   )
                 ),
 
                 Expanded(
-                  child: Center(
-                    child: WigglingWidget(
-                      controller: _idleController,
-                      child: widget.noLevels
-                      ? WigglingWidget(
-                        controller: _idleController,
-                        child: OutlinedText(
-                          text: "No levels yet. Check back in later!",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: "Schoolbell"
-                          )
-                        )
+                  child: widget.reason == EncloseMoosePlaceholderReason.loading
+                    ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.white
                       )
-                      : CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
+                    )
+                    : Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Center(
+                          child: AnimatedSprite(
+                            vsync: this,
+                            idleFrames: AssetHandler.getIdleFrames(EncloseGridCellType.moose),
+                            idleController: _idleController
+                          )
+                        ),
+
+                        Center(
+                          child: Transform.translate(
+                            offset: const Offset(-15, -115),
+                            child: SizedBox(
+                              width: 200,
+                              child: AnimatedThoughtBubble(
+                                text: widget.reason == EncloseMoosePlaceholderReason.noLevels
+                                  ? "No levels yet. Check back in later.\n\nUntil then, I will roam free!!! (:"
+                                  : "There was an error getting the levels. Check back in later.\n\nDo I even exist outside of these levels? );",
+                                color: Colors.white.withAlpha(180),
+                                idleController: _idleController
+                              )
+                            )
+                          )
+                        ),
+                      ]
                     ),
-                  ),
+
+                    // child: WigglingWidget(
+                    //   controller: _idleController,
+                    //   child: widget.noLevels
+                    //   ? WigglingWidget(
+                    //     controller: _idleController,
+                    //     child: OutlinedText(
+                    //       text: "No levels yet. Check back in later!",
+                    //       style: const TextStyle(
+                    //         color: Colors.white,
+                    //         fontSize: 25,
+                    //         fontFamily: "Schoolbell"
+                    //       )
+                    //     )
+                    //   )
+                    //   : CircularProgressIndicator(
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
                 ),
 
                 SafeArea(
@@ -213,8 +278,7 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
                                 style: TextButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  overlayColor: Colors.black
+                                  )
                                 ),
                                 onPressed: null,
                                 child: const OutlinedText(
@@ -251,16 +315,33 @@ class _EncloseMooseGamePlaceholderState extends State<EncloseMooseGamePlaceholde
                           maintainAnimation: true,
                           maintainSize: true,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton.icon(
+                              OutlinedButton.icon(
                                 onPressed: null,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
                                   visualDensity: VisualDensity.compact
                                 ),
                                 label: OutlinedText(
-                                  text: "Your best: ?",
+                                  text: "Optimal: ?",
+                                  style: const TextStyle(
+                                    // color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: "Schoolbell"
+                                  )
+                                ),
+                                icon: const Icon(Icons.star_sharp)
+                              ),
+
+                              OutlinedButton.icon(
+                                onPressed: null,
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
+                                  visualDensity: VisualDensity.compact
+                                ),
+                                label: OutlinedText(
+                                  text: "Your solution: ?",
                                   style: const TextStyle(
                                     // color: Colors.white,
                                     fontSize: 20,

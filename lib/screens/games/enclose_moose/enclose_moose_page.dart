@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
 import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
+import "package:dio/dio.dart";
 import "asset_handler.dart";
-import "enclose_game_placeholder.dart";
+import "enclose_moose_level_placeholder_page.dart";
 import "enclose_moose_level_page.dart";
 
 class EncloseMoosePage extends StatefulWidget {
@@ -12,6 +13,7 @@ class EncloseMoosePage extends StatefulWidget {
 
 class _EncloseMooseState extends State<EncloseMoosePage> with TickerProviderStateMixin {
   List<EncloseMooseLevelRead>? _levels;
+  bool _exceptionOccurred = false;
 
   late final PageController? _pageController;
 
@@ -33,80 +35,28 @@ class _EncloseMooseState extends State<EncloseMoosePage> with TickerProviderStat
   }
 
   Future<void> _fetchLevels() async {
-    final response = await ApiService.apiClient.getEncloseMooseApi().encloseMooseGetAllLevels();
+    try {
+      final response = await ApiService.apiClient.getEncloseMooseApi().encloseMooseGetAllLevels();
 
-    if (!mounted) return;
-
-    setState(() {
-      _levels = response.data!
-        .where((level) => level.dayIndex != null)
-        .followedBy(response.data!
-        .where((level) => level.dayIndex == null))
-        .toList();
-    });
-
-    final lastDailyIndex = _levels!.lastIndexWhere((level) => level.dayIndex != null);
-    _pageController = PageController(initialPage: lastDailyIndex != -1 ? lastDailyIndex : 0);
-
-    /*
-    """
-      level_id,
-      day_index,
-      name,
-      encoded_grid,
-      wall_budget,
-      optimal_score,
-      optimal_solution,
-      player_score,
-      player_solution,
-      plays
-    """;
-
-    for (final levelRead in levelReads) {
-      final dayIndex = {
-        "daily_-1": -1,
-        "daily_0": 0,
-        "daily_1": 1,
-        "daily_2": 2,
-        "daily_3": 3,
-        "daily_4": 4,
-      }[levelId]!;
-      const name = "Sista";
-      const encodedGrid = ".....~..~....~\n.~...~..~~~..~\n.~..~~......~~\n.~~....~~~....\n.........~....\n~...~......~~~\n~~~.~...~~.~..\n....~~.H~.....\n~~~.....~...~~\n..~.......~..~\n..........~..~\n~..~~..~..~~..\n~...~..~....~.\n~~..~.~~..~~~.";  // ".~........~~~..\n~......~~~~~~..\n..0~~S.~~~.0~..\n..~~~~......~..\n..~C~...~......\n....~..~....~..\n..~...~.....~..\n..~.~..........\n....~....~~~~~~\n..~.~...H~...1~\n..~......~~~~~~\n....~..........\n..~.~..........\n.1~.~...~~~~~..\n..~.....~...~..\n...C~...~G.....\n~~~~~~.~~~.~~~~";
-      const wallBudget = 9;
-      const optimalScore = 49;
-      const optimalSolution = [
-          31,
-          34,
-          56,
-          80,
-          98,
-          135,
-          142,
-          148,
-          187
-      ];
-      const playerScore = null;
-      const playerSolution = null;
-      const plays = 0;
-
-      final grid = EncloseGrid(encodedGrid, wallBudget);
-      final gameData = GameData(
-        name: name,
-        dayIndex: dayIndex,
-        grid: grid,
-        optimalScore: optimalScore,
-        optimalSolution: optimalSolution,
-        playerScore: playerScore,
-        playerSolution: playerSolution,
-        plays: plays
-      );
+      if (!mounted) return;
 
       setState(() {
-        _gameDatas[levelId] = gameData;
+        _levels = response.data!
+          .where((level) => level.dayIndex != null)
+          .followedBy(response.data!
+          .where((level) => level.dayIndex == null))
+          .toList();
       });
+
+      final lastDailyIndex = _levels!.lastIndexWhere((level) => level.dayIndex != null);
+      _pageController = PageController(initialPage: lastDailyIndex != -1 ? lastDailyIndex : 0);
+    } on DioException {  // catch (e) {
+      setState(() {
+        _exceptionOccurred = true;
+      });
+
+      _pageController = null;  // needs to be initialized
     }
-    */
   }
 
   @override
@@ -118,8 +68,14 @@ class _EncloseMooseState extends State<EncloseMoosePage> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    if (_levels == null || _levels!.length == 0) {
-      return EncloseMooseGamePlaceholderPage(noLevels: _levels != null);
+    if (_levels == null) {
+      if (_exceptionOccurred) {
+        return EncloseMooseGamePlaceholderPage(reason: .connectionError);
+      } else {
+        return EncloseMooseGamePlaceholderPage(reason: .loading);
+      }
+    } else if (_levels!.isEmpty) {
+      return EncloseMooseGamePlaceholderPage(reason: .noLevels);
     }
 
     return PageView.builder(

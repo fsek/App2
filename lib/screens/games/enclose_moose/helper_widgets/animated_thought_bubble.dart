@@ -105,6 +105,7 @@ class _AnimatedThoughtBubbleState extends State<AnimatedThoughtBubble> with Sing
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ScaleTransition(
           scale: _cloudAnim,
@@ -142,7 +143,7 @@ class _AnimatedThoughtBubbleState extends State<AnimatedThoughtBubble> with Sing
         ),
 
         Transform.translate(
-          offset: Offset(5, 30),
+          offset: Offset(-5, 30),
           child: ScaleTransition(
             scale: _dot1Anim,
             child: FadeTransition(
@@ -164,7 +165,7 @@ class _AnimatedThoughtBubbleState extends State<AnimatedThoughtBubble> with Sing
         ),
 
         Transform.translate(
-          offset: Offset(15, 10),
+          offset: Offset(-13, 10),
           child: ScaleTransition(
             scale: _dot2Anim,
             child: FadeTransition(

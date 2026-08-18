@@ -96,7 +96,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
       // color: Colors.black.withAlpha(50),
       padding: const EdgeInsets.all(5),
       child: Column(
-        mainAxisSize: .min,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
@@ -154,7 +154,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   WigglingWidget(
                     controller: _idleController,
                     child: OutlinedText(
-                      text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Extra",
+                      text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Bonus",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 25,
@@ -212,7 +212,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             controller: _idleController,
             child: OutlinedText(
               text: t.localeName == "sv" ? _usedLevel.nameSv : _usedLevel.nameEn,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.yellow,
                 fontSize: 20,
                 fontFamily: "Schoolbell"
@@ -418,7 +418,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                     _openCallCounter
                                   ]),
                                   builder: (context, child) {
-                                    const thoughtCloudWidth = 200;
+                                    const thoughtCloudWidth = 200;  // Would like this to be dynamic in some way but don't know how? Would have to specify the center coordinate
 
                                     return Stack(
                                       clipBehavior: Clip.none,
@@ -441,7 +441,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                           ),
 
                                         Positioned(
-                                          left: (_grid.mooseTile.columnIndex + 1) * cellSize - thoughtCloudWidth / 2,
+                                          left: (_grid.mooseTile.columnIndex - 0.5) * cellSize - thoughtCloudWidth / 2,
                                           right: (_grid.gridWidth - _grid.mooseTile.columnIndex - 1) * cellSize - thoughtCloudWidth / 2,
                                           bottom: (_grid.gridHeight - _grid.mooseTile.rowIndex) * cellSize + 20,
                                           child: IgnorePointer(
@@ -831,7 +831,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
               children: [
                 if (_nonDailies.isNotEmpty)
                   const Text(
-                    "Extras",
+                    "Bonus levels",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 25,

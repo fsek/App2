@@ -124,7 +124,7 @@ class TileWidget extends StatelessWidget {
                   animationWaitTime: waitTime,
                   animationReverseWaitTime: reverseWaitTime,
                   startIdleFrames: idleFrames,
-                  endIdleFrames: AssetHandler.getAnimationFrames(.apple),
+                  endIdleFrames: AssetHandler.getAnimationFrames(EncloseGridCellType.apple),
                   idleController: idleController
                 ),
 
