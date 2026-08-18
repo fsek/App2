@@ -38,7 +38,7 @@ class _SandwichPageState extends State<SandwichPage> {
 
     final topBackground = "$path/bg_top_$t.png";
     final endBackground = "$path/bg_end.png";
-    final middleBackground = "$path/bg2.png";
+    final middleBackground = "$path/bg.png";
 
     return Scaffold(
       extendBodyBehindAppBar: true,
