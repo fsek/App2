@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+import 'package:fsek_mobile/util/nollning/week_tracker.dart';
 
 class QuestScreen extends StatefulWidget {
   final double availableWidth;
@@ -51,34 +52,11 @@ class _QuestScreenState extends State<QuestScreen>
   String pixelart_tavling =
       "assets/data/nollning_26/uppdrag/pixelart_tävling.png";
   String pixelart_alg = "assets/data/nollning_26/uppdrag/pixelart_älg.png";
-  String poke_kort = "assets/data/nollning_26/uppdrag/pokekort_exkl.png";
+  String poke_kort = "assets/data/nollning_26/uppdrag/pokekort_exkl.jpg";
   String clouds = "assets/data/nollning_26/uppdrag/clouds.png";
 
-  /*int _checkNollningWeek() {
-    if (DateTime.now().toLocal().isAfter(DateTime(2026, 9, 20, 23, 59, 59))) {
-      return 5;
-    } else if (DateTime.now().toLocal().isAfter(
-      DateTime(2026, 9, 13, 23, 59, 59),
-    )) {
-      return 4;
-    } else if (DateTime.now().toLocal().isAfter(
-      DateTime(2026, 9, 6, 23, 59, 59),
-    )) {
-      return 3;
-    } else if (DateTime.now().toLocal().isAfter(
-      DateTime(2026, 8, 30, 23, 59, 59),
-    )) {
-      return 2;
-    } else if (DateTime.now().toLocal().isAfter(
-      DateTime(2026, 8, 23, 23, 59, 59),
-    )) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }*/
   int _checkNollningWeek() {
-    return 4;
+    return WeekTracker.determineWeek();
   }
 
   @override
@@ -378,7 +356,7 @@ class _QuestScreenState extends State<QuestScreen>
   ) async {
     var t = AppLocalizations.of(context)!;
 
-    if (adventureMission.nollningWeek != (_checkNollningWeek() - 1)) {
+    if (adventureMission.nollningWeek != (_checkNollningWeek())) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -465,7 +443,9 @@ class _QuestScreenState extends State<QuestScreen>
         width: widget.availableWidth,
         child: Stack(
           children: [
-            Positioned.fill(child: Image.asset(poke_kort, fit: BoxFit.fill)),
+            Positioned.fill(
+              child: Image.asset(poke_kort, fit: BoxFit.fill, cacheWidth: 1440),
+            ),
             Padding(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: Column(
