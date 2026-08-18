@@ -272,6 +272,7 @@ class _GuildPageState extends State<GuildPage> {
         PortraitData(imagePath: heraldPortrait, flex: largePortraitFlex,
             onTap: () => pushNavigator(index: 30, imagePath: heraldPortrait)),
       ]),
-    ].withSpacing(24);
+    ].withSpacing(24)
+      ..add(SizedBox(height: MediaQuery.viewPaddingOf(context).bottom + 24));
   }
 }

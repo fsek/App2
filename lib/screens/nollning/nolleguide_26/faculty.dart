@@ -92,7 +92,8 @@ class _FacultyPageState extends State<FacultyPage> {
         PortraitData(imagePath: nollu, flex: 2,
             onTap: () => pushNavigator(index: 3, imagePath: nollu)),
       ]),
-    ].withSpacing(24);
+    ].withSpacing(24)
+      ..add(SizedBox(height: MediaQuery.viewPaddingOf(context).bottom + 24));
 
   }
 }
