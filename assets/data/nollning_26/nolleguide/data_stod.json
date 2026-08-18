@@ -13,6 +13,17 @@
   {
     "type": "subheading",
     "title":{
+      "sv": "Nollningskontraktet",
+      "en": "Introduction contract"
+    },
+    "text":{
+      "sv": "Inför nollningen ingår alla volontärer i ett kontrakt gentemot sin överordnade som anger principer som är viktiga för nollningen och regler som ska följas. Sammanfattat anger den följande.\n\nNollningen ska präglas av glädje, gemenskap och öppenhet, och allt deltagande är helt frivilligt. Teknologkåren har nolltolerans mot narkotika, diskriminering, trakasserier och kränkande särbehandling. Det råder ingen alkoholpress – alkoholfritt är alltid ett naturligt alternativ, och ett ”nej” eller ”kanske” ska alltid respekteras. Volontärer får inte utnyttja sin maktposition, särbehandla eller ha intimt umgänge med nya studenter, och det är alltid du själv som avgör var din gräns går och om en händelse känts kränkande. Om du känner dig illa behandlad eller har frågor kan du kontakta Föset, Jämlikhetsombudet, Nollegeneralen eller Kårordförande. Att bryta mot reglerna angivna i kontraktet kommer innebära konsekvenser för volontären som anpassas efter fall.",
+      "en": "Prior to the introduction period, all volunteers enter into a contract with their supervisors outlining essential principles and mandatory rules. In summary, it states the following:\n\nThe introduction period should be characterized by joy, community, and openness, and all participation is completely voluntary. Teknologkåren has a zero-tolerance policy regarding drugs, discrimination, harassment, and degrading treatment. There is no peer pressure to drink alcohol—non-alcoholic options are always a natural alternative, and a “no” or “maybe” must always be respected. Volunteers must not abuse their position of power, engage in preferential treatment, or have intimate relations with new students. You alone decide where your boundaries are and whether an incident felt offensive. If you feel mistreated or have any questions, you can contact Föset, the Equality Officer, the Introduction General, or the Union President. Breaches of the contract rules will result in consequences for the volunteer, handled on a case-by-case basis."
+    }
+  },
+  {
+    "type": "subheading",
+    "title":{
       "sv": "Hjälp och viktiga kontakter",
       "en": "Help and important contacts"
     },

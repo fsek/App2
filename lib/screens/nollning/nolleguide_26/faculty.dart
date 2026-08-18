@@ -64,8 +64,8 @@ class _FacultyPageState extends State<FacultyPage> {
     required Map<String, dynamic> data
   }) {
     final String title = "$path/title_${locale}.png";
-    final String frame = "$path/frame.png";
     final String president = "$path/president_${locale}.png";
+    final String general = "$path/general_${locale}.png";
     final String officers = "$path/officers_${locale}.png";
     final String nollu = "$path/nollu.png";
 
@@ -85,14 +85,15 @@ class _FacultyPageState extends State<FacultyPage> {
             onTap: () => pushNavigator(index: 1, imagePath: officers)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: 5,
-            onTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: Nollegeneral Norea
+        PortraitData(imagePath: general, flex: 5,
+            onTap: () => pushNavigator(index: 2, imagePath: general)),
       ]),
       PortraitRow(portraits: [
         PortraitData(imagePath: nollu, flex: 2,
             onTap: () => pushNavigator(index: 3, imagePath: nollu)),
       ]),
-    ].withSpacing(24);
+    ].withSpacing(24)
+      ..add(SizedBox(height: MediaQuery.viewPaddingOf(context).bottom + 24));
 
   }
 }

@@ -97,29 +97,36 @@ class _GuildPageState extends State<GuildPage> {
     }
 
     final String boardPortrait = portrait("board");
+    final String boardmemberPortrait = portrait("boardmember");
     final String bookPortrait = portrait("book");
+    final String bookfosPortrait = portrait("bookfos");
     final String cafePortrait = portrait("cafe");
     final String crPortrait = portrait("cr");
     final String culturePortrait = portrait("culture");
+    final String eventfosPortrait = portrait("eventfos");
     final String eduPortrait = portrait("edu");
+    final String fadderfosPortrait = portrait("fadderfos");
     final String faradPortrait = portrait("farad");
     final String frejaPortrait = portrait("freja");
     final String heraldPortrait = portrait("herald");
+    final String infofosPortrait = portrait("infofos");
     final String jubileePortrait = portrait("jubilee");
     final String libuPortrait = portrait("libu", isLocale: false);
+    final String overfosPortrait = portrait("overfos");
     final String presidentPortrait = portrait("president");
     final String prylPortrait = portrait("pryl");
     final String reisemeisterPortrait = portrait("reisemeister", isLocale: false);
     final String samvetetPortrait = portrait("samvetet");
+    final String secretaryPortrait = portrait("secretary");
     final String sexPortrait = portrait("sex");
+    final String sigmafosPortrait = portrait("sigmafos");
     final String spiderPortrait = portrait("spider");
+    final String sponsfosPortrait = portrait("sponsfos");
     final String sportPortrait = portrait("sport");
     final String tavernPortrait = portrait("tavern");
     final String treasurerPortrait = portrait("treasurer");
     final String truthPortrait = portrait("truth");
     final String vpPortrait = portrait("vp");
-
-    final String frame = "$path/frame.png";
 
     const largePortraitFlex = 5;
     const smallPortraitFlex = 2;
@@ -133,26 +140,26 @@ class _GuildPageState extends State<GuildPage> {
     return [
       Image.asset(fosetTitle),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: largePortraitFlex,
-            onTap: () => pushNavigator(index: 0, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: overfosPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 0, imagePath: overfosPortrait)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 1, imagePath: frame)), //TODO: FÖSET
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 2, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: bookfosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 1, imagePath: bookfosPortrait)),
+        PortraitData(imagePath: infofosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 2, imagePath: infofosPortrait)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 3, imagePath: frame)), //TODO: FÖSET
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 4, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: sponsfosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 3, imagePath: sponsfosPortrait)),
+        PortraitData(imagePath: fadderfosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 4, imagePath: fadderfosPortrait)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 5, imagePath: frame)), //TODO: FÖSET
-        PortraitData(imagePath: frame, flex: doublePortraitFlex,
-            onTap: () => pushNavigator(index: 6, imagePath: frame)), //TODO: FÖSET
+        PortraitData(imagePath: sigmafosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 5, imagePath: sigmafosPortrait)),
+        PortraitData(imagePath: eventfosPortrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 6, imagePath: eventfosPortrait)),
       ]),
       Image.asset(organisationTitle),
       PortraitRow(portraits: [
@@ -169,8 +176,8 @@ class _GuildPageState extends State<GuildPage> {
             onTap: () => pushNavigator(index: 9, imagePath: boardPortrait)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: smallPortraitFlex,
-            onTap: () => pushNavigator(index: 10, imagePath: frame)), //TODO: Ledamöter
+        PortraitData(imagePath: boardmemberPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: boardmemberPortrait)),
       ]),
       Image.asset(studentcouncilTitle),
       PortraitRow(portraits: [
@@ -194,8 +201,8 @@ class _GuildPageState extends State<GuildPage> {
       ]),
       Image.asset(serviceTitle),
       PortraitRow(portraits: [
-        PortraitData(imagePath: frame, flex: largePortraitFlex,
-            onTap: () => pushNavigator(index: 15, imagePath: frame)), //TODO: Sekreterare
+        PortraitData(imagePath: secretaryPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 15, imagePath: secretaryPortrait)),
       ]),
       Image.asset(truthTitle),
       PortraitRow(portraits: [
@@ -265,6 +272,7 @@ class _GuildPageState extends State<GuildPage> {
         PortraitData(imagePath: heraldPortrait, flex: largePortraitFlex,
             onTap: () => pushNavigator(index: 30, imagePath: heraldPortrait)),
       ]),
-    ].withSpacing(24);
+    ].withSpacing(24)
+      ..add(SizedBox(height: MediaQuery.viewPaddingOf(context).bottom + 24));
   }
 }

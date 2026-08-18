@@ -190,7 +190,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     ];
 }
 
-  static const Color backButtonColor = Color.fromRGBO(0, 72, 123, 1);
+  static const Color backButtonColor = Color.fromRGBO(222, 43, 131, 1.0);
   static const double zoomX = 2.2; // We need to do this terribleness to make the arcade machine
   static const double zoomY = 3;   // fit the screen...
 
