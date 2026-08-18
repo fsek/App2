@@ -1,0 +1,288 @@
+[
+  {
+    "title": {
+      "sv": "Quorn Dallas",
+      "en": "Quorn Dallas"
+    },
+    "description": {
+      "sv": "Noggrant komponerad med en blandning av utsökta smaker, precis som en Amerikansk BBQ. En uppfriskande sås bryter av en perfekt quornblandning toppad av delikat rostad lök. Med dess storlek uppfyller den alla krav en amerikan skulle kunna ställa. Det amerikanska självförtroendet har även lånats när man djärvt blandade in sallad för att fullända mackans komposition.\n\nSmak: 25/25\nPris: 17/25\nStorlek: 23/25\nUpplevelse: 25/25\n\nTotalt: 90/100",
+      "en": "Carefully composed with a blend of exquisite flavors, just like an American BBQ. A refreshing sauce cuts through a perfect Quorn mix, topped with delicate crispy onions. With its size, it meets every demand an American could possibly make. American confidence was also borrowed when they boldly mixed in lettuce to perfect the sandwich's composition.\n\nTaste: 25/25\nPrice: 17/25\nSize: 23/25\nExperience: 25/25\n\nTotal: 90/100"
+    },
+    "additional": "",
+    "price": "44 kr",
+    "asset": "quorndallas"
+  },
+  {
+    "title": {
+      "sv": "Aprikos Brie",
+      "en": "Apricot Brie"
+    },
+    "description": {
+      "sv": "Håller CSN på att ta slut? Närmar sig tenta P och du har inte tid för semester? Åk på en 33 kronors resa till södra frankrike där du kan njuta av den söta aprikosen och den lena brien. Denna macka frambringar det bästa och det värsta av en dessertbricka, Riktigt god smak i blygsam mängd.\n\nSmak: 22/25\nPris: 25/25\nStorlek: 13/25\nUpplevelse: 21/25\n\nTotalt: 81/100",
+      "en": "Is your CSN (student finance) running out? Is the exam period approaching and you have no time for a vacation? Take a 33 SEK trip to southern France where you can enjoy the sweet apricot and the smooth brie. This sandwich brings out the best and the worst of a dessert platter. Really good taste in a modest quantity.\n\nTaste: 22/25\nPrice: 25/25\nSize: 13/25\nExperience: 21/25\n\nTotal: 81/100"
+    },
+    "additional": "",
+    "price": "33 kr",
+    "asset": "apricotbrie"
+  },
+  {
+    "title": {
+      "sv": "Mozzarella pesto",
+      "en": "Mozzarella Pesto"
+    },
+    "description": {
+      "sv": "\"Som att läsa en historia du redan känner till\" Du vet exakt vad du kommer få och du blir inte besviken. Gudarna ska veta! Peston är studentens hjärtebröd, den valsar passionerat fram på tungan för att efterföljas av mozzarellans mjuka tango.\n\nSmak: 19/25\nPris: 18/25\nStorlek: 16/25\nUpplevelse: 20/25\n\nTotalt: 73/100",
+      "en": "\"Like reading a story you already know.\" You know exactly what you're going to get, and you won't be disappointed. Heaven knows! Pesto is the bread and butter of the student; it waltzes passionately across the tongue, followed by the soft tango of the mozzarella.\n\nTaste: 19/25\nPrice: 18/25\nSize: 16/25\nExperience: 20/25\n\nTotal: 73/100"
+    },
+    "additional": "",
+    "price": "42 kr",
+    "asset": "pesto"
+  },
+  {
+    "title": {
+      "sv": "Serrano Färskost",
+      "en": "Serrano Cream Cheese"
+    },
+    "description": {
+      "sv": "Serrano, denna salta skinka, typisk för det spanska köket, låter lite mer som en italiensk maffiaboss. Precis som en maffiaboss lovade skinkan mycket men gjorde istället en blygsam entré. I själva verket var det tomaten och färskosten som bar smaken på sina axlar. En god färskost macka helt enkel.\n\nSmak: 19/25\nPris: 20/25\nStorlek: 18/25\nUpplevelse: 16/25\n\nTotalt: 73/100",
+      "en": "Serrano, this salty ham typical of Spanish cuisine, sounds a bit more like an Italian mafia boss. And just like a mafia boss, the ham promised a lot but made a modest entrance instead. In reality, the tomato and the cream cheese carried the flavor on their shoulders. So simply put, it's a good cream cheese sandwich.\n\nTaste: 19/25\nPrice: 20/25\nSize: 18/25\nExperience: 16/25\n\nTotal: 73/100"
+    },
+    "additional": "",
+    "price": "40 kr",
+    "asset": "serrano"
+  },
+  {
+    "title": {
+      "sv": "Chillimarinerad blomkål",
+      "en": "Chilli Marinated Cauliflower"
+    },
+    "description": {
+      "sv": "Saknade den intensiva hetta som namnet utlovade. Och utan hetta blir det ingen passion (shoutout Reise25). Annars en stabil macka där chili och lök gör grovjobbet. Blomkålen var där.\n\nSmak: 17/25\nPris: 21/25\nStorlek: 17/25\nUpplevelse: 17/25\n\nTotalt: 72/100",
+      "en": "Lacked the intense heat the name promised. And without heat, there is no passion (shoutout Reise25). Otherwise a solid sandwich where chili and onion do the heavy lifting. The cauliflower was there.\n\nTaste: 17/25\nPrice: 21/25\nSize: 17/25\nExperience: 17/25\n\nTotal: 72/100"
+    },
+    "additional": "",
+    "price": "38 kr",
+    "asset": "chilli"
+  },
+  {
+    "title": {
+      "sv": "Tofu Bahn mi",
+      "en": "Tofu Bánh Mì"
+    },
+    "description": {
+      "sv": "Med ett lovande intryck (bröd med pålägg) var denna macka välfylld som första föreläsningen i endim. Tyvärr är det dock en praktikant och inte Micke P som ska föreläsa. Såsen och tofun existerade men slank ner utan att lämna något större intryck, till och med mjölk kunde inte rädda denna upplevelse från dess bleka realitet.\n\nSmak: 11/25\nPris: 19/25\nStorlek: 17/25\nUpplevelse: 13/25\n\nTotalt: 60/100",
+      "en": "With a promising first impression (bread with toppings), this sandwich was as packed as the first lecture in one-dimensional calculus. Unfortunately, it's an intern lecturing and not Micke P. The sauce and tofu existed but slipped down without leaving any major impression; even milk couldn't save this experience from its pale reality.\n\nTaste: 11/25\nPrice: 19/25\nSize: 17/25\nExperience: 13/25\n\nTotal: 60/100"
+    },
+    "additional": "",
+    "price": "41 kr",
+    "asset": "tofu"
+  },
+  {
+    "title": {
+      "sv": "Dallas Kyckling",
+      "en": "Dallas Chicken"
+    },
+    "description": {
+      "sv": "Denna macka sticker verkligen ut! Både i pris (svindyr) och i smak (svingod). Ett av få icke vegetariska alternativ passar perfekt för de läkarstudenter som lyckas förhålla sig ner till MH och fått för sig att det inte går att äta vegetariskt. Tyvärr hittades denna macka inte längre i Hilbert då den har pensionerats. RIP.\n\nSmak: 24/25\nPris: 15/25\nStorlek: 23/25\nUpplevelse: 25/25\n\nTotalt: 87/100",
+      "en": "This sandwich really stands out! Both in price (hella expensive) and in taste (hella good). One of the few non-vegetarian options fits perfectly for those medical students who manage to wander down to MH and have gotten it into their heads that it's impossible to eat vegetarian. Unfortunately, this sandwich is no longer found in Hilbert Café as it has been retired. RIP.\n\nTaste: 24/25\nPrice: 15/25\nSize: 23/25\nExperience: 25/25\n\nTotal: 87/100"
+    },
+    "additional": "",
+    "price": "48 kr",
+    "asset": "chickendallas"
+  },
+  {
+    "title": {
+      "sv": "Quorn Tzatziki",
+      "en": "Quorn Tzatziki"
+    },
+    "description": {
+      "sv": "En solig måndag morgon gick jag in i Foajen och där var den, Ljuset studsade mot brödets spröda yta, Doften av tzatziki hängde i luften och jag lyftes liksom av osynliga fingrar mot Hilbertcafe. Längtar du redan efter känslan då du får ta fram grillen igen nästa vår? Då är detta mackan för dig.\n\nSmak: 20/25\nPris: 18/25\nStorlek: 21/25\nUpplevelse: 23/25\n\nTotalt: 82/100",
+      "en": "One sunny Monday morning I walked into the foyer and there it was. The light bounced off the crispy surface of the bread, the scent of tzatziki hung in the air, and I was lifted, as if by invisible fingers, towards Hilbert Café. Are you already longing for the feeling of bringing out the grill again next spring? Then this is the sandwich for you.\n\nTaste: 20/25\nPrice: 18/25\nSize: 21/25\nExperience: 23/25\n\nTotal: 82/100"
+    },
+    "additional": "",
+    "price": "42 kr",
+    "asset": "quorntz"
+  },
+  {
+    "title": {
+      "sv": "Kalkon feta",
+      "en": "Turkey Feta"
+    },
+    "description": {
+      "sv": "Inför denna macka var mina förväntningar låga. Men den var bra och jag har inget att såga. Fetaosten var välvald som Micke P's ord. Kalkonen var fräsch, magen blev smord. Om du efter en stabil macka leta, rekommenderar jag Kalkon Feta.\n\nSmak: 23/25\nPris: 16/25\nStorlek: 22/25\nUpplevelse: 24/25\n\nTotalt: 85/100",
+      "en": "Before this sandwich, my expectations were low. But it was good, and I have no critique to throw. The feta was well-chosen, like Micke P's word. The turkey was fresh, my stomach concurred. If a solid sandwich is what you're trying to get, a recommendation goes to the Turkey Feta.\n\nTaste: 23/25\nPrice: 16/25\nSize: 22/25\nExperience: 24/25\n\nTotal: 85/100"
+    },
+    "additional": "",
+    "price": "44 kr",
+    "asset": "turkey"
+  },
+  {
+    "title": {
+      "sv": "Lax pepparot",
+      "en": "Salmon Horseradish"
+    },
+    "description": {
+      "sv": "Har du förlorat din inre Stockholms grisch på Lunds smågator? Frukta inte, här har vi lösningen. För ringa 49 kr kan du åter känna den ljuva smekningen av lax på tungan. Dess samspel med pepparrotens eleganta sting gjorde mig upphetsad av ren gastronomisk upplevelse och fulländade alla mina behov av lyx.\n\nSmak: 25/25\nPris: 14/25\nStorlek: 23/25\nUpplevelse: 25/25\n\nTotalt: 87/100",
+      "en": "Have you lost your inner Stockholm \"grisch\" (posh vibe) on the small streets of Lund? Fear not, here is the solution. For a mere 49 SEK you can once again feel the sweet caress of salmon on your tongue. Its interplay with the elegant sting of the horseradish aroused me with pure gastronomic delight and fulfilled all my needs for luxury.\n\nTaste: 25/25\nPrice: 14/25\nSize: 23/25\nExperience: 25/25\n\nTotal: 87/100"
+    },
+    "additional": "",
+    "price": "49 kr",
+    "asset": "salmon"
+  },
+  {
+    "title": {
+      "sv": "Chevre och Honung",
+      "en": "Chèvre and Honey"
+    },
+    "description": {
+      "sv": "En estetiskt upplyftande macka. Det frasiga brödet arbetade i unison med chevrens kraftiga karaktär och medförde en maffig upplevelse. Honungen var något blygsam men dess ojämna närvaro gjorde det hela till en intressant skattjakt.\n\nSmak: 18/25\nPris: 16/25\nStorlek: 19/25\nUpplevelse: 19/25\n\nTotalt: 72/100",
+      "en": "An aesthetically uplifting sandwich. The crusty bread worked in unison with the strong character of the chèvre, resulting in a hefty experience. The honey was somewhat modest, but its uneven presence turned the whole thing into an interesting treasure hunt.\n\nTaste: 18/25\nPrice: 16/25\nSize: 19/25\nExperience: 19/25\n\nTotal: 72/100"
+    },
+    "additional": "",
+    "price": "44 kr",
+    "asset": "chevre"
+  },
+  {
+    "title": {
+      "sv": "Salami brie",
+      "en": "Salami Brie"
+    },
+    "description": {
+      "sv": "Under tenta p provade jag salami bri(e). Den fick mig att känna mig lite mera fri. Med osten tyckte jag att hilbert cafe var lite snåla. Men jag kommer ej göra som Gordon Ramsay och vråla. En bra macka, trots detta ris, definitivt värt sitt pris.\n\nSmak: 20/25\nPris: 20/25\nStorlek: 21/25\nUpplevelse: 21/25\n\nTotalt: 82/100",
+      "en": "During the exam period I tried the salami bri(e), It made me feel a little more free. With the cheese, I thought Hilbert Café was a bit cheap, But I won't do like Gordon Ramsay and shout or weep. A good sandwich, despite this critique, definitely worth the fee.\n\nTaste: 20/25\nPrice: 20/25\nSize: 21/25\nExperience: 21/25\n\nTotal: 82/100"
+    },
+    "additional": "",
+    "price": "38 kr",
+    "asset": "salamibrie"
+  },
+  {
+    "title": {
+      "sv": "Avocado bagel",
+      "en": "Avocado Bagel"
+    },
+    "description": {
+      "sv": "Detta var i grunden en riktigt härlig macka med ett väldigt bra koncept. Brödet var otroligt gott och var utan tvekan mackans stora stjärna. Tyvärr var avokadon välsaltad just den här dagen, vilket gav en känsla av att inhalera en kallsup. Med en försiktigare hand med saltkaret har den här mackan dock potential att bli en riktig favorit på kaféet! Avokado är ju både lyxigt och gott.\n\nSmak: 4/25\nPris: 20/25\nStorlek: 22/25\nUpplevelse: 2/25\n\nTotalt: 48/100",
+      "en": "This was fundamentally a sandwich with a very good concept. The bread was incredibly tasty and was undoubtedly the big star of the sandwich. Unfortunately, the avocado was heavily salted on this particular day, which gave the sensation of inhaling seawater. With a more careful hand on the salt shaker, however, this sandwich has the potential to become a real favorite at the café! Avocado is, after all, both luxurious and delicious.\n\nTaste: 4/25\nPrice: 20/25\nSize: 22/25\nExperience: 2/25\n\nTotal: 48/100"
+    },
+    "additional": "",
+    "price": "38 kr",
+    "asset": "avocado"
+  },
+  {
+    "title": {
+      "sv": "Mango curry",
+      "en": "Mango Curry"
+    },
+    "description": {
+      "sv": "Äpple och curry var en spännande kombination som gör en liten piruett på tungan. Tyvärr blir föreställningen snabbt enformig då curry såsen inte riktigt vågar kliva in i rampljuset. Mackan känns lite som en ballerina som gör samma steg hela tiden, vackert till en början men förutsägbart efter ett tag. Jag tyckte att det var extra synd att en av huvudrollsinnehavarna knappt dyker upp på scenen. Mangons sötma märks knappt i mackans komposition. En relativt svag show men kan ändå avnjutas då tillfälle är rätt!\n\nSmak: 19/25\nPris: 18/25\nStorlek: 19/25\nUpplevelse: 16/25\n\nTotalt: 72/100",
+      "en": "Apple and curry was an exciting combination that does a little pirouette on the tongue. Unfortunately, the performance quickly becomes monotonous as the curry sauce doesn't quite dare to step into the spotlight. The sandwich feels a bit like a ballerina doing the same step over and over, beautiful at first, but predictable after a while. I thought it was an extra shame that one of the lead actors barely shows up on stage. The sweetness of the mango is barely noticeable in the sandwich's composition. A relatively weak show, but it can still be enjoyed when the occasion is right!\n\nTaste: 19/25\nPrice: 18/25\nSize: 19/25\nExperience: 16/25\n\nTotal: 72/100"
+    },
+    "additional": "",
+    "price": "42 kr",
+    "asset": "mango"
+  },
+  {
+    "title": {
+      "sv": "Rödbetshummus",
+      "en": "Beetroot Hummus"
+    },
+    "description": {
+      "sv": "Likt ett par vita byxor under en sangria kväll har hummusen färgats rosa av rödbetor. Tyvärr stannar rödbetans insats vid just färgen, smaken känns inte alls. Det är hummusen som gör att detta överhuvudtaget kan kallas en macka. Eftersträvar du mer hummus i ditt liv (som jag gör) är detta en ren guldgruva. Annars skjuter du dig själv i foten.\n\nSmak: 19/25\nPris: 20/25\nStorlek: 22/25\nUpplevelse: 21/25\n\nTotalt: 82/100",
+      "en": "Like a pair of white pants during a sangria night, the hummus has been dyed pink by beetroots. Unfortunately, the beetroot's contribution stops at just the color; the taste isn't there at all. It's the hummus that makes this possible to call a sandwich in the first place. If you are striving for more hummus in your life (as I am), this is an absolute goldmine. Otherwise, you're shooting yourself in the foot.\n\nTaste: 19/25\nPrice: 20/25\nSize: 22/25\nExperience: 21/25\n\nTotal: 82/100"
+    },
+    "additional": "",
+    "price": "39 kr",
+    "asset": "hummus"
+  },
+  {
+    "title": {
+      "sv": "Smurrig vegocurry",
+      "en": "Scrumptious Veggie Curry"
+    },
+    "description": {
+      "sv": "Läses till melodin Var nöjd med allt som livet ger. Smurrig curry vill jag ha. och mackan den va riktigt bra. Glöm bort bekymmer, plugget och och bli kär. vad glad och mätt jag blev ida'. Den macka som jag självklart tar. Tacka hilbert för att de finns här.\n\nSmak: 22/25\nPris: 18/25\nStorlek: 22/25\nUpplevelse: 25/25\n\nTotalt: 87/100",
+      "en": "(Read to the tune of \"The Bare Necessities\") Scrumptious curry's what I crave, and this sandwich was a real rave. Forget your worries, studies, and fall in love, how happy and full I feel today. The sandwich that I'll gladly take, Thank Hilbert that they're here to stay.\n\nTaste: 22/25\nPrice: 18/25\nSize: 22/25\nExperience: 25/25\n\nTotal: 87/100"
+    },
+    "additional": "",
+    "price": "45 kr",
+    "asset": "curry"
+  },
+  {
+    "title": {
+      "sv": "Taco mack",
+      "en": "Taco Sandwich"
+    },
+    "description": {
+      "sv": "Denna macka gav mig nästan traumatiska flashbacks till Avokado Bageln. Den var på gränsen till för salt vilket möjligtvis var en engångsgrej. För den som gillar tacos och inte pallar hacka alla grönsaker själv är denna macka perfekt. Med lite mindre salt och mer majs (för de e najs) så har vi en perfekt torsdagsmacka som kan avnjutas med valfri dryck!\n\nSmak: 21/25\nPris: 17/25\nStorlek: 23/25\nUpplevelse: 14/25\n\nTotalt: 76/100",
+      "en": "This sandwich gave me almost traumatic flashbacks to the Avocado Bagel. It was on the verge of being too salty, which was possibly a one-time thing. For someone who likes tacos and can't be bothered chopping all the vegetables themselves, this sandwich is perfect. With a little less salt and more corn (because corn is godchild newly born), we have a perfect Thursday sandwich that can be enjoyed with a beverage of your choice!\n\nTaste: 21/25\nPrice: 17/25\nSize: 23/25\nExperience: 14/25\n\nTotal: 76/100"
+    },
+    "additional": "",
+    "price": "44 kr",
+    "asset": "taco"
+  },
+  {
+    "title": {
+      "sv": "Spicy vegan",
+      "en": "Spicy Vegan"
+    },
+    "description": {
+      "sv": "Jag är en stark förespråkare av att inte blanda in för mycket hetta i min mat. Om du gillar smärta i din mat så är det bara att köra på men jag undviker helst att bli aggressivt boxad på tungan. Mackan levererar på de förväntningar som namnet ger med en okej smak som för mig blir helt skymd av \"WHY IS IT SPICY\".\n\nSmak: 17/25\nPris: 18/25\nStorlek: 21/25\nUpplevelse: 14/25\n\nTotalt: 70/100",
+      "en": "I am a strong advocate for not mixing too much heat into my food. If you enjoy pain in your food, go right ahead, but I prefer to avoid getting aggressively punched on the tongue. The sandwich delivers on the expectations set by the name with an okay taste that, to me, gets completely overshadowed by \"WHY IS IT SPICY.\"\n\nTaste: 17/25\nPrice: 18/25\nSize: 21/25\nExperience: 14/25\n\nTotal: 70/100"
+    },
+    "additional": "spicy.gif",
+    "price": "43 kr",
+    "asset": "vegan"
+  },
+  {
+    "title": {
+      "sv": "All Mountain",
+      "en": "All Mountain"
+    },
+    "description": {
+      "sv": "Denna smäckra macka var en gourmetisk sensation. Den salami liknande produkten i mitten skapade eufori på mina smaklökar. Tyvärr tyngdes den ner av opersonlig ost som inte uppfyllde mackans potential. Man brukar ju säga att \"size doesn't matter\", men å alla studenters vägnar… jag har sett större.\n\nSmak: 23/25\nPris: 21/25\nStorlek: 13/25\nUpplevelse: 21/25\n\nTotalt: 78/100",
+      "en": "This sleek sandwich was a gourmet sensation. The salami-like product in the middle created euphoria on my taste buds. Unfortunately, it was weighed down by impersonal cheese that didn't fulfill the sandwich's potential. They usually say that \"size doesn't matter,\" but on behalf of all students... I've seen bigger.\n\nTaste: 23/25\nPrice: 21/25\nSize: 13/25\nExperience: 21/25\n\nTotal: 78/100"
+    },
+    "additional": "",
+    "price": "38 kr",
+    "asset": "mountain"
+  },
+  {
+    "title": {
+      "sv": "Ostbulle",
+      "en": "Cheese Roll"
+    },
+    "description": {
+      "sv": "För en student är denna guld värd, så att man kan bli mycket närd. En klassisk ost macka, när man på morgon ej frukost hinner packa.\n\nSmak: 24/25\nPris: 25/25\nStorlek: 9/25\nUpplevelse: 20/25\n\nTotalt: 78/100",
+      "en": "For a student this is worth its weight in gold, keeping you nourished and bold. A classic cheese roll to pack, when in the morning, time for breakfast you lack.\n\nTaste: 24/25\nPrice: 25/25\nSize: 9/25\nExperience: 20/25\n\nTotal: 78/100"
+    },
+    "additional": "",
+    "price": "20 kr",
+    "asset": "cheese"
+  },
+  {
+    "title": {
+      "sv": "Eslöv Baguette",
+      "en": "Eslöv Baguette"
+    },
+    "description": {
+      "sv": "En klassisk vegobullemacka. För en liten peng kan du borra dig in i en oljekälla som praktiskt taget svämmar över av fyllning. En kladdig upplevelse som känns som en riktig vinstlott. Här gör rödbetan storslagen entré och gör att varje tugga blir som ett nytt spännande äventyr.\n\nSmak: 24/25\nPris: 21/25\nStorlek: 25/25\nUpplevelse: 25/25\n\nTotalt: 95/100",
+      "en": "A classic veggie-meatball sandwich. For a small penny, you can drill into an oil well that practically overflows with filling. A messy experience that feels like a real winning lottery ticket. Here the beetroot makes a grand entrance, making every bite feel like a new exciting adventure.\n\nTaste: 24/25\nPrice: 21/25\nSize: 25/25\nExperience: 25/25\n\nTotal: 95/100"
+    },
+    "additional": "",
+    "price": "38 kr",
+    "asset": "eslov"
+  },
+  {
+    "title": {
+      "sv": "Mackan som saknas",
+      "en": "The Missing Sandwich"
+    },
+    "description": {
+      "sv": "Med en stor näve nyfångade, handskalade räkor till det låga priset 149 kr. Så utgör denna macka, studentens sista levebröd. En rågskiva med två ägghalvor på en klick majonnäs och ett salladsblad ger dig all näring du behöver. Kompositionen rundas av med en skiva ny skuren citron. Rekommenderar verkligen denna macka. Tyvärr har den ännu inte dykt upp i Hilbert cafe.\n\nSmak: 25/25\nPris: 25/25\nStorlek: 25/25\nUpplevelse: 25/25\n\nTotalt: 100/100",
+      "en": "With a large handful of freshly caught, hand-peeled shrimp for the low price of 149 SEK. This sandwich constitutes the student's final livelihood. A slice of rye bread with two egg halves on a dollop of mayonnaise and a lettuce leaf gives you all the nutrition you need. The composition is rounded off with a slice of freshly cut lemon. Highly recommend this sandwich. Unfortunately, it has not yet appeared in Hilbert Café.\n\nTaste: 25/25\nPrice: 25/25\nSize: 25/25\nExperience: 25/25\n\nTotal: 100/100"
+    },
+    "additional": "",
+    "price": "149 kr",
+    "asset": "missing"
+  }
+]
