@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/etiquette.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/poweredBy.dart';
+import 'package:fsek_mobile/screens/nollning/nolleguide_26/sandwich.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wordList.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/dressCode.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/lund.dart';
@@ -28,15 +31,17 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     required String asset,
     required double width,
     VoidCallback? onTap,
+    double? rotation
 }) {
     return Positioned(
       top: top,
       left: left,
       child: Center(
-        child: InkWell(
-          onTap: onTap,
-          child: Image.asset(asset, width: screenWidth * width),
-        ),
+        child: Transform.rotate(angle: rotation ?? 0, child: InkWell(
+            onTap: onTap,
+            child: Image.asset(asset, width: screenWidth * width),
+          ),
+        )
       )
     );
   }
@@ -52,6 +57,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     required String ordlistaAsset,
     required String etiquetteAsset,
     required String poweredByAsset,
+    required String sandwichAsset
 }){
     return [
       Positioned(
@@ -114,6 +120,15 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
         width: 0.4,
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PoweredByPage()))
       ),
+      generateItem(
+          screenWidth: screenWidth,
+          top: screenHeight * 0.6,
+          left: screenWidth * 0.1,
+          asset: sandwichAsset,
+          width: 0.3,
+          rotation: pi / 8,
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SandwichPage()))
+      )
     ];
   }
 
@@ -195,6 +210,7 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
     final ordlista = "${path}/homescreen/ordlista_${t.localeName}.png";
     final etiquette = "${path}/homescreen/etiquette_${t.localeName}.png";
     final poweredBy = "${path}/homescreen/powered_by.png";
+    final sandwich = "${path}/homescreen/sandwich_${t.localeName}.png";
 
     // Student life page
     final studentLifeTitle = "${path}/studentlife/title_${t.localeName}.png";
@@ -241,7 +257,8 @@ class _NolleGuideHomeState extends State<NolleGuideHomePage> {
                       kladkodAsset: kladkod,
                       ordlistaAsset: ordlista,
                       etiquetteAsset: etiquette,
-                      poweredByAsset: poweredBy
+                      poweredByAsset: poweredBy,
+                      sandwichAsset: sandwich
                 ),
                   HomePageState.studentLife => generateStudentLifePage(
                       screenWidth: screenWidth,
