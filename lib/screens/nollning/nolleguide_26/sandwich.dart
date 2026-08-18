@@ -39,7 +39,11 @@ class _SandwichPageState extends State<SandwichPage> {
     final topBackground = "$path/bg_top_$t.png";
     final endBackground = "$path/bg_end.png";
     final middleBackground = "$path/bg.png";
-
+    // Find screen width in pixels for caching the image
+    final cacheWidth =
+        (MediaQuery.of(context).size.width *
+                MediaQuery.of(context).devicePixelRatio)
+            .round();
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: new Color.fromRGBO(236, 112, 38, 1),
@@ -65,6 +69,7 @@ class _SandwichPageState extends State<SandwichPage> {
                       child: InkWell(
                         child: Image.asset(
                           "$path/${item["asset"]}_$t.png",
+                          cacheWidth: cacheWidth,
                           fit: BoxFit.fitWidth,
                           alignment: Alignment.center,
                         ),
