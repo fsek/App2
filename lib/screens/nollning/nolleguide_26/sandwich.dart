@@ -52,9 +52,7 @@ class _SandwichPageState extends State<SandwichPage> {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
-      body: InteractiveViewer(
-        panEnabled: true,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -73,11 +71,11 @@ class _SandwichPageState extends State<SandwichPage> {
                           fit: BoxFit.fitWidth,
                           alignment: Alignment.center,
                         ),
-                        onTap: () => {
+                        onTap: () {
                           Navigator.push(
                             context,
                             SandwichOverlayRoute(data: item, locale: t),
-                          ),
+                          );
                         },
                       ),
                     ),
@@ -86,8 +84,7 @@ class _SandwichPageState extends State<SandwichPage> {
               Image.asset(endBackground, fit: BoxFit.fitWidth),
             ],
           ),
-        ),
-      ),
+        )
     );
   }
 }
