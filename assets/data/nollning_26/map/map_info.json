@@ -27,7 +27,9 @@
             "sv": "Bland glitter och glamour träder A-Phøs fram. Man finner dem här, i A-huset. Resan hit tar 8 minuter från Mattehuset.",
             "en": "Amidst the glitz and glamour, A-Phøs steps into the spotlight. You can find them here, in the A-building. The journey here takes 8 minutes from the Math Building."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            "assets/data/nollning_26/map/pin_media/Aphos.jpg"
+        ],
         "boxes": [
             {
                 "left": 2095.0,
@@ -105,7 +107,9 @@
             "sv": "Så du har hittat hem, det glädjer mig! I denna byggnaden hänger F-fös och du kan känna dig som hemma dina kommande år på LTH. Käka en macka från Hilbert Café, stämpla en kopp nybryggt guld från ditt kaffekort och njut, du är precis där du ska vara! <3",
             "en": "So you’ve found your way home—I’m so glad! This is the building where the F-fös hang out, and you can truly feel at home here during your coming years at LTH. Grab a sandwich from Hilbert Café, stamp your coffee card for a cup of freshly brewed liquid gold, and just enjoy—you’re exactly where you’re meant to be! <3"
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            "assets/data/nollning_26/map/pin_media/Foset.jpg"
+        ],
         "boxes": [
             {
                 "left": 1067.0,
