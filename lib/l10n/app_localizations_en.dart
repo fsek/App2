@@ -42,6 +42,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get introduction => 'Introduction';
 
   @override
+  String get verifyEmailBanner =>
+      'Your account is not verified. Verify your email to get full access.';
+
+  @override
+  String get verifyEmailAction => 'Send email';
+
+  @override
+  String get verifyEmailSent => 'A verification email has been sent.';
+
+  @override
+  String get verifyEmailSentShort => 'Sent';
+
+  @override
+  String get verifyEmailFailed =>
+      'Could not send verification email, please try again later.';
+
+  @override
   String get loginRequiredField => 'Required field';
 
   @override

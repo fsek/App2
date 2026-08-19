@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'models/destination.dart';
 import 'models/user/user.dart';
 import 'widgets/bottom_app_bar.dart';
+import 'widgets/verification_banner.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -201,6 +202,7 @@ class _ContentWrapperState extends State<ContentWrapper>
                         view); //move offstage to ensure they aren't painted when not visible
               }
             }).toList())),
+            VerificationBanner(),
           ])),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
