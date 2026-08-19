@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/screens/nollning/englishSchedule.dart';
 import 'package:fsek_mobile/util/app_exception.dart';
@@ -16,6 +17,15 @@ class _ScheduleScreenState extends State<ScheduleScreenPage> {
   @override
   void initState(){
     super.initState();
+    // hide the android navigation bar while the schedule is showing
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  @override
+  void dispose() {
+    // before leaving, show the android navigation bar again
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
   }
 
   @override
