@@ -31,6 +31,8 @@ part 'event_create.g.dart';
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [mentorGroupTypes] 
+/// * [allowOtherMentors] 
 /// * [alcoholEventType] 
 /// * [dressCode] 
 /// * [price] 
@@ -94,6 +96,13 @@ abstract class EventCreate implements Built<EventCreate, EventCreateBuilder> {
 
   @BuiltValueField(wireName: r'is_nollning_event')
   bool get isNollningEvent;
+
+  @BuiltValueField(wireName: r'mentor_group_types')
+  BuiltList<EventCreateMentorGroupTypesEnum> get mentorGroupTypes;
+  // enum mentorGroupTypesEnum {  Mentor,  Mission,  Default,  Committee,  };
+
+  @BuiltValueField(wireName: r'allow_other_mentors')
+  bool get allowOtherMentors;
 
   @BuiltValueField(wireName: r'alcohol_event_type')
   EventCreateAlcoholEventTypeEnum get alcoholEventType;
@@ -228,6 +237,16 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     yield r'is_nollning_event';
     yield serializers.serialize(
       object.isNollningEvent,
+      specifiedType: const FullType(bool),
+    );
+    yield r'mentor_group_types';
+    yield serializers.serialize(
+      object.mentorGroupTypes,
+      specifiedType: const FullType(BuiltList, [FullType(EventCreateMentorGroupTypesEnum)]),
+    );
+    yield r'allow_other_mentors';
+    yield serializers.serialize(
+      object.allowOtherMentors,
       specifiedType: const FullType(bool),
     );
     yield r'alcohol_event_type';
@@ -411,6 +430,20 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
           ) as bool;
           result.isNollningEvent = valueDes;
           break;
+        case r'mentor_group_types':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(EventCreateMentorGroupTypesEnum)]),
+          ) as BuiltList<EventCreateMentorGroupTypesEnum>;
+          result.mentorGroupTypes.replace(valueDes);
+          break;
+        case r'allow_other_mentors':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.allowOtherMentors = valueDes;
+          break;
         case r'alcohol_event_type':
           final valueDes = serializers.deserialize(
             value,
@@ -473,6 +506,25 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
     );
     return result.build();
   }
+}
+
+class EventCreateMentorGroupTypesEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Mentor')
+  static const EventCreateMentorGroupTypesEnum mentor = _$eventCreateMentorGroupTypesEnum_mentor;
+  @BuiltValueEnumConst(wireName: r'Mission')
+  static const EventCreateMentorGroupTypesEnum mission = _$eventCreateMentorGroupTypesEnum_mission;
+  @BuiltValueEnumConst(wireName: r'Default')
+  static const EventCreateMentorGroupTypesEnum default_ = _$eventCreateMentorGroupTypesEnum_default_;
+  @BuiltValueEnumConst(wireName: r'Committee')
+  static const EventCreateMentorGroupTypesEnum committee = _$eventCreateMentorGroupTypesEnum_committee;
+
+  static Serializer<EventCreateMentorGroupTypesEnum> get serializer => _$eventCreateMentorGroupTypesEnumSerializer;
+
+  const EventCreateMentorGroupTypesEnum._(String name): super(name);
+
+  static BuiltSet<EventCreateMentorGroupTypesEnum> get values => _$eventCreateMentorGroupTypesEnumValues;
+  static EventCreateMentorGroupTypesEnum valueOf(String name) => _$eventCreateMentorGroupTypesEnumValueOf(name);
 }
 
 class EventCreateAlcoholEventTypeEnum extends EnumClass {

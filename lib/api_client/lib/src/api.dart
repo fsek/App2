@@ -21,6 +21,7 @@ import 'package:api_client/src/api/council_api.dart';
 import 'package:api_client/src/api/default_api.dart';
 import 'package:api_client/src/api/document_api.dart';
 import 'package:api_client/src/api/elections_api.dart';
+import 'package:api_client/src/api/enclose_moose_api.dart';
 import 'package:api_client/src/api/event_signup_api.dart';
 import 'package:api_client/src/api/events_api.dart';
 import 'package:api_client/src/api/groups_api.dart';
@@ -34,6 +35,7 @@ import 'package:api_client/src/api/nollning_api.dart';
 import 'package:api_client/src/api/nominations_api.dart';
 import 'package:api_client/src/api/permissions_api.dart';
 import 'package:api_client/src/api/posts_api.dart';
+import 'package:api_client/src/api/prereg_members_api.dart';
 import 'package:api_client/src/api/room_booking_api.dart';
 import 'package:api_client/src/api/songs_api.dart';
 import 'package:api_client/src/api/songs_category_api.dart';
@@ -208,6 +210,12 @@ class ApiClient {
     return ElectionsApi(dio, serializers);
   }
 
+  /// Get EncloseMooseApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  EncloseMooseApi getEncloseMooseApi() {
+    return EncloseMooseApi(dio, serializers);
+  }
+
   /// Get EventSignupApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   EventSignupApi getEventSignupApi() {
@@ -284,6 +292,12 @@ class ApiClient {
   /// by doing that all interceptors will not be executed
   PostsApi getPostsApi() {
     return PostsApi(dio, serializers);
+  }
+
+  /// Get PreregMembersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  PreregMembersApi getPreregMembersApi() {
+    return PreregMembersApi(dio, serializers);
   }
 
   /// Get RoomBookingApi instance, base route and serializer can be overridden by a given but be careful,

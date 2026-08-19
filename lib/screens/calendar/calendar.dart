@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fsek_mobile/api_client/lib/api_client.dart';
-import 'package:fsek_mobile/services/api.service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fsek_mobile/api_client/lib/api_client.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/screens/event/event.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
+
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
@@ -15,7 +17,10 @@ class _CalendarState extends State<Calendar> {
   DateTime _selectedDay = DateTime.now().toLocal();
   List<EventRead> _selectedEvents = [];
   List<EventRead> _events = [];
+
+  @override
   void initState() {
+    super.initState();
     _selectedDay = DateTime.utc(_now.year, _now.month, _now.day);
     ApiService.apiClient
         .getEventsApi()
@@ -24,226 +29,224 @@ class _CalendarState extends State<Calendar> {
               this._events = value.data!.toList();
               _selectedEvents = _getEventsForDay(_selectedDay);
             }));
-    super.initState();
   }
+
   void openEventPage(EventRead event) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => EventPage(eventId: event.id)));
+        MaterialPageRoute(builder: (context) => EventPage(event: event, eventId: event.id)));
   }
-  List<EventRead> _getEventsForDay(DateTime day) {
 
+  List<EventRead> _getEventsForDay(DateTime day) {
     final events = this._events.where((item) => isSameDay(item.startsAt.toLocal(), day)).toList();
     events.sort((a, b) => a.startsAt.compareTo(b.startsAt));
     return events;
   }
+
   Future<void> _onRefresh() async {
-    ApiService.apiClient
+    return ApiService.apiClient
         .getEventsApi()
         .eventsGetAllEvents()
-        .then((value) => setState(() {
-              this._events = value.data!.toList();
-              _selectedEvents = _getEventsForDay(_selectedDay);
-            }));
+        .then((value) {
+          if(!mounted) return; // We don't want to do a setstate when the state is no longer active.
+          setState(() {
+            this._events = value.data!.toList();
+            _selectedEvents = _getEventsForDay(_selectedDay);
+          });
+        });
   }
 
-  Widget checkAlcoholEventType(String alcType){
-    final String alcServed = "assets/data/nollning_25/calendar/alkfullImg.png";
-    final String noAlc = "assets/data/nollning_25/calendar/alkfriImg.png";
-    final String byob = "assets/data/nollning_25/calendar/byobImg.png";
-
+  Widget? checkAlcoholEventType(String alcType, {bool isNollning = false}){
     switch (alcType) {
       case "Alcohol-Served":
-        return Image.asset(alcServed, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/alcfull_icon.png");
+        }
+
+        return Icon(Icons.wine_bar_rounded);
 
       case "Alcohol":
-        return Image.asset(byob, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/byob_icon.png");
+        }
+
+        return null;
 
       default:
-        return Image.asset(noAlc, fit: BoxFit.fill);
+        if (isNollning) {
+          return Image.asset("assets/data/nollning_26/calendar/alcfree_icon.png");
+        }
+
+        return null;
     }
   }
 
   Widget createEventCard(EventRead event) {
     String locale = Localizations.localeOf(context).toString();
     var t = AppLocalizations.of(context)!;
-    if(event.isNollningEvent) {
-      return Container(
-        child: Card(
-          shadowColor: Colors.transparent,
-          color: Colors.transparent,
-          surfaceTintColor: null,
-          child: InkWell(
-            onTap: () => openEventPage(event),
-            child: Container(
-              margin: EdgeInsets.zero,
-              child: Stack(
-                children: [
-                  Positioned.fill(child: checkAlcoholEventType(event.alcoholEventType)),
-                  Container(child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(padding: EdgeInsets.only(top: 5)),
-                      Container(
-                    margin: EdgeInsets.only(bottom: 7, left: 30),
-                    child: Text(
-                      t.localeName == "en" ? event.titleEn : event.titleSv,
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xFFFCBD1D)
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
+
+    final formattedStartTime = DateFormat("HH:mm").format(event.startsAt.toLocal());
+    final formattedEndTime = DateFormat("HH:mm").format(event.endsAt.toLocal());
+    final formattedDay = DateFormat("MMMMd", locale).format(event.startsAt.toLocal());
+
+    final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
+
+    return Card(
+      elevation: 5,
+      shadowColor: null,
+      color: null,
+      margin: const EdgeInsets.all(5),
+      child: InkWell(
+        onTap: () => openEventPage(event),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            const imageWidth = 940;
+            // const imageHeight = 280;
+
+            final scale = imageWidth / constraints.maxWidth;
+
+            const horizontalSlice = 70.0;
+            const verticalSlice = 108.5;
+            final scaledCenterSlice = Rect.fromLTWH(
+              horizontalSlice / scale,
+              verticalSlice / scale,
+              (imageWidth - 2 * horizontalSlice) / scale,
+              1 / scale
+            );
+
+            return Container(
+              padding: event.isNollningEvent ? const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40) : const EdgeInsets.all(10),
+              decoration: !event.isNollningEvent ? null : BoxDecoration(
+                image: DecorationImage(
+                  image: ResizeImage(  // Can not just use scale in DecorationImage because it is prone to floating point errors
+                    AssetImage("assets/data/nollning_26/calendar/event_banner.png"),
+                    width: constraints.maxWidth.toInt()  // imageWidth / scale
+                    // height: (constraints.maxWidth * imageHeight / imageWidth).toInt()  // imageHeight / scale
                   ),
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.only(left: 30)),
-                      Icon(
-                        Icons.access_time_rounded,
-                        size: 20,
-                      ),
-                      Text(
-                        /* better error checking */
-                        "  " +
-                            DateFormat("HH:mm")
-                                .format(event.startsAt.toLocal()) +
-                            " - " +
-                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
-                            ", " +
-                            DateFormat("MMMMd", locale)
-                                .format(event.startsAt.toLocal()),
-                        style: TextStyle(
-                          fontFamily: "MinionPro",
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.only(left: 30)),
-                      Icon(
-                        Icons.room,
-                        size: 20,
-                      ),
-                      Text(
-                        "  " +
-                            event.location,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                    Padding(padding: EdgeInsets.only(bottom: 10))
-                    ]))
-                ],
+                  invertColors: Theme.of(context).brightness == Brightness.dark,  // is this the correct way to do this?
+                  centerSlice: scaledCenterSlice  // To hide stretching
+                )
               ),
-            ),
-          )));
-
-    } else {
-
-    return Container(
-      child: Card(
-        shadowColor: null,
-        color: null,
-        child: InkWell(
-          onTap: () => openEventPage(event),
-          child: Container(
-            margin: EdgeInsets.zero,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 7),
-                    child: Text(
-                      t.localeName == "en" ? event.titleEn : event.titleSv,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.access_time_rounded,
-                        size: 20,
-                      ),
-                      Text(
-                        /* better error checking */
-                        "  " +
-                            DateFormat("HH:mm")
-                                .format(event.startsAt.toLocal()) +
-                            " - " +
-                            DateFormat("HH:mm").format(event.endsAt.toLocal()) +
-                            ", " +
-                            DateFormat("MMMMd", locale)
-                                .format(event.startsAt.toLocal()),
-                        style: TextStyle(
-                          fontSize: 14,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 7),
+                          child: Text(
+                            t.localeName == "en" ? event.titleEn : event.titleSv,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            // overflow: TextOverflow.ellipsis
+                          )
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+
+                        Row(
                           children: [
-                            // Alcohol is served
-                            if (event.alcoholEventType == "Alcohol-Served")
-                              Icon(Icons.wine_bar_rounded, size: 20),
+                            const Icon(
+                              Icons.access_time_rounded,
+                              size: 20
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                /* better error checking */
+                                "$formattedStartTime - $formattedEndTime, $formattedDay",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                )
+                              )
+                            ),
+                          ]
+                        ),
+
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.room,
+                              size: 20,
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                event.location,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                )
+                              )
+                            ),
                           ],
                         ),
-                      )
-                    ],
+                      ],
+                    )
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.room,
-                        size: 20,
-                      ),
-                      Text(
-                        "  " +
-                            event.location,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              margin: EdgeInsets.all(10),
-            ),
-          ),
-        ),
-        // Introduction events background needs access to entire card
-        margin: EdgeInsets.all(4),
-      ),
+
+                  if (alcPolicyImage != null)
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: alcPolicyImage
+                    ),
+                ]
+              )
+            );
+          }
+        )
+      )
     );
-    }
   }
+
+  Widget? _getMarkers(List<EventRead> events) {
+    if (events.isEmpty) return null;
+
+    return FittedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: events.map((event) {
+          final alcPolicyImage = checkAlcoholEventType(event.alcoholEventType, isNollning: event.isNollningEvent);
+
+          if (!event.isNollningEvent || alcPolicyImage == null) {
+            return Container(
+              width: 10,
+              height: 10,
+              margin: const EdgeInsets.symmetric(horizontal: 1),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inverseSurface,
+                shape: BoxShape.circle
+              )
+            );
+          }
+
+          return Container(
+            width: 16,
+            height: 16,
+            margin: const EdgeInsets.symmetric(horizontal: 1),
+            child: alcPolicyImage
+          );
+        }).toList()
+      )
+    );
+  }
+
+  Future<void> openExportCalendarLink() async {
+  final uri = Uri.parse("https://fsektionen.se/calendar#subscribe");
+
+  await launchUrl(
+    uri,
+    mode: LaunchMode.externalApplication  // for some reason it gives a PlatformError when not having this
+  );
+}
 
   @override
   Widget build(BuildContext context) {
     String locale = Localizations.localeOf(context).toString();
-    if (locale == "sv") {
-      DateFormat("MMMMEEEEd", "sv_SE").format(_selectedDay);
-    } else {
-      DateFormat("MMMMEEEEd", "en_US").format(_selectedDay);
-    }
+
     return Container(
       height: MediaQuery.of(context).size.height,
       color: Theme.of(context).colorScheme.surface,
@@ -284,6 +287,39 @@ class _CalendarState extends State<Calendar> {
                   eventLoader: (day) {
                     return _getEventsForDay(day);
                   },
+                  headerStyle: HeaderStyle(
+                    leftChevronIcon: Icon(
+                      color: Theme.of(context).primaryColor,
+                      Icons.chevron_left,
+                      size: 25
+                    ),
+
+                    rightChevronIcon: Icon(
+                      color: Theme.of(context).primaryColor,
+                      Icons.chevron_right,
+                      size: 25
+                    )
+                  ),
+                  calendarBuilders: CalendarBuilders<EventRead>(
+                    markerBuilder: (context, day, events) => _getMarkers(events),
+                    headerTitleBuilder: (context, day) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          DateFormat("MMMM yyyy", locale).format(day),
+                          style: const TextStyle(
+                            fontSize: 18
+                          )
+                        ),
+
+                        IconButton(
+                          icon: const Icon(Icons.open_in_browser_rounded),
+                          color: Theme.of(context).primaryColor,
+                          onPressed: openExportCalendarLink
+                        ),
+                      ]
+                    )
+                  )
                 ),
                 Container(
                   alignment: Alignment.centerLeft,

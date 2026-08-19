@@ -353,8 +353,38 @@ abstract class AppLocalizations {
   /// No description provided for @eventSendSignup.
   ///
   /// In sv, this message translates to:
-  /// **'Skicka Anmälan'**
+  /// **'Skicka anmälan'**
   String get eventSendSignup;
+
+  /// No description provided for @eventSignupErrorTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'Anmälan misslyckades'**
+  String get eventSignupErrorTitle;
+
+  /// No description provided for @eventSignupErrorInvalidGroup.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du kan inte anmäla dig med den här gruppen!'**
+  String get eventSignupErrorInvalidGroup;
+
+  /// No description provided for @eventSignupErrorDeadlinePassed.
+  ///
+  /// In sv, this message translates to:
+  /// **'Anmälningsperioden för det här eventet är slut!'**
+  String get eventSignupErrorDeadlinePassed;
+
+  /// No description provided for @eventSignupErrorNoGroupNoPriority.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.'**
+  String get eventSignupErrorNoGroupNoPriority;
+
+  /// No description provided for @eventSignupErrorClose.
+  ///
+  /// In sv, this message translates to:
+  /// **'Stäng'**
+  String get eventSignupErrorClose;
 
   /// No description provided for @eventFoodPrefInfo.
   ///
@@ -505,6 +535,24 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Inget'**
   String get eventNoAlcohol;
+
+  /// No description provided for @eventNollning.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent'**
+  String get eventNollning;
+
+  /// No description provided for @eventNollningMentor.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent (med faddergruppen)'**
+  String get eventNollningMentor;
+
+  /// No description provided for @eventNollningMission.
+  ///
+  /// In sv, this message translates to:
+  /// **'Nollningsevent (med uppdragsgruppen)'**
+  String get eventNollningMission;
 
   /// No description provided for @settingsSettings.
   ///
@@ -1175,7 +1223,7 @@ abstract class AppLocalizations {
   /// No description provided for @nolleguideEtiquette.
   ///
   /// In sv, this message translates to:
-  /// **'Allt du behöver veta'**
+  /// **'Vett och Etikett'**
   String get nolleguideEtiquette;
 
   /// No description provided for @nolleguideWordlist.
@@ -2083,6 +2131,18 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.'**
   String get emergencyContentSeven;
+
+  /// No description provided for @emergencyTitleEight.
+  ///
+  /// In sv, this message translates to:
+  /// **'Föset'**
+  String get emergencyTitleEight;
+
+  /// No description provided for @emergencyContentEight.
+  ///
+  /// In sv, this message translates to:
+  /// **'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nElina Kazemi-Esfeh\n073 772 5955 \n\nEdith Fållsten\n076 871 7087 \n\nAda Parén\n076 047 0583 \n\nAlice Önnerheim\n070 922 1301 \n\nLinnea Becker\n076 139 9402 \n\nManne Mönster\n070 948 7839 \n\nHarald Barck-Holst\n076 319 3169 \n\nKontaktinformation till andra delar av sektionen kan du hitta på hemsidans kontakt-sida: https://fsektionen.se/contact/.'**
+  String get emergencyContentEight;
 
   /// No description provided for @game.
   ///

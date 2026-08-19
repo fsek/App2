@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-// During introduciton, please don't modify this file.
+// During introduction, please don't modify this file.
 // Instead, create a new file in the home folder, for example nollningHome25.dart
 // And change the destination in main.dart
 
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     String defaultBackground = "assets/img/default_background.png";
 
     return Stack(children: [
-      // If we couldnt get a background image for whatever reason make it the default
+      // If we couldn't get a background image for whatever reason make it the default
       backgroundUrl != null
           ? CachedNetworkImage(
         fit: BoxFit.cover,

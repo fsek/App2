@@ -138,7 +138,25 @@ class AppLocalizationsSv extends AppLocalizations {
   String get eventFoodPreferences => 'Matpreferenser:';
 
   @override
-  String get eventSendSignup => 'Skicka Anmälan';
+  String get eventSendSignup => 'Skicka anmälan';
+
+  @override
+  String get eventSignupErrorTitle => 'Anmälan misslyckades';
+
+  @override
+  String get eventSignupErrorInvalidGroup =>
+      'Du kan inte anmäla dig med den här gruppen!';
+
+  @override
+  String get eventSignupErrorDeadlinePassed =>
+      'Anmälningsperioden för det här eventet är slut!';
+
+  @override
+  String get eventSignupErrorNoGroupNoPriority =>
+      'Du är inte medlem i någon grupp och har inte valt någon prioritet, så du kan inte anmäla dig till det här eventet. Du är troligtvis inte en del av nollningen, eller så har eventansvariga inte lagt till din prioriterade grupp.';
+
+  @override
+  String get eventSignupErrorClose => 'Stäng';
 
   @override
   String get eventFoodPrefInfo =>
@@ -216,6 +234,15 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventNoAlcohol => 'Inget';
+
+  @override
+  String get eventNollning => 'Nollningsevent';
+
+  @override
+  String get eventNollningMentor => 'Nollningsevent (med faddergruppen)';
+
+  @override
+  String get eventNollningMission => 'Nollningsevent (med uppdragsgruppen)';
 
   @override
   String get settingsSettings => 'Inställningar';
@@ -568,7 +595,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get nolleguideWeAtFsek => 'F-sektionen';
 
   @override
-  String get nolleguideEtiquette => 'Allt du behöver veta';
+  String get nolleguideEtiquette => 'Vett och Etikett';
 
   @override
   String get nolleguideWordlist => 'Ordlista';
@@ -1072,6 +1099,13 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get emergencyContentSeven =>
       'Sveriges nationella informationsnummer. Dit kan du ringa om du vill få information vid allvarliga olyckor och kriser i samhället.';
+
+  @override
+  String get emergencyTitleEight => 'Föset';
+
+  @override
+  String get emergencyContentEight =>
+      'Om du snabbt behöver komma i kontakt med någon av oss i föset så kan du ringa oss på följande nummer. \n\nElina Kazemi-Esfeh\n073 772 5955 \n\nEdith Fållsten\n076 871 7087 \n\nAda Parén\n076 047 0583 \n\nAlice Önnerheim\n070 922 1301 \n\nLinnea Becker\n076 139 9402 \n\nManne Mönster\n070 948 7839 \n\nHarald Barck-Holst\n076 319 3169 \n\nKontaktinformation till andra delar av sektionen kan du hitta på hemsidans kontakt-sida: https://fsektionen.se/contact/.';
 
   @override
   String get game => 'Moose game';

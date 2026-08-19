@@ -30,11 +30,14 @@ part 'event_update.g.dart';
 /// * [canSignup] 
 /// * [drinkPackage] 
 /// * [isNollningEvent] 
+/// * [mentorGroupTypes] 
+/// * [allowOtherMentors] 
 /// * [priorities] 
 /// * [alcoholEventType] 
 /// * [dressCode] 
 /// * [price] 
 /// * [dot] 
+/// * [lottery] 
 @BuiltValue()
 abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'council_id')
@@ -91,6 +94,13 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'is_nollning_event')
   bool? get isNollningEvent;
 
+  @BuiltValueField(wireName: r'mentor_group_types')
+  BuiltList<EventUpdateMentorGroupTypesEnum>? get mentorGroupTypes;
+  // enum mentorGroupTypesEnum {  Mentor,  Mission,  Default,  Committee,  };
+
+  @BuiltValueField(wireName: r'allow_other_mentors')
+  bool? get allowOtherMentors;
+
   @BuiltValueField(wireName: r'priorities')
   BuiltList<String>? get priorities;
 
@@ -107,6 +117,9 @@ abstract class EventUpdate implements Built<EventUpdate, EventUpdateBuilder> {
   @BuiltValueField(wireName: r'dot')
   EventUpdateDotEnum? get dot;
   // enum dotEnum {  None,  Single,  Double,  };
+
+  @BuiltValueField(wireName: r'lottery')
+  bool? get lottery;
 
   EventUpdate._();
 
@@ -257,6 +270,20 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
         specifiedType: const FullType.nullable(bool),
       );
     }
+    if (object.mentorGroupTypes != null) {
+      yield r'mentor_group_types';
+      yield serializers.serialize(
+        object.mentorGroupTypes,
+        specifiedType: const FullType.nullable(BuiltList, [FullType(EventUpdateMentorGroupTypesEnum)]),
+      );
+    }
+    if (object.allowOtherMentors != null) {
+      yield r'allow_other_mentors';
+      yield serializers.serialize(
+        object.allowOtherMentors,
+        specifiedType: const FullType.nullable(bool),
+      );
+    }
     if (object.priorities != null) {
       yield r'priorities';
       yield serializers.serialize(
@@ -290,6 +317,13 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
       yield serializers.serialize(
         object.dot,
         specifiedType: const FullType.nullable(EventUpdateDotEnum),
+      );
+    }
+    if (object.lottery != null) {
+      yield r'lottery';
+      yield serializers.serialize(
+        object.lottery,
+        specifiedType: const FullType.nullable(bool),
       );
     }
   }
@@ -459,6 +493,22 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.isNollningEvent = valueDes;
           break;
+        case r'mentor_group_types':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(BuiltList, [FullType(EventUpdateMentorGroupTypesEnum)]),
+          ) as BuiltList<EventUpdateMentorGroupTypesEnum>?;
+          if (valueDes == null) continue;
+          result.mentorGroupTypes.replace(valueDes);
+          break;
+        case r'allow_other_mentors':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.allowOtherMentors = valueDes;
+          break;
         case r'priorities':
           final valueDes = serializers.deserialize(
             value,
@@ -499,6 +549,14 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
           if (valueDes == null) continue;
           result.dot = valueDes;
           break;
+        case r'lottery':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.lottery = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -526,6 +584,25 @@ class _$EventUpdateSerializer implements PrimitiveSerializer<EventUpdate> {
     );
     return result.build();
   }
+}
+
+class EventUpdateMentorGroupTypesEnum extends EnumClass {
+
+  @BuiltValueEnumConst(wireName: r'Mentor')
+  static const EventUpdateMentorGroupTypesEnum mentor = _$eventUpdateMentorGroupTypesEnum_mentor;
+  @BuiltValueEnumConst(wireName: r'Mission')
+  static const EventUpdateMentorGroupTypesEnum mission = _$eventUpdateMentorGroupTypesEnum_mission;
+  @BuiltValueEnumConst(wireName: r'Default')
+  static const EventUpdateMentorGroupTypesEnum default_ = _$eventUpdateMentorGroupTypesEnum_default_;
+  @BuiltValueEnumConst(wireName: r'Committee')
+  static const EventUpdateMentorGroupTypesEnum committee = _$eventUpdateMentorGroupTypesEnum_committee;
+
+  static Serializer<EventUpdateMentorGroupTypesEnum> get serializer => _$eventUpdateMentorGroupTypesEnumSerializer;
+
+  const EventUpdateMentorGroupTypesEnum._(String name): super(name);
+
+  static BuiltSet<EventUpdateMentorGroupTypesEnum> get values => _$eventUpdateMentorGroupTypesEnumValues;
+  static EventUpdateMentorGroupTypesEnum valueOf(String name) => _$eventUpdateMentorGroupTypesEnumValueOf(name);
 }
 
 class EventUpdateAlcoholEventTypeEnum extends EnumClass {

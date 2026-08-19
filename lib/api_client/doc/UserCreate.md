@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **isActive** | **bool** |  | [optional] 
 **isSuperuser** | **bool** |  | [optional] 
 **isVerified** | **bool** |  | [optional] 
+**stilId** | **String** |  | [optional] 
 **firstName** | **String** |  | 
 **lastName** | **String** |  | 
 **telephoneNumber** | **String** |  | 

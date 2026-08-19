@@ -60,6 +60,11 @@ import 'package:api_client/src/model/election_populate.dart';
 import 'package:api_client/src/model/election_post_read.dart';
 import 'package:api_client/src/model/election_read.dart';
 import 'package:api_client/src/model/election_update.dart';
+import 'package:api_client/src/model/enclose_moose_level_create.dart';
+import 'package:api_client/src/model/enclose_moose_level_read.dart';
+import 'package:api_client/src/model/enclose_moose_level_update.dart';
+import 'package:api_client/src/model/enclose_moose_submission_create.dart';
+import 'package:api_client/src/model/enclose_moose_submission_read.dart';
 import 'package:api_client/src/model/error_model.dart';
 import 'package:api_client/src/model/event_create.dart';
 import 'package:api_client/src/model/event_read.dart';
@@ -105,6 +110,9 @@ import 'package:api_client/src/model/post_door_access_read.dart';
 import 'package:api_client/src/model/post_permission_read.dart';
 import 'package:api_client/src/model/post_read.dart';
 import 'package:api_client/src/model/post_update.dart';
+import 'package:api_client/src/model/prereg_member_create.dart';
+import 'package:api_client/src/model/prereg_member_read.dart';
+import 'package:api_client/src/model/prereg_member_update.dart';
 import 'package:api_client/src/model/priority_db.dart';
 import 'package:api_client/src/model/room_booking_create.dart';
 import 'package:api_client/src/model/room_booking_read.dart';
@@ -135,6 +143,7 @@ import 'package:api_client/src/model/user_access_read.dart';
 import 'package:api_client/src/model/user_access_update.dart';
 import 'package:api_client/src/model/user_create.dart';
 import 'package:api_client/src/model/user_event_read.dart';
+import 'package:api_client/src/model/user_for_event_signup_read.dart';
 import 'package:api_client/src/model/user_in_event_read.dart';
 import 'package:api_client/src/model/user_in_group_read.dart';
 import 'package:api_client/src/model/user_post_read.dart';
@@ -191,6 +200,11 @@ part 'serializers.g.dart';
   ElectionPostRead,
   ElectionRead,
   ElectionUpdate,
+  EncloseMooseLevelCreate,
+  EncloseMooseLevelRead,
+  EncloseMooseLevelUpdate,
+  EncloseMooseSubmissionCreate,
+  EncloseMooseSubmissionRead,
   ErrorModel,
   EventCreate,
   EventRead,
@@ -236,6 +250,9 @@ part 'serializers.g.dart';
   PostPermissionRead,
   PostRead,
   PostUpdate,
+  PreregMemberCreate,
+  PreregMemberRead,
+  PreregMemberUpdate,
   PriorityDB,
   RoomBookingCreate,
   RoomBookingRead,
@@ -266,6 +283,7 @@ part 'serializers.g.dart';
   UserAccessUpdate,
   UserCreate,
   UserEventRead,
+  UserForEventSignupRead,
   UserInEventRead,
   UserInGroupRead,
   UserPostRead,
@@ -301,6 +319,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(UpdateUserMemberMultiple)]),
         () => ListBuilder<UpdateUserMemberMultiple>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EncloseMooseLevelRead)]),
+        () => ListBuilder<EncloseMooseLevelRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(ElectionMemberRead)]),
@@ -343,6 +365,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<MooseGameRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PreregMemberCreate)]),
+        () => ListBuilder<PreregMemberCreate>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdRead)]),
         () => ListBuilder<AdRead>(),
       )
@@ -359,6 +385,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<NollningGroupRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PreregMemberRead)]),
+        () => ListBuilder<PreregMemberRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(EventSignupRead)]),
         () => ListBuilder<EventSignupRead>(),
       )
@@ -369,6 +399,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(TagRead)]),
         () => ListBuilder<TagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EncloseMooseSubmissionRead)]),
+        () => ListBuilder<EncloseMooseSubmissionRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdventureMissionRead)]),

@@ -15,6 +15,10 @@ Name | Type | Description | Notes
 **maxPoints** | **int** |  | 
 **minPoints** | **int** |  | 
 **nollningWeek** | **int** |  | 
+**missionCategory** | **String** |  | [optional] 
+**unlockCode** | **String** |  | [optional] 
+**unlockHintSv** | **String** |  | [optional] 
+**unlockHintEn** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

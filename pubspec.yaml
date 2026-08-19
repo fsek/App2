@@ -13,7 +13,7 @@ description: Mobile application for the F-guild
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 #
 
-version: 1.28.6122+1
+version: 1.29.6122+1
 
 environment:
   sdk: '>=3.10.0 <4.0.0'
@@ -76,7 +76,6 @@ dependencies:
   url_launcher_web: any
   # flutter_web_plugins: any
   html: any
-  photo_view: ^0.15.0
   package_info_plus: ^9.0.0
   connectivity_plus: ^7.0.0
   vector_math: any
@@ -115,16 +114,25 @@ flutter:
     - assets/img/
     - assets/img/moose_game/
     - assets/img/memes/
-    - assets/data/nollning_25/calendar/
-    - assets/data/nollning_25/nolleguide/
-    - assets/data/nollning_25/nolleguide/kladguide/
-    - assets/data/nollning_25/nolleguide/homescreen/
-    - assets/data/nollning_25/uppdrag/
-    - assets/data/nollning_25/nolleguide/studentlivet/
-    - assets/data/nollning_25/nolleguide/studentlivet/fsek/
-    - assets/data/nollning_25/
-    - assets/data/nollning_25/schema/
-    - assets/data/nollning_25/homescreen/
+    - assets/data/nollning_26/homescreen/
+    - assets/data/nollning_26/schema/
+    - assets/data/nollning_26/nolleguide/homescreen/
+    - assets/data/nollning_26/nolleguide/studentlife/
+    - assets/data/nollning_26/nolleguide/studentlife/building_blocks/
+    - assets/data/nollning_26/nolleguide/studentlife/faculty/
+    - assets/data/nollning_26/nolleguide/studentlife/guild/
+    - assets/data/nollning_26/nolleguide/studentlife/lund/
+    - assets/data/nollning_26/nolleguide/
+    - assets/data/nollning_26/nolleguide/dresscode/
+    - assets/data/nollning_26/nolleguide/sandwich/
+    - assets/data/nollning_26/homescreen/lvl_0/
+    - assets/data/nollning_26/homescreen/lvl_1/
+    - assets/data/nollning_26/homescreen/lvl_2/
+    - assets/data/nollning_26/homescreen/lvl_3/
+    - assets/data/nollning_26/homescreen/lvl_4/
+    - assets/data/nollning_26/calendar/
+    - assets/data/nollning_26/map/
+    - assets/data/nollning_26/map/pin_media/
 
   fonts:
     - family: Brandon Grotesque
@@ -145,6 +153,9 @@ flutter:
           weight: 500
         - asset: assets/fonts/MinionPro-Bold.otf
           weight: 900
+    - family: Consolas
+      fonts:
+        - asset: assets/fonts/Consolas-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

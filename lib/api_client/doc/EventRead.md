@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **canSignup** | **bool** |  | 
 **drinkPackage** | **bool** |  | 
 **isNollningEvent** | **bool** |  | 
+**mentorGroupTypes** | **BuiltList&lt;String&gt;** |  | 
+**allowOtherMentors** | **bool** |  | 
 **alcoholEventType** | **String** |  | 
 **dressCode** | **String** |  | 
 **price** | **int** |  | 
