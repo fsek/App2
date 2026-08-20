@@ -74,7 +74,7 @@ class _GameChooserState extends State<GameChooserPage> with SingleTickerProvider
 
           Expanded(
             child: _filteredImage(
-              "assets/img/moose_game/logo.png",
+              "assets/img/moose_game/space_logo.png",
               extraChild: Center(
                 child: TextButton(
                   onPressed: () => Navigator.of(context).push(
