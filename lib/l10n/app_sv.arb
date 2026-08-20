@@ -14,6 +14,12 @@
     "other" : "Övrigt",
     "introduction" : "Nollning",
 
+    "verifyEmailBanner": "Ditt konto är inte verifierat. Verifiera din e-post för att få full åtkomst.",
+    "verifyEmailAction": "Skicka mejl",
+    "verifyEmailSent": "Ett verifieringsmejl har skickats.",
+    "verifyEmailSentShort": "Skickat",
+    "verifyEmailFailed": "Kunde inte skicka verifieringsmejl, försök igen senare.",
+
     "loginRequiredField": "Obligatoriskt fält",
     "loginEmail": "E-postadress",
     "loginPassword": "Lösenord",
