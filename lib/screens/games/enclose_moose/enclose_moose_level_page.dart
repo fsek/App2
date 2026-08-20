@@ -761,13 +761,26 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
   Widget Function(BuildContext) _buildDayChooserDialog() {
     final t = AppLocalizations.of(context)!;
+    final targetKey = GlobalKey();
 
-    return (context) => AlertDialog(
-      contentPadding: const EdgeInsets.all(16),
-      constraints: BoxConstraints(maxHeight: 400, minWidth: MediaQuery.of(context).size.width),
-      scrollable: true,
-      content:
-        Column(
+    return (context) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final targetContext = targetKey.currentContext;
+
+        if (targetContext != null) {
+          Scrollable.ensureVisible(
+            targetContext,
+            alignment: 0.5,
+            duration: Duration.zero,
+          );
+        }
+      });
+
+      return AlertDialog(
+        contentPadding: const EdgeInsets.all(16),
+        constraints: BoxConstraints(maxHeight: 400, minWidth: MediaQuery.of(context).size.width),
+        scrollable: true,
+        content: Column(
           spacing: 20,
           children: [
             Column(
@@ -783,6 +796,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   ),
 
                 ..._dailies.map((level) => Card.outlined(
+                  key: level.levelId != _usedLevel.levelId ? null : targetKey,
                   color: level.levelId != _usedLevel.levelId ? null : Colors.amber.withAlpha(100),
                   child: ListTile(
                     onTap: () {
@@ -833,6 +847,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   ),
 
                 ..._nonDailies.map((level) => Card.outlined(
+                  key: level.levelId != _usedLevel.levelId ? null : targetKey,
                   color: level.levelId != _usedLevel.levelId ? null : Colors.amber.withAlpha(100),
                   child: ListTile(
                     onTap: () {
@@ -858,7 +873,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             ),
           ]
         )
-    );
+      );
+    };
   }
 
   Widget Function(BuildContext) _buildHelpDialog() {

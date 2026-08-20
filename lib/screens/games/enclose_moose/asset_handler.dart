@@ -218,7 +218,7 @@ class AssetHandler {
       ("I'm moosing it!", "${baseAudioPath}moosing_it.mp3"),
       ("Iiit's moosing tiiime!", "${baseAudioPath}moosing_time.mp3"),
       ("Moo! You will never catch me", "${baseAudioPath}never_catch_me.mp3"),
-      ("You will never be able to enclose meee!", "${baseAudioPath}never_be_able_to_enclose_me.mp3"),
+      ("You will never be able to enclose ME!", "${baseAudioPath}never_be_able_to_enclose_me.mp3"),
       ("I'm out of here!", "${baseAudioPath}out_of_here.mp3"),
       ("Moo! I'll sneak away like sooo...", "${baseAudioPath}sneak_away_like_so_2.mp3"),
       ("I'll sneak away like sooo... Moohoho", "${baseAudioPath}sneak_away_like_so_3.mp3"),
