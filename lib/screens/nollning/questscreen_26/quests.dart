@@ -24,11 +24,11 @@ class _QuestScreenState extends State<QuestScreen>
   dynamic selectedMission;
   late TabController _tabController;
 
-  String bakgrund = "assets/data/nollning_25/uppdrag/bakgrund.png";
-  String avklarad = "assets/data/nollning_25/uppdrag/bricka-avklarad.png";
-  String bedomning = "assets/data/nollning_25/uppdrag/bricka-bedomning.png";
-  String misslyckad = "assets/data/nollning_25/uppdrag/bricka-misslyckad.png";
-  String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
+  String bakgrund = "assets/data/nollning_26/uppdrag/bakgrund.png";
+  String avklarad = "assets/data/nollning_26/uppdrag/bricka-avklarad.png";
+  String bedomning = "assets/data/nollning_26/uppdrag/bricka-bedomning.png";
+  String misslyckad = "assets/data/nollning_26/uppdrag/bricka-misslyckad.png";
+  String rubrik = "assets/data/nollning_26/uppdrag/rubrik.png";
   String ej_vald = "assets/data/nollning_26/uppdrag/ej_vald.png";
   String vald = "assets/data/nollning_26/uppdrag/vald.png";
   String done_check = "assets/data/nollning_26/uppdrag/done_check.png";
