@@ -110,35 +110,38 @@ class EncloseGrid extends ChangeNotifier {
     return escapeDirections;
   }
 
-  EncloseGridTile? getDirectionalNeighbor(EncloseGridTile tile, AxisDirection direction) {
-    final escapeDirections = getEscapeDirections(tile);
-    if (escapeDirections.contains(direction)) {
+  EncloseGridTile? getDirectionalNeighbor(EncloseGridTile tile, AxisDirection direction, {AxisDirection? secondaryDirection}) {
+    Set<AxisDirection> escapeDirections = getEscapeDirections(tile);
+    if (escapeDirections.contains(direction) || escapeDirections.contains(secondaryDirection)) {
       return null;
     }
 
-    if (direction == AxisDirection.left) {
-      return flatGrid[tile.index - 1];
-    }
-    if (direction == AxisDirection.up) {
-      return flatGrid[tile.index - gridWidth];
-    }
-    if (direction == AxisDirection.right) {
-      return flatGrid[tile.index + 1];
-    }
-    if (direction == AxisDirection.down) {
-      return flatGrid[tile.index + gridWidth];
-    }
+    final directionOffsetDict = {
+      AxisDirection.left: -1,
+      AxisDirection.up: -gridWidth,
+      AxisDirection.right: 1,
+      AxisDirection.down: gridWidth,
+    };
+    final flatIndex = tile.index + directionOffsetDict[direction]! + (directionOffsetDict[secondaryDirection] ?? 0);
 
-    return null;
+    return flatGrid[flatIndex];
   }
 
-  Set<EncloseGridTile> getNeighbors(EncloseGridTile tile) {
-    final Set<EncloseGridTile> neighbors = {
+  Iterable<EncloseGridTile?> getNeighbors(EncloseGridTile tile, {bool includeDiagonal = false, bool keepNulls = false}) {
+    final List<EncloseGridTile?> neighbors = [
       getDirectionalNeighbor(tile, AxisDirection.left),
       getDirectionalNeighbor(tile, AxisDirection.up),
       getDirectionalNeighbor(tile, AxisDirection.right),
       getDirectionalNeighbor(tile, AxisDirection.down)
-    }.nonNulls.toSet();
+    ];
+    if (includeDiagonal) {
+      neighbors.addAll([
+        getDirectionalNeighbor(tile, AxisDirection.left, secondaryDirection: AxisDirection.up),
+        getDirectionalNeighbor(tile, AxisDirection.right, secondaryDirection: AxisDirection.up),
+        getDirectionalNeighbor(tile, AxisDirection.left, secondaryDirection: AxisDirection.down),
+        getDirectionalNeighbor(tile, AxisDirection.right, secondaryDirection: AxisDirection.down)
+      ]);
+    }
 
     if (tile.isPortal) {
       for (final portalTile in portals[tile.portalIndex!]!) {
@@ -148,8 +151,12 @@ class EncloseGrid extends ChangeNotifier {
       }
     }
 
+    if (!keepNulls) {
+      return neighbors.nonNulls.toSet();
+    }
+
     return neighbors;
-  }
+  }  
 
   void updateEnclosure() {
     // BFS from moosey.
@@ -168,7 +175,7 @@ class EncloseGrid extends ChangeNotifier {
       final current = queue.removeFirst();
 
       for (final neighbor in getNeighbors(current)) {
-        final isVisited = visited.containsKey(neighbor);
+        final isVisited = visited.containsKey(neighbor!);
         if (isVisited || !neighbor.isOpen) continue;
 
         parentMap[neighbor] = current;

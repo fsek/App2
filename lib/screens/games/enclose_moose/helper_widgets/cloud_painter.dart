@@ -27,7 +27,7 @@ class CloudPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width * 0.5, size.height * 0.5);
-    final a = size.width * 0.5;
+    final a = size.width * 0.5;  // could divide by sqrt(2) to ensure the bounds are enclosed within the ellipse but then the size becomes more unpredictable and harder for the dots
     final b = size.height * 0.5;
 
     final numPuffs = minPuffs + _rng.nextInt(puffVariance);

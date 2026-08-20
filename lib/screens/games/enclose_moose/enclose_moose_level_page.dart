@@ -262,7 +262,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
               //   fit: BoxFit.fill
               // )
               child: Container(
-                color: Color(0xFF014421)
+                color: Color(0xFF00501f)
               )
             ),
 
@@ -293,7 +293,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
                           return SizedBox(
                             width: _grid.gridWidth * cellSize,
-                            height: _grid.gridHeight * cellSize,
+                            height: _grid.gridHeight * cellSize + 0.0000001,  // Adds a really small height, which for some reason sometimes fixes allowing clipping
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -309,15 +309,15 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                     // final reverseFramOffset = frameOffset == null ? null : maxOffset - _grid.getDistance(tile, includeExpand: false)!;
                                     // final reverseWaitTime = reverseFramOffset == null ? null : wheatFrameDuration * reverseFramOffset;
 
-                                    final neighboringWater = !tile.isWater ? null : [AxisDirection.left, AxisDirection.up, AxisDirection.right, AxisDirection.down].map(
-                                      (direction) => !(_grid.getDirectionalNeighbor(tile, direction)?.isWater ?? false)
+                                    final neighboringWater = !tile.isWater ? null : _grid.getNeighbors(tile, includeDiagonal: true, keepNulls: true).map(
+                                      (neighbor) => !(neighbor?.isWater ?? false)
                                     ).toList();
 
                                     return Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors.green[900]!,
-                                          width: 0  // as thin as possible
+                                          width: cellSize / 100
                                         )
                                       ),
                                       child: OverflowBox(
@@ -327,7 +327,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                           tile: tile,
                                           vsync: this,
                                           idleController: _idleController,
-                                          tileRandom: math.Random(_usedLevel.levelId.hashCode + tile.index.hashCode),
+                                          tileRandomFunction: () => math.Random(_usedLevel.levelId.hashCode + tile.index.hashCode),
                                           onTap: () => _tapTile(tile),
                                           portalFilter: _portalFilters[tile.portalIndex],
                                           neighboringWater: neighboringWater,

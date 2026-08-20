@@ -35,7 +35,7 @@ class EncloseGridTile extends ChangeNotifier {
     required this.index,
     required this.rowIndex,
     required this.columnIndex,
-    required EncloseGridCellType type,
+    required type,
     required this.bonusScore,
     this.portalIndex
   }) : _type = type;

@@ -13,7 +13,7 @@ class TileWidget extends StatelessWidget {
     required this.tile,
     required this.vsync,
     required this.idleController,
-    required this.tileRandom,
+    required this.tileRandomFunction,
     required this.onTap,
     this.portalFilter,
     this.neighboringWater,
@@ -23,22 +23,22 @@ class TileWidget extends StatelessWidget {
   final EncloseGridTile tile;
   final TickerProvider vsync;
   final AnimationController idleController;
-  final Random tileRandom;
+  final Random Function() tileRandomFunction;
   final VoidCallback onTap;
   final ColorFilter? portalFilter;
   final List<bool>? neighboringWater;
   final RestrictedCallCounter? tooltipCallCounter;
 
-  late final idleFrames = AssetHandler.getIdleFrames(tile.type, random: tileRandom, extra: !tile.isWater ? null : neighboringWater);
-  final wheatFrameDuration = Duration(milliseconds: 40);
+  final _wheatFrameDuration = Duration(milliseconds: 40);
+  static const _neighborIndexCorners = [(4, 0, 1), (5, 2, 1), (7, 2, 3), (6, 0, 3)];  // This is pretty shit but first is the index of the diagonal (from the order in getNeighbors), then the two indices for the directions it is composed of
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: tile,
       builder: (context, child) {
-        final waitTime = tile.waitFrames == null ? null : wheatFrameDuration * tile.waitFrames!;
-        final reverseWaitTime = tile.reverseWaitFrames == null ? null : wheatFrameDuration * tile.reverseWaitFrames!;
+        final waitTime = tile.waitFrames == null ? null : _wheatFrameDuration * tile.waitFrames!;
+        final reverseWaitTime = tile.reverseWaitFrames == null ? null : _wheatFrameDuration * tile.reverseWaitFrames!;
 
         return GestureDetector(
           onTap: onTap,
@@ -52,7 +52,7 @@ class TileWidget extends StatelessWidget {
                 AnimatedSprite(
                   key: Key("grass"),  // keys needed because otherwise it would sometimes confuse them, leading to incorrect didUpdateWidget calls
                   vsync: vsync,
-                  idleFrames: idleFrames,
+                  idleFrames: AssetHandler.getIdleFrames(tile.type, extra: tileRandomFunction()),
                   idleController: idleController
                 ),
 
@@ -62,21 +62,38 @@ class TileWidget extends StatelessWidget {
                   key: Key("wheat"),
                   vsync: vsync,
                   shouldAnimate: tile.isEnclosed,
-                  animationFrames: tile.isGrass ? AssetHandler.animationWheatFrames : AssetHandler.emptyWheatFrames,  // Would rather not animate emptyWheatFrames
-                  animationFrameDuration: wheatFrameDuration,
+                  animationFrames: AssetHandler.animationWheatFrames,
+                  animationFrameDuration: _wheatFrameDuration,
                   animationWaitTime: waitTime,
                   animationReverseWaitTime: reverseWaitTime,
-                  endIdleFrames: tile.isGrass ? AssetHandler.idleWheatFrames : AssetHandler.emptyWheatFrames,
+                  endIdleFrames: AssetHandler.idleWheatFrames,
                   idleController: idleController
                 )
-              else
+              else ...[
                 // Water
                 AnimatedSprite(
                   key: Key("water"),
                   vsync: vsync,
-                  idleFrames: idleFrames,
+                  idleFrames: AssetHandler.getIdleFrames(tile.type, extra: (tileRandomFunction(), neighboringWater)),
                   idleController: idleController
                 ),
+
+                ..._neighborIndexCorners.indexed.map((indexedIndexCorner) {
+                  final indexCorner = indexedIndexCorner.$2;
+                  if (!neighboringWater![indexCorner.$1] || neighboringWater![indexCorner.$2] || neighboringWater![indexCorner.$3]) return SizedBox.shrink();  // Check if the extra is not needed on this corner
+
+                  final index = indexedIndexCorner.$1;
+
+                  return RotatedBox(
+                    quarterTurns: index,
+                    child: AnimatedSprite(
+                      vsync: vsync,
+                      idleFrames: AssetHandler.cornerIdleWaterFrames,
+                      idleController: idleController
+                    )
+                  );
+                }).nonNulls,
+              ],
 
               // Wall
               AnimatedSprite(
@@ -108,7 +125,7 @@ class TileWidget extends StatelessWidget {
                   child: AnimatedSprite(
                     key: Key("portal"),
                     vsync: vsync,
-                    idleFrames: idleFrames,
+                    idleFrames: AssetHandler.getIdleFrames(tile.type),
                     idleController: idleController
                   )
                 ),
@@ -118,13 +135,13 @@ class TileWidget extends StatelessWidget {
                 AnimatedSprite(
                   key: Key("bonus"),
                   vsync: vsync,
-                  animationFrames: AssetHandler.getAnimationFrames(tile.type),
+                  animationFrames: AssetHandler.getAnimationFrames(tile.type, extra: tile.isEnclosed),
                   shouldAnimate: tile.isEnclosed,
                   animationFrameDuration: const Duration(milliseconds: 100),  // This means the total animation time is way longer than for wheat, which can lead to some weird looking behavior but worth it
                   animationWaitTime: waitTime,
                   animationReverseWaitTime: reverseWaitTime,
-                  startIdleFrames: idleFrames,
-                  endIdleFrames: AssetHandler.getAnimationFrames(EncloseGridCellType.apple),
+                  startIdleFrames: AssetHandler.getIdleFrames(tile.type, extra: true),
+                  endIdleFrames: AssetHandler.getIdleFrames(tile.type, extra: false),
                   idleController: idleController
                 ),
 
@@ -132,7 +149,7 @@ class TileWidget extends StatelessWidget {
                 AnimatedSprite(
                   key: Key("moose"),
                   vsync: vsync,
-                  idleFrames: idleFrames,
+                  idleFrames: AssetHandler.getIdleFrames(tile.type),
                   idleController: idleController
                 ),
 
