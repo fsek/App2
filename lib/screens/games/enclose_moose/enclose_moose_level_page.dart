@@ -12,6 +12,7 @@ import "enclose_grid.dart";
 import "enclose_grid_tile.dart";
 import "call_counter.dart";
 import "tile_widget.dart";
+import "asset_handler.dart";
 import "helper_widgets/wiggling_widget.dart";
 import "helper_widgets/outlined_text.dart";
 import "helper_widgets/highlighted_text.dart";
@@ -64,7 +65,6 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
   // bool panPlacesWalls = true;
 
-  math.Random _mooseThoughtRandom = math.Random();
   String _mooseThought = "";
   AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -418,7 +418,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                     _openCallCounter
                                   ]),
                                   builder: (context, child) {
-                                    const thoughtCloudWidth = 200;  // Would like this to be dynamic in some way but don't know how? Would have to specify the center coordinate
+                                    const thoughtCloudWidth = 150;  // Would like this to be dynamic in some way but don't know how? Would have to specify the center coordinate
 
                                     return Stack(
                                       clipBehavior: Clip.none,
@@ -448,7 +448,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                             child: AnimatedThoughtBubble(
                                               isVisible: (_openCallCounter.getCount("thinking") ?? 0) != 0,
                                               text: _mooseThought,
-                                              color: Colors.white.withAlpha(180),
+                                              color: Colors.white.withAlpha(200),
                                               idleController: _idleController
                                             )
                                           )
@@ -665,7 +665,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     }
   }
 
-  void _tapTile(EncloseGridTile tile) {
+  void _tapTile(EncloseGridTile tile) async {
     if (_grid.wallsLeft == 0 && tile.isGrass) {
       _openCallCounter.increment("walls", 0, duration: const Duration(seconds: 1));
     } else if (tile.canToggleWall) {
@@ -690,24 +690,17 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     }
 
     if (tile.isMoose) {
+      final mooseVoiceline = AssetHandler.getMooseVoiceline(_grid.escapePath == null);
+      _mooseThought = mooseVoiceline.$1;
+      _audioPlayer.release();  // Doesn't otherwise happen if the same voiceline is chosen
+      _audioPlayer.play(AssetSource(mooseVoiceline.$2));
+
+      final voicelineDuration = await _audioPlayer.onDurationChanged.first;
       if (_grid.escapePath != null) {
-        _openCallCounter.increment("escape", 0, duration: const Duration(seconds: 5));
+        _openCallCounter.increment("escape", 0, duration: voicelineDuration);
       }
 
-      _openCallCounter.increment("thinking", 0, duration: const Duration(seconds: 5));
-
-      const freeMooseThoughts = [
-        ("audio/moose.mp4", "I can go thiiiis way \n *neigh*"),
-        ("audio/moose2.mp4", "moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-      ];
-      const enclosedMooseThoughts = [
-        ("audio/moose.mp4", "I don't wanna be enclosed ):")
-      ];
-
-      final possibleThoughts = _grid.escapePath != null ? freeMooseThoughts : enclosedMooseThoughts;
-      final mooseThoughtIndex = _mooseThoughtRandom.nextInt(possibleThoughts.length);
-      _mooseThought = possibleThoughts[mooseThoughtIndex].$2;
-      _audioPlayer.play(AssetSource(possibleThoughts[mooseThoughtIndex].$1));
+      _openCallCounter.increment("thinking", 0, duration: voicelineDuration);
     }
 
     if (tile.isBonus) {
