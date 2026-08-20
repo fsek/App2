@@ -14,6 +14,12 @@
     "other" : "Other",
     "introduction" : "Introduction",
 
+    "verifyEmailBanner": "Your account is not verified. Verify your email to get full access.",
+    "verifyEmailAction": "Send email",
+    "verifyEmailSent": "A verification email has been sent.",
+    "verifyEmailSentShort": "Sent",
+    "verifyEmailFailed": "Could not send verification email, please try again later.",
+
     "loginRequiredField": "Required field",
     "loginEmail": "Email",
     "loginPassword": "Password",

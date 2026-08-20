@@ -164,6 +164,36 @@ abstract class AppLocalizations {
   /// **'Nollning'**
   String get introduction;
 
+  /// No description provided for @verifyEmailBanner.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ditt konto är inte verifierat. Verifiera din e-post för att få full åtkomst.'**
+  String get verifyEmailBanner;
+
+  /// No description provided for @verifyEmailAction.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skicka mejl'**
+  String get verifyEmailAction;
+
+  /// No description provided for @verifyEmailSent.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ett verifieringsmejl har skickats.'**
+  String get verifyEmailSent;
+
+  /// No description provided for @verifyEmailSentShort.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skickat'**
+  String get verifyEmailSentShort;
+
+  /// No description provided for @verifyEmailFailed.
+  ///
+  /// In sv, this message translates to:
+  /// **'Kunde inte skicka verifieringsmejl, försök igen senare.'**
+  String get verifyEmailFailed;
+
   /// No description provided for @loginRequiredField.
   ///
   /// In sv, this message translates to:

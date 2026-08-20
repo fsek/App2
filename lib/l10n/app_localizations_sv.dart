@@ -42,6 +42,23 @@ class AppLocalizationsSv extends AppLocalizations {
   String get introduction => 'Nollning';
 
   @override
+  String get verifyEmailBanner =>
+      'Ditt konto är inte verifierat. Verifiera din e-post för att få full åtkomst.';
+
+  @override
+  String get verifyEmailAction => 'Skicka mejl';
+
+  @override
+  String get verifyEmailSent => 'Ett verifieringsmejl har skickats.';
+
+  @override
+  String get verifyEmailSentShort => 'Skickat';
+
+  @override
+  String get verifyEmailFailed =>
+      'Kunde inte skicka verifieringsmejl, försök igen senare.';
+
+  @override
   String get loginRequiredField => 'Obligatoriskt fält';
 
   @override
