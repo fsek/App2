@@ -97,7 +97,6 @@ class _GuildPageState extends State<GuildPage> {
     }
 
     final String boardPortrait = portrait("board");
-    final String boardmemberPortrait = portrait("boardmember");
     final String bookPortrait = portrait("book");
     final String bookfosPortrait = portrait("bookfos");
     final String cafePortrait = portrait("cafe");
@@ -123,6 +122,10 @@ class _GuildPageState extends State<GuildPage> {
     final String spiderPortrait = portrait("spider");
     final String sponsfosPortrait = portrait("sponsfos");
     final String sportPortrait = portrait("sport");
+    final String styrelse1Portrait = portrait("styrelse1");
+    final String styrelse2Portrait = portrait("styrelse2");
+    final String styrelse3Portrait = portrait("styrelse3");
+    final String styrelse4Portrait = portrait("styrelse4");
     final String tavernPortrait = portrait("tavern");
     final String treasurerPortrait = portrait("treasurer");
     final String truthPortrait = portrait("truth");
@@ -176,8 +179,16 @@ class _GuildPageState extends State<GuildPage> {
             onTap: () => pushNavigator(index: 9, imagePath: boardPortrait)),
       ]),
       PortraitRow(portraits: [
-        PortraitData(imagePath: boardmemberPortrait, flex: smallPortraitFlex,
-            onTap: () => pushNavigator(index: 10, imagePath: boardmemberPortrait)),
+        PortraitData(imagePath: styrelse1Portrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: styrelse1Portrait)),
+        PortraitData(imagePath: styrelse2Portrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: styrelse2Portrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: styrelse3Portrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: styrelse3Portrait)),
+        PortraitData(imagePath: styrelse4Portrait, flex: doublePortraitFlex,
+            onTap: () => pushNavigator(index: 10, imagePath: styrelse4Portrait)),
       ]),
       Image.asset(studentcouncilTitle),
       PortraitRow(portraits: [
