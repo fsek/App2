@@ -37,16 +37,7 @@ class ForgottenPassword {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Container(
-                              width: 220.0,
-                              child: Text(
-                                contentText,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  //fontWeight: FontWeight.w600,
-                                  //color: Colors.black,
-                                ),
-                              )),
+                          child: Text(contentText),
                         ),
                         Visibility(
                           visible: notClicked,
@@ -73,17 +64,9 @@ class ForgottenPassword {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Stack(children: <Widget>[
-                              ElevatedButton(
+                              TextButton(
                                   key: Key('submit_btn'),
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context).colorScheme.primary),
-                                  child: Text(
-                                    t.resetSubmit,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: Theme.of(context).colorScheme.onSecondary,
-                                    ),
-                                  ),
+                                  child: Text(t.resetSubmit),
                                   onPressed: () {
                                     setState(() {
                                       resetController.text.isEmpty

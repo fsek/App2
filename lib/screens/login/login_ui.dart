@@ -212,18 +212,12 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       ) {
         final _loginButton = ScaleTransition(
             scale: loginBtnAnimation as Animation<double>,
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                ),
+            child: TextButton(
                 key: Key("login_btn"),
                 onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
                 child: Text(
                   t.loginLogIn,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary, 
-                    fontSize: 16
-                  ),
+                  style: TextStyle(fontSize: 16),
                 )));
         final _loadingIcon =
             ScaleTransition(scale: loadingAnimation as Animation<double>, child: CircularProgressIndicator());
