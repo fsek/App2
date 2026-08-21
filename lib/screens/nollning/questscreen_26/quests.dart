@@ -50,7 +50,7 @@ class _QuestScreenState extends State<QuestScreen>
   String poke_kort = "assets/data/nollning_26/uppdrag/pokekort_exkl.jpg";
   String clouds = "assets/data/nollning_26/uppdrag/clouds.png";
   String turn_in_sv = "assets/data/nollning_26/uppdrag/lämna_in_uppdrag.png";
-  String turn_in_en = "assets/data/nollning_26/uppdrag/turn_in_quests.png";
+  String turn_in_en = "assets/data/nollning_26/uppdrag/turn_in_quest.png";
   String vecka_0 = "assets/data/nollning_26/uppdrag/vecka0.png";
   String vecka_1 = "assets/data/nollning_26/uppdrag/vecka1.png";
   String vecka_2 = "assets/data/nollning_26/uppdrag/vecka2.png";
@@ -517,7 +517,7 @@ class _QuestScreenState extends State<QuestScreen>
                       width: widget.availableHeight * 0.35,
                       height: widget.availableHeight * 0.35,
                       _pixelArt(mission),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -691,7 +691,7 @@ class _QuestScreenState extends State<QuestScreen>
                       width: widget.availableHeight * 0.35,
                       height: widget.availableHeight * 0.35,
                       _pixelArt(mission),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
