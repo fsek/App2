@@ -145,6 +145,12 @@ class _MapViewState extends State<MapView> {
       // ),
       backgroundColor: const Color(0xFFFF00FF),
       contentPadding: const EdgeInsets.all(20),
+      /*  // Could add this but scrollable ones look a bit worse (imo)
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.6
+      ),
+      */
+      scrollable: true,
       content: Container(
         padding: const EdgeInsets.all(0),
         decoration: const BoxDecoration(
