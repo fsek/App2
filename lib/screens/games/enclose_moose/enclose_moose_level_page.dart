@@ -59,6 +59,9 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   final CallCounter<EncloseGridTile, String> _tooltipCallCounter = CallCounter();
   final CallCounter<int, List<int>> _portalCallCounter = CallCounter();
 
+  final Map<EncloseGridTile, RestrictedCallCounter<EncloseGridTile, String>> _tileTooltipCallCounters = {};  
+  // Save these so we don't make new ones every time the grid rebuilds.
+
   late final Map<int, ColorFilter> _portalFilters = Map.fromIterables(_grid.portals.keys, _grid.portals.keys.map(
     (portalIndex) => ColorFilter.matrix(_hueRotationMatrix(_portalOffset + 360 * portalIndex / _grid.portals.length))
   ));  // Precompute these for performance
@@ -79,6 +82,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   void dispose() {
     _idleController.dispose();
     _audioPlayer.dispose();
+
+    for (final tileTooltipCallCounter in _tileTooltipCallCounters.values) {
+      tileTooltipCallCounter.dispose();  
+    }
 
     _openCallCounter.dispose();
     _tooltipCallCounter.dispose();
@@ -331,9 +338,12 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                           onTap: () => _tapTile(tile),
                                           portalFilter: _portalFilters[tile.portalIndex],
                                           neighboringWater: neighboringWater,
-                                          tooltipCallCounter: RestrictedCallCounter(
-                                            callCounter: _tooltipCallCounter,
-                                            key: tile
+                                          tooltipCallCounter: _tileTooltipCallCounters.putIfAbsent(
+                                            tile, // key used
+                                            () => RestrictedCallCounter(
+                                              callCounter: _tooltipCallCounter,
+                                              key: tile
+                                            )
                                           )
                                         )
                                       )
@@ -954,7 +964,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     String grade;
     if (_usedLevel.playerSubmission!.playerScore == _usedLevel.optimalScore) {
       grade = "PERFECT!!! 💎";
-    } else if (percentile >= 0.5) {
+    } else if (percentile >= 0.75) {
       grade = "Pretty good! ✅";
     } else if (percentile >= 0.5) {
       grade = "Not bad! ✅";
