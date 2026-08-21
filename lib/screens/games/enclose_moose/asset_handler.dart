@@ -97,8 +97,7 @@ class AssetHandler {
         if (returnAll) {
           List<String> waters = [];
           for (final i in List.generate(16, (index) => index)) {
-            String binaryString = i.toRadixString(2);
-            binaryString += List.generate(4 - binaryString.length, (i) => "0").join("");
+            final binaryString = i.toRadixString(2).padLeft(4, "0");
 
             if (binaryString == "0000") {
               waters.addAll([
