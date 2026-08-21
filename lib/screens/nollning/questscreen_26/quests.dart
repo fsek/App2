@@ -510,7 +510,7 @@ class _QuestScreenState extends State<QuestScreen>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: widget.availableHeight * 0.23),
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.27),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Image.asset(
@@ -522,7 +522,7 @@ class _QuestScreenState extends State<QuestScreen>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: widget.availableHeight * 0.13),
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.14),
                   child: Row(
                     children: [
                       Image.asset(
@@ -555,7 +555,7 @@ class _QuestScreenState extends State<QuestScreen>
                   padding: EdgeInsets.only(left: 30, right: 30),
                   child: Column(
                     children: [
-                      SizedBox(height: widget.availableHeight * 0.65),
+                      SizedBox(height: widget.availableHeight * 0.73),
                       Text(
                         t.localeName == "sv"
                             ? (mission.descriptionSv.length <= 180
@@ -590,7 +590,7 @@ class _QuestScreenState extends State<QuestScreen>
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    bottom: widget.availableHeight * 0.11,
+                    bottom: widget.availableHeight * 0.13,
                   ),
                   child: Align(
                     alignment: Alignment.bottomCenter,
@@ -684,7 +684,7 @@ class _QuestScreenState extends State<QuestScreen>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: widget.availableHeight * 0.23),
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.27),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Image.asset(
@@ -696,7 +696,7 @@ class _QuestScreenState extends State<QuestScreen>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: widget.availableHeight * 0.13),
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.14),
                   child: Row(
                     children: [
                       Image.asset(
@@ -736,7 +736,7 @@ class _QuestScreenState extends State<QuestScreen>
                   padding: EdgeInsets.only(left: 30, right: 30),
                   child: Column(
                     children: [
-                      SizedBox(height: widget.availableHeight * 0.65),
+                      SizedBox(height: widget.availableHeight * 0.73),
                       Text(
                         t.localeName == "sv"
                             ? (mission.adventureMission.descriptionSv.length <=

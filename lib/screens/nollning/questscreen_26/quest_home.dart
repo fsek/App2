@@ -33,6 +33,9 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double appBarHeight = AppBar().preferredSize.height;
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    double availableHeight = screenHeight - appBarHeight - statusBarHeight;
 
     return DefaultTabController(
       length: 2,
@@ -45,8 +48,9 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
             _controller?.addListener(_handleTabChange);
           }
           return Scaffold(
+            appBar: AppBar(),
             body: Container(
-              height: screenHeight,
+              height: availableHeight,
               width: screenWidth,
               child: Stack(
                 children: [
@@ -90,17 +94,17 @@ class _QuestHomeScreenState extends State<QuestHomeScreen> {
                       ),
                       Container(
                         width: screenWidth,
-                        height: screenHeight - (screenHeight / 8),
+                        height: availableHeight - (screenHeight / 8),
                         child: TabBarView(
                           children: [
                             QuestScreen(
                               availableHeight:
-                                  screenHeight - (screenHeight / 8),
+                                  availableHeight - (screenHeight / 8),
                               availableWidth: screenWidth,
                             ),
                             HighscoreScreen(
                               availableHeight:
-                                  screenHeight - (screenHeight / 8),
+                                  availableHeight - (screenHeight / 8),
                               availableWidth: screenWidth,
                             ),
                           ],
