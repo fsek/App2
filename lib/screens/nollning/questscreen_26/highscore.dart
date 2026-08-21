@@ -20,12 +20,6 @@ class _HighscoreScreenState extends State<HighscoreScreen> {
   Map<NollningGroupRead, int> groupPointsMap = {};
   NollningRead? nollning;
 
-  String avklarad = "assets/data/nollning_25/uppdrag/bricka-avklarad.png";
-  String bedomning = "assets/data/nollning_25/uppdrag/bricka-bedomning.png";
-  String misslyckad = "assets/data/nollning_25/uppdrag/bricka-misslyckad.png";
-  String start = "assets/data/nollning_25/uppdrag/bricka-start.png";
-  String rubrik = "assets/data/nollning_25/uppdrag/rubrik.png";
-
   @override
   void initState() {
     super.initState();
