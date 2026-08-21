@@ -24,11 +24,6 @@ class _QuestScreenState extends State<QuestScreen>
   dynamic selectedMission;
   late TabController _tabController;
 
-  String bakgrund = "assets/data/nollning_26/uppdrag/bakgrund.png";
-  String avklarad = "assets/data/nollning_26/uppdrag/bricka-avklarad.png";
-  String bedomning = "assets/data/nollning_26/uppdrag/bricka-bedomning.png";
-  String misslyckad = "assets/data/nollning_26/uppdrag/bricka-misslyckad.png";
-  String rubrik = "assets/data/nollning_26/uppdrag/rubrik.png";
   String ej_vald = "assets/data/nollning_26/uppdrag/ej_vald.png";
   String vald = "assets/data/nollning_26/uppdrag/vald.png";
   String done_check = "assets/data/nollning_26/uppdrag/done_check.png";
@@ -54,9 +49,22 @@ class _QuestScreenState extends State<QuestScreen>
   String pixelart_alg = "assets/data/nollning_26/uppdrag/pixelart_älg.png";
   String poke_kort = "assets/data/nollning_26/uppdrag/pokekort_exkl.jpg";
   String clouds = "assets/data/nollning_26/uppdrag/clouds.png";
+  String turn_in_sv = "assets/data/nollning_26/uppdrag/lämna_in_uppdrag.png";
+  String turn_in_en = "assets/data/nollning_26/uppdrag/turn_in_quests.png";
+  String vecka_0 = "assets/data/nollning_26/uppdrag/vecka0.png";
+  String vecka_1 = "assets/data/nollning_26/uppdrag/vecka1.png";
+  String vecka_2 = "assets/data/nollning_26/uppdrag/vecka2.png";
+  String vecka_3 = "assets/data/nollning_26/uppdrag/vecka3.png";
+  String vecka_4 = "assets/data/nollning_26/uppdrag/vecka4.png";
+  String week_0 = "assets/data/nollning_26/uppdrag/week0.png";
+  String week_1 = "assets/data/nollning_26/uppdrag/week1.png";
+  String week_2 = "assets/data/nollning_26/uppdrag/week2.png";
+  String week_3 = "assets/data/nollning_26/uppdrag/week3.png";
+  String week_4 = "assets/data/nollning_26/uppdrag/week4.png";
 
   int _checkNollningWeek() {
-    return WeekTracker.determineWeek();
+    return 0;
+    //return WeekTracker.determineWeek();
   }
 
   @override
@@ -353,27 +361,39 @@ class _QuestScreenState extends State<QuestScreen>
   Future<void> _sendMissionAttempt(
     AdventureMissionRead adventureMission,
     BuildContext context,
+    VoidCallback onClose,
   ) async {
     var t = AppLocalizations.of(context)!;
 
     if (adventureMission.nollningWeek != (_checkNollningWeek())) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(t.localeName == "sv" ? "Misslyckat!" : "Failure!"),
-          content: Text(
-            t.localeName == "sv"
-                ? "Misslyckad registrering!\nUppdragsregistrering för denna veckan har stängt!"
-                : "Falied to register mission!\nMission registration for this week has closed!",
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("OK"),
+      late OverlayEntry entry;
+      entry = OverlayEntry(
+        builder: (dialogContext) => Material(
+          color: Colors.black54,
+          child: Center(
+            child: AlertDialog(
+              title: Text(
+                t.localeName == "sv" ? "Misslyckat!" : "Failure!",
+                style: TextStyle(
+                  fontFamily: "Consolas",
+                  fontWeight: FontWeight.w600,
+                  fontSize: widget.availableWidth / 20,
+                  color: Colors.black,
+                ),
+              ),
+              content: Text(
+                t.localeName == "sv"
+                    ? "Misslyckad registrering!\nUppdragsregistrering för denna veckan har stängt!"
+                    : "Falied to register mission!\nMission registration for this week has closed!",
+              ),
+              actions: [
+                TextButton(onPressed: () => entry.remove(), child: Text("OK")),
+              ],
             ),
-          ],
+          ),
         ),
       );
+      Overlay.of(context).insert(entry);
       return;
     }
     try {
@@ -390,102 +410,190 @@ class _QuestScreenState extends State<QuestScreen>
           );
 
       if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(t.localeName == "sv" ? "Lyckat!" : "Success!"),
-            content: Text(
-              t.localeName == "sv"
-                  ? "Uppdragsförsök registerat!"
-                  : "Mission attempt registered",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => setState(() {
-                  Navigator.of(context).pop();
-                  refresh();
-                }),
-                child: Text("OK"),
+        late OverlayEntry entry;
+        entry = OverlayEntry(
+          builder: (dialogContext) => Material(
+            color: Colors.black54,
+            child: Center(
+              child: AlertDialog(
+                title: Text(
+                  t.localeName == "sv" ? "Lyckat!" : "Success!",
+                  style: TextStyle(
+                    fontFamily: "Consolas",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 20,
+                    color: Colors.black,
+                  ),
+                ),
+                content: Text(
+                  t.localeName == "sv"
+                      ? "Uppdragsförsök registerat!"
+                      : "Mission attempt registered",
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      entry.remove();
+                      if (mounted) {
+                        refresh();
+                      }
+                      onClose(); // stänger hela mission-detaljvyn
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
+        Overlay.of(context).insert(entry);
       }
     } catch (e) {
       if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(t.localeName == "sv" ? "Misslyckat!" : "Failure!"),
-            content: Text(
-              t.localeName == "sv"
-                  ? "Misslyckad registrering"
-                  : "Registration failed",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text("OK"),
+        late OverlayEntry entry;
+        entry = OverlayEntry(
+          builder: (dialogContext) => Material(
+            color: Colors.black54,
+            child: Center(
+              child: AlertDialog(
+                title: Text(
+                  t.localeName == "sv" ? "Misslyckat!" : "Failure!",
+                  style: TextStyle(
+                    fontFamily: "Consolas",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 20,
+                    color: Colors.black,
+                  ),
+                ),
+                content: Text(
+                  t.localeName == "sv"
+                      ? "Misslyckad registrering"
+                      : "Registration failed",
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => entry.remove(),
+                    child: Text("OK"),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
+        Overlay.of(context).insert(entry);
       }
     }
   }
 
-  Widget _missionDetails(dynamic mission, BuildContext context) {
+  Widget _missionDetails(
+    dynamic mission,
+    BuildContext context,
+    VoidCallback onClose,
+  ) {
     var t = AppLocalizations.of(context)!;
 
     if (mission is AdventureMissionRead) {
-      return Container(
-        height: widget.availableHeight,
-        width: widget.availableWidth,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(poke_kort, fit: BoxFit.fill, cacheWidth: 1440),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 30, right: 30),
-              child: Column(
-                children: [
-                  SizedBox(height: 40),
-                  Center(
-                    child: Text(
-                      t.localeName == "sv" ? mission.titleSv : mission.titleEn,
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.w600,
-                        fontSize: widget.availableWidth / 10,
-                        color: Colors.black, // Color(0xFFFCBD1D)
+      return Material(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onClose,
+          child: Container(
+            height: widget.availableHeight,
+            width: widget.availableWidth,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    poke_kort,
+                    fit: BoxFit.fill,
+                    cacheWidth: 1440,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.23),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      width: widget.availableHeight * 0.35,
+                      height: widget.availableHeight * 0.35,
+                      _pixelArt(mission),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.13),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        _week_image(mission.nollningWeek, t.localeName == "sv"),
+                        width: widget.availableWidth * 0.22,
                       ),
-                    ),
-                  ),
-                  Text(
-                    t.localeName == "sv"
-                        ? mission.descriptionSv
-                        : mission.descriptionEn,
-                    style: TextStyle(
-                      fontFamily: "MinionPro",
-                      fontWeight: FontWeight.normal,
-                      fontSize: widget.availableWidth / 25,
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      mission.minPoints == mission.maxPoints
-                          ? mission.maxPoints.toString()
-                          : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.w600,
-                        fontSize: widget.availableWidth / 22,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: widget.availableWidth * 0.03,
+                        ),
+                        child: Text(
+                          t.localeName == "sv"
+                              ? (mission.titleSv.length <= 21
+                                    ? mission.titleSv
+                                    : mission.titleSv.substring(0, 18) + "...")
+                              : (mission.titleEn.length <= 21
+                                    ? mission.titleEn
+                                    : mission.titleEn.substring(0, 18) + "..."),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 15,
+                            color: Colors.black, // Color(0xFFFCBD1D)
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  Center(
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 30, right: 30),
+                  child: Column(
+                    children: [
+                      SizedBox(height: widget.availableHeight * 0.65),
+                      Text(
+                        t.localeName == "sv"
+                            ? (mission.descriptionSv.length <= 180
+                                  ? mission.descriptionSv
+                                  : mission.descriptionSv.substring(0, 175) +
+                                        "...")
+                            : (mission.descriptionEn.length <= 180
+                                  ? mission.descriptionEn
+                                  : mission.descriptionEn.substring(0, 175) +
+                                        "..."),
+                        style: TextStyle(
+                          fontFamily: "Consolas",
+                          fontWeight: FontWeight.normal,
+                          fontSize: widget.availableWidth / 20,
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          mission.minPoints == mission.maxPoints
+                              ? mission.maxPoints.toString()
+                              : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
+                          style: TextStyle(
+                            fontFamily: "LoRes12OT",
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 20,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: widget.availableHeight * 0.11,
+                  ),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
                     child: Container(
                       height: widget.availableHeight / 15,
                       width: widget.availableWidth,
@@ -496,59 +604,53 @@ class _QuestScreenState extends State<QuestScreen>
                             Colors.transparent, // Remove highlight transparency
                         borderRadius: BorderRadius.circular(12),
                         onTap: () {
-                          final parentContext = context;
-                          showDialog(
-                            context: parentContext,
-                            builder: (dialogContext) => AlertDialog(
-                              content: Text(
-                                t.localeName == "sv"
-                                    ? "Registera uppdragsförsök?"
-                                    : "Register mission attempt?",
+                          late OverlayEntry dialogEntry;
+                          dialogEntry = OverlayEntry(
+                            builder: (dialogContext) => Material(
+                              color: Colors.black54,
+                              child: Center(
+                                child: AlertDialog(
+                                  content: Text(
+                                    t.localeName == "sv"
+                                        ? "Registrera uppdragsförsök?"
+                                        : "Register quest attempt?",
+                                    style: TextStyle(
+                                      fontFamily: "Consolas",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: widget.availableWidth / 20,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        dialogEntry.remove();
+                                        await _sendMissionAttempt(
+                                          mission,
+                                          context,
+                                          onClose,
+                                        );
+                                      },
+                                      child: Text(t.eventYes),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        dialogEntry.remove();
+                                      },
+                                      child: Text(t.eventNo),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () async {
-                                    Navigator.of(dialogContext).pop();
-                                    await _sendMissionAttempt(
-                                      mission,
-                                      parentContext,
-                                    );
-                                  },
-                                  child: Text(t.eventYes),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(t.eventNo),
-                                ),
-                              ],
                             ),
                           );
+                          Overlay.of(context).insert(dialogEntry);
                         },
                         child: Stack(
                           children: [
                             Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  rubrik,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                t.localeName == "sv"
-                                    ? "Registrera försök"
-                                    : "Register attempt",
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors
-                                      .black, // Optional: change to fit your theme
-                                ),
+                              child: Image.asset(
+                                t.localeName == "sv" ? turn_in_sv : turn_in_en,
                               ),
                             ),
                           ],
@@ -556,151 +658,124 @@ class _QuestScreenState extends State<QuestScreen>
                       ),
                     ),
                   ),
-                  SizedBox(height: 50),
-                  Center(
-                    child: Container(
-                      height: widget.availableHeight / 30,
-                      width: widget.availableWidth / 3,
-                      child: InkWell(
-                        splashColor:
-                            Colors.transparent, // Remove splash transparency
-                        highlightColor:
-                            Colors.transparent, // Remove highlight transparency
-                        borderRadius: BorderRadius.circular(12),
-                        onTap: () => setState(() {
-                          this.selectedMission = null;
-                        }),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.asset(
-                                  rubrik,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                t.localeName == "sv" ? "Tillbaka" : "Back",
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors
-                                      .black, // Optional: change to fit your theme
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       );
     }
 
     if (mission is GroupMissionRead) {
-      return Container(
-        height: widget.availableHeight,
-        width: widget.availableWidth,
-        child: Stack(
-          children: [
-            Positioned.fill(child: Image.asset(bakgrund, fit: BoxFit.fill)),
-            Padding(
-              padding: EdgeInsets.only(left: 30, right: 30),
-              child: Column(
-                children: [
-                  SizedBox(height: 40),
-                  Center(
-                    child: Text(
-                      t.localeName == "sv"
-                          ? mission.adventureMission.titleSv
-                          : mission.adventureMission.titleEn,
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.w600,
-                        fontSize: widget.availableWidth / 10,
-                        color: Colors.black, // Color(0xFFFCBD1D)
+      return Material(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onClose,
+          child: Container(
+            height: widget.availableHeight,
+            width: widget.availableWidth,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    poke_kort,
+                    fit: BoxFit.fill,
+                    cacheWidth: 1440,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.23),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      width: widget.availableHeight * 0.35,
+                      height: widget.availableHeight * 0.35,
+                      _pixelArt(mission),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: widget.availableHeight * 0.13),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        _week_image(
+                          mission.adventureMission.nollningWeek,
+                          t.localeName == "sv",
+                        ),
+                        width: widget.availableWidth * 0.22,
                       ),
-                    ),
-                  ),
-                  Text(
-                    t.localeName == "sv"
-                        ? mission.adventureMission.descriptionSv
-                        : mission.adventureMission.descriptionEn,
-                    style: TextStyle(
-                      fontFamily: "MinionPro",
-                      fontWeight: FontWeight.normal,
-                      fontSize: widget.availableWidth / 25,
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      _pointsFromMission(mission, context),
-                      style: TextStyle(
-                        fontFamily: "MinionPro",
-                        fontWeight: FontWeight.w600,
-                        fontSize: widget.availableWidth / 22,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Center(child: _missionReview(context, mission)),
-                  SizedBox(height: 50),
-                  Center(
-                    child: Container(
-                      height: widget.availableHeight / 30,
-                      width: widget.availableWidth / 3,
-                      child: InkWell(
-                        splashColor:
-                            Colors.transparent, // Remove splash transparency
-                        highlightColor:
-                            Colors.transparent, // Remove highlight transparency
-                        borderRadius: BorderRadius.circular(12),
-                        onTap: () => setState(() {
-                          this.selectedMission = null;
-                        }),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.asset(
-                                  rubrik,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                t.localeName == "sv" ? "Tillbaka" : "Back",
-                                style: TextStyle(
-                                  fontFamily: "MinionPro",
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: widget.availableWidth / 20,
-                                  color: Colors
-                                      .black, // Optional: change to fit your theme
-                                ),
-                              ),
-                            ),
-                          ],
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: widget.availableWidth * 0.03,
+                        ),
+                        child: Text(
+                          t.localeName == "sv"
+                              ? (mission.adventureMission.titleSv.length <= 21
+                                    ? mission.adventureMission.titleSv
+                                    : mission.adventureMission.titleSv
+                                              .substring(0, 18) +
+                                          "...")
+                              : (mission.adventureMission.titleEn.length <= 21
+                                    ? mission.adventureMission.titleEn
+                                    : mission.adventureMission.titleEn
+                                              .substring(0, 18) +
+                                          "..."),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 15,
+                            color: Colors.black, // Color(0xFFFCBD1D)
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 30, right: 30),
+                  child: Column(
+                    children: [
+                      SizedBox(height: widget.availableHeight * 0.65),
+                      Text(
+                        t.localeName == "sv"
+                            ? (mission.adventureMission.descriptionSv.length <=
+                                      180
+                                  ? mission.adventureMission.descriptionSv
+                                  : mission.adventureMission.descriptionSv
+                                            .substring(0, 175) +
+                                        "...")
+                            : (mission.adventureMission.descriptionEn.length <=
+                                      180
+                                  ? mission.adventureMission.descriptionEn
+                                  : mission.adventureMission.descriptionEn
+                                            .substring(0, 175) +
+                                        "..."),
+                        style: TextStyle(
+                          fontFamily: "Consolas",
+                          fontWeight: FontWeight.normal,
+                          fontSize: widget.availableWidth / 20,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Center(
+                        child: Text(
+                          _pointsFromMission(mission, context),
+                          style: TextStyle(
+                            fontFamily: "LoRes12OT",
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 20,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Center(child: _missionReview(context, mission)),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       );
     }
@@ -710,9 +785,6 @@ class _QuestScreenState extends State<QuestScreen>
 
   Widget _questTab(bool? completedQuestsTab, BuildContext context) {
     // completedQuestsTab: true = "Completed", false = "Missed", None = "Current"
-    if (selectedMission != null) {
-      return _missionDetails(selectedMission, context);
-    }
 
     return Container(
       height: widget.availableHeight,
@@ -720,17 +792,25 @@ class _QuestScreenState extends State<QuestScreen>
       child: Stack(
         children: [
           SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 10),
-                ...generateTabMissionCards(
-                  missionsMap,
-                  groupMissionsMap,
-                  completedQuestsTab,
-                  context,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: widget.availableHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    ...generateTabMissionCards(
+                      missionsMap,
+                      groupMissionsMap,
+                      completedQuestsTab,
+                      context,
+                    ),
+                    if (completedQuestsTab == null) ...[
+                      Spacer(),
+                      Image.asset(clouds),
+                    ],
+                  ],
                 ),
-                if (completedQuestsTab == null) ...[Image.asset(clouds)],
-              ],
+              ),
             ),
           ),
         ],
@@ -750,9 +830,14 @@ class _QuestScreenState extends State<QuestScreen>
           color: Colors.transparent,
           surfaceTintColor: null,
           child: InkWell(
-            onTap: () => (setState(() {
-              this.selectedMission = element;
-            })),
+            onTap: () {
+              late OverlayEntry entry;
+              entry = OverlayEntry(
+                builder: (context) =>
+                    _missionDetails(element, context, () => entry.remove()),
+              );
+              Overlay.of(context).insert(entry);
+            },
             child: Stack(
               children: [
                 Positioned.fill(
@@ -791,8 +876,12 @@ class _QuestScreenState extends State<QuestScreen>
                       alignment: Alignment.centerLeft,
                       child: Text(
                         t.localeName == "sv"
-                            ? element.titleSv
-                            : element.titleEn,
+                            ? (element.titleSv.length <= 40
+                                  ? element.titleSv
+                                  : element.titleSv.substring(0, 35) + "...")
+                            : (element.titleEn.length <= 40
+                                  ? element.titleEn
+                                  : element.titleEn.substring(0, 35) + "..."),
                         style: TextStyle(
                           fontFamily: "LoRes12OT",
                           fontWeight: FontWeight.w600,
@@ -822,9 +911,17 @@ class _QuestScreenState extends State<QuestScreen>
                 color: Colors.transparent,
                 surfaceTintColor: null,
                 child: InkWell(
-                  onTap: () => (setState(() {
-                    this.selectedMission = element;
-                  })),
+                  onTap: () {
+                    late OverlayEntry entry;
+                    entry = OverlayEntry(
+                      builder: (context) => _missionDetails(
+                        element,
+                        context,
+                        () => entry.remove(),
+                      ),
+                    );
+                    Overlay.of(context).insert(entry);
+                  },
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -874,8 +971,18 @@ class _QuestScreenState extends State<QuestScreen>
                             alignment: Alignment.centerLeft,
                             child: Text(
                               t.localeName == "sv"
-                                  ? element.adventureMission.titleSv
-                                  : element.adventureMission.titleEn,
+                                  ? (element.adventureMission.titleSv.length <=
+                                            40
+                                        ? element.adventureMission.titleSv
+                                        : element.adventureMission.titleSv
+                                                  .substring(0, 35) +
+                                              "...")
+                                  : (element.adventureMission.titleEn.length <=
+                                            40
+                                        ? element.adventureMission.titleEn
+                                        : element.adventureMission.titleEn
+                                                  .substring(0, 35) +
+                                              "..."),
                               style: TextStyle(
                                 fontFamily: "LoRes12OT",
                                 fontWeight: FontWeight.w600,
@@ -905,9 +1012,17 @@ class _QuestScreenState extends State<QuestScreen>
                 color: Colors.transparent,
                 surfaceTintColor: null,
                 child: InkWell(
-                  onTap: () => (setState(() {
-                    this.selectedMission = element;
-                  })),
+                  onTap: () {
+                    late OverlayEntry entry;
+                    entry = OverlayEntry(
+                      builder: (context) => _missionDetails(
+                        element,
+                        context,
+                        () => entry.remove(),
+                      ),
+                    );
+                    Overlay.of(context).insert(entry);
+                  },
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -956,8 +1071,18 @@ class _QuestScreenState extends State<QuestScreen>
                             alignment: Alignment.centerLeft,
                             child: Text(
                               t.localeName == "sv"
-                                  ? element.adventureMission.titleSv
-                                  : element.adventureMission.titleEn,
+                                  ? (element.adventureMission.titleSv.length <=
+                                            40
+                                        ? element.adventureMission.titleSv
+                                        : element.adventureMission.titleSv
+                                                  .substring(0, 35) +
+                                              "...")
+                                  : (element.adventureMission.titleEn.length <=
+                                            40
+                                        ? element.adventureMission.titleEn
+                                        : element.adventureMission.titleEn
+                                                  .substring(0, 35) +
+                                              "..."),
                               style: TextStyle(
                                 fontFamily: "LoRes12OT",
                                 fontWeight: FontWeight.w600,
@@ -987,9 +1112,17 @@ class _QuestScreenState extends State<QuestScreen>
                 color: Colors.transparent,
                 surfaceTintColor: null,
                 child: InkWell(
-                  onTap: () => (setState(() {
-                    this.selectedMission = element;
-                  })),
+                  onTap: () {
+                    late OverlayEntry entry;
+                    entry = OverlayEntry(
+                      builder: (context) => _missionDetails(
+                        element,
+                        context,
+                        () => entry.remove(),
+                      ),
+                    );
+                    Overlay.of(context).insert(entry);
+                  },
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -1042,8 +1175,18 @@ class _QuestScreenState extends State<QuestScreen>
                             alignment: Alignment.centerLeft,
                             child: Text(
                               t.localeName == "sv"
-                                  ? element.adventureMission.titleSv
-                                  : element.adventureMission.titleEn,
+                                  ? (element.adventureMission.titleSv.length <=
+                                            40
+                                        ? element.adventureMission.titleSv
+                                        : element.adventureMission.titleSv
+                                                  .substring(0, 35) +
+                                              "...")
+                                  : (element.adventureMission.titleEn.length <=
+                                            40
+                                        ? element.adventureMission.titleEn
+                                        : element.adventureMission.titleEn
+                                                  .substring(0, 35) +
+                                              "..."),
                               style: TextStyle(
                                 fontFamily: "LoRes12OT",
                                 fontWeight: FontWeight.w600,
@@ -1072,13 +1215,13 @@ class _QuestScreenState extends State<QuestScreen>
       case "Accepted":
         return Text(
           t.localeName == "sv" ? "Uppdrag accepterat" : "Mission success",
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
         );
 
       case "Failed":
         return Text(
           t.localeName == "sv" ? "Uppdrag misslyckat" : "Mission failed",
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         );
 
       default:
@@ -1086,7 +1229,10 @@ class _QuestScreenState extends State<QuestScreen>
           t.localeName == "sv"
               ? "Uppdrag under granskning"
               : "Mission under review",
-          style: TextStyle(color: Color(0xFFcfac23)),
+          style: TextStyle(
+            color: Color(0xFFcfac23),
+            fontWeight: FontWeight.bold,
+          ),
         );
     }
   }
@@ -1156,15 +1302,6 @@ class _QuestScreenState extends State<QuestScreen>
   }
 
   String _pixelArt(dynamic mission) {
-    //test tills categories mergeas
-    return pixelart_alg;
-  }
-
-  String _buttonArt(dynamic mission) {
-    return blue;
-  }
-
-  /*String _pixelArt(dynamic mission) {
     String category = "";
     String pixelArt;
     if (mission is AdventureMissionRead) {
@@ -1199,9 +1336,9 @@ class _QuestScreenState extends State<QuestScreen>
         break;
     }
     return pixelArt;
-  }*/
+  }
 
-  /*String _buttonArt(dynamic mission) {
+  String _buttonArt(dynamic mission) {
     String category = "";
     String pixelArt;
     if (mission is AdventureMissionRead) {
@@ -1214,7 +1351,7 @@ class _QuestScreenState extends State<QuestScreen>
         pixelArt = purple;
         break;
       case "Fadder":
-        pixelArt = red;
+        pixelArt = orange;
         break;
       case "Kreativ":
         pixelArt = blue;
@@ -1223,7 +1360,7 @@ class _QuestScreenState extends State<QuestScreen>
         pixelArt = orange;
         break;
       case "Spel":
-        pixelArt = purple;
+        pixelArt = red;
         break;
       case "Tävling":
         pixelArt = yellow;
@@ -1236,5 +1373,35 @@ class _QuestScreenState extends State<QuestScreen>
         break;
     }
     return pixelArt;
-  }*/
+  }
+
+  String _week_image(int week, bool lang) {
+    if (lang) {
+      switch (week) {
+        case 0:
+          return vecka_0;
+        case 1:
+          return vecka_1;
+        case 2:
+          return vecka_2;
+        case 3:
+          return vecka_3;
+        default:
+          return vecka_4;
+      }
+    } else {
+      switch (week) {
+        case 0:
+          return week_0;
+        case 1:
+          return week_1;
+        case 2:
+          return week_2;
+        case 3:
+          return week_3;
+        default:
+          return week_4;
+      }
+    }
+  }
 }
