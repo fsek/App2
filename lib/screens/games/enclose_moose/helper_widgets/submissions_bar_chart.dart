@@ -132,7 +132,7 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
                         if (scale == 1 && value != minScore && value != widget.optimalScore) return const SizedBox.shrink();  // Because the axis is categorical we can't use interval and instead have to use this
 
                         final usedInterval = amountBars ~/ scale;  // Evenly space labels so that at least one is always showing
-                        if (value.toInt() % usedInterval != minScore && value != minScore && value != widget.optimalScore) return const SizedBox.shrink();
+                        if ((value.toInt() - minScore) % usedInterval != 0 && value != minScore && value != widget.optimalScore) return const SizedBox.shrink();
 
                         return SideTitleWidget(
                           space: 5,
@@ -223,7 +223,12 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
     if (!mounted) return;
     if (_hideTooltipFuture != tooltipFuture) return;  // A different bar has been clicked
 
-    _shownTooltip = null;
     await _tooltipAnimationController.reverse();
+    if (!mounted) return;
+    if (_hideTooltipFuture != tooltipFuture) return;  // A different bar has been clicked during the fade-out
+
+    setState(() {  // we have to use setState since the tooltip is not showing anymore
+      _shownTooltip = null;
+    });
   }
 }
