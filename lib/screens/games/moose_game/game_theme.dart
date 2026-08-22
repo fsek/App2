@@ -51,6 +51,10 @@ const double _mooseFrameScale = 24 / 27; // the run frames are 27px wide
 /// Nudge in pixelart pixels, centers the moose head and body when jumping
 const Map<String, double> _spaceMooseNudge = {"hilbert_space_jump": 2};
 
+const String mooseGameThumbnail = spaceTheme
+    ? "assets/img/moose_game/space_logo.png"
+    : "assets/img/moose_game/logo.png";
+
 Sprite _spaceMoose(String name) {
   final List<double> size = _spaceMooseFrames[name]!;
   return Sprite(

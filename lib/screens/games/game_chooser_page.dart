@@ -3,6 +3,7 @@ import "moose_game/moose_game.dart";
 import "enclose_moose/enclose_moose_page.dart";
 import "enclose_moose/helper_widgets/wiggling_widget.dart";
 import "enclose_moose/helper_widgets/outlined_text.dart";
+import "moose_game/game_theme.dart";
 
 class GameChooserPage extends StatefulWidget {
   @override
@@ -74,7 +75,7 @@ class _GameChooserState extends State<GameChooserPage> with SingleTickerProvider
 
           Expanded(
             child: _filteredImage(
-              "assets/img/moose_game/space_logo.png",
+              mooseGameThumbnail,
               extraChild: Center(
                 child: TextButton(
                   onPressed: () => Navigator.of(context).push(
