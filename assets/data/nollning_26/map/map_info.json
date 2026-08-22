@@ -84,7 +84,13 @@
             "sv": "Längst bort från trygga hemvisten hittar vi Kemicentrum! I dess korridorer rör sig K-pHøs och W-Phøs. Packa matsäck och kaffe för vägen hit tar hela 9 minuter av vandring.",
             "en": "Furthest away from our familiar home base, we find the Chemistry Centre! K-pHøs and W-Phøs roam its corridors. Pack a packed lunch and some coffee, because the walk here takes a whole 9 minutes."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/W_Phos.jpg",
+                "width": 6000,
+                "height": 4000
+            }
+        ],
         "boxes": [
             {
                 "left": 1489.0,
@@ -104,7 +110,11 @@
             "en": "Amidst the glitz and glamour, A-Phøs steps into the spotlight. You can find them here, in the A-building. The journey here takes 8 minutes from the Math Building."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Aphos.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/A_Phos.jpg",
+                "width": 2880,
+                "height": 2160
+            }
         ],
         "boxes": [
             {
@@ -124,7 +134,13 @@
             "sv": "Slå upp dörrarna in till V-huset och V-Phøs du skall finna! Expeditionen hit tar hela 6 minuter och ska man ta sig så långt från Mattehuset bör riskerna beaktas.",
             "en": "Throw open the doors to the V-building, and you shall find V-Phøs! The trek here takes a full six minutes, and venturing that far from the Math Building means the risks should be considered."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/V_Phos.jpg",
+                "width": 3000,
+                "height": 2000
+            }
+        ],
         "boxes": [
             {
                 "left": 1926.0,
@@ -143,7 +159,13 @@
             "sv": "Välkommen in i värmen av E-huset. I denna byggnad finner vi E-Phøs och D-stab. Färden hit tar er 3 minuter från Mattehuset.",
             "en": "Welcome into the warmth of the E-building. This building houses E-Phøs and D-stab. The journey here takes three minutes from the Math Building."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/Staben.jpg",
+                "width": 8218,
+                "height": 5414
+            }
+        ],
         "boxes": [
             {
                 "left": 1834.0,
@@ -163,7 +185,16 @@
             "en": "Hello and welcome to the M-building! In this building, you will find M-Phøs and I-Phøs. If you are coming here from the Math Building, it takes about four minutes to walk."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Mphos.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/M_Phos.jpg",
+                "width": 6000,
+                "height": 4000
+            },
+            {
+                "path": "assets/data/nollning_26/map/pin_media/I_Phos.png",
+                "width": 6000,
+                "height": 3181
+            }
         ],
         "boxes": [
             {
@@ -184,7 +215,11 @@
             "en": "So you’ve found your way home—I’m so glad! This is the building where the F-fös hang out, and you can truly feel at home here during your coming years at LTH. Grab a sandwich from Hilbert Café, stamp your coffee card for a cup of freshly brewed liquid gold, and just enjoy—you’re exactly where you’re meant to be! <3"
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Foset.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/Foset.jpg",
+                "width": 5184,
+                "height": 3456
+            }
         ],
         "boxes": [
             {
@@ -205,7 +240,11 @@
             "en": "We’ve traveled a long way now—all the way to Helsingborg! That’s where we find the ING-phøs. It takes anywhere from 31 to 52 minutes to travel to them."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/INGphos.jpg"
+           {
+                "path": "assets/data/nollning_26/map/pin_media/ING_Phos.jpg",
+                "width": 6240,
+                "height": 4160
+            }
         ],
         "boxes": [
             {
