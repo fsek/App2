@@ -366,34 +366,31 @@ class _QuestScreenState extends State<QuestScreen>
     var t = AppLocalizations.of(context)!;
 
     if (adventureMission.nollningWeek != (_checkNollningWeek())) {
-      late OverlayEntry entry;
-      entry = OverlayEntry(
-        builder: (dialogContext) => Material(
-          color: Colors.black54,
-          child: Center(
-            child: AlertDialog(
-              title: Text(
-                t.localeName == "sv" ? "Misslyckat!" : "Failure!",
-                style: TextStyle(
-                  fontFamily: "Consolas",
-                  fontWeight: FontWeight.w600,
-                  fontSize: widget.availableWidth / 20,
-                  color: Colors.black,
-                ),
-              ),
-              content: Text(
-                t.localeName == "sv"
-                    ? "Misslyckad registrering!\nUppdragsregistrering för denna veckan har stängt!"
-                    : "Falied to register mission!\nMission registration for this week has closed!",
-              ),
-              actions: [
-                TextButton(onPressed: () => entry.remove(), child: Text("OK")),
-              ],
+      showDialog(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: Text(
+            t.localeName == "sv" ? "Misslyckat!" : "Failure!",
+            style: TextStyle(
+              fontFamily: "Consolas",
+              fontWeight: FontWeight.w600,
+              fontSize: widget.availableWidth / 20,
+              color: Colors.black,
             ),
           ),
+          content: Text(
+            t.localeName == "sv"
+                ? "Misslyckad registrering!\nUppdragsregistrering för denna veckan har stängt!"
+                : "Falied to register mission!\nMission registration for this week has closed!",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text("OK"),
+            ),
+          ],
         ),
       );
-      Overlay.of(context).insert(entry);
       return;
     }
     try {
@@ -410,79 +407,77 @@ class _QuestScreenState extends State<QuestScreen>
           );
 
       if (mounted) {
-        late OverlayEntry entry;
-        entry = OverlayEntry(
-          builder: (dialogContext) => Material(
-            color: Colors.black54,
-            child: Center(
-              child: AlertDialog(
-                title: Text(
-                  t.localeName == "sv" ? "Lyckat!" : "Success!",
-                  style: TextStyle(
-                    fontFamily: "Consolas",
-                    fontWeight: FontWeight.w600,
-                    fontSize: widget.availableWidth / 20,
-                    color: Colors.black,
-                  ),
-                ),
-                content: Text(
-                  t.localeName == "sv"
-                      ? "Uppdragsförsök registerat!"
-                      : "Mission attempt registered",
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      entry.remove();
-                      if (mounted) {
-                        refresh();
-                      }
-                      onClose(); // stänger hela mission-detaljvyn
-                    },
-                    child: Text("OK"),
-                  ),
-                ],
+        showDialog(
+          context: this.context,
+          builder: (dialogContext) => AlertDialog(
+            title: Text(
+              t.localeName == "sv" ? "Lyckat!" : "Success!",
+              style: TextStyle(
+                fontFamily: "Consolas",
+                fontWeight: FontWeight.w600,
+                fontSize: widget.availableWidth / 20,
+                color: Colors.black,
               ),
             ),
+            content: Text(
+              t.localeName == "sv"
+                  ? "Uppdragsförsök registerat!"
+                  : "Mission attempt registered",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                  refresh();
+                  onClose(); // stänger hela mission-detaljvyn
+                },
+                child: Text("OK"),
+              ),
+            ],
           ),
         );
-        Overlay.of(context).insert(entry);
       }
     } catch (e) {
       if (mounted) {
-        late OverlayEntry entry;
-        entry = OverlayEntry(
-          builder: (dialogContext) => Material(
-            color: Colors.black54,
-            child: Center(
-              child: AlertDialog(
-                title: Text(
-                  t.localeName == "sv" ? "Misslyckat!" : "Failure!",
-                  style: TextStyle(
-                    fontFamily: "Consolas",
-                    fontWeight: FontWeight.w600,
-                    fontSize: widget.availableWidth / 20,
-                    color: Colors.black,
-                  ),
-                ),
-                content: Text(
-                  t.localeName == "sv"
-                      ? "Misslyckad registrering"
-                      : "Registration failed",
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => entry.remove(),
-                    child: Text("OK"),
-                  ),
-                ],
+        showDialog(
+          context: this.context,
+          builder: (dialogContext) => AlertDialog(
+            title: Text(
+              t.localeName == "sv" ? "Misslyckat!" : "Failure!",
+              style: TextStyle(
+                fontFamily: "Consolas",
+                fontWeight: FontWeight.w600,
+                fontSize: widget.availableWidth / 20,
+                color: Colors.black,
               ),
             ),
+            content: Text(
+              t.localeName == "sv"
+                  ? "Misslyckad registrering"
+                  : "Registration failed",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(),
+                child: Text("OK"),
+              ),
+            ],
           ),
         );
-        Overlay.of(context).insert(entry);
       }
     }
+  }
+
+  void _openMission(dynamic element, BuildContext context) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (ctx, _, __) =>
+            _missionDetails(element, ctx, () => Navigator.of(ctx).pop()),
+      ),
+    );
   }
 
   Widget _missionDetails(
@@ -556,20 +551,19 @@ class _QuestScreenState extends State<QuestScreen>
                   child: Column(
                     children: [
                       SizedBox(height: widget.availableHeight * 0.73),
-                      Text(
-                        t.localeName == "sv"
-                            ? (mission.descriptionSv.length <= 180
-                                  ? mission.descriptionSv
-                                  : mission.descriptionSv.substring(0, 175) +
-                                        "...")
-                            : (mission.descriptionEn.length <= 180
-                                  ? mission.descriptionEn
-                                  : mission.descriptionEn.substring(0, 175) +
-                                        "..."),
-                        style: TextStyle(
-                          fontFamily: "Consolas",
-                          fontWeight: FontWeight.normal,
-                          fontSize: widget.availableWidth / 20,
+                      SizedBox(
+                        height: widget.availableHeight * 0.30,
+                        child: SingleChildScrollView(
+                          child: Text(
+                            t.localeName == "sv"
+                                ? mission.descriptionSv
+                                : mission.descriptionEn,
+                            style: TextStyle(
+                              fontFamily: "Consolas",
+                              fontWeight: FontWeight.normal,
+                              fontSize: widget.availableWidth / 20,
+                            ),
+                          ),
                         ),
                       ),
                       Center(
@@ -603,48 +597,42 @@ class _QuestScreenState extends State<QuestScreen>
                         highlightColor:
                             Colors.transparent, // Remove highlight transparency
                         borderRadius: BorderRadius.circular(12),
-                        onTap: () {
-                          late OverlayEntry dialogEntry;
-                          dialogEntry = OverlayEntry(
-                            builder: (dialogContext) => Material(
-                              color: Colors.black54,
-                              child: Center(
-                                child: AlertDialog(
-                                  content: Text(
-                                    t.localeName == "sv"
-                                        ? "Registrera uppdragsförsök?"
-                                        : "Register quest attempt?",
-                                    style: TextStyle(
-                                      fontFamily: "Consolas",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: widget.availableWidth / 20,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () async {
-                                        dialogEntry.remove();
-                                        await _sendMissionAttempt(
-                                          mission,
-                                          context,
-                                          onClose,
-                                        );
-                                      },
-                                      child: Text(t.eventYes),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        dialogEntry.remove();
-                                      },
-                                      child: Text(t.eventNo),
-                                    ),
-                                  ],
+                        onTap: () async {
+                          final confirmed = await showDialog<bool>(
+                            context: context,
+                            builder: (dialogContext) => AlertDialog(
+                              content: Text(
+                                t.localeName == "sv"
+                                    ? "Registrera uppdragsförsök?"
+                                    : "Register quest attempt?",
+                                style: TextStyle(
+                                  fontFamily: "Consolas",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: widget.availableWidth / 20,
+                                  color: Colors.black,
                                 ),
                               ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(true),
+                                  child: Text(t.eventYes),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(false),
+                                  child: Text(t.eventNo),
+                                ),
+                              ],
                             ),
                           );
-                          Overlay.of(context).insert(dialogEntry);
+                          if (confirmed == true) {
+                            await _sendMissionAttempt(
+                              mission,
+                              context,
+                              onClose,
+                            );
+                          }
                         },
                         child: Stack(
                           children: [
@@ -737,24 +725,19 @@ class _QuestScreenState extends State<QuestScreen>
                   child: Column(
                     children: [
                       SizedBox(height: widget.availableHeight * 0.73),
-                      Text(
-                        t.localeName == "sv"
-                            ? (mission.adventureMission.descriptionSv.length <=
-                                      180
-                                  ? mission.adventureMission.descriptionSv
-                                  : mission.adventureMission.descriptionSv
-                                            .substring(0, 175) +
-                                        "...")
-                            : (mission.adventureMission.descriptionEn.length <=
-                                      180
-                                  ? mission.adventureMission.descriptionEn
-                                  : mission.adventureMission.descriptionEn
-                                            .substring(0, 175) +
-                                        "..."),
-                        style: TextStyle(
-                          fontFamily: "Consolas",
-                          fontWeight: FontWeight.normal,
-                          fontSize: widget.availableWidth / 20,
+                      SizedBox(
+                        height: widget.availableHeight * 0.30,
+                        child: SingleChildScrollView(
+                          child: Text(
+                            t.localeName == "sv"
+                                ? mission.adventureMission.descriptionSv
+                                : mission.adventureMission.descriptionEn,
+                            style: TextStyle(
+                              fontFamily: "Consolas",
+                              fontWeight: FontWeight.normal,
+                              fontSize: widget.availableWidth / 20,
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -831,12 +814,7 @@ class _QuestScreenState extends State<QuestScreen>
           surfaceTintColor: null,
           child: InkWell(
             onTap: () {
-              late OverlayEntry entry;
-              entry = OverlayEntry(
-                builder: (context) =>
-                    _missionDetails(element, context, () => entry.remove()),
-              );
-              Overlay.of(context).insert(entry);
+              _openMission(element, context);
             },
             child: Stack(
               children: [
@@ -912,15 +890,7 @@ class _QuestScreenState extends State<QuestScreen>
                 surfaceTintColor: null,
                 child: InkWell(
                   onTap: () {
-                    late OverlayEntry entry;
-                    entry = OverlayEntry(
-                      builder: (context) => _missionDetails(
-                        element,
-                        context,
-                        () => entry.remove(),
-                      ),
-                    );
-                    Overlay.of(context).insert(entry);
+                    _openMission(element, context);
                   },
                   child: Stack(
                     children: [
@@ -1013,15 +983,7 @@ class _QuestScreenState extends State<QuestScreen>
                 surfaceTintColor: null,
                 child: InkWell(
                   onTap: () {
-                    late OverlayEntry entry;
-                    entry = OverlayEntry(
-                      builder: (context) => _missionDetails(
-                        element,
-                        context,
-                        () => entry.remove(),
-                      ),
-                    );
-                    Overlay.of(context).insert(entry);
+                    _openMission(element, context);
                   },
                   child: Stack(
                     children: [
@@ -1113,15 +1075,7 @@ class _QuestScreenState extends State<QuestScreen>
                 surfaceTintColor: null,
                 child: InkWell(
                   onTap: () {
-                    late OverlayEntry entry;
-                    entry = OverlayEntry(
-                      builder: (context) => _missionDetails(
-                        element,
-                        context,
-                        () => entry.remove(),
-                      ),
-                    );
-                    Overlay.of(context).insert(entry);
+                    _openMission(element, context);
                   },
                   child: Stack(
                     children: [
@@ -1276,7 +1230,15 @@ class _QuestScreenState extends State<QuestScreen>
     if (completedQuestsTab == true) {
       filteredMissionList = missionList.where((m) => _isCompleted(m)).toList();
     } else if (completedQuestsTab == false) {
-      filteredMissionList = missionList.where((m) => _isFailed(m)).toList();
+      // A past week's quest that was never attempted never becomes a
+      // GroupMission, so without this it shows up in no tab at all.
+      filteredMissionList = missionList
+          .where(
+            (m) =>
+                _isFailed(m) ||
+                (m is AdventureMissionRead && m.nollningWeek < week),
+          )
+          .toList();
     }
 
     List<Widget> list = [];
