@@ -33,7 +33,9 @@ class CallCounter<T, E> extends ChangeNotifier {
         _counter[key] = _counter[key]! - 1;
       }
 
-      _futures[key]!.removeAt(0);
+      if (_futures[key]!.length != 0) {
+        _futures[key]!.removeAt(0);
+      }
     });
     if (!_futures.containsKey(key)) {
       _futures[key] = [];

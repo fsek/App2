@@ -48,7 +48,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_image_compress: ^2.0.4
-  syncfusion_flutter_charts: ^34.1.33
+  fl_chart: ^1.2.0
   #pdf_render: ^1.4.12
   path_provider: any
   flutter_pdfview: ^1.4.3 # For PDF viewer

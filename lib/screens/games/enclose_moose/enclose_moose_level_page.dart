@@ -3,7 +3,6 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:built_collection/built_collection.dart";
 import "package:audioplayers/audioplayers.dart";
-import "package:syncfusion_flutter_charts/charts.dart";
 import "package:dio/dio.dart";
 import "package:api_client/api_client.dart";
 import "package:fsek_mobile/services/api.service.dart";
@@ -18,6 +17,7 @@ import "helper_widgets/outlined_text.dart";
 import "helper_widgets/highlighted_text.dart";
 import "helper_widgets/animated_smooth_arrow.dart";
 import "helper_widgets/animated_thought_bubble.dart";
+import "helper_widgets/submissions_bar_chart.dart";
 import "../../../util/time.dart";
 
 class EncloseMooseLevelPage extends StatefulWidget {
@@ -676,6 +676,24 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   void _tapTile(EncloseGridTile tile) async {
+    /*  // Useful for debug!
+    final builder = EncloseMooseLevelReadBuilder();
+    builder.levelId = 10;
+    builder.nameSv = "debug";
+    builder.nameEn = "debug";
+    builder.encodedGrid = "";
+    builder.wallBudget = 10;
+    builder.playerSubmission = EncloseMooseSubmissionReadBuilder();
+    builder.playerSubmission.levelId = 10;
+    builder.playerSubmission.submissionTime = DateTime.now();
+    builder.playerSubmission.playerId = 0;
+    builder.playerSubmission.playerScore = 10;
+    builder.releaseDate = Date.now();
+    builder.optimalScore = 54;
+
+    _usedLevel = builder.build();
+    */
+
     if (_grid.wallsLeft == 0 && tile.isGrass) {
       _openCallCounter.increment("walls", 0, duration: const Duration(seconds: 1));
     } else if (tile.canToggleWall) {
@@ -915,6 +933,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     for (final entry in _usedLevel.scoreDistribution!.entries) {
       scoreDistribution[int.parse(entry.key)] = entry.value;
     }
+    // scoreDistribution[10] = 10;
 
     final minScore = scoreDistribution.keys.reduce(math.min);
     for (final score in List.generate(_usedLevel.optimalScore! - minScore, (score) => minScore + score + 1)) {
@@ -922,38 +941,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
         scoreDistribution[score] = 0;  // math.Random().nextInt(20);
       }
     }
-    final entries = scoreDistribution.entries.toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
-
-    final zoomPanBehavior = ZoomPanBehavior(
-      enablePinching: true,
-      enablePanning: true,
-      enableDoubleTapZooming: true,
-      zoomMode: ZoomMode.x,
-    );
-    final tooltipBehavior = TooltipBehavior(
-      enable: true,
-      animationDuration: 100,
-      duration: 5000,
-      color: Theme.of(context).primaryColor,
-      builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
-        return Container(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "${data.value} player${data.value != 1 ? "s" : ""} got a score of ${data.key}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontFamily: "Schoolbell"
-            )
-          ),
-        );
-      },
-    );
   
     int totalCount = 0;
     int countLessOrEqual = 0;
-    for (var entry in entries) {
+    for (final entry in scoreDistribution.entries) {
       totalCount += entry.value;
       if (entry.key <= _usedLevel.playerSubmission!.playerScore) {
         countLessOrEqual += entry.value;
@@ -986,7 +977,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
       ),
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1076,72 +1067,12 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
         ),
 
         SizedBox(
-          width: MediaQuery.of(context).size.width,  // take as much space as you can!
-          child: SfCartesianChart(
-            plotAreaBorderWidth: 0,
-            title: ChartTitle(
-              text: "Score distribution",
-              textStyle: const TextStyle( 
-                fontSize: 20,
-                fontFamily: "Schoolbell"
-              )
-            ),
-            tooltipBehavior: tooltipBehavior,
-            zoomPanBehavior: zoomPanBehavior,
-            primaryXAxis: CategoryAxis(
-              title: AxisTitle(
-                text: "Score",
-                textStyle: const TextStyle( 
-                  fontSize: 20,
-                  fontFamily: "Schoolbell"
-                )
-              ),
-              labelStyle: const TextStyle( 
-                fontSize: 15,
-                fontFamily: "Schoolbell"
-              ),
-              maximumLabels: 1,
-              interval: entries.length >= 2 ? entries.length.toDouble() - 1 : 1,
-              majorGridLines: MajorGridLines(width: 0),
-              plotBands: <PlotBand>[
-                PlotBand(
-                  start: _usedLevel.playerSubmission!.playerScore.toString(),
-                  end: _usedLevel.playerSubmission!.playerScore.toString(),
-                  borderWidth: 2,
-                  borderColor: Theme.of(context).primaryColor,
-                  dashArray: [5, 5],
-                  shouldRenderAboveSeries: true
-                ),
-              ],
-            ),
-            primaryYAxis: NumericAxis(
-              title: AxisTitle(
-                text: "Occurrence",
-                textStyle: const TextStyle( 
-                  fontSize: 20,
-                  fontFamily: "Schoolbell"
-                )
-              ),
-              labelStyle: const TextStyle( 
-                fontSize: 15,
-                fontFamily: "Schoolbell"
-              ),
-              interval: 1,
-              axisLine: const AxisLine(width: 0)
-            ),
-            series: <CartesianSeries<MapEntry<int, int>, String>>[
-              ColumnSeries<MapEntry<int, int>, String>(
-                animationDuration: 400,
-                dataSource: entries,
-                xValueMapper: (data, _) => data.key.toString(),
-                yValueMapper: (data, _) => data.value,
-                color: Theme.of(context).primaryColor,
-                // Rounded top corners for bars
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(4)
-                )
-              ),
-            ]
+          width: MediaQuery.of(context).size.width * 0.9,  // likely more than it is allowed to take
+          height: 300,
+          child: SubmissionsBarChart(
+            scoreDistribution: scoreDistribution,
+            playerScore: _usedLevel.playerSubmission!.playerScore,
+            optimalScore: _usedLevel.optimalScore!
           )
         ),
       ]
