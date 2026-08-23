@@ -700,6 +700,25 @@ class AppLocalizationsSv extends AppLocalizations {
   String get introductionMapClose => 'Stäng';
 
   @override
+  String get questUnlockTitle => 'Försök låsa upp?';
+
+  @override
+  String get questUnlockEnterCode => 'Ange kod';
+
+  @override
+  String get questUnlockWrongCode => 'Fel kod';
+
+  @override
+  String get questLockedTitle => '[ KOD KRÄVS ]';
+
+  @override
+  String get questLockedDescription =>
+      'Du behöver en kod för att låsa upp detta uppdrag!';
+
+  @override
+  String get questUnlockButton => 'LÅS UPP!';
+
+  @override
   String get cafeShiftSignup => 'Du är nu uppskriven på passet!';
 
   @override

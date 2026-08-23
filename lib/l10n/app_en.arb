@@ -244,6 +244,13 @@
     "introductionMap": "Map over LTH",
     "introductionMapClose": "Close",
 
+    "questUnlockTitle": "Try to unlock?",
+    "questUnlockEnterCode": "Enter code",
+    "questUnlockWrongCode": "Wrong code",
+    "questLockedTitle": "[ CODE NEEDED ]",
+    "questLockedDescription": "You need a code to unlock this quest!",
+    "questUnlockButton": "UNLOCK!",
+
     "cafeShiftSignup": "You have signed up for the shift",
     "cafeShiftSignupText": "Thank you for wanting to work in the café! Remember to remove your sing-up if you can't make it.",
     "cafeShiftFail": "Something went wrong!",
@@ -559,6 +566,5 @@
     "unlimited": "Unlimited",
     "eventNoSignup": "No signup required",
     "eventHasLottery": "Spots decided by lottery"
-
 
 }
