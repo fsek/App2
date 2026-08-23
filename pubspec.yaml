@@ -147,6 +147,7 @@ flutter:
     - assets/data/nollning_26/calendar/
     - assets/data/nollning_26/map/
     - assets/data/nollning_26/map/pin_media/
+    - assets/data/nollning_26/uppdrag/
 
   fonts:
     - family: Brandon Grotesque
@@ -173,6 +174,9 @@ flutter:
     - family: Schoolbell
       fonts:
         - asset: assets/fonts/Schoolbell-Regular.ttf
+    - family: LoRes12OT
+      fonts:
+        - asset: assets/fonts/LoRes12OT-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
