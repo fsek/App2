@@ -86,7 +86,7 @@ class _QuestScreenState extends State<QuestScreen>
     super.dispose();
   }
 
-  void refresh() {
+  void _refresh() {
     setState(() {
       this.missionsMap = {};
       this.groupMissionsMap = {};
@@ -118,7 +118,7 @@ class _QuestScreenState extends State<QuestScreen>
       if (missions.data != null) {
         missionList = missions.data!.toList();
       }
-      nollningGroupData = await findUserNollningGroup(
+      nollningGroupData = await _findUserNollningGroup(
         nollningData,
         userData.id,
       );
@@ -158,7 +158,7 @@ class _QuestScreenState extends State<QuestScreen>
     }
   }
 
-  NollningGroupRead? findUserNollningGroup(NollningRead nollning, int userId) {
+  NollningGroupRead? _findUserNollningGroup(NollningRead nollning, int userId) {
     try {
       final nollningGroup = nollning.nollningGroups.firstWhere(
         (nollningGroup) => (nollningGroup.group.groupUsers.any(
@@ -276,10 +276,12 @@ class _QuestScreenState extends State<QuestScreen>
       case "Accepted":
         finalString =
             "${mission.points} / ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+        break;
 
       case "Failed":
         finalString =
             "${0} / ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+        break;
 
       case "Review":
         finalString =
@@ -287,9 +289,11 @@ class _QuestScreenState extends State<QuestScreen>
                 mission.adventureMission.maxPoints
             ? mission.adventureMission.maxPoints.toString()
             : "${mission.adventureMission.minPoints} - ${mission.adventureMission.maxPoints} ${t.introductionPoints2}";
+        break;
 
       default:
         finalString = "";
+        break;
     }
 
     return finalString;
@@ -325,10 +329,10 @@ class _QuestScreenState extends State<QuestScreen>
             ),
             actions: [
               TextButton(
-                onPressed: () => setState(() {
+                onPressed: () {
                   Navigator.of(context).pop();
-                  refresh();
-                }),
+                  _refresh();
+                },
                 child: Text("OK"),
               ),
             ],
@@ -428,7 +432,7 @@ class _QuestScreenState extends State<QuestScreen>
               TextButton(
                 onPressed: () {
                   Navigator.of(dialogContext).pop();
-                  refresh();
+                  _refresh();
                   onClose(); // stänger hela mission-detaljvyn
                 },
                 child: Text("OK"),
