@@ -3,6 +3,10 @@ import 'package:fsek_mobile/api_client/lib/api_client.dart';
 import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 import 'package:fsek_mobile/util/nollning/week_tracker.dart';
+import 'package:fsek_mobile/util/storage_wrapper.dart';
+
+import 'dart:async';
+import 'dart:math';
 
 class QuestScreen extends StatefulWidget {
   final double availableWidth;
@@ -18,6 +22,12 @@ class _QuestScreenState extends State<QuestScreen>
     with SingleTickerProviderStateMixin {
   Map<int, List<AdventureMissionRead>> missionsMap = {};
   Map<int, List<GroupMissionRead>> groupMissionsMap = {};
+  Map<int, String> _enteredUnlockCodes = {};
+  final TokenStorageWrapper _storage = TokenStorageWrapper();
+  // Bumped whenever a mission is unlocked or the locked text re-scrambles,
+  // so the pushed mission-detail route rebuilds itself.
+  final ValueNotifier<int> _unlockTick = ValueNotifier(0);
+  Timer? _scrambleTimer;
   AdminUserRead? user;
   NollningRead? nollning;
   NollningGroupRead? nollningGroup;
@@ -34,6 +44,7 @@ class _QuestScreenState extends State<QuestScreen>
   String purple = "assets/data/nollning_26/uppdrag/knapp_purple.png";
   String red = "assets/data/nollning_26/uppdrag/knapp_red.png";
   String yellow = "assets/data/nollning_26/uppdrag/knapp_yellow.png";
+  String locked = "assets/data/nollning_26/uppdrag/knapp_locked.png";
   String pixelart_placeholder =
       "assets/data/nollning_26/uppdrag/pixelart_placeholder.png";
   String pixelart_barbiedans =
@@ -51,6 +62,8 @@ class _QuestScreenState extends State<QuestScreen>
   String clouds = "assets/data/nollning_26/uppdrag/clouds.png";
   String turn_in_sv = "assets/data/nollning_26/uppdrag/lämna_in_uppdrag.png";
   String turn_in_en = "assets/data/nollning_26/uppdrag/turn_in_quest.png";
+  String placeholder_button =
+      "assets/data/nollning_26/uppdrag/placeholder_button.png";
   String vecka_0 = "assets/data/nollning_26/uppdrag/vecka0.png";
   String vecka_1 = "assets/data/nollning_26/uppdrag/vecka1.png";
   String vecka_2 = "assets/data/nollning_26/uppdrag/vecka2.png";
@@ -61,6 +74,71 @@ class _QuestScreenState extends State<QuestScreen>
   String week_2 = "assets/data/nollning_26/uppdrag/week2.png";
   String week_3 = "assets/data/nollning_26/uppdrag/week3.png";
   String week_4 = "assets/data/nollning_26/uppdrag/week4.png";
+  static const unicodeChars =
+      r'!#$%&*+/<=>?@\^_~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ§¤¢£¥µ¿¡«»×÷±¬°†‡•‰∞≈≠≤≥∑∏√∫∂ΩΔΘΛΞΠΣΦΨαβγδεζηθλμξπστφχψω¦';
+
+  // we have to use a monospace font to avoid glitching text changing width
+  static const lockedFont = "Consolas";
+
+  Random _rnd = Random();
+
+  String getRandomString(int length) => String.fromCharCodes(
+    Iterable.generate(
+      length,
+      (_) => unicodeChars.codeUnitAt(_rnd.nextInt(unicodeChars.length)),
+    ),
+  );
+
+  bool _isMissionLocked(dynamic mission) {
+    // If any attempts have been made by the group (GroupMission), the mission is unlocked.
+    if (mission is! AdventureMissionRead) return false;
+    if (mission.unlockCode == null) return false;
+    final entered = _enteredUnlockCodes[mission.id];
+    if (entered == null) return true;
+    return entered.trim().toLowerCase() !=
+        mission.unlockCode!.trim().toLowerCase();
+  }
+
+  String _unlockKey(int missionId) => "unlock_code_${nollning?.id}_$missionId";
+
+  /// Unlocks the mission and closes the dialog if the code is correct,
+  /// otherwise does nothing and returns false.
+  bool _submitUnlockCode(
+    AdventureMissionRead mission,
+    String code,
+    BuildContext dialogContext,
+  ) {
+    final trimmed = code.trim();
+    if (trimmed.toLowerCase() != mission.unlockCode!.trim().toLowerCase()) {
+      return false;
+    }
+    setState(() {
+      _enteredUnlockCodes[mission.id] = trimmed;
+    });
+    _storage.write(key: _unlockKey(mission.id), value: trimmed);
+    _unlockTick.value++; // notify detail page to rebuild itself
+    Navigator.of(dialogContext).pop();
+    return true;
+  }
+
+  Future<void> _loadPersistedUnlockCodes(
+    List<AdventureMissionRead>? missions,
+  ) async {
+    if (missions == null) return;
+    final codes = <int, String>{};
+    for (final mission in missions) {
+      if (mission.unlockCode == null) continue;
+      final stored = await _storage.read(_unlockKey(mission.id));
+      if (stored != null) {
+        codes[mission.id] = stored;
+      }
+    }
+    if (mounted && codes.isNotEmpty) {
+      setState(() {
+        _enteredUnlockCodes.addAll(codes);
+      });
+    }
+  }
 
   int _checkNollningWeek() {
     return 0;
@@ -78,11 +156,26 @@ class _QuestScreenState extends State<QuestScreen>
     ); //_checkNollningWeek()
 
     _loadInitData();
+
+    // Re-roll the getRandomString() calls in build a few times a second, so
+    // locked missions look like they are glitching.
+    _scrambleTimer = Timer.periodic(Duration(milliseconds: 300), (_) {
+      if (!mounted) return;
+      final anyLocked = missionsMap.values.any(
+        (missions) => missions.any(_isMissionLocked),
+      );
+      if (!anyLocked) return;
+      // Only the scrambled Text widgets listen to this, so the rest of the
+      // screen is not rebuilt several times a second.
+      _unlockTick.value++;
+    });
   }
 
   @override
   void dispose() {
+    _scrambleTimer?.cancel();
     _tabController.dispose();
+    _unlockTick.dispose();
     super.dispose();
   }
 
@@ -90,6 +183,7 @@ class _QuestScreenState extends State<QuestScreen>
     setState(() {
       this.missionsMap = {};
       this.groupMissionsMap = {};
+      this._enteredUnlockCodes = {};
       this.user = null;
       this.nollning = null;
       this.nollningGroup = null;
@@ -155,6 +249,8 @@ class _QuestScreenState extends State<QuestScreen>
               })
             : ();
       });
+
+      await _loadPersistedUnlockCodes(missionList);
     }
   }
 
@@ -478,8 +574,84 @@ class _QuestScreenState extends State<QuestScreen>
         opaque: false,
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
-        pageBuilder: (ctx, _, __) =>
-            _missionDetails(element, ctx, () => Navigator.of(ctx).pop()),
+        pageBuilder: (ctx, _, __) => ValueListenableBuilder<int>(
+          valueListenable: _unlockTick,
+          builder: (ctx2, _, __) =>
+              _missionDetails(element, ctx2, () => Navigator.of(ctx2).pop()),
+        ),
+      ),
+    );
+  }
+
+  void _showUnlockDialog(AdventureMissionRead mission, BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+    String enteredCode = "";
+    bool wrongCode = false;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (dialogContext, setDialogState) {
+          void submit(String value) {
+            enteredCode = value;
+            if (!_submitUnlockCode(mission, value, dialogContext)) {
+              setDialogState(() {
+                wrongCode = true;
+              });
+            }
+          }
+
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  t.localeName == "sv" ? "Försök låsa upp?" : "Try to unlock?",
+                  style: TextStyle(
+                    fontFamily: "Consolas",
+                    fontWeight: FontWeight.w600,
+                    fontSize: widget.availableWidth / 20,
+                    color: Colors.black,
+                  ),
+                ),
+                TextField(
+                  autofocus: true,
+                  autocorrect: false,
+                  textCapitalization: TextCapitalization.none,
+                  decoration: InputDecoration(
+                    labelText: t.localeName == "sv" ? "Ange kod" : "Enter code",
+                    errorText: wrongCode
+                        ? (t.localeName == "sv" ? "Fel kod" : "Wrong code")
+                        : null,
+                  ),
+                  onChanged: (value) {
+                    enteredCode = value;
+                    if (wrongCode) {
+                      setDialogState(() {
+                        wrongCode = false;
+                      });
+                    }
+                  },
+                  onSubmitted: submit,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  submit(enteredCode);
+                },
+                child: Text(t.eventYes),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+                child: Text(t.eventNo),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -512,12 +684,14 @@ class _QuestScreenState extends State<QuestScreen>
                   padding: EdgeInsets.only(top: widget.availableHeight * 0.27),
                   child: Align(
                     alignment: Alignment.topCenter,
-                    child: Image.asset(
-                      width: widget.availableHeight * 0.35,
-                      height: widget.availableHeight * 0.35,
-                      _pixelArt(mission),
-                      fit: BoxFit.contain,
-                    ),
+                    child: _isMissionLocked(mission)
+                        ? _lockedPixelArt(widget.availableHeight * 0.35, false)
+                        : Image.asset(
+                            width: widget.availableHeight * 0.35,
+                            height: widget.availableHeight * 0.35,
+                            _pixelArt(mission),
+                            fit: BoxFit.contain,
+                          ),
                   ),
                 ),
                 Padding(
@@ -533,7 +707,15 @@ class _QuestScreenState extends State<QuestScreen>
                           left: widget.availableWidth * 0.03,
                         ),
                         child: Text(
-                          t.localeName == "sv"
+                          _isMissionLocked(mission)
+                              ? (t.localeName == "sv"
+                                    ? getRandomString(2) +
+                                          "[ KOD KRÄVS ]" +
+                                          getRandomString(2)
+                                    : getRandomString(2) +
+                                          "[ CODE NEEDED ]" +
+                                          getRandomString(2))
+                              : t.localeName == "sv"
                               ? (mission.titleSv.length <= 21
                                     ? mission.titleSv
                                     : mission.titleSv.substring(0, 18) + "...")
@@ -541,6 +723,9 @@ class _QuestScreenState extends State<QuestScreen>
                                     ? mission.titleEn
                                     : mission.titleEn.substring(0, 18) + "..."),
                           style: TextStyle(
+                            fontFamily: _isMissionLocked(mission)
+                                ? lockedFont
+                                : null,
                             fontWeight: FontWeight.w600,
                             fontSize: widget.availableWidth / 15,
                             color: Colors.black, // Color(0xFFFCBD1D)
@@ -559,7 +744,17 @@ class _QuestScreenState extends State<QuestScreen>
                         height: widget.availableHeight * 0.30,
                         child: SingleChildScrollView(
                           child: Text(
-                            t.localeName == "sv"
+                            _isMissionLocked(mission)
+                                ? (t.localeName == "sv"
+                                      ? "Du behöver en kod för att låsa upp detta uppdrag!" +
+                                            (mission.unlockHintSv != null
+                                                ? "\n\n" + mission.unlockHintSv!
+                                                : "")
+                                      : "You need a code to unlock this quest!" +
+                                            (mission.unlockHintEn != null
+                                                ? "\n\n" + mission.unlockHintEn!
+                                                : ""))
+                                : t.localeName == "sv"
                                 ? mission.descriptionSv
                                 : mission.descriptionEn,
                             style: TextStyle(
@@ -572,11 +767,19 @@ class _QuestScreenState extends State<QuestScreen>
                       ),
                       Center(
                         child: Text(
-                          mission.minPoints == mission.maxPoints
+                          _isMissionLocked(mission)
+                              ? getRandomString(2) +
+                                    " - " +
+                                    getRandomString(2) +
+                                    " " +
+                                    t.introductionPoints2
+                              : mission.minPoints == mission.maxPoints
                               ? mission.maxPoints.toString()
                               : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
                           style: TextStyle(
-                            fontFamily: "LoRes12OT",
+                            fontFamily: _isMissionLocked(mission)
+                                ? lockedFont
+                                : "LoRes12OT",
                             fontWeight: FontWeight.w600,
                             fontSize: widget.availableWidth / 20,
                           ),
@@ -602,6 +805,10 @@ class _QuestScreenState extends State<QuestScreen>
                             Colors.transparent, // Remove highlight transparency
                         borderRadius: BorderRadius.circular(12),
                         onTap: () async {
+                          if (_isMissionLocked(mission)) {
+                            _showUnlockDialog(mission, context);
+                            return;
+                          }
                           final confirmed = await showDialog<bool>(
                             context: context,
                             builder: (dialogContext) => AlertDialog(
@@ -638,15 +845,38 @@ class _QuestScreenState extends State<QuestScreen>
                             );
                           }
                         },
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                t.localeName == "sv" ? turn_in_sv : turn_in_en,
+                        child: _isMissionLocked(mission)
+                            ? Stack(
+                                children: [
+                                  Center(
+                                    child: Image.asset(placeholder_button),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      t.localeName == "sv"
+                                          ? "LÅS UPP!"
+                                          : "UNLOCK!",
+                                      style: TextStyle(
+                                        fontFamily: "LoRes12OT",
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: widget.availableWidth / 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                children: [
+                                  Center(
+                                    child: Image.asset(
+                                      t.localeName == "sv"
+                                          ? turn_in_sv
+                                          : turn_in_en,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),
@@ -833,15 +1063,25 @@ class _QuestScreenState extends State<QuestScreen>
                     height: widget.availableHeight / 6 * 0.73,
                     child: Stack(
                       children: [
-                        Image.asset(pixelart_placeholder, fit: BoxFit.contain),
-                        Positioned.fill(
-                          child: Center(
-                            child: Image.asset(
-                              _pixelArt(element),
-                              fit: BoxFit.contain,
+                        if (_isMissionLocked(element))
+                          _lockedPixelArt(
+                            widget.availableHeight / 6 * 0.73,
+                            true,
+                          )
+                        else ...[
+                          Image.asset(
+                            pixelart_placeholder,
+                            fit: BoxFit.contain,
+                          ),
+                          Positioned.fill(
+                            child: Center(
+                              child: Image.asset(
+                                _pixelArt(element),
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ],
                     ),
                   ),
@@ -856,19 +1096,32 @@ class _QuestScreenState extends State<QuestScreen>
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        t.localeName == "sv"
-                            ? (element.titleSv.length <= 40
-                                  ? element.titleSv
-                                  : element.titleSv.substring(0, 35) + "...")
-                            : (element.titleEn.length <= 40
-                                  ? element.titleEn
-                                  : element.titleEn.substring(0, 35) + "..."),
-                        style: TextStyle(
-                          fontFamily: "LoRes12OT",
-                          fontWeight: FontWeight.w600,
-                          fontSize: widget.availableWidth / 20,
-                          color: Colors.white,
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: _unlockTick,
+                        builder: (context, _, __) => Text(
+                          _isMissionLocked(element)
+                              ? (t.localeName == "sv"
+                                    ? getRandomString(4) +
+                                          "[ KOD KRÄVS ]" +
+                                          getRandomString(4)
+                                    : getRandomString(3) +
+                                          "[ CODE NEEDED ]" +
+                                          getRandomString(3))
+                              : t.localeName == "sv"
+                              ? (element.titleSv.length <= 40
+                                    ? element.titleSv
+                                    : element.titleSv.substring(0, 35) + "...")
+                              : (element.titleEn.length <= 40
+                                    ? element.titleEn
+                                    : element.titleEn.substring(0, 35) + "..."),
+                          style: TextStyle(
+                            fontFamily: _isMissionLocked(element)
+                                ? lockedFont
+                                : "LoRes12OT",
+                            fontWeight: FontWeight.w600,
+                            fontSize: widget.availableWidth / 20,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -1267,6 +1520,38 @@ class _QuestScreenState extends State<QuestScreen>
     return false;
   }
 
+  Widget _lockedPixelArt(double size, bool showBackground) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        children: [
+          if (showBackground)
+            Positioned.fill(
+              child: Image.asset(pixelart_placeholder, fit: BoxFit.contain),
+            ),
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.all(size * 0.01),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  "?",
+                  style: TextStyle(
+                    fontFamily: "LoRes12OT",
+                    fontWeight: FontWeight.w600,
+                    height: 1.0,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   String _pixelArt(dynamic mission) {
     String category = "";
     String pixelArt;
@@ -1305,6 +1590,9 @@ class _QuestScreenState extends State<QuestScreen>
   }
 
   String _buttonArt(dynamic mission) {
+    if (_isMissionLocked(mission)) {
+      return locked;
+    }
     String category = "";
     String pixelArt;
     if (mission is AdventureMissionRead) {
