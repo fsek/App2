@@ -195,7 +195,7 @@ class _MapViewState extends State<MapView> {
                         title,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontFamily: "NF-Pixels",
+                          fontFamily: "LoRes12OT",
                           fontSize: 30
                         )
                       )
@@ -235,7 +235,7 @@ class _MapViewState extends State<MapView> {
                 description,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontFamily: "NF-Pixels",
+                  fontFamily: "LoRes12OT",
                   fontSize: 20
                 ),
               )
