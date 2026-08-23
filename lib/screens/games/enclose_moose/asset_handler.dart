@@ -65,7 +65,7 @@ class AssetHandler {
         return List.generate(3, (frameIndex) => "${baseImgPath}bees/animation${frameIndex}.png");
 
       case EncloseGridCellType.moose:
-        return const ["${baseImgPath}moose/idle0.png"];
+        return [];  // needs to be empty and not null to allow for seperate start and end idles.
     }
   }
 
@@ -188,7 +188,16 @@ class AssetHandler {
         return beeFrames;
 
       case EncloseGridCellType.moose:
-        return List.generate(2, (frameIndex) => "${baseImgPath}moose/idle${frameIndex}.png");
+      final List<String> mooseFrames = [];
+        final isStart = (extra as bool?) ?? true;
+        if (isStart || returnAll) {
+          mooseFrames.addAll(List.generate(2, (frameIndex) => "${baseImgPath}moose/start_idle${frameIndex}.png"));
+        }
+        if (!isStart || returnAll) {
+          mooseFrames.addAll(List.generate(2, (frameIndex) => "${baseImgPath}moose/end_idle${frameIndex}.png"));
+        }
+
+        return mooseFrames;
     }
   }
 

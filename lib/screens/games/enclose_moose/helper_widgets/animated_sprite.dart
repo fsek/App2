@@ -114,7 +114,7 @@ class _AnimatedSpriteState extends State<AnimatedSprite> with SingleTickerProvid
           if (frame <= 0 || frame >= animationFramesLength) {
             final usedStartIdleFrames = widget.startIdleFrames ?? widget.idleFrames;
             final usedEndIdleFrames = widget.endIdleFrames ?? widget.idleFrames;
-            final usedIdleFrames = frame <= 0 ? usedStartIdleFrames : usedEndIdleFrames;
+            final usedIdleFrames = (frame <= 0 && !(animationFramesLength == 0 && widget.shouldAnimate)) ? usedStartIdleFrames : usedEndIdleFrames;
             if (usedIdleFrames?.isEmpty ?? true) return const SizedBox.shrink();
 
             return AnimatedBuilder(

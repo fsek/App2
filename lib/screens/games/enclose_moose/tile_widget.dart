@@ -149,7 +149,10 @@ class TileWidget extends StatelessWidget {
                 AnimatedSprite(
                   key: Key("moose"),
                   vsync: vsync,
-                  idleFrames: AssetHandler.getIdleFrames(tile.type),
+                  animationFrames: AssetHandler.getAnimationFrames(tile.type),
+                  shouldAnimate: tile.isEnclosed,
+                  startIdleFrames: AssetHandler.getIdleFrames(tile.type, extra: true),
+                  endIdleFrames: AssetHandler.getIdleFrames(tile.type, extra: false),
                   idleController: idleController
                 ),
 
