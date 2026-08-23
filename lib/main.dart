@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fsek_mobile/screens/home/nollningHome26.dart';
-import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
+import 'package:fsek_mobile/screens/games/game_chooser_page.dart';
 import 'package:fsek_mobile/screens/news/news.dart';
 import 'package:fsek_mobile/screens/calendar/calendar.dart';
 import 'package:fsek_mobile/screens/other/other.dart';
@@ -41,7 +41,7 @@ void main() async {
     // During introduction, modify NollningHomePage() and comment the normal HomePage()
     Destination(2, Icons.home, NollningHomePage()),
     // Destination(2, Icons.home, HomePage()),
-    Destination(3, CustomIcons.moose, MooseGamePage()),
+    Destination(3, CustomIcons.moose, GameChooserPage()),
     Destination(4, Icons.list, OtherContent()),
   ];
 

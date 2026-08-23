@@ -100,7 +100,7 @@ class _ContentWrapperState extends State<ContentWrapper>
       0: t.news,
       1: t.calendar,
       2: t.home, //these maybe needs to change
-      3: "Game",  // t.notifications,
+      3: "Games",  // t.notifications,
       4: t.other,
     };
     // Shows state messages
