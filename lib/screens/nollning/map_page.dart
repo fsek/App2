@@ -153,6 +153,7 @@ class _MapViewState extends State<MapView> {
       }
     }
 
+    if(!mounted) return;
     setState(() {
       pins = pinList;
     });
