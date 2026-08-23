@@ -24,9 +24,11 @@ class _QuestScreenState extends State<QuestScreen>
   Map<int, List<GroupMissionRead>> groupMissionsMap = {};
   Map<int, String> _enteredUnlockCodes = {};
   final TokenStorageWrapper _storage = TokenStorageWrapper();
-  // Bumped whenever a mission is unlocked or the locked text re-scrambles,
-  // so the pushed mission-detail route rebuilds itself.
+  // Bumped whenever a mission is unlocked, so the pushed mission-detail route
+  // rebuilds itself.
   final ValueNotifier<int> _unlockTick = ValueNotifier(0);
+  // Bumped a few times a second so all text which could be scrambled rebuilds.
+  final ValueNotifier<int> _scrambleTick = ValueNotifier(0);
   Timer? _scrambleTimer;
   AdminUserRead? user;
   NollningRead? nollning;
@@ -166,7 +168,7 @@ class _QuestScreenState extends State<QuestScreen>
       if (!anyLocked) return;
       // Only the scrambled Text widgets listen to this, so the rest of the
       // screen is not rebuilt several times a second.
-      _unlockTick.value++;
+      _scrambleTick.value++;
     });
   }
 
@@ -175,6 +177,7 @@ class _QuestScreenState extends State<QuestScreen>
     _scrambleTimer?.cancel();
     _tabController.dispose();
     _unlockTick.dispose();
+    _scrambleTick.dispose();
     super.dispose();
   }
 
@@ -703,25 +706,30 @@ class _QuestScreenState extends State<QuestScreen>
                         padding: EdgeInsets.only(
                           left: widget.availableWidth * 0.03,
                         ),
-                        child: Text(
-                          _isMissionLocked(mission)
-                              ? getRandomString(2) +
-                                    t.questLockedTitle +
-                                    getRandomString(2)
-                              : t.localeName == "sv"
-                              ? (mission.titleSv.length <= 21
-                                    ? mission.titleSv
-                                    : mission.titleSv.substring(0, 18) + "...")
-                              : (mission.titleEn.length <= 21
-                                    ? mission.titleEn
-                                    : mission.titleEn.substring(0, 18) + "..."),
-                          style: TextStyle(
-                            fontFamily: _isMissionLocked(mission)
-                                ? lockedFont
-                                : null,
-                            fontWeight: FontWeight.w600,
-                            fontSize: widget.availableWidth / 15,
-                            color: Colors.black, // Color(0xFFFCBD1D)
+                        child: ValueListenableBuilder<int>(
+                          valueListenable: _scrambleTick,
+                          builder: (context, _, __) => Text(
+                            _isMissionLocked(mission)
+                                ? getRandomString(2) +
+                                      t.questLockedTitle +
+                                      getRandomString(2)
+                                : t.localeName == "sv"
+                                ? (mission.titleSv.length <= 21
+                                      ? mission.titleSv
+                                      : mission.titleSv.substring(0, 18) +
+                                            "...")
+                                : (mission.titleEn.length <= 21
+                                      ? mission.titleEn
+                                      : mission.titleEn.substring(0, 18) +
+                                            "..."),
+                            style: TextStyle(
+                              fontFamily: _isMissionLocked(mission)
+                                  ? lockedFont
+                                  : null,
+                              fontWeight: FontWeight.w600,
+                              fontSize: widget.availableWidth / 15,
+                              color: Colors.black, // Color(0xFFFCBD1D)
+                            ),
                           ),
                         ),
                       ),
@@ -758,22 +766,25 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                       ),
                       Center(
-                        child: Text(
-                          _isMissionLocked(mission)
-                              ? getRandomString(2) +
-                                    " - " +
-                                    getRandomString(2) +
-                                    " " +
-                                    t.introductionPoints2
-                              : mission.minPoints == mission.maxPoints
-                              ? mission.maxPoints.toString()
-                              : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
-                          style: TextStyle(
-                            fontFamily: _isMissionLocked(mission)
-                                ? lockedFont
-                                : "LoRes12OT",
-                            fontWeight: FontWeight.w600,
-                            fontSize: widget.availableWidth / 20,
+                        child: ValueListenableBuilder<int>(
+                          valueListenable: _scrambleTick,
+                          builder: (context, _, __) => Text(
+                            _isMissionLocked(mission)
+                                ? getRandomString(2) +
+                                      " - " +
+                                      getRandomString(2) +
+                                      " " +
+                                      t.introductionPoints2
+                                : mission.minPoints == mission.maxPoints
+                                ? mission.maxPoints.toString()
+                                : "${mission.minPoints} - ${mission.maxPoints} ${t.introductionPoints2}",
+                            style: TextStyle(
+                              fontFamily: _isMissionLocked(mission)
+                                  ? lockedFont
+                                  : "LoRes12OT",
+                              fontWeight: FontWeight.w600,
+                              fontSize: widget.availableWidth / 20,
+                            ),
                           ),
                         ),
                       ),
@@ -1087,7 +1098,7 @@ class _QuestScreenState extends State<QuestScreen>
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: ValueListenableBuilder<int>(
-                        valueListenable: _unlockTick,
+                        valueListenable: _scrambleTick,
                         builder: (context, _, __) => Text(
                           _isMissionLocked(element)
                               ? getRandomString(3) +
