@@ -141,8 +141,7 @@ class _QuestScreenState extends State<QuestScreen>
   }
 
   int _checkNollningWeek() {
-    return 0;
-    //return WeekTracker.determineWeek();
+    return WeekTracker.determineWeek();
   }
 
   @override
@@ -606,7 +605,7 @@ class _QuestScreenState extends State<QuestScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  t.localeName == "sv" ? "Försök låsa upp?" : "Try to unlock?",
+                  t.questUnlockTitle,
                   style: TextStyle(
                     fontFamily: "Consolas",
                     fontWeight: FontWeight.w600,
@@ -619,10 +618,8 @@ class _QuestScreenState extends State<QuestScreen>
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
                   decoration: InputDecoration(
-                    labelText: t.localeName == "sv" ? "Ange kod" : "Enter code",
-                    errorText: wrongCode
-                        ? (t.localeName == "sv" ? "Fel kod" : "Wrong code")
-                        : null,
+                    labelText: t.questUnlockEnterCode,
+                    errorText: wrongCode ? t.questUnlockWrongCode : null,
                   ),
                   onChanged: (value) {
                     enteredCode = value;
@@ -708,13 +705,9 @@ class _QuestScreenState extends State<QuestScreen>
                         ),
                         child: Text(
                           _isMissionLocked(mission)
-                              ? (t.localeName == "sv"
-                                    ? getRandomString(2) +
-                                          "[ KOD KRÄVS ]" +
-                                          getRandomString(2)
-                                    : getRandomString(2) +
-                                          "[ CODE NEEDED ]" +
-                                          getRandomString(2))
+                              ? getRandomString(2) +
+                                    t.questLockedTitle +
+                                    getRandomString(2)
                               : t.localeName == "sv"
                               ? (mission.titleSv.length <= 21
                                     ? mission.titleSv
@@ -745,13 +738,12 @@ class _QuestScreenState extends State<QuestScreen>
                         child: SingleChildScrollView(
                           child: Text(
                             _isMissionLocked(mission)
-                                ? (t.localeName == "sv"
-                                      ? "Du behöver en kod för att låsa upp detta uppdrag!" +
-                                            (mission.unlockHintSv != null
+                                ? t.questLockedDescription +
+                                      (t.localeName == "sv"
+                                          ? (mission.unlockHintSv != null
                                                 ? "\n\n" + mission.unlockHintSv!
                                                 : "")
-                                      : "You need a code to unlock this quest!" +
-                                            (mission.unlockHintEn != null
+                                          : (mission.unlockHintEn != null
                                                 ? "\n\n" + mission.unlockHintEn!
                                                 : ""))
                                 : t.localeName == "sv"
@@ -853,9 +845,7 @@ class _QuestScreenState extends State<QuestScreen>
                                   ),
                                   Center(
                                     child: Text(
-                                      t.localeName == "sv"
-                                          ? "LÅS UPP!"
-                                          : "UNLOCK!",
+                                      t.questUnlockButton,
                                       style: TextStyle(
                                         fontFamily: "LoRes12OT",
                                         fontWeight: FontWeight.w600,
@@ -1100,13 +1090,9 @@ class _QuestScreenState extends State<QuestScreen>
                         valueListenable: _unlockTick,
                         builder: (context, _, __) => Text(
                           _isMissionLocked(element)
-                              ? (t.localeName == "sv"
-                                    ? getRandomString(4) +
-                                          "[ KOD KRÄVS ]" +
-                                          getRandomString(4)
-                                    : getRandomString(3) +
-                                          "[ CODE NEEDED ]" +
-                                          getRandomString(3))
+                              ? getRandomString(3) +
+                                    t.questLockedTitle +
+                                    getRandomString(3)
                               : t.localeName == "sv"
                               ? (element.titleSv.length <= 40
                                     ? element.titleSv

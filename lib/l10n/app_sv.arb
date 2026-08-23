@@ -244,6 +244,13 @@
     "introductionMap": "Karta över LTH",
     "introductionMapClose": "Stäng",
 
+    "questUnlockTitle": "Försök låsa upp?",
+    "questUnlockEnterCode": "Ange kod",
+    "questUnlockWrongCode": "Fel kod",
+    "questLockedTitle": "[ KOD KRÄVS ]",
+    "questLockedDescription": "Du behöver en kod för att låsa upp detta uppdrag!",
+    "questUnlockButton": "LÅS UPP!",
+
     "cafeShiftSignup": "Du är nu uppskriven på passet!",
     "cafeShiftSignupText": "Tack för att du vill jobba i caféet! Kom ihåg att avanmäla dig om du får förhinder.",
     "cafeShiftFail": "Något gick fel!",

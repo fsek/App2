@@ -1424,6 +1424,42 @@ abstract class AppLocalizations {
   /// **'Stäng'**
   String get introductionMapClose;
 
+  /// No description provided for @questUnlockTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'Försök låsa upp?'**
+  String get questUnlockTitle;
+
+  /// No description provided for @questUnlockEnterCode.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ange kod'**
+  String get questUnlockEnterCode;
+
+  /// No description provided for @questUnlockWrongCode.
+  ///
+  /// In sv, this message translates to:
+  /// **'Fel kod'**
+  String get questUnlockWrongCode;
+
+  /// No description provided for @questLockedTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'[ KOD KRÄVS ]'**
+  String get questLockedTitle;
+
+  /// No description provided for @questLockedDescription.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du behöver en kod för att låsa upp detta uppdrag!'**
+  String get questLockedDescription;
+
+  /// No description provided for @questUnlockButton.
+  ///
+  /// In sv, this message translates to:
+  /// **'LÅS UPP!'**
+  String get questUnlockButton;
+
   /// No description provided for @cafeShiftSignup.
   ///
   /// In sv, this message translates to:
