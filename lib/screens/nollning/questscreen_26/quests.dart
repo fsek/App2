@@ -166,8 +166,8 @@ class _QuestScreenState extends State<QuestScreen>
         (missions) => missions.any(_isMissionLocked),
       );
       if (!anyLocked) return;
-      // Only the scrambled Text widgets listen to this, so the rest of the
-      // screen is not rebuilt several times a second.
+      // Only text widgets which can be scrambled are listening to this,
+      // so most widgets won't rebuild every 300ms
       _scrambleTick.value++;
     });
   }
