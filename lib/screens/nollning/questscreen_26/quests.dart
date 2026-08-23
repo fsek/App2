@@ -33,7 +33,6 @@ class _QuestScreenState extends State<QuestScreen>
   AdminUserRead? user;
   NollningRead? nollning;
   NollningGroupRead? nollningGroup;
-  dynamic selectedMission;
   late TabController _tabController;
 
   String ej_vald = "assets/data/nollning_26/uppdrag/ej_vald.png";
@@ -189,7 +188,6 @@ class _QuestScreenState extends State<QuestScreen>
       this.user = null;
       this.nollning = null;
       this.nollningGroup = null;
-      this.selectedMission = null;
     });
     _loadInitData();
   }
@@ -305,11 +303,7 @@ class _QuestScreenState extends State<QuestScreen>
                   return Expanded(
                     child: GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        if (selectedMission == null) {
-                          _tabController.animateTo(index);
-                        }
-                      },
+                      onTap: () => _tabController.animateTo(index),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: widget.availableWidth / 30,
@@ -685,7 +679,11 @@ class _QuestScreenState extends State<QuestScreen>
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: _isMissionLocked(mission)
-                        ? _lockedPixelArt(widget.availableHeight * 0.35, false)
+                        ? _lockedPixelArt(
+                            widget.availableHeight * 0.35,
+                            false,
+                            mission.titleSv,
+                          )
                         : Image.asset(
                             width: widget.availableHeight * 0.35,
                             height: widget.availableHeight * 0.35,
@@ -1068,6 +1066,7 @@ class _QuestScreenState extends State<QuestScreen>
                           _lockedPixelArt(
                             widget.availableHeight / 6 * 0.73,
                             true,
+                            element.titleSv,
                           )
                         else ...[
                           Image.asset(
@@ -1517,7 +1516,29 @@ class _QuestScreenState extends State<QuestScreen>
     return false;
   }
 
-  Widget _lockedPixelArt(double size, bool showBackground) {
+  // Colors used for the "?" of locked missions.
+  static const lockedQuestionColors = [
+    Color(0xFF4C7FE0), // blue
+    Color(0xFFE08A2E), // orange
+    Color(0xFF8A5AD1), // purple
+    Color(0xFFD1483F), // red
+    Color(0xFFE0C13A), // yellow
+    Color(0xFF3FAE7A), // green
+    Color(0xFFD1519B), // pink
+  ];
+
+  Color getColorFromTitle(String titleSv) {
+    // Hashes titleSv, uses it to pick a color from a list.
+    // Used for locked missions so we can tell them apart visually.
+
+    int hash = 0;
+    for (final codeUnit in titleSv.codeUnits) {
+      hash = (hash * 31 + codeUnit) & 0x7FFFFFFF;
+    }
+    return lockedQuestionColors[hash % lockedQuestionColors.length];
+  }
+
+  Widget _lockedPixelArt(double size, bool showBackground, String titleSv) {
     return SizedBox(
       width: size,
       height: size,
@@ -1538,7 +1559,7 @@ class _QuestScreenState extends State<QuestScreen>
                     fontFamily: "LoRes12OT",
                     fontWeight: FontWeight.w600,
                     height: 1.0,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: getColorFromTitle(titleSv),
                   ),
                 ),
               ),
