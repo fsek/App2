@@ -8,7 +8,6 @@ import 'package:fsek_mobile/screens/nollning/nolleguide_26/portraitBuilder.dart'
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/wallFactory.dart';
 import 'package:fsek_mobile/screens/nollning/nolleguide_26/overlay.dart';
 
-
 class GuildPage extends StatefulWidget {
   @override
   _GuildPageState createState() => _GuildPageState();
@@ -81,7 +80,6 @@ class _GuildPageState extends State<GuildPage> {
     final String fosetTitle = title("foset");
     final String frejaTitle = title("freja", isLocale: false);
     final String jubileeTitle = title("jubilee");
-    final String libuTitle = title("libu");
     final String organisationTitle = title("organisation", isLocale: false);
     final String processionTitle = title("procession");
     final String samvetetTitle = title("samvetet");
@@ -190,6 +188,20 @@ class _GuildPageState extends State<GuildPage> {
         PortraitData(imagePath: styrelse4Portrait, flex: doublePortraitFlex,
             onTap: () => pushNavigator(index: 10, imagePath: styrelse4Portrait)),
       ]),
+      Image.asset(accountingTitle),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: treasurerPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 27, imagePath: treasurerPortrait)),
+      ]),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: bookPortrait, flex: smallPortraitFlex,
+            onTap: () => pushNavigator(index: 28, imagePath: bookPortrait)),
+      ]),
+      Image.asset(serviceTitle),
+      PortraitRow(portraits: [
+        PortraitData(imagePath: secretaryPortrait, flex: largePortraitFlex,
+            onTap: () => pushNavigator(index: 15, imagePath: secretaryPortrait)),
+      ]),
       Image.asset(studentcouncilTitle),
       PortraitRow(portraits: [
         PortraitData(imagePath: eduPortrait, flex: largePortraitFlex,
@@ -210,11 +222,6 @@ class _GuildPageState extends State<GuildPage> {
         PortraitData(imagePath: jubileePortrait, flex: largePortraitFlex,
             onTap: () => pushNavigator(index: 14, imagePath: jubileePortrait)),
       ]),
-      Image.asset(serviceTitle),
-      PortraitRow(portraits: [
-        PortraitData(imagePath: secretaryPortrait, flex: largePortraitFlex,
-            onTap: () => pushNavigator(index: 15, imagePath: secretaryPortrait)),
-      ]),
       Image.asset(truthTitle),
       PortraitRow(portraits: [
         PortraitData(imagePath: truthPortrait, flex: largePortraitFlex,
@@ -229,9 +236,8 @@ class _GuildPageState extends State<GuildPage> {
         PortraitData(imagePath: samvetetPortrait, flex: largePortraitFlex,
             onTap: () => pushNavigator(index: 18, imagePath: samvetetPortrait)),
       ]),
-      Image.asset(libuTitle),
       PortraitRow(portraits: [
-        PortraitData(imagePath: libuPortrait, flex: largePortraitFlex,
+        PortraitData(imagePath: libuPortrait, flex: smallPortraitFlex,
             onTap: () => pushNavigator(index: 19, imagePath: libuPortrait)),
       ]),
       Image.asset(facilitiesTitle),
@@ -263,15 +269,6 @@ class _GuildPageState extends State<GuildPage> {
       PortraitRow(portraits: [
         PortraitData(imagePath: frejaPortrait, flex: largePortraitFlex,
             onTap: () => pushNavigator(index: 26, imagePath: frejaPortrait)),
-      ]),
-      Image.asset(accountingTitle),
-      PortraitRow(portraits: [
-        PortraitData(imagePath: treasurerPortrait, flex: largePortraitFlex,
-            onTap: () => pushNavigator(index: 27, imagePath: treasurerPortrait)),
-      ]),
-      PortraitRow(portraits: [
-        PortraitData(imagePath: bookPortrait, flex: smallPortraitFlex,
-            onTap: () => pushNavigator(index: 28, imagePath: bookPortrait)),
       ]),
       Image.asset(cafeTitle),
       PortraitRow(portraits: [
