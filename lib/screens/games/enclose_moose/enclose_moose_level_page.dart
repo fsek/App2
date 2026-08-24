@@ -677,21 +677,27 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
   void _tapTile(EncloseGridTile tile) async {
     /*  // Useful for debug!
-    final builder = EncloseMooseLevelReadBuilder();
-    builder.levelId = 10;
-    builder.nameSv = "debug";
-    builder.nameEn = "debug";
-    builder.encodedGrid = "";
-    builder.wallBudget = 10;
+    final builder = _usedLevel.toBuilder();
+    builder.optimalScore = 45;
+    builder.optimalSolution = SetBuilder();
+    builder.optimalIsUnique = true;
+    builder.scoreDistribution = MapBuilder({
+      "1": 3,
+      "2": 1,
+      "17": 2,
+      "22": 1,
+      "41": 3,
+      "45": 4
+    });
     builder.playerSubmission = EncloseMooseSubmissionReadBuilder();
-    builder.playerSubmission.levelId = 10;
+    builder.playerSubmission.levelId = _usedLevel.levelId;
     builder.playerSubmission.submissionTime = DateTime.now();
     builder.playerSubmission.playerId = 0;
-    builder.playerSubmission.playerScore = 10;
-    builder.releaseDate = Date.now();
-    builder.optimalScore = 54;
+    builder.playerSubmission.playerScore = 45;
 
     _usedLevel = builder.build();
+
+    showDialog(context: context, builder: _buildSubmitDialog());
     */
 
     if (_grid.wallsLeft == 0 && tile.isGrass) {

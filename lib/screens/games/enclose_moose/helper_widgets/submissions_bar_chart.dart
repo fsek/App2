@@ -68,9 +68,14 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
           ]),
             
           builder: (context, child) {
-            final scale = _chartTransformationController.value.getMaxScaleOnAxis();
+            final transformationMatrix = _chartTransformationController.value;
+            final scale = transformationMatrix.getMaxScaleOnAxis();
+            final translation = transformationMatrix.getTranslation().x.abs();
+
             final barWidth = scale * (constraints.maxWidth * 0.7 - 75) / amountBars;
             final currentAlpha = (255 * _tooltipAnimationController.value).toInt();
+
+            final amountShownBars = amountBars / scale;
 
             return BarChart(
               BarChartData(
@@ -126,13 +131,14 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
                     ),
                     sideTitles: SideTitles(
                       showTitles: true,
-                      interval: scale == 1 ? 1 : amountBars / scale,
+                      // interval: scale == 1 ? 1 : amountBars / scale,
+                      interval: 1,
                       reservedSize: 28,
-                      getTitlesWidget: (value, meta) {
-                        if (scale == 1 && value != minScore && value != widget.optimalScore) return const SizedBox.shrink();  // Because the axis is categorical we can't use interval and instead have to use this
-
-                        final usedInterval = amountBars ~/ scale;  // Evenly space labels so that at least one is always showing
-                        if ((value.toInt() - minScore) % usedInterval != 0 && value != minScore && value != widget.optimalScore) return const SizedBox.shrink();
+                      getTitlesWidget: (value, meta) {  // Why is meta.min == 0 and meta.max == 1 always? They have the tools to calculate the max and min (they do it because they only call getTitlesWidget for bars that are in frame...)
+                        final barsTranslated = (amountBars / (meta.parentAxisSize / translation));  // Don't really understand why meta.parentAxisSize != constraints.maxWidth cause then this would just be translation / barWidth
+                        final minShown = (minScore + barsTranslated).roundToDouble();  // This should maybe be a ceil because sometimes this one is out of frame but it's so ugly!
+                        final maxShown = (minScore + barsTranslated + amountShownBars - 1).roundToDouble();  // Same thing here but with floor. 
+                        if (value != minShown && value != maxShown) return const SizedBox.shrink();
 
                         return SideTitleWidget(
                           space: 5,
