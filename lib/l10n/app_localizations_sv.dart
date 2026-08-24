@@ -1683,4 +1683,84 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get eventHasLottery => 'Platser lottas';
+
+  @override
+  String get encloseDay => 'Dag';
+
+  @override
+  String get encloseBonus => 'Bonus';
+
+  @override
+  String get encloseWalls => 'Väggar';
+
+  @override
+  String get encloseSubmit => 'Skicka in';
+
+  @override
+  String get encloseScore => 'Poäng';
+
+  @override
+  String get encloseOptimal => 'Optimal';
+
+  @override
+  String get encloseYourSolution => 'Din lösning';
+
+  @override
+  String get encloseYourBest => 'Ditt bästa';
+
+  @override
+  String get encloseIfEnclosed => 'om i hagen';
+
+  @override
+  String get enclosePreviousDays => 'Tidigare dagar';
+
+  @override
+  String get encloseBonusLevels => 'Bonusnivåer';
+
+  @override
+  String get encloseHowToPlay => 'Hur man spelar';
+
+  @override
+  String get encloseInstruction =>
+      'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera väggar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal väggar så använd dem vist';
+
+  @override
+  String get enclosePerfect => 'PERFEKT!!!';
+
+  @override
+  String get enclosePrettyGood => 'Ganska bra!';
+
+  @override
+  String get encloseNotBad => 'Inte illa!';
+
+  @override
+  String get encloseNotTheWorst => 'Jag har sett värre!';
+
+  @override
+  String get encloseComeOn => 'Kom igen...';
+
+  @override
+  String get encloseBetterThan => 'Du fick lika bra eller bättre än';
+
+  @override
+  String get enclosePercentOfPlayers => '% av spelare';
+
+  @override
+  String get encloseYourScore => 'Din poäng';
+
+  @override
+  String get encloseSubmitErrorTitle =>
+      'Ett problem uppstod med att skicka in ditt svar';
+
+  @override
+  String get encloseSubmitErrorText => 'Försök igen senare\n\nAnledningen var';
+
+  @override
+  String get encloseOptimalScore => 'Optimal poäng';
+
+  @override
+  String get encloseOccurrences => 'Förekomster';
+
+  @override
+  String get encloseOccurrence => 'Förekomst';
 }

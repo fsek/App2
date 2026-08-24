@@ -161,7 +161,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   WigglingWidget(
                     controller: _idleController,
                     child: OutlinedText(
-                      text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Bonus",
+                      text: _usedLevel.dayIndex != null ? "${t.encloseDay} ${_usedLevel.dayIndex}" : t.encloseBonus,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 25,
@@ -503,7 +503,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                   child: HighlightedText(
                                     showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
                                     child: OutlinedText(
-                                      text: "Walls: ${_grid.wallsLeft}/${_grid.wallBudget}",
+                                      text: "${t.encloseWalls}: ${_grid.wallsLeft}/${_grid.wallBudget}",
                                       style: const TextStyle(
                                         fontSize: 25,
                                         fontFamily: "Schoolbell"
@@ -527,9 +527,9 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                         )
                                       ),
                                       onPressed: _submitSolution,
-                                      child: const OutlinedText(
-                                        text: "Submit",
-                                        style: TextStyle(
+                                      child: OutlinedText(
+                                        text: t.encloseSubmit,
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontFamily: "Schoolbell"
@@ -547,7 +547,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                   child: HighlightedText(
                                     showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
                                     child: OutlinedText(
-                                      text: "Score: ${_grid.score ?? "N/A"}",
+                                      text: "${t.encloseScore}: ${_grid.score ?? "N/A"}",
                                       style: const TextStyle(
                                         fontSize: 25,
                                         fontFamily: "Schoolbell"
@@ -577,7 +577,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                         visualDensity: VisualDensity.compact
                                       ),
                                       label: OutlinedText(
-                                        text: "Optimal: ${_usedLevel.optimalScore}",
+                                        text: "${t.encloseOptimal}: ${_usedLevel.optimalScore}",
                                         style: const TextStyle(
                                           // color: Colors.white,
                                           fontSize: 20,
@@ -605,7 +605,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                         visualDensity: VisualDensity.compact
                                       ),
                                       label: OutlinedText(
-                                        text: _hasSubmitted ? "Your solution: ${_usedLevel.playerSubmission!.playerScore}" : "Your best: $_bestSolutionScore",
+                                        text: _hasSubmitted ? "${t.encloseYourSolution}: ${_usedLevel.playerSubmission!.playerScore}" : "${t.encloseYourBest}: $_bestSolutionScore",
                                         style: const TextStyle(
                                           // color: Colors.white,
                                           fontSize: 20,
@@ -740,7 +740,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     if (tile.isBonus) {
       final bonusScore = tile.bonusScore;
       if (bonusScore != 0) {
-        _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore if enclosed");
+        final t = AppLocalizations.of(context)!;
+        _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore ${t.encloseIfEnclosed}");
       }
     }
   }
@@ -820,10 +821,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             Column(
               children: [
                 if (_dailies.isNotEmpty)
-                  const Text(
-                    "Previous days",
+                  Text(
+                    t.enclosePreviousDays,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontFamily: "Schoolbell"
                     )
@@ -840,12 +841,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                     title: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
-                            text: "Day ${level.dayIndex}"
-                          ),
+                          TextSpan(text: "${t.encloseDay} ${level.dayIndex}"),
 
                           TextSpan(
-                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y", locale: "en")})",
+                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y", locale: t.localeName)})",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor
                             )
@@ -871,10 +870,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             Column(
               children: [
                 if (_nonDailies.isNotEmpty)
-                  const Text(
-                    "Bonus levels",
+                  Text(
+                    t.encloseBonusLevels,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontFamily: "Schoolbell"
                     )
@@ -912,20 +911,22 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildHelpDialog() {
-    return (context) => const SimpleDialog(
+    final t = AppLocalizations.of(context)!;
+
+    return (context) => SimpleDialog(
       contentPadding: const EdgeInsets.all(16),
       title: Text(
-        "How to play",
+        t.encloseHowToPlay,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 25,
           fontFamily: "Schoolbell"
         )
       ),
       children: [
         Text(
-          "The objective is to build an enclosure for the moose by placing walls (tapping) on the grid. The moose can not move over the water. The more grass tiles in your enclosure, the higher your score. You only have a limited amount of walls so use them wisely.",
-          style: TextStyle( 
+          t.encloseInstruction,
+          style: const TextStyle( 
             fontSize: 18,
             fontFamily: "Schoolbell"
           )
@@ -935,6 +936,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildSubmitDialog() {
+    final t = AppLocalizations.of(context)!;
+  
     final Map<int, int> scoreDistribution = {};
     for (final entry in _usedLevel.scoreDistribution!.entries) {
       scoreDistribution[int.parse(entry.key)] = entry.value;
@@ -960,15 +963,15 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
     String grade;
     if (_usedLevel.playerSubmission!.playerScore == _usedLevel.optimalScore) {
-      grade = "PERFECT!!! 💎";
+      grade = "${t.enclosePerfect} 💎";
     } else if (percentile >= 0.75) {
-      grade = "Pretty good! ✅";
+      grade = "${t.enclosePrettyGood} ✅";
     } else if (percentile >= 0.5) {
-      grade = "Not bad! ✅";
+      grade = "${t.encloseNotBad} ✅";
     } else if (percentile >= 0.25) {
-      grade = "Not the worst! ✅";
+      grade = "${t.encloseNotTheWorst} ✅";
     } else {
-      grade = "Come on... ✅";
+      grade = "${t.encloseComeOn} ✅";
     }
 
     return (context) => SimpleDialog(
@@ -993,7 +996,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "You scored as good or better than ",
+                        text: "${t.encloseBetterThan} ",
                         style: const TextStyle( 
                           fontSize: 20,
                           fontFamily: "Schoolbell"
@@ -1010,7 +1013,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                       ),
 
                       TextSpan(
-                        text: "% of players",
+                        text: t.enclosePercentOfPlayers,
                         style: const TextStyle( 
                           fontSize: 20,
                           fontFamily: "Schoolbell"
@@ -1025,7 +1028,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Your score: ",
+                      text: "${t.encloseYourScore}: ",
                       style: const TextStyle( 
                         fontSize: 20,
                         fontFamily: "Schoolbell"
@@ -1049,7 +1052,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Optimal: ",
+                      text: "${t.encloseOptimalScore}: ",
                       style: const TextStyle( 
                         fontSize: 20,
                         fontFamily: "Schoolbell"
@@ -1086,19 +1089,21 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildSubmitErrorDialog(String errorMessage) {
+    final t = AppLocalizations.of(context)!;
+
     return (context) => SimpleDialog(
       contentPadding: const EdgeInsets.all(16),
-      title: const Text(
-        "There was an error with your submission",
+      title: Text(
+        t.encloseSubmitErrorTitle,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 25,
           fontFamily: "Schoolbell"
         )
       ),
       children: [
         Text(
-          "Please try again later.\n\nResponse was: \"$errorMessage\"",
+          "${t.encloseSubmitErrorText} \"$errorMessage\"",
           style: const TextStyle( 
             fontSize: 18,
             fontFamily: "Schoolbell"

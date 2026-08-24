@@ -1,6 +1,7 @@
 import "dart:math" as math;
 import "package:flutter/material.dart";
 import "package:fl_chart/fl_chart.dart";
+import "package:fsek_mobile/l10n/app_localizations.dart";
 
 class SubmissionsBarChart extends StatefulWidget {
   const SubmissionsBarChart({
@@ -52,6 +53,8 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+
     final barColorDict = {
       widget.playerScore: Theme.of(context).primaryColor,  // A bit weird on themeN where primaryColor is green
       widget.optimalScore: Colors.green[800]
@@ -93,7 +96,7 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
                     getTooltipColor: (group) => (barColorDict[group.x] ?? defaultBarColor).withAlpha(currentAlpha),
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
                       return BarTooltipItem(
-                        "Score: ${entries[groupIndex].key}\nOccurrences: ${rod.toY.toInt()}",
+                        "${t.encloseScore}: ${entries[groupIndex].key}\n${t.encloseOccurrences}: ${rod.toY.toInt()}",
                         TextStyle(
                           color: Colors.white.withAlpha(currentAlpha),
                           fontSize: 18,
@@ -122,9 +125,9 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
                   ),
                   bottomTitles: AxisTitles(
                     axisNameSize: 30,
-                    axisNameWidget: const Text(
-                      "Score",
-                      style: TextStyle(
+                    axisNameWidget: Text(
+                      t.encloseScore,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontFamily: "Schoolbell"
                       )
@@ -156,9 +159,9 @@ class _SubmissionsBarChartState extends State<SubmissionsBarChart> with SingleTi
                   ),
                   leftTitles: AxisTitles(
                     axisNameSize: 30,
-                    axisNameWidget: const Text(
-                      "Occurrence",
-                      style: TextStyle(
+                    axisNameWidget: Text(
+                      t.encloseOccurrence,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontFamily: "Schoolbell"
                       )

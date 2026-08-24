@@ -3187,6 +3187,162 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Platser lottas'**
   String get eventHasLottery;
+
+  /// No description provided for @encloseDay.
+  ///
+  /// In sv, this message translates to:
+  /// **'Dag'**
+  String get encloseDay;
+
+  /// No description provided for @encloseBonus.
+  ///
+  /// In sv, this message translates to:
+  /// **'Bonus'**
+  String get encloseBonus;
+
+  /// No description provided for @encloseWalls.
+  ///
+  /// In sv, this message translates to:
+  /// **'Väggar'**
+  String get encloseWalls;
+
+  /// No description provided for @encloseSubmit.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skicka in'**
+  String get encloseSubmit;
+
+  /// No description provided for @encloseScore.
+  ///
+  /// In sv, this message translates to:
+  /// **'Poäng'**
+  String get encloseScore;
+
+  /// No description provided for @encloseOptimal.
+  ///
+  /// In sv, this message translates to:
+  /// **'Optimal'**
+  String get encloseOptimal;
+
+  /// No description provided for @encloseYourSolution.
+  ///
+  /// In sv, this message translates to:
+  /// **'Din lösning'**
+  String get encloseYourSolution;
+
+  /// No description provided for @encloseYourBest.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ditt bästa'**
+  String get encloseYourBest;
+
+  /// No description provided for @encloseIfEnclosed.
+  ///
+  /// In sv, this message translates to:
+  /// **'om i hagen'**
+  String get encloseIfEnclosed;
+
+  /// No description provided for @enclosePreviousDays.
+  ///
+  /// In sv, this message translates to:
+  /// **'Tidigare dagar'**
+  String get enclosePreviousDays;
+
+  /// No description provided for @encloseBonusLevels.
+  ///
+  /// In sv, this message translates to:
+  /// **'Bonusnivåer'**
+  String get encloseBonusLevels;
+
+  /// No description provided for @encloseHowToPlay.
+  ///
+  /// In sv, this message translates to:
+  /// **'Hur man spelar'**
+  String get encloseHowToPlay;
+
+  /// No description provided for @encloseInstruction.
+  ///
+  /// In sv, this message translates to:
+  /// **'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera väggar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal väggar så använd dem vist'**
+  String get encloseInstruction;
+
+  /// No description provided for @enclosePerfect.
+  ///
+  /// In sv, this message translates to:
+  /// **'PERFEKT!!!'**
+  String get enclosePerfect;
+
+  /// No description provided for @enclosePrettyGood.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ganska bra!'**
+  String get enclosePrettyGood;
+
+  /// No description provided for @encloseNotBad.
+  ///
+  /// In sv, this message translates to:
+  /// **'Inte illa!'**
+  String get encloseNotBad;
+
+  /// No description provided for @encloseNotTheWorst.
+  ///
+  /// In sv, this message translates to:
+  /// **'Jag har sett värre!'**
+  String get encloseNotTheWorst;
+
+  /// No description provided for @encloseComeOn.
+  ///
+  /// In sv, this message translates to:
+  /// **'Kom igen...'**
+  String get encloseComeOn;
+
+  /// No description provided for @encloseBetterThan.
+  ///
+  /// In sv, this message translates to:
+  /// **'Du fick lika bra eller bättre än'**
+  String get encloseBetterThan;
+
+  /// No description provided for @enclosePercentOfPlayers.
+  ///
+  /// In sv, this message translates to:
+  /// **'% av spelare'**
+  String get enclosePercentOfPlayers;
+
+  /// No description provided for @encloseYourScore.
+  ///
+  /// In sv, this message translates to:
+  /// **'Din poäng'**
+  String get encloseYourScore;
+
+  /// No description provided for @encloseSubmitErrorTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ett problem uppstod med att skicka in ditt svar'**
+  String get encloseSubmitErrorTitle;
+
+  /// No description provided for @encloseSubmitErrorText.
+  ///
+  /// In sv, this message translates to:
+  /// **'Försök igen senare\n\nAnledningen var'**
+  String get encloseSubmitErrorText;
+
+  /// No description provided for @encloseOptimalScore.
+  ///
+  /// In sv, this message translates to:
+  /// **'Optimal poäng'**
+  String get encloseOptimalScore;
+
+  /// No description provided for @encloseOccurrences.
+  ///
+  /// In sv, this message translates to:
+  /// **'Förekomster'**
+  String get encloseOccurrences;
+
+  /// No description provided for @encloseOccurrence.
+  ///
+  /// In sv, this message translates to:
+  /// **'Förekomst'**
+  String get encloseOccurrence;
 }
 
 class _AppLocalizationsDelegate
