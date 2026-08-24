@@ -3,15 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
 
-class PlaceInfo {
-  final String titleSv;
-  final String titleEn;
-  final String descriptionSv;
-  final String descriptionEn;
-  final List<String> descriptionAssets;
-  final List<Rect> boxes;
-  // final String asset;
+class DescriptionAsset {
+  const DescriptionAsset({
+    required this.path,
+    required this.width,
+    required this.height
+  });
 
+  final String path;
+  final int width;
+  final int height;
+
+  factory DescriptionAsset.fromJson(Map<String, dynamic> json) {
+    return DescriptionAsset(
+      path: json["path"],
+      width: json["width"],
+      height: json["height"]
+    );
+  }
+}
+
+class PlaceInfo {
   const PlaceInfo({
     required this.titleSv,
     required this.titleEn,
@@ -22,14 +34,22 @@ class PlaceInfo {
     // required this.asset,
   });
 
+  final String titleSv;
+  final String titleEn;
+  final String descriptionSv;
+  final String descriptionEn;
+  final List<DescriptionAsset> descriptionAssets;
+  final List<Rect> boxes;
+  // final String asset;
+
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
     return PlaceInfo(
       titleSv: json["title"]["sv"],
       titleEn: json["title"]["en"],
       descriptionSv: json["description"]["sv"],
       descriptionEn: json["description"]["en"],
-      descriptionAssets: List<String>.from(json["descriptionAssets"]),
-      boxes: (json["boxes"] as List<dynamic>).map((box) => Rect.fromLTWH(
+      descriptionAssets: List<Map<String, dynamic>>.from(json["descriptionAssets"]).map(DescriptionAsset.fromJson).toList(),
+      boxes: List<dynamic>.from(json["boxes"]).map((box) => Rect.fromLTWH(
         box["left"], box["top"], box["width"], box["height"]
       )).toList(),
       // asset: json["asset"],
@@ -94,9 +114,10 @@ class _MapViewState extends State<MapView> {
 
   Future<void> _placePins(BuildContext context) async {
     final placeInfos = await loadJson();
+
     for (final placeInfo in placeInfos) {
-      for (final asset in placeInfo.descriptionAssets) {
-        precacheImage(AssetImage(asset), context);
+      for (final descriptionAsset in placeInfo.descriptionAssets) {
+        precacheImage(AssetImage(descriptionAsset.path), context);
       }
     }
 
@@ -132,19 +153,26 @@ class _MapViewState extends State<MapView> {
       }
     }
 
+    if(!mounted) return;
     setState(() {
       pins = pinList;
     });
   }
 
   Widget Function(BuildContext) _buildPOIDialog(String title, String description,
-      List<String>? descriptionAssets) {
+      List<DescriptionAsset>? descriptionAssets) {
     return (BuildContext context) => AlertDialog(
       // constraints: BoxConstraints(
       //   minWidth: MediaQuery.of(context).size.width
       // ),
       backgroundColor: const Color(0xFFFF00FF),
       contentPadding: const EdgeInsets.all(20),
+      /*  // Could add this but scrollable ones look a bit worse (imo)
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.6
+      ),
+      */
+      scrollable: true,
       content: Container(
         padding: const EdgeInsets.all(0),
         decoration: const BoxDecoration(
@@ -167,7 +195,7 @@ class _MapViewState extends State<MapView> {
                         title,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontFamily: "NF-Pixels",
+                          fontFamily: "LoRes12OT",
                           fontSize: 30
                         )
                       )
@@ -185,12 +213,21 @@ class _MapViewState extends State<MapView> {
               ),
 
               if (descriptionAssets != null)
-                ...descriptionAssets.map((asset) => InteractiveViewer(
+                ...descriptionAssets.map((descriptionAsset) => InteractiveViewer(
                   minScale: 1,
                   maxScale: 5,
-                  child: Image.asset(
-                    asset,
-                    fit: BoxFit.contain
+                  child: AspectRatio(
+                    aspectRatio: descriptionAsset.width / descriptionAsset.height,
+                    child: Stack(
+                      children: [
+                        Center(child: const CircularProgressIndicator()),
+
+                        Image.asset(
+                          descriptionAsset.path,
+                          fit: BoxFit.contain
+                        ),
+                      ]
+                    )
                   )
                 )),
 
@@ -198,7 +235,7 @@ class _MapViewState extends State<MapView> {
                 description,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontFamily: "NF-Pixels",
+                  fontFamily: "LoRes12OT",
                   fontSize: 20
                 ),
               )

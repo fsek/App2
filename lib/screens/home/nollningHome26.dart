@@ -112,20 +112,20 @@ class _NollningHomePageState extends State<NollningHomePage> {
                   Container(
                     width: screenWidth / buttonSize,
                     child: InkWell(
-                      //onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => QuestHomeScreen()))),
-                        onTap: () => showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(t.localeName == "sv" ? "Stopp!" : "Stop!"),
-                              content: Text(t.localeName == "sv"
-                                  ? "Uppdragen kommer att släppas snart! (men inte än)"
-                                  : "The quests will be released soon! (but not yet)"),
-                              actions: [
-                                TextButton(
-                                    onPressed: () => Navigator.of(context).pop(),
-                                    child: Text("OK"))
-                              ],
-                            )),
+                      onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => QuestHomeScreen()))),
+                        // onTap: () => showDialog(
+                        //     context: context,
+                        //     builder: (context) => AlertDialog(
+                        //       title: Text(t.localeName == "sv" ? "Stopp!" : "Stop!"),
+                        //       content: Text(t.localeName == "sv"
+                        //           ? "Uppdragen kommer att släppas snart! (men inte än)"
+                        //           : "The quests will be released soon! (but not yet)"),
+                        //       actions: [
+                        //         TextButton(
+                        //             onPressed: () => Navigator.of(context).pop(),
+                        //             child: Text("OK"))
+                        //       ],
+                        //     )),
                       child: Image.asset(questButton)
                     ),
                   )

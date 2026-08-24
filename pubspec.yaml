@@ -13,7 +13,7 @@ description: Mobile application for the F-guild
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 #
 
-version: 1.30.6122+1
+version: 1.31.6122+1
 
 environment:
   sdk: '>=3.10.0 <4.0.0'
@@ -48,6 +48,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_image_compress: ^2.0.4
+  fl_chart: ^1.2.0
   #pdf_render: ^1.4.12
   path_provider: any
   flutter_pdfview: ^1.4.3 # For PDF viewer
@@ -113,6 +114,19 @@ flutter:
     - assets/audio/gameoverfart.mp3
     - assets/img/
     - assets/img/moose_game/
+    - assets/audio/enclose_moose/
+    - assets/img/enclose_moose/
+    - assets/img/enclose_moose/grass/
+    - assets/img/enclose_moose/wheat/
+    - assets/img/enclose_moose/wheat/
+    - assets/img/enclose_moose/water/
+    - assets/img/enclose_moose/wall/
+    - assets/img/enclose_moose/portal/
+    - assets/img/enclose_moose/cherry/
+    - assets/img/enclose_moose/apple/
+    - assets/img/enclose_moose/apple/
+    - assets/img/enclose_moose/bees/
+    - assets/img/enclose_moose/moose/
     - assets/img/memes/
     - assets/data/nollning_26/homescreen/
     - assets/data/nollning_26/schema/
@@ -133,6 +147,7 @@ flutter:
     - assets/data/nollning_26/calendar/
     - assets/data/nollning_26/map/
     - assets/data/nollning_26/map/pin_media/
+    - assets/data/nollning_26/uppdrag/
 
   fonts:
     - family: Brandon Grotesque
@@ -156,6 +171,12 @@ flutter:
     - family: Consolas
       fonts:
         - asset: assets/fonts/Consolas-Regular.ttf
+    - family: Schoolbell
+      fonts:
+        - asset: assets/fonts/Schoolbell-Regular.ttf
+    - family: LoRes12OT
+      fonts:
+        - asset: assets/fonts/LoRes12OT-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

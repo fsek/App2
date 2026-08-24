@@ -94,6 +94,7 @@ final ThemeData themeFdark = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Colors.orange[700]!),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -177,6 +178,7 @@ final ThemeData themeN = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Colors.green[700]!),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -260,6 +262,7 @@ final ThemeData themePi = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Color.fromARGB(255, 245, 147, 35)),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -374,6 +377,7 @@ final ThemeData themeF = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Colors.orange[700]!),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -425,6 +429,7 @@ final ThemeData themeO = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(const Color.fromRGBO(191, 54, 12, 1)),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -480,6 +485,7 @@ final ThemeData themeD = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFF280A1)),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 
@@ -516,6 +522,7 @@ final ThemeData themeV = ThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.all<Color>(Colors.blue[400]!),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      overlayColor: WidgetStateProperty.all<Color>(Colors.white.withAlpha(26)),
     ),
   ),
 

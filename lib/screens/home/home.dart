@@ -9,7 +9,7 @@ import 'package:fsek_mobile/screens/guild_meeting/other_documents.dart';
 import 'package:fsek_mobile/screens/guild_meeting/about_guild_meeting.dart';
 import 'package:fsek_mobile/screens/guild_meeting/propositions.dart';
 import 'package:fsek_mobile/screens/guild_meeting/motions.dart';
-import 'package:fsek_mobile/screens/moose_game/moose_game.dart';
+import 'package:fsek_mobile/screens/games/moose_game/moose_game.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 

@@ -703,6 +703,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get introductionMapClose => 'Close';
 
   @override
+  String get questUnlockTitle => 'Try to unlock?';
+
+  @override
+  String get questUnlockEnterCode => 'Enter code';
+
+  @override
+  String get questUnlockWrongCode => 'Wrong code';
+
+  @override
+  String get questLockedTitle => '[ CODE NEEDED ]';
+
+  @override
+  String get questLockedDescription => 'You need a code to unlock this quest!';
+
+  @override
+  String get questUnlockButton => 'UNLOCK!';
+
+  @override
   String get cafeShiftSignup => 'You have signed up for the shift';
 
   @override

@@ -1,6 +1,82 @@
 [
     {
         "title": {
+            "sv": "Studiecentrum",
+            "en": "The Study Centre"
+        },
+        "description": {
+            "sv": "Studiecentrum är byggnaden att minnas. Här finns lunch, fika, skolmaterial och böcker, allting samlat på en enda plats! Behöver man smita undan atmosfären av Mattehuset kan man även plugga här, då omringad av alla möjliga sorters studenter från universitetet. Att ta sig hit tar inte mer än 3 minuter.",
+            "en": "The Study Centre is the building to remember. You’ll find lunch, coffee breaks, school supplies, and books, everything gathered in one place! If you need to escape the atmosphere of the Math Building, you can also study here, surrounded by all kinds of university students. It takes no more than three minutes to get there."
+        },
+        "descriptionAssets": [],
+        "boxes": [
+            {
+                "left": 1658.0,
+                "top": 2430.0,
+                "width": 176.0,
+                "height": 130.0
+            }
+        ]
+    },
+    {
+        "title": {
+            "sv": "Fysicum",
+            "en": "Fysicum"
+        },
+        "description": {
+            "sv": "Välkommen in – vågar du ta första steget in i labyrinten som titulerats Fysicum? Inte ens den mest erfarna och uråldriga 5:e klassaren kan med säkerhet röra sig genom denna byggnadens korridorer med vetskap om var den kommer hamna. Så ta en vän i hand och ge er ut. Skulle ni våga er hit kostar det 5 minuter av er värdefulla tid.",
+            "en": "Welcome inside — do you dare take the first step into the labyrinth known as Fysicum? Not even the most seasoned, ancient fifth-grader can navigate these corridors with certainty about where they’ll end up. So, take a friend by the hand and venture in. If you dare to visit, it will cost you five minutes of your valuable time."
+        },
+        "descriptionAssets": [],
+        "boxes": [
+            {
+                "left": 662.0,
+                "top": 2538.0,
+                "width": 405.0,
+                "height": 255.0
+            }
+        ]
+    },
+    {
+        "title": {
+            "sv": "Matteannexet",
+            "en": "The Math Annex"
+        },
+        "description": {
+            "sv": "Stig på och känn dig som hemma i Matteannexet! En myriad av studenter från alla Lunds universitets hörn samlas här för att bevittna de stora föreläsningssalarna. Befinner du dig i heMH tar det mer eller mindre 34 sekunder att ta dig hit.",
+            "en": "Step inside and feel at home in the Math Annex! A multitude of students from every corner of Lund University gather here to experience the large lecture halls. If you are in heMH, it takes more or less 34 seconds to get here."
+        },
+        "descriptionAssets": [],
+        "boxes": [
+            {
+                "left": 1384.0,
+                "top": 2554.0,
+                "width": 189.0,
+                "height": 118.0
+            }
+        ]
+    },
+    {
+        "title": {
+            "sv": "Kårhuset",
+            "en": "The Union Building"
+        },
+        "description": {
+            "sv": "På kårhuset hör Nollningsutskottet hemma bestående av Nolleamiralen, Nollegeneralen, fyra Øverster. Vi hittar även de största föreläsningssalarna en student kan föreställa sig men än viktigare än det, GASQUE. På bottenplan finner vi platsen där studentens drömmar slår in, platsen som stått ut med både klickande högaklackar, spillda glas och blöta servetter. Sexets hemvist och sångisarnas scen! Ska ni masa er hit från heMH tar det 4 minuter av dyrbar tid.",
+            "en": "The Union Building is home to the Orientation Committee—comprising the Orientation Admiral, the Orientation General, and four Colonels. Here, you will find the largest lecture halls a student could possibly imagine, but more importantly, GASQUE. On the ground floor lies the place where students' dreams come true, a spot that has endured the clacking of high heels, spilled glasses, and soggy napkins. It is the home base of the party committee and the stage for the toastmasters! If you decide to drag yourselves over here from hoMH, it takes four minutes of precious time."
+        },
+        "descriptionAssets": [],
+        "boxes": [
+            {
+                "left": 1585.0,
+                "top": 2222.0,
+                "width": 278.0,
+                "height": 107.0
+            }
+        ]
+    },
+    {
+        "title": {
             "sv": "Kemicentrum",
             "en": "The Chemistry Centre"
         },
@@ -8,7 +84,13 @@
             "sv": "Längst bort från trygga hemvisten hittar vi Kemicentrum! I dess korridorer rör sig K-pHøs och W-Phøs. Packa matsäck och kaffe för vägen hit tar hela 9 minuter av vandring.",
             "en": "Furthest away from our familiar home base, we find the Chemistry Centre! K-pHøs and W-Phøs roam its corridors. Pack a packed lunch and some coffee, because the walk here takes a whole 9 minutes."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/W_Phos.jpg",
+                "width": 6000,
+                "height": 4000
+            }
+        ],
         "boxes": [
             {
                 "left": 1489.0,
@@ -28,7 +110,11 @@
             "en": "Amidst the glitz and glamour, A-Phøs steps into the spotlight. You can find them here, in the A-building. The journey here takes 8 minutes from the Math Building."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Aphos.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/A_Phos.jpg",
+                "width": 2880,
+                "height": 2160
+            }
         ],
         "boxes": [
             {
@@ -48,7 +134,13 @@
             "sv": "Slå upp dörrarna in till V-huset och V-Phøs du skall finna! Expeditionen hit tar hela 6 minuter och ska man ta sig så långt från Mattehuset bör riskerna beaktas.",
             "en": "Throw open the doors to the V-building, and you shall find V-Phøs! The trek here takes a full six minutes, and venturing that far from the Math Building means the risks should be considered."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/V_Phos.jpg",
+                "width": 3000,
+                "height": 2000
+            }
+        ],
         "boxes": [
             {
                 "left": 1926.0,
@@ -67,7 +159,13 @@
             "sv": "Välkommen in i värmen av E-huset. I denna byggnad finner vi E-Phøs och D-stab. Färden hit tar er 3 minuter från Mattehuset.",
             "en": "Welcome into the warmth of the E-building. This building houses E-Phøs and D-stab. The journey here takes three minutes from the Math Building."
         },
-        "descriptionAssets": [],
+        "descriptionAssets": [
+            {
+                "path": "assets/data/nollning_26/map/pin_media/Staben.jpg",
+                "width": 8218,
+                "height": 5414
+            }
+        ],
         "boxes": [
             {
                 "left": 1834.0,
@@ -87,7 +185,16 @@
             "en": "Hello and welcome to the M-building! In this building, you will find M-Phøs and I-Phøs. If you are coming here from the Math Building, it takes about four minutes to walk."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Mphos.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/M_Phos.jpg",
+                "width": 6000,
+                "height": 4000
+            },
+            {
+                "path": "assets/data/nollning_26/map/pin_media/I_Phos.jpg",
+                "width": 6000,
+                "height": 3181
+            }
         ],
         "boxes": [
             {
@@ -108,7 +215,11 @@
             "en": "So you’ve found your way home—I’m so glad! This is the building where the F-fös hang out, and you can truly feel at home here during your coming years at LTH. Grab a sandwich from Hilbert Café, stamp your coffee card for a cup of freshly brewed liquid gold, and just enjoy—you’re exactly where you’re meant to be! <3"
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/Foset.jpg"
+            {
+                "path": "assets/data/nollning_26/map/pin_media/Foset.jpg",
+                "width": 5184,
+                "height": 3456
+            }
         ],
         "boxes": [
             {
@@ -129,7 +240,11 @@
             "en": "We’ve traveled a long way now—all the way to Helsingborg! That’s where we find the ING-phøs. It takes anywhere from 31 to 52 minutes to travel to them."
         },
         "descriptionAssets": [
-            "assets/data/nollning_26/map/pin_media/INGphos.jpg"
+           {
+                "path": "assets/data/nollning_26/map/pin_media/ING_Phos.jpg",
+                "width": 6240,
+                "height": 4160
+            }
         ],
         "boxes": [
             {
