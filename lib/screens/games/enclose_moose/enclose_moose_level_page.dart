@@ -322,9 +322,9 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
                                     return Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.green[900]!,
-                                          width: cellSize / 100
+                                        border: tile.isWater ? null : Border.all(
+                                          color: const Color.fromARGB(255, 36, 124, 42),
+                                          width: 0,  // thinnest possible  // cellSize / 100  // Would prefer this to depend on cellSize but looks weird for a nonzero value next to water
                                         )
                                       ),
                                       child: OverflowBox(
