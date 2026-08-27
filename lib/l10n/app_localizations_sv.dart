@@ -1691,7 +1691,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get encloseBonus => 'Bonus';
 
   @override
-  String get encloseWalls => 'Väggar';
+  String get encloseWalls => 'Murar';
 
   @override
   String get encloseSubmit => 'Skicka in';
@@ -1722,7 +1722,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get encloseInstruction =>
-      'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera väggar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal väggar så använd dem vist';
+      'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera murar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal murar så använd dem vist';
 
   @override
   String get enclosePerfect => 'PERFEKT!!!';

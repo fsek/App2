@@ -571,7 +571,7 @@
 
     "encloseDay": "Dag",
     "encloseBonus": "Bonus",
-    "encloseWalls": "Väggar",
+    "encloseWalls": "Murar",
     "encloseSubmit": "Skicka in",
     "encloseScore": "Poäng",
     "encloseOptimal": "Optimal",
@@ -581,7 +581,7 @@
     "enclosePreviousDays": "Tidigare dagar",
     "encloseBonusLevels": "Bonusnivåer",
     "encloseHowToPlay": "Hur man spelar",
-    "encloseInstruction": "Målet är att bygga en så stor hage som möjligt åt älgen genom att placera väggar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal väggar så använd dem vist",
+    "encloseInstruction": "Målet är att bygga en så stor hage som möjligt åt älgen genom att placera murar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal murar så använd dem vist",
     "enclosePerfect": "PERFEKT!!!",
     "enclosePrettyGood": "Ganska bra!",
     "encloseNotBad": "Inte illa!",

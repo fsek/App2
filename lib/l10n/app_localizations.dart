@@ -3203,7 +3203,7 @@ abstract class AppLocalizations {
   /// No description provided for @encloseWalls.
   ///
   /// In sv, this message translates to:
-  /// **'Väggar'**
+  /// **'Murar'**
   String get encloseWalls;
 
   /// No description provided for @encloseSubmit.
@@ -3263,7 +3263,7 @@ abstract class AppLocalizations {
   /// No description provided for @encloseInstruction.
   ///
   /// In sv, this message translates to:
-  /// **'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera väggar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal väggar så använd dem vist'**
+  /// **'Målet är att bygga en så stor hage som möjligt åt älgen genom att placera murar (klicka) i rutnätet. Älgen kan inte röra sig över vatten eller diagonalt. Ju mer gräs i din hage, desto högre din poäng. Du har ett begränsat antal murar så använd dem vist'**
   String get encloseInstruction;
 
   /// No description provided for @enclosePerfect.

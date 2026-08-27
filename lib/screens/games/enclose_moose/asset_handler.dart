@@ -235,7 +235,7 @@ class AssetHandler {
       ("I'll sneak away like sooo... Moohoho", "${baseAudioPath}sneak_away_like_so.mp3"),
       ("I'll sneak away like sooo... Moohoho", "${baseAudioPath}sneak_away_like_so.mp3"),
       ("I will first go THIS way and then I will go THAT way and then I'm free!", "${baseAudioPath}this_way_that_way_2.mp3"),
-      ("I will go THIS way and then I will go THAT way and then I'm gonna be free!", "${baseAudioPath}this_way_that_way.mp3"),
+      ("I will go THIS way and then I will go THAT way and then I will be free!", "${baseAudioPath}this_way_that_way.mp3"),
       ("You can't enclose me, I'm a moose!", "${baseAudioPath}you_cant_enclose_me.mp3")
     ];
     const enclosedVoicelines = [
