@@ -101,7 +101,8 @@ class TileWidget extends StatelessWidget {
                 vsync: vsync,
                 shouldAnimate: tile.type == EncloseGridCellType.wall,
                 animationFrames: AssetHandler.getAnimationFrames(EncloseGridCellType.wall),
-                animationReverseFrameDuration: const Duration(milliseconds: 20),
+                animationFrameDuration: _wheatFrameDuration,
+                animationReverseFrameDuration: _wheatFrameDuration * 0.5,
                 endIdleFrames: AssetHandler.getIdleFrames(EncloseGridCellType.wall),
                 idleController: idleController
               ),
