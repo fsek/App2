@@ -784,6 +784,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   void _changeToSolution(Iterable<int> solution) {
+    final oldScore = _grid.score;
+
     _grid.reset(doUpdate: false);
 
     for (final flatIndex in solution) {
@@ -792,6 +794,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     }
 
     _grid.updateEnclosure();
+    updateScore(oldScore);
   }
 
   Widget Function(BuildContext) _buildDayChooserDialog() {
