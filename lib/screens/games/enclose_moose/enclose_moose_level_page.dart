@@ -444,7 +444,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                               cellSize: cellSize,
                                               extraLength: cellSize,
                                               extraDirection: _grid.escapeDirection,
-                                              lineColor: Colors.white.withAlpha(200),
+                                              lineColor: Colors.white.withAlpha(220),
                                               idleController: _idleController,
                                               frequency: 2
                                             )
@@ -458,7 +458,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                             child: AnimatedThoughtBubble(
                                               isVisible: (_openCallCounter.getCount("thinking") ?? 0) != 0,
                                               text: _mooseThought,
-                                              color: Colors.white.withAlpha(200),
+                                              color: Colors.white.withAlpha(220),
                                               idleController: _idleController
                                             )
                                           )
