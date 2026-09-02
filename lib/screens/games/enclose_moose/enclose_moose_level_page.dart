@@ -726,8 +726,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     if (tile.isMoose) {
       final mooseVoiceline = AssetHandler.getMooseVoiceline(_grid.escapePath == null);
       _mooseThought = mooseVoiceline.$1;
-      _audioPlayer.release();  // Doesn't otherwise happen if the same voiceline is chosen
-      _audioPlayer.play(AssetSource(mooseVoiceline.$2));
+      _playVoicelineAudio(AssetSource(mooseVoiceline.$2));
 
       final voicelineDuration = await _audioPlayer.onDurationChanged.first;
       if (_grid.escapePath != null) {
@@ -744,6 +743,11 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
         _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore ${t.encloseIfEnclosed}");
       }
     }
+  }
+
+  Future<void> _playVoicelineAudio(AssetSource voiceline) async {  // for some reason has to be a seperate function to avoid a bug where the audio played but the though bubble didn't show
+    await _audioPlayer.stop();  // Doesn't otherwise happen if the same voiceline is chosen
+    await _audioPlayer.play(voiceline);
   }
 
   Future<void> _submitSolution() async {
