@@ -107,109 +107,135 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              WigglingWidget(
-                controller: _idleController,
-                child: IconButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: _buildDayChooserDialog());
-                  },
-                  icon: const Icon(Icons.calendar_month_rounded),
-                  color: Colors.white
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                    child: IconButton(
+                      onPressed: () {
+                        showDialog(context: context, builder: _buildDayChooserDialog());
+                      },
+                      icon: const Icon(Icons.calendar_month_rounded),
+                      color: Colors.white
+                    )
+                  )
                 )
               ),
               
-              Visibility(
-                visible: _hasSubmitted,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                child: WigglingWidget(
-                  controller: _idleController,
-                  child: IconButton(
-                    onPressed: () {
-                      showDialog(context: context, builder: _buildSubmitDialog());
-                    },
-                    icon: const Icon(Icons.leaderboard_outlined),
-                    color: Colors.white
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Visibility(
+                    visible: _hasSubmitted,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: IconButton(
+                        onPressed: () {
+                          showDialog(context: context, builder: _buildSubmitDialog());
+                        },
+                        icon: const Icon(Icons.leaderboard_outlined),
+                        color: Colors.white
+                      )
+                    )
                   )
                 )
               ),
 
-              const Spacer(),
+              // const Spacer(),
 
-              Row(
-                children: [
-                  Visibility(
-                    visible: widget.availableLevels.first != _usedLevel,
-                    maintainState: true,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    child: WigglingWidget(
-                      controller: _idleController,
-                      child: IconButton(
-                        onPressed: () {
-                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
-                        },
-                        icon: const Icon(Icons.chevron_left),
-                        color: Colors.white
-                      )
-                    )
-                  ),
+              Flexible(
+                flex: 4,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    children: [
+                      Visibility(
+                        visible: widget.availableLevels.first != _usedLevel,
+                        maintainState: true,
+                        maintainAnimation: true,
+                        maintainSize: true,
+                        child: WigglingWidget(
+                          controller: _idleController,
+                          child: IconButton(
+                            onPressed: () {
+                              widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
+                            },
+                            icon: const Icon(Icons.chevron_left),
+                            color: Colors.white
+                          )
+                        )
+                      ),
 
-                  WigglingWidget(
-                    controller: _idleController,
-                    child: OutlinedText(
-                      text: _usedLevel.dayIndex != null ? "Day ${_usedLevel.dayIndex}" : "Bonus",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontFamily: "Schoolbell"
-                      )
-                    )
-                  ),
+                      WigglingWidget(
+                        controller: _idleController,
+                        child: OutlinedText(
+                          text: _usedLevel.dayIndex != null ? "${t.encloseDay} ${_usedLevel.dayIndex}" : t.encloseBonus,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontFamily: "Schoolbell"
+                          )
+                        )
+                      ),
 
-                  Visibility(
-                    visible: widget.availableLevels.last != _usedLevel,
-                    maintainState: true,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    child: WigglingWidget(
-                      controller: _idleController,
-                      child: IconButton(
-                        onPressed: () {
-                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
-                        },
-                        icon: const Icon(Icons.chevron_right),
-                        color: Colors.white
-                      )
-                    )
-                  ),
-                ]
-              ),
-
-              Spacer(),
-
-              WigglingWidget(
-                controller: _idleController,
-                child: IconButton(
-                  onPressed: () {
-                    _grid.reset();
-                  },
-                  icon: const Icon(Icons.restart_alt_outlined),
-                  color: Colors.white
+                      Visibility(
+                        visible: widget.availableLevels.last != _usedLevel,
+                        maintainState: true,
+                        maintainAnimation: true,
+                        maintainSize: true,
+                        child: WigglingWidget(
+                          controller: _idleController,
+                          child: IconButton(
+                            onPressed: () {
+                              widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
+                            },
+                            icon: const Icon(Icons.chevron_right),
+                            color: Colors.white
+                          )
+                        )
+                      ),
+                    ]
+                  )
                 )
               ),
 
-              WigglingWidget(
-                controller: _idleController,
-                  child: IconButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: _buildHelpDialog());
-                  },
-                  icon: const Icon(Icons.question_mark_outlined),
-                  color: Colors.white
+              // const Spacer(),
+
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                    child: IconButton(
+                      onPressed: () {
+                        _grid.reset();
+                      },
+                      icon: const Icon(Icons.restart_alt_outlined),
+                      color: Colors.white
+                    )
+                  )
+                )
+              ),
+
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                      child: IconButton(
+                      onPressed: () {
+                        showDialog(context: context, builder: _buildHelpDialog());
+                      },
+                      icon: const Icon(Icons.question_mark_outlined),
+                      color: Colors.white
+                    )
+                  )
                 )
               ),
             ]
@@ -240,23 +266,25 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             )
           ),
 
-          title: WigglingWidget(
-            controller: _idleController,
-            child: Text.rich(
-              TextSpan(
-                children: "enclose.moose".characters.map((char) => WidgetSpan(  // Could consider making all text like this
-                  child: WigglingWidget(
-                    controller: _idleController,
-                    child: OutlinedText(
-                      text: char,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 45,
-                        fontFamily: "Schoolbell"
+          title: FittedBox(
+            child: WigglingWidget(
+              controller: _idleController,
+              child: Text.rich(
+                TextSpan(
+                  children: "enclose.moose".characters.map((char) => WidgetSpan(  // Could consider making all text like this
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: OutlinedText(
+                        text: char,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontFamily: "Schoolbell"
+                        )
                       )
                     )
-                  )
-                )).toList()
+                  )).toList()
+                )
               )
             )
           )
@@ -322,9 +350,9 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
                                     return Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.green[900]!,
-                                          width: cellSize / 100
+                                        border: tile.isWater ? null : Border.all(
+                                          color: const Color.fromARGB(255, 36, 124, 42),
+                                          width: 0,  // thinnest possible  // cellSize / 100  // Would prefer this to depend on cellSize but looks weird for a nonzero value next to water
                                         )
                                       ),
                                       child: OverflowBox(
@@ -444,7 +472,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                               cellSize: cellSize,
                                               extraLength: cellSize,
                                               extraDirection: _grid.escapeDirection,
-                                              lineColor: Colors.white.withAlpha(200),
+                                              lineColor: Colors.white.withAlpha(220),
                                               idleController: _idleController,
                                               frequency: 2
                                             )
@@ -458,7 +486,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                             child: AnimatedThoughtBubble(
                                               isVisible: (_openCallCounter.getCount("thinking") ?? 0) != 0,
                                               text: _mooseThought,
-                                              color: Colors.white.withAlpha(200),
+                                              color: Colors.white.withAlpha(220),
                                               idleController: _idleController
                                             )
                                           )
@@ -496,61 +524,72 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                WigglingWidget(
-                                  controller: _idleController,
-                                  child: HighlightedText(
-                                    showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
-                                    child: OutlinedText(
-                                      text: "Walls: ${_grid.wallsLeft}/${_grid.wallBudget}",
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: WigglingWidget(
+                                      controller: _idleController,
+                                      child: HighlightedText(
+                                        showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
+                                        child: OutlinedText(
+                                          text: "${t.encloseWalls}: ${_grid.wallsLeft}/${_grid.wallBudget}",
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: "Schoolbell"
+                                          )
+                                        )
                                       )
                                     )
                                   )
                                 ),
 
-                                Spacer(),
-
-                                Visibility(
-                                  visible: !_hasSubmitted && _grid.escapePath == null,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(5),
-                                        )
-                                      ),
-                                      onPressed: _submitSolution,
-                                      child: const OutlinedText(
-                                        text: "Submit",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                          fontFamily: "Schoolbell"
-                                        )
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: !_hasSubmitted && _grid.escapePath == null,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(5),
+                                            )
+                                          ),
+                                          onPressed: _submitSolution,
+                                          child: OutlinedText(
+                                            text: t.encloseSubmit,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 25,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          )
+                                        ),
+                                        controller: _idleController
                                       )
-                                    ),
-                                    controller: _idleController
+                                    )
                                   )
                                 ),
 
-                                Spacer(),
-
-                                WigglingWidget(
-                                  controller: _idleController,
-                                  child: HighlightedText(
-                                    showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
-                                    child: OutlinedText(
-                                      text: "Score: ${_grid.score ?? "N/A"}",
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: WigglingWidget(
+                                      controller: _idleController,
+                                      child: HighlightedText(
+                                        showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
+                                        child: OutlinedText(
+                                          text: "${t.encloseScore}: ${_grid.score ?? "N/A"}",
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: "Schoolbell"
+                                          )
+                                        )
                                       )
                                     )
                                   )
@@ -561,58 +600,68 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Visibility(
-                                  visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    controller: _idleController,
-                                    child: OutlinedButton.icon(
-                                      onPressed: () {
-                                        _changeToSolution(_usedLevel.optimalSolution!);
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
-                                        visualDensity: VisualDensity.compact
-                                      ),
-                                      label: OutlinedText(
-                                        text: "Optimal: ${_usedLevel.optimalScore}",
-                                        style: const TextStyle(
-                                          // color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        controller: _idleController,
+                                        child: OutlinedButton.icon(
+                                          onPressed: () {
+                                            _changeToSolution(_usedLevel.optimalSolution!);
+                                          },
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
+                                            visualDensity: VisualDensity.compact
+                                          ),
+                                          label: OutlinedText(
+                                            text: "${t.encloseOptimal}: ${_usedLevel.optimalScore}",
+                                            style: const TextStyle(
+                                              // color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          ),
+                                          icon: const Icon(Icons.star_sharp)
                                         )
-                                      ),
-                                      icon: const Icon(Icons.star_sharp)
+                                      )
                                     )
                                   )
                                 ),
 
-                                Visibility(
-                                  visible: isNotShowingYours || !isCurrentBest,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    controller: _idleController,
-                                    child: OutlinedButton.icon(
-                                      onPressed: () {
-                                        _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
-                                        visualDensity: VisualDensity.compact
-                                      ),
-                                      label: OutlinedText(
-                                        text: _hasSubmitted ? "Your solution: ${_usedLevel.playerSubmission!.playerScore}" : "Your best: $_bestSolutionScore",
-                                        style: const TextStyle(
-                                          // color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: isNotShowingYours || !isCurrentBest,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        controller: _idleController,
+                                        child: OutlinedButton.icon(
+                                          onPressed: () {
+                                            _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
+                                          },
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
+                                            visualDensity: VisualDensity.compact
+                                          ),
+                                          label: OutlinedText(
+                                            text: _hasSubmitted ? "${t.encloseYourSolution}: ${_usedLevel.playerSubmission!.playerScore}" : "${t.encloseYourBest}: $_bestSolutionScore",
+                                            style: const TextStyle(
+                                              // color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          ),
+                                          icon: const Icon(Icons.keyboard_return_outlined)
                                         )
-                                      ),
-                                      icon: const Icon(Icons.keyboard_return_outlined)
+                                      )
                                     )
                                   )
                                 ),
@@ -677,21 +726,27 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
   void _tapTile(EncloseGridTile tile) async {
     /*  // Useful for debug!
-    final builder = EncloseMooseLevelReadBuilder();
-    builder.levelId = 10;
-    builder.nameSv = "debug";
-    builder.nameEn = "debug";
-    builder.encodedGrid = "";
-    builder.wallBudget = 10;
+    final builder = _usedLevel.toBuilder();
+    builder.optimalScore = 45;
+    builder.optimalSolution = SetBuilder();
+    builder.optimalIsUnique = true;
+    builder.scoreDistribution = MapBuilder({
+      "1": 3,
+      "2": 1,
+      "17": 2,
+      "22": 1,
+      "41": 3,
+      "45": 4
+    });
     builder.playerSubmission = EncloseMooseSubmissionReadBuilder();
-    builder.playerSubmission.levelId = 10;
+    builder.playerSubmission.levelId = _usedLevel.levelId;
     builder.playerSubmission.submissionTime = DateTime.now();
     builder.playerSubmission.playerId = 0;
-    builder.playerSubmission.playerScore = 10;
-    builder.releaseDate = Date.now();
-    builder.optimalScore = 54;
+    builder.playerSubmission.playerScore = 45;
 
     _usedLevel = builder.build();
+
+    showDialog(context: context, builder: _buildSubmitDialog());
     */
 
     if (_grid.wallsLeft == 0 && tile.isGrass) {
@@ -720,8 +775,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     if (tile.isMoose) {
       final mooseVoiceline = AssetHandler.getMooseVoiceline(_grid.escapePath == null);
       _mooseThought = mooseVoiceline.$1;
-      _audioPlayer.release();  // Doesn't otherwise happen if the same voiceline is chosen
-      _audioPlayer.play(AssetSource(mooseVoiceline.$2));
+      _playVoicelineAudio(AssetSource(mooseVoiceline.$2));
 
       final voicelineDuration = await _audioPlayer.onDurationChanged.first;
       if (_grid.escapePath != null) {
@@ -734,9 +788,15 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     if (tile.isBonus) {
       final bonusScore = tile.bonusScore;
       if (bonusScore != 0) {
-        _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore if enclosed");
+        final t = AppLocalizations.of(context)!;
+        _tooltipCallCounter.increment(tile, (bonusScore > 0 ? "+" : "") + "$bonusScore ${t.encloseIfEnclosed}");
       }
     }
+  }
+
+  Future<void> _playVoicelineAudio(AssetSource voiceline) async {  // for some reason has to be a seperate function to avoid a bug where the audio played but the though bubble didn't show
+    await _audioPlayer.stop();  // Doesn't otherwise happen if the same voiceline is chosen
+    await _audioPlayer.play(voiceline);
   }
 
   Future<void> _submitSolution() async {
@@ -777,6 +837,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   void _changeToSolution(Iterable<int> solution) {
+    final oldScore = _grid.score;
+
     _grid.reset(doUpdate: false);
 
     for (final flatIndex in solution) {
@@ -785,6 +847,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
     }
 
     _grid.updateEnclosure();
+    updateScore(oldScore);
   }
 
   Widget Function(BuildContext) _buildDayChooserDialog() {
@@ -814,10 +877,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             Column(
               children: [
                 if (_dailies.isNotEmpty)
-                  const Text(
-                    "Previous days",
+                  Text(
+                    t.enclosePreviousDays,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontFamily: "Schoolbell"
                     )
@@ -834,12 +897,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                     title: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
-                            text: "Day ${level.dayIndex}"
-                          ),
+                          TextSpan(text: "${t.encloseDay} ${level.dayIndex}"),
 
                           TextSpan(
-                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y", locale: "en")})",
+                            text: " (${Time.format(level.releaseDate.toDateTime(), "%d %M %Y", locale: t.localeName)})",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor
                             )
@@ -865,10 +926,10 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             Column(
               children: [
                 if (_nonDailies.isNotEmpty)
-                  const Text(
-                    "Bonus levels",
+                  Text(
+                    t.encloseBonusLevels,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontFamily: "Schoolbell"
                     )
@@ -906,20 +967,22 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildHelpDialog() {
-    return (context) => const SimpleDialog(
+    final t = AppLocalizations.of(context)!;
+
+    return (context) => SimpleDialog(
       contentPadding: const EdgeInsets.all(16),
       title: Text(
-        "How to play",
+        t.encloseHowToPlay,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 25,
           fontFamily: "Schoolbell"
         )
       ),
       children: [
         Text(
-          "The objective is to build an enclosure for the moose by placing walls (tapping) on the grid. The moose can not move over the water. The more grass tiles in your enclosure, the higher your score. You only have a limited amount of walls so use them wisely.",
-          style: TextStyle( 
+          t.encloseInstruction,
+          style: const TextStyle( 
             fontSize: 18,
             fontFamily: "Schoolbell"
           )
@@ -929,6 +992,8 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildSubmitDialog() {
+    final t = AppLocalizations.of(context)!;
+  
     final Map<int, int> scoreDistribution = {};
     for (final entry in _usedLevel.scoreDistribution!.entries) {
       scoreDistribution[int.parse(entry.key)] = entry.value;
@@ -954,15 +1019,15 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
 
     String grade;
     if (_usedLevel.playerSubmission!.playerScore == _usedLevel.optimalScore) {
-      grade = "PERFECT!!! 💎";
+      grade = "${t.enclosePerfect} 💎";
     } else if (percentile >= 0.75) {
-      grade = "Pretty good! ✅";
+      grade = "${t.enclosePrettyGood} ✅";
     } else if (percentile >= 0.5) {
-      grade = "Not bad! ✅";
+      grade = "${t.encloseNotBad} ✅";
     } else if (percentile >= 0.25) {
-      grade = "Not the worst! ✅";
+      grade = "${t.encloseNotTheWorst} ✅";
     } else {
-      grade = "Come on... ✅";
+      grade = "${t.encloseComeOn} ✅";
     }
 
     return (context) => SimpleDialog(
@@ -987,7 +1052,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "You scored as good or better than ",
+                        text: "${t.encloseBetterThan} ",
                         style: const TextStyle( 
                           fontSize: 20,
                           fontFamily: "Schoolbell"
@@ -1004,7 +1069,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                       ),
 
                       TextSpan(
-                        text: "% of players",
+                        text: t.enclosePercentOfPlayers,
                         style: const TextStyle( 
                           fontSize: 20,
                           fontFamily: "Schoolbell"
@@ -1019,7 +1084,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Your score: ",
+                      text: "${t.encloseYourScore}: ",
                       style: const TextStyle( 
                         fontSize: 20,
                         fontFamily: "Schoolbell"
@@ -1043,7 +1108,7 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Optimal: ",
+                      text: "${t.encloseOptimalScore}: ",
                       style: const TextStyle( 
                         fontSize: 20,
                         fontFamily: "Schoolbell"
@@ -1080,19 +1145,21 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
   }
 
   Widget Function(BuildContext) _buildSubmitErrorDialog(String errorMessage) {
+    final t = AppLocalizations.of(context)!;
+
     return (context) => SimpleDialog(
       contentPadding: const EdgeInsets.all(16),
-      title: const Text(
-        "There was an error with your submission",
+      title: Text(
+        t.encloseSubmitErrorTitle,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 25,
           fontFamily: "Schoolbell"
         )
       ),
       children: [
         Text(
-          "Please try again later.\n\nResponse was: \"$errorMessage\"",
+          "${t.encloseSubmitErrorText} \"$errorMessage\"",
           style: const TextStyle( 
             fontSize: 18,
             fontFamily: "Schoolbell"

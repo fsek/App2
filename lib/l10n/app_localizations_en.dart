@@ -1693,4 +1693,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventHasLottery => 'Spots decided by lottery';
+
+  @override
+  String get encloseDay => 'Day';
+
+  @override
+  String get encloseBonus => 'Bonus';
+
+  @override
+  String get encloseWalls => 'Walls';
+
+  @override
+  String get encloseSubmit => 'Submit';
+
+  @override
+  String get encloseScore => 'Score';
+
+  @override
+  String get encloseOptimal => 'Optimal';
+
+  @override
+  String get encloseYourSolution => 'Your solution';
+
+  @override
+  String get encloseYourBest => 'Your best';
+
+  @override
+  String get encloseIfEnclosed => 'if in enclosure';
+
+  @override
+  String get enclosePreviousDays => 'Previous days';
+
+  @override
+  String get encloseBonusLevels => 'Bonus levels';
+
+  @override
+  String get encloseHowToPlay => 'How to play';
+
+  @override
+  String get encloseInstruction =>
+      'The objective is to build an enclosure for the moose by placing walls (tapping) on the grid. The moose can not move over the water or diagonally. The more grass tiles in your enclosure, the higher your score. You only have a limited amount of walls so use them wisely';
+
+  @override
+  String get enclosePerfect => 'PERFECT!!!';
+
+  @override
+  String get enclosePrettyGood => 'Pretty good!';
+
+  @override
+  String get encloseNotBad => 'Not bad!';
+
+  @override
+  String get encloseNotTheWorst => 'I\'ve seen worse!';
+
+  @override
+  String get encloseComeOn => 'Come on...';
+
+  @override
+  String get encloseBetterThan => 'You scored as good or better than';
+
+  @override
+  String get enclosePercentOfPlayers => '% of players';
+
+  @override
+  String get encloseYourScore => 'Your score';
+
+  @override
+  String get encloseSubmitErrorTitle =>
+      'A problem occurred with your submission';
+
+  @override
+  String get encloseSubmitErrorText =>
+      'Please try again later\n\nThe reason was';
+
+  @override
+  String get encloseOptimalScore => 'Optimal score';
+
+  @override
+  String get encloseOccurrences => 'Occurrences';
+
+  @override
+  String get encloseOccurrence => 'Occurrence';
 }
