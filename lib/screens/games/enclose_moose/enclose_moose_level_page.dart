@@ -107,109 +107,135 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              WigglingWidget(
-                controller: _idleController,
-                child: IconButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: _buildDayChooserDialog());
-                  },
-                  icon: const Icon(Icons.calendar_month_rounded),
-                  color: Colors.white
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                    child: IconButton(
+                      onPressed: () {
+                        showDialog(context: context, builder: _buildDayChooserDialog());
+                      },
+                      icon: const Icon(Icons.calendar_month_rounded),
+                      color: Colors.white
+                    )
+                  )
                 )
               ),
               
-              Visibility(
-                visible: _hasSubmitted,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                child: WigglingWidget(
-                  controller: _idleController,
-                  child: IconButton(
-                    onPressed: () {
-                      showDialog(context: context, builder: _buildSubmitDialog());
-                    },
-                    icon: const Icon(Icons.leaderboard_outlined),
-                    color: Colors.white
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Visibility(
+                    visible: _hasSubmitted,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: IconButton(
+                        onPressed: () {
+                          showDialog(context: context, builder: _buildSubmitDialog());
+                        },
+                        icon: const Icon(Icons.leaderboard_outlined),
+                        color: Colors.white
+                      )
+                    )
                   )
                 )
               ),
 
-              const Spacer(),
+              // const Spacer(),
 
-              Row(
-                children: [
-                  Visibility(
-                    visible: widget.availableLevels.first != _usedLevel,
-                    maintainState: true,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    child: WigglingWidget(
-                      controller: _idleController,
-                      child: IconButton(
-                        onPressed: () {
-                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
-                        },
-                        icon: const Icon(Icons.chevron_left),
-                        color: Colors.white
-                      )
-                    )
-                  ),
+              Flexible(
+                flex: 4,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    children: [
+                      Visibility(
+                        visible: widget.availableLevels.first != _usedLevel,
+                        maintainState: true,
+                        maintainAnimation: true,
+                        maintainSize: true,
+                        child: WigglingWidget(
+                          controller: _idleController,
+                          child: IconButton(
+                            onPressed: () {
+                              widget.pageController.jumpToPage(widget.pageController.page!.toInt() - 1);
+                            },
+                            icon: const Icon(Icons.chevron_left),
+                            color: Colors.white
+                          )
+                        )
+                      ),
 
-                  WigglingWidget(
-                    controller: _idleController,
-                    child: OutlinedText(
-                      text: _usedLevel.dayIndex != null ? "${t.encloseDay} ${_usedLevel.dayIndex}" : t.encloseBonus,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontFamily: "Schoolbell"
-                      )
-                    )
-                  ),
+                      WigglingWidget(
+                        controller: _idleController,
+                        child: OutlinedText(
+                          text: _usedLevel.dayIndex != null ? "${t.encloseDay} ${_usedLevel.dayIndex}" : t.encloseBonus,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontFamily: "Schoolbell"
+                          )
+                        )
+                      ),
 
-                  Visibility(
-                    visible: widget.availableLevels.last != _usedLevel,
-                    maintainState: true,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    child: WigglingWidget(
-                      controller: _idleController,
-                      child: IconButton(
-                        onPressed: () {
-                          widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
-                        },
-                        icon: const Icon(Icons.chevron_right),
-                        color: Colors.white
-                      )
-                    )
-                  ),
-                ]
-              ),
-
-              Spacer(),
-
-              WigglingWidget(
-                controller: _idleController,
-                child: IconButton(
-                  onPressed: () {
-                    _grid.reset();
-                  },
-                  icon: const Icon(Icons.restart_alt_outlined),
-                  color: Colors.white
+                      Visibility(
+                        visible: widget.availableLevels.last != _usedLevel,
+                        maintainState: true,
+                        maintainAnimation: true,
+                        maintainSize: true,
+                        child: WigglingWidget(
+                          controller: _idleController,
+                          child: IconButton(
+                            onPressed: () {
+                              widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
+                            },
+                            icon: const Icon(Icons.chevron_right),
+                            color: Colors.white
+                          )
+                        )
+                      ),
+                    ]
+                  )
                 )
               ),
 
-              WigglingWidget(
-                controller: _idleController,
-                  child: IconButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: _buildHelpDialog());
-                  },
-                  icon: const Icon(Icons.question_mark_outlined),
-                  color: Colors.white
+              // const Spacer(),
+
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                    child: IconButton(
+                      onPressed: () {
+                        _grid.reset();
+                      },
+                      icon: const Icon(Icons.restart_alt_outlined),
+                      color: Colors.white
+                    )
+                  )
+                )
+              ),
+
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: WigglingWidget(
+                    controller: _idleController,
+                      child: IconButton(
+                      onPressed: () {
+                        showDialog(context: context, builder: _buildHelpDialog());
+                      },
+                      icon: const Icon(Icons.question_mark_outlined),
+                      color: Colors.white
+                    )
+                  )
                 )
               ),
             ]
@@ -240,23 +266,25 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
             )
           ),
 
-          title: WigglingWidget(
-            controller: _idleController,
-            child: Text.rich(
-              TextSpan(
-                children: "enclose.moose".characters.map((char) => WidgetSpan(  // Could consider making all text like this
-                  child: WigglingWidget(
-                    controller: _idleController,
-                    child: OutlinedText(
-                      text: char,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 45,
-                        fontFamily: "Schoolbell"
+          title: FittedBox(
+            child: WigglingWidget(
+              controller: _idleController,
+              child: Text.rich(
+                TextSpan(
+                  children: "enclose.moose".characters.map((char) => WidgetSpan(  // Could consider making all text like this
+                    child: WigglingWidget(
+                      controller: _idleController,
+                      child: OutlinedText(
+                        text: char,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontFamily: "Schoolbell"
+                        )
                       )
                     )
-                  )
-                )).toList()
+                  )).toList()
+                )
               )
             )
           )
@@ -496,61 +524,72 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                WigglingWidget(
-                                  controller: _idleController,
-                                  child: HighlightedText(
-                                    showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
-                                    child: OutlinedText(
-                                      text: "${t.encloseWalls}: ${_grid.wallsLeft}/${_grid.wallBudget}",
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: WigglingWidget(
+                                      controller: _idleController,
+                                      child: HighlightedText(
+                                        showHighlight: (_openCallCounter.getCount("walls") ?? 0) != 0,
+                                        child: OutlinedText(
+                                          text: "${t.encloseWalls}: ${_grid.wallsLeft}/${_grid.wallBudget}",
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: "Schoolbell"
+                                          )
+                                        )
                                       )
                                     )
                                   )
                                 ),
 
-                                Spacer(),
-
-                                Visibility(
-                                  visible: !_hasSubmitted && _grid.escapePath == null,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(5),
-                                        )
-                                      ),
-                                      onPressed: _submitSolution,
-                                      child: OutlinedText(
-                                        text: t.encloseSubmit,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                          fontFamily: "Schoolbell"
-                                        )
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: !_hasSubmitted && _grid.escapePath == null,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(5),
+                                            )
+                                          ),
+                                          onPressed: _submitSolution,
+                                          child: OutlinedText(
+                                            text: t.encloseSubmit,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 25,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          )
+                                        ),
+                                        controller: _idleController
                                       )
-                                    ),
-                                    controller: _idleController
+                                    )
                                   )
                                 ),
 
-                                Spacer(),
-
-                                WigglingWidget(
-                                  controller: _idleController,
-                                  child: HighlightedText(
-                                    showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
-                                    child: OutlinedText(
-                                      text: "${t.encloseScore}: ${_grid.score ?? "N/A"}",
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: WigglingWidget(
+                                      controller: _idleController,
+                                      child: HighlightedText(
+                                        showHighlight: (_openCallCounter.getCount("score") ?? 0) != 0,
+                                        child: OutlinedText(
+                                          text: "${t.encloseScore}: ${_grid.score ?? "N/A"}",
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: "Schoolbell"
+                                          )
+                                        )
                                       )
                                     )
                                   )
@@ -561,58 +600,68 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Visibility(
-                                  visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    controller: _idleController,
-                                    child: OutlinedButton.icon(
-                                      onPressed: () {
-                                        _changeToSolution(_usedLevel.optimalSolution!);
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
-                                        visualDensity: VisualDensity.compact
-                                      ),
-                                      label: OutlinedText(
-                                        text: "${t.encloseOptimal}: ${_usedLevel.optimalScore}",
-                                        style: const TextStyle(
-                                          // color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: _hasSubmitted && _grid.score != _usedLevel.optimalScore,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        controller: _idleController,
+                                        child: OutlinedButton.icon(
+                                          onPressed: () {
+                                            _changeToSolution(_usedLevel.optimalSolution!);
+                                          },
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
+                                            visualDensity: VisualDensity.compact
+                                          ),
+                                          label: OutlinedText(
+                                            text: "${t.encloseOptimal}: ${_usedLevel.optimalScore}",
+                                            style: const TextStyle(
+                                              // color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          ),
+                                          icon: const Icon(Icons.star_sharp)
                                         )
-                                      ),
-                                      icon: const Icon(Icons.star_sharp)
+                                      )
                                     )
                                   )
                                 ),
 
-                                Visibility(
-                                  visible: isNotShowingYours || !isCurrentBest,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  maintainSize: true,
-                                  child: WigglingWidget(
-                                    controller: _idleController,
-                                    child: OutlinedButton.icon(
-                                      onPressed: () {
-                                        _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
-                                        visualDensity: VisualDensity.compact
-                                      ),
-                                      label: OutlinedText(
-                                        text: _hasSubmitted ? "${t.encloseYourSolution}: ${_usedLevel.playerSubmission!.playerScore}" : "${t.encloseYourBest}: $_bestSolutionScore",
-                                        style: const TextStyle(
-                                          // color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: "Schoolbell"
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Visibility(
+                                      visible: isNotShowingYours || !isCurrentBest,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      maintainSize: true,
+                                      child: WigglingWidget(
+                                        controller: _idleController,
+                                        child: OutlinedButton.icon(
+                                          onPressed: () {
+                                            _changeToSolution(_hasSubmitted ? _usedLevel.playerSubmission!.playerSolution : _bestSolution!);
+                                          },
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
+                                            visualDensity: VisualDensity.compact
+                                          ),
+                                          label: OutlinedText(
+                                            text: _hasSubmitted ? "${t.encloseYourSolution}: ${_usedLevel.playerSubmission!.playerScore}" : "${t.encloseYourBest}: $_bestSolutionScore",
+                                            style: const TextStyle(
+                                              // color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Schoolbell"
+                                            )
+                                          ),
+                                          icon: const Icon(Icons.keyboard_return_outlined)
                                         )
-                                      ),
-                                      icon: const Icon(Icons.keyboard_return_outlined)
+                                      )
                                     )
                                   )
                                 ),

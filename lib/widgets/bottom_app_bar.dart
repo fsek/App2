@@ -182,10 +182,13 @@ class FsekAppBarState extends State<FsekAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(item.iconData, color: color, size: widget.iconSize),
-                Text(
-                  item.text!,
-                  style: TextStyle(color: color),
-                  softWrap: false,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    item.text!,
+                    style: TextStyle(color: color),
+                    softWrap: false,
+                  )
                 )
               ],
             ),
