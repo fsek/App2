@@ -5,7 +5,7 @@ class OutlinedText extends StatefulWidget {
     super.key,
     required this.text,
     this.style,
-    this.strokeWidth = 1.5,
+    this.strokeWidth = 1.5,  // could make this default depend on font size
     this.strokeColor = Colors.black,
     this.textAlign
   });
