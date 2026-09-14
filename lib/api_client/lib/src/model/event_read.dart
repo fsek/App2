@@ -572,6 +572,7 @@ class _$EventReadSerializer implements PrimitiveSerializer<EventRead> {
   }
 }
 
+
 class EventReadMentorGroupTypesEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Mentor')

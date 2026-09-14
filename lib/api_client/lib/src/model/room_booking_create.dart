@@ -208,6 +208,7 @@ class _$RoomBookingCreateSerializer implements PrimitiveSerializer<RoomBookingCr
   }
 }
 
+
 class RoomBookingCreateRoomEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'LC')

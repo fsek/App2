@@ -120,3 +120,4 @@ class _$AlbumPhotographerAddSerializer implements PrimitiveSerializer<AlbumPhoto
   }
 }
 
+

@@ -120,3 +120,4 @@ class _$BearerResponseSerializer implements PrimitiveSerializer<BearerResponse> 
   }
 }
 
+

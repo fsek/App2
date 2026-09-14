@@ -168,3 +168,4 @@ class _$CarBlockReadSerializer implements PrimitiveSerializer<CarBlockRead> {
   }
 }
 
+

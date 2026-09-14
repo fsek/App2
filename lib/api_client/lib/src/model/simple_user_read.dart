@@ -136,3 +136,4 @@ class _$SimpleUserReadSerializer implements PrimitiveSerializer<SimpleUserRead> 
   }
 }
 
+

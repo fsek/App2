@@ -202,3 +202,4 @@ class _$CarBookingUpdateSerializer implements PrimitiveSerializer<CarBookingUpda
   }
 }
 
+

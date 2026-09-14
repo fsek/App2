@@ -145,3 +145,4 @@ class _$RoomBookingUpdateSerializer implements PrimitiveSerializer<RoomBookingUp
   }
 }
 
+

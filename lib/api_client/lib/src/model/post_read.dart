@@ -303,6 +303,7 @@ class _$PostReadSerializer implements PrimitiveSerializer<PostRead> {
   }
 }
 
+
 class PostReadElectedAtSemesterEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'HT')

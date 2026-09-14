@@ -120,3 +120,4 @@ class _$MooseGameReadSerializer implements PrimitiveSerializer<MooseGameRead> {
   }
 }
 
+

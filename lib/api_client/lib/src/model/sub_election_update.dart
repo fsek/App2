@@ -165,3 +165,4 @@ class _$SubElectionUpdateSerializer implements PrimitiveSerializer<SubElectionUp
   }
 }
 
+

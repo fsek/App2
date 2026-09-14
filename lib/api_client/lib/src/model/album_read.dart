@@ -234,3 +234,4 @@ class _$AlbumReadSerializer implements PrimitiveSerializer<AlbumRead> {
   }
 }
 
+

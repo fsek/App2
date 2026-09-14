@@ -203,6 +203,7 @@ class _$CandidateUserReadSerializer implements PrimitiveSerializer<CandidateUser
   }
 }
 
+
 class CandidateUserReadProgramEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Oklart')

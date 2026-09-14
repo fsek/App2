@@ -233,3 +233,4 @@ class _$DocumentReadSerializer implements PrimitiveSerializer<DocumentRead> {
   }
 }
 
+

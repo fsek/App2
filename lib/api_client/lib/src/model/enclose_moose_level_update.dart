@@ -203,3 +203,4 @@ class _$EncloseMooseLevelUpdateSerializer implements PrimitiveSerializer<Enclose
   }
 }
 
+

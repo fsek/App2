@@ -155,6 +155,7 @@ class _$GroupReadSerializer implements PrimitiveSerializer<GroupRead> {
   }
 }
 
+
 class GroupReadGroupTypeEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Mentor')

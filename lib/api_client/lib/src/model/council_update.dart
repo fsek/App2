@@ -164,3 +164,4 @@ class _$CouncilUpdateSerializer implements PrimitiveSerializer<CouncilUpdate> {
   }
 }
 
+

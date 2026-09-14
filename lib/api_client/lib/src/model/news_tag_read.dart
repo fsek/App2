@@ -105,3 +105,4 @@ class _$NewsTagReadSerializer implements PrimitiveSerializer<NewsTagRead> {
   }
 }
 
+

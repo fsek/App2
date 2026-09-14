@@ -168,3 +168,4 @@ class _$CandidatePostReadSerializer implements PrimitiveSerializer<CandidatePost
   }
 }
 
+

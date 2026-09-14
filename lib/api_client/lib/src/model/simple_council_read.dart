@@ -136,3 +136,4 @@ class _$SimpleCouncilReadSerializer implements PrimitiveSerializer<SimpleCouncil
   }
 }
 
+

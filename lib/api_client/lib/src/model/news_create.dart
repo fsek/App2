@@ -190,3 +190,4 @@ class _$NewsCreateSerializer implements PrimitiveSerializer<NewsCreate> {
   }
 }
 
+

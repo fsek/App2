@@ -120,3 +120,4 @@ class _$CafeViewBetweenDatesSerializer implements PrimitiveSerializer<CafeViewBe
   }
 }
 
+

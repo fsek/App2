@@ -104,3 +104,4 @@ class _$UpdateUserMemberSerializer implements PrimitiveSerializer<UpdateUserMemb
   }
 }
 
+

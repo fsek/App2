@@ -280,6 +280,7 @@ class _$UserUpdateSerializer implements PrimitiveSerializer<UserUpdate> {
   }
 }
 
+
 class UserUpdateProgramEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Oklart')

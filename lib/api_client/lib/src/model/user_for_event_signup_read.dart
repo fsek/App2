@@ -188,3 +188,4 @@ class _$UserForEventSignupReadSerializer implements PrimitiveSerializer<UserForE
   }
 }
 
+

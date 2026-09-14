@@ -152,3 +152,4 @@ class _$UserPostReadSerializer implements PrimitiveSerializer<UserPostRead> {
   }
 }
 
+

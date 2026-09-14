@@ -219,3 +219,4 @@ class _$AdReadSerializer implements PrimitiveSerializer<AdRead> {
   }
 }
 
+

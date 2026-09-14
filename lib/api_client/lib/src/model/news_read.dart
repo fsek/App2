@@ -268,3 +268,4 @@ class _$NewsReadSerializer implements PrimitiveSerializer<NewsRead> {
   }
 }
 
+

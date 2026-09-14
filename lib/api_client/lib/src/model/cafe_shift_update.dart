@@ -145,3 +145,4 @@ class _$CafeShiftUpdateSerializer implements PrimitiveSerializer<CafeShiftUpdate
   }
 }
 
+

@@ -120,3 +120,4 @@ class _$MovePostRequestSerializer implements PrimitiveSerializer<MovePostRequest
   }
 }
 
+

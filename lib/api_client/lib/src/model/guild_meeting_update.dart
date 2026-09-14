@@ -221,3 +221,4 @@ class _$GuildMeetingUpdateSerializer implements PrimitiveSerializer<GuildMeeting
   }
 }
 
+

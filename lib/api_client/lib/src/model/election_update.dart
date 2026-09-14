@@ -190,3 +190,4 @@ class _$ElectionUpdateSerializer implements PrimitiveSerializer<ElectionUpdate> 
   }
 }
 
+

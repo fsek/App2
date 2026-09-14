@@ -203,3 +203,4 @@ class _$SubElectionReadSerializer implements PrimitiveSerializer<SubElectionRead
   }
 }
 
+

@@ -250,3 +250,4 @@ class _$ElectionPostReadSerializer implements PrimitiveSerializer<ElectionPostRe
   }
 }
 
+

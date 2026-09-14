@@ -147,6 +147,7 @@ class _$UserAccessUpdateSerializer implements PrimitiveSerializer<UserAccessUpda
   }
 }
 
+
 class UserAccessUpdateDoorEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Ledningscentralen')

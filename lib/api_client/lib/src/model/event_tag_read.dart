@@ -105,3 +105,4 @@ class _$EventTagReadSerializer implements PrimitiveSerializer<EventTagRead> {
   }
 }
 
+

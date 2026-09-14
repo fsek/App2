@@ -115,7 +115,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **postsGetAllDoors**
-> BuiltList<String> postsGetAllDoors()
+> BuiltList<String?> postsGetAllDoors()
 
 Get All Doors
 
@@ -144,7 +144,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**BuiltList&lt;String&gt;**
+**BuiltList&lt;String?&gt;**
 
 ### Authorization
 

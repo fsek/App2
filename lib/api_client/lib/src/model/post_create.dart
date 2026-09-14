@@ -251,6 +251,7 @@ class _$PostCreateSerializer implements PrimitiveSerializer<PostCreate> {
   }
 }
 
+
 class PostCreateElectedAtSemesterEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'HT')

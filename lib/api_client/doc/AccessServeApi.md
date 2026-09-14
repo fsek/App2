@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **accessServeGetAllAccessIds**
-> BuiltList<String> accessServeGetAllAccessIds(door)
+> BuiltList<String?> accessServeGetAllAccessIds(door)
 
 Get All Access Ids
 
@@ -42,7 +42,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltList&lt;String&gt;**
+**BuiltList&lt;String?&gt;**
 
 ### Authorization
 

@@ -144,6 +144,7 @@ class _$GroupMissionEditSerializer implements PrimitiveSerializer<GroupMissionEd
   }
 }
 
+
 class GroupMissionEditIsAcceptedEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Accepted')

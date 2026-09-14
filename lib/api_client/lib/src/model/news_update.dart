@@ -202,3 +202,4 @@ class _$NewsUpdateSerializer implements PrimitiveSerializer<NewsUpdate> {
   }
 }
 
+

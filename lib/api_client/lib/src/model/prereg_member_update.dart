@@ -145,3 +145,4 @@ class _$PreregMemberUpdateSerializer implements PrimitiveSerializer<PreregMember
   }
 }
 
+

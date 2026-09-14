@@ -171,3 +171,4 @@ class _$AdminCafeShiftReadSerializer implements PrimitiveSerializer<AdminCafeShi
   }
 }
 
+

@@ -169,3 +169,4 @@ class _$EncloseMooseSubmissionReadSerializer implements PrimitiveSerializer<Encl
   }
 }
 
+

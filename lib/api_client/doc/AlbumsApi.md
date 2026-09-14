@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **albumsDeleteAlbumYear**
-> BuiltMap<String, String> albumsDeleteAlbumYear(year)
+> BuiltMap<String, String?> albumsDeleteAlbumYear(year)
 
 Delete Album Year
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+**BuiltMap&lt;String, String?&gt;**
 
 ### Authorization
 
