@@ -278,6 +278,7 @@ class _$AdventureMissionCreateSerializer implements PrimitiveSerializer<Adventur
   }
 }
 
+
 class AdventureMissionCreateMissionCategoryEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Barbiedans')

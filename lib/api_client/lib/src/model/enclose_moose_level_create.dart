@@ -121,8 +121,9 @@ class _$EncloseMooseLevelCreateSerializer implements PrimitiveSerializer<Enclose
         case r'release_date':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(Date),
-          ) as Date;
+            specifiedType: const FullType.nullable(Date),
+          ) as Date?;
+          if (valueDes == null) continue;
           result.releaseDate = valueDes;
           break;
         case r'day_index':
@@ -189,4 +190,5 @@ class _$EncloseMooseLevelCreateSerializer implements PrimitiveSerializer<Enclose
     return result.build();
   }
 }
+
 

@@ -32,9 +32,9 @@ class AccessServeApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<String?>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> accessServeGetAllAccessIds({ 
+  Future<Response<BuiltList<String?>>> accessServeGetAllAccessIds({ 
     required String door,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -64,14 +64,14 @@ class AccessServeApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltList<String>? _responseData;
+    BuiltList<String?>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
         specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
+      ) as BuiltList<String?>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -83,7 +83,7 @@ class AccessServeApi {
       );
     }
 
-    return Response<BuiltList<String>>(
+    return Response<BuiltList<String?>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

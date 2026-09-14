@@ -291,22 +291,25 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
         case r'is_active':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(bool),
-          ) as bool;
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
           result.isActive = valueDes;
           break;
         case r'is_superuser':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(bool),
-          ) as bool;
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
           result.isSuperuser = valueDes;
           break;
         case r'is_verified':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(bool),
-          ) as bool;
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
           result.isVerified = valueDes;
           break;
         case r'first_name':
@@ -459,6 +462,7 @@ class _$AdminUserReadSerializer implements PrimitiveSerializer<AdminUserRead> {
     return result.build();
   }
 }
+
 
 class AdminUserReadProgramEnum extends EnumClass {
 

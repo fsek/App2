@@ -138,6 +138,7 @@ class _$UpdatePermissionSerializer implements PrimitiveSerializer<UpdatePermissi
   }
 }
 
+
 class UpdatePermissionChangeEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'add')

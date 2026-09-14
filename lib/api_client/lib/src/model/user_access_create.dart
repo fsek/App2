@@ -154,6 +154,7 @@ class _$UserAccessCreateSerializer implements PrimitiveSerializer<UserAccessCrea
   }
 }
 
+
 class UserAccessCreateDoorEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Ledningscentralen')

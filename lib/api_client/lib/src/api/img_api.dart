@@ -33,9 +33,9 @@ class ImgApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String?>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, String>>> imgDeleteImage({ 
+  Future<Response<BuiltMap<String, String?>>> imgDeleteImage({ 
     required int id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -75,14 +75,14 @@ class ImgApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltMap<String, String>? _responseData;
+    BuiltMap<String, String?>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
         specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
-      ) as BuiltMap<String, String>;
+      ) as BuiltMap<String, String?>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -94,7 +94,7 @@ class ImgApi {
       );
     }
 
-    return Response<BuiltMap<String, String>>(
+    return Response<BuiltMap<String, String?>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -376,9 +376,9 @@ class ImgApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltMap<String, String?>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, String>>> imgUploadImage({ 
+  Future<Response<BuiltMap<String, String?>>> imgUploadImage({ 
     required int albumId,
     required MultipartFile file,
     CancelToken? cancelToken,
@@ -446,14 +446,14 @@ class ImgApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    BuiltMap<String, String>? _responseData;
+    BuiltMap<String, String?>? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
         specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
-      ) as BuiltMap<String, String>;
+      ) as BuiltMap<String, String?>;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -465,7 +465,7 @@ class ImgApi {
       );
     }
 
-    return Response<BuiltMap<String, String>>(
+    return Response<BuiltMap<String, String?>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

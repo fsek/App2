@@ -353,13 +353,3 @@ lib/src/model/user_update.dart
 lib/src/model/validation_error.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/enclose_moose_api_test.dart
-test/enclose_moose_level_create_test.dart
-test/enclose_moose_level_read_test.dart
-test/enclose_moose_level_update_test.dart
-test/enclose_moose_submission_create_test.dart
-test/enclose_moose_submission_read_test.dart
-test/prereg_member_create_test.dart
-test/prereg_member_read_test.dart
-test/prereg_member_update_test.dart
-test/prereg_members_api_test.dart

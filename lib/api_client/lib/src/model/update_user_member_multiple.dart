@@ -120,3 +120,4 @@ class _$UpdateUserMemberMultipleSerializer implements PrimitiveSerializer<Update
   }
 }
 
+

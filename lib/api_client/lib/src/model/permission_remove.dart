@@ -123,6 +123,7 @@ class _$PermissionRemoveSerializer implements PrimitiveSerializer<PermissionRemo
   }
 }
 
+
 class PermissionRemoveActionEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'view')

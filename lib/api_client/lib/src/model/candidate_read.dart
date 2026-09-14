@@ -171,3 +171,4 @@ class _$CandidateReadSerializer implements PrimitiveSerializer<CandidateRead> {
   }
 }
 
+

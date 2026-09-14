@@ -120,3 +120,4 @@ class _$CafeShiftCreateSerializer implements PrimitiveSerializer<CafeShiftCreate
   }
 }
 
+

@@ -203,3 +203,4 @@ class _$AdCreateSerializer implements PrimitiveSerializer<AdCreate> {
   }
 }
 
+

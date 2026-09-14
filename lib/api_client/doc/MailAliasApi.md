@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **mailAliasDeleteAlias**
-> BuiltMap<String, String> mailAliasDeleteAlias(aliasEmail)
+> BuiltMap<String, String?> mailAliasDeleteAlias(aliasEmail)
 
 Delete Alias
 
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+**BuiltMap&lt;String, String?&gt;**
 
 ### Authorization
 

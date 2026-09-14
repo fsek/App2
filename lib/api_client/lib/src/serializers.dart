@@ -293,14 +293,6 @@ part 'serializers.g.dart';
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CarBlockRead)]),
-        () => ListBuilder<CarBlockRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(String)]),
-        () => MapBuilder<String, String>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CarBookingRead)]),
         () => ListBuilder<CarBookingRead>(),
       )
@@ -313,12 +305,100 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<EventRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UpdateUserMemberMultiple)]),
+        () => ListBuilder<UpdateUserMemberMultiple>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(GroupUserRead)]),
+        () => ListBuilder<GroupUserRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NewsTagRead)]),
+        () => ListBuilder<NewsTagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UpdatePermissionPart)]),
+        () => ListBuilder<UpdatePermissionPart>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EventTagRead)]),
+        () => ListBuilder<EventTagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(MooseGameRead)]),
+        () => ListBuilder<MooseGameRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AdRead)]),
+        () => ListBuilder<AdRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SubElectionRead)]),
+        () => ListBuilder<SubElectionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(GroupRead)]),
+        () => ListBuilder<GroupRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(TagRead)]),
+        () => ListBuilder<TagRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(EncloseMooseSubmissionRead)]),
+        () => ListBuilder<EncloseMooseSubmissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SubElectionMemberRead)]),
+        () => ListBuilder<SubElectionMemberRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(UserEventRead)]),
+        () => ListBuilder<UserEventRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(AliasRead)]),
+        () => ListBuilder<AliasRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PermissionRead)]),
+        () => ListBuilder<PermissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltSet, [FullType(int)]),
+        () => SetBuilder<int>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(NewsRead)]),
+        () => ListBuilder<NewsRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(GroupMissionRead)]),
+        () => ListBuilder<GroupMissionRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(CarBlockRead)]),
+        () => ListBuilder<CarBlockRead>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        () => MapBuilder<String, String>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PriorityDB)]),
+        () => ListBuilder<PriorityDB>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PostPermissionRead)]),
+        () => ListBuilder<PostPermissionRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CandidateRead)]),
         () => ListBuilder<CandidateRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(UpdateUserMemberMultiple)]),
-        () => ListBuilder<UpdateUserMemberMultiple>(),
+        const FullType(BuiltList, [FullType(ElectionPostRead)]),
+        () => ListBuilder<ElectionPostRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(EncloseMooseLevelRead)]),
@@ -345,6 +425,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CouncilRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(LocationInner)]),
+        () => ListBuilder<LocationInner>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(ElectionRead)]),
         () => ListBuilder<ElectionRead>(),
       )
@@ -357,20 +441,20 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CandidatePostRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EventTagRead)]),
-        () => ListBuilder<EventTagRead>(),
+        const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        () => MapBuilder<String, int>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(MooseGameRead)]),
-        () => ListBuilder<MooseGameRead>(),
+        const FullType(BuiltList, [FullType(UserPostRead)]),
+        () => ListBuilder<UserPostRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PreregMemberCreate)]),
         () => ListBuilder<PreregMemberCreate>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AdRead)]),
-        () => ListBuilder<AdRead>(),
+        const FullType(BuiltList, [FullType(SimpleUserAccessRead)]),
+        () => ListBuilder<SimpleUserAccessRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(RoomBookingRead)]),
@@ -385,6 +469,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<NollningGroupRead>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PhotographerInAlbumRead)]),
+        () => ListBuilder<PhotographerInAlbumRead>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PreregMemberRead)]),
         () => ListBuilder<PreregMemberRead>(),
       )
@@ -393,16 +481,8 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<EventSignupRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GroupRead)]),
-        () => ListBuilder<GroupRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TagRead)]),
-        () => ListBuilder<TagRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EncloseMooseSubmissionRead)]),
-        () => ListBuilder<EncloseMooseSubmissionRead>(),
+        const FullType(BuiltList, [FullType(PostDoorAccessRead)]),
+        () => ListBuilder<PostDoorAccessRead>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdventureMissionRead)]),
@@ -421,24 +501,12 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CafeShiftRead>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AliasRead)]),
-        () => ListBuilder<AliasRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(PermissionRead)]),
-        () => ListBuilder<PermissionRead>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(int)]),
         () => ListBuilder<int>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NewsRead)]),
-        () => ListBuilder<NewsRead>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GroupMissionRead)]),
-        () => ListBuilder<GroupMissionRead>(),
+        const FullType(BuiltList, [FullType(ValidationError)]),
+        () => ListBuilder<ValidationError>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PostRead)]),

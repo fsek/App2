@@ -202,3 +202,4 @@ class _$RoomBookingReadSerializer implements PrimitiveSerializer<RoomBookingRead
   }
 }
 
+

@@ -158,3 +158,4 @@ class _$CouncilCreateSerializer implements PrimitiveSerializer<CouncilCreate> {
   }
 }
 
+

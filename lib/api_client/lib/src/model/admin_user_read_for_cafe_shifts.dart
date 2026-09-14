@@ -185,3 +185,4 @@ class _$AdminUserReadForCafeShiftsSerializer implements PrimitiveSerializer<Admi
   }
 }
 
+

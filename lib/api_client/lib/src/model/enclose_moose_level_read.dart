@@ -299,3 +299,4 @@ class _$EncloseMooseLevelReadSerializer implements PrimitiveSerializer<EncloseMo
   }
 }
 
+

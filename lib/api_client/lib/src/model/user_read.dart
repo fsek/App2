@@ -187,6 +187,7 @@ class _$UserReadSerializer implements PrimitiveSerializer<UserRead> {
   }
 }
 
+
 class UserReadProgramEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Oklart')

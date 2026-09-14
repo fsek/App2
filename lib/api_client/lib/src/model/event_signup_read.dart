@@ -204,6 +204,7 @@ class _$EventSignupReadSerializer implements PrimitiveSerializer<EventSignupRead
   }
 }
 
+
 class EventSignupReadDrinkPackageEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'None')

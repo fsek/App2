@@ -105,3 +105,4 @@ class _$UpdateUserPostsSerializer implements PrimitiveSerializer<UpdateUserPosts
   }
 }
 
+

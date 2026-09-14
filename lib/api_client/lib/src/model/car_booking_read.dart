@@ -240,3 +240,4 @@ class _$CarBookingReadSerializer implements PrimitiveSerializer<CarBookingRead> 
   }
 }
 
+

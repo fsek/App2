@@ -122,6 +122,7 @@ class _$GroupCreateSerializer implements PrimitiveSerializer<GroupCreate> {
   }
 }
 
+
 class GroupCreateGroupTypeEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Mentor')

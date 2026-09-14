@@ -75,8 +75,9 @@ class _$HTTPValidationErrorSerializer implements PrimitiveSerializer<HTTPValidat
         case r'detail':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(ValidationError)]),
-          ) as BuiltList<ValidationError>;
+            specifiedType: const FullType.nullable(BuiltList, [FullType(ValidationError)]),
+          ) as BuiltList<ValidationError>?;
+          if (valueDes == null) continue;
           result.detail.replace(valueDes);
           break;
         default:
@@ -107,4 +108,5 @@ class _$HTTPValidationErrorSerializer implements PrimitiveSerializer<HTTPValidat
     return result.build();
   }
 }
+
 

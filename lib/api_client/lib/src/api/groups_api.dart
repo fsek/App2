@@ -178,7 +178,7 @@ class GroupsApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'group_type': encodeQueryParameter(_serializers, groupType, const FullType(String)),
+      if (groupType != null) r'group_type': encodeQueryParameter(_serializers, groupType, const FullType(String)),
     };
 
     final _response = await _dio.request<Object>(

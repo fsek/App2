@@ -301,6 +301,7 @@ class _$PostUpdateSerializer implements PrimitiveSerializer<PostUpdate> {
   }
 }
 
+
 class PostUpdateDoorsEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Ledningscentralen')

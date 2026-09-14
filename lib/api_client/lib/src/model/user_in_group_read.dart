@@ -169,3 +169,4 @@ class _$UserInGroupReadSerializer implements PrimitiveSerializer<UserInGroupRead
   }
 }
 
+

@@ -122,6 +122,7 @@ class _$PostDoorAccessReadSerializer implements PrimitiveSerializer<PostDoorAcce
   }
 }
 
+
 class PostDoorAccessReadDoorEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Ledningscentralen')

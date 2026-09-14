@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **nollningDeleteNollning**
-> BuiltMap<String, String> nollningDeleteNollning(nollningId)
+> BuiltMap<String, String?> nollningDeleteNollning(nollningId)
 
 Delete Nollning
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+**BuiltMap&lt;String, String?&gt;**
 
 ### Authorization
 

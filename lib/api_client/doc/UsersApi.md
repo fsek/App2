@@ -257,7 +257,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersGetMyPriorities**
-> BuiltList<String> usersGetMyPriorities()
+> BuiltList<String?> usersGetMyPriorities()
 
 Get My Priorities
 
@@ -286,7 +286,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**BuiltList&lt;String&gt;**
+**BuiltList&lt;String?&gt;**
 
 ### Authorization
 

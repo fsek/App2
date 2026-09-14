@@ -136,3 +136,4 @@ class _$PostPermissionReadSerializer implements PrimitiveSerializer<PostPermissi
   }
 }
 
+

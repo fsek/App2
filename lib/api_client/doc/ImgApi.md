@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **imgDeleteImage**
-> BuiltMap<String, String> imgDeleteImage(id)
+> BuiltMap<String, String?> imgDeleteImage(id)
 
 Delete Image
 
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+**BuiltMap&lt;String, String?&gt;**
 
 ### Authorization
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **imgUploadImage**
-> BuiltMap<String, String> imgUploadImage(albumId, file)
+> BuiltMap<String, String?> imgUploadImage(albumId, file)
 
 Upload Image
 
@@ -242,7 +242,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**BuiltMap&lt;String, String&gt;**
+**BuiltMap&lt;String, String?&gt;**
 
 ### Authorization
 

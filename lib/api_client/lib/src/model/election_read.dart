@@ -220,3 +220,4 @@ class _$ElectionReadSerializer implements PrimitiveSerializer<ElectionRead> {
   }
 }
 
+

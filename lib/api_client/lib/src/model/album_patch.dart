@@ -183,3 +183,4 @@ class _$AlbumPatchSerializer implements PrimitiveSerializer<AlbumPatch> {
   }
 }
 
+

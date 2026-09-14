@@ -170,6 +170,7 @@ class _$ElectionPopulateSerializer implements PrimitiveSerializer<ElectionPopula
   }
 }
 
+
 class ElectionPopulateSemesterEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'HT')

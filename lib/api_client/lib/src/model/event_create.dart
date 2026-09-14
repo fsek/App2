@@ -508,6 +508,7 @@ class _$EventCreateSerializer implements PrimitiveSerializer<EventCreate> {
   }
 }
 
+
 class EventCreateMentorGroupTypesEnum extends EnumClass {
 
   @BuiltValueEnumConst(wireName: r'Mentor')

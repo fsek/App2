@@ -205,3 +205,4 @@ class _$CouncilReadSerializer implements PrimitiveSerializer<CouncilRead> {
   }
 }
 
+

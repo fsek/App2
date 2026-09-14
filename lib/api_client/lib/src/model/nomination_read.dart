@@ -216,3 +216,4 @@ class _$NominationReadSerializer implements PrimitiveSerializer<NominationRead> 
   }
 }
 
+

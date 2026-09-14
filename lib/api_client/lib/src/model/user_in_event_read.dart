@@ -187,3 +187,4 @@ class _$UserInEventReadSerializer implements PrimitiveSerializer<UserInEventRead
   }
 }
 
+

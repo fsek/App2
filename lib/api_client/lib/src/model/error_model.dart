@@ -105,3 +105,4 @@ class _$ErrorModelSerializer implements PrimitiveSerializer<ErrorModel> {
   }
 }
 
+
