@@ -1612,5 +1612,8 @@ class AppLocalizationsSv extends AppLocalizations {
   String get eventNoSignup => 'Ingen anmälan behövs';
 
   @override
+  String get eventSignupClosed => 'Anmälan i appen temporärt stängd';
+
+  @override
   String get eventHasLottery => 'Platser lottas';
 }

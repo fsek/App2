@@ -557,7 +557,11 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    if (!event!.canSignup) {
+
+    bool canSignup = event!.canSignup;
+    bool closed = event!.closed;
+
+    if (!canSignup || closed) {
       return Container(
         margin: EdgeInsets.all(10),
         child: Column(
@@ -566,7 +570,7 @@ class _EventPageState extends State<EventPage> {
             Row(
               children: [
                 Icon(Icons.local_activity_outlined),
-                Text("  " + t.eventNoSignup),
+                Text("  " + (closed ? t.eventSignupClosed : t.eventNoSignup)),
               ],
             ),
             Divider(
@@ -597,7 +601,7 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    if (event!.canSignup) {
+    if (canSignup) {
       if (isSignupOpen(event!) == "open") {
         signup = signupWidget(t);
       } else {

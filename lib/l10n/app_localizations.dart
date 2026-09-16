@@ -3056,6 +3056,12 @@ abstract class AppLocalizations {
   /// **'Ingen anmälan behövs'**
   String get eventNoSignup;
 
+  /// No description provided for @eventSignupClosed.
+  ///
+  /// In sv, this message translates to:
+  /// **'Anmälan i appen temporärt stängd'**
+  String get eventSignupClosed;
+
   /// No description provided for @eventHasLottery.
   ///
   /// In sv, this message translates to:

@@ -544,6 +544,7 @@
     "missions": "UPPDRAG",
     "unlimited": "Oändligt",
     "eventNoSignup": "Ingen anmälan behövs",
+	"eventSignupClosed": "Anmälan i appen är just nu stängd",
     "eventHasLottery": "Platser lottas"
 
 }

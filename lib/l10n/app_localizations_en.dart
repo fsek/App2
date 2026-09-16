@@ -1621,5 +1621,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eventNoSignup => 'No signup required';
 
   @override
+  String get eventSignupClosed => 'App signup temporarily closed';
+
+  @override
   String get eventHasLottery => 'Spots decided by lottery';
 }

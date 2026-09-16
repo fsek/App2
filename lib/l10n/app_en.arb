@@ -542,6 +542,7 @@
     "missions": "MISSIONS",
     "unlimited": "Unlimited",
     "eventNoSignup": "No signup required",
+	"eventSignupClosed": "App signup is currently closed",
     "eventHasLottery": "Spots decided by lottery"
 
 
