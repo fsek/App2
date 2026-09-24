@@ -125,7 +125,7 @@ class _EventPageState extends State<EventPage> {
         this.event = event;
         this.user = user;
         this.eventSignup = eventSignup;
-        this.drinkPackageAnswer = drinkPackageAlcohol;
+        this.drinkPackageAnswer = drinkPackageNone;
         this.priorities = prioritiesResponse.data!.toList().cast<String>();
         if (user.groups.isNotEmpty) {
           this.defaultGroup = user.groups.first;
@@ -937,16 +937,16 @@ class _EventPageState extends State<EventPage> {
                 },
                 items: [
                   DropdownMenuItem<String?>(
+                    value: drinkPackageNone,
+                    child: Text(t.eventNone),
+                  ),
+                  DropdownMenuItem<String?>(
                     value: drinkPackageAlcohol,
                     child: Text(t.eventAlcohol),
                   ),
                   DropdownMenuItem<String?>(
                     value: drinkPackageAlcoholFree,
                     child: Text(t.eventAlcoholFree),
-                  ),
-                  DropdownMenuItem<String?>(
-                    value: drinkPackageNone,
-                    child: Text(t.eventNoAlcohol),
                   ),
                 ],
               ),
@@ -1119,14 +1119,14 @@ class _EventPageState extends State<EventPage> {
         case "none":
           drinkPackage = _drinkPackageWidget(
             t.eventDrinkPackage,
-            " ${t.eventNoAlcohol}",
+            " ${t.eventNone}",
           );
           break;
         default:
           this.drinkPackageAnswer = drinkPackageNone;
           drinkPackage = _drinkPackageWidget(
             t.eventDrinkPackage,
-            " ${t.eventNoAlcohol}",
+            " ${t.eventNone}",
           );
           break;
       }

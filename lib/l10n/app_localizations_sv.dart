@@ -250,7 +250,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get eventAlcoholFree => 'Alkoholfritt';
 
   @override
-  String get eventNoAlcohol => 'Inget';
+  String get eventNone => 'Inget';
 
   @override
   String get eventNollning => 'Nollningsevent';

@@ -83,7 +83,7 @@
     "eventAlcohol": "Alkohol",
     "eventAlcoholMayAppear" : "Alkohol kan förekomma",
     "eventAlcoholFree" : "Alkoholfritt",
-    "eventNoAlcohol" : "Inget",
+    "eventNone" : "Inget",
 	"eventNollning": "Nollningsevent",
 	"eventNollningMentor": "Nollningsevent (med faddergruppen)",
 	"eventNollningMission": "Nollningsevent (med uppdragsgruppen)",
