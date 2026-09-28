@@ -671,7 +671,7 @@ class _EventPageState extends State<EventPage> {
 
   Widget signupInfoWidget() {
     var t = AppLocalizations.of(context)!;
-    Widget signup;
+    Widget? signup = null;
     String locale = Localizations.localeOf(context).toString();
     // If no event
     if (event == null) {
@@ -727,56 +727,80 @@ class _EventPageState extends State<EventPage> {
         ),
       );
     }
-    if (event!.canSignup) {
-      if (isSignupOpen(event!) == "open") {
-        signup = signupWidget(t);
-      } else {
-        if (isSignupOpen(event!) == "closed") {
-          if (eventSignup == null) {
-            signup = Row(
-              children: [
-                Icon(
-                  Icons.info_outline_rounded,
-                  color: Colors
-                      .red[300], // I don't like it, but this hardcoding kinda just works
-                ),
-                Text(
-                  t.eventNotSignedUp,
-                  style: TextStyle(color: Colors.red[300]),
-                ),
-              ],
-            );
-          } else {
-            String? groupName = eventSignup!.groupName;
-            String userType = eventSignup!.priority;
-            if (event!.eventUsersConfirmed) {
-              if (!eventSignup!.confirmedStatus) {
-                signup = Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.cancel, color: Colors.red[300]),
-                        Text(
-                          t.eventNoSpot,
-                          style: TextStyle(color: Colors.red[300]),
-                        ),
-                      ],
-                    ),
-                    Divider(color: null),
-                    ..._signupDetails(groupName, userType),
-                  ],
-                );
+    if (!event!.closed) {
+      if (event!.canSignup) {
+        if (isSignupOpen(event!) == "open") {
+          signup = signupWidget(t);
+        } else {
+          if (isSignupOpen(event!) == "closed") {
+            if (eventSignup == null) {
+              signup = Row(
+                children: [
+                  Icon(
+                    Icons.info_outline_rounded,
+                    color: Colors
+                        .red[300], // I don't like it, but this hardcoding kinda just works
+                  ),
+                  Text(
+                    t.eventNotSignedUp,
+                    style: TextStyle(color: Colors.red[300]),
+                  ),
+                ],
+              );
+            } else {
+              String? groupName = eventSignup!.groupName;
+              String userType = eventSignup!.priority;
+              if (event!.eventUsersConfirmed) {
+                if (!eventSignup!.confirmedStatus) {
+                  signup = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.cancel, color: Colors.red[300]),
+                          Text(
+                            t.eventNoSpot,
+                            style: TextStyle(color: Colors.red[300]),
+                          ),
+                        ],
+                      ),
+                      Divider(color: null),
+                      ..._signupDetails(groupName, userType),
+                    ],
+                  );
+                } else {
+                  signup = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle, color: Colors.green[300]),
+                          Text(
+                            t.eventGotSpot,
+                            style: TextStyle(color: Colors.green[300]),
+                          ),
+                        ],
+                      ),
+                      Divider(color: null),
+                      ..._signupDetails(groupName, userType),
+                    ],
+                  );
+                }
               } else {
                 signup = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.check_circle, color: Colors.green[300]),
+                        Icon(
+                          Icons.info_outline_rounded,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         Text(
-                          t.eventGotSpot,
-                          style: TextStyle(color: Colors.green[300]),
+                          t.eventLotterySpot,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                       ],
                     ),
@@ -785,36 +809,10 @@ class _EventPageState extends State<EventPage> {
                   ],
                 );
               }
-            } else {
-              signup = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info_outline_rounded,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      Text(
-                        t.eventLotterySpot,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(color: null),
-                  ..._signupDetails(groupName, userType),
-                ],
-              );
             }
-          }
-        } else {
-          signup = SizedBox.shrink();
+          } 
         }
       }
-    } else {
-      signup = SizedBox.shrink();
     }
 
     return Container(
@@ -882,8 +880,10 @@ class _EventPageState extends State<EventPage> {
             ),
           ),
           Divider(color: null),
-          signup,
-          Divider(color: null),
+          if (signup != null) ...[
+            signup,
+            Divider(color: null),
+          ],
           Container(
             margin: EdgeInsets.all(10),
             child: Column(
