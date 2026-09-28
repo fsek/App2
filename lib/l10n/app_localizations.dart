@@ -560,11 +560,11 @@ abstract class AppLocalizations {
   /// **'Alkoholfritt'**
   String get eventAlcoholFree;
 
-  /// No description provided for @eventNoAlcohol.
+  /// No description provided for @eventNone.
   ///
   /// In sv, this message translates to:
   /// **'Inget'**
-  String get eventNoAlcohol;
+  String get eventNone;
 
   /// No description provided for @eventNollning.
   ///

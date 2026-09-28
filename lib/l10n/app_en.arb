@@ -83,7 +83,7 @@
     "eventAlcohol": "Alcohol",
     "eventAlcoholMayAppear" : "Alcohol may be present",
     "eventAlcoholFree" : "Alcoholfree",
-    "eventNoAlcohol" : "None",
+    "eventNone" : "None",
 	"eventNollning": "Introduction event",
 	"eventNollningMentor": "Introduction event (with your mentor group)",
 	"eventNollningMission": "Introduction event (with your mission group)",

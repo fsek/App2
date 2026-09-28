@@ -251,7 +251,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eventAlcoholFree => 'Alcoholfree';
 
   @override
-  String get eventNoAlcohol => 'None';
+  String get eventNone => 'None';
 
   @override
   String get eventNollning => 'Introduction event';
