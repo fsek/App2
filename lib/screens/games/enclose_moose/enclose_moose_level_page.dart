@@ -611,12 +611,14 @@ class _EncloseMooseLevelState extends State<EncloseMooseLevelPage> with TickerPr
                                       child: WigglingWidget(
                                         controller: _idleController,
                                         child: OutlinedButton.icon(
-                                          onPressed: () {
+                                          onPressed: _usedLevel.optimalSolution == null ? null : () {
                                             _changeToSolution(_usedLevel.optimalSolution!);
                                           },
                                           style: OutlinedButton.styleFrom(
                                             backgroundColor: Color(0xFF15542D).withAlpha(200),  // Colors.black.withAlpha(55),
-                                            visualDensity: VisualDensity.compact
+                                            visualDensity: VisualDensity.compact,
+                                            disabledForegroundColor: Theme.of(context).primaryColor,
+                                            disabledBackgroundColor: Color.fromARGB(255, 14, 60, 32).withAlpha(200)
                                           ),
                                           label: OutlinedText(
                                             text: "${t.encloseOptimal}: ${_usedLevel.optimalScore}",
