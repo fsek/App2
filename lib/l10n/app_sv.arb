@@ -596,11 +596,11 @@
     "encloseOccurrences": "Förekomster",
     "encloseOccurrence": "Förekomst",
 
-    "stilIdNotificationTitle": "Stil-ID Notifikation",
+    "stilIdNotificationTitle": "Stil-ID notifikation",
     "stilIdNotificationNiceTry": "Bra försök...",
     "stilIdNotificationSubmit": "Skicka",
-    "stilIdNotificationInfo": "Vänligen ange ditt Stil-ID kopplat till ditt studentkonto på Lunds Universitet.",
+    "stilIdNotificationInfo": "Ange ditt Stil-ID kopplat till ditt studentkonto på Lunds universitet.",
     "stilIdNotificationWhy": "Ditt Stil-ID används bland annat för access till sektionens lokaler samt för att synkronisera användardata med Teknologappen.",
-    "stilIdNotificationErrorEmpty": "Vänligen lämna inte fältet tomt.",
-    "stilIdNotificationErrorInvalid": "Kunde inte bekräfta Stil-ID, vänligen bekräfta att formatteringen är korrekt(ab0000cd-s)."
+    "stilIdNotificationErrorEmpty": "Fältet får inte vara tomt.",
+    "stilIdNotificationErrorInvalid": "Kunde inte bekräfta Stil-ID. Kontrollera att formateringen är korrekt (ab0000cd-s)."
 }

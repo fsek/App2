@@ -594,11 +594,11 @@
     "encloseOccurrences": "Occurrences",
     "encloseOccurrence": "Occurrence",
 
-    "stilIdNotificationTitle": "Stil-ID Notification",
+    "stilIdNotificationTitle": "Stil-ID notification",
     "stilIdNotificationNiceTry": "Nice try...",
     "stilIdNotificationSubmit": "Submit",
-    "stilIdNotificationInfo": "Please enter your Stil-ID associated with your student account on Lund University.",
+    "stilIdNotificationInfo": "Enter your Stil-ID associated with your student account at Lund University.",
     "stilIdNotificationWhy": "We use your Stil-ID for purposes such as door access and syncing user data with Teknologappen.",
-    "stilIdNotificationErrorEmpty": "Please do not enter an empty field.",
-    "stilIdNotificationErrorInvalid": "Could not assign Stil-ID, please make sure the formatting is correct(ab0000cd-s)."
+    "stilIdNotificationErrorEmpty": "This field can't be empty.",
+    "stilIdNotificationErrorInvalid": "Could not verify Stil-ID. Check that the format is correct (ab0000cd-s)."
 }

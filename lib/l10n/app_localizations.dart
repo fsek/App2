@@ -3347,7 +3347,7 @@ abstract class AppLocalizations {
   /// No description provided for @stilIdNotificationTitle.
   ///
   /// In sv, this message translates to:
-  /// **'Stil-ID Notifikation'**
+  /// **'Stil-ID notifikation'**
   String get stilIdNotificationTitle;
 
   /// No description provided for @stilIdNotificationNiceTry.
@@ -3365,7 +3365,7 @@ abstract class AppLocalizations {
   /// No description provided for @stilIdNotificationInfo.
   ///
   /// In sv, this message translates to:
-  /// **'Vänligen ange ditt Stil-ID kopplat till ditt studentkonto på Lunds Universitet.'**
+  /// **'Ange ditt Stil-ID kopplat till ditt studentkonto på Lunds universitet.'**
   String get stilIdNotificationInfo;
 
   /// No description provided for @stilIdNotificationWhy.
@@ -3377,13 +3377,13 @@ abstract class AppLocalizations {
   /// No description provided for @stilIdNotificationErrorEmpty.
   ///
   /// In sv, this message translates to:
-  /// **'Vänligen lämna inte fältet tomt.'**
+  /// **'Fältet får inte vara tomt.'**
   String get stilIdNotificationErrorEmpty;
 
   /// No description provided for @stilIdNotificationErrorInvalid.
   ///
   /// In sv, this message translates to:
-  /// **'Kunde inte bekräfta Stil-ID, vänligen bekräfta att formatteringen är korrekt(ab0000cd-s).'**
+  /// **'Kunde inte bekräfta Stil-ID. Kontrollera att formateringen är korrekt (ab0000cd-s).'**
   String get stilIdNotificationErrorInvalid;
 }
 
