@@ -1774,4 +1774,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get encloseOccurrence => 'Occurrence';
+
+  @override
+  String get stilIdNotificationTitle => 'Stil-ID notification';
+
+  @override
+  String get stilIdNotificationNiceTry => 'Nice try...';
+
+  @override
+  String get stilIdNotificationSubmit => 'Submit';
+
+  @override
+  String get stilIdNotificationInfo =>
+      'Enter your Stil-ID associated with your student account at Lund University.';
+
+  @override
+  String get stilIdNotificationWhy =>
+      'We use your Stil-ID for purposes such as door access and syncing user data with Teknologappen.';
+
+  @override
+  String get stilIdNotificationErrorEmpty => 'This field can\'t be empty.';
+
+  @override
+  String get stilIdNotificationErrorInvalid =>
+      'Could not verify Stil-ID. Check that the format is correct (ab0000cd-s).';
 }
