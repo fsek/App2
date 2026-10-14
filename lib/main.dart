@@ -39,8 +39,8 @@ void main() async {
     Destination(0, Icons.feed_outlined, NewsPage()),
     Destination(1, Icons.calendar_today, Calendar()),
     // During introduction, modify NollningHomePage() and comment the normal HomePage()
-    Destination(2, Icons.home, NollningHomePage()),
-    // Destination(2, Icons.home, HomePage()),
+    // Destination(2, Icons.home, NollningHomePage()),
+    Destination(2, Icons.home, HomePage()),
     Destination(3, CustomIcons.moose, GameChooserPage()),
     Destination(4, Icons.list, OtherContent()),
   ];

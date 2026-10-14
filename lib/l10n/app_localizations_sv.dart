@@ -1763,4 +1763,28 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get encloseOccurrence => 'Förekomst';
+
+  @override
+  String get stilIdNotificationTitle => 'Stil-ID Notifikation';
+
+  @override
+  String get stilIdNotificationNiceTry => 'Bra försök...';
+
+  @override
+  String get stilIdNotificationSubmit => 'Skicka';
+
+  @override
+  String get stilIdNotificationInfo =>
+      'Vänligen ange ditt Stil-ID kopplat till ditt studentkonto på Lunds Universitet.';
+
+  @override
+  String get stilIdNotificationWhy =>
+      'Ditt Stil-ID används bland annat för access till sektionens lokaler samt för att synkronisera användardata med Teknologappen.';
+
+  @override
+  String get stilIdNotificationErrorEmpty => 'Vänligen lämna inte fältet tomt.';
+
+  @override
+  String get stilIdNotificationErrorInvalid =>
+      'Kunde inte bekräfta Stil-ID, vänligen bekräfta att formatteringen är korrekt(ab0000cd-s).';
 }

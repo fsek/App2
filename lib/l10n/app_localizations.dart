@@ -3343,6 +3343,48 @@ abstract class AppLocalizations {
   /// In sv, this message translates to:
   /// **'Förekomst'**
   String get encloseOccurrence;
+
+  /// No description provided for @stilIdNotificationTitle.
+  ///
+  /// In sv, this message translates to:
+  /// **'Stil-ID Notifikation'**
+  String get stilIdNotificationTitle;
+
+  /// No description provided for @stilIdNotificationNiceTry.
+  ///
+  /// In sv, this message translates to:
+  /// **'Bra försök...'**
+  String get stilIdNotificationNiceTry;
+
+  /// No description provided for @stilIdNotificationSubmit.
+  ///
+  /// In sv, this message translates to:
+  /// **'Skicka'**
+  String get stilIdNotificationSubmit;
+
+  /// No description provided for @stilIdNotificationInfo.
+  ///
+  /// In sv, this message translates to:
+  /// **'Vänligen ange ditt Stil-ID kopplat till ditt studentkonto på Lunds Universitet.'**
+  String get stilIdNotificationInfo;
+
+  /// No description provided for @stilIdNotificationWhy.
+  ///
+  /// In sv, this message translates to:
+  /// **'Ditt Stil-ID används bland annat för access till sektionens lokaler samt för att synkronisera användardata med Teknologappen.'**
+  String get stilIdNotificationWhy;
+
+  /// No description provided for @stilIdNotificationErrorEmpty.
+  ///
+  /// In sv, this message translates to:
+  /// **'Vänligen lämna inte fältet tomt.'**
+  String get stilIdNotificationErrorEmpty;
+
+  /// No description provided for @stilIdNotificationErrorInvalid.
+  ///
+  /// In sv, this message translates to:
+  /// **'Kunde inte bekräfta Stil-ID, vänligen bekräfta att formatteringen är korrekt(ab0000cd-s).'**
+  String get stilIdNotificationErrorInvalid;
 }
 
 class _AppLocalizationsDelegate

@@ -1,6 +1,6 @@
+import 'package:api_client/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:fsek_mobile/l10n/app_localizations.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:fsek_mobile/screens/cafe/cafe.dart';
 import 'package:fsek_mobile/screens/gallery/gallery.dart';
@@ -15,10 +15,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:fsek_mobile/models/documents/election_document.dart';
 import 'package:fsek_mobile/screens/songbook/songbook.dart';
+import 'package:fsek_mobile/services/api.service.dart';
 import 'package:fsek_mobile/services/theme.service.dart';
 
 import 'package:fsek_mobile/services/service_locator.dart';
-import 'package:fsek_mobile/services/document.service.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -53,6 +53,143 @@ class _HomePageState extends State<HomePage> {
     //   }
     // }));
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowStilIDPopup());
+  }
+
+  Future<void> _maybeShowStilIDPopup() async {
+    var t = AppLocalizations.of(context)!;
+    AdminUserRead? userData;
+    final errorLookup = {
+      "empty": t.stilIdNotificationErrorEmpty,
+      "fail": t.stilIdNotificationErrorInvalid
+    };
+
+    try{
+      final response = await ApiService.apiClient.getUsersApi().usersGetMe();
+      userData = response.data;
+    } catch(e) {
+      return;
+    }
+
+    final shouldShow = userData != null && userData.stilId == null;
+    if (!mounted || !shouldShow) return;
+
+    TextEditingController _textFieldController = TextEditingController();
+    bool loading = false;
+    String? errorCode;
+    bool triedToCheat = false;
+
+    await showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext dialogContext) =>
+            StatefulBuilder(builder: (context, setDialogState) =>
+                PopScope(
+                  canPop: false,
+                  onPopInvokedWithResult: (didPop, result) {
+                    if(didPop) return;
+                    setDialogState(() => triedToCheat = true);
+                  },
+                  child: AlertDialog(
+                    title: Text(t.stilIdNotificationTitle),
+                    contentPadding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
+                    actionsAlignment: MainAxisAlignment.spaceBetween,
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          t.stilIdNotificationInfo,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        Visibility(
+                          visible: triedToCheat,
+                          maintainSize: true,
+                          maintainAnimation: true,
+                          maintainState: true,
+                          child: Text(
+                              t.stilIdNotificationNiceTry,
+                              style: const TextStyle(color: Colors.red, fontSize: 13)
+                          ),
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.text,
+                          controller: _textFieldController,
+                          enabled: !loading,
+                          decoration: InputDecoration(
+                            hintText: "ab0000cd-s",
+                            errorText: errorLookup[errorCode],
+                            errorMaxLines: 2
+                          ),
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      IconButton(onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                            content: Text(t.stilIdNotificationWhy),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }, icon: const Icon(Icons.info_outline,)),
+                      TextButton(
+                          onPressed: loading ? null : () async {
+                            setDialogState(() {
+                              loading = true;
+                              errorCode = null;
+                            });
+                            final result = await _tryAddStilId(_textFieldController.text.trim());
+                            if (result.$1) {
+                              if(dialogContext.mounted){
+                                Navigator.of(dialogContext).pop();
+                              }
+                              return;
+                            }
+                            if(dialogContext.mounted){
+                              setDialogState(() {
+                                loading = false;
+                                errorCode = result.$2!;
+                              });
+                            }
+                          },
+                          child: loading ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.black),
+                          ) : Text(t.stilIdNotificationSubmit)
+                      )
+                    ],
+                  ),
+                )
+            )
+    );
+  }
+
+  Future<(bool, String?)> _tryAddStilId(String input) async {
+    if (input.isEmpty) {
+      return (false, "empty");
+    }
+
+    try {
+      await ApiService.apiClient.getUsersApi().usersUpdateSelf(
+        userUpdate: UserUpdate((b) => b..stilId = input),
+      );
+      return (true, null);
+    }
+    catch (e) {
+      return (false, "fail");
+    }
   }
 
   @override

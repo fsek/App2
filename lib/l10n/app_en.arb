@@ -592,5 +592,13 @@
     "encloseSubmitErrorText": "Please try again later\n\nThe reason was",
     "encloseOptimalScore": "Optimal score",
     "encloseOccurrences": "Occurrences",
-    "encloseOccurrence": "Occurrence"
+    "encloseOccurrence": "Occurrence",
+
+    "stilIdNotificationTitle": "Stil-ID Notification",
+    "stilIdNotificationNiceTry": "Nice try...",
+    "stilIdNotificationSubmit": "Submit",
+    "stilIdNotificationInfo": "Please enter your Stil-ID associated with your student account on Lund University.",
+    "stilIdNotificationWhy": "We use your Stil-ID for purposes such as door access and syncing user data with Teknologappen.",
+    "stilIdNotificationErrorEmpty": "Please do not enter an empty field.",
+    "stilIdNotificationErrorInvalid": "Could not assign Stil-ID, please make sure the formatting is correct(ab0000cd-s)."
 }
