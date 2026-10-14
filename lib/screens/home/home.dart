@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                               hintText: "ab0000cd-s",
                               errorText: errorLookup[errorCode],
-                              errorMaxLines: 2
+                              errorMaxLines: 3
                           ),
                         ),
                       ],
