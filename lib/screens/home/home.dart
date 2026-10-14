@@ -64,10 +64,10 @@ class _HomePageState extends State<HomePage> {
       "fail": t.stilIdNotificationErrorInvalid
     };
 
-    try{
+    try {
       final response = await ApiService.apiClient.getUsersApi().usersGetMe();
       userData = response.data;
-    } catch(e) {
+    } catch (e) {
       return;
     }
 
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 PopScope(
                   canPop: false,
                   onPopInvokedWithResult: (didPop, result) {
-                    if(didPop) return;
+                    if (didPop) return;
                     setDialogState(() => triedToCheat = true);
                   },
                   child: AlertDialog(
@@ -110,7 +110,8 @@ class _HomePageState extends State<HomePage> {
                           maintainState: true,
                           child: Text(
                               t.stilIdNotificationNiceTry,
-                              style: const TextStyle(color: Colors.red, fontSize: 13)
+                              style: const TextStyle(
+                                  color: Colors.red, fontSize: 13)
                           ),
                         ),
                         TextField(
@@ -118,9 +119,9 @@ class _HomePageState extends State<HomePage> {
                           controller: _textFieldController,
                           enabled: !loading,
                           decoration: InputDecoration(
-                            hintText: "ab0000cd-s",
-                            errorText: errorLookup[errorCode],
-                            errorMaxLines: 2
+                              hintText: "ab0000cd-s",
+                              errorText: errorLookup[errorCode],
+                              errorMaxLines: 2
                           ),
                         ),
                       ],
@@ -128,18 +129,19 @@ class _HomePageState extends State<HomePage> {
                     actions: [
                       IconButton(onPressed: () {
                         showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                            content: Text(t.stilIdNotificationWhy),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('OK'),
+                          context: context,
+                          builder: (BuildContext context) =>
+                              AlertDialog(
+                                content: Text(t.stilIdNotificationWhy),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
                         );
                       }, icon: const Icon(Icons.info_outline,)),
                       TextButton(
@@ -148,14 +150,15 @@ class _HomePageState extends State<HomePage> {
                               loading = true;
                               errorCode = null;
                             });
-                            final result = await _tryAddStilId(_textFieldController.text.trim());
+                            final result = await _tryAddStilId(
+                                _textFieldController.text.trim());
                             if (result.$1) {
-                              if(dialogContext.mounted){
+                              if (dialogContext.mounted) {
                                 Navigator.of(dialogContext).pop();
                               }
                               return;
                             }
-                            if(dialogContext.mounted){
+                            if (dialogContext.mounted) {
                               setDialogState(() {
                                 loading = false;
                                 errorCode = result.$2!;
@@ -166,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                             width: 16,
                             height: 16,
                             child: const CircularProgressIndicator(
-                              strokeWidth: 2, color: Colors.black),
+                                strokeWidth: 2, color: Colors.black),
                           ) : Text(t.stilIdNotificationSubmit)
                       )
                     ],
